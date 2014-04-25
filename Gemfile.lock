@@ -51,6 +51,7 @@ GEM
     mime-types (1.25.1)
     minitest (5.3.3)
     multi_json (1.9.2)
+    pg (0.17.0)
     polyglot (0.3.4)
     rack (1.5.2)
     rack-test (0.6.2)
@@ -107,6 +108,7 @@ DEPENDENCIES
   bcrypt (~> 3.1.7)
   debugger
   jbuilder (~> 2.0)
+  pg
   rails (= 4.1.0)
   sdoc (~> 0.4.0)
   spring
