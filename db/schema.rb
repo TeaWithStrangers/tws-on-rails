@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140425223024) do
+ActiveRecord::Schema.define(version: 20140425224009) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,5 +27,15 @@ ActiveRecord::Schema.define(version: 20140425223024) do
   end
 
   add_index "cities", ["city_code"], name: "city_code_idx", unique: true, using: :btree
+
+  create_table "tea_times", force: true do |t|
+    t.datetime "start_time"
+    t.float    "duration"
+    t.integer  "followup_status", default: 0
+    t.text     "location"
+    t.integer  "city_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
