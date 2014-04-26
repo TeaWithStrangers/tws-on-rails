@@ -4,7 +4,7 @@ class TeaTimesController < ApplicationController
   # GET /tea_times
   # GET /tea_times.json
   def index
-    @tea_times = City.find_by!(:city_code => params[:city_id].upcase).tea_times
+    @tea_times = City.for_code!(:sea).tea_times
     respond_to do |format|
       format.json { render json: @tea_times }
     end
