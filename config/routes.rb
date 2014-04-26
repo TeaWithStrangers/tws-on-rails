@@ -5,6 +5,11 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'static#index'
+  # Static Landing, FAQ Pages
+  get '/stories' => 'static#stories', :as => :stories
+  get '/questions' => 'static#questions', :as => :questions
+  get '/hosting' => 'static#hosting', :as => :hosting
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
@@ -17,8 +22,8 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :city do
-    resources :tea_times
+  resources :cities do
+    resources :teatime, controller: 'tea_times'
   end
 
   # Example resource route with options:

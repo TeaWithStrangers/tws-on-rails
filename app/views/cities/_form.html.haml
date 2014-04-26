@@ -1,0 +1,14 @@
+= form_for @city do |f|
+  = f.text_field :name
+  = f.text_field :city_code
+  = f.text_field :tagline
+  = f.text_area :description
+  - if @city.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@city.errors.count, "error")} prohibited this city from being saved:"
+      %ul
+        - @city.errors.full_messages.each do |msg|
+          %li= msg
+
+  .actions
+    = f.submit 'Save'

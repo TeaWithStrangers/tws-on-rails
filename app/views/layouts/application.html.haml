@@ -2,19 +2,20 @@
 %html
   %head
     %title= content_for(:title) || "Tea with Strangers"
-    %meta{name: 'description', content=(content_for(:description || "Tea With Strangers")}
+    %meta{name: 'description', content: (content_for(:description) || "Tea With Strangers")}
     %meta{name: 'author', content: ""}
     %meta{name: 'viewport', content:"width=device-width, initial-scale=1, maximum-scale=1"}
 
     <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+
     /link rel="shortcut icon" href="images/favicon.ico">
     /link rel="apple-touch-icon" href="images/apple-touch-icon.png">
     /link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
     /link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
-    = stylesheet_link_tag{'application', media: 'all', 'data-turbolinks-track' => true}
-    = javascript_include_tag{'application', 'data-turbolinks-track' => true}
+    = stylesheet_link_tag('application', :media => 'all', 'data-turbolinks-track' => true)
+    = javascript_include_tag('application', 'data-turbolinks-track' => true)
     = csrf_meta_tags
-  %body{class: (params[:controller] ? "controller-#{params[:controller]}" || nil) }
+  %body{class: (params[:controller] ? "controller-#{params[:controller]}" : nil) }
     = yield

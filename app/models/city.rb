@@ -3,6 +3,10 @@ class City < ActiveRecord::Base
   enum brew_status: [ :cold_water, :warming_up, :fully_brewed ]
   has_many :tea_times
 
+  def to_param
+    city_code
+  end
+
   class << self
     def for_code(code)
       for_code_proxy(code, :find_by)
