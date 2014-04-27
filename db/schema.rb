@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140426185354) do
+ActiveRecord::Schema.define(version: 20140427041100) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,9 +21,14 @@ ActiveRecord::Schema.define(version: 20140426185354) do
     t.string   "city_code"
     t.text     "description"
     t.text     "tagline"
-    t.integer  "brew_status", default: 0
+    t.integer  "brew_status",            default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "timezone"
+    t.string   "header_bg_file_name"
+    t.string   "header_bg_content_type"
+    t.integer  "header_bg_file_size"
+    t.datetime "header_bg_updated_at"
   end
 
   add_index "cities", ["city_code"], name: "city_code_idx", unique: true, using: :btree
