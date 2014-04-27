@@ -31,8 +31,11 @@ class CitiesController < ApplicationController
   end 
 
   def destroy
-    city.destroy
-    render status: 204
+    if city.destroy
+      redirect_to cities_index
+    elsif
+      redirect_to root_path
+    end
   end
 
   private
