@@ -1,6 +1,6 @@
 class City < ActiveRecord::Base
   validates_uniqueness_of :city_code
-  enum brew_status: [ :cold_water, :warming_up, :fully_brewed ]
+  enum brew_status: { :cold_water => 0, :warming_up => 1, :fully_brewed => 2}
   has_many :tea_times
 
   def to_param
