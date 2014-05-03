@@ -1,0 +1,11 @@
+%h3= "Welcome home, #{current_user.name}!"
+%ul.nav-list
+  %li
+    =link_to "Upcoming Tea Times", profile_path
+  %li
+    - if @user.host? || @user.admin?
+      = link_to "Schedule Tea Time", new_teatime_path
+  %li
+    =link_to "Account", edit_user_registration_path
+  %li
+    =link_to "Sign Out", destroy_user_session_path, method: :delete

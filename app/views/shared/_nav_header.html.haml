@@ -1,13 +1,12 @@
-.row 
-  %header.sixteen.columns.alpha
-    %nav.header
-      %h1.logo Tea With Strangers
-      %ul.nav-list
-        %li= link_to "Other Cities", cities_path
-        %li= link_to "Stories", stories_path
-        %li= link_to "Questions", questions_path
-        %li= link_to "Hosting", hosting_path
+%header.sixteen.columns.alpha
+  %nav
+    %h1.logo Tea With Strangers
+    %ul.nav-list
+      %li= link_to "Other Cities", cities_path
+      %li= link_to "Stories", stories_path
+      %li= link_to "Questions", questions_path
+      %li= link_to "Hosting", hosting_path
 
-        %li 
-          =link_to_if current_user.nil?, 'Login', root_path do
-            = link_to current_user.name, users_path(current_user.id)
+      %li 
+        =link_to_if current_user.nil?, 'Login', new_user_session_path do
+          = link_to "Your Profile", "/profile"

@@ -31,4 +31,17 @@ $shadow-grey: #bebebe;
       z-index: 10;
     }
   }
+  
+  em.city-name {
+    font-size: 1.5em;
+    font-style: normal;
+    font-weight: bold;
+  }
+    ul.host-headshots {
+      li {
+        float: left;
+        margin-left: 50px;
+        .host-name { text-align: center; }
+      }
+    }
 }

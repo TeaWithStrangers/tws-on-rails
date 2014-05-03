@@ -20,11 +20,23 @@ Rails.application.routes.draw do
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 
-  devise_for :users
+  devise_for :users, :skip => [:sessions]
+  as :user do
+    get 'signin' => 'devise/sessions#new', :as => :new_user_session
+    post 'signin' => 'devise/sessions#create', :as => :user_session
+    delete 'signout' => 'devise/sessions#destroy', :as => :destroy_user_session
+    get 'logout' => 'devise/sessions#destroy'
+  end
 
   resources :cities do
-    resources :teatime, controller: 'tea_times'
+    resources :teatime, except: [:new], controller: 'tea_times' 
   end
+  
+  post 'profile/flake' => 'profiles#flake', as: :cancel_teatime
+  match 'profile(/:id)' => 'profiles#show', as: :profile, via: :get
+  get 'teatime/create' => 'tea_times#new', as: :new_teatime
+
+
 
   # Example resource route with options:
   #   resources :products do

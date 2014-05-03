@@ -1,0 +1,21 @@
+- count = hosts.count 
+- many_hosts = hosts.count > 2
+.row
+  .sixteen.columns.text-seperator
+    - if many_hosts
+      Hosts plant seeds for bomb diggity conversations
+    - elsif count >= 1
+      We could use some more hosts
+    - else
+      To bring tea time together, we'll also need some hosts
+.row
+  .sixteen.columns
+    %ul.host-headshots
+      - hosts.each do |host|
+        - (1..5).each do |i|
+          %li
+            %img.host-avatar.small{src: host.avatar.url(:thumb)}
+            %p.host-name= host.name
+  .row
+    = render partial: "host_signup", locals: {city: @city}
+

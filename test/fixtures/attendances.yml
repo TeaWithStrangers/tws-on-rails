@@ -1,7 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: Admin
+  TeaTime: 
+  User: 
+  Status: 1
 
 two:
-  name: Host
+  TeaTime: 
+  User: 
+  Status: 1

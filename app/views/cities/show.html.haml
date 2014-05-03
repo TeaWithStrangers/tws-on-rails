@@ -27,6 +27,14 @@
         Tea time creates space for neighbors to sit together and try to
         understand each other.
       %p It's just a really good conversation.
-    
+      /= render partial: '
+  .row
+    .ten.columns.offset-by-three
+      %p
+        %em.city-name= @city.name
+        = @city.tagline
+      %p
+        = @city.description
 
-
+  = render partial: 'host_headshots', locals: {hosts: @city.hosts}
+  = render partial: 'shared/tea_times', locals: {tea_times: @city.future_tea_times.take(10)}

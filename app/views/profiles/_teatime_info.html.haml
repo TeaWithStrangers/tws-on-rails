@@ -1,0 +1,10 @@
+.eight.columns.alpha.teatime
+  .row
+    %em= tea_time.friendly_time
+    %p= tea_time.location
+  .row
+    %form{action: cancel_teatime_path, method: 'post'}
+      %input{type:'hidden', name: :tea_time, value: tea_time.id}
+      %input{type:'submit', value: 'Cancel'}
+
+    

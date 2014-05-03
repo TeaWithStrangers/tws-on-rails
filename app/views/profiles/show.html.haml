@@ -1,0 +1,15 @@
+.container
+  = render partial: 'shared/nav_header'
+  .six.columns.alpha
+    = render partial: 'sidebar'
+  .ten.columns
+    .row
+      %h1 Upcoming Tea Times
+    .row
+      - if @user.future_tea_times.count>0
+        %ul
+          -@user.future_tea_times.each do |t|
+            %li
+              = render partial: 'teatime_info', locals: {tea_time: t}
+      - else
+        %em You're not scheduled for any upcoming tea times
