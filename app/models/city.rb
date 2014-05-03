@@ -1,7 +1,8 @@
 class City < ActiveRecord::Base
   validates_uniqueness_of :city_code
   validates_presence_of :city_code, :timezone
-
+  has_attached_file :header_bg, default_url: "http://placecorgi.com/1280"
+  validates_attachment_content_type :header_bg, :content_type => /\Aimage\/.*\Z/
   enum brew_status: { :cold_water => 0, :warming_up => 1, :fully_brewed => 2}
   has_many :tea_times
 
@@ -51,5 +52,5 @@ class City < ActiveRecord::Base
   end
 
   #FIXME: Shouldn't have to have this at the very end
-  validates :timezone, inclusion: { in: City.timezone_mappings.values }
+  validates :timezone, inclusion: { in: City.timezone_mappings.keys }
 end

@@ -1,8 +1,16 @@
-= form_for @city do |f|
+= form_for @city, multipart: true do |f|
+  = f.label :name
   = f.text_field :name
+  = f.label :city_code
   = f.text_field :city_code
+  = f.label :tagline
   = f.text_field :tagline
+  = f.label :description
   = f.text_area :description
+  = f.label :timezone
+  = select_tag(:timezone, options_for_select(City.timezone_mappings))
+  = f.label :header_bg
+  = f.file_field :header_bg
   - if @city.errors.any?
     #error_explanation
       %h2= "#{pluralize(@city.errors.count, "error")} prohibited this city from being saved:"
