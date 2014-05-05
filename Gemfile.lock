@@ -67,6 +67,9 @@ GEM
       warden (~> 1.2.3)
     erubis (2.7.0)
     execjs (2.0.2)
+    figaro (0.7.0)
+      bundler (~> 1.0)
+      rails (>= 3, < 5)
     haml (4.0.5)
       tilt
     haml-rails (0.5.3)
@@ -79,6 +82,7 @@ GEM
       json (~> 1.8)
       multi_xml (>= 0.5.2)
     i18n (0.6.9)
+    icalendar (2.0.1)
     jbuilder (2.0.6)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
@@ -178,7 +182,9 @@ DEPENDENCIES
   delayed_job (~> 4.0.1)
   delayed_job_active_record (~> 4.0.1)
   devise (~> 3.2.4)
+  figaro
   haml-rails
+  icalendar (~> 2.0)
   jbuilder (~> 2.0)
   jquery-rails
   paperclip (~> 4.1)

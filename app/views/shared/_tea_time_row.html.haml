@@ -2,13 +2,13 @@
   .two.column
     %img.host-avatar.tiny{src: tea_time.host.avatar.url(:thumb)}
   .seven.columns
-    %p
-      = tea_time.start_time
+    %p.time-and-location
+      = tea_time.friendly_time
       %br
       = tea_time.location
   .four.columns.host-name
     %p= tea_time.host.name
-  = link_to "#signup", class: ["button", tea_time.spots_remaining? ? :green : :red] do
+  = link_to tea_time_path(tea_time), class: ["button", tea_time.spots_remaining? ? :green : :red] do
     .three.columns
       - if tea_time.spots_remaining?
         = "#{tea_time.spots_remaining} spots left"

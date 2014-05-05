@@ -16,7 +16,7 @@ class City < ActiveRecord::Base
 
   def hosts
     #TODO: Hosts who have nothing scheduled won't show in the hosts partial
-    future_tea_times.map(&:host)
+    future_tea_times.map(&:host).uniq
   end
 
   def timezone=(tz)

@@ -1,0 +1,19 @@
+= form_for @tea_time do |f|
+  = label_tag :start_time, 'Start Time'
+  = f.label :duration, 'Duration (in Hours)'
+  = f.number_field :duration
+  = f.text_field :start_time, {value: @tea_time.local_time }
+  = f.label :location
+  = f.text_area :location
+  = f.label :city
+  = select_tag(:city, options_for_select(City.all.collect{ |p| [p.name, p.id] }))
+
+  - if @tea_time.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@tea_time.errors.count, "error")} prohibited this tea_time from being saved:"
+      %ul
+        - @tea_time.errors.full_messages.each do |msg|
+          %li= msg
+
+  .actions
+    = f.submit 'Save'

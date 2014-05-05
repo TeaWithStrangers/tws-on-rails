@@ -18,11 +18,45 @@
 $tws-beige: rgb(251,241,228);
 $tws-grey: rgb(147, 149, 152);
 $tws-dark-grey: rgb(58, 58, 60);
+$shadow-grey: #bebebe;
 
 body {
   background-color: $tws-beige;
   font: 16px/24px 'Helvetica Neue', 'Arial', sans-serif;
 }
+
+.landscape-header {
+  height: 300px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid $shadow-grey;
+  background: no-repeat center center;
+  background-size: cover;
+  box-shadow: 0 4px 4px -4px $shadow-grey;
+  position: relative;
+
+  .blur-layer {
+    z-index: 5;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    background: none repeat scroll 0% 0% rgba(246, 210, 172, 0.25);
+  }
+
+  .landscape-text h1 {
+    text-align: center;
+    color: #FFF;
+    text-shadow: 1px 1px 2px #404040;
+    position: absolute;
+    top: 50%;
+    margin-top: -60px;
+    left: 50%;
+    margin-left: -130px;
+    z-index: 10;
+  }
+}
+
 
 header nav {
   font-size: 1.2em;

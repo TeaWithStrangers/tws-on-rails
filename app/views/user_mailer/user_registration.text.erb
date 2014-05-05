@@ -1,0 +1,15 @@
+Welcome to TeaWithStrangers, <%= @user.name %>
+===============================================
+ 
+You have successfully signed up to teawithstrangers.com,
+your username is: <%= @user.email %>.
+
+We've automatically generated a password for you. It's:
+<%= @password %>
+
+We recommend you change it immediately by visiting your
+user profile: <%= url_for(controller: 'registrations', action: 'edit', only_path: false) %>
+ 
+To sign up for a tea time near you, just follow this link: <%= url_for(controller: 'cities', action: 'index', only_path: false) %>.
+ 
+Thanks for joining and have an awesome day!

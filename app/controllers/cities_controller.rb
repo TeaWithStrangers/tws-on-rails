@@ -1,5 +1,6 @@
 class CitiesController < ApplicationController
   before_action :set_city, only: [:show, :edit, :update, :destroy]
+  before_action :authorized?, only: [:edit, :create, :new, :destroy]
 
   # GET /cities
   # GET /cities.json
@@ -65,6 +66,10 @@ class CitiesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_city
       @city = City.for_code(params[:id]) || City.find(params[:id])
+    end
+
+    def authorized?
+      authorize! :manage, City
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

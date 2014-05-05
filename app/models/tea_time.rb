@@ -2,9 +2,13 @@ class TeaTime < ActiveRecord::Base
   MAX_ATTENDEES = 5
   belongs_to :city
   belongs_to :host, :class_name => 'User', :foreign_key => 'user_id'
+  validates_presence_of :host, :start_time, :city, :duration
   has_many :attendances, dependent: :destroy
   
   attr_reader :local_time, :spots_remaining
+
+  scope :past, -> { where("start_time <= ?", DateTime.now) }
+  scope :future, -> { where("start_time >= ?", DateTime.now) }
 
   def local_time
     start_time.in_time_zone(city.timezone)

@@ -4,18 +4,12 @@ class TeaTimesController < ApplicationController
   # GET /tea_times
   # GET /tea_times.json
   def index
-    @tea_times = City.for_code!(:sea).tea_times
-    respond_to do |format|
-      format.json { render json: @tea_times }
-    end
+    @tea_times = TeaTime.all
   end
 
   # GET /tea_times/1
   # GET /tea_times/1.json
   def show
-    respond_to do |format|
-      format.json { render json: @tea_time }
-    end
   end
 
   # GET /tea_times/new
@@ -31,11 +25,14 @@ class TeaTimesController < ApplicationController
   # POST /tea_times.json
   def create
     @tea_time = TeaTime.new(tea_time_params)
+    @tea_time.host = current_user
 
     respond_to do |format|
       if @tea_time.save
+        format.html { redirect_to @tea_time, notice: 'Tea time was successfully created.' }
         format.json { render :show, status: :created, location: @tea_time }
       else
+        format.html { render :new }
         format.json { render json: @tea_time.errors, status: :unprocessable_entity }
       end
     end
@@ -46,8 +43,10 @@ class TeaTimesController < ApplicationController
   def update
     respond_to do |format|
       if @tea_time.update(tea_time_params)
+        format.html { redirect_to @tea_time, notice: 'Tea time was successfully updated.' }
         format.json { render :show, status: :ok, location: @tea_time }
       else
+        format.html { render :edit }
         format.json { render json: @tea_time.errors, status: :unprocessable_entity }
       end
     end
@@ -58,6 +57,7 @@ class TeaTimesController < ApplicationController
   def destroy
     @tea_time.destroy
     respond_to do |format|
+      format.html { redirect_to tea_times_url }
       format.json { head :no_content }
     end
   end
@@ -70,6 +70,7 @@ class TeaTimesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tea_time_params
-      params[:tea_time]
+      permitted = [:start_time, :duration, :location, :city_id]
+      params.require(:tea_time).permit(*permitted)
     end
 end

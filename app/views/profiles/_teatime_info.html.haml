@@ -1,10 +1,14 @@
-.eight.columns.alpha.teatime
-  .row
+.row
+  .eight.columns.alpha.teatime
     %em= tea_time.friendly_time
     %p= tea_time.location
-  .row
-    %form{action: cancel_teatime_path, method: 'post'}
+  .two.columns.omega
+    %img.host-avatar.tiny{src: tea_time.host.avatar.url(:thumb)}
+    = link_to "Hosted by #{tea_time.host.name}", ""
+.row
+  .eight.columns.alpha
+    %form{action: '', method: 'post'}
       %input{type:'hidden', name: :tea_time, value: tea_time.id}
       %input{type:'submit', value: 'Cancel'}
-
-    
+  .two.columns.omega
+    =link_to "Email Host", "mailto: #{tea_time.host.email}?subject=Tea%20Time%20Question"

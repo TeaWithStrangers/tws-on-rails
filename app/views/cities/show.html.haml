@@ -1,4 +1,4 @@
-.city-landscape{style:"background-image: url(#{@city.header_bg.url || 'http://placecorgi.com/2560'});"}
+.landscape-header{style:"background-image: url(#{@city.header_bg.url || 'http://placecorgi.com/2560'});"}
   .blur-layer
   .landscape-text
     %h1 
@@ -31,10 +31,11 @@
   .row
     .ten.columns.offset-by-three
       %p
-        %em.city-name= @city.name
+        %em.city-name= "#{@city.name},"
         = @city.tagline
       %p
         = @city.description
 
   = render partial: 'host_headshots', locals: {hosts: @city.hosts}
-  = render partial: 'shared/tea_times', locals: {tea_times: @city.future_tea_times.take(10)}
+  -if !@city.future_tea_times.empty?
+    = render partial: 'shared/tea_times', locals: {tea_times: @city.future_tea_times.take(10)}

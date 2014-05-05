@@ -16,3 +16,6 @@
 /tmp
 
 /ignore
+
+# Ignore application configuration
+/config/application.yml
