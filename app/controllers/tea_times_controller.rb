@@ -1,6 +1,6 @@
 class TeaTimesController < ApplicationController
   helper TeaTimesHelper
-  before_action :set_tea_time, only: [:show, :edit, :update, :destroy]
+  before_action :set_tea_time, only: [:show, :edit, :update, :destroy, :update_attendance, :create_attendance]
   before_action :prepare_tea_time_for_edit, only: [:create, :update]
 
   # GET /tea_times
@@ -24,6 +24,19 @@ class TeaTimesController < ApplicationController
   end
 
   # POST /tea_times/1/attendance
+  def create_attendance
+    @user = current_user
+    status = :pending
+    @attendance = Attendance.new(tea_time: @tea_time, user: @user)
+    respond_to do |format|
+      if @attendance.save
+        format.html { redirect_to profile_path, notice: 'Registered for Tea Time! See you soon :)' }
+        format.json { @attendance }
+      end
+    end
+  end
+
+  # PUT /tea_times/1/attendance
   def update_attendance
     user, status = nil, nil
     if (current_user.host? || (can? :manage, :all))

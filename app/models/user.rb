@@ -10,8 +10,8 @@ class User < ActiveRecord::Base
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
   def future_tea_times
-    attendee = TeaTime.future.joins(:attendances).where("attendances.status = 0")
-    attendee + TeaTime.future.where(user_id: self)
+    attendee = TeaTime.future.joins(:attendances).where("attendances.status = 0", :user_id => self.id)
+    attendee
   end
 
   def role?(role)

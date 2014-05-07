@@ -6,17 +6,9 @@ class City < ActiveRecord::Base
   enum brew_status: { :cold_water => 0, :warming_up => 1, :fully_brewed => 2}
   has_many :tea_times
 
-  def future_tea_times
-    tea_times.where("start_time >= ?", Date.today)
-  end
-
-  def past_tea_times
-    tea_times.where("start_time < ?", Date.today)
-  end
-
   def hosts
     #TODO: Hosts who have nothing scheduled won't show in the hosts partial
-    future_tea_times.map(&:host).uniq
+    tea_times.future.map(&:host).uniq
   end
 
   def timezone=(tz)

@@ -28,7 +28,12 @@ Rails.application.routes.draw do
     get 'logout' => 'devise/sessions#destroy'
   end
 
-  resources :tea_times
+  resources :tea_times do
+    member do
+      post 'attendance' => 'tea_times#create_attendance', as: :attendance
+    end
+  end
+
   resources :cities
   
   match 'profile(/:id)' => 'profiles#show', as: :profile, via: :get

@@ -37,5 +37,5 @@
         = @city.description
 
   = render partial: 'host_headshots', locals: {hosts: @city.hosts}
-  -if !@city.future_tea_times.empty?
-    = render partial: 'shared/tea_times', locals: {tea_times: @city.future_tea_times.take(10)}
+  -if @city.tea_times.future
+    = render partial: 'shared/tea_times', locals: {tea_times: @city.tea_times.future.take(10)}
