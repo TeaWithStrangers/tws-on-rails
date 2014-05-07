@@ -20,7 +20,6 @@ class City < ActiveRecord::Base
   end
 
   def timezone=(tz)
-    pp tz
     val = City.timezone_mappings[tz] || tz if City.timezone_mappings.value? tz
     if val
       write_attribute(:timezone, val) 
