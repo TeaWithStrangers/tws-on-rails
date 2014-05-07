@@ -17,7 +17,6 @@ class TeaTimesController < ApplicationController
   # GET /tea_times/new
   def new
     @tea_time = City.first.tea_times.build
-    pp @tea_time
   end
 
   # GET /tea_times/1/edit
@@ -58,7 +57,6 @@ class TeaTimesController < ApplicationController
         format.html { redirect_to @tea_time, notice: 'Tea time was successfully created.' }
         format.json { render :show, status: :created, location: @tea_time }
       else
-        pp @tea_time.errors
         format.html { render :new }
         format.json { render json: @tea_time.errors, status: :unprocessable_entity }
       end
