@@ -7,11 +7,16 @@ class UserMailer < ActionMailer::Base
   end
 
   def tea_time_registration(attendance)
+    @attendance = attendance
     mail to: @user.email, subject: "See You at Tea Time!"
   end
 
   def tea_time_cancellation(tea_time)
-    mail to: @user.email, subject: "Uh-oh :( Tea Time Canceled"
+    @tea_time = @tea_time
+    tea_time.attendances.each do |att|
+      @user = att.user 
+      mail to: @user.email, subject: "Uh-oh :( Tea Time Canceled"
+    end
   end
 
   def tea_time_flake(attendance)
