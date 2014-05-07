@@ -14,6 +14,8 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'haml-rails'
 gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
+# Serve Assets in Production
+gem 'rails_12factor', group: :production 
 gem 'turbolinks'
 gem 'jquery-rails'
 
