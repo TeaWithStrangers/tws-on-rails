@@ -1,4 +1,5 @@
 module ApplicationHelper
+  
   #Devise Methods
   def resource_name
     :user

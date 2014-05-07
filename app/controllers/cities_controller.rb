@@ -26,13 +26,13 @@ class CitiesController < ApplicationController
   # POST /cities.json
   def create
     @city = City.new(city_params)
-
+    debugger
     respond_to do |format|
       if @city.save
         format.html { redirect_to @city, notice: 'City was successfully created.' }
         format.json { render :show, status: :created, location: @city }
       else
-        format.html { render :new }
+        format.html { render :edit }
         format.json { render json: @city.errors, status: :unprocessable_entity }
       end
     end
@@ -74,6 +74,6 @@ class CitiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def city_params
-      params.require(:city).permit(:header_bg)
+      params.require(:city).permit!
     end
 end

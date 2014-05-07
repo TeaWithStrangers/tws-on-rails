@@ -1,12 +1,14 @@
 = form_for @tea_time do |f|
-  = label_tag :start_time, 'Start Time'
+  = label_tag :start_date, 'Date (MM/DD/YY)'
+  = f.text_field :start_date, value: @tea_time.local_time.strftime("%m/%d/%y")
+  = label_tag :start_time, 'Start Time (HH:MM)'
+  = f.text_field :start_time, {value: @tea_time.local_time.utc.strftime("%H:%M")}
   = f.label :duration, 'Duration (in Hours)'
   = f.number_field :duration
-  = f.text_field :start_time, {value: @tea_time.local_time }
   = f.label :location
   = f.text_area :location
   = f.label :city
-  = select_tag(:city, options_for_select(City.all.collect{ |p| [p.name, p.id] }))
+  = select_tag(:city, options_for_select(City.all.collect{ |p| [p.name, p.id] }, @tea_time.city.id))
 
   - if @tea_time.errors.any?
     #error_explanation

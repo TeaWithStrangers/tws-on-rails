@@ -14,6 +14,14 @@ class TeaTime < ActiveRecord::Base
     start_time.in_time_zone(city.timezone)
   end
 
+  def start_time
+    read_attribute(:start_time) || DateTime.now
+  end
+
+  def duration
+    read_attribute(:duration) || 2
+  end
+
   def friendly_time
     return "#{local_time.strftime("%a, %b %d, %Y,%l")}-#{(local_time+duration.hours).strftime("%-l%P")}"
   end

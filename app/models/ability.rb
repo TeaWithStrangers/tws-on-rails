@@ -9,9 +9,11 @@ class Ability
     elsif user.role? :host 
       can :manage, TeaTime, :host_id => user.id
       can :create, TeaTime
+      can :update, Attendance
       can :read, User
     else
       can :read, User, :id => user.id
+      can :update, Attendance, :user_id => user.id
     end 
   end 
 end 
