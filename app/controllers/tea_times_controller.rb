@@ -50,8 +50,6 @@ class TeaTimesController < ApplicationController
   # POST /tea_times
   # POST /tea_times.json
   def create
-    @tea_time = TeaTime.new(tea_time_params)
-
     respond_to do |format|
       if @tea_time.save
         format.html { redirect_to @tea_time, notice: 'Tea time was successfully created.' }
@@ -94,6 +92,7 @@ class TeaTimesController < ApplicationController
     end
 
     def prepare_tea_time_for_edit
+      @tea_time ||= TeaTime.new(tea_time_params)
       @tea_time.start_time = parse_date(params)
       @tea_time.city = City.find(params[:city])
       @tea_time.host = current_user
