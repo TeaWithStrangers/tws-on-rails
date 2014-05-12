@@ -1,0 +1,14 @@
+<% unless current_user.roles.nil?%>
+  <h3> Host Fields </h3>
+
+  <div><%= f.label :avatar %><br />
+  <%= f.file_field :avatar %></div>
+  <div><%= f.label :tagline %><br />
+    <%= f.text_area :tagline %></div>
+  <div><%= f.label :summary %><br />
+    <%= f.text_area :summary %></div>
+  <div><%= f.label :story %><br />
+    <%= f.text_area :story %></div>
+  <div><%= f.label :topics %><br />
+    <%= f.text_area :topics %></div>
+<% end %>

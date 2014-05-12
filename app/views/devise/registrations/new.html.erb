@@ -9,6 +9,8 @@
   <div><%= f.label :email %><br />
   <%= f.email_field :email %></div>
 
+  <%= render partial: 'host', locals: {f: f } %>
+
   <div><%= f.label :password %><br />
     <%= f.password_field :password, autocomplete: "off" %></div>
 
