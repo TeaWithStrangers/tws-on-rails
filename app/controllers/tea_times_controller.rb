@@ -106,16 +106,15 @@ class TeaTimesController < ApplicationController
 
     def prepare_tea_time_for_edit
       @tea_time ||= TeaTime.new(tea_time_params)
-      @tea_time.start_time = parse_date(params)
       @tea_time.city = City.find(params[:city])
       @tea_time.host = current_user
     end
 
-
     # Never trust parameters from the scary internet, only allow the white list through.
     def tea_time_params
       permitted = [:start_time, :duration, :location, :city]
-      params.require(:tea_time).permit(*permitted)
+      #FIXME: Fuck Strong Params
+      params.require(:tea_time).permit!
     end
 
     def parse_date(params)
@@ -123,6 +122,6 @@ class TeaTimesController < ApplicationController
       date = tt[:start_date]
       time = tt[:start_time]
       d = "#{date} #{time}"
-      DateTime.strptime(d, "%m/%d/%y %H:%M")
+      Time.zone.strptime(d, "%m/%d/%y %H:%M")
     end
 end

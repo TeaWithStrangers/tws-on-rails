@@ -1,8 +1,6 @@
 = form_for @tea_time do |f|
-  = label_tag :start_date, 'Date (MM/DD/YY)'
-  = f.text_field :start_date, value: @tea_time.local_time.strftime("%m/%d/%y")
-  = label_tag :start_time, 'Start Time (HH:MM)'
-  = f.text_field :start_time, {value: @tea_time.local_time.utc.strftime("%H:%M")}
+  = label_tag :start_time
+  = datetime_select :tea_time, :start_time
   = f.label :duration, 'Duration (in Hours)'
   = f.number_field :duration
   = f.label :location

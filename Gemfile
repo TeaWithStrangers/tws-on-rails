@@ -26,6 +26,7 @@ gem 'figaro', group: [:development, :test]
 
 #Calendars
 gem 'icalendar', '~> 2.0'
+gem 'time_zone_ext'
 
 #Background Jobs
 gem 'delayed_job', '~> 4.0.1'

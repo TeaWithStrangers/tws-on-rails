@@ -7,11 +7,12 @@ class TeaTime < ActiveRecord::Base
   
   attr_reader :local_time, :spots_remaining
 
-  scope :past, -> { where("start_time <= ?", DateTime.now) }
-  scope :future, -> { where("start_time >= ?", DateTime.now) }
+  scope :past, -> { where("start_time <= ?", DateTime.now.midnight) }
+  scope :future, -> { where("start_time >= ?", DateTime.now.midnight) }
 
   def local_time
-    start_time.in_time_zone(city.timezone)
+    #FIXME: Just use UTC times for now, fix down the line
+    start_time#.in_time_zone(city.timezone)
   end
 
   def start_time
@@ -19,7 +20,7 @@ class TeaTime < ActiveRecord::Base
   end
 
   def duration
-    read_attribute(:duration) || 2
+    read_attribute(:duration) || 2.0
   end
 
   def friendly_time
@@ -39,6 +40,11 @@ class TeaTime < ActiveRecord::Base
   end
 
   def cancel!
+    UserMailer.tea_time_cancellation(self)
+    attendances.map { |att|
+      att.status= :cancelled
+    }
+    update_attributes(start_time: DateTime.new(1900,1,1))
   end
 
   enum followup_status: [:na, :pending, :sent]

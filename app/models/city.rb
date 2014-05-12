@@ -12,7 +12,7 @@ class City < ActiveRecord::Base
   end
 
   def timezone=(tz)
-    val = City.timezone_mappings[tz] || tz if City.timezone_mappings.value? tz
+    val = tz if City.timezone_mappings.key? tz
     if val
       write_attribute(:timezone, val) 
     else
@@ -42,7 +42,5 @@ class City < ActiveRecord::Base
         self.send(method, city_code: code.upcase)
       end
   end
-
-  #FIXME: Shouldn't have to have this at the very end
-  validates :timezone, inclusion: { in: City.timezone_mappings.values }
 end
+
