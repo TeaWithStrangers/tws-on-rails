@@ -12,7 +12,9 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 #JS, CSS, Templating
 gem 'haml-rails'
-gem 'sass-rails', '~> 4.0.3'
+#FIXME: Add versions for these gems
+gem 'less-rails'
+gem 'therubyracer'
 gem 'uglifier', '>= 1.3.0'
 # Serve Assets in Production
 gem 'rails_12factor', group: :production 
