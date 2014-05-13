@@ -720,57 +720,58 @@ table#navigation-table {
       .transition;
     }
   }
-  form.new_user {
-    overflow: auto;
-    -webkit-font-smoothing: antialiased !important;
-    input {
-      width: 100%;
-      clear: both;
-      .fsII;
-      .regular;
-      padding: 10px;
-      border-radius: .35em;
-      border: 1px solid @gray;
-      margin-bottom: 10px;
-      color: @black;
-      &:active, &:focus {
-        outline: none;
-      }
-      &[type="submit"] {
-        background: @red;
-        .bold;
-        .fsIII;
-        color: @white;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        border: 1px solid @red;
-        .transition;
-        box-shadow: 0 1px 0px @darkred, 
-                    0 2px 0px @darkred,
-                    0 3px 0px @darkred,
-                    0 4px 0px @darkred,
-                    0 5px 0px @darkred,
-                    0 6px 0px @darkred;
-        cursor: pointer;
-        margin-bottom: 25px;
-        position: relative;
-        &:hover {
-          .transition;
-          background: darken(@red,5%);
-        }
-        &:active {
-          .transition;
-          .translate(0, 4px);
-          box-shadow: 0 1px 0px @darkred, 
-                      0 2px 0px @darkred;
-        }
-      }
+}
+
+form.new_user {
+  overflow: auto;
+  -webkit-font-smoothing: antialiased !important;
+  input {
+    width: 100%;
+    clear: both;
+    .fsII;
+    .regular;
+    padding: 10px;
+    border-radius: .35em;
+    border: 1px solid @gray;
+    margin-bottom: 10px;
+    color: @black;
+    &:active, &:focus {
+      outline: none;
     }
-    h6.footnote {
-      .fs;
+    &[type="submit"] {
+      background: @red;
       .bold;
+      .fsIII;
+      color: @white;
       text-transform: uppercase;
-      color: @red;
+      letter-spacing: 1px;
+      border: 1px solid @red;
+      .transition;
+      box-shadow: 0 1px 0px @darkred, 
+                  0 2px 0px @darkred,
+                  0 3px 0px @darkred,
+                  0 4px 0px @darkred,
+                  0 5px 0px @darkred,
+                  0 6px 0px @darkred;
+      cursor: pointer;
+      margin-bottom: 25px;
+      position: relative;
+      &:hover {
+        .transition;
+        background: darken(@red,5%);
+      }
+      &:active {
+        .transition;
+        .translate(0, 4px);
+        box-shadow: 0 1px 0px @darkred, 
+                    0 2px 0px @darkred;
+      }
     }
+  }
+  h6.footnote {
+    .fs;
+    .bold;
+    text-transform: uppercase;
+    color: @red;
   }
 }
