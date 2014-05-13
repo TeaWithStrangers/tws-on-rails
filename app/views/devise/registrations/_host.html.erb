@@ -1,4 +1,4 @@
-<% unless current_user.roles.nil?%>
+<% if current_user && !current_user.roles.nil?%>
   <h3> Host Fields </h3>
 
   <div><%= f.label :avatar %><br />
