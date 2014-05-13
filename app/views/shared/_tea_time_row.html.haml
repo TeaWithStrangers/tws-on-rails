@@ -1,11 +1,13 @@
 .row.tea-time
-  .two.column
-    %img.host-avatar.tiny{src: tea_time.host.avatar.url(:thumb)}
-  .seven.columns
-    %p.time-and-location
-      = tea_time.friendly_time
-      %br
-      = tea_time.location
+  .host-photo
+    .avatar-container
+      .avatar{style:"background-image:url(#{tea_time.host.avatar.url(:medium)});"}
+  .time-and-place
+    .t-p-container
+      %h6.top
+        = tea_time.friendly_time
+      %h6.bottom
+        = tea_time.location
   .four.columns.host-name
     %p= tea_time.host.name
   = button_to attendance_tea_time_path(tea_time), class: ["button", tea_time.spots_remaining? ? :green : :red] do
