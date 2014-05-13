@@ -3,7 +3,7 @@
   %li
     =link_to "Upcoming Tea Times", profile_path
   %li
-    - if @user.host? || @user.admin?
+    - if current_user.host? || current_user.admin?
       = link_to "Schedule Tea Time", new_tea_time_path
   %li
     =link_to "Account", edit_user_registration_path
