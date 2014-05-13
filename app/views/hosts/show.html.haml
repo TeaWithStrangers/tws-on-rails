@@ -1,0 +1,4 @@
+- if @city.hosts.count == 1 && @city.hosts.first == @host
+  = render partial: 'one_of_one'
+- else
+  = render partial: 'one_of_many'
