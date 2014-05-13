@@ -34,9 +34,14 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :cities
+  resources :cities do
+    member do
+      get '/host/:host_id' => 'hosts#show', as: :host
+    end
+  end
+
   
-  match 'profile(/:id)' => 'profiles#show', as: :profile, via: :get
+  match '/profile(/:id)' => 'profiles#show', as: :profile, via: :get
 
 
 
