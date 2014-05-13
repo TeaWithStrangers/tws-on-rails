@@ -1,4 +1,4 @@
-.landscape-header{style:"background-image: url(#{image_path("splash.jpg")});"}
+.landscape-header
   .blur-layer
   .landscape-text
     %h1 
@@ -6,38 +6,26 @@
 .container
   = render partial: 'shared/nav_header'
   .row
-    .eight.columns.offset-by-four
-      %p 
+    .narrow
+      %p.big
         Tea time is a two hour conversation fueled by a few strangers, a super
         host, good questions, stories, and lots of listening.
-      %p You should come sometime. Or fivetimes.
+      %p.big.last
+        You should come sometime. Or fivetimes.
       = render partial: 'shared/signup'
   .row
-    .twelve.columns.offset-by-two
-      %h3.divided-header
+    .wide.something-funny
+      %h3.divider
         Something funny happens when strangers sit together for two hours.
-      %p
-        Thundercats fanny pack Kickstarter, hashtag photo booth cliche Marfa
-        skateboard Carles forage cred food truck Blue Bottle High Life. Cray
-        aesthetic chillwave, yr irony Thundercats Cosby sweater. Sriracha
-        Helvetica sartorial hoodie scenester deep v. Pour-over Tumblr Tonx Wes
-        Anderson banjo put a bird on it. Sriracha gluten-free cardigan
-        letterpress, chillwave Blue Bottle fixie. Pork belly normcore vegan,
-        Pinterest Portland Echo Park meggings. Pop-up biodiesel organic, tote
-        bag chillwave vegan put a bird on it Schlitz seitan.
-      %p
-        XOXO American Apparel freegan, Portland Carles asymmetrical Cosby
-        sweater plaid Austin hashtag food truck mixtape swag. Salvia letterpress
-        Portland cliche 90's, iPhone jean shorts single-origin coffee. Yr Vice
-        VHS, salvia kale chips High Life typewriter authentic shabby chic
-        whatever biodiesel chia. Fap wayfarers lo-fi drinking vinegar try-hard
-        disrupt. Bitters artisan messenger bag sartorial. Seitan Tonx
-        McSweeney's, retro American Apparel viral fashion axe scenester Banksy
-        single-origin coffee +1 selfies. Thundercats actually Austin meggings
-        deep v, before they sold out put a bird on it.
+      %p.big
+        We don't really have a specific reason to talk, so this could be awkward. We probably don't have connections through work, mutual friends, or any particular common interests.
+      %p.big
+        But we aren't actually that different. We're all proud, insecure, believers of something or another, passionate about things that matter to us, and we have loved ones — and when we sit, listen, and share thoughts and stories, we start seeing that.
+      %p.big
+        But goodness, we won't see it by reading a website about strangers, and we definitely won't see it by connecting on Instatweetbook.
   .row
-    .twelve.columns.offset-by-two
-      %h3.divided-header
+    .wide
+      %h3.divider
         Where we are
       %ul.cities
         -City.all.each do |c|

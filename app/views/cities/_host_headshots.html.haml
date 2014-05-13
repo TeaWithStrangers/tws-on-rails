@@ -14,7 +14,7 @@
       - hosts.each do |host|
         %li
           %img.host-avatar.small{src: host.avatar.url(:thumb)}
-          %p.host-name= host.name
+          %p.host-name= link_to(host.name, host_city_path(@city, host) )
   .row
     = render partial: "host_signup", locals: {city: @city}
 
