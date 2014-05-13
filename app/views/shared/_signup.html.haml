@@ -1,12 +1,13 @@
 - if current_user.nil?
   = form_for(resource, as: resource_name, url: registration_path(resource_name),
     class: 'signup') do |f|
-    = f.label :name
+    / = f.label :name
     = f.text_field :name, placeholder: 'Full Name'
-    = f.label :email
+    / = f.label :email
     = f.email_field :email, placeholder: 'john@appleseed.com'
     = f.hidden_field :autogen, value: true
-    = f.submit "Let's Get Tea"
+    = f.submit "Let's Get Tea*"
+    %h6.footnote *YOLO.
 - else
   %p 
     You've already registered for tea time!
