@@ -601,7 +601,7 @@ table#navigation-table {
 }
 
 .landscape-header {
-  background: url('http://f.cl.ly/items/3S0W0D1i041u1J120B2b/splash.jpg') no-repeat center;
+  background: asset-url('splash.jpg') no-repeat center; 
   background-size: cover;
   height: 400px;
   position: relative;
@@ -653,7 +653,7 @@ table#navigation-table {
         padding: 1em 0;
         float: left;
         padding-left: 3em;
-        background: url('http://cl.ly/VUdQ/teacup.png') no-repeat left center;
+        background: asset-url('teacup.png') no-repeat left center;
         background-size: 2em auto;
         overflow: visible;
       }
@@ -663,6 +663,14 @@ table#navigation-table {
         li {
           float: left;
           padding-left: 15px;
+          a {
+            color: @lightred;
+            .transition;
+            &:hover {
+              color: @red;
+              .transition;
+            }
+          }
         }
       }
     }
@@ -710,14 +718,6 @@ table#navigation-table {
           padding: 0 7.5% 0 12.5%;
         }
       }
-    }
-  }
-  a {
-    color: @lightred;
-    .transition;
-    &:hover {
-      color: @red;
-      .transition;
     }
   }
 }
