@@ -158,8 +158,13 @@ h1, h2, h3, p, ul, li {
 
 @width: 750px;
 @leftrightspace: 10px;
-.fsV {
+.fsVI {
   font-size: 5em;
+  line-height: 1.25em;
+}
+
+.fsV {
+  font-size: 3.5em;
   line-height: 1.25em;
 }
 
@@ -184,8 +189,8 @@ h1, h2, h3, p, ul, li {
 }
 
 .fs {
-  font-size: 0.75em;
-  line-height: 1.3em;
+  font-size: .9em;
+  line-height: 1.25em;
 }
 
 .ultra {
@@ -580,23 +585,15 @@ table#navigation-table {
   }
 }
 
-.controller-cities {
-  em.city-name {
-    font-size: 1.5em;
-    font-style: normal;
-    font-weight: bold;
+// End of styles from old TWS static pages
+
+// New styles begin here
+
+a {
+  color: @red;
+  &:hover {
+    text-decoration: underline;
   }
-    ul.host-headshots {
-      li {
-        float: left;
-        margin-left: 50px;
-        margin-bottom: 0px;
-        .host-name {
-          text-align: center; 
-          margin-bottom: 0px;
-        }
-      }
-    }
 }
 
 .landscape-header {
@@ -604,6 +601,9 @@ table#navigation-table {
   background-size: cover;
   height: 400px;
   position: relative;
+  &.city {
+    height: 300px;
+  }
   .blur-layer {
     position: absolute;
     height: 100%;
@@ -619,7 +619,7 @@ table#navigation-table {
     z-index: 2;
     h1 {
       .ultra;
-      .fsV;
+      .fsVI;
       top: 50%;
       left: 50%;
       .translate(-50%, -50%);
@@ -628,6 +628,9 @@ table#navigation-table {
       text-shadow: 0px 0px 4px @gray;
       width: 100%;
       text-align: center;
+      &.heycity {
+        .fsV;
+      }
     }
   }
   &:hover {
@@ -648,13 +651,22 @@ table#navigation-table {
     nav {
       .bold;
       overflow: auto;
-      h1.logo {
-        padding: 1em 0;
-        float: left;
-        padding-left: 3em;
-        background: asset-url('teacup.png') no-repeat left center;
-        background-size: 2em auto;
-        overflow: visible;
+      .tws {
+        a {
+          color: @black;
+          .transition;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+        h1.logo {
+          padding: 1em 0;
+          float: left;
+          padding-left: 3em;
+          background: asset-url('teacup.png') no-repeat left center;
+          background-size: 2em auto;
+          overflow: visible;
+        }
       }
       ul.nav-list {
         float: right;
@@ -667,6 +679,7 @@ table#navigation-table {
             .transition;
             &:hover {
               color: @red;
+              text-decoration: underline;
               .transition;
             }
           }
@@ -682,12 +695,21 @@ table#navigation-table {
   .row {
     clear: both;
     margin-bottom: 3em;
+    overflow: auto;
     .narrow {
       width: 75%;
       margin: 0 auto;
     }
+    .wide {
+      width: 100%;
+      &.something-funny {
+        p.bigger, p.big {
+          padding: 0 7.5% 0 12.5%;
+        }
+      }
+    }
     p {
-      .fsI;
+      .fsII;
       .regular;
       margin-bottom: 1em;
       &.big {
@@ -703,18 +725,117 @@ table#navigation-table {
         margin-bottom: 2em;
       }
     }
-    h3.divider {
-      .fsIV;
-      .bold;
-      padding-bottom: .25em;
-      margin-bottom: .75em;
-      border-bottom: 5px solid @red;
+    .half {
+      float: left;
+      width: 50%;
+      &.left {
+        padding-right: 2%;
+      }
+      &.right {
+        padding-left: 2%;
+      }
     }
-    .wide {
+    h3 {
+      &.divider {
+        .fsIV;
+        .bold;
+        padding-bottom: .25em;
+        margin-bottom: .75em;
+        border-bottom: 5px solid @red;
+      }
+      &.sectionhead {
+        .fsIII;
+        .bold;
+        padding: .25em .25em;
+        text-transform: uppercase;
+        color: @white;
+        background: @yellow;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+    }
+    em.city-name {
+      .bold;
+      .fsIV;
+      padding-right: 5px;
+    }
+    .howitworks {
+      ol {
+        list-style-type: decimal;
+        padding: 0 7.5% 0 12.5%;
+        li {
+          .fsII;
+          padding-left: 5%;
+          &.small {
+            .fsI;
+            .bold;
+            text-transform: uppercase;
+          }
+        }
+      }
+    }
+    ul.host-headshots {
+      overflow: auto;
       width: 100%;
-      &.something-funny {
-        p.bigger, p.big {
-          padding: 0 7.5% 0 12.5%;
+      li {
+        float: left;
+        width: 25%;
+        padding: 0 20px 20px 20px;
+        overflow: auto;
+        h5.host-name {
+          .fsII;
+          text-align: center;
+          margin-top: .75em;
+        }
+      }
+    }
+    .avatar-container {
+      border: 2px solid @red;
+      border-radius: 50%;
+      width: 100%;
+      padding-bottom: 100%;
+      position: relative;
+      .avatar {
+        height: 95%;
+        width: 95%;
+        border-radius: 50%;
+        background-size: auto 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        .translate(-50%, -50%);
+      }
+    }
+    &.tea-time {
+      .host-photo {
+        width: 15%;
+        float: left;
+      }
+      .time-and-place {
+        width: 45%;
+        float: left;
+        position: relative;
+        .t-p-container {
+          padding-bottom: 35%;
+          position: relative;
+        }
+        h6 {
+          .fsII;
+          width: 100%;
+          padding-left: 11px;
+          position: absolute;
+          &.top {
+            border-bottom: 2px solid @red;
+            top: 10px;
+            left: -4px;
+            padding-left: 11px;
+          }
+          &.bottom {
+            top: 44px;
+            .fs;
+          }
         }
       }
     }
