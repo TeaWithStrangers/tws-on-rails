@@ -1113,3 +1113,55 @@ form.new_user {
     }
   }
 }
+
+// Scheduling modal styles
+
+.controller-tea_times {
+  form.schedule-tea {
+    label, p.label {
+      .fs;
+      text-transform: uppercase;
+      .bold;
+      display: block;
+    }
+    .host-photo {
+      width: 15%;
+      float: left;
+    }
+    .time-and-place {
+      width: 55%;
+      float: left;
+      position: relative;
+      .t-p-container {
+        padding-bottom: 30%;
+        position: relative;
+      }
+      h6 {
+        .fsII;
+        width: 100%;
+        padding-left: 11px;
+        position: absolute;
+        &.top {
+          border-bottom: 2px solid @red;
+          top: 10px;
+          left: -4px;
+          padding-left: 11px;
+          .bold;
+          text-transform: uppercase;
+          color: @red;
+        }
+        &.bottom {
+          top: 44px;
+          .fs;
+        }
+        span.datalabel {
+          .bold;
+          text-transform: uppercase;
+        }
+      }
+    }
+    .button {
+      display: none;
+    }
+  }
+}
