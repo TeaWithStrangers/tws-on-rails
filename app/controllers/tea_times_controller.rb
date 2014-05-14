@@ -30,6 +30,7 @@ class TeaTimesController < ApplicationController
     @attendance = Attendance.new(tea_time: @tea_time, user: @user)
     respond_to do |format|
       if @attendance.save
+        UserMailer.tea_time_registration(@attendance)
         format.html { redirect_to profile_path, notice: 'Registered for Tea Time! See you soon :)' }
         format.json { @attendance }
       end
@@ -51,6 +52,7 @@ class TeaTimesController < ApplicationController
 
     respond_to do |format|
       if @attendance.save
+        UserMailer.tea_time_flake(@attendance) if status == :flake 
         format.html { redirect_to @tea_time, notice: 'Tea time was successfully created.' }
         format.json { render :show, status: :created, location: @tea_time }
       else
