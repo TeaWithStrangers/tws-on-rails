@@ -37,7 +37,7 @@
                   %li
                     .avatar-container.quarter
                       .avatar{style:"background-image:url(#{h.avatar.url(:medium)});"}
-                    %h5.host-name= h.name
+                    %h5.host-name= link_to h.name, host_city_path(c, h)
       %ul.cities.single-host
         - @cities_by_host[:single_host].each do |c|
           %li
@@ -49,7 +49,7 @@
                   %li
                     .avatar-container.quarter
                       .avatar{style:"background-image:url(#{h.avatar.url(:medium)});"}
-                    %h5.host-name= h.name
+                    %h5.host-name= link_to h.name, host_city_path(c, h)
   .upcoming.cities.row
     .wide
       %h3.divider
