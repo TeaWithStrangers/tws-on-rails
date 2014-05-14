@@ -10,7 +10,7 @@
         = tea_time.location
   .four.columns.host-name
     %p= tea_time.host.name
-  = button_to attendance_tea_time_path(tea_time), class: ["button", tea_time.spots_remaining? ? :green : :red] do
+  = button_to tea_time_path(tea_time), class: ["button", tea_time.spots_remaining? ? :green : :red] do
     .three.columns
       - if tea_time.spots_remaining?
         = "#{tea_time.spots_remaining} spots left"

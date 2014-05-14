@@ -1,0 +1,23 @@
+.landscape-header.city{style:"background-image: url(#{@city.header_bg.url});"}
+  .blur-layer
+  .landscape-text
+    %h1.heycity
+      Hey #{@city.name}!
+      %br
+      Let's get tea.
+
+.container
+  = render partial: 'shared/nav_header'
+  .row
+    .narrow.howitworks
+      %h3.divider Let's find a time that works!
+      %p 
+        Each tea time is hosted by someone awesome (trust us, not just anyone
+        gets to host tea time  ;-)). If no times below suit you, we’ll release
+        more soon and fire you an email then. 
+      %p 
+        In either case, you’ll soon receive an email with a link to this page
+        for future access.
+      
+  -if @city.tea_times.future
+    = render partial: 'shared/tea_times', locals: {tea_times: @city.tea_times.future.take(10)}
