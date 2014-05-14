@@ -14,10 +14,8 @@
         %span.datalabel
           Location:
         = tea_time.location
-  .four.columns.host-name
-    %p= tea_time.host.name
-  = button_to tea_time_path(tea_time), class: ["button", tea_time.spots_remaining? ? :green : :red] do
-    .three.columns
+  .button
+    = button_to tea_time_path(tea_time), class: ["button", tea_time.spots_remaining? ? :green : :red] do
       - if tea_time.spots_remaining?
         = "#{tea_time.spots_remaining} spots left"
       - else
