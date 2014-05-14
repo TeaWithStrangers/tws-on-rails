@@ -9,7 +9,7 @@
   <div><%= f.label :email %><br />
   <%= f.email_field :email, placeholder: "Email Address" %></div>
 
-  <%= render partial: 'host', locals: {f: f } %>
+  <%= render partial: 'devise/registrations/host', locals: {f: f } %>
 
   <div><%= f.label :password %><br />
     <%= f.password_field :password, placeholder: "Password", autocomplete: "off" %></div>

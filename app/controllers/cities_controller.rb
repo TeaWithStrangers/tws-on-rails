@@ -1,5 +1,5 @@
 class CitiesController < ApplicationController
-  before_action :set_city, only: [:show, :edit, :update, :destroy]
+  before_action :set_city, only: [:show, :edit, :update, :destroy, :schedule]
   before_action :authorized?, only: [:edit, :create, :new, :destroy]
 
   # GET /cities
@@ -11,6 +11,9 @@ class CitiesController < ApplicationController
   # GET /cities/1
   # GET /cities/1.json
   def show
+  end
+
+  def schedule
   end
 
   # GET /cities/new

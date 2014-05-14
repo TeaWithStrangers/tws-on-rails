@@ -1,0 +1,9 @@
+%h2 Sign Up a New Host
+
+= form_for(@host, url: create_host_path) do |f|
+  = f.label :name
+  = f.text_field :name, autofocus: true
+  = f.label :email
+  = f.email_field :email, placeholder: "Email Address"
+  = render partial: 'devise/registrations/host', locals: {f: f}
+  = f.submit 'Create Host'
