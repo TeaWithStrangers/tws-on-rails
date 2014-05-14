@@ -12,7 +12,7 @@
         host, good questions, stories, and lots of listening.
       %p.big.last
         You should come sometime. Or fivetimes.
-      = render partial: 'shared/signup'
+      = render partial: 'shared/signup', locals: {dropdown: true}
   .row
     .wide.something-funny
       %h3.divider
@@ -28,5 +28,16 @@
       %h3.divider
         Where we are
       %ul.cities
-        -City.all.each do |c|
+        - @cities_by_host[:many_hosts].each do |c|
           %li= link_to c.name, city_path(c)
+        - @cities_by_host[:single_host].each do |c|
+          %li= link_to c.name, city_path(c), {class: 'single-host'}
+  .row
+    .wide
+      %h3.divider
+        Where we're coming
+      %ul.cities
+        //No host cities (where we'll be soon)
+        - @cities_by_host[:no_hosts].each do |c|
+          %li= link_to c.name, city_path(c)
+
