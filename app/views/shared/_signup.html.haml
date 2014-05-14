@@ -14,6 +14,8 @@
     = f.submit "Let's Get Tea*"
     %h6.footnote *YOLO.
 - else
-  %p 
-    You've already registered for tea time!
-    =link_to("Go sign up for one!", "#cities")
+  .already
+    %h4.schedule.button
+      =link_to("Schedule tea time", "#cities")
+    %h5.logout
+      =link_to("If you're not #{current_user.name}, click here and sign up yourself!", "signout")
