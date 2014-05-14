@@ -699,7 +699,9 @@ a {
           color: @black;
           .transition;
           &:hover {
-            text-decoration: underline;
+            h1 {
+              text-decoration: underline;
+            }
           }
         }
         h1.logo {
@@ -753,7 +755,7 @@ a {
         border-bottom: 1px solid @red;
       }
       .body {
-        padding: 20px;
+        padding: 20px 20px 30px;
         p {
           color: @black;
           .fsII;
@@ -775,6 +777,30 @@ a {
       &.something-funny {
         p.bigger, p.big {
           padding: 0 7.5% 0 12.5%;
+        }
+      }
+    }
+    .already {
+      text-align: center;
+      h4.whoops {
+        .bold;
+        .fs;
+        text-transform: uppercase;
+        padding: 1em 0 .5em;
+      }
+      h4.schedule.button {
+        a {
+          .button(@green);
+          color:@white;
+          display: block;
+          margin-bottom: 10px;
+          padding: .25em;
+        }
+      }
+      h5.logout {
+        padding-top: 1em;
+        a {
+
         }
       }
     }
