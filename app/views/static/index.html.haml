@@ -23,20 +23,41 @@
         But we aren't actually that different. We're all proud, insecure, believers of something or another, passionate about things that matter to us, and we have loved ones — and when we sit, listen, and share thoughts and stories, we start seeing that.
       %p.big
         But goodness, we won't see it by reading a website about strangers, and we definitely won't see it by connecting on Instatweetbook.
-  #cities.row
+  .cities.row
     .wide
       %h3.divider
         Where we are
-      %ul.cities
+      %ul.cities.multiple-hosts
         - @cities_by_host[:many_hosts].each do |c|
-          %li= link_to c.name, city_path(c)
+          %li
+            .city-bg{style:"background-image:url(#{city.header_bg.url});"}
+              %h3= link_to c.name, city_path(c)
+              %ul.hosts
+                - c.hosts.each do |h|
+                  %li
+                    .avatar-container.quarter
+                      .avatar{style:"background-image:url(#{h.avatar.url(:medium)});"}
+                    %h5.host-name= h.name
+      %ul.cities.single-host
         - @cities_by_host[:single_host].each do |c|
-          %li= link_to c.name, city_path(c), {class: 'single-host'}
-  .row
+          %li
+            .city-bg{style:"background-image:url(#{c.header_bg.url});"}
+              %h3= link_to c.name, city_path(c), {class: 'single-host'}
+            .host-container
+              %ul.hosts
+                - c.hosts.each do |h|
+                  %li
+                    .avatar-container.quarter
+                      .avatar{style:"background-image:url(#{h.avatar.url(:medium)});"}
+                    %h5.host-name= h.name
+  .upcoming.cities.row
     .wide
       %h3.divider
         Where we're coming
-      %ul.cities
+      %ul.cities.no-host
         //No host cities (where we'll be soon)
         - @cities_by_host[:no_hosts].each do |c|
-          %li= link_to c.name, city_path(c)
+          / %li= link_to c.name, city_path(c)
+          %li
+            .city-bg{style:"background-image:url(#{c.header_bg.url});"}
+              %h3= link_to c.name, city_path(c), {class: 'single-host'}

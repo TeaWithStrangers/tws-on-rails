@@ -741,6 +741,99 @@ a {
         }
       }
     }
+    ul.cities {
+      overflow: auto;
+      li {
+        overflow: visible;
+        position: relative;
+        .city-bg {
+          width: 100%;
+          clear: both;
+          height: 270px;
+          background-size: cover;
+          background-position: center;
+          position: relative;
+        }
+        h3 {
+          .ultra;
+          .fsIV;
+          text-align: center;
+          text-transform: uppercase;
+          padding-top: 10px;
+          a {
+            color: @white;
+            text-decoration: none;
+            text-shadow: 0px 0px 4px @gray;
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+        .host-container {
+          width: 100%;
+          position: relative;
+          margin-top: -45px;
+          top: -50px;
+          overflow: auto;
+          ul.hosts {
+            overflow: auto;
+            width: 100%;
+            li {
+              overflow: auto;
+              h5.host-name {
+                text-align: center;
+                padding-top: 1em;
+              }
+            }
+          }
+        }
+      }
+      &.single-host, &.no-host {
+        li {
+          width: 100%/3;
+          float: left;
+          &:nth-child(3n+1) { //1,4,7,...
+            padding-right: 40px/3;
+          }
+          &:nth-child(3n+2) { //2,5,8,...
+            padding: 0 40px/6;
+          }
+          &:nth-child(3n) { //3,6,9,...
+            padding-left: 40px/3;
+          }
+          ul.hosts {
+            li {
+              width: 100%;
+              padding: 0 10%;
+              .avatar-container {
+                width: 150px;
+                height: 150px;
+                padding-bottom: 0;
+                margin: 0 auto;
+              }
+            }
+          }
+        }
+      }
+      &.multiple-hosts {
+        li {
+          h3 {
+            text-align: left;
+            padding-left: 20px;
+          }
+          ul.hosts {
+            li {
+              width: 25%;
+              padding: 0 20px;
+              float: left;
+              &:nth-child(n+5) {
+                margin-top: 20px;
+              }
+            }
+          }
+        }
+      }
+    }
     p {
       .fsII;
       .regular;
@@ -824,6 +917,7 @@ a {
     }
     .avatar-container {
       border: 2px solid @red;
+      background: @background;
       border-radius: 50%;
       width: 100%;
       padding-bottom: 100%;
@@ -887,6 +981,9 @@ a {
           float: right;
           width: 90%;
           border-radius: .25em;
+          &.red {
+            .button(@gray);
+          }
         }
       }
     }
