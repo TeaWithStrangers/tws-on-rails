@@ -154,6 +154,7 @@ h1, h2, h3, p, ul, li {
 @lightred: lighten(@red, 30%);
 @darkred: darken(@red, 15%);
 @yellow: #e0a33c;
+@green: #27ae61;
 @background: #fae8d5;
 
 @width: 750px;
@@ -207,6 +208,38 @@ h1, h2, h3, p, ul, li {
 
 strong {
   .bold;
+}
+
+.button(@color) {
+  background: @color;
+  .bold;
+  .fsIII;
+  color: @white;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: 1px solid @color;
+  .transition;
+  box-shadow: 0 1px 0px darken(@color, 15%),
+              0 2px 0px darken(@color, 15%),
+              0 3px 0px darken(@color, 15%),
+              0 4px 0px darken(@color, 15%),
+              0 5px 0px darken(@color, 15%),
+              0 6px 0px darken(@color, 15%);
+  cursor: pointer;
+  position: relative;
+  &:hover {
+    .transition;
+    background: darken(@color,5%);
+  }
+  &:active {
+    .transition;
+    .translate(0, 4px);
+    box-shadow: 0 1px 0px darken(@color, 15%),
+                0 2px 0px darken(@color, 15%);
+  }
+  &:focus {
+    outline: none;
+  }
 }
 
 header.cover {
@@ -809,16 +842,17 @@ a {
       }
     }
     &.tea-time {
+      margin-bottom: 1.5em;
       .host-photo {
         width: 15%;
         float: left;
       }
       .time-and-place {
-        width: 45%;
+        width: 55%;
         float: left;
         position: relative;
         .t-p-container {
-          padding-bottom: 35%;
+          padding-bottom: 30%;
           position: relative;
         }
         h6 {
@@ -831,11 +865,29 @@ a {
             top: 10px;
             left: -4px;
             padding-left: 11px;
+            .bold;
+            text-transform: uppercase;
+            color: @red;
           }
           &.bottom {
             top: 44px;
             .fs;
           }
+          span.datalabel {
+            .bold;
+            text-transform: uppercase;
+          }
+        }
+      }
+      .button {
+        float: left;
+        width: 30%;
+        button.button {
+          .button(@green);
+          float: right;
+          width: 90%;
+          border-radius: .25em;
+
         }
       }
     }
@@ -859,33 +911,8 @@ form.new_user {
       outline: none;
     }
     &[type="submit"] {
-      background: @red;
-      .bold;
-      .fsIII;
-      color: @white;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      border: 1px solid @red;
-      .transition;
-      box-shadow: 0 1px 0px @darkred, 
-                  0 2px 0px @darkred,
-                  0 3px 0px @darkred,
-                  0 4px 0px @darkred,
-                  0 5px 0px @darkred,
-                  0 6px 0px @darkred;
-      cursor: pointer;
+      .button(@red);
       margin-bottom: 25px;
-      position: relative;
-      &:hover {
-        .transition;
-        background: darken(@red,5%);
-      }
-      &:active {
-        .transition;
-        .translate(0, 4px);
-        box-shadow: 0 1px 0px @darkred, 
-                    0 2px 0px @darkred;
-      }
     }
   }
   h6.footnote {
