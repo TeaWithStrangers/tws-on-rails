@@ -7,6 +7,8 @@
     = f.email_field :email, placeholder: 'Email Address'
     - if dropdown ||= false
       = select_tag :city, options_for_select(City.all.map{ |c| [c.name, c.id] })
+    - elsif @city ||= nil
+      = hidden_field :city, value: @city.id
     = f.hidden_field :autogen, value: true
     = f.submit "Let's Get Tea*"
     %h6.footnote *YOLO.
