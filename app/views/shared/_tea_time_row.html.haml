@@ -7,6 +7,12 @@
       %h6.top
         = tea_time.friendly_time
       %h6.bottom
+        %span.datalabel
+          Host:
+        = tea_time.host.name
+        %br
+        %span.datalabel
+          Location:
         = tea_time.location
   .four.columns.host-name
     %p= tea_time.host.name
