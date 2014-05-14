@@ -887,7 +887,6 @@ a {
           float: right;
           width: 90%;
           border-radius: .25em;
-
         }
       }
     }
@@ -920,5 +919,82 @@ form.new_user {
     .bold;
     text-transform: uppercase;
     color: @red;
+  }
+}
+
+// Modal styles
+
+.ui-widget-overlay.ui-front {
+  background: fade(@gray,30%);
+  opacity: 1;
+}
+.ui-dialog .ui-dialog-content {
+  padding: 0 !important;
+  color: @black !important;
+}
+.ui-widget-content.ui-dialog.ui-corner-all {
+  background: @white;
+  color: @black;
+  border-radius: .5em;
+  .regular;
+  .fsII;
+  top: 10% !important;
+  padding: 0;
+  box-shadow: 0 0 5px lighten(@gray,15%);
+  .ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix {
+    padding: 0;
+    border: none;
+  }
+  .ui-dialog-title {
+    display: none;
+  }
+  h2.admin-head {
+    .fsIII;
+    .bold;
+    color: @red;
+    background: @background;
+    padding: .75em;
+    border-bottom: 1px solid @lightred;
+  }
+  button[type="button"][title="close"] {
+    top: 2em;
+    right: .75em;
+    border: none;
+    background: none;
+    z-index: 1000;
+  }
+  input#user_remember_me {
+    float: left;
+    margin: .2em;
+    width: auto;
+  }
+  label[for="user_remember_me"] {
+    .fs;
+    .regular;
+    float: left;
+    position: relative;
+    top: 1px;
+    padding-left: 5px;
+  }
+  form.new_user {
+    overflow: auto;
+    -webkit-font-smoothing: antialiased !important;
+    padding: .75em;
+    input, select {
+      .fsI;
+      padding: 5px 10px;
+      border-color: lighten(@gray, 15%);
+      &[type="submit"] {
+        .button(@red);
+        .fsII;
+        margin-top: 15px;
+      }
+    }
+    h6.footnote {
+      .fs;
+      .bold;
+      text-transform: uppercase;
+      color: @red;
+    }
   }
 }
