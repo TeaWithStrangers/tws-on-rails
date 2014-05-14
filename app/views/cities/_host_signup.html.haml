@@ -1,12 +1,14 @@
 .alert-box
   %h1
     - if count == 0
-      If you think you'd be one of them
+      If you think you'd be a great host
     - else 
       Seriously though
-  %p
-    - if count == 0
-      Intro text
-    - else
-      Other text
-
+  .body
+    %p
+      - if count == 0
+        Tea time has a tone that makes it the conversation it is. A good host sets that tone. They’re reliable, caring, interesting and they try to be humble despite their awesomeness. And they know how to ask questions unashamedly because, at the end of the day, we’re in no place to assume.
+      - else
+        = "We could use an army of hosts in #{@city.name}. If we had another few hosts, we could create the space for tea time pretty much every day. Now imagine that. A #{@city.name} where people sat, asked questions, shared stories, and listened every day. That’d be pretty sweet."
+    .host-material
+      Think you're host material?
