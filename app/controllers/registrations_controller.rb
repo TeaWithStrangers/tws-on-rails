@@ -1,5 +1,4 @@
 class RegistrationsController < Devise::RegistrationsController
-
   def create
     if params[:user][:autogen]
       generated_password = Devise.friendly_token.first(8)
