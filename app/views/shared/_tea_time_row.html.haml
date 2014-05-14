@@ -9,14 +9,15 @@
       %h6.bottom
         %span.datalabel
           Host:
-        = tea_time.host.name
+        = link_to tea_time.host.name, host_city_path(tea_time.city, tea_time.host)
         %br
         %span.datalabel
           Location:
         = tea_time.location
   .button
-    = button_to tea_time_path(tea_time), class: ["button", tea_time.spots_remaining? ? :green : :red] do
-      - if tea_time.spots_remaining?
-        = "#{tea_time.spots_remaining} spots left"
-      - else
-        Full
+    = link_to tea_time_path(tea_time) do
+      %button.button
+        - if tea_time.spots_remaining?
+          = "#{tea_time.spots_remaining} spots left"
+        - else
+          Full
