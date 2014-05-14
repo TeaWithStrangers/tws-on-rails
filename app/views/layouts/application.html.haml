@@ -19,3 +19,4 @@
     = csrf_meta_tags
   %body{class: (params[:controller] ? "controller-#{params[:controller]}" : nil) }
     = yield
+    #modal{style: 'display: none' }

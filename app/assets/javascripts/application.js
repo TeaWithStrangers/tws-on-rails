@@ -15,3 +15,13 @@
 //= require turbolinks
 //= require jquery.ui.all
 //= require_tree .
+
+
+$(document).ready(function() {
+  $('#login').click(function(evt, x, y) {
+    evt.preventDefault();
+    console.log('Something')
+    $("#modal").load('/signin').dialog({modal: true});
+    console.log('Something')
+  });
+})
