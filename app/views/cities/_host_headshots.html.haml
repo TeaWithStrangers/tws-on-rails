@@ -1,4 +1,3 @@
-=render partial: 'shared/signup'
 - count = hosts.count 
 - many_hosts = hosts.count > 2
 .row
@@ -15,5 +14,7 @@
           .avatar-container.quarter
             .avatar{style:"background-image:url(#{host.avatar.url(:medium)});"}
           %h5.host-name= link_to(host.name || "No Name :(", host_city_path(@city, host) )
+.row
+  .narrow
     - if count <= 1
       = render partial: "host_signup", locals: {city: @city, count: count}
