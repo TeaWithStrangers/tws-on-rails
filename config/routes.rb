@@ -37,11 +37,14 @@ Rails.application.routes.draw do
   resources :cities do
     member do
       get '/host/:host_id' => 'hosts#show', as: :host
+      get '/schedule', action: 'schedule', as: :schedule
     end
   end
 
   
   match '/profile(/:id)' => 'profiles#show', as: :profile, via: :get
+  get '/host/new' => 'hosts#new', as: :new_host
+  post '/host' => 'hosts#create', as: :create_host
 
 
 

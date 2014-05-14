@@ -23,7 +23,7 @@
         But we aren't actually that different. We're all proud, insecure, believers of something or another, passionate about things that matter to us, and we have loved ones — and when we sit, listen, and share thoughts and stories, we start seeing that.
       %p.big
         But goodness, we won't see it by reading a website about strangers, and we definitely won't see it by connecting on Instatweetbook.
-  .row
+  #cities.row
     .wide
       %h3.divider
         Where we are
@@ -40,4 +40,3 @@
         //No host cities (where we'll be soon)
         - @cities_by_host[:no_hosts].each do |c|
           %li= link_to c.name, city_path(c)
-

@@ -13,5 +13,5 @@
         %li.host
           .avatar-container.quarter
             .avatar{style:"background-image:url(#{host.avatar.url(:medium)});"}
-          %h5.host-name= link_to(host.name, host_city_path(@city, host) )
+          %h5.host-name= link_to(host.name || "No Name :(", host_city_path(@city, host) )
     = render partial: "host_signup", locals: {city: @city}
