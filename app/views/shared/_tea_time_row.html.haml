@@ -7,11 +7,15 @@
       %h6.top
         = tea_time.friendly_time
       %h6.bottom
+        %span.datalabel
+          Host:
+        = tea_time.host.name
+        %br
+        %span.datalabel
+          Location:
         = tea_time.location
-  .four.columns.host-name
-    %p= tea_time.host.name
-  = button_to attendance_tea_time_path(tea_time), class: ["button", tea_time.spots_remaining? ? :green : :red] do
-    .three.columns
+  .button
+    = button_to attendance_tea_time_path(tea_time), class: ["button", tea_time.spots_remaining? ? :green : :red] do
       - if tea_time.spots_remaining?
         = "#{tea_time.spots_remaining} spots left"
       - else
