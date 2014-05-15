@@ -20,13 +20,26 @@
 function loadModal(modalTarget) {
   return function(evt) {
     evt.preventDefault();
-    $("#modal").load(modalTarget).dialog({modal: true});
+    return $("#modal").load(modalTarget).dialog({
+      modal: true,
+      draggable: false,
+      resizeable: false,
+      width: 500,
+      title: null
+    });
   }
 }
 
+
+var modal;
+function closeModal() { modal.dialog('close') }
 $(document).ready(function() {
   $('#login').click(loadModal('/signin'));
   $('.tea-time-scheduling').on('click', function(evt) {
-    loadModal(evt.currentTarget.href)(evt)
+    modal = loadModal(evt.currentTarget.href)(evt)
+  })
+  $('input.cancel').on('click', function(evt) {
+    evt.preventDefault();
+    closeModal();
   })
 })
