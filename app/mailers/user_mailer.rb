@@ -11,7 +11,15 @@ class UserMailer < ActionMailer::Base
     tt = attendance.tea_time
 
     mail.attachments['event.ics'] = {mime_type: "text/calendar", content: tt.ito_cal.to_ical}
-    mail(to: attendance.user.email, subject: "See you at tea time!")
+    mail(to: attendance.user.email, subject: "See you at tea time!").deliver!
+  end
+
+  def tea_time_reminder(attendance)
+    @attendance = attendance
+    tt = attendance.tea_time
+
+    mail(to: attendance.user.email, subject: "See you at tea time!", 
+         reply_to: tt.host.email).deliver!
   end
 
   def tea_time_cancellation(tea_time)
