@@ -6,8 +6,10 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :roles
   has_many :tea_times
   has_many :attendances
-  has_attached_file :avatar, styles: { medium: "300x300", thumb: "100x100", landscape: "300x"}, default_url: "/assets/missing.png"
+  has_attached_file :avatar, styles: { medium: "300x300", thumb: "100x100", landscape: "300"}, default_url: "/assets/missing.png"
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
+
+  scope :hosts, -> { joins(:roles).where(roles: {name: 'Host'}) }
 
   def future_tea_times
     attendee = TeaTime.future.joins(:attendances).where("attendances.status = 0", :user_id => self.id)
