@@ -3,7 +3,10 @@ class UserMailer < ActionMailer::Base
 
   def user_registration(user, password)
     @user = user; @password=password;
-    mail(to: @user.email, subject: 'High fives from Tea With Strangers!').deliver!
+    mail(from: 'ankit@teawithstrangers.com',
+         to: @user.email, 
+         subject: 'High fives from Tea With Strangers!').
+         deliver!
   end
 
   def tea_time_registration(attendance)
