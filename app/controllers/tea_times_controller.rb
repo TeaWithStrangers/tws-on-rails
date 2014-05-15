@@ -25,7 +25,15 @@ class TeaTimesController < ApplicationController
 
   # POST /tea_times/1/attendance
   def create_attendance
+    debugger
     @user = current_user
+    #FIXME: ALL THIS
+    if @user.nil?
+      generated_password = Devise.friendly_token.first(8)
+      @user = User.create(name: tea_time_params[:name], email: tea_time_params[:email], password: generated_password)
+      sign_in(:user, @user)
+      UserMailer.user_registration(@user, generated_password) if @user
+    end
     status = :pending
     @attendance = Attendance.new(tea_time: @tea_time, user: @user)
     respond_to do |format|
