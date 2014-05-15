@@ -12,6 +12,10 @@ class TeaTimesController < ApplicationController
   # GET /tea_times/1
   # GET /tea_times/1.json
   def show
+    respond_to do |format|
+      format.html { render layout: !request.xhr? }
+      format.json { @tea_time }
+    end
   end
 
   # GET /tea_times/new
