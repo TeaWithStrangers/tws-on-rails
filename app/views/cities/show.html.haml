@@ -42,4 +42,4 @@
   = render partial: 'host_headshots', locals: {hosts: @city.hosts}
   -if @city.tea_times.future
     = render partial: 'shared/tea_times', locals: {tea_times: @city.tea_times.future.take(10)}
-= render partial: 'shared/footer'
+=content_for(:footer) { render partial: 'shared/footer' }
