@@ -8,7 +8,7 @@ class UserMailer < ActionMailer::Base
 
   def tea_time_registration(attendance)
     @attendance = attendance
-    mail(to: @user.email, subject: "See You at Tea Time!").deliver!
+    mail(to: attendance.user.email, subject: "See You at Tea Time!").deliver!
   end
 
   def tea_time_cancellation(tea_time)
