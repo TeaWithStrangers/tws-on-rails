@@ -10,7 +10,8 @@
       %p.big
         Tea time is a two hour conversation fueled by the stories, questions, and listening of a few strangers and a super host.
       %p.big
-        You should sign up and come sometime. Yes, you.
+        You should sign up and come sometime. 
+        %a{href: '#footer'} Yes, you.
       = render partial: 'shared/signup', locals: {dropdown: true}
   .row
     .wide.something-funny
@@ -59,4 +60,4 @@
           %li
             .city-bg{style:"background-image:url(#{c.header_bg.url});"}
               %h3= link_to c.name, city_path(c), {class: 'single-host'}
-= render partial: 'shared/footer'
+- content_for(:footer) { render partial: 'shared/footer'}
