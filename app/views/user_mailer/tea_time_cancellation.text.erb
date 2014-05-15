@@ -2,13 +2,18 @@ Hey <%= @user.name %>,
  
 We're really sorry for this, but your upcoming tea time was canceled.
 
-<!-- It'd be good to include the details for relevant tea time here -->
+That "upcoming tea time" was this one, by the way:
 
-We try to make sure this rarely happens, so emails like this are only sent when there's a good reason for it.
+<%= render partial: "tea_time_info", locals: {tea_time: @tea_time} %>
 
-In the meantime, we'd love it if there were another time that did work for you. Check out the schedule here: <%= url_for(controller: 'cities', action: 'index', only_path: false) %>.
+We try to make sure this rarely happens, so emails like this are only sent when
+there's a good reason for it.
 
-Hope you're having a super duper day! If not, watch this: https://www.youtube.com/watch?v=eaIvk1cSyG8.
+In the meantime, we'd love it if there were another time that did work for you.
+Check out the schedule here: <%= url_for(controller: 'cities', action: 'index', only_path: false) %>.  
+
+Hope you're having a super duper day! If not, watch this:
+https://www.youtube.com/watch?v=eaIvk1cSyG8.
 
 Thumbs up for rock and roll!
 The Tea With Strangers team
