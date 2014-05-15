@@ -25,7 +25,6 @@ class TeaTimesController < ApplicationController
 
   # POST /tea_times/1/attendance
   def create_attendance
-    debugger
     @user = current_user
     #FIXME: ALL THIS
     if @user.nil?
