@@ -8,8 +8,8 @@
     .row
       - if @user.future_tea_times.count>0
         %ul
-          -@user.future_tea_times.each do |t|
+          -@user.future_tea_times.each do |a|
             %li
-              = render partial: 'teatime_info', locals: {tea_time: t}
+              = render partial: 'teatime_info', locals: {tea_time: a.tea_time, att: a}
       - else
         %em You're not scheduled for any upcoming tea times

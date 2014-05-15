@@ -7,8 +7,8 @@ class TeaTime < ActiveRecord::Base
   
   attr_reader :local_time, :spots_remaining
 
-  scope :past, -> { where("start_time <= ?", DateTime.now.midnight) }
-  scope :future, -> { where("start_time >= ?", DateTime.now.midnight) }
+  scope :past, -> { where("start_time <= ?", DateTime.now.midnight.utc) }
+  scope :future, -> { where("start_time >= ?", DateTime.now.midnight.utc) }
 
   def local_time
     #FIXME: Just use UTC times for now, fix down the line

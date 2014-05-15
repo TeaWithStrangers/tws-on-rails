@@ -12,8 +12,8 @@ class User < ActiveRecord::Base
   scope :hosts, -> { joins(:roles).where(roles: {name: 'Host'}) }
 
   def future_tea_times
-    attendee = TeaTime.future.joins(:attendances).where("attendances.status = 0", :user_id => self.id)
-    attendee
+    attendances.where(status: 0).joins(:tea_time).
+      merge(TeaTime.future).includes(:tea_time)
   end
 
   def role?(role)
