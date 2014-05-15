@@ -7,7 +7,7 @@
     = render partial: 'shared/tea_time_row', locals: {tea_time: @tea_time}
     = f.label :name, "Your name is"
     = f.text_field :name, value: prefill ? current_user.name : '', readonly: prefill, placeholder: 'Full Name'
-    = f.label :email, "You check email (and hopefully manage a calendar) at"
+    = f.label :email, "You check email (and manage a calendar) at"
     = f.email_field :email, value: prefill ? current_user.email : '', readonly: prefill,placeholder: 'Email Address'
     .button-container
       = f.submit 'Cancel', class: 'cancel'
