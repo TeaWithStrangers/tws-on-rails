@@ -15,13 +15,13 @@
   .row
     .wide.something-funny
       %h3.divider
-        Something funny happens when strangers sit together for two hours.
+        We're strangers, but we're not that strange.
       %p.big
-        We don't really have a specific reason to talk, so this could be awkward. We probably don't have connections through work, mutual friends, or any particular common interests.
+        We all have good days and bad days. We're all scared of something, have loved ones, pet peeves, insecurities, points of pride, and passions that matter to us.
       %p.big
-        But we aren't actually that different. We're all proud, insecure, believers of something or another, passionate about things that matter to us, and we have loved ones — and when we sit, listen, and share thoughts and stories, we start seeing that.
+        The funny thing is that without common friends, interests, or fields of work, we probably won't cross paths. So it's hard to see how similar we actually are in our day-to-day (even if we're following each other on Instatweetbook.)
       %p.big
-        But goodness, we won't see it by reading a website about strangers, and we definitely won't see it by connecting on Instatweetbook.
+        But we might just start to see it if we sit for a conversation. It's a better shot than reading a website about strangers, at the least. Let's get tea.
   #cities.row
     .wide
       %h3.divider
@@ -56,7 +56,7 @@
       %ul.cities.no-host
         //No host cities (where we'll be soon)
         - @cities_by_host[:no_hosts].each do |c|
-          / %li= link_to c.name, city_path(c)
           %li
             .city-bg{style:"background-image:url(#{c.header_bg.url});"}
               %h3= link_to c.name, city_path(c), {class: 'single-host'}
+= render partial: 'shared/footer'

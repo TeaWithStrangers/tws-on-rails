@@ -1,18 +1,18 @@
-Welcome to TeaWithStrangers, <%= @user.name %>
-===============================================
+Hey hey <%= @user.name %>!
  
-You have successfully signed up to teawithstrangers.com,
-your username is: <%= @user.email %>.
+Ankit here, one of the hosts behind Tea With Strangers. 
+
+First off, you're awesome for signing up. It says a lot that you're cool with the idea of sharing stories and having a conversation with strangers. High five for that!
+
+If you haven't yet, you should absolutely find a time to sit for tea here: <%= url_for(controller: 'cities', action: 'index', only_path: false) %>.
+
+Now, tea time is really cool. So cool that you might want to sign up for another one after your first. Not trying to jump the gun TOO much, but you should know that when you want to sign up for another one, you can log in with <%= @user.email %>.
 
 <% if @password %>
-We've automatically generated a password for you. It's:
-<%= @password %>
+For now, we made a password for you — <%= @password %> — but you should change it to something easier to remember. You can do that here: <%= url_for(controller: 'registrations', action: 'edit', only_path: false) %>.
 <% end %>
+ 
+That's all for now, but in the meantime, enjoy the Tea With Strangers blog at http://blog.teawithstrangers.com and tell your friends, near and far, about Tea With Strangers. Soon enough, strangers will be sitting together for the greatest conversations of all time, 7 days a week, in every big city, but that can only happen if there's people who let us know that they're up for it. So share away.
 
-We recommend you change it immediately by visiting your
-user profile: <%= url_for(controller: 'registrations', action: 'edit', only_path: false) %>
- 
-To sign up for a tea time near you, just follow this link: 
-<%= url_for(controller: 'cities', action: 'index', only_path: false) %>.
- 
-Thanks for joining and have an awesome day!
+Super love,
+Ankit
