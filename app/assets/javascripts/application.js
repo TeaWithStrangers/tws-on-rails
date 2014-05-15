@@ -17,11 +17,29 @@
 //= require_tree .
 
 
-$(document).ready(function() {
-  $('#login').click(function(evt, x, y) {
+function loadModal(modalTarget) {
+  return function(evt) {
     evt.preventDefault();
-    console.log('Something')
-    $("#modal").load('/signin').dialog({modal: true});
-    console.log('Something')
-  });
+    return $("#modal").load(modalTarget).dialog({
+      modal: true,
+      draggable: false,
+      resizeable: false,
+      width: 500,
+      title: null
+    });
+  }
+}
+
+
+var modal;
+function closeModal() { modal.dialog('close') }
+$(document).ready(function() {
+  $('#login').click(loadModal('/signin'));
+  $('.tea-time-scheduling').on('click', function(evt) {
+    modal = loadModal(evt.currentTarget.href)(evt)
+  })
+  $('input.cancel').on('click', function(evt) {
+    evt.preventDefault();
+    closeModal();
+  })
 })

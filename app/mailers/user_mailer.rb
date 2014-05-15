@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default from: "noreply@teawithstrangers.com"
+  default from: "sayhi@teawithstrangers.com"
 
   def user_registration(user, password)
     @user = user; @password=password;
@@ -8,7 +8,11 @@ class UserMailer < ActionMailer::Base
 
   def tea_time_registration(attendance)
     @attendance = attendance
-    mail(to: @user.email, subject: "See You at Tea Time!").deliver!
+    tt = attendance.tea_time
+    end
+
+    mail.attachments['event.ics'] = {mime_type: "text/calendar", content: tt.ito_cal.to_ical}
+    mail(to: attendance.user.email, subject: "See You at Tea Time!")
   end
 
   def tea_time_cancellation(tea_time)
