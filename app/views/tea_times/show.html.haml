@@ -1,16 +1,14 @@
 - prefill = !!current_user
+%h2.admin-head
+  Sign up for tea time
 = form_for :tea_time, url: attendance_tea_time_path(@tea_time), html: {class: 'schedule-tea new_user'} do |f|
-  %h2.admin-head
-    Double check and confirm!
   .form-body
+    %p.label Tea time details
+    = render partial: 'shared/tea_time_row', locals: {tea_time: @tea_time}
     = f.label :name, "Your name is"
     = f.text_field :name, value: prefill ? current_user.name : '', readonly: prefill, placeholder: 'Full Name'
     = f.label :email, "You check email (and hopefully manage a calendar) at"
     = f.email_field :email, value: prefill ? current_user.email : '', readonly: prefill,placeholder: 'Email Address'
-
-    %p.label Where, when, and with whom you'll be sitting for tea time
-    = render partial: 'shared/tea_time_row', locals: {tea_time: @tea_time}
-
     .button-container
       = f.submit 'Cancel', class: 'cancel'
       = f.submit 'Confirm', class: 'confirm'

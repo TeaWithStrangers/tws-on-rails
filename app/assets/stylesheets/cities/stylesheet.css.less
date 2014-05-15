@@ -1108,6 +1108,7 @@ form.new_user {
 }
 .ui-dialog .ui-dialog-content {
   color: @black !important;
+  padding: 0 !important;
 }
 .ui-widget-content.ui-dialog.ui-corner-all {
   background: @white;
@@ -1178,97 +1179,96 @@ form.new_user {
 
 // Scheduling modal styles
 
-.controller-tea_times {
-  form.schedule-tea {
-    h2.admin-head {
-      .fsIII;
-      .bold;
-      color: @red;
-      background: @background;
-      padding: .75em;
-      border-bottom: 1px solid @lightred;
-    }
-    .form-body {
-      padding: 1.25em .75em;
-      overflow: auto;
-    }
-    label, p.label {
-      .fs;
-      text-transform: uppercase;
-      .bold;
-      display: block;
-      margin-bottom: 5px;
-    }
-    input {
-      margin-bottom: 20px;
-    }
-    .row.tea-time {
-      overflow: auto;
-      .host-photo {
-        width: 100px;
-        float: left;
-        .avatar-container {
-          border: 2px solid @red;
-          background: @background;
-          border-radius: 50%;
-          width: 100%;
-          height: 100px;
-          padding-bottom: 0;
-          position: relative;
-        }
-      }
-      .time-and-place {
-        width: 75%;
-        float: left;
+form.schedule-tea {
+  h2.admin-head {
+    .fsIII;
+    .bold;
+    color: @red;
+    background: @background;
+    padding: .75em;
+    border-bottom: 1px solid @lightred;
+  }
+  .form-body {
+    padding: 1.25em .75em;
+    overflow: auto;
+  }
+  label, p.label {
+    .fs;
+    text-transform: uppercase;
+    .bold;
+    display: block;
+    margin-bottom: 5px;
+  }
+  input {
+    margin-bottom: 20px;
+  }
+  .row.tea-time {
+    overflow: auto;
+    margin-bottom: 1em;
+    .host-photo {
+      width: 100px;
+      float: left;
+      .avatar-container {
+        border: 2px solid @red;
+        background: @background;
+        border-radius: 50%;
+        width: 100%;
+        height: 100px;
+        padding-bottom: 0;
         position: relative;
-        .t-p-container {
-          padding-bottom: 0;
-          position: relative;
-        }
-        h6 {
-          .fsII;
-          width: 100%;
-          padding-left: 11px;
-          position: absolute;
-          &.top {
-            border-bottom: 2px solid @red;
-            top: 10px;
-            left: -4px;
-            padding-left: 11px;
-            .bold;
-            text-transform: uppercase;
-            color: @red;
-          }
-          &.bottom {
-            top: 44px;
-            .fs;
-          }
-          span.datalabel {
-            .bold;
-            text-transform: uppercase;
-          }
-        }
-      }
-      .button {
-        display: none;
       }
     }
-    .button-container {
-      float: right;
-      input.cancel, input.confirm {
-        float: left;
-        clear: none;
-        width: auto;
-        padding: 10px 15px;
-        margin-bottom: 0;
+    .time-and-place {
+      width: 75%;
+      float: left;
+      position: relative;
+      overflow: auto;
+      .t-p-container {
+        padding-bottom: 0;
+        position: relative;
       }
-      input.cancel {
-        .button(@gray);
+      h6 {
+        .fsII;
+        width: 100%;
+        padding-left: 11px;
+        position: relative;
+        &.top {
+          border-bottom: 2px solid @red;
+          left: -4px;
+          padding-left: 10px;
+          .bold;
+          text-transform: uppercase;
+          color: @red;
+        }
+        &.bottom {
+          .fs;
+          padding-top: 5px;
+        }
+        span.datalabel {
+          .bold;
+          text-transform: uppercase;
+        }
       }
-      input.confirm {
-        .button(@green);
-        margin-left: 10px;
-      }
+    }
+    .button {
+      display: none;
+    }
+  }
+  .button-container {
+    float: right;
+    input.cancel, input.confirm {
+      float: left !important;
+      clear: none !important;
+      width: auto !important;
+      padding: 10px 15px !important;
+      margin-bottom: 0 !important;
+    }
+    input.cancel {
+      .button(@gray) !important;
+    }
+    input.confirm {
+      .button(@green) !important;
+      margin-left: 10px !important;
     }
   }
 }
