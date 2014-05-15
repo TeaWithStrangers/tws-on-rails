@@ -15,7 +15,7 @@
           Location:
         = tea_time.location
   .button
-    = link_to tea_time_path(tea_time) do
+    = link_to tea_time_path(tea_time), class: 'tea-time-scheduling' do
       %button.button
         - if tea_time.spots_remaining?
           = "#{tea_time.spots_remaining} spots left"

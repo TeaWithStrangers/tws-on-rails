@@ -17,11 +17,16 @@
 //= require_tree .
 
 
-$(document).ready(function() {
-  $('#login').click(function(evt, x, y) {
+function loadModal(modalTarget) {
+  return function(evt) {
     evt.preventDefault();
-    console.log('Something')
-    $("#modal").load('/signin').dialog({modal: true});
-    console.log('Something')
-  });
+    $("#modal").load(modalTarget).dialog({modal: true});
+  }
+}
+
+$(document).ready(function() {
+  $('#login').click(loadModal('/signin'));
+  $('.tea-time-scheduling').on('click', function(evt) {
+    loadModal(evt.currentTarget.href)(evt)
+  })
 })
