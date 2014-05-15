@@ -1,0 +1,33 @@
+.row
+  .wide
+    .half.left
+      %p
+        %em.starter= "Hey, I'm #{@host.name}!"
+        =@host.summary
+    .half.right
+      %p
+        %em.starter Let's get tea
+        You, me and 3-4 strangers will sit at a cafe or park for 2 hours and
+        talk.
+      = render partial: 'shared/signup'
+.row
+  .wide
+    .third.left
+      %h3
+        Tea With Strangers
+      %p
+        Tea time is a two hour conversation fueled by the stories, questions,
+        and listening of a few strangers and a super host.
+      %h4.signup-cta
+        Sign up and come sometime.
+      = render partial: 'shared/signup'
+    .two-third.right
+      %img.host-photo{src: @host.avatar.url(:landscape)}
+      .prompt
+        %h3
+          What's your story?
+        %p= @host.story
+      .prompt
+        %h3
+          What might we talk about?
+        %p= @host.topics

@@ -5,14 +5,13 @@
       Hey #{@city.name}!
       %br
       Let's get tea.
-
 .container
   = render partial: 'shared/nav_header'
   .row
     .wide
       .half.left
         %p
-          %em.city-name= "#{@city.name},"
+          %em.starter= "#{@city.name},"
           = @city.tagline
         %p
           = @city.description
@@ -24,20 +23,23 @@
         = render partial: 'shared/signup'
   .row
     .narrow.howitworks
-      %h3.divider How does this work?
+      %h3.divider Here's what happens
       %ol
         %li 
-          You and 3-5 strangers sit down together.
+          You and I sit together with 3-5 strangers.
         %li 
-          For 2 hours or so, we ask questions, share stories, and listen.
+          It gets awkward and we'll talk about the weather or some TV show.
+        %li
+          At some point, someone will ask a question or share a story that breaks the "formality seal," and suddenly, we'll all feel like we can be real people.
+        %li
+          Lots of stories, listening, and more questions.
         %li.small
-          ¡¡¡¡All sorts of serendipity!!!!
+          All sorts of serendipity!
         %li
           We sit there and wonder how this doesn't happen more often.
         %li
           Maybe we become friends. Maybe not. That's cool too.
-
-
   = render partial: 'host_headshots', locals: {hosts: @city.hosts}
   -if @city.tea_times.future
     = render partial: 'shared/tea_times', locals: {tea_times: @city.tea_times.future.take(10)}
+= render partial: 'shared/footer'

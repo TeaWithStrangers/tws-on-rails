@@ -1,18 +1,19 @@
-// Host Tagline (the oen sentence at bottom of description)
-= @host.tagline
-// First paragraph below host photo in doc
-= @host.summary
-// "What's your story?"
-= @host.story
-// "What might we talk about?"
-= @host.topics
+.landscape-header.city{style:"background-image: url(#{@city.header_bg.url});"}
+  .blur-layer
+  .landscape-text
+    %h1.heycity
+      Hey #{@city.name}!
+      %br
+      Let's get tea.
 
-//The different host page layouts are controlled by the partials below; let me
-//know if that's not flexible enough and I'll fix it tomorrow morning
-
-- if @city.hosts.count == 0
-  = render partial: 'none_of_none'
-- elsif @city.hosts.count == 1
-  = render partial: 'one_of_one'
-- else @city.hosts.count
-  = render partial: 'one_of_many'
+.container
+  = render partial: 'shared/nav_header'
+  - if @city.hosts.count == 0
+    = render partial: 'none_of_none'
+  - elsif @city.hosts.count == 1
+    = render partial: 'one_of_one'
+  - else
+    = render partial: 'one_of_many'
+.footer
+  .wide
+    %p= @host.tagline
