@@ -44,23 +44,15 @@ class TeaTimesController < ApplicationController
     end
   end
 
-  # PUT /tea_times/1/attendance
+  # PUT /tea_times/1/attendance/2
   def update_attendance
-    user, status = nil, nil
-    if (current_user.host? || (can? :manage, :all))
-      user = User.find(params[:user])
-      status = params[:status]
-    else
-      user = current_user
-      status = :flake
-    end
-    @attendance = Attendance.find_by(tea_time: @tea_time, user: user)
-    @attendance.status = flake
+    @attendance = Attendance.find_by(tea_time: @tea_time, user: current_user)
+    @attendance.status = :flake
 
     respond_to do |format|
       if @attendance.save
-        UserMailer.tea_time_flake(@attendance) if status == :flake 
-        format.html { redirect_to @tea_time, notice: 'Tea time was successfully created.' }
+        UserMailer.tea_time_flake(@attendance) if @attendance.status == :flake 
+        format.html { redirect_to profile_path, notice: 'Tea time was successfully flaked.' }
         format.json { render :show, status: :created, location: @tea_time }
       else
         format.html { redirect_to profile_path }
