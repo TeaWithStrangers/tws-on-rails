@@ -2,6 +2,8 @@ Hey <%= @user.name %>,
  
 We're really sorry for this, but your upcoming tea time was canceled.
 
+<!-- It'd be good to include the details for relevant tea time here -->
+
 We try to make sure this rarely happens, so emails like this are only sent when there's a good reason for it.
 
 In the meantime, we'd love it if there were another time that did work for you. Check out the schedule here: <%= url_for(controller: 'cities', action: 'index', only_path: false) %>.

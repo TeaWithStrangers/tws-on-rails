@@ -17,11 +17,11 @@
       %h3.divider
         We're strangers, but we're not that strange.
       %p.big
-        We all have good days and bad days. We are scared of something, have loved ones, pet peeves, insecurities, points of pride, and passions that matter to us.
+        We all have good days and bad days. We're all scared of something, have loved ones, pet peeves, insecurities, points of pride, and passions that matter to us.
       %p.big
-        The funny thing is that without common friends, interests, or fields of work, it's unlikely we cross paths. So it's hard to actually see those commonalities in our day-to-day (even if we're following each other on Instatweetbook.)
+        The funny thing is that without common friends, interests, or fields of work, we probably won't cross paths. So it's hard to see how similar we actually are in our day-to-day (even if we're following each other on Instatweetbook.)
       %p.big
-        But if we stop searching for perspective on a website and instead sit for a conversation, we'll see it. So let's get tea.
+        But we might just start to see it if we sit for a conversation. It's a better shot than reading a website about strangers, at the least. Let's get tea.
   .cities.row
     .wide
       %h3.divider
@@ -59,3 +59,4 @@
           %li
             .city-bg{style:"background-image:url(#{c.header_bg.url});"}
               %h3= link_to c.name, city_path(c), {class: 'single-host'}
+= render partial: 'shared/footer'
