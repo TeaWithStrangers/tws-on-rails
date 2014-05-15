@@ -1,7 +1,7 @@
 class HostsController < ApplicationController
   def show
     @city = City.for_code(params[:id])
-    @host = Host.find(params[:host_id])
+    @host = User.find(params[:host_id])
   end
 
   def new
@@ -11,7 +11,7 @@ class HostsController < ApplicationController
   def create
     authorize! :manage, :all
     generated_password = Devise.friendly_token.first(8)
-    @host = Host.new(host_params)
+    @host = User.new(host_params)
     @host.roles << Role.find_by(name: 'Host')
     @host.password = generated_password
     if @host.save
