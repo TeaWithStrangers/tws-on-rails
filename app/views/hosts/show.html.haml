@@ -1,3 +1,15 @@
+// Host Tagline (the oen sentence at bottom of description)
+= @host.tagline
+// First paragraph below host photo in doc
+= @host.summary
+// "What's your story?"
+= @host.story
+// "What might we talk about?"
+= @host.topics
+
+//The different host page layouts are controlled by the partials below; let me
+//know if that's not flexible enough and I'll fix it tomorrow morning
+
 - if @city.hosts.count == 0
   = render partial: 'none_of_none'
 - elsif @city.hosts.count == 1

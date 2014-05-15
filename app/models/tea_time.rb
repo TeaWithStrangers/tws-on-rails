@@ -47,6 +47,22 @@ class TeaTime < ActiveRecord::Base
     update_attributes(start_time: DateTime.new(1900,1,1))
   end
 
+  def ical
+    tt = self
+    cal = Icalendar::Calendar.new
+    Time.use_zone(tt.city.timezone) do
+      start_time = Time.zone.parse(tt.start_time.utc.strftime("%Y-%m-%d %H:%M"))
+      cal.event do |e|
+        e.dtstart = start_time
+        e.dtend  = (start_time + tt.duration.hours)
+        e.summary = "Tea Time with #{tt.host.name}"
+        #FIXME: Come back to this with fresh eyes
+        #e.organizer = "CN=#{tt.host.name}:MAILTO:#{tt.host.email}"
+        e.location = tt.location
+      end
+    end
+  end
+
   enum followup_status: [:na, :pending, :sent]
 
   def todo?
