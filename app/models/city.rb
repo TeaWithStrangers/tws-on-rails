@@ -1,6 +1,7 @@
 class City < ActiveRecord::Base
   validates_uniqueness_of :city_code
   validates_presence_of :city_code, :timezone
+  before_save :upcase_code
   has_attached_file :header_bg, default_url: "http://placecorgi.com/1280"
   validates_attachment_content_type :header_bg, :content_type => /\Aimage\/.*\Z/
   enum brew_status: { :cold_water => 0, :warming_up => 1, :fully_brewed => 2}
@@ -23,6 +24,11 @@ class City < ActiveRecord::Base
   def to_param
     city_code
   end
+
+  private
+    def upcase_code
+      write_attribute(:city_code, read_attribute(:city_code).upcase)
+    end
 
   class << self
     def timezone_mappings

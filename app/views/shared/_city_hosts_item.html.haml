@@ -1,0 +1,12 @@
+- host_count = city.hosts.count
+%li
+  .city-bg{style:"background-image:url(#{city.header_bg.url});"}
+    %h3= link_to city.name, city_path(city), {class: host_count > 1 ?  nil : 'single-host'}
+  - if host_count > 0
+    .host-container
+      %ul.hosts
+        - city.hosts.each do |h|
+          %li
+            .avatar-container.quarter
+              .avatar{style:"background-image:url(#{h.avatar.url(:medium)});"}
+            %h5.host-name= link_to h.name, host_city_path(city, h)
