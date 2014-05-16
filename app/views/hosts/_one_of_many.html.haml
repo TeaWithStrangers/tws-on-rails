@@ -8,8 +8,7 @@
       %img.host-photo{src: @host.avatar.url(:landscape)}
 .row.cta
   .narrow
-    %h5.button-cta
-      Let's get tea
+    = render partial: 'shared/signup'
 .row
   .wide
     .third.left
@@ -20,8 +19,7 @@
         and listening of a few strangers and a super host.
       %h4.signup-cta
         Sign up and come sometime.
-      %h5.button-cta
-        Let's get tea
+      = render partial: 'shared/signup'
     .two-third.right
       .prompt
         %h3
