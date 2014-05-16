@@ -60,6 +60,7 @@ class TeaTime < ActiveRecord::Base
         #e.organizer = "CN=#{tt.host.name}:MAILTO:#{tt.host.email}"
         e.location = tt.location
       end
+      cal
     end
   end
 
