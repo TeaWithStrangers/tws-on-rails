@@ -21,4 +21,4 @@
       -else
         =link_to("Schedule tea time", "#cities")
     %h5.logout
-      =link_to("If you're not #{current_user.name}, click here and sign up yourself!", "signout")
+      =link_to "If you're not #{current_user.name}, click here and sign up yourself!", destroy_user_session_path, method: :delete
