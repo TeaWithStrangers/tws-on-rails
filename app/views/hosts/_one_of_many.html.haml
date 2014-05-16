@@ -22,13 +22,13 @@
       = render partial: 'shared/signup'
     .two-third.right
       .prompt
-          %h3
-            What's your story?
-          = simple_format @host.story
-        .prompt
-          %h3
-            What might we talk about?
-          = simple_format @host.topics
+        %h3
+          What's your story?
+        = simple_format @host.story
+      .prompt
+        %h3
+          What might we talk about?
+        = simple_format @host.topics
 = content_for :footer do
   .wide
     %p= @host.tagline
