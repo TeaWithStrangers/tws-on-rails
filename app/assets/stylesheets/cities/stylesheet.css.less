@@ -272,6 +272,7 @@ a {
   background-size: cover;
   height: 400px;
   position: relative;
+  min-width: 750px;
   &.city {
     height: 300px;
   }
@@ -297,7 +298,7 @@ a {
       position: absolute;
       color: @white;
       text-shadow: 0px 0px 4px @gray;
-      width: 100%;
+      min-width: 750px;
       text-align: center;
       &.heycity {
         .fsV;
@@ -430,6 +431,13 @@ a {
         a {
 
         }
+      }
+    }
+    ul.text {
+      list-style-type: disc;
+      margin-left: 30px;
+      li {
+        .fsII;
       }
     }
     ul.cities {
@@ -777,6 +785,8 @@ a {
 #footer {
   background: darken(@lightred,10%);
   text-align: center;
+  min-width: 750px;
+  width: 100%;
   .wide {
     width: @width;
     margin: 0 auto;
