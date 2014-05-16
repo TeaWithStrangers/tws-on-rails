@@ -29,27 +29,10 @@
         Where we are
       %ul.cities.multiple-hosts
         - @cities_by_host[:many_hosts].each do |c|
-          %li
-            .city-bg{style:"background-image:url(#{city.header_bg.url});"}
-              %h3= link_to c.name, city_path(c)
-              %ul.hosts
-                - c.hosts.each do |h|
-                  %li
-                    .avatar-container.quarter
-                      .avatar{style:"background-image:url(#{h.avatar.url(:medium)});"}
-                    %h5.host-name= link_to h.name, host_city_path(c, h)
+          = render partial: 'shared/city_hosts_item', locals: {city: c}
       %ul.cities.single-host
         - @cities_by_host[:single_host].each do |c|
-          %li
-            .city-bg{style:"background-image:url(#{c.header_bg.url});"}
-              %h3= link_to c.name, city_path(c), {class: 'single-host'}
-            .host-container
-              %ul.hosts
-                - c.hosts.each do |h|
-                  %li
-                    .avatar-container.quarter
-                      .avatar{style:"background-image:url(#{h.avatar.url(:medium)});"}
-                    %h5.host-name= link_to h.name, host_city_path(c, h)
+          = render partial: 'shared/city_hosts_item', locals: {city: c}
   .upcoming.cities.row
     .wide
       %h3.divider
@@ -57,7 +40,5 @@
       %ul.cities.no-host
         //No host cities (where we'll be soon)
         - @cities_by_host[:no_hosts].each do |c|
-          %li
-            .city-bg{style:"background-image:url(#{c.header_bg.url});"}
-              %h3= link_to c.name, city_path(c), {class: 'single-host'}
+          = render partial: 'shared/city_hosts_item', locals: {city: c}
 - content_for(:footer) { render partial: 'shared/footer'}

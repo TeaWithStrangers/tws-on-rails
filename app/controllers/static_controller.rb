@@ -6,9 +6,9 @@ class StaticController < ApplicationController
       {single_host: [],
        many_hosts: [],
        no_hosts: []}.merge(@cities.group_by { |x| 
-         if x.hosts.count == 1
+         if x.hosts.count == 1 || x.brew_status == :warming_up
            :single_host
-         elsif x.hosts.count > 1
+         elsif x.hosts.count > 1 || x.brew_status == :fully_brewed
            :many_hosts
          else
            :no_hosts
