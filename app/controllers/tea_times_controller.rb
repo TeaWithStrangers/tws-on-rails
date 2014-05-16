@@ -33,7 +33,10 @@ class TeaTimesController < ApplicationController
     #FIXME: ALL THIS
     if @user.nil?
       generated_password = Devise.friendly_token.first(8)
-      @user = User.create(name: tea_time_params[:name], email: tea_time_params[:email], password: generated_password)
+      @user = User.create(name: tea_time_params[:name],
+                          email: tea_time_params[:email], 
+                          password: generated_password,
+                          home_city: @tea_time.city)
       sign_in(:user, @user)
       UserMailer.user_registration(@user, generated_password) if @user
     end

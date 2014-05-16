@@ -6,10 +6,10 @@ class City < ActiveRecord::Base
   validates_attachment_content_type :header_bg, :content_type => /\Aimage\/.*\Z/
   enum brew_status: { :cold_water => 0, :warming_up => 1, :fully_brewed => 2}
   has_many :tea_times
+  has_many :users, foreign_key: 'home_city_id'
 
   def hosts
-    #TODO: Hosts who have nothing scheduled won't show in the hosts partial
-    tea_times.future.map(&:host).uniq
+    User.hosts.where(home_city: self)
   end
 
   def timezone=(tz)
