@@ -11,14 +11,16 @@ class UserMailer < ActionMailer::Base
 
   def tea_time_registration(attendance)
     @attendance = attendance
-    tt = attendance.tea_time
+    @tea_time = attendance.tea_time
+    @user = attendance.user
 
-    mail.attachments['event.ics'] = {mime_type: "text/calendar", content: tt.ito_cal.to_ical}
+    mail.attachments['event.ics'] = {mime_type: "text/calendar", content: @tea_time.ical.to_ical}
     mail(to: attendance.user.email, subject: "See you at tea time!").deliver!
   end
 
   def tea_time_reminder(attendance)
     @attendance = attendance
+    @user = attendance.user
     tt = attendance.tea_time
 
     mail(to: attendance.user.email, subject: "See you at tea time!", 
@@ -26,7 +28,7 @@ class UserMailer < ActionMailer::Base
   end
 
   def tea_time_cancellation(tea_time)
-    @tea_time = @tea_time
+    @tea_time = tea_time
     tea_time.attendances.each do |att|
       @user = att.user 
       mail(to: @user.email, subject: "Sad days — tea time canceled").deliver!
