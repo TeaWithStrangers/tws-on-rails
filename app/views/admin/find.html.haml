@@ -1,0 +1,8 @@
+= form_tag(admin_ghost_path) do
+  %p 
+    This form lets you masquerade as another user by logging in as them.
+    Please act responsibly.
+  = label_tag :email, 'User Email'
+  = text_field_tag :email
+  = submit_tag 'Find User'
+
