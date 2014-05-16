@@ -3,7 +3,7 @@
     .half.left
       %p
         %em.starter= "Hey, I'm #{@host.name}!"
-        =@host.summary
+      = simple_format @host.summary
     .half.right
       %img.host-photo{src: @host.avatar.url(:landscape)}
 .row.cta
@@ -26,8 +26,8 @@
       .prompt
         %h3
           What's your story?
-        %p= @host.story
+        = simple_format @host.story
       .prompt
         %h3
           What might we talk about?
-        %p= @host.topics
+        = simple_format @host.topics
