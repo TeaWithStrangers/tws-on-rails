@@ -28,7 +28,7 @@ class TeaTime < ActiveRecord::Base
   end
 
   def spots_remaining
-    MAX_ATTENDEES - (attendances.select(&:pending?).count + 1)
+    MAX_ATTENDEES - attendances.select(&:pending?).count
   end
 
   def spots_remaining?
