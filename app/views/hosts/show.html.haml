@@ -8,9 +8,7 @@
 
 .container
   = render partial: 'shared/nav_header'
-  - if @city.hosts.count == 0
-    = render partial: 'none_of_none'
-  - elsif @city.hosts.count == 1
+  - elsif @city.hosts.count <= 1
     = render partial: 'one_of_one'
   - else
     = render partial: 'one_of_many'
