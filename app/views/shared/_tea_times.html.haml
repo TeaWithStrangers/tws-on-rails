@@ -1,5 +1,6 @@
 .row
-	.wide
-		%h3.sectionhead Join for an upcoming tea time
-		- tea_times.each do |tt|
-			= render partial: 'shared/tea_time_row', locals: {tea_time: tt}
+  .wide
+    - unless tea_times.count.zero?
+      %h3.sectionhead Join for an upcoming tea time
+      - tea_times.each do |tt|
+        = render partial: 'shared/tea_time_row', locals: {tea_time: tt}
