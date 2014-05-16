@@ -6,8 +6,9 @@
       %br
       Let's get tea.
 
-= render partial: 'shared/nav_header'
-- if @city.hosts.count <= 1
-  = render partial: 'one_of_one'
-- else
-  = render partial: 'one_of_many'
+.container
+  = render partial: 'shared/nav_header'
+  - if @city.hosts.count <= 1
+    = render partial: 'one_of_one'
+  - else
+    = render partial: 'one_of_many'
