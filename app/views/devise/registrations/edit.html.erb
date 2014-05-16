@@ -9,6 +9,9 @@
   <div><%= f.label :email %><br />
   <%= f.email_field :email %></div>
 
+  <div><%= f.label :home_city %><br />
+  <%= select(resource_name, :home_city_id, City.all.collect{ |p| [p.name, p.id] }) %></div>
+
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
