@@ -64,7 +64,7 @@ class TeaTimesController < ApplicationController
     @attendance = Attendance.find_by(tea_time: @tea_time, user: current_user)
     @attendance.status = :flake
 
-    UserMailer.tea_time_flake(@attendance) if @attendance.status == :flake 
+    UserMailer.tea_time_flake(@attendance)
     respond_to do |format|
       if @attendance.save
         format.html { redirect_to profile_path, notice: 'Tea time was successfully flaked.' }
