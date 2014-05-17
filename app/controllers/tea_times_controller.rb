@@ -40,12 +40,20 @@ class TeaTimesController < ApplicationController
       sign_in(:user, @user)
       UserMailer.user_registration(@user, generated_password) if @user
     end
-    status = :pending
-    @attendance = Attendance.new(tea_time: @tea_time, user: @user)
-    respond_to do |format|
-      if @attendance.save
-        UserMailer.tea_time_registration(@attendance)
+
+    @attendance = Attendance.where(tea_time: @tea_time, user: @user).first_or_create
+    @attendance.status = :pending
+
+    UserMailer.tea_time_registration(@attendance)
+    if @attendance.save
+      respond_to do |format|
         format.html { redirect_to profile_path, notice: 'Registered for Tea Time! See you soon :)' }
+        format.json { @attendance }
+      end
+    else 
+      respond_to do |format|
+        format.html { redirect_to schedule_city_path(@tea_time.city), 
+                      notice: "Couldn't register for that, sorry :(" }
         format.json { @attendance }
       end
     end
@@ -56,9 +64,9 @@ class TeaTimesController < ApplicationController
     @attendance = Attendance.find_by(tea_time: @tea_time, user: current_user)
     @attendance.status = :flake
 
+    UserMailer.tea_time_flake(@attendance) if @attendance.status == :flake 
     respond_to do |format|
       if @attendance.save
-        UserMailer.tea_time_flake(@attendance) if @attendance.status == :flake 
         format.html { redirect_to profile_path, notice: 'Tea time was successfully flaked.' }
         format.json { render :show, status: :created, location: @tea_time }
       else
