@@ -10,10 +10,9 @@
       %h3.sectionhead To bring tea time together, we'll need some hosts
     %ul.host-headshots
       - hosts.each do |host|
-        %li.host
+        %li.host =link_to "", host_city_path(@city, host)
           .avatar-container.quarter
-            =link_to "", host_city_path(@city, host)
-              .avatar{style:"background-image:url(#{host.avatar.url(:medium)});"}
+            .avatar{style:"background-image:url(#{host.avatar.url(:medium)});"}
           %h5.host-name= link_to(host.name || "No Name :(", host_city_path(@city, host) )
 .row
   .narrow
