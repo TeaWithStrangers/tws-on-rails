@@ -12,7 +12,7 @@
       - hosts.each do |host|
         %li.host
           .avatar-container.quarter
-            %a=link_to("", host_city_path(@city, host))
+            =link_to "", host_city_path(@city, host)
               .avatar{style:"background-image:url(#{host.avatar.url(:medium)});"}
           %h5.host-name= link_to(host.name || "No Name :(", host_city_path(@city, host) )
 .row
