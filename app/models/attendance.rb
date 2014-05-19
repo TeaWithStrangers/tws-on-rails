@@ -17,8 +17,8 @@ class Attendance < ActiveRecord::Base
 
   private
     def check_capacity
-      unless self.tea_time.spots_remaining?
-        raise ArgumentError, "Can't sign up for that tea time; it's at capacity"
+      if self.tea_time.spots_remaining?
+        return false
       end
     end
 
