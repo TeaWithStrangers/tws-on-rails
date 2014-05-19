@@ -40,5 +40,5 @@
           Maybe we become friends. Maybe not. That's cool too.
   = render partial: 'host_headshots', locals: {hosts: @city.hosts}
   -if @city.tea_times.future
-    = render partial: 'shared/tea_times', locals: {tea_times: @city.tea_times.future.take(10)}
+    = render partial: 'shared/tea_times', locals: {tea_times: @city.tea_times.where(start_time: (Date.today..(Date.today+2.weeks))).order(:start_time => :asc)} 
 =content_for(:footer) { render partial: 'shared/footer' }
