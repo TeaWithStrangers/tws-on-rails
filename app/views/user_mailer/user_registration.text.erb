@@ -4,7 +4,7 @@ Ankit here, one of the hosts behind Tea With Strangers.
 
 First off, you're awesome for signing up. It says a lot that you're cool with the idea of sharing stories and having a conversation with strangers. High five for that!
 
-If you haven't yet, you should absolutely find a time to sit for tea here: <%= url_for(controller: 'cities', action: 'index', only_path: false) %>.
+If you haven't yet, you should absolutely find a time to sit for tea here: <%= url_for(controller: 'schedule_city_path(city)', action: 'index', only_path: false) %>.
 
 Now, tea time is really cool. So cool that you might want to sign up for another one after your first. Not trying to jump the gun TOO much, but you should know that when you want to sign up for another one, you can log in with <%= @user.email %>.
 
