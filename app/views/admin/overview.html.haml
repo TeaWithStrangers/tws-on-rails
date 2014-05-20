@@ -1,0 +1,15 @@
+.container
+  - TeaTime.future.order(:start_time).each do |tt|
+    .row
+      =render partial: 'shared/tea_time_row', locals: {tea_time: tt}
+      %table.attendees
+        %tr
+          %td Name
+          %td Email
+          %td Attendance Status
+        - tt.attendances.each do |a|
+          %tr
+            %td=  a.user.name
+            %td=  a.user.email
+            %td=  a.status.to_s
+          

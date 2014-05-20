@@ -44,6 +44,7 @@ Rails.application.routes.draw do
   end
 
   get '/admin/find' => 'admin#find'
+  get '/admin/overview' => 'admin#overview'
   post '/admin/ghost' => 'admin#ghost'
 
   
