@@ -12,7 +12,7 @@ class RegistrationsController < Devise::RegistrationsController
         sign_in(:user, user)
         message = "All registered! Check your email for your password."
         if city
-          redirect_to city, message: message
+          redirect_to schedule_city_path(city), message: message
         else
           redirect_to root_path, message: message
         end
