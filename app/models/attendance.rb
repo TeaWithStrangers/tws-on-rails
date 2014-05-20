@@ -17,7 +17,7 @@ class Attendance < ActiveRecord::Base
 
   private
     def check_capacity
-      if self.tea_time.spots_remaining?
+      if !self.tea_time.spots_remaining?
         return false
       end
     end
