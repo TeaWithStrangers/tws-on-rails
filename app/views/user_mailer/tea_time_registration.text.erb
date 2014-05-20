@@ -1,11 +1,8 @@
 Hey hey <%= @user.name %>!
 
-Just confirming the tea time you just signed up for! Attached to this email is a
-calendar event so that you don't forget. If you hit the 'Add to Calendar'
-button, it'll be on your cal.
+Just confirming the tea time you just signed up for! Attached to this email is a calendar event so that you don't forget. If you hit the 'Add to Calendar' button, it'll be on your cal.
 
-For good measure (in case you really hate calendars for some reason), tea time
-deets are:
+For good measure (in case you really hate calendars for some reason), tea time deets are:
 
 <%= render partial: "tea_time_info", locals: {tea_time: @tea_time} %>
 
