@@ -3,6 +3,9 @@ class AdminController < ApplicationController
   def find
   end
 
+  def overview
+  end
+
   def ghost
     user = User.find_by(email: params[:email])
     if user
