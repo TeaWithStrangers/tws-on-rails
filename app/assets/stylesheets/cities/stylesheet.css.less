@@ -262,8 +262,11 @@ strong {
 
 a {
   color: @red;
+  text-decoration: underline;
+  .transition;
   &:hover {
-    text-decoration: underline;
+    color: lighten(@red, 10%);
+    .transition;
   }
 }
 

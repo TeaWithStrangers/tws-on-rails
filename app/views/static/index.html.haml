@@ -8,7 +8,7 @@
   .row
     .narrow
       %p.big
-        Tea time is a two hour conversation fueled by the stories, questions, and listening of a few strangers and a super host.
+        Tea time is a conversation fueled by the stories, questions, and listening of a few strangers and a super host.
       %p.big
         You should sign up and come sometime. 
         %a{href: '#footer'} Yes, you.
@@ -22,13 +22,13 @@
       %p.big
         The funny thing is that without common friends, interests, or fields of work, we probably won't cross paths. So it's hard to see how similar we actually are in our day-to-day (even if we're following each other on Instatweetbook.)
       %p.big
-        But we might just start to see it if we sit for a conversation. It's a better shot than reading a website about strangers, at the least. Let's get tea.
+        But we might just start to see it if we sit for a conversation. It's a better shot than reading a website about strangers, at the least.
   #cities.row
     .wide
       %h3.divider.with-sub
         So let's get tea!
       %h4.divider-sub
-        We bring tea time to cities where we know the locals want great conversations and we can ensure amazing hosts. The hosts we have already are bomb. Get to know 'em below!
+        Get to know our beautiful hosts and their stories below. We bring tea time to cities when we know the locals are into it and we have hosts ready to go!
       %ul.cities.multiple-hosts
         - @cities_by_host[:many_hosts].each do |c|
           = render partial: 'shared/city_hosts_item', locals: {city: c}
@@ -40,7 +40,7 @@
       %h3.divider.with-sub
         We're on our way here.
       %h4.divider-sub
-        These are our next few destinations. If any of the below is home for you, check out the page and sign up! The more people we know will come, the faster we'll bring tea time there.
+        These are our next few destinations. If any of the below is home for you, sign up so we can keep you posted when we're near!
       %ul.cities.no-host
         //No host cities (where we'll be soon)
         - @cities_by_host[:no_hosts].each do |c|
