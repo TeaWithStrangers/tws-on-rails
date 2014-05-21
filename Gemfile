@@ -56,3 +56,11 @@ gem 'unicorn', group: :production
 
 # Use debugger
 gem 'debugger', group: [:development, :test]
+
+# Random debug tools
+group :development, :test do
+  gem 'pry-rails'
+  gem 'pry-debugger'
+  gem 'pry-stack_explorer'
+  gem 'rspec-rails', '~> 2.14.2'
+end
