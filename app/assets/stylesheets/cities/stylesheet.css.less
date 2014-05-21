@@ -272,6 +272,7 @@ a {
   background-size: cover;
   height: 400px;
   position: relative;
+  min-width: 750px;
   &.city {
     height: 300px;
   }
@@ -297,7 +298,7 @@ a {
       position: absolute;
       color: @white;
       text-shadow: 0px 0px 4px @gray;
-      width: 100%;
+      min-width: 750px;
       text-align: center;
       &.heycity {
         .fsV;
@@ -390,9 +391,12 @@ a {
         }
         .host-material {
           width: 100%;
-          text-align: center;
-          .button(@red);
-          padding: .25em;
+          a {
+            text-align: center;
+            .button(@red);
+            padding: .25em;
+            display: block;
+          }
         }
       }
     }
@@ -432,6 +436,13 @@ a {
         }
       }
     }
+    ul.text {
+      list-style-type: disc;
+      margin-left: 30px;
+      li {
+        .fsII;
+      }
+    }
     ul.cities {
       overflow: auto;
       li {
@@ -450,11 +461,12 @@ a {
           .fsIV;
           text-align: center;
           text-transform: uppercase;
-          padding-top: 10px;
+          padding: 10px 10px 0;
           a {
             color: @white;
             text-decoration: none;
             text-shadow: 0px 0px 4px @gray;
+            padding: 10px 0;
             &:hover {
               text-decoration: underline;
             }
@@ -619,6 +631,8 @@ a {
         width: 100%;
         height: auto;
         margin: 0 auto;
+        padding: 0 10%;
+        margin-bottom: 20px;
       }
       .prompt {
         margin-bottom: 2em;
@@ -775,6 +789,8 @@ a {
 #footer {
   background: darken(@lightred,10%);
   text-align: center;
+  min-width: 750px;
+  width: 100%;
   .wide {
     width: @width;
     margin: 0 auto;

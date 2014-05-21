@@ -8,6 +8,8 @@
 
   - @tea_times.each do |tea_time|
     %tr
+      %td= tea_time.host.name
+      %td= tea_time.friendly_time
       %td= link_to 'Show', tea_time
       %td= link_to 'Edit', edit_tea_time_path(tea_time)
       %td= link_to 'Destroy', tea_time, :method => :delete, :data => { :confirm => 'Are you sure?' }

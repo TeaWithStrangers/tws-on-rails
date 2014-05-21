@@ -12,13 +12,13 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 #JS, CSS, Templating
 
-#FIXME: Add versions for these gems
-gem 'haml-rails'
-gem 'less-rails'
-gem 'therubyracer'
+gem 'haml-rails', '~> 0.5'
+gem 'less-rails', '~> 2.5'
+gem 'therubyracer', '~> 0.12'
+
 gem 'uglifier', '>= 1.3.0'
 # Serve Assets in Production
-gem 'rails_12factor', group: :production 
+gem 'rails_12factor', group: :production
 gem 'turbolinks'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'

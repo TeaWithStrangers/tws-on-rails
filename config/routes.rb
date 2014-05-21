@@ -43,6 +43,10 @@ Rails.application.routes.draw do
     end
   end
 
+  get '/admin/find' => 'admin#find'
+  get '/admin/overview' => 'admin#overview'
+  post '/admin/ghost' => 'admin#ghost'
+
   
   match '/profile(/:id)' => 'profiles#show', as: :profile, via: :get
   get '/host/new' => 'hosts#new', as: :new_host

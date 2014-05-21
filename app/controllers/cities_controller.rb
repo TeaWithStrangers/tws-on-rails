@@ -71,7 +71,7 @@ class CitiesController < ApplicationController
     end
 
     def authorized?
-      true
+      authorize! :manage, City
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
