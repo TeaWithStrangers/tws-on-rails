@@ -164,8 +164,8 @@ h1, h2, h3, p, ul, li {
 @green: #27ae61;
 @background: #fae8d5;
 
-@width: 750px;
-@leftrightspace: 10px;
+@width: 790px;
+
 .fsVI {
   font-size: 5em;
   line-height: 1.25em;
@@ -318,6 +318,7 @@ a {
 
 .container {
   width: @width;
+  padding: 0 20px;
   margin: 0 auto;
   position: relative;
   overflow: auto;
@@ -515,6 +516,15 @@ a {
           background-size: cover;
           background-position: center;
           position: relative;
+          overflow: hidden;
+          img.city-background-image {
+            width: auto;
+            height: 100%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            .translate(-50%, -50%);
+          }
           a.background-link {
             position: absolute;
             height: 100%;
@@ -539,6 +549,7 @@ a {
           text-transform: uppercase;
           padding: 10px 10px 0;
           position: absolute;
+          width: 100%;
           top: 0;
           left: 0;
           z-index: 1000;
@@ -607,6 +618,12 @@ a {
       }
       &.multiple-hosts {
         li {
+          .city-bg {
+            img.city-background-image {
+              height: auto;
+              width: 100%;
+            }
+          }
           h3 {
             text-align: left;
             padding-left: 20px;
@@ -616,8 +633,9 @@ a {
               width: 25%;
               padding: 0 20px;
               float: left;
+              padding-top: 20px;
               &:nth-child(n+5) {
-                margin-top: 20px;
+                padding-top: 20px;
               }
             }
           }
@@ -832,6 +850,15 @@ a {
         top: 50%;
         left: 50%;
         .translate(-50%, -50%);
+        overflow: hidden;
+        img.avatar-image {
+          width: auto;
+          height: 100%;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          .translate(-50%, -50%);
+        }
       }
     }
     &.tea-time {
