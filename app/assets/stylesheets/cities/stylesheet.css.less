@@ -515,6 +515,17 @@ a {
           background-size: cover;
           background-position: center;
           position: relative;
+          a {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background-color: fade(darken(@yellow,10%), 10%);
+            top: 0;
+            left: 0;
+            &:hover {
+              background-color: transparent;
+            }
+          }
         }
         h3 {
           .ultra;
@@ -573,6 +584,12 @@ a {
                 height: 150px;
                 padding-bottom: 0;
                 margin: 0 auto;
+              }
+              a:hover {
+                .avatar-container {
+                  box-shadow: 0 0 4px 1px @gray;
+                  .transition;
+                }
               }
             }
           }
@@ -793,6 +810,7 @@ a {
       width: 100%;
       padding-bottom: 100%;
       position: relative;
+      .transition;
       .avatar {
         height: 95%;
         width: 95%;
