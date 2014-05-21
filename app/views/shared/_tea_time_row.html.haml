@@ -1,7 +1,8 @@
 .row.tea-time
   .host-photo
     .avatar-container
-      .avatar{style:"background-image:url(#{tea_time.host.avatar.url(:medium)});"}
+      .avatar
+        %img.avatar-image{src:host.avatar.url(:medium)}
   .time-and-place
     .t-p-container
       %h6.top
