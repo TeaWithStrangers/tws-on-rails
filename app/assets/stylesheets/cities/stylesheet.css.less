@@ -722,6 +722,9 @@ a {
         margin-bottom: .75em;
         border-bottom: 5px solid @red;
         color: @red;
+        &.with-sub {
+          margin-bottom: 0;
+        }
       }
       &.sectionhead {
         .fsIII;
@@ -732,6 +735,18 @@ a {
         background: @yellow;
         text-align: center;
         margin-bottom: 20px;
+      }
+    }
+    h4 {
+      &.divider-sub {
+        color: @black;
+        .fsII;
+        padding: .5em 7.5% .5em 12.5%;
+        margin-bottom: 1em;
+        margin-top: .25em;
+        &.top-margin {
+          margin-top: 1em;
+        }
       }
     }
     em.starter {
