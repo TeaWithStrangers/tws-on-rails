@@ -524,6 +524,11 @@ a {
             left: 0;
             &:hover {
               background-color: transparent;
+              ~ h3 {
+                a {
+                  text-decoration: underline;
+                }
+              }
             }
           }
         }
@@ -533,6 +538,10 @@ a {
           text-align: center;
           text-transform: uppercase;
           padding: 10px 10px 0;
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: 1000;
           a {
             color: @white;
             text-decoration: none;
@@ -558,6 +567,13 @@ a {
                 text-align: center;
                 padding-top: 1em;
               }
+              a:hover {
+                .avatar-container {
+                  box-shadow: 0 0 4px 1px @gray;
+                  .transform(scale(1.05));
+                  .transition;
+                }
+              }
             }
           }
         }
@@ -578,18 +594,12 @@ a {
           ul.hosts {
             li {
               width: 100%;
-              padding: 0 10%;
+              padding: 10px 10% 0;
               .avatar-container {
                 width: 150px;
                 height: 150px;
                 padding-bottom: 0;
                 margin: 0 auto;
-              }
-              a:hover {
-                .avatar-container {
-                  box-shadow: 0 0 4px 1px @gray;
-                  .transition;
-                }
               }
             }
           }
