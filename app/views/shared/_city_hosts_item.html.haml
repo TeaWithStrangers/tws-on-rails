@@ -7,6 +7,7 @@
       %ul.hosts
         - city.hosts.each do |h|
           %li
-            .avatar-container.quarter
-              .avatar{style:"background-image:url(#{h.avatar.url(:medium)});"}
-            %h5.host-name= link_to h.name, host_city_path(city, h)
+            %a{href:host_city_path(city, h)}
+              .avatar-container.quarter
+                .avatar{style:"background-image:url(#{h.avatar.url(:medium)});"}
+              %h5.host-name= link_to h.name, host_city_path(city, h)
