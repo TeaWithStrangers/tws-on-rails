@@ -33,12 +33,12 @@
       %ul.cities.single-host
         - @cities_by_host[:single_host].each do |c|
           = render partial: 'shared/city_hosts_item', locals: {city: c}
-  / .upcoming.cities.row
-  /   .wide
-  /     %h3.divider
-  /       Where we're coming
-  /     %ul.cities.no-host
-  /       //No host cities (where we'll be soon)
-  /       - @cities_by_host[:no_hosts].each do |c|
-  /         = render partial: 'shared/city_hosts_item', locals: {city: c}
+  .upcoming.cities.row
+    .wide
+      %h3.divider
+        Where we're coming
+      %ul.cities.no-host
+        //No host cities (where we'll be soon)
+        - @cities_by_host[:no_hosts].each do |c|
+          = render partial: 'shared/city_hosts_item', locals: {city: c}
 - content_for(:footer) { render partial: 'shared/footer'}

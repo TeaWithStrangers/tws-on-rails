@@ -1,1 +1,27 @@
-No hosts
+.row
+  .wide
+    %p
+      %em.starter= "#{@city.name}, tea time should exist where you are. But first, we need to know that you'll show up."
+    %p.last
+      By signing up here, you light a fire under our butts to make sure we bring tea time to your neighborhood! Your email isn't used for anything besides letting you know when we're there!
+  .narrow
+    = render partial: 'shared/signup'
+.row
+  .narrow.howitworks
+    %h3.divider Here's what happens
+    %ol
+      %li 
+        You and I sit together with 3-5 strangers.
+      %li 
+        It gets awkward and we'll talk about the weather or some TV show.
+      %li
+        At some point, someone will ask a question or share a story that breaks the "formality seal," and suddenly, we'll all feel like we can be real people.
+      %li
+        Lots of stories, listening, and more questions.
+      %li.small
+        All sorts of serendipity!
+      %li
+        We sit there and wonder how this doesn't happen more often.
+      %li
+        Maybe we become friends. Maybe not. That's cool too.
+= render partial: 'host_headshots', locals: {hosts: @city.hosts}
