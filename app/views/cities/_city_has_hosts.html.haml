@@ -1,0 +1,34 @@
+.row
+  .wide
+    .half.left
+      %p
+        %em.starter= "#{@city.name},"
+        = @city.tagline
+      = simple_format @city.description
+    .half.right
+      %p 
+        Tea time is a two hour conversation fueled by the stories, questions, and listening of a few strangers and a super host.
+      %p.big
+        You should sign up and come sometime. Yes, you.
+      = render partial: 'shared/signup'
+.row
+  .narrow.howitworks
+    %h3.divider Here's what happens
+    %ol
+      %li 
+        You and I sit together with 3-5 strangers.
+      %li 
+        It gets awkward and we'll talk about the weather or some TV show.
+      %li
+        At some point, someone will ask a question or share a story that breaks the "formality seal," and suddenly, we'll all feel like we can be real people.
+      %li
+        Lots of stories, listening, and more questions.
+      %li.small
+        All sorts of serendipity!
+      %li
+        We sit there and wonder how this doesn't happen more often.
+      %li
+        Maybe we become friends. Maybe not. That's cool too.
+= render partial: 'host_headshots', locals: {hosts: @city.hosts}
+-if @city.tea_times.future
+  = render partial: 'shared/tea_times', locals: {tea_times: @city.tea_times.where(start_time: (Date.today..(Date.today+2.weeks))).order(:start_time => :asc)} 
