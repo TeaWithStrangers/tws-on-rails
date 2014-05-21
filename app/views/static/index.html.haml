@@ -25,8 +25,10 @@
         But we might just start to see it if we sit for a conversation. It's a better shot than reading a website about strangers, at the least. Let's get tea.
   #cities.row
     .wide
-      %h3.divider
-        Where we are
+      %h3.divider.with-sub
+        So let's get tea!
+      %h4.divider-sub
+        We bring tea time to cities where we know the locals want great conversations and we can ensure amazing hosts. The hosts we have already are bomb. Get to know 'em below!
       %ul.cities.multiple-hosts
         - @cities_by_host[:many_hosts].each do |c|
           = render partial: 'shared/city_hosts_item', locals: {city: c}
@@ -35,10 +37,15 @@
           = render partial: 'shared/city_hosts_item', locals: {city: c}
   .upcoming.cities.row
     .wide
-      %h3.divider
-        Where we're coming
+      %h3.divider.with-sub
+        We're on our way here.
+      %h4.divider-sub
+        These are our next few destinations. If any of the below is home for you, check out the page and sign up! The more people we know will come, the faster we'll bring tea time there.
       %ul.cities.no-host
         //No host cities (where we'll be soon)
         - @cities_by_host[:no_hosts].each do |c|
           = render partial: 'shared/city_hosts_item', locals: {city: c}
+      %h4.divider-sub.top-margin
+        If home is some place else for you and you think you'd lead the charge in bringing tea time there, 
+        = link_to "check out the hosting page and email us.", hosting_path
 - content_for(:footer) { render partial: 'shared/footer'}
