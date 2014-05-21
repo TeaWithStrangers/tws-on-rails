@@ -1,0 +1,23 @@
+.row
+  .narrow.howitworks
+    %h3.divider 
+      = "We're getting closer to bringing tea time to #{@city.name}!"
+    %p 
+      When we reach you, we'll email you and let you know! In the meantime, we're making sure that we have amazing hosts and enough people to ensure that tea time won't just be you and...you.
+    %p 
+      In the meantime, here are two things you should do:
+  .wide.action
+    %ul
+      %li
+        %h4
+          Tell not-so-strangers in your area about tea time
+        %p
+          = "Post a facebook status or a tweet about Tea With Strangers, linking to #{@city.name}'s page."
+      %li
+        %h4
+          Enjoy stories from tea time
+        %p
+          We share some good stories from tea time, discuss some of the funny things about open communication, and share lots of behind the scenes details about Tea With Strangers on our blog. 
+          %a{href:'http://teawithstrangers.com/blog'} You should check it out and subscribe here.
+  -if @city.tea_times.future
+    = render partial: 'shared/tea_times', locals: {tea_times: @city.tea_times.where(start_time: (Date.today..(Date.today+2.weeks))).order(:start_time => :asc)} 
