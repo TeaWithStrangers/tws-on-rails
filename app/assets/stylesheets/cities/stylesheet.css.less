@@ -411,6 +411,63 @@ a {
           padding: 0 7.5% 0 12.5%;
         }
       }
+      &.action {
+        ul {
+          overflow: hidden;
+          text-align: center;
+          counter-reset: my-badass-counter;
+          li {
+            width: 50%;
+            float: left;
+            position: relative;
+            overflow: visible;
+            h4 {
+              .fsII;
+              .bold;
+              text-transform: uppercase;
+              color: @red;
+            }
+            &:first-child {
+              padding-right: 5%;
+              &:after {
+                content:'';
+                background: @lightred;
+                position: absolute;
+                width: 95%;
+                height: 1px;
+                top: 1em;
+                left: 52.5%;
+              }
+            }
+            &:last-child {
+              padding-left: 5%;
+              &:after {
+                content:'';
+                background: @lightred;
+                position: absolute;
+                width: 1px;
+                height: 100%;
+                top: 1em;
+                left: 0%;
+              }
+            }
+            &:before {
+              content: counter(my-badass-counter);
+              counter-increment: my-badass-counter;
+              padding: .15em;
+              height: 1.75em;
+              width: 1.75em;
+              border-radius: 50%;
+              background: @red;
+              color: @white;
+              .fsII;
+              .bold;
+              margin-bottom: 1em;
+              display: inline-block;
+            }
+          }
+        }
+      }
     }
     .already {
       text-align: center;
@@ -690,7 +747,6 @@ a {
           .fsII;
           padding-left: 5%;
           &.small {
-            .fsI;
             .bold;
             text-transform: uppercase;
           }
