@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   has_many :tea_times
   has_many :attendances
   belongs_to :home_city, class_name: 'City'
-  has_attached_file :avatar, styles: { medium: "300x300", thumb: "100x100", landscape: "300"}, default_url: "/assets/missing.png"
+  has_attached_file :avatar, styles: { medium: "300x300", thumb: "100x100", landscape: "500"}, default_url: "/assets/missing.png"
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
   scope :hosts, -> { joins(:roles).where(roles: {name: 'Host'}) }
