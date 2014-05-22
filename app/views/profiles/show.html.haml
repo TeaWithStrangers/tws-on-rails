@@ -1,20 +1,28 @@
-.container
+.landscape-header.city
+  .blur-layer
+  .landscape-text
+    %h1.heycity
+      ="Hey #{current_user.name}!"
+      %br
+      Let's get tea.
+.container.dashboard
   = render partial: 'shared/nav_header'
-  .six.columns.alpha
-    = render partial: 'sidebar'
-  .ten.columns
-    .row
-      %h1 Upcoming Tea Times
-    .row
-      - if @user.future_tea_times.count>0
-        %ul
-          -@user.future_tea_times.each do |a|
-            %li
-              = render partial: 'teatime_info', locals: {tea_time: a.tea_time, att: a}
-              - if current_user.host?
-                %h3 Attendees:
-                %ul.attendees
-                  - a.tea_time.attendees.each do |a|
-                    %li= link_to a.name, "mailto:#{a.email}"
-      - else
-        %em You're not scheduled for any upcoming tea times
+  .row
+    .wide
+      %h2= "Welcome home, #{current_user.name}!"
+      .third.left
+        = render partial: 'sidebar'
+      .two-third.right
+        %h2.main Upcoming Tea Times
+        - if @user.future_tea_times.count>0
+          %ul
+            -@user.future_tea_times.each do |a|
+              %li
+                = render partial: 'teatime_info', locals: {tea_time: a.tea_time, att: a}
+                - if current_user.host?
+                  %h3 Attendees:
+                  %ul.attendees
+                    - a.tea_time.attendees.each do |a|
+                      %li= link_to a.name, "mailto:#{a.email}"
+        - else
+          %p You're not scheduled for any tea times! Let's change that. Go schedule a tea time!
