@@ -236,6 +236,7 @@ strong {
               0 6px 0px darken(@color, 15%);
   cursor: pointer;
   position: relative;
+  -webkit-appearance: none;
   &:hover {
     .transition;
     background: darken(@color,5%);
@@ -1004,6 +1005,72 @@ a {
               padding-right: 5px;
               padding-bottom: 5px;
             }
+          }
+        }
+      }
+    }
+    &.edit {
+      .two-third {
+        form.edit_user, form.new_tea_time {
+          div {
+            margin-bottom: 1em;
+            label,span.continue-label {
+              .fs;
+              text-transform: uppercase;
+            }
+            input, textarea, select {
+              width: 100%;
+              .fsI;
+              .regular;
+              padding: 0 5px;
+              border-radius: 5px;
+              border: 1px solid @gray;
+            }
+            input[name="commit"] {
+              .button(@green);
+            }
+          }
+          h3.edit-subheader {
+            .fsII;
+            .bold;
+            text-transform: uppercase;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+            border-bottom: 5px solid @red;
+            color: @red;
+            padding-top: 20px;
+            &.first {
+              padding-top: 0;
+            }
+          }
+        }
+        form.new_tea_time {
+          label {
+            display: block;
+            .fs;
+            text-transform: uppercase;
+            margin-top: 20px;
+          }
+          input, textarea {
+            width: 100%;
+            .fsI;
+            .regular;
+            padding: 0 5px;
+            border-radius: 5px;
+            border: 1px solid @gray;
+          }
+          select {
+            .fsI;
+            .regular;
+            padding: 0 5px;
+            border-radius: 5px;
+            border: 1px solid @gray;
+            &.city {
+              width: 100%;
+            }
+          }
+          .actions {
+            margin-top: 20px;
           }
         }
       }
