@@ -262,6 +262,13 @@ strong {
 
 // New styles begin here
 
+.sharing {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 1000;
+}
+
 a {
   color: @red;
   text-decoration: underline;
@@ -921,6 +928,19 @@ a {
           &.red {
             .button(@gray);
           }
+        }
+      }
+    }
+  }
+  &.cities-page {
+    ul.cities {
+      li {
+        margin-bottom: 20px;
+        .city-bg {
+          height: 135px;
+        }
+        .host-container {
+          display: none;
         }
       }
     }
