@@ -19,5 +19,3 @@
         %p
           We share some good stories from tea time, discuss some of the funny things about open communication, and share lots of behind the scenes details about Tea With Strangers on our blog. 
           %a{href:'http://teawithstrangers.com/blog'} You should check it out and subscribe here.
-  -if @city.tea_times.future
-    = render partial: 'shared/tea_times', locals: {tea_times: @city.tea_times.where(start_time: (Date.today..(Date.today+2.weeks))).order(:start_time => :asc)} 
