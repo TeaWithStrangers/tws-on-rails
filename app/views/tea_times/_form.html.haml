@@ -3,10 +3,10 @@
   = datetime_select :tea_time, :start_time
   = f.label :duration, 'Duration (in Hours)'
   = f.number_field :duration
-  = f.label :location
-  = f.text_area :location
+  = f.label :location, 'Location ([Place Name], [Address, including cross street], [City])'
+  = f.text_field :location
   = f.label :city
-  = select_tag(:city, options_for_select(City.all.collect{ |p| [p.name, p.id] }, @tea_time.city.id))
+  = select_tag(:city, options_for_select(City.all.collect{ |p| [p.name, p.id] }, @tea_time.city.id), {:class => "city"})
 
   - if @tea_time.errors.any?
     #error_explanation
@@ -16,4 +16,4 @@
           %li= msg
 
   .actions
-    = f.submit 'Save'
+    = f.submit 'Create Tea Time'

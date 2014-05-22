@@ -1,5 +1,19 @@
-%h1 Schedule a Tea Time
-
-= render 'form'
-
-= link_to 'Back', tea_times_path
+.landscape-header.city
+  .blur-layer
+  .landscape-text
+    %h1.heycity
+      ="Hey #{current_user.name}!"
+      %br
+      Let's get tea.
+.container.dashboard.edit
+  = render partial: 'shared/nav_header'
+  .row
+    .wide
+      %h2= "Welcome home, #{current_user.name}!"
+      .third.left
+        = render partial: 'profiles/sidebar'
+      .two-third.right
+        %h2.main 
+          Create a New Tea Time
+        = render 'form'
+        / = link_to 'Back', tea_times_path
