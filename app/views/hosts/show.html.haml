@@ -7,6 +7,8 @@
       Let's get tea.
 
 .container
+  =content_for :header_logo do
+    = link_to @city.name, city_path(@city)
   = render partial: 'shared/nav_header'
   - if @city.hosts.count <= 1
     = render partial: 'one_of_one'
