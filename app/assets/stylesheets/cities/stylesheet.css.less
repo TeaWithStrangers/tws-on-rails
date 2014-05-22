@@ -943,6 +943,67 @@ a {
       .bold;
       padding-bottom: .5em;
     }
+    .two-third {
+      ul {
+        li {
+          .row.tea-time {
+            margin-bottom: 0;
+            .host-photo {
+              float: right;
+            }
+            .time-and-place {
+              width: 80%;
+              float: left;
+              position: relative;
+              .t-p-container {
+                padding: 0;
+                h6, h6.top, h6.bottom {
+                  border: none;
+                  top: auto;
+                  left: auto;
+                  position: relative;
+                }
+              }
+            }
+            .button {
+              clear: both;
+              float: right;
+              width: 30%;
+              margin: 10px 0;
+            }
+          }
+          form.edit-attendance {
+            float: right;
+            input[name="commit"] {
+              .regular;
+              .fs;
+              text-decoration: underline;
+              color: @red;
+              border: none;
+              background: none;
+              padding: 0;
+              margin: 0;
+              padding-left: 10px;
+            }
+          }
+          a.email-host {
+            float: right;
+          }
+          h3.attendees {
+            clear: both;
+          }
+          ul.attendees-list {
+            overflow: auto;
+            .bold;
+            .fs;
+            text-transform: uppercase;
+            li {
+              display: inline-block;
+            }
+          }
+        }
+      }
+    }
   }
 }
 #footer {
@@ -1130,6 +1191,27 @@ form.schedule-tea {
         height: 100px;
         padding-bottom: 0;
         position: relative;
+        .avatar {
+          height: 95%;
+          width: 95%;
+          border-radius: 50%;
+          background-size: auto 100%;
+          background-position: center;
+          background-repeat: no-repeat;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          .translate(-50%, -50%);
+          overflow: hidden;
+          img.avatar-image {
+            width: auto;
+            height: 100%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            .translate(-50%, -50%);
+          }
+        }
       }
     }
     .time-and-place {
