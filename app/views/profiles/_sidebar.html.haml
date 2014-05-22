@@ -1,11 +1,12 @@
-%h3= "Welcome home, #{current_user.name}!"
 %ul.nav-list
   %li
-    =link_to "Upcoming Tea Times", profile_path
+    =link_to "Your Upcoming Tea Times", profile_path
+  / %li
+  /   =link_to "Join Another Tea Time", url_for(controller: 'cities', action: 'schedule', id: @user.home_city.city_code, only_path: false)
   %li
     - if current_user.host? || current_user.admin?
-      = link_to "Schedule Tea Time", new_tea_time_path
+      = link_to "Create New Tea Time", new_tea_time_path
   %li
-    =link_to "Account", edit_user_registration_path
+    =link_to "Account Details", edit_user_registration_path
   %li
     =link_to "Sign Out", destroy_user_session_path, method: :delete
