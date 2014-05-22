@@ -1,18 +1,33 @@
-%h1 Listing cities
+.landscape-header
+  .blur-layer
+  .landscape-text
+    %h1 
+      Let's get tea.
+.container.cities-page
+  = render partial: 'shared/nav_header'
+  #cities.row
+    .wide
+      %h3.divider.with-sub
+        Where we are
+      %h4.divider-sub
+        So far, we're in the following cities!
+      %ul.cities.multiple-hosts
+        - @cities.each do |city|
+          = render partial: 'shared/city_hosts_item', locals: {city: city}
 
-%table
-  %tr
-    %th
-    %th
-    %th
-
-  - @cities.each do |city|
+  %table
     %tr
-      %td= city.name
-      %td= link_to 'Show', city
-      %td= link_to 'Edit', edit_city_path(city)
-      %td= link_to 'Destroy', city, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %th
+      %th
+      %th
 
-%br
+    - @cities.each do |city|
+      %tr
+        %td= city.name
+        %td= link_to 'Show', city
+        %td= link_to 'Edit', edit_city_path(city)
+        %td= link_to 'Destroy', city, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
-= link_to 'New City', new_city_path
+  %br
+
+  = link_to 'New City', new_city_path
