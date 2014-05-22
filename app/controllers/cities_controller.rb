@@ -5,7 +5,11 @@ class CitiesController < ApplicationController
   # GET /cities
   # GET /cities.json
   def index
-    @cities = City.all
+    if can? :manage, City
+      @cities = City.all
+    else
+      redirect_to root_path+"#cities"
+    end
   end
 
   # GET /cities/1
