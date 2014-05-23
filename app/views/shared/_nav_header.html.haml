@@ -1,15 +1,18 @@
 %header
   %nav
     .tws
-      =link_to '<h1 class="logo">Tea With Strangers</h1>'.html_safe, root_path
+      %h1.logo
+        = link_to 'Tea with Strangers', root_path
+        = yield :header_logo
     %ul.nav-list
       %li= link_to "Places", root_path+"#cities"
       / %li= link_to "Stories", stories_path
       / %li= link_to "Questions", questions_path
       %li= link_to "Hosting", hosting_path
-      %li 
-        - if current_user.nil? 
-          = link_to 'Login', new_user_session_path, {id: :login}
-        - else
-          = link_to "Your Profile", "/profile"
+      - if current_user.nil? 
+        %li= link_to 'Login', new_user_session_path, {id: :login}
+      - else
+        %li= link_to "Account", "/profile"
+        %li= link_to "Schedule Tea Time",
+          schedule_city_path((current_user.home_city || City.first))
 %hr 
