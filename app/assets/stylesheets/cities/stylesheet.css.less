@@ -808,7 +808,7 @@ a {
         color: @white;
         background: @yellow;
         text-align: center;
-        margin-bottom: 20px;
+        margin-bottom: 1em;
       }
     }
     h4 {
@@ -845,11 +845,19 @@ a {
     ul.host-headshots {
       overflow: auto;
       width: 100%;
+      margin-bottom: 1em;
       li {
         float: left;
         width: 25%;
-        padding: 0 20px 20px 20px;
+        padding: 10px 20px 20px 20px;
         overflow: auto;
+        a:hover {
+          .avatar-container {
+            box-shadow: 0 0 4px 1px @gray;
+            .transform(scale(1.05));
+            .transition;
+          }
+        }
         h5.host-name {
           .fsII;
           text-align: center;
