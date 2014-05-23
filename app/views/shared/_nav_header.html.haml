@@ -1,8 +1,9 @@
 %header
   %nav
     .tws
-      %h1.logo= link_to 'Tea with Strangers', root_path
-      = yield :header_logo
+      %h1.logo
+        = link_to 'Tea with Strangers', root_path
+        = yield :header_logo
     %ul.nav-list
       %li= link_to "Places", root_path+"#cities"
       / %li= link_to "Stories", stories_path
@@ -11,7 +12,7 @@
       - if current_user.nil? 
         %li= link_to 'Login', new_user_session_path, {id: :login}
       - else
-        %li= link_to "Your Profile", "/profile"
-        %li= link_to "Schedule a Tea Time",
+        %li= link_to "Account", "/profile"
+        %li= link_to "Schedule Tea Time",
           schedule_city_path((current_user.home_city || City.first))
 %hr 
