@@ -22,6 +22,9 @@ rake db:create
 
 # Load the schema
 rake db:schema:load
+
+# Create roles that Cancan can use in development
+rake db:dev:create_roles
 ```
 
 # Environment Var Setup
@@ -35,15 +38,5 @@ to your `config/application.yml` to get email working:
   (e.g. `gmail.com`)
 * `GMAIL_PASSWORD`: The password you use to log into GMail, domain included
 
-# Creating Roles
-
-You'll also need to create the Roles used by Cancan (while we wait to get a
-proper fixture setup going for dev). 
-
-In the Rails console:
-
-```
-=> %w{Admin Host}.map {|r| Role.create(name: r) }
-```
 
 [1]:https://github.com/laserlemon/figaro
