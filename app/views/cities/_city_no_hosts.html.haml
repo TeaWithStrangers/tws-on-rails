@@ -6,6 +6,7 @@
       We're still working on gathering a super team of hosts. By signing up here, you'll be able to join and connect with awesome strangers before we announce it to anyone else.
   .narrow
     = render partial: 'shared/signup'
+= render partial: 'host_headshots', locals: {hosts: @city.hosts}
 .row
   .narrow.howitworks
     %h3.divider Here's what happens
@@ -24,4 +25,3 @@
         We sit there and wonder how this doesn't happen more often.
       %li
         Maybe we become friends. Maybe not. That's cool too.
-= render partial: 'host_headshots', locals: {hosts: @city.hosts}
