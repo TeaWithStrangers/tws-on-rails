@@ -12,7 +12,13 @@ class User < ActiveRecord::Base
 
   scope :hosts, -> { joins(:roles).where(roles: {name: 'Host'}) }
 
-  def future_tea_times
+  def future_hosts
+    now = DateTime.now.utc.midnight
+    inclusive_of = (now..(now+2.weeks))
+    tea_times.where(start_time: inclusive_of)
+  end
+
+  def future_attendances
     attendances.where(status: 0).joins(:tea_time).
       merge(TeaTime.future).includes(:tea_time)
   end
