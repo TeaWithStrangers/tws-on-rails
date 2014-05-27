@@ -13,18 +13,5 @@
       .third.left
         = render partial: 'sidebar'
       .two-third.right
-        %h2.main Upcoming Tea Times
-        - if @user.future_tea_times.count>0
-          %ul
-            -@user.future_tea_times.each do |a|
-              %li
-                = render partial: 'teatime_info', locals: {tea_time: a.tea_time, att: a}
-                - if current_user.host?
-                  %h3.attendees Attendees:
-                  %ul.attendees-list
-                    - a.tea_time.attendees.each do |a|
-                      %li= link_to a.name, "mailto:#{a.email}"
-        - else
-          %p 
-            You're not scheduled for any tea times! Let's change that.
-            =link_to "Go schedule a tea time!", schedule_city_path(current_user.home_city)
+        = render partial: 'host_tea_time_info' if current_user.host?
+        = render partial: 'user_tea_time_info'
