@@ -1,0 +1,9 @@
+%h2.main Upcoming Tea Times
+- if !current_user.future_attendances.count.zero?
+  %ul
+    - current_user.future_attendances.each do |a|
+      %li= render partial: 'teatime_info', locals: {tea_time: a.tea_time, att: a, without_button: true}
+- else
+  %p 
+    You're not scheduled for any tea times! Let's change that.
+    =link_to "Go schedule a tea time!", schedule_city_path(current_user.home_city)

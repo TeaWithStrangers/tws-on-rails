@@ -15,11 +15,12 @@
         %span.datalabel
           Location:
         = tea_time.location
-  .button
-    = link_to tea_time_path(tea_time), class: 'tea-time-scheduling' do
-      - if tea_time.spots_remaining?
-        %button.button
-          = "#{tea_time.spots_remaining} spots left"
-      - else
-        %button.red.button{disabled: true}
-          Full
+  - if !(without_button ||= false)
+    .button
+      = link_to tea_time_path(tea_time), class: 'tea-time-scheduling' do
+        - if tea_time.spots_remaining?
+          %button.button
+            = "#{tea_time.spots_remaining} spots left"
+        - else
+          %button.red.button{disabled: true}
+            Full
