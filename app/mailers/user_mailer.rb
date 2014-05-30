@@ -1,9 +1,9 @@
 class UserMailer < ActionMailer::Base
-  default from: "sayhi@teawithstrangers.com"
+  default from: "\"Tea With Strangers\" <sayhi@teawithstrangers.com>"
 
   def user_registration(user, password)
     @user = user; @password=password;
-    mail(from: 'ankit@teawithstrangers.com',
+    mail(from: "\"Ankit at Tea With Strangers\" <ankit@teawithstrangers.com>",
          to: @user.email, 
          subject: 'High fives from Tea With Strangers!').
          deliver!
@@ -22,9 +22,12 @@ class UserMailer < ActionMailer::Base
     @attendance = attendance
     @user = attendance.user
     tt = attendance.tea_time
-
-    mail(to: attendance.user.email, subject: "See you at tea time!", 
-         reply_to: tt.host.email).deliver!
+    
+    mail(from: "\"#{tt.host.name}\" <#{tt.host.email}>", 
+         to: attendance.user.email, 
+         subject: "Confirming tea time the day after tmrw", 
+         reply_to: tt.host.email).
+         deliver!
   end
 
   def tea_time_cancellation(tea_time)
@@ -38,6 +41,6 @@ class UserMailer < ActionMailer::Base
   def tea_time_flake(attendance)
     @user = attendance.user
     @tea_time = attendance.tea_time
-    mail(to: @user.email, subject: "Let's find another tea time that works for you!").deliver!
+    mail(to: @user.email, subject: "Let's find another tea time that works!").deliver!
   end
 end
