@@ -23,8 +23,11 @@ class UserMailer < ActionMailer::Base
     @user = attendance.user
     tt = attendance.tea_time
     
+    mail.attachments['event.ics'] = {mime_type: "text/calendar", 
+                                     content: @attendance.tea_time.ical.to_ical}
+
     mail(from: "\"#{tt.host.name}\" <#{tt.host.email}>", 
-         to: attendance.user.email, 
+         to: @user.email, 
          subject: "Confirming Tea Time tomorrow", 
          reply_to: tt.host.email).
          deliver!
