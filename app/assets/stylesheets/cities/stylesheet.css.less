@@ -522,7 +522,8 @@ a {
     }
     ul.text {
       list-style-type: disc;
-      margin-left: 30px;
+      margin-left: 2em;
+      margin-bottom: 1em;
       li {
         .fsII;
       }
@@ -1208,6 +1209,15 @@ form.new_user {
   .ui-dialog-title {
     display: none;
   }
+  .container {
+    width: auto;
+    padding: 0;
+    margin: 0;
+    overflow: auto;
+    nav, hr {
+      display: none;
+    }
+  }
   h2.admin-head {
     .fsIII;
     .bold;
@@ -1236,10 +1246,33 @@ form.new_user {
     top: 1px;
     padding-left: 5px;
   }
+  .left {
+    float: left;
+    .remember-me {
+      float: left;
+    }
+  }
+  .sign-in.button {
+    float: right;
+  }
+  a.link {
+    color: @red;
+    text-decoration: none;
+    .fs;
+    .regular;
+    &.sign-up {
+      display: none;
+    }
+    &.forgot-pw {
+      float: left;
+      clear: left;
+      padding-top: 5px;
+    }
+  }
   form.new_user {
     overflow: auto;
     -webkit-font-smoothing: antialiased !important;
-    padding: .75em;
+    padding: .75em .75em 1.75em .75em;
     input, select {
       .fsI;
       padding: 5px 10px;
@@ -1247,7 +1280,8 @@ form.new_user {
       &[type="submit"] {
         .button(@red);
         .fsII;
-        margin-top: 15px;
+        margin: 0;
+        padding: 5px 20px;
       }
     }
     h6.footnote {
@@ -1383,11 +1417,87 @@ form.schedule-tea {
     }
 
     tr {
-      border-bottom: 1px solid black
+      border-bottom: 1px solid black;
     }
 
     :last-child {
       border: none;
+    }
+  }
+}
+
+// User Account Pages (when not in modal)
+.container.user-form {
+  h2.admin-head {
+    .fsIII;
+    .bold;
+    color: @red;
+    background: @background;
+    padding-bottom: .75em;
+  }
+  h3.admin-sub {
+    .fs;
+    .regular;
+    color: @black;
+    padding-bottom: 1em;
+  }
+  input#user_remember_me {
+    float: left;
+    margin: .2em;
+    width: auto;
+  }
+  label[for="user_remember_me"] {
+    .fs;
+    .regular;
+    float: left;
+    position: relative;
+    top: 1px;
+    padding-left: 5px;
+  }
+  .left {
+    float: left;
+    .remember-me {
+      float: left;
+    }
+  }
+  .sign-in.button {
+    float: right;
+    margin-bottom: 5px;
+  }
+  a.link {
+    color: @red;
+    text-decoration: none;
+    .fs;
+    .regular;
+    &.sign-up {
+      display: none;
+    }
+    &.forgot-pw {
+      float: left;
+      clear: left;
+      padding-top: 5px;
+    }
+  }
+  form.new_user {
+    overflow: auto;
+    -webkit-font-smoothing: antialiased !important;
+    padding: 0;
+    input, select {
+      .fsI;
+      padding: 5px 10px;
+      border-color: lighten(@gray, 15%);
+      &[type="submit"] {
+        .button(@red);
+        .fsII;
+        margin: 0;
+        padding: 5px 20px;
+      }
+    }
+    h6.footnote {
+      .fs;
+      .bold;
+      text-transform: uppercase;
+      color: @red;
     }
   }
 }
