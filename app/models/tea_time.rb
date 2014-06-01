@@ -55,7 +55,7 @@ class TeaTime < ActiveRecord::Base
       cal.event do |e|
         e.dtstart = start_time
         e.dtend  = (start_time + tt.duration.hours)
-        e.summary = "Tea Time with #{tt.host.name}"
+        e.summary = "Tea time with #{tt.host.name}"
         #FIXME: Come back to this with fresh eyes
         #e.organizer = "CN=#{tt.host.name}:MAILTO:#{tt.host.email}"
         e.location = tt.location
