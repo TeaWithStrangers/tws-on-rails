@@ -25,7 +25,7 @@ class UserMailer < ActionMailer::Base
     
     mail(from: "\"#{tt.host.name}\" <#{tt.host.email}>", 
          to: attendance.user.email, 
-         subject: "Confirming tea time the day after tmrw", 
+         subject: "Confirming Tea Time tomorrow", 
          reply_to: tt.host.email).
          deliver!
   end
