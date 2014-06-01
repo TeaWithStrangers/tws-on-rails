@@ -2,7 +2,7 @@ Hey hey <%= @user.name %>!
  
 Ankit here, one of the hosts behind Tea With Strangers. 
 
-First off, you're awesome for signing up. It says a lot that you're cool with the idea of sharing stories and having a conversation with strangers. High five for that!
+First off, you're awesome for signing up. It says a lot that you're cool with the idea of sharing stories and having a conversation with strangers.
 
 If you haven't yet, you should absolutely find a time to sit for tea here: <%=
 url_for(controller: 'cities',
@@ -10,17 +10,13 @@ url_for(controller: 'cities',
         id: @user.home_city.city_code,
         only_path: false) %>.
 
-Now, tea time is really cool. So cool that you might want to sign up for another one after your first. Not trying to jump the gun TOO much, but you should know that when you want to sign up for another one, you can log in with <%= @user.email %>.
-
 <% if @password %>
-For now, we made a password for you — <%= @password %> — but you should change it to something easier to remember. You can do that here: <%= url_for(controller: 'registrations', action: 'edit', only_path: false) %>.
+Now, tea time is really cool. So cool that you might want to sign up for another one after your first, so you should know that when you want to sign up for another one, you can log in with <%= @user.email %> and this password — <%= @password %> — but change it to something easier to remember here: <%= url_for(controller: 'registrations', action: 'edit', only_path: false) %>.
 <% end %>
- 
-That's all for now, but in the meantime, show us some love on Facebook http://facebook.com/teawithstrangers/ where we'll share some awesome stories about what happens at tea time. 
-
-Oh, and tell your friends, near and far, about us. Soon enough, strangers will be sitting together for the greatest conversations of all time, 7 days a week, in big cities worldwide.
 
 Super love,
 Ankit
 
-P.S. Keep this email in case you never change your pw and want to remember it later!
+P.S. Show us some love on Facebook (http://facebook.com/teawithstrangers) where we'll share some awesome stories about what happens at tea time. 
+
+Oh, and tell your friends about us. Soon enough, strangers will be sitting together for the greatest conversations of all time, 7 days a week, in big cities worldwide.
