@@ -4,11 +4,11 @@ Just wanted to shoot you a quick reminder about tea time in two days! Could you 
 
 For a refresher, here are the details:
 
-<%= render partial: "tea_time_info", locals: {tea_time: @tea_time} %>
+<%= render partial: "tea_time_info", locals: {tea_time: @attendance.tea_time} %>
 
 Super excited to see you!
 
 Cheers,
-<%= tea_time.host.name %>
+<%= @attendance.tea_time.host.name %>
 
 P.S. If you need to cancel last minute, it's super easy. Just log into the site, clicking 'Account' and clicking the 'Cancel' button. This way, your spot can be opened up for someone else.
