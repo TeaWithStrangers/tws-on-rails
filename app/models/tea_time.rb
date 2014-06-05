@@ -40,11 +40,20 @@ class TeaTime < ActiveRecord::Base
   end
 
   def cancel!
-    UserMailer.tea_time_cancellation(self)
-    attendances.map { |att|
-      att.status= :cancelled
-    }
-    update_attributes(start_time: DateTime.new(1900,1,1))
+    unless cancelled?
+      begin 
+        self.followup_status = :cancelled
+        self.save!
+        UserMailer.tea_time_cancellation(self)
+        attendances.map { |att|
+          att.status = :cancelled
+          att.save
+        }
+        return true
+      rescue Exception => e
+        return false
+      end
+    end
   end
 
   def ical
@@ -64,7 +73,7 @@ class TeaTime < ActiveRecord::Base
     end
   end
 
-  enum followup_status: [:na, :pending, :sent]
+  enum followup_status: [:na, :pending, :sent, :cancelled]
 
   def todo?
     return !! followup_status != :sent && !attendances.select(&:todo?).empty?

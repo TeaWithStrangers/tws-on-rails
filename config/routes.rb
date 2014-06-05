@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   resources :tea_times do
     member do
       post '/attendance' => 'tea_times#create_attendance', as: :attendance
+      delete '/cancel' => 'tea_times#cancel', as: :cancel
       put '/attendance/:attendance_id' => 'tea_times#update_attendance',
         as: :update_attendance
     end
