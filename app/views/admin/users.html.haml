@@ -1,0 +1,17 @@
+.container
+  - User.all.order(:id).group_by(&:home_city).each do |city, users|
+    .row
+      %h1= link_to city.name, city_path(city)
+      %table.attendees
+        %tr
+          %td Name
+          %td Email
+          %td Registered On
+          %td Tea Time Registrations
+        - users.each do |a|
+          %tr
+            %td=  a.name
+            %td=  a.email
+            %td=  a.created_at
+            %td=  a.attendances.count
+          
