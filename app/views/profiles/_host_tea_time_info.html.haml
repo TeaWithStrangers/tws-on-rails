@@ -4,7 +4,10 @@
   - current_user.future_hosts.each do |tea_time|
     %li
       = render partial: 'teatime_info', locals: {tea_time: tea_time, att: nil}
-      - if current_user.host?
+      - if tea_time.cancelled? 
+        ='This event was cancelled.'
+      - else
+        = link_to 'Cancel Tea Time :(', cancel_tea_time_path(tea_time), {method: :delete}
         %h3.attendees Attendees:
         %ul.attendees-list
           - tea_time.attendees.each do |a|

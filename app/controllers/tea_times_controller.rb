@@ -1,7 +1,8 @@
 class TeaTimesController < ApplicationController
   helper TeaTimesHelper
-  before_action :set_tea_time, only: [:show, :edit, :update, :destroy, :update_attendance, :create_attendance]
+  before_action :set_tea_time, only: [:show, :edit, :update, :destroy, :update_attendance, :create_attendance, :cancel]
   before_action :prepare_tea_time_for_edit, only: [:create, :update]
+  before_action :authorized?, only: [:create, :update, :cancel]
 
   # GET /tea_times
   # GET /tea_times.json
@@ -104,6 +105,18 @@ class TeaTimesController < ApplicationController
     end
   end
 
+  def cancel
+    respond_to do |format|
+      if @tea_time.cancel!
+        format.html { redirect_to profile_path, notice: 'Tea time canceled' }
+        format.json { render status: 204 }
+      else
+        format.html { redirect_to :back, error: "Something went wrong"}
+        format.json { render status: 500 }
+      end
+    end
+  end
+
   # DELETE /tea_times/1
   # DELETE /tea_times/1.json
   def destroy
@@ -139,5 +152,11 @@ class TeaTimesController < ApplicationController
       time = tt[:start_time]
       d = "#{date} #{time}"
       Time.zone.strptime(d, "%m/%d/%y %H:%M")
+    end
+
+    def authorized?
+      if !(can? :manage, (@tea_time || TeaTime))
+        redirect_to :back, error: 'Unauthorised!'
+      end
     end
 end
