@@ -81,7 +81,7 @@ class TeaTimesController < ApplicationController
   def create
     respond_to do |format|
       if @tea_time.save
-        format.html { redirect_to @tea_time, notice: 'Tea time was successfully created.' }
+        format.html { redirect_to profile_path, notice: 'Tea time was successfully created.' }
         format.json { render :show, status: :created, location: @tea_time }
       else
         format.html { render :new }
@@ -95,7 +95,7 @@ class TeaTimesController < ApplicationController
   def update
     respond_to do |format|
       if @tea_time.update(tea_time_params)
-        format.html { redirect_to @tea_time, notice: 'Tea time was successfully updated.' }
+        format.html { redirect_to profile_path, notice: 'Tea time was successfully updated.' }
         format.json { render :show, status: :ok, location: @tea_time }
       else
         format.html { render :edit }
