@@ -1,16 +1,17 @@
 <div class="container user-form">
 	<%= render partial: 'shared/nav_header' %>
+	<div class="mobilepad">
+		<h2 class="admin-head">Forgot your password?</h2>
+		<h3 class="admin-sub">Enter the email that you signed up with originally, and we'll send you instructions to reset your password.</h3>
 
-	<h2 class="admin-head">Forgot your password?</h2>
-	<h3 class="admin-sub">Enter the email that you signed up with originally, and we'll send you instructions to reset your password.</h3>
+		<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+		  <%= devise_error_messages! %>
 
-	<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-	  <%= devise_error_messages! %>
+		  <div><%= f.email_field :email, autofocus: true, placeholder: "Email Address" %></div>
 
-	  <div><%= f.email_field :email, autofocus: true, placeholder: "Email Address" %></div>
-
-	  <div class="sign-in button"><%= f.submit "Send reset link" %></div>
-	<% end %>
+		  <div class="sign-in button"><%= f.submit "Send reset link" %></div>
+		<% end %>
+	</div>
 
 </div>
 

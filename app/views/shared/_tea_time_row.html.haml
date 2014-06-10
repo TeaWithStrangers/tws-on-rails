@@ -3,24 +3,25 @@
     .avatar-container
       .avatar
         %img.avatar-image{src:tea_time.host.avatar.url(:medium)}
-  .time-and-place
-    .t-p-container
-      %h6.top
-        = tea_time.friendly_time
-      %h6.bottom
-        %span.datalabel
-          Host:
-        = link_to tea_time.host.name, host_city_path(tea_time.city, tea_time.host)
-        %br
-        %span.datalabel
-          Location:
-        = tea_time.location
-  - if !(without_button ||= false)
-    .button
-      = link_to tea_time_path(tea_time), class: 'tea-time-scheduling' do
-        - if tea_time.spots_remaining?
-          %button.button
-            = "#{tea_time.spots_remaining} spots left"
-        - else
-          %button.red.button{disabled: true}
-            Full
+  .everything-else
+    .time-and-place
+      .t-p-container
+        %h6.top
+          = tea_time.friendly_time
+        %h6.bottom
+          %span.datalabel
+            Host:
+          = link_to tea_time.host.name, host_city_path(tea_time.city, tea_time.host)
+          %br
+          %span.datalabel
+            Location:
+          = tea_time.location
+    - if !(without_button ||= false)
+      .button
+        = link_to tea_time_path(tea_time), class: 'tea-time-scheduling' do
+          - if tea_time.spots_remaining?
+            %button.button
+              = "#{tea_time.spots_remaining} spots left"
+          - else
+            %button.red.button{disabled: true}
+              Full
