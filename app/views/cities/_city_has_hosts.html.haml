@@ -1,16 +1,16 @@
 .row
   .wide
-    .half.left
-      %p
-        %em.starter= "#{@city.name},"
-        = @city.tagline
-      = simple_format @city.description
     .half.right
       %p 
         Tea time is a conversation fueled by the stories, questions, and listening of a few strangers and a super host.
       %p.big
         You should sign up and come sometime. Yes, you.
       = render partial: 'shared/signup'
+    .half.left
+      %p
+        %em.starter= "#{@city.name},"
+        = @city.tagline
+      = simple_format @city.description
 = render partial: 'host_headshots', locals: {hosts: @city.hosts}
 .row
   .narrow.howitworks

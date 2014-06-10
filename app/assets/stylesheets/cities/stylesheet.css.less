@@ -696,6 +696,10 @@ a {
       }
       &.right {
         padding-left: 2%;
+        float: right;
+        &.mobilephoto {
+          display: none;
+        }
       }
       img {
         width: 100%;
@@ -1506,7 +1510,7 @@ form.schedule-tea {
   }
 }
 
-@media only screen and (min-device-width: 320px) and (max-device-width: 568px) {
+@media only screen and (min-device-width: 320px) and (max-device-width: 568px), (max-width: 800px) {
   body {
     // font-size: 32px;
   }
@@ -1585,6 +1589,12 @@ form.schedule-tea {
           margin-bottom: 2em;
           border-bottom: 2px solid @lightred;
         }
+        &.right {
+          margin-bottom: 1em;
+          &.mobilephoto {
+            display: block;
+          }
+        }
       }
       ul.cities {
         li {
@@ -1653,6 +1663,9 @@ form.schedule-tea {
         float: none;
         width: 100%;
         padding: 0;
+        img.singlehost {
+          display: none;
+        }
       }
       .third.left {
         float: none;

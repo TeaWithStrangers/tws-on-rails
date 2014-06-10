@@ -1,11 +1,11 @@
 .row
   .wide
+    .half.right
+      %img.host-photo{src: @host.avatar.url(:landscape)}
     .half.left
       %p
         %em.starter= "Hey, I'm #{@host.name}!"
       = simple_format @host.summary
-    .half.right
-      %img.host-photo{src: @host.avatar.url(:landscape)}
 .row.cta
   .narrow
     = render partial: 'shared/signup'
