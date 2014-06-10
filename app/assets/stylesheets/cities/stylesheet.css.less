@@ -1602,9 +1602,13 @@ form.schedule-tea {
           .city-bg {
             height: 175px;
             img.city-background-image {
-              height: 100%;
-              width: auto;
-              min-width: 100%;
+              height: auto;
+              width: 100%;
+              min-height: 100%;
+            }
+            h3 {
+              text-align: center;
+              padding: 15px 10px;
             }
           }
           .host-container {
@@ -1643,6 +1647,15 @@ form.schedule-tea {
                   padding-bottom: 100%;
                 }
               }
+            }
+          }
+        }
+        &.no-host {
+          .city-bg {
+            h3 {
+              top: 50%;
+              .translate(0,-50%);
+              padding: 0 10px;
             }
           }
         }
@@ -1764,23 +1777,9 @@ form.schedule-tea {
     right: 5% !important;
     width: auto !important;
     max-height: 95%;
-    // padding: 4.5em 0 0 0;
     box-shadow: 0 0 5px lighten(@gray,15%);
     overflow-y: auto;
     z-index: 1000;
-    // h2.admin-head {
-    //   position: fixed;
-    //   top: 2.5% !important;
-    //   left: 5% !important;
-    //   right: 5% !important;
-    //   z-index: 1000;
-    // }
-    // button[type="button"][title="close"] {
-    //   position: fixed;
-    //   z-index: 1001;
-    //   top: 6%;
-    //   right: 7.5%;
-    // }
     .container.user-form .mobilepad {
       padding: 0;
     }
