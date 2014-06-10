@@ -1,22 +1,22 @@
 <div class="container user-form">
 	<%= render partial: 'shared/nav_header' %>
+	<div class="mobilepad">
+		<h2 class="admin-head">Reset your password</h2>
+		<h3 class="admin-sub">Enter your new password twice for good luck and you're all set!</h3>
 
-	<h2 class="admin-head">Reset your password</h2>
-	<h3 class="admin-sub">Enter your new password twice for good luck and you're all set!</h3>
+		<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+		  <%= devise_error_messages! %>
+		  <%= f.hidden_field :reset_password_token %>
 
-	<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-	  <%= devise_error_messages! %>
-	  <%= f.hidden_field :reset_password_token %>
+		  <div>
+		    <%= f.password_field :password, autofocus: true, autocomplete: "off", placeholder: "New password" %></div>
 
-	  <div>
-	    <%= f.password_field :password, autofocus: true, autocomplete: "off", placeholder: "New password" %></div>
+		  <div>
+		    <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "One more time!" %></div>
 
-	  <div>
-	    <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "One more time!" %></div>
-
-	  <div class="sign-in button"><%= f.submit "Reset password" %></div>
-	<% end %>
-
+		  <div class="sign-in button"><%= f.submit "Reset password" %></div>
+		<% end %>
+	</div>
 </div>
 
 <!-- <%= render "devise/shared/links" %> -->
