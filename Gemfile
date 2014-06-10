@@ -22,6 +22,7 @@ gem 'rails_12factor', group: :production
 gem 'turbolinks'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
+gem "active_model_serializers"
 
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
