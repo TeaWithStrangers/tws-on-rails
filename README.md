@@ -25,6 +25,12 @@ rake db:schema:load
 
 # Create roles that Cancan can use in development
 rake db:dev:create_roles
+
+# Start mailcatcher in the background
+mailcatcher &
+
+# Start the server
+rails s
 ```
 
 # Environment Var Setup
