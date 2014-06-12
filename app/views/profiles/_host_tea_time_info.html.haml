@@ -7,7 +7,7 @@
       - if tea_time.cancelled? 
         ='This event was cancelled.'
       - else
-        = link_to 'Cancel Tea Time :(', cancel_tea_time_path(tea_time), {method: :delete}
+        = link_to 'Cancel Tea Time :(', cancel_tea_time_path(tea_time), {method: :put}
         %h3.attendees Attendees:
         %ul.attendees-list
           - tea_time.attendees.each do |a|
