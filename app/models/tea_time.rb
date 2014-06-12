@@ -41,6 +41,10 @@ class TeaTime < ActiveRecord::Base
 
   def cancel!
     unless cancelled?
+      # Until we move mailers into something like DJ we run the risk of a failed
+      # email send blocking cancellation and ruining everything. If that happens
+      # I rather abort and return the Requesting thread than 500 error. This is
+      # a short-term fix
       begin 
         self.followup_status = :cancelled
         self.save!
