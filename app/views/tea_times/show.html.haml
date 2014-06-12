@@ -10,6 +10,6 @@
     = f.label :email, "You check email (and manage a calendar) at"
     = f.email_field :email, value: prefill ? current_user.email : '', readonly: prefill,placeholder: 'Email Address'
     .button-container
-      = link_to "Cancel", :back, class: 'cancel'
       = f.submit 'Confirm', class: 'confirm'
-
+      = link_to "Nevermind", :back, class: 'cancel'
+      

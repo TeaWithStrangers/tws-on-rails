@@ -23,14 +23,20 @@ rake db:create
 # Load the schema
 rake db:schema:load
 
-# Create roles that Cancan can use in development
-rake db:dev:create_roles
-
 # Start mailcatcher in the background
 mailcatcher &
 
 # Start the server
 rails s
+
+# For prodution
+rake db:create_roles
+
+# For Development
+# Create some development data to play arond with
+# This includes creating roles
+# This will drop the database if it exists and create it again.
+rake db:seed_dev
 ```
 
 # Environment Var Setup
