@@ -23,6 +23,12 @@ rake db:create
 # Load the schema
 rake db:schema:load
 
+# Start mailcatcher in the background
+mailcatcher &
+
+# Start the server
+rails s
+
 # For prodution
 rake db:create_roles
 
