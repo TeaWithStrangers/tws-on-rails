@@ -909,35 +909,38 @@ a {
         width: 15%;
         float: left;
       }
-      .time-and-place {
-        width: 55%;
-        float: left;
-        position: relative;
-        .t-p-container {
-          padding-bottom: 30%;
+      .everything-else {
+        overflow: auto;
+        .time-and-place {
+          width: 55%;
+          float: left;
           position: relative;
-        }
-        h6 {
-          .fsII;
-          width: 100%;
-          padding-left: 11px;
-          position: absolute;
-          &.top {
-            border-bottom: 2px solid @red;
-            top: 10px;
-            left: -4px;
+          .t-p-container {
+            padding-bottom: 30%;
+            position: relative;
+          }
+          h6 {
+            .fsII;
+            width: 100%;
             padding-left: 11px;
-            .bold;
-            text-transform: uppercase;
-            color: @red;
-          }
-          &.bottom {
-            top: 44px;
-            .fs;
-          }
-          span.datalabel {
-            .bold;
-            text-transform: uppercase;
+            position: absolute;
+            &.top {
+              border-bottom: 2px solid @red;
+              top: 10px;
+              left: -4px;
+              padding-left: 11px;
+              .bold;
+              text-transform: uppercase;
+              color: @red;
+            }
+            &.bottom {
+              top: 44px;
+              .fs;
+            }
+            span.datalabel {
+              .bold;
+              text-transform: uppercase;
+            }
           }
         }
       }
@@ -993,6 +996,7 @@ a {
         li {
           .row.tea-time {
             margin-bottom: 0;
+            padding: 0;
             .host-photo {
               float: right;
             }
@@ -1035,19 +1039,22 @@ a {
           a.email-host {
             float: right;
           }
-          h3.attendees {
-            clear: both;
-          }
-          ul.attendees-list {
-            overflow: auto;
-            padding-top: 5px;
-            li {
-              display: inline-block;
-              .bold;
-              .fs;
-              text-transform: uppercase;
-              padding-right: 5px;
-              padding-bottom: 5px;
+          .attendees-container {
+            padding-top: 1em;
+            h3.attendees {
+              clear: both;
+            }
+            ul.attendees-list {
+              overflow: auto;
+              padding-top: 5px;
+              li {
+                display: inline-block;
+                .bold;
+                .fs;
+                text-transform: uppercase;
+                padding-right: 5px;
+                padding-bottom: 5px;
+              }
             }
           }
         }
