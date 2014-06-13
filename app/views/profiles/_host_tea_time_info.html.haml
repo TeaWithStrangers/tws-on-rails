@@ -2,7 +2,7 @@
 %ul.upcoming.host
   - if current_user.future_hosts
     - current_user.future_hosts.each do |tea_time|
-      %li
+      %li.tea-time
         = render partial: 'teatime_info', locals: {tea_time: tea_time, att: nil}
         - if current_user.host?
           .attendees-container
@@ -11,7 +11,7 @@
               %ul.attendees-list{:class => "#{k}"}
                 %h4 #{k.capitalize}
                 - v.map(&:user).each do |a|
-                  %li= link_to a.name, "mailto:#{a.email}"
+                  %li.attendee-names= link_to a.name, "mailto:#{a.email}"
   - else
     %p 
       You're not hosting any upcoming tea times! Let's change that.

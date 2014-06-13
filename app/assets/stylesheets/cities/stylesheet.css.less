@@ -992,20 +992,60 @@ a {
     }
     .two-third {
       ul.upcoming {
+        overflow: auto;
+        clear: both;
         &.host {
-          li {
+          li.tea-time {
+            padding-bottom: 1em;
+            margin-bottom: 1em;
+            border-bottom: 1px solid @red;
             .row.tea-time {
+              width: 70%;
+              float: left;
               .host-photo {
                 display: none;
               }
               .everything-else {
                 .time-and-place {
                   .t-p-container {
-                    h6.bottom {
-                      .host {
-                        display: none;
+                    h6 {
+                      &.top {
+                        color: @black;
+                        text-transform: none;
+                      }
+                      &.bottom {
+                        .host {
+                          display: none;
+                        }
+                        .datalabel {
+                          display: none;
+                        }
                       }
                     }
+                  }
+                }
+              }
+            }
+            .attendees-container {
+              float: right;
+              width: 30%;
+              h3.attendees {
+                display: none;
+              }
+              ul.attendees-list {
+                overflow: auto;
+                padding-top: 5px;
+                li.attendee-names {
+                  .fs;
+                  text-align: right;
+                  padding-bottom: 5px;
+                  a {
+                    color: @black;
+                  }
+                }
+                &.pending {
+                  h4 {
+                    display: none;
                   }
                 }
               }
@@ -1013,6 +1053,8 @@ a {
           }
         }
         li {
+          overflow: auto;
+          clear: both;
           .row.tea-time {
             margin-bottom: 0;
             padding: 0;
@@ -1057,24 +1099,6 @@ a {
           }
           a.email-host {
             float: right;
-          }
-          .attendees-container {
-            padding-top: 1em;
-            h3.attendees {
-              clear: both;
-            }
-            ul.attendees-list {
-              overflow: auto;
-              padding-top: 5px;
-              li {
-                display: inline-block;
-                .bold;
-                .fs;
-                text-transform: uppercase;
-                padding-right: 5px;
-                padding-bottom: 5px;
-              }
-            }
           }
         }
       }
