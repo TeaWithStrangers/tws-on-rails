@@ -9,7 +9,7 @@
             %h3.attendees Attendees:
             %ul.attendees-list
               - tea_time.attendances.group_by(&:status).each do |k,v|
-                %h4 k.capitalize
+                %h4 #{k.capitalize}
                 - v.map(&:user).each do |a|
                   %li= link_to a.name, "mailto:#{a.email}"
   - else
