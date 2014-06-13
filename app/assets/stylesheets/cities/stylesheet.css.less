@@ -986,7 +986,7 @@ a {
       }
     }
     h2.main {
-      .fsIV;
+      .fsIII;
       .bold;
       padding-bottom: .5em;
     }
@@ -995,10 +995,11 @@ a {
         overflow: auto;
         clear: both;
         &.host {
+          padding-bottom: 3em;
           li.tea-time {
             padding-bottom: 1em;
             margin-bottom: 1em;
-            border-bottom: 1px solid @red;
+            border-bottom: 1px solid @lightred;
             .row.tea-time {
               width: 70%;
               float: left;
@@ -1029,19 +1030,24 @@ a {
             .attendees-container {
               float: right;
               width: 30%;
+              text-align: right;
               h3.attendees {
-                display: none;
+                .fsII;
+                .bold;
               }
               ul.attendees-list {
                 overflow: auto;
                 padding-top: 5px;
                 li.attendee-names {
                   .fs;
-                  text-align: right;
                   padding-bottom: 5px;
                   a {
                     color: @black;
                   }
+                }
+                h4 {
+                  .fsII;
+                  .bold;
                 }
                 &.pending {
                   h4 {
