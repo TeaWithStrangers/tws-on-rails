@@ -6,7 +6,7 @@ namespace :email do
       tt.attendances.each do |a|
         #Mail the user a reminder
         begin
-          UserMailer.tea_time_reminder(a)
+          UserMailer.tea_time_reminder(a) if a.pending?
         rescue => ex
           Rails.logger.error "Failed Mail: #{ex.message}"
         end
