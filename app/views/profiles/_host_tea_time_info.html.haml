@@ -1,4 +1,4 @@
-%h2.main.upcoming.host Your Upcoming Host Times
+%h2.main.upcoming.host Hosting
 %ul.upcoming.host
   - if current_user.future_hosts
     - current_user.future_hosts.each do |tea_time|
@@ -6,7 +6,7 @@
         = render partial: 'teatime_info', locals: {tea_time: tea_time, att: nil}
         - if current_user.host?
           .attendees-container
-            %h3.attendees Attendees:
+            %h3.attendees Attendees
             - tea_time.attendances.group_by(&:status).each do |k,v|
               %ul.attendees-list{:class => "#{k}"}
                 %h4 #{k.capitalize}

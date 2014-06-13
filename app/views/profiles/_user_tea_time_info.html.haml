@@ -1,4 +1,4 @@
-%h2.main.upcoming Upcoming Tea Times
+%h2.main.upcoming Tea Times
 - if !current_user.future_attendances.count.zero?
   %ul.upcoming
     - current_user.future_attendances.each do |a|
