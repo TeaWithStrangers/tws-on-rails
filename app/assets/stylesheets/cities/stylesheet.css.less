@@ -991,7 +991,27 @@ a {
       padding-bottom: .5em;
     }
     .two-third {
-      ul {
+      ul.upcoming {
+        &.host {
+          li {
+            .row.tea-time {
+              .host-photo {
+                display: none;
+              }
+              .everything-else {
+                .time-and-place {
+                  .t-p-container {
+                    h6.bottom {
+                      .host {
+                        display: none;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
         li {
           .row.tea-time {
             margin-bottom: 0;
