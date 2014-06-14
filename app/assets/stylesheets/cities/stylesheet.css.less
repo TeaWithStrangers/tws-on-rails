@@ -1024,11 +1024,22 @@ a {
               ul.attendees-list {
                 overflow: auto;
                 padding-top: 5px;
-                li.attendee-names {
-                  .fs;
-                  padding-bottom: 5px;
-                  a {
-                    color: @black;
+                li {
+                  &.email-all a {
+                    display: block;
+                    .button(@green);
+                    .fsI;
+                    color: @white;
+                    text-decoration: none;
+                    margin: .5em 0 1em 0;
+                    text-align: center;
+                  }
+                  &.attendee-names {
+                    .fs;
+                    padding-bottom: 5px;
+                    a {
+                      color: @black;
+                    }
                   }
                 }
                 h4 {

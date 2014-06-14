@@ -6,13 +6,13 @@
         = render partial: 'teatime_info', locals: {tea_time: tea_time, att: nil}
         - if current_user.host?
           .attendees-container
-            = link_to "Email All" "mailto:#{tea_time.all_attendee_emails}"
             %h3.attendees Attendees
             - tea_time.attendances.group_by(&:status).each do |k,v|
               %ul.attendees-list{:class => "#{k}"}
                 %h4 #{k.capitalize}
                 - v.map(&:user).each do |a|
                   %li.attendee-names= link_to a.name, "mailto:#{a.email}"
+                %li.email-all= link_to "Email All", "mailto:#{tea_time.all_attendee_emails}"
           .controls
             %h6= link_to 'Edit details', edit_tea_time_path(tea_time)
             %h6= link_to 'Cancel tea time', tea_time, :method => :delete, :data => { :confirm => 'Are you sure?' }
