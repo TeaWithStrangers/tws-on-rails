@@ -38,17 +38,3 @@ rake db:create_roles
 # This will drop the database if it exists and create it again.
 rake db:seed_dev
 ```
-
-# Environment Var Setup
-
-We use [Figaro][1] for configuring our environment variables.
-
-You'll want to run `rails g figaro:install` and then add the following variables
-to your `config/application.yml` to get email working:
-
-* `GMAIL_USERNAME`: The username you use to log into GMail, domain included
-  (e.g. `gmail.com`)
-* `GMAIL_PASSWORD`: The password you use to log into GMail, domain included
-
-
-[1]:https://github.com/laserlemon/figaro

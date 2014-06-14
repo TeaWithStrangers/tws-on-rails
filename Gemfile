@@ -26,8 +26,6 @@ gem "active_model_serializers"
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring',        group: :development
 gem 'mailcatcher',        group: :development
-# Figaro makes it easy to set env variables without Foreman
-gem 'figaro', group: [:development, :test]
 
 #Calendars
 gem 'icalendar', '~> 2.0'
