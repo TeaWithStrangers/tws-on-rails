@@ -908,6 +908,9 @@ a {
       .host-photo {
         width: 15%;
         float: left;
+        h6.host-name {
+          display: none;
+        }
       }
       .everything-else {
         .time-and-place {
@@ -997,9 +1000,6 @@ a {
         &.host {
           padding-bottom: 3em;
           li.tea-time {
-            padding-bottom: 1em;
-            margin-bottom: 1em;
-            border-bottom: 1px solid @lightred;
             .row.tea-time {
               width: 70%;
               float: left;
@@ -1009,20 +1009,6 @@ a {
               .everything-else {
                 .time-and-place {
                   .t-p-container {
-                    h6 {
-                      &.top {
-                        color: @black;
-                        text-transform: none;
-                      }
-                      &.bottom {
-                        .host {
-                          display: none;
-                        }
-                        .datalabel {
-                          display: none;
-                        }
-                      }
-                    }
                   }
                 }
               }
@@ -1038,11 +1024,22 @@ a {
               ul.attendees-list {
                 overflow: auto;
                 padding-top: 5px;
-                li.attendee-names {
-                  .fs;
-                  padding-bottom: 5px;
-                  a {
-                    color: @black;
+                li {
+                  &.email-all a {
+                    display: block;
+                    .button(@green);
+                    .fsI;
+                    color: @white;
+                    text-decoration: none;
+                    margin: .5em 0 1em 0;
+                    text-align: center;
+                  }
+                  &.attendee-names {
+                    .fs;
+                    padding-bottom: 5px;
+                    a {
+                      color: @black;
+                    }
                   }
                 }
                 h4 {
@@ -1058,14 +1055,41 @@ a {
             }
           }
         }
-        li {
+        li.tea-time {
           overflow: auto;
           clear: both;
+          padding-bottom: 1em;
+          margin-bottom: 1em;
+          border-bottom: 1px solid @lightred;
+          &:last-child {
+            border-bottom: none;
+          }
           .row.tea-time {
             margin-bottom: 0;
             padding: 0;
+            overflow: visible;
             .host-photo {
               float: right;
+              width: 20%;
+              &:before {
+                content: 'Host';
+                display: block;
+                padding-bottom: .5em;
+                top: 0;
+                position: relative;
+                text-transform: uppercase;
+                .fs;
+                .bold;
+                text-align: center;
+              }
+              .avatar-container {
+                margin-bottom: .5em;
+              }
+              h6.host-name {
+                display: block;
+                .fs;
+                text-align: center;
+              }
             }
             .time-and-place {
               width: 80%;
@@ -1079,6 +1103,16 @@ a {
                   left: auto;
                   position: relative;
                   padding: 0;
+                  .datalabel {
+                    display: none;
+                  }
+                  .host {
+                    display: none;
+                  }
+                }
+                h6.top {
+                  color: @black;
+                  text-transform: none;
                 }
               }
             }
@@ -1089,22 +1123,50 @@ a {
               margin: 10px 0;
             }
           }
-          form.edit_attendance {
-            float: right;
-            input[name="commit"] {
-              .regular;
+          .controls {
+            float: left;
+            width: 70%;
+            clear: left;
+            padding-top: .25em;
+            h6 {
               .fs;
-              text-decoration: underline;
-              color: @red;
-              border: none;
-              background: none;
-              padding: 0;
-              margin: 0;
-              padding-left: 10px;
+              float: left;
+              padding-right: 1em;
             }
-          }
-          a.email-host {
-            float: right;
+            a {
+              color: @lightred;
+              .transition;
+              &:hover {
+                color: @red;
+                .transition;
+              }
+            }
+            form.edit_attendance {
+              float: left;
+              padding-right: 1em;
+              input[name="commit"] {
+                .regular;
+                .fs;
+                text-decoration: underline;
+                color: @lightred;
+                border: none;
+                background: none;
+                padding: 0;
+                margin: 0;
+                cursor: pointer;
+                -webkit-appearance: none !important;
+                .transition;
+                &:hover, &:active, &:focus {
+                  text-decoration: none;
+                  outline: none;
+                  color: @red;
+                  .transition;
+                }
+              }
+            }
+            a.email-host {
+              .fs;
+            }
           }
         }
       }
@@ -1387,6 +1449,9 @@ form.schedule-tea {
     .host-photo {
       width: 100px;
       float: left;
+      h6.host-name {
+        display: none;
+      }
       .avatar-container {
         border: 2px solid @red;
         background: @background;
@@ -1760,7 +1825,7 @@ form.schedule-tea {
   form.schedule-tea .row.tea-time, .container .row.tea-time {
     padding: 0;
     .host-photo {
-      width: 100%;
+      width: 100% !important; 
       padding: 0 25%;
       float: none;
       .avatar-container {
