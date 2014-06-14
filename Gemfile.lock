@@ -79,6 +79,9 @@ GEM
     execjs (2.2.0)
     factory_girl (4.4.0)
       activesupport (>= 3.0.0)
+    factory_girl_rails (4.4.1)
+      factory_girl (~> 4.4.0)
+      railties (>= 3.0.0)
     haml (4.0.5)
       tilt
     haml-rails (0.5.3)
@@ -260,6 +263,7 @@ DEPENDENCIES
   delayed_job_active_record (~> 4.0.1)
   devise (~> 3.2.4)
   factory_girl (~> 4.4)
+  factory_girl_rails
   haml-rails (~> 0.5)
   icalendar (~> 2.0)
   jquery-rails
