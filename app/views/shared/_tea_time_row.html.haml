@@ -1,8 +1,10 @@
 .row.tea-time
   .host-photo
-    .avatar-container
-      .avatar
-        %img.avatar-image{src:tea_time.host.avatar.url(:medium)}
+    %a{href:host_city_path(tea_time.city, tea_time.host)}
+      .avatar-container
+        .avatar
+          %img.avatar-image{src:tea_time.host.avatar.url(:medium)}
+      %h6.host-name= "#{tea_time.host.name}"
   .everything-else
     .time-and-place
       .t-p-container
