@@ -14,6 +14,8 @@ GEM
       activesupport (= 4.1.0)
       builder (~> 3.1)
       erubis (~> 2.7.0)
+    active_model_serializers (0.8.1)
+      activemodel (>= 3.0)
     activemodel (4.1.0)
       activesupport (= 4.1.0)
       builder (~> 3.1)
@@ -86,9 +88,6 @@ GEM
       multi_xml (>= 0.5.2)
     i18n (0.6.9)
     icalendar (2.0.1)
-    jbuilder (2.0.6)
-      activesupport (>= 3.0.0, < 5)
-      multi_json (~> 1.2)
     jquery-rails (3.1.0)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
@@ -218,6 +217,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_model_serializers
   aws-sdk (~> 1.5.7)
   bcrypt (~> 3.1.7)
   cancan (~> 1.6.10)
@@ -228,7 +228,6 @@ DEPENDENCIES
   figaro
   haml-rails (~> 0.5)
   icalendar (~> 2.0)
-  jbuilder (~> 2.0)
   jquery-rails
   jquery-ui-rails
   less-rails (~> 2.5)
