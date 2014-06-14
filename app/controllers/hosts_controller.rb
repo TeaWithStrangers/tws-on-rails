@@ -2,6 +2,10 @@ class HostsController < ApplicationController
   def show
     @city = City.for_code(params[:id])
     @host = User.find(params[:host_id])
+    respond_to do |format|
+      format.html { render layout: !request.xhr? }
+      format.json { render json: @host }
+    end
   end
 
   def new

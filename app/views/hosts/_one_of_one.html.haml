@@ -1,5 +1,7 @@
 .row
   .wide
+    .half.right.mobilephoto
+      %img.host-photo{src: @host.avatar.url(:landscape)}
     .half.left
       %p
         %em.starter= "Hey, I'm #{@host.name}!"
@@ -12,6 +14,16 @@
       = render partial: 'shared/signup'
 .row
   .wide
+    .two-third.right
+      %img.host-photo.singlehost{src: @host.avatar.url(:landscape)}
+      .prompt
+        %h3
+          What's your story?
+        = simple_format @host.story
+      .prompt
+        %h3
+          What might we talk about?
+        = simple_format @host.topics
     .third.left
       %h3
         Tea With Strangers
@@ -21,14 +33,4 @@
       %h4.signup-cta
         Sign up and come sometime.
       = render partial: 'shared/signup'
-    .two-third.right
-      %img.host-photo{src: @host.avatar.url(:landscape)}
-      .prompt
-        %h3
-          What's your story?
-        = simple_format @host.story
-      .prompt
-        %h3
-          What might we talk about?
-        = simple_format @host.topics
 =content_for(:footer) { render partial: 'shared/footer' }

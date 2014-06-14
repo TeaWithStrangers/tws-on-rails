@@ -1,6 +1,7 @@
-.row
+.row.mobilewide
   .wide
     - unless tea_times.count.zero?
       %h3.sectionhead.schedule Join for an upcoming tea time
-      - tea_times.each do |tt|
-        = render partial: 'shared/tea_time_row', locals: {tea_time: tt}
+      .mobilepad
+        - tea_times.each do |tt|
+          = render partial: 'shared/tea_time_row', locals: {tea_time: tt}

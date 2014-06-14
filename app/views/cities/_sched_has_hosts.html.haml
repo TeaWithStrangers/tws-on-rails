@@ -9,5 +9,5 @@
       In either case, you’ll soon receive an email with a link to this page
       for future access.
       
-  -if @city.tea_times.future
-    = render partial: 'shared/tea_times', locals: {tea_times: @city.tea_times.where(start_time: (Date.today..(Date.today+2.weeks))).order(:start_time => :asc)} 
+-if @city.tea_times.future
+  = render partial: 'shared/tea_times', locals: {tea_times: @city.tea_times.where(start_time: (Date.today..(Date.today+2.weeks))).order(:start_time => :asc)} 

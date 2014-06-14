@@ -7,6 +7,10 @@ class TeaTimesController < ApplicationController
   # GET /tea_times.json
   def index
     @tea_times = TeaTime.all
+    respond_to do |format|
+      format.html { render layout: !request.xhr? }
+      format.json { render json: @tea_times }
+    end
   end
 
   # GET /tea_times/1
@@ -14,7 +18,7 @@ class TeaTimesController < ApplicationController
   def show
     respond_to do |format|
       format.html { render layout: !request.xhr? }
-      format.json { @tea_time }
+      format.json { render json: @tea_time }
     end
   end
 
@@ -81,7 +85,7 @@ class TeaTimesController < ApplicationController
   def create
     respond_to do |format|
       if @tea_time.save
-        format.html { redirect_to @tea_time, notice: 'Tea time was successfully created.' }
+        format.html { redirect_to profile_path, notice: 'Tea time was successfully created.' }
         format.json { render :show, status: :created, location: @tea_time }
       else
         format.html { render :new }
@@ -95,7 +99,7 @@ class TeaTimesController < ApplicationController
   def update
     respond_to do |format|
       if @tea_time.update(tea_time_params)
-        format.html { redirect_to @tea_time, notice: 'Tea time was successfully updated.' }
+        format.html { redirect_to profile_path, notice: 'Tea time was successfully updated.' }
         format.json { render :show, status: :ok, location: @tea_time }
       else
         format.html { render :edit }
