@@ -4,7 +4,7 @@ class TeaTime < ActiveRecord::Base
   belongs_to :host, :class_name => 'User', :foreign_key => 'user_id'
   validates_presence_of :host, :start_time, :city, :duration
   has_many :attendances, dependent: :destroy
-  
+
   attr_reader :local_time, :spots_remaining
 
   scope :past, -> { where("start_time <= ?", DateTime.now.midnight.utc) }
@@ -33,6 +33,10 @@ class TeaTime < ActiveRecord::Base
 
   def spots_remaining?
     spots_remaining > 0
+  end
+
+  def all_attendee_emails
+    attendees.map(&:email).join(',')
   end
 
   def attendees
