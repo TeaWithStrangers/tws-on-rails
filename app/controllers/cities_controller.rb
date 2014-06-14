@@ -7,6 +7,10 @@ class CitiesController < ApplicationController
   def index
     if can? :manage, City
       @cities = City.all
+      respond_to do |format|
+        format.html { render layout: !request.xhr? }
+        format.json { render json: @cities }
+      end
     else
       redirect_to root_path+"#cities"
     end
@@ -15,6 +19,11 @@ class CitiesController < ApplicationController
   # GET /cities/1
   # GET /cities/1.json
   def show
+    @city = City.find(params[:id])
+    respond_to do |format|
+      format.html { render layout: !request.xhr? }
+      format.json { render json: @city }
+    end
   end
 
   def schedule
