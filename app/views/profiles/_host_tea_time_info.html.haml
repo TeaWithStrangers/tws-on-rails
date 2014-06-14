@@ -6,6 +6,7 @@
         = render partial: 'teatime_info', locals: {tea_time: tea_time, att: nil}
         - if current_user.host?
           .attendees-container
+            = link_to "Email All" "mailto:#{tea_time.all_attendee_emails}"
             %h3.attendees Attendees
             - tea_time.attendances.group_by(&:status).each do |k,v|
               %ul.attendees-list{:class => "#{k}"}
@@ -13,6 +14,6 @@
                 - v.map(&:user).each do |a|
                   %li.attendee-names= link_to a.name, "mailto:#{a.email}"
   - else
-    %p 
+    %p
       You're not hosting any upcoming tea times! Let's change that.
       =link_to "Create a new tea time!", new_tea_time_path
