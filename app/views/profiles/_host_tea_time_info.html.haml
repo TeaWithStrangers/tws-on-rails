@@ -12,7 +12,11 @@
                 %h4 #{k.capitalize}
                 - v.map(&:user).each do |a|
                   %li.attendee-names= link_to a.name, "mailto:#{a.email}"
+                %li.email-all= link_to "Email All", "mailto:#{tea_time.all_attendee_emails}"
+          .controls
+            %h6= link_to 'Edit details', edit_tea_time_path(tea_time)
+            %h6= link_to 'Cancel tea time', tea_time, :method => :delete, :data => { :confirm => 'Are you sure?' }
   - else
-    %p 
+    %p
       You're not hosting any upcoming tea times! Let's change that.
       =link_to "Create a new tea time!", new_tea_time_path
