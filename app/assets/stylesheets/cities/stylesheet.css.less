@@ -975,57 +975,86 @@ a {
     }
   }
   &.dashboard {
-    h2 {
-      .fsI;
-      .bold;
-    }
-    ul.nav-list {
-      overflow: auto;
-      li {
+    .row {
+      hr {
+        display: none;
+      }
+      h2 {
         .fsI;
-        a {
-          text-decoration: none;
+        .bold;
+      }
+      ul.nav-list {
+        overflow: auto;
+        li {
+          .fsI;
+          a {
+            text-decoration: none;
+            color: @lightred;
+            &:hover {
+              color: @red;
+              text-decoration: underline;
+            }
+          }
         }
       }
-    }
-    h2.main {
-      .fsIII;
-      .bold;
-      padding-bottom: .5em;
-    }
-    .two-third {
-      ul.upcoming {
-        overflow: auto;
-        clear: both;
-        &.host {
-          padding-bottom: 3em;
-          li.tea-time {
-            .row.tea-time {
-              width: 70%;
-              float: left;
-              .host-photo {
-                display: none;
-              }
-              .everything-else {
-                .time-and-place {
-                  .t-p-container {
+      h2.main {
+        .fsIII;
+        .bold;
+        padding-bottom: .5em;
+      }
+      .two-third {
+        ul.upcoming {
+          overflow: auto;
+          clear: both;
+          &.host {
+            padding-bottom: 3em;
+            li.tea-time {
+              .row.tea-time {
+                width: 70%;
+                float: left;
+                .host-photo {
+                  display: none;
+                }
+                .everything-else {
+                  .time-and-place {
+                    .t-p-container {
+                    }
                   }
                 }
               }
-            }
-            .attendees-container {
-              float: right;
-              width: 30%;
-              text-align: right;
-              h3.attendees {
-                .fsII;
-                .bold;
-              }
-              ul.attendees-list {
-                overflow: auto;
-                padding-top: 5px;
-                li {
-                  &.email-all a {
+              .attendees-container {
+                float: right;
+                width: 30%;
+                text-align: right;
+                h3.attendees {
+                  .fsII;
+                  .bold;
+                }
+                ul.attendees-list {
+                  overflow: auto;
+                  padding-top: 5px;
+                  li {
+                    &.attendee-names {
+                      .fs;
+                      padding-bottom: 5px;
+                      a {
+                        color: @black;
+                      }
+                    }
+                  }
+                  h4 {
+                    .fsII;
+                    .bold;
+                  }
+                  &.pending {
+                    h4 {
+                      display: none;
+                    }
+                  }
+                }
+                .email-all {
+                  clear: both;
+                  a {
                     display: block;
                     .button(@green);
                     .fsI;
@@ -1034,138 +1063,122 @@ a {
                     margin: .5em 0 1em 0;
                     text-align: center;
                   }
-                  &.attendee-names {
-                    .fs;
-                    padding-bottom: 5px;
-                    a {
-                      color: @black;
+                }
+              }
+            }
+          }
+          li.tea-time {
+            overflow: auto;
+            clear: both;
+            padding-bottom: 1em;
+            margin-bottom: 1em;
+            border-bottom: 1px solid @lightred;
+            &:last-child {
+              border-bottom: none;
+            }
+            .row.tea-time {
+              margin-bottom: 0;
+              padding: 0;
+              overflow: visible;
+              .host-photo {
+                float: right;
+                width: 20%;
+                &:before {
+                  content: 'Host';
+                  display: block;
+                  padding-bottom: .5em;
+                  top: 0;
+                  position: relative;
+                  text-transform: uppercase;
+                  .fs;
+                  .bold;
+                  text-align: center;
+                }
+                .avatar-container {
+                  margin-bottom: .5em;
+                }
+                h6.host-name {
+                  display: block;
+                  .fs;
+                  text-align: center;
+                }
+              }
+              .time-and-place {
+                width: 80%;
+                float: left;
+                position: relative;
+                .t-p-container {
+                  padding: 0;
+                  h6, h6.top, h6.bottom {
+                    border: none;
+                    top: auto;
+                    left: auto;
+                    position: relative;
+                    padding: 0;
+                    .datalabel {
+                      display: none;
+                    }
+                    .host {
+                      display: none;
                     }
                   }
-                }
-                h4 {
-                  .fsII;
-                  .bold;
-                }
-                &.pending {
-                  h4 {
-                    display: none;
+                  h6.top {
+                    color: @black;
+                    text-transform: none;
                   }
                 }
               }
-            }
-          }
-        }
-        li.tea-time {
-          overflow: auto;
-          clear: both;
-          padding-bottom: 1em;
-          margin-bottom: 1em;
-          border-bottom: 1px solid @lightred;
-          &:last-child {
-            border-bottom: none;
-          }
-          .row.tea-time {
-            margin-bottom: 0;
-            padding: 0;
-            overflow: visible;
-            .host-photo {
-              float: right;
-              width: 20%;
-              &:before {
-                content: 'Host';
-                display: block;
-                padding-bottom: .5em;
-                top: 0;
-                position: relative;
-                text-transform: uppercase;
-                .fs;
-                .bold;
-                text-align: center;
-              }
-              .avatar-container {
-                margin-bottom: .5em;
-              }
-              h6.host-name {
-                display: block;
-                .fs;
-                text-align: center;
+              div.button {
+                clear: both;
+                float: right;
+                width: 30%;
+                margin: 10px 0;
               }
             }
-            .time-and-place {
-              width: 80%;
+            .controls {
               float: left;
-              position: relative;
-              .t-p-container {
-                padding: 0;
-                h6, h6.top, h6.bottom {
-                  border: none;
-                  top: auto;
-                  left: auto;
-                  position: relative;
-                  padding: 0;
-                  .datalabel {
-                    display: none;
-                  }
-                  .host {
-                    display: none;
-                  }
-                }
-                h6.top {
-                  color: @black;
-                  text-transform: none;
-                }
-              }
-            }
-            div.button {
-              clear: both;
-              float: right;
-              width: 30%;
-              margin: 10px 0;
-            }
-          }
-          .controls {
-            float: left;
-            width: 70%;
-            clear: left;
-            padding-top: .25em;
-            h6 {
-              .fs;
-              float: left;
-              padding-right: 1em;
-            }
-            a {
-              color: @lightred;
-              .transition;
-              &:hover {
-                color: @red;
-                .transition;
-              }
-            }
-            form.edit_attendance {
-              float: left;
-              padding-right: 1em;
-              input[name="commit"] {
-                .regular;
+              width: 70%;
+              clear: left;
+              padding-top: .25em;
+              h6 {
                 .fs;
-                text-decoration: underline;
+                float: left;
+                padding-right: 1em;
+              }
+              a {
                 color: @lightred;
-                border: none;
-                background: none;
-                padding: 0;
-                margin: 0;
-                cursor: pointer;
-                -webkit-appearance: none !important;
                 .transition;
-                &:hover, &:active, &:focus {
-                  text-decoration: none;
-                  outline: none;
+                &:hover {
                   color: @red;
                   .transition;
                 }
               }
-            }
-            a.email-host {
-              .fs;
+              form.edit_attendance {
+                float: left;
+                padding-right: 1em;
+                input[name="commit"] {
+                  .regular;
+                  .fs;
+                  text-decoration: underline;
+                  color: @lightred;
+                  border: none;
+                  background: none;
+                  padding: 0;
+                  margin: 0;
+                  cursor: pointer;
+                  -webkit-appearance: none !important;
+                  .transition;
+                  &:hover, &:active, &:focus {
+                    text-decoration: none;
+                    outline: none;
+                    color: @red;
+                    .transition;
+                  }
+                }
+              }
+              a.email-host {
+                .fs;
+              }
             }
           }
         }
@@ -1176,21 +1189,26 @@ a {
         form.edit_user, form.new_tea_time {
           div {
             margin-bottom: 1em;
-            label,span.continue-label {
-              .fs;
-              text-transform: uppercase;
+          }
+          label,span.continue-label {
+            .fs;
+            .bold;
+          }
+          input, textarea, select {
+            width: 100%;
+            .fsII;
+            .regular;
+            padding: 10px;
+            border-radius: .35em;
+            border: 1px solid @gray;
+            margin-bottom: 10px;
+            color: @black;
+            &:active, &:focus {
+              outline: none;
             }
-            input, textarea, select {
-              width: 100%;
-              .fsI;
-              .regular;
-              padding: 0 5px;
-              border-radius: 5px;
-              border: 1px solid @gray;
-            }
-            input[name="commit"] {
-              .button(@green);
-            }
+          }
+          input[name="commit"] {
+            .button(@green);
           }
           h3.edit-subheader {
             .fsII;
@@ -1210,31 +1228,50 @@ a {
           label {
             display: block;
             .fs;
-            text-transform: uppercase;
             margin-top: 20px;
+            .fs;
+            .bold;
           }
-          input, textarea {
-            width: 100%;
-            .fsI;
-            .regular;
-            padding: 0 5px;
-            border-radius: 5px;
-            border: 1px solid @gray;
+          [for="tea_time_duration"], #tea_time_duration {
+            display: none;
           }
           select {
-            .fsI;
-            .regular;
-            padding: 0 5px;
-            border-radius: 5px;
-            border: 1px solid @gray;
+            width: auto;
             &.city {
               width: 100%;
+            }
+            &#tea_time_start_time_1i, 
+            &#tea_time_start_time_2i, 
+            &#tea_time_start_time_3i, 
+            &#tea_time_start_time_4i, 
+            &#tea_time_start_time_5i {
+              
             }
           }
           .actions {
             margin-top: 20px;
           }
         }
+      }
+    }
+  }
+  form {
+    .dropdown {
+      width: 100%;
+      height: 3em;
+      overflow: hidden;
+      border: 1px solid @gray;
+      border-radius: .35em;
+      background: @white asset-url('dropdown-arrow.png') no-repeat 97.5% center;
+      background-size: 16px auto;
+      margin-bottom: 10px;
+      select {
+        height: 100%;
+        width: 110%;
+        border: 0;
+        border-radius: 0;
+        -webkit-appearance: none;
+        background: transparent;
       }
     }
   }
@@ -1260,7 +1297,6 @@ a {
     }
   }
 }
-
 form.new_user {
   overflow: auto;
   -webkit-font-smoothing: antialiased !important;
@@ -1280,24 +1316,6 @@ form.new_user {
     &[type="submit"] {
       .button(@red);
       margin-bottom: 25px;
-    }
-  }
-  .city-dropdown {
-    width: 100%;
-    height: 3em;
-    overflow: hidden;
-    border: 1px solid @gray;
-    border-radius: .35em;
-    background: @white asset-url('dropdown-arrow.png') no-repeat 97.5% center;
-    background-size: 16px auto;
-    margin-bottom: 10px;
-    select {
-      height: 100%;
-      width: 110%;
-      border: 0;
-      border-radius: 0;
-      -webkit-appearance: none;
-      background: transparent;
     }
   }
   h6.footnote {
@@ -1658,6 +1676,9 @@ form.schedule-tea {
     }
   }
   .container {
+    hr {
+      margin-bottom: 1em;
+    }
     &.user-form {
       .mobilepad {
         padding: 0 20px;
@@ -1684,6 +1705,8 @@ form.schedule-tea {
           clear: both;
           display: inline-block;
           padding: 0;
+          padding-bottom: 1em;
+          overflow: hidden;
           li {
             display: inline-block;
             text-align: center;
@@ -1816,6 +1839,145 @@ form.schedule-tea {
             width: 100%;
             &:after {
               display: none;
+            }
+          }
+        }
+      }
+    }
+    &.dashboard {
+      .row {
+        hr {
+          display: block;
+        }
+        h2 {
+          text-align: center;
+        }
+        .third {
+          padding-bottom: 1em;
+          ul.nav-list {
+            text-align: center;
+            overflow: hidden;
+            li {
+              display: inline-block;
+              text-align: center;
+              padding: .25em .5em;
+            }
+          }
+        }
+        .two-third {
+          ul.upcoming, ul.upcoming.host {
+            li.tea-time {
+              .row.tea-time {
+                width: 100%;
+                float: none;
+                overflow: auto;
+                .everything-else {
+                  margin: 0;
+                  background: transparent;
+                  border: none;
+                  border-radius: 0;
+                  .time-and-place {
+                    width: 100%;
+                    float: none;
+                    padding: 0;
+                    .t-p-container {
+                      h6 {
+                        &.top {
+                          color: @red;
+                          margin: 0;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+              .attendees-container {
+                width: 100%;
+                float: none;
+                text-align: left;
+                h3.attendees {
+                  float: left;
+                  .fs;
+                }
+                ul.attendees-list {
+                  overflow: visible;
+                  padding: 0;
+                  li.attendee-names {
+                    float: left;
+                    padding-left: 1em;
+                  }
+                }
+                .email-all {
+                  margin-top: 1em;
+                  overflow: auto;
+                }
+              }
+              .controls {
+                width: 100%;
+                float: none;
+                clear: both;
+                h6, form, a {
+                  &.left {
+                    float: left;
+                  }
+                  &.right {
+                    float: right;
+                  }
+                }
+              }
+            }
+          }
+          ul.upcoming.going {
+            li.tea-time {
+              .row.tea-time {
+                .host-photo {
+                  float: left;
+                  width: 20% !important;
+                  padding: 0;
+                  &:before {
+                    content:'';
+                    display: none;
+                  }
+                  h6.host-name {
+                    display: none;
+                  }
+                }
+                .everything-else {
+                  padding-left: 1em;
+                  float: left;
+                  width: 80%;
+                  .time-and-place {
+                    .t-p-container {
+                      h6 {
+                        &.top {
+                          
+                        }
+                        &.bottom {
+                          .host {
+                            display: block;
+                            padding-bottom: .15em;
+                          }
+                          .datalabel {
+                            display: inline;
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      &.edit {
+        .two-third {
+          form#new_tea_time {
+            select {
+
+            }
+            label[for="tea_time_location"] {
+              clear: both;
             }
           }
         }
