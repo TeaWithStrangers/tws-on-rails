@@ -1,6 +1,6 @@
 = render partial: 'shared/tea_time_row', locals: {tea_time: tea_time, without_button: true}
 - if att
   .controls
-    =form_for(att, url: update_attendance_tea_time_path(tea_time, att), method: :put) do |f|
+    =form_for(att, url: update_attendance_tea_time_path(tea_time, att), html: {class: 'left edit_attendance'}, method: :put) do |f|
       =f.submit "Cancel my spot"
-    =link_to "Email Host", "mailto: #{tea_time.host.email}?subject=Tea%20Time%20Question", :class => "email-host"
+    =link_to "Email Host", "mailto: #{tea_time.host.email}?subject=Tea%20Time%20Question", :class => "email-host right"

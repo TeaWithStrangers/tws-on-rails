@@ -32,6 +32,7 @@
           </li>
         </ul>
       </div>
+      <hr>
       <div class="two-third right">
         <h2 class="main">Edit Your Information</h2>
 
@@ -45,7 +46,7 @@
           <%= f.email_field :email %></div>
 
           <div><%= f.label :home_city %><br />
-          <%= select(resource_name, :home_city_id, City.all.collect{ |p| [p.name, p.id] }) %></div>
+          <div class="dropdown"><%= select(resource_name, :home_city_id, City.all.collect{ |p| [p.name, p.id] }) %></div></div>
 
           <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
             <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
@@ -55,13 +56,13 @@
 
           <h3 class="edit-subheader"> Password </h3>
 
-          <div><%= f.label :password %> <span class="continue-label">(leave blank if you don't want to change it)</span><br />
+          <div><%= f.label :password %> <span class="continue-label">(only if making changes)</span><br />
             <%= f.password_field :password, autocomplete: "off" %></div>
 
           <div><%= f.label :password_confirmation %><br />
             <%= f.password_field :password_confirmation, autocomplete: "off" %></div>
 
-          <div><%= f.label :current_password %> <span class="continue-label">(we need your current password to confirm your changes)</span><br />
+          <div><%= f.label :current_password %> <span class="continue-label">(to confirm your changes)</span><br />
             <%= f.password_field :current_password, autocomplete: "off" %></div>
 
           <div><%= f.submit "Save Changes" %></div>
