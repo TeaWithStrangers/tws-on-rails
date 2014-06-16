@@ -16,10 +16,10 @@ class CitiesController < ApplicationController
     end
   end
 
-  # GET /cities/1
-  # GET /cities/1.json
+  # GET /cities/:city_code
+  # GET /cities/:city_code.json
   def show
-    @city = City.find(params[:id])
+    @city = City.find_by_city_code(params[:id])
     respond_to do |format|
       format.html { render layout: !request.xhr? }
       format.json { render json: @city }
