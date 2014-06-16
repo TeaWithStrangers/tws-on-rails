@@ -4,14 +4,12 @@ describe Attendance do
 
   describe 'todo?' do
     it 'returns true when pending? is false' do
-      attendance = Attendance.new
-      attendance.stub(:pending?) { true }
+      attendance = create(:attendance)
       expect(attendance.todo?).to eq true
     end
 
     it 'returns false when pending? is false' do
-      attendance = Attendance.new
-      attendance.stub(:pending?) { false }
+      attendance = create(:attendance, :flake)
       expect(attendance.todo?).to eq false
     end
 
@@ -23,21 +21,18 @@ describe Attendance do
   end
 
   describe 'flake!' do
+    before(:each) do
+      @tt = create(:tea_time)
+    end
     it 'updates status to :flake' do
-      fake_tea = mock_model("TeaTime", {:spots_remaining? => true })
-
-      attendance = Attendance.new(tea_time:  fake_tea)
+      attendance = Attendance.new(tea_time: @tt)
 
       attendance.flake!
       expect(attendance.status).to eq "flake"
     end
 
     it 'saves the record' do
-      # TODO use Factory Girl to generate a valid Attendance
-      # so this test doesn't need to create an association
-      fake_tea = mock_model("TeaTime", {:spots_remaining? => true })
-
-      attendance = Attendance.new(tea_time:  fake_tea)
+      attendance = Attendance.new(tea_time: @tt)
       attendance.flake!
       expect(attendance.changed?).to eq false
     end
