@@ -4,6 +4,7 @@ class TeaTime < ActiveRecord::Base
   belongs_to :host, :class_name => 'User', :foreign_key => 'user_id'
   validates_presence_of :host, :start_time, :city, :duration
   has_many :attendances, dependent: :destroy
+  after_touch :clear_association_cache_wrapper
 
   attr_reader :local_time, :spots_remaining
 
@@ -73,4 +74,9 @@ class TeaTime < ActiveRecord::Base
   def todo?
     return !! followup_status != :sent && !attendances.select(&:todo?).empty?
   end
+
+  private
+    def clear_association_cache_wrapper
+      clear_association_cache
+    end
 end
