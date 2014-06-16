@@ -15,7 +15,7 @@
               .email-all= link_to "Email All", "mailto:#{tea_time.all_attendee_emails}"
           .controls
             %h6.left= link_to 'Edit details', edit_tea_time_path(tea_time)
-            %h6.right= link_to 'Cancel tea time', tea_time, :method => :delete, :data => { :confirm => 'Are you sure?' }
+            %h6.right= link_to 'Cancel tea time', tea_time, :method => :put, :data => { :confirm => 'Are you sure?' }
   - else
     %p
       You're not hosting any upcoming tea times! Let's change that.
