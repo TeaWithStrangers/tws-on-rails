@@ -5,6 +5,9 @@ gem 'rails', '4.1.0'
 
 gem 'pg'
 
+# Production monitoring
+gem 'newrelic_rpm'
+
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
