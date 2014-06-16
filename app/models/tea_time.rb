@@ -44,11 +44,24 @@ class TeaTime < ActiveRecord::Base
   end
 
   def cancel!
-    UserMailer.tea_time_cancellation(self)
-    attendances.map { |att|
-      att.status= :cancelled
-    }
-    update_attributes(start_time: DateTime.new(1900,1,1))
+    unless cancelled?
+      # Until we move mailers into something like DJ we run the risk of a failed
+      # email send blocking cancellation and ruining everything. If that happens
+      # I rather abort and return the Requesting thread than 500 error. This is
+      # a short-term fix
+      begin 
+        self.followup_status = :cancelled
+        self.save!
+        UserMailer.tea_time_cancellation(self)
+        attendances.map { |att|
+          att.status = :cancelled
+          att.save
+        }
+        return true
+      rescue Exception => e
+        return false
+      end
+    end
   end
 
   def ical
@@ -68,7 +81,7 @@ class TeaTime < ActiveRecord::Base
     end
   end
 
-  enum followup_status: [:na, :pending, :sent]
+  enum followup_status: [:na, :pending, :sent, :cancelled]
 
   def todo?
     return !! followup_status != :sent && !attendances.select(&:todo?).empty?
