@@ -1,8 +1,8 @@
-%h2.main Upcoming Tea Times
+%h2.main.upcoming.going Tea times
 - if !current_user.future_attendances.count.zero?
-  %ul
+  %ul.upcoming.going
     - current_user.future_attendances.each do |a|
-      %li= render partial: 'teatime_info', locals: {tea_time: a.tea_time, att: a, without_button: true}
+      %li.tea-time= render partial: 'teatime_info', locals: {tea_time: a.tea_time, att: a, without_button: true}
 - else
   %p 
     You're not scheduled for any tea times! Let's change that.

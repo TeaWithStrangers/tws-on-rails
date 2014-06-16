@@ -4,7 +4,7 @@ class TeaTime < ActiveRecord::Base
   belongs_to :host, :class_name => 'User', :foreign_key => 'user_id'
   validates_presence_of :host, :start_time, :city, :duration
   has_many :attendances, dependent: :destroy
-  
+
   attr_reader :local_time, :spots_remaining
 
   scope :past, -> { where("start_time <= ?", DateTime.now.midnight.utc) }
@@ -33,6 +33,10 @@ class TeaTime < ActiveRecord::Base
 
   def spots_remaining?
     spots_remaining > 0
+  end
+
+  def all_attendee_emails
+    attendees.map(&:email).join(',')
   end
 
   def attendees
@@ -68,7 +72,7 @@ class TeaTime < ActiveRecord::Base
       cal.event do |e|
         e.dtstart = start_time
         e.dtend  = (start_time + tt.duration.hours)
-        e.summary = "Tea Time with #{tt.host.name}"
+        e.summary = "Tea time with #{tt.host.name}"
         #FIXME: Come back to this with fresh eyes
         #e.organizer = "CN=#{tt.host.name}:MAILTO:#{tt.host.email}"
         e.location = tt.location

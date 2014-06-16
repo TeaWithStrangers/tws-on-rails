@@ -1,18 +1,22 @@
-%h2.main Your Upcoming Host Times
-%ul
-- if current_user.future_hosts
-  - current_user.future_hosts.each do |tea_time|
-    %li
-      = render partial: 'teatime_info', locals: {tea_time: tea_time, att: nil}
-      - if tea_time.cancelled? 
-        ='This event was cancelled.'
-      - else
-        = link_to 'Cancel Tea Time :(', cancel_tea_time_path(tea_time), {method: :put}
-        %h3.attendees Attendees:
-        %ul.attendees-list
-          - tea_time.attendees.each do |a|
-            %li= link_to a.name, "mailto:#{a.email}"
-- else
-  %p 
-    You're not hosting any upcoming tea times! Let's change that.
-    =link_to "Create a new tea time!", new_tea_time_path
+%h2.main.upcoming.host Hosting
+%ul.upcoming.host
+  - if current_user.future_hosts
+    - current_user.future_hosts.each do |tea_time|
+      %li.tea-time
+        = render partial: 'teatime_info', locals: {tea_time: tea_time, att: nil}
+        - if current_user.host?
+          .attendees-container
+            %h3.attendees Attendees
+            - tea_time.attendances.group_by(&:status).each do |k,v|
+              %ul.attendees-list{:class => "#{k}"}
+                %h4 #{k.capitalize}
+                - v.map(&:user).each do |a|
+                  %li.attendee-names= link_to a.name, "mailto:#{a.email}"
+              .email-all= link_to "Email All", "mailto:#{tea_time.all_attendee_emails}"
+          .controls
+            %h6.left= link_to 'Edit details', edit_tea_time_path(tea_time)
+            %h6.right= link_to 'Cancel tea time', tea_time, :method => :delete, :data => { :confirm => 'Are you sure?' }
+  - else
+    %p
+      You're not hosting any upcoming tea times! Let's change that.
+      =link_to "Create a new tea time!", new_tea_time_path
