@@ -35,7 +35,7 @@ class TeaTime < ActiveRecord::Base
       ft.gsub!(":00", "")
     }
 
-    return "#{date}, #{startT}-#{endT}#{meridian}"
+    "#{date}, #{startT}-#{endT}#{meridian}"
   end
 
   def spots_remaining
