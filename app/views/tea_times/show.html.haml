@@ -1,15 +1,16 @@
-- prefill = !!current_user
-%h2.admin-head
-  Sign up for tea time
-= form_for :tea_time, url: attendance_tea_time_path(@tea_time), html: {class: 'schedule-tea new_user'} do |f|
-  .form-body
-    %p.label Tea time details
-    = render partial: 'shared/tea_time_row', locals: {tea_time: @tea_time}
-    = f.label :name, "Your name is"
-    = f.text_field :name, value: prefill ? current_user.name : '', readonly: prefill, placeholder: 'Full Name'
-    = f.label :email, "You check email (and manage a calendar) at"
-    = f.email_field :email, value: prefill ? current_user.email : '', readonly: prefill,placeholder: 'Email Address'
-    .button-container
-      = link_to "Cancel", :back, class: 'cancel'
-      = f.submit 'Confirm', class: 'confirm'
-
+.container.user-form
+  = render partial: 'shared/nav_header'
+  - prefill = !!current_user
+  %h2.admin-head
+    Sign up for tea time
+  = form_for :tea_time, url: attendance_tea_time_path(@tea_time), html: {class: 'schedule-tea new_user'} do |f|
+    .form-body
+      = render partial: 'shared/tea_time_row', locals: {tea_time: @tea_time}
+      = f.label :name, "Your name is"
+      = f.text_field :name, value: prefill ? current_user.name : '', readonly: prefill, placeholder: 'Full Name'
+      = f.label :email, "You check email (and manage a calendar) at"
+      = f.email_field :email, value: prefill ? current_user.email : '', readonly: prefill,placeholder: 'Email Address'
+      .button-container
+        = f.submit 'Confirm', class: 'confirm'
+        = link_to "Nevermind", :back, class: 'cancel'
+        

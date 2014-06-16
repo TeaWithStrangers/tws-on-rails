@@ -12,6 +12,7 @@
       %h2= "Welcome home, #{current_user.name}!"
       .third.left
         = render partial: 'sidebar'
+      %hr
       .two-third.right
         = render partial: 'host_tea_time_info' if current_user.host?
         = render partial: 'user_tea_time_info'

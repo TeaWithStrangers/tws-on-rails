@@ -5,8 +5,6 @@ gem 'rails', '4.1.0'
 
 gem 'pg'
 
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
@@ -22,13 +20,15 @@ gem 'rails_12factor', group: :production
 gem 'turbolinks'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
+gem "active_model_serializers"
 
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring',        group: :development
-# Figaro makes it easy to set env variables without Foreman
-gem 'figaro', group: [:development, :test]
+gem 'mailcatcher',        group: :development
+gem 'maildown'
 
+# Figaro makes it easy to set env variables without Foreman
 #Calendars
 gem 'icalendar', '~> 2.0'
 gem 'time_zone_ext'
@@ -55,3 +55,11 @@ gem 'unicorn', group: :production
 
 # Use debugger
 gem 'debugger', group: [:development, :test]
+
+# Random debug tools
+group :development, :test do
+  gem 'pry-rails'
+  gem 'pry-debugger'
+  gem 'pry-stack_explorer'
+  gem 'rspec-rails', '~> 2.14.2'
+end

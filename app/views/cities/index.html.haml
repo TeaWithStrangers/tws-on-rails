@@ -5,12 +5,13 @@
       Let's get tea.
 .container.cities-page
   = render partial: 'shared/nav_header'
-  #cities.row
+  #cities.row.cities.mobilewide
     .wide
-      %h3.divider.with-sub
-        Where we are
-      %h4.divider-sub
-        So far, we're in the following cities!
+      .mobilepad
+        %h3.divider.with-sub
+          Where we are
+        %h4.divider-sub
+          So far, we're in the following cities!
       %ul.cities.multiple-hosts
         - @cities.each do |city|
           = render partial: 'shared/city_hosts_item', locals: {city: city}

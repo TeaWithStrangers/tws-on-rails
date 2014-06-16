@@ -11,7 +11,7 @@ url_for(controller: 'cities',
         only_path: false) %>.
 
 <% if @password %>
-Now, tea time is really cool. So cool that you might want to sign up for another one after your first, so you should know that when you want to sign up for another one, you can log in with <%= @user.email %> and this password — <%= @password %> — but change it to something easier to remember here: <%= url_for(controller: 'registrations', action: 'edit', only_path: false) %>.
+Now, tea time is really cool. So cool that you might want to sign up for another one after your first. To do that, log in with <%= @user.email %> and this password — <%= @password %> — but change it to something easier to remember here: <%= url_for(controller: 'registrations', action: 'edit', only_path: false) %>.
 <% end %>
 
 Super love,

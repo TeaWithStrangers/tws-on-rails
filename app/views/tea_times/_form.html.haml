@@ -2,11 +2,12 @@
   = label_tag :start_time
   = datetime_select :tea_time, :start_time
   = f.label :duration, 'Duration (in Hours)'
-  = f.number_field :duration
-  = f.label :location, 'Location ([Place Name], [Address, including cross street], [City])'
+  = f.number_field :duration, value: 2
+  = f.label :location, 'Location (Place name & address)'
   = f.text_field :location
   = f.label :city
-  = select_tag(:city, options_for_select(City.all.collect{ |p| [p.name, p.id] }, @tea_time.city.id), {:class => "city"})
+  .dropdown
+    = select_tag(:city, options_for_select(City.all.collect{ |p| [p.name, p.id] }, @tea_time.city.id), {:class => "city"})
 
   - if @tea_time.errors.any?
     #error_explanation
@@ -15,5 +16,9 @@
         - @tea_time.errors.full_messages.each do |msg|
           %li= msg
 
+  .actions 
+    .create-button
+      = f.submit 'Create Tea Time'
   .actions
-    = f.submit 'Create Tea Time'
+    .update-button
+      = f.submit 'Update Tea Time'

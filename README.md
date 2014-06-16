@@ -23,20 +23,18 @@ rake db:create
 # Load the schema
 rake db:schema:load
 
-# Create roles that Cancan can use in development
-rake db:dev:create_roles
+# Start mailcatcher in the background
+mailcatcher &
+
+# Start the server
+rails s
+
+# For prodution
+rake db:create_roles
+
+# For Development
+# Create some development data to play arond with
+# This includes creating roles
+# This will drop the database if it exists and create it again.
+rake db:seed_dev
 ```
-
-# Environment Var Setup
-
-We use [Figaro][1] for configuring our environment variables.
-
-You'll want to run `rails g figaro:install` and then add the following variables
-to your `config/application.yml` to get email working:
-
-* `GMAIL_USERNAME`: The username you use to log into GMail, domain included
-  (e.g. `gmail.com`)
-* `GMAIL_PASSWORD`: The password you use to log into GMail, domain included
-
-
-[1]:https://github.com/laserlemon/figaro
