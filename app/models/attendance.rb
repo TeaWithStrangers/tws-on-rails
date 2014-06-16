@@ -1,6 +1,6 @@
 class Attendance < ActiveRecord::Base
   belongs_to :user
-  belongs_to :tea_time
+  belongs_to :tea_time, touch: true
   enum :status => [:pending, :flake, :no_show, :present, :waiting_list, :cancelled]
   validates_presence_of :user, :tea_time, presence: true
   validates_uniqueness_of :user_id, scope: :tea_time_id
