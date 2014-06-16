@@ -24,7 +24,18 @@ class TeaTime < ActiveRecord::Base
   end
 
   def friendly_time
-    return "#{local_time.strftime("%a, %b %d, %Y,%l")}-#{(local_time+duration.hours).strftime("%-l%P")}"
+    start_t = start_time
+    end_t = (start_t+duration.hours)
+    date = start_t.strftime("%a, %b %d, %Y").strip
+    meridian = end_t.strftime("%P")
+
+    startT = start_t.strftime("%-l:%M")
+    endT = end_t.strftime("%-l:%M")
+    [startT, endT].each {|ft|
+      ft.gsub!(":00", "")
+    }
+
+    return "#{date}, #{startT}-#{endT}#{meridian}"
   end
 
   def spots_remaining
