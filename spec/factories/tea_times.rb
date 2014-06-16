@@ -9,6 +9,10 @@ FactoryGirl.define do
       start_time DateTime.now.midnight - 2.days
     end
 
+    trait :cancelled do
+      followup_status :cancelled
+    end
+
     factory :tt_with_attendees do
       ignore do
         attendee_count 3
