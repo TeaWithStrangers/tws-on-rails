@@ -1,7 +1,9 @@
-%h1 Editing Tea Time
-
-= render 'form'
-
-= link_to 'Show', @tea_time
-\|
-= link_to 'Back', tea_times_path
+.container.user-form.edit.dashboard
+  = render partial: 'shared/nav_header'
+  - prefill = !!current_user
+  .mobilepad.edit-tea-time
+    %h2.admin-head
+      Edit tea time details
+    = render 'form'
+    .controls
+      %h6.left= link_to 'Cancel tea time', @tea_time, :method => :delete, :data => { :confirm => 'Are you sure?' }
