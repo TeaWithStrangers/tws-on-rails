@@ -42,4 +42,8 @@ RSpec.configure do |config|
 
   # Include FactoryGirl in specs
   config.include FactoryGirl::Syntax::Methods
+
+  config.before(:all) do
+    load Rails.root + "db/seeds_test.rb"
+  end
 end
