@@ -1043,8 +1043,9 @@ a {
                     }
                   }
                   h4 {
-                    .fsII;
+                    .fs;
                     .bold;
+                    float: left;
                   }
                   &.pending {
                     h4 {
@@ -1184,73 +1185,96 @@ a {
         }
       }
     }
-    &.edit {
-      .two-third {
-        form.edit_user, form.new_tea_time {
-          div {
-            margin-bottom: 1em;
-          }
-          label,span.continue-label {
-            .fs;
-            .bold;
-          }
-          input, textarea, select {
-            width: 100%;
-            .fsII;
-            .regular;
-            padding: 10px;
-            border-radius: .35em;
-            border: 1px solid lighten(@gray, 15%);
-            margin-bottom: 10px;
-            color: @black;
-            &:active, &:focus {
-              outline: none;
-            }
-          }
-          input[name="commit"] {
-            .button(@green);
-          }
-          h3.edit-subheader {
-            .fsII;
-            .bold;
-            text-transform: uppercase;
-            padding-bottom: 5px;
-            margin-bottom: 15px;
-            border-bottom: 5px solid @red;
-            color: @red;
-            padding-top: 20px;
-            &.first {
-              padding-top: 0;
-            }
+    &.edit, &.edit .two-third {
+      form.edit_user, form.new_tea_time, form.edit_tea_time {
+        div {
+          margin-bottom: 1em;
+        }
+        label,span.continue-label {
+          .fs;
+          .bold;
+        }
+        input, textarea, select {
+          width: 100%;
+          .fsII;
+          .regular;
+          padding: 10px;
+          border-radius: .35em;
+          border: 1px solid lighten(@gray, 15%);
+          margin-bottom: 10px;
+          color: @black;
+          &:active, &:focus {
+            outline: none;
           }
         }
-        form.new_tea_time {
-          label {
-            display: block;
-            .fs;
-            margin-top: 20px;
-            .fs;
-            .bold;
+        input[name="commit"] {
+          .button(@green);
+        }
+        h3.edit-subheader {
+          .fsII;
+          .bold;
+          text-transform: uppercase;
+          padding-bottom: 5px;
+          margin-bottom: 15px;
+          border-bottom: 5px solid @red;
+          color: @red;
+          padding-top: 20px;
+          &.first {
+            padding-top: 0;
           }
-          [for="tea_time_duration"], #tea_time_duration {
-            display: none;
+        }
+      }
+      form.new_tea_time, form.edit_tea_time {
+        label {
+          display: block;
+          .fs;
+          margin-top: 20px;
+          .fs;
+          .bold;
+        }
+        [for="tea_time_duration"], #tea_time_duration {
+          display: none;
+        }
+        select {
+          width: auto;
+          &.city {
+            width: 100%;
           }
-          select {
-            width: auto;
-            &.city {
-              width: 100%;
-            }
-            &#tea_time_start_time_1i, 
-            &#tea_time_start_time_2i, 
-            &#tea_time_start_time_3i, 
-            &#tea_time_start_time_4i, 
-            &#tea_time_start_time_5i {
-              
-            }
+          &#tea_time_start_time_1i, 
+          &#tea_time_start_time_2i, 
+          &#tea_time_start_time_3i, 
+          &#tea_time_start_time_4i, 
+          &#tea_time_start_time_5i {
+            
           }
-          .actions {
-            margin-top: 20px;
-          }
+        }
+        .actions {
+          margin-top: 20px;
+        }
+      }
+    }
+    &.edit {
+      .actions {
+        .update-button {
+          display: block;
+        }
+        .create-button {
+          display: none;
+        }
+      }
+      .controls {
+        clear: both;
+        width: 100%;
+        overflow: auto;
+      }
+    }
+    &.edit .two-third {
+      .actions {
+        .update-button {
+          display: none;
+        }
+        .create-button {
+          display: block;
         }
       }
     }
@@ -1267,8 +1291,8 @@ a {
       margin-bottom: 10px;
       select {
         height: 100%;
-        width: 110%;
-        border: 0;
+        width: 110% !important;
+        border: 0 !important;
         border-radius: 0;
         -webkit-appearance: none;
         background: transparent;

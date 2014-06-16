@@ -16,5 +16,9 @@
         - @tea_time.errors.full_messages.each do |msg|
           %li= msg
 
+  .actions 
+    .create-button
+      = f.submit 'Create Tea Time'
   .actions
-    = f.submit 'Create Tea Time'
+    .update-button
+      = f.submit 'Update Tea Time'
