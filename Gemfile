@@ -65,4 +65,6 @@ group :development, :test do
   gem 'pry-debugger'
   gem 'pry-stack_explorer'
   gem 'rspec-rails', '~> 2.14.2'
+  gem 'factory_girl', '~>4.4'
+  gem 'factory_girl_rails'
 end

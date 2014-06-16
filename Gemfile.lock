@@ -77,6 +77,14 @@ GEM
     erubis (2.7.0)
     eventmachine (1.0.3)
     execjs (2.2.0)
+<<<<<<< HEAD
+=======
+    factory_girl (4.4.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.4.1)
+      factory_girl (~> 4.4.0)
+      railties (>= 3.0.0)
+>>>>>>> origin/factory-girl-and-friends
     haml (4.0.5)
       tilt
     haml-rails (0.5.3)
@@ -258,6 +266,8 @@ DEPENDENCIES
   delayed_job (~> 4.0.1)
   delayed_job_active_record (~> 4.0.1)
   devise (~> 3.2.4)
+  factory_girl (~> 4.4)
+  factory_girl_rails
   haml-rails (~> 0.5)
   icalendar (~> 2.0)
   jquery-rails
