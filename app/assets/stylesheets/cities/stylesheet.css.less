@@ -77,6 +77,51 @@
   font-style: normal;
 }
 
+@font-face {
+    font-family: 'MuseoSans-Rounded-Light';
+    src: asset-url('MuseoSans-Rounded-Light.eot');
+    src: asset-url('MuseoSans-Rounded-Light.eot?#iefix') format('embedded-opentype'),
+         asset-url('MuseoSans-Rounded-Light.woff') format('woff'),
+         asset-url('MuseoSans-Rounded-Light.ttf') format('truetype'),
+         asset-url('MuseoSans-Rounded-Light.svg#MuseoSans-Rounded-Light') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'MuseoSans-Rounded-Regular';
+    src: asset-url('MuseoSans-Rounded-Regular.eot');
+    src: asset-url('MuseoSans-Rounded-Regular.eot?#iefix') format('embedded-opentype'),
+         asset-url('MuseoSans-Rounded-Regular.woff') format('woff'),
+         asset-url('MuseoSans-Rounded-Regular.ttf') format('truetype'),
+         asset-url('MuseoSans-Rounded-Regular.svg#MuseoSans-Rounded-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'MuseoSans-Rounded-Semibold';
+    src: asset-url('MuseoSans-Rounded-Semibold.eot');
+    src: asset-url('MuseoSans-Rounded-Semibold.eot?#iefix') format('embedded-opentype'),
+         asset-url('MuseoSans-Rounded-Semibold.woff') format('woff'),
+         asset-url('MuseoSans-Rounded-Semibold.ttf') format('truetype'),
+         asset-url('MuseoSans-Rounded-Semibold.svg#MuseoSans-Rounded-Semibold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'MuseoSans-Rounded-Bold';
+    src: asset-url('MuseoSans-Rounded-Bold.eot');
+    src: asset-url('MuseoSans-Rounded-Bold.eot?#iefix') format('embedded-opentype'),
+         asset-url('MuseoSans-Rounded-Bold.woff') format('woff'),
+         asset-url('MuseoSans-Rounded-Bold.ttf') format('truetype'),
+         asset-url('MuseoSans-Rounded-Bold.svg#MuseoSans-Rounded-Bold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -212,6 +257,22 @@ h1, h2, h3, p, ul, li {
   font-family: 'ProximaNova-Regular', 'Helvetica Neue', Arial, sans-serif;
 }
 
+.museo-light {
+  font-family: 'MuseoSans-Rounded-Light', 'Helvetica Neue', Arial, sans-serif;
+}
+
+.museo-regular {
+  font-family: 'MuseoSans-Rounded-Regular', 'Helvetica Neue', Arial, sans-serif;
+}
+
+.museo-semibold {
+  font-family: 'MuseoSans-Rounded-Semibold', 'Helvetica Neue', Arial, sans-serif;
+}
+
+.museo-bold {
+  font-family: 'MuseoSans-Rounded-Bold', 'Helvetica Neue', Arial, sans-serif;
+}
+
 strong {
   .bold;
 }
@@ -287,7 +348,7 @@ a {
     height: 300px;
   }
   &.internproject {
-    background-image: asset-url('internproject.jpg');
+    background-image: asset-url('internproject-redo.jpg');
   }
   .blur-layer {
     position: absolute;
@@ -1298,6 +1359,14 @@ a {
         border-radius: 0;
         -webkit-appearance: none;
         background: transparent;
+      }
+    }
+  }
+  &.internproject {
+    p {
+      em.subheader {
+        .fsIII;
+        .museo-regular;
       }
     }
   }
