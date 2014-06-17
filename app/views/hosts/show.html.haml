@@ -8,7 +8,7 @@
 
 .container
   =content_for :header_logo do
-    = link_to @city.name, city_path(@city), :class => "city-name"
+    = link_to @city.name, city_path(@city), :class => "city-name #{@city.city_code}"
   = render partial: 'shared/nav_header'
   - if @city.hosts.count <= 1
     = render partial: 'one_of_one'
