@@ -1,0 +1,18 @@
+Hey <%= @user.name %>,
+
+Sorry to hear you won't be able to join <%= tea_time.host.name %> for tea, but it's cool! Just for confirmation, here are the details of the tea time you just canceled for:
+
+<%= render partial: "tea_time_info_nohost", locals: {tea_time: @tea_time} %>
+
+It'd be awesome if you were able to find another time that does work for you (with me or with any of the other awesome hosts) so be sure to check out the schedule here: <%=
+url_for(controller: 'cities',
+        action: 'schedule',
+        id: @user.home_city.city_code,
+        only_path: false) %>.
+
+Hope your day is going beautifully. If not, grab a bar of chocolate and watch this: https://www.youtube.com/watch?v=l-gQLqv9f4o. 
+
+Happy days! 
+<%= @attendance.tea_time.host.name %>
+
+P.S. In case you forgot your password, you can reset it with ease here: http://www.teawithstrangers.com/users/password/new.
