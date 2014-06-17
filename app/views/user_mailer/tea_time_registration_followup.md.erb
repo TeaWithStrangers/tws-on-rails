@@ -19,11 +19,7 @@ Tea time is a conversation between a few strangers pulled together by a host.
 
 In short, tea time is hugely about just being you and not thinking too hard about it all. It's a good thing :).
 
-Now come through and let's find a time that you can join for tea? <%=
-url_for(controller: 'cities',
-        action: 'schedule',
-        id: @user.home_city.city_code,
-        only_path: false) %>.
+Now come through and let's find a time that you can join for tea? <<%=url_for(controller: 'cities',action: 'schedule',id: @user.home_city.city_code,only_path: false) %>>.
 
 All good things,  
 Ankit, a host at TWS

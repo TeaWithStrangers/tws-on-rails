@@ -1,6 +1,6 @@
 Hey <%= @user.name %>,
 
-Sorry to hear you won't be able to join <%= tea_time.host.name %> for tea, but it's cool! Just for confirmation, here are the details of the tea time you just canceled for:
+Sorry to hear you won't be able to join for tea, but it's cool! Just for confirmation, here are the details of the tea time you just canceled for:
 
 <%= render partial: "tea_time_info_nohost", locals: {tea_time: @tea_time} %>
 
@@ -12,7 +12,7 @@ url_for(controller: 'cities',
 
 Hope your day is going beautifully. If not, grab a bar of chocolate and watch this: https://www.youtube.com/watch?v=l-gQLqv9f4o. 
 
-Happy days! 
+Happy days!  
 <%= @attendance.tea_time.host.name %>
 
 P.S. In case you forgot your password, you can reset it with ease here: http://www.teawithstrangers.com/users/password/new.
