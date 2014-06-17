@@ -31,4 +31,4 @@
       %li
         Maybe we become friends. Maybe not. That's cool too.
 -if @city.tea_times.future
-  = render partial: 'shared/tea_times', locals: {tea_times: @city.tea_times.where(start_time: (Date.today..(Date.today+2.weeks))).order(:start_time => :asc)} 
+  = render partial: 'shared/tea_times', locals: {tea_times: @city.tea_times.future_until(Date.today+2.weeks).na.order(:start_time => :asc)} 
