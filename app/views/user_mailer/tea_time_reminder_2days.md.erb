@@ -1,0 +1,13 @@
+Hey hey <%= @user.name %>!
+
+Just wanted to shoot you a quick reminder about your upcoming tea time! Here are the details:
+
+<%= render partial: "tea_time_info_nohost", locals: {tea_time: @attendance.tea_time} %>
+
+Super excited to see you!
+
+Cheers,
+<%= @attendance.tea_time.host.name %>
+
+P.S. If you need to cancel, it's super easy. Just log into the site, click 'Account' and 
+hit the 'Cancel' button. This way, your spot can be opened up for someone else.
