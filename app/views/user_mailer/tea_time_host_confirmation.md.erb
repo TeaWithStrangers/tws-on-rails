@@ -1,0 +1,10 @@
+Hey <%= @attendance.tea_time.host.name %>,
+
+This email is just to confirm the tea time you just created. I attached a calendar event here to make life a little bit easier.
+
+<%= render partial: "tea_time_info_nohost", locals: {tea_time: @attendance.tea_time} %>
+
+You're awesome.
+
+Super love,
+Ankit
