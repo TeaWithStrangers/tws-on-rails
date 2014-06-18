@@ -105,4 +105,26 @@ describe TeaTime do
       expect(tea_time.all_attendee_emails).to eq('foo@tws.com,bar@tws.com,baz@tws.com')
     end
   end
+
+  describe 'permissions' do
+    it 'should let admins edit any tea time' do
+      u = create(:user, :admin)
+      a = Ability.new(u)
+      tt = create(:tea_time)
+      
+      a.should be_able_to(:edit, tt)
+    end
+
+    it 'should let hosts edit only their own tea times' do
+      u = create(:user, :host)
+      u2 = create(:user, :host)
+      a = Ability.new(u)
+      a2 = Ability.new(u2)
+      tt = create(:tea_time, host: u)
+      
+      a.should be_able_to(:edit, tt)
+      a2.should_not be_able_to(:edit, tt)
+    end
+
+  end
 end
