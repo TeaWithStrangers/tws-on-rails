@@ -7,7 +7,7 @@ class Ability
     if user.role? :admin 
       can :manage , :all 
     elsif user.role? :host 
-      can :manage, TeaTime, :host_id => user.id
+      can :manage, TeaTime, :user_id => user.id
       can :create, TeaTime
       can :update, Attendance
       can :read, User
