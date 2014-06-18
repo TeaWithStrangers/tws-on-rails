@@ -5,7 +5,7 @@
       Hey #{@city.name}!
       %br
       Let's get tea.
-.container
+.container{:class => "#{@city.city_code}"}
   = render partial: 'shared/nav_header'
   = @city.hosts.empty? ? render(partial: 'city_no_hosts') : render(partial: 'city_has_hosts')
 =content_for(:footer) { render partial: 'shared/footer' }
