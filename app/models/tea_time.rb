@@ -4,32 +4,46 @@ class TeaTime < ActiveRecord::Base
   belongs_to :host, :class_name => 'User', :foreign_key => 'user_id'
   validates_presence_of :host, :start_time, :city, :duration
   has_many :attendances, dependent: :destroy
+
   after_touch :clear_association_cache_wrapper
 
   enum followup_status: [:na, :pending, :sent, :cancelled]
-
-  attr_reader :local_time, :spots_remaining
 
   TeaTime.followup_statuses.each do |k,v|
     scope k, -> { where(followup_status: v) }
   end
   scope :before, ->(date)  { where("start_time <= ?", date) }
   scope :after, ->(date)  { where("start_time >= ?", date) }
-  scope :past, -> { before(DateTime.now.midnight.utc) }
-  scope :future, -> { after(DateTime.now.midnight.utc) }
+  scope :past, -> { before(Time.now.midnight.utc) }
+  scope :future, -> { after(Time.now.midnight.utc) }
   scope :future_until, ->(until_time) { future.before(until_time) }
 
-  def local_time
-    #FIXME: Just use UTC times for now, fix down the line
-    start_time#.in_time_zone(city.timezone)
+  def start_time
+    use_city_timezone { super.in_time_zone }
   end
 
-  def start_time
-    read_attribute(:start_time) || DateTime.now
+  def start_time=(time)
+    if city
+      use_city_timezone do
+        fmt = "%m/%d/%y %H:%M"
+        time.strftime(fmt)
+        converted = Time.zone.strptime(time.strftime(fmt), fmt)
+        pp time.strftime(fmt), converted
+        write_attribute(:start_time, converted)
+      end
+    else
+      super
+    end
+  end
+
+  def city=(c)
+    s = self.start_time if city
+    super
+    self.start_time = s if s
   end
 
   def duration
-    read_attribute(:duration) || 2.0
+    read_attribute(:duration) || 2
   end
 
   def friendly_time
@@ -110,6 +124,10 @@ class TeaTime < ActiveRecord::Base
   end
 
   private
+    def use_city_timezone(&block)
+      Time.use_zone(city.timezone, &block)
+    end
+
     def clear_association_cache_wrapper
       clear_association_cache
     end
