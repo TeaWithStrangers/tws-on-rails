@@ -55,12 +55,12 @@ class TeaTime < ActiveRecord::Base
     spots_remaining > 0
   end
 
-  def all_attendee_emails
-    attendees.map(&:email).join(',')
+  def all_attendee_emails(filter: nil)
+    attendees(filter: filter).map(&:email).join(',')
   end
 
-  def attendees
-    attendances.map(&:user)
+  def attendees(filter: nil)
+    attendances.reject(&filter).map(&:user)
   end
 
   def cancel!
