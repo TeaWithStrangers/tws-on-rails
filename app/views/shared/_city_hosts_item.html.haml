@@ -1,5 +1,5 @@
 - host_count = city.hosts.count
-%li
+%li{:class => "#{city.city_code}"}
   .city-bg
     %img.city-background-image{src:city.header_bg.url}
     %a.background-link{href:city_path(city)}
