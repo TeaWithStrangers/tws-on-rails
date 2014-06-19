@@ -2,7 +2,8 @@ class City < ActiveRecord::Base
   validates_uniqueness_of :city_code
   validates_presence_of :city_code, :timezone
   before_save :upcase_code
-  has_attached_file :header_bg, default_url: "http://placecorgi.com/1280"
+  has_attached_file :header_bg, styles: {banner: '1280x', medium: '750x>', small: '350x>'},
+                                         default_url: "http://placecorgi.com/1280"
   validates_attachment_content_type :header_bg, :content_type => /\Aimage\/.*\Z/
   enum brew_status: { cold_water: 0, warming_up: 1, fully_brewed: 2, hidden: 3}
   has_many :tea_times
