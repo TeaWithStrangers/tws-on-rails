@@ -1,7 +1,7 @@
 require 'spec_helper.rb'
 
 describe TeaTime do
-  describe 'persistence' do
+  describe '.start_time' do
     before(:each) do
       @city_pst = create(:city)
       @city_est = create(:city, timezone: "Eastern Time (US & Canada)")
@@ -31,11 +31,16 @@ describe TeaTime do
       expect(tt.start_time.utc).to eq(Time.utc(2014,1,1,21))
     end
 
-    it 'should adjust to maintain the same *local* time if switched between timezones/cities' do
+    it 'should not adjust to maintain the same *local* time if switched between timezones/cities' do
       tt = create(:tea_time, city: @city_est, start_time: Time.utc(2014,1,1,16))
       expect(tt.start_time.utc).to eq Time.utc(2014,1,1,21)
       tt.city = @city_pst
-      expect(tt.start_time.utc).to eq Time.utc(2014,1,2)
+      expect(tt.start_time.utc).to eq Time.utc(2014,1,1, 21)
+    end
+
+    it 'should allow access when city is nil' do
+      tt = TeaTime.new(start_time: Time.utc(2014,1,1))
+      expect(tt.start_time).not_to eq(nil)
     end
   end
 

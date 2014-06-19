@@ -19,27 +19,15 @@ class TeaTime < ActiveRecord::Base
   scope :future_until, ->(until_time) { future.before(until_time) }
 
   def start_time
-    use_city_timezone { super.in_time_zone }
+    return use_city_timezone { super.in_time_zone if super } || Time.now
   end
 
   def start_time=(time)
     if city
-      use_city_timezone do
-        fmt = "%m/%d/%y %H:%M"
-        time.strftime(fmt)
-        converted = Time.zone.strptime(time.strftime(fmt), fmt)
-        pp time.strftime(fmt), converted
-        write_attribute(:start_time, converted)
-      end
+      write_attribute(:start_time, reparse_time_in_tz(time))
     else
       super
     end
-  end
-
-  def city=(c)
-    s = self.start_time if city
-    super
-    self.start_time = s if s
   end
 
   def duration
@@ -125,7 +113,19 @@ class TeaTime < ActiveRecord::Base
 
   private
     def use_city_timezone(&block)
-      Time.use_zone(city.timezone, &block)
+      unless city.nil?
+        Time.use_zone(city.timezone, &block)
+      else
+        block.call
+      end
+    end
+
+    def reparse_time_in_tz(time)
+      use_city_timezone do
+        fmt = "%Y-%m-%d %H:%M" 
+        time.strftime(fmt)
+        Time.zone.parse(time.strftime(fmt))
+      end
     end
 
     def clear_association_cache_wrapper
