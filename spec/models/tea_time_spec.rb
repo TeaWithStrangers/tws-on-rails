@@ -51,11 +51,36 @@ describe TeaTime do
   end
 
   describe '.attendees' do
+    before(:all) do
+      @tea_time = create(:tt_with_attendees)
+      @att_flake = create(:attendance, :flake, tea_time: @tea_time)
+    end
+
     it 'should return the User objects of attendees' do
-      tea_time = create(:tt_with_attendees)
-      expect(tea_time.attendees.count).to eq(3)
+      expect(@tea_time.attendees.count).to eq(4)
+    end
+
+    it 'should remove items matching the given filter proc' do
+      expect(@tea_time.attendees(filter: ->(a) { a.flake? })).not_to include(@att_flake.user)
+    end 
+
+    describe '.all_attendee_emails' do
+      it 'should concatenate email addresses of attendees' do
+        tea_time = TeaTime.new
+        tea_time.stub(attendees: [
+          mock_model('User', email: 'foo@tws.com', status: 'pending'),
+          mock_model('User', email: 'bar@tws.com', status: 'pending'),
+          mock_model('User', email: 'baz@tws.com', status: 'pending'),
+        ])
+        expect(tea_time.all_attendee_emails).to eq('foo@tws.com,bar@tws.com,baz@tws.com')
+      end
+
+      it 'should exclude items matching a given filter' do
+        expect(@tea_time.all_attendee_emails(filter: :flake?)).not_to include(@att_flake.user.email)
+      end
     end
   end
+
   describe '.spots_remaining?' do
     it 'should return true if fewer than MAX_ATTENDEES are registered' do
       tea_time = create(:tt_with_attendees)
@@ -94,18 +119,6 @@ describe TeaTime do
     end
   end
 
-  describe 'all_attendee_emails' do
-    it 'should concatenate email addresses of attendees' do
-      tea_time = TeaTime.new
-      tea_time.stub(attendees: [
-        mock_model('User', email: 'foo@tws.com'),
-        mock_model('User', email: 'bar@tws.com'),
-        mock_model('User', email: 'baz@tws.com'),
-      ])
-      expect(tea_time.all_attendee_emails).to eq('foo@tws.com,bar@tws.com,baz@tws.com')
-    end
-  end
-
   describe 'permissions' do
     it 'should let admins edit any tea time' do
       u = create(:user, :admin)
@@ -125,6 +138,5 @@ describe TeaTime do
       a.should be_able_to(:edit, tt)
       a2.should_not be_able_to(:edit, tt)
     end
-
   end
 end
