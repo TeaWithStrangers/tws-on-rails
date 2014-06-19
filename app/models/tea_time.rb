@@ -54,13 +54,17 @@ class TeaTime < ActiveRecord::Base
   def spots_remaining?
     spots_remaining > 0
   end
-
-  def all_attendee_emails
-    attendees.map(&:email).join(',')
+  
+  #Attendees takes an optional single argument lambda via the :filter keyword arg
+  # that is passed to reject. Any items for which the Proc returns true are
+  # excluded from the returned list of attendees.
+  def attendees(filter: nil)
+    attendances.reject(&filter).map(&:user)
   end
-
-  def attendees
-    attendances.map(&:user)
+  
+  #Takes :filter, same as attendees
+  def all_attendee_emails(filter: nil)
+    attendees(filter: filter).map(&:email).join(',')
   end
 
   def cancel!
