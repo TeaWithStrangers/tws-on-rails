@@ -47,11 +47,13 @@
               = render partial: 'shared/signup', locals: {dropdown: true}
             %li
               %h4
-                Apply to be a host
+                Nominate yourself or a friend to be a host
               %p
                 A good host is cool with asking questions, is pretty generous, and can make decisions on the fly. They have massive hearts and reflect plentifully (even if their reflections don't turn into blog posts).
               .host-material
-                = button_to "Apply to Host", "https://docs.google.com/forms/d/1GNJ0jQFFbwC_UsgPKwEfLjkSSZHsLPH-1O0JB4x7tAM/viewform", :method => :get
+                = button_to "Nominate a Host*", "https://docs.google.com/forms/d/1GNJ0jQFFbwC_UsgPKwEfLjkSSZHsLPH-1O0JB4x7tAM/viewform", :method => :get
+              %p.small
+                *All potential hosts should go to at least one tea time. Feel free to apply before that tea time happens, but this will need to happen before you start hosting.
         .narrow
           %p
             Until July 4th or so, tea times will be available to interns the same way it is to everyone else in SF (i.e. interns and non-interns alike at tea time.) In that time, we'll be getting some interns ready to become hosts themselves, and from early July, we'll be having regular intern-only tea times for the rest of the summer.

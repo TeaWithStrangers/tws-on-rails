@@ -348,7 +348,7 @@ a {
     height: 300px;
   }
   &.internproject {
-    background-image: asset-url('internproject-redo.jpg');
+    background-image: asset-url('internproject-redo.jpg') !important;
   }
   .blur-layer {
     position: absolute;
@@ -462,6 +462,7 @@ a {
     overflow: auto;
     padding: 0 20px;
     .host-material {
+      margin-bottom: 2em;
       input[type="submit"] {
         text-align: center;
         .button(@red);
@@ -469,6 +470,9 @@ a {
         display: block;
         width: 100%;
       }
+    }
+    p.small {
+      .fs;
     }
     .alert-box {
       border-radius: 10px;
@@ -1887,6 +1891,8 @@ form.schedule-tea {
     .landscape-text h1 {
       top: 50%;
       .fsV;
+      font-size: 3em;
+      padding: .25em;
     }
   }
   .container {
