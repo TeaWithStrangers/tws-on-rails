@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140622031319) do
+ActiveRecord::Schema.define(version: 20140622181052) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,10 +38,17 @@ ActiveRecord::Schema.define(version: 20140622031319) do
     t.string   "header_bg_content_type"
     t.integer  "header_bg_file_size"
     t.datetime "header_bg_updated_at"
-    t.integer  "proxy_city_id"
   end
 
   add_index "cities", ["city_code"], name: "city_code_idx", unique: true, using: :btree
+
+  create_table "proxy_cities", force: true do |t|
+    t.integer "city_id"
+    t.integer "proxy_city_id"
+  end
+
+  add_index "proxy_cities", ["city_id", "proxy_city_id"], name: "index_proxy_cities_on_city_id_and_proxy_city_id", unique: true, using: :btree
+  add_index "proxy_cities", ["proxy_city_id", "city_id"], name: "index_proxy_cities_on_proxy_city_id_and_city_id", unique: true, using: :btree
 
   create_table "roles", force: true do |t|
     t.string   "name"
