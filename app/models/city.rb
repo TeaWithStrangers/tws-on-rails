@@ -21,7 +21,7 @@ class City < ActiveRecord::Base
 
   def hosts
     hosts = proxy_cities.inject([]) {|lst, c| lst + c.hosts}
-    hosts + User.hosts.where(home_city: self)
+    User.hosts.where(home_city: [self] + proxy_cities)
   end
 
   def timezone=(tz)
@@ -38,8 +38,7 @@ class City < ActiveRecord::Base
   end
 
   def tea_times
-    tts = proxy_cities.inject([]) {|lst, c| lst + c.tea_times}
-    tts + super
+    TeaTime.where(city: [self] + proxy_cities)
   end
 
   private
