@@ -4,9 +4,11 @@ class City < ActiveRecord::Base
   before_save :upcase_code
   has_attached_file :header_bg, default_url: "http://placecorgi.com/1280"
   validates_attachment_content_type :header_bg, :content_type => /\Aimage\/.*\Z/
-  enum brew_status: { :cold_water => 0, :warming_up => 1, :fully_brewed => 2}
+  enum brew_status: { cold_water: 0, warming_up: 1, fully_brewed: 2, hidden: 3}
   has_many :tea_times
   has_many :users, foreign_key: 'home_city_id'
+
+  default_scope { where.not(brew_status: 3) }
 
   def hosts
     User.hosts.where(home_city: self)
