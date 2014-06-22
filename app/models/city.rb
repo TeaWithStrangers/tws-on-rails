@@ -8,7 +8,8 @@ class City < ActiveRecord::Base
   has_many :tea_times
   has_many :users, foreign_key: 'home_city_id'
 
-  default_scope { where.not(brew_status: 3) }
+  default_scope { where.not(brew_status: brew_statuses[:hidden]) }
+  scope :hidden, ->() { unscoped.where(brew_status: brew_statuses[:hidden]) }
 
   def hosts
     User.hosts.where(home_city: self)
