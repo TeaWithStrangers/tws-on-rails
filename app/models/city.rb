@@ -6,15 +6,22 @@ class City < ActiveRecord::Base
   validates_attachment_content_type :header_bg, :content_type => /\Aimage\/.*\Z/
   enum brew_status: { cold_water: 0, warming_up: 1, fully_brewed: 2, hidden: 3}
   has_many :tea_times
-  has_one :proxy_city, foreign_key: :proxy_city_id, class: City
-  validate :proxy_city_not_self
   has_many :users, foreign_key: 'home_city_id'
 
-  default_scope { where.not(brew_status: brew_statuses[:hidden]) }
-  scope :hidden, ->() { unscoped.where(brew_status: brew_statuses[:hidden]) }
+  has_and_belongs_to_many :proxy_cities,
+    class_name: 'City',
+    join_table: :proxy_cities,
+    foreign_key: :city_id,
+    association_foreign_key: :proxy_city_id
+
+  validate :proxy_city_not_self
+
+  scope :visible, -> { where.not(brew_status: brew_statuses[:hidden]) }
+  scope :hidden, -> { where(brew_status: brew_statuses[:hidden]) }
 
   def hosts
-    User.hosts.where(home_city: self)
+    hosts = proxy_cities.inject([]) {|lst, c| lst + c.hosts}
+    hosts + User.hosts.where(home_city: self)
   end
 
   def timezone=(tz)
@@ -31,7 +38,7 @@ class City < ActiveRecord::Base
   end
 
   def tea_times
-    tts = (proxy_city.tea_times if proxy_city) || []
+    tts = proxy_cities.inject([]) {|lst, c| lst + c.tea_times}
     tts + super
   end
 
@@ -43,7 +50,9 @@ class City < ActiveRecord::Base
     # Having self as proxy creates an infinite chain of queries when
     # attempting to resolve tea times for the city.
     def proxy_city_not_self
-      errors.add(:proxy_city) if (proxy_city && proxy_city.id == self.id)
+      proxy_cities.each do |proxy_city|
+        errors.add(:proxy_cities) if proxy_city.id == self.id
+      end
     end
 
   class << self

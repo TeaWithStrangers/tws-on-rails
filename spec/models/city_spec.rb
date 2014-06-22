@@ -9,13 +9,15 @@ describe City do
     end
 
     describe '#default_scope' do
-      it 'should exclude hidden locations' do
-        expect(City.all).to include(@city, @warm)
-        expect(City.all).not_to include(@hidden)
+      it 'should include hidden locations' do
+        expect(City.all).to include(@city, @warm, @hidden)
       end
+    end
 
-      it 'should include hidden locations when unscoped' do
-        expect(City.unscoped.all).to include(@city, @warm, @hidden)
+    describe '#visible' do
+      it 'should not include hidden locations' do
+        expect(City.visible).to include(@city, @warm)
+        expect(City.visible).not_to include(@hidden)
       end
     end
 
@@ -28,7 +30,7 @@ describe City do
   end
   
   describe '#for_code' do
-    it 'should look for a city, ignoring default_scope' do
+    it 'should find a city regardless of status' do
       city = create(:city, :hidden, city_code: 'hidden')
       expect(City.for_code('hidden')).to eq(city)
     end
@@ -38,27 +40,43 @@ describe City do
     it 'should not be able to save if self is proxy target' do
       city = create(:city)
 
-      city.proxy_city = city
+      city.proxy_cities << city
       expect(city.save).to eq(false)
       expect{ city.save! }.to raise_exception
     end
   end
 
 
-  describe '.tea_times' do
+  context 'proxy_cities' do
     before(:each) do
       @second_city = create(:city)
+      @third_city = create(:city)
       create_list(:tea_time, 3, city: @second_city)
-      @city = create(:city, proxy_city: @second_city)
+      create_list(:tea_time, 3, city: @third_city)
+      @city = create(:city, proxy_cities: [@second_city, @third_city])
       @tt = create(:tea_time, city: @city)
+      @tt_3rd = create(:tea_time, city: @third_city)
     end
 
-    it 'should include tea times associated for that city' do
-      expect(@city.tea_times).to include(@tt)
+    describe '.hosts' do
+      it 'should include hosts for that city' do
+        host = create(:user, :host, home_city: @city)
+        expect(@city.hosts).to include(host)
     end
 
-    it 'should include tea times associated for that city AND the proxy city if specified' do
-      expect(@city.tea_times).to include(*@second_city.tea_times, @tt)
+    it 'should include hosts for proxy cities' do
+      expect(@city.hosts).to include(*@second_city.hosts, *@third_city.hosts)
+    end
+  end
+
+    describe '.tea_times' do
+      it 'should include tea times associated for that city' do
+        expect(@city.tea_times).to include(@tt)
+      end
+
+      it 'should include tea times associated for that city AND the proxy cities if specified' do
+        expect(@city.tea_times).to include(*@second_city.tea_times, @tt, *@third_city.tea_times)
+      end
     end
   end
 end
