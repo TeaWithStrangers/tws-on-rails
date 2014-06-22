@@ -20,6 +20,7 @@ class City < ActiveRecord::Base
   scope :hidden, -> { where(brew_status: brew_statuses[:hidden]) }
 
   def hosts
+    hosts = proxy_cities.inject([]) {|lst, c| lst + c.hosts}
     hosts + User.hosts.where(home_city: self)
   end
 

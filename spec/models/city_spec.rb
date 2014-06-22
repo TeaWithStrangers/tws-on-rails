@@ -47,7 +47,7 @@ describe City do
   end
 
 
-  describe '.tea_times' do
+  context 'proxy_cities' do
     before(:each) do
       @second_city = create(:city)
       @third_city = create(:city)
@@ -58,12 +58,25 @@ describe City do
       @tt_3rd = create(:tea_time, city: @third_city)
     end
 
-    it 'should include tea times associated for that city' do
-      expect(@city.tea_times).to include(@tt)
+    describe '.hosts' do
+      it 'should include hosts for that city' do
+        host = create(:user, :host, home_city: @city)
+        expect(@city.hosts).to include(host)
     end
 
-    it 'should include tea times associated for that city AND the proxy cities if specified' do
-      expect(@city.tea_times).to include(*@second_city.tea_times, @tt, *@third_city.tea_times)
+    it 'should include hosts for proxy cities' do
+      expect(@city.hosts).to include(*@second_city.hosts, *@third_city.hosts)
+    end
+  end
+
+    describe '.tea_times' do
+      it 'should include tea times associated for that city' do
+        expect(@city.tea_times).to include(@tt)
+      end
+
+      it 'should include tea times associated for that city AND the proxy cities if specified' do
+        expect(@city.tea_times).to include(*@second_city.tea_times, @tt, *@third_city.tea_times)
+      end
     end
   end
 end
