@@ -26,6 +26,13 @@ describe City do
       end
     end
   end
+  
+  describe '#for_code' do
+    it 'should look for a city, ignoring default_scope' do
+      city = create(:city, :hidden, city_code: 'hidden')
+      expect(City.for_code('hidden')).to eq(city)
+    end
+  end
 
   describe '.proxy_city=' do
     it 'should not be able to save if self is proxy target' do
