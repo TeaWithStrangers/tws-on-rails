@@ -6,6 +6,8 @@ class City < ActiveRecord::Base
   validates_attachment_content_type :header_bg, :content_type => /\Aimage\/.*\Z/
   enum brew_status: { cold_water: 0, warming_up: 1, fully_brewed: 2, hidden: 3}
   has_many :tea_times
+  has_one :proxy_city, foreign_key: :proxy_city_id, class: City
+  validate :proxy_city_not_self
   has_many :users, foreign_key: 'home_city_id'
 
   default_scope { where.not(brew_status: brew_statuses[:hidden]) }
@@ -28,9 +30,20 @@ class City < ActiveRecord::Base
     city_code
   end
 
+  def tea_times
+    tts = (proxy_city.tea_times if proxy_city) || []
+    tts + super
+  end
+
   private
     def upcase_code
       write_attribute(:city_code, read_attribute(:city_code).upcase)
+    end
+
+    # Having self as proxy creates an infinite chain of queries when
+    # attempting to resolve tea times for the city.
+    def proxy_city_not_self
+      errors.add(:proxy_city) if (proxy_city && proxy_city.id == self.id)
     end
 
   class << self
