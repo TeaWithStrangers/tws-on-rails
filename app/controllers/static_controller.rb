@@ -1,6 +1,6 @@
 class StaticController < ApplicationController
   def index
-    @cities = City.all
+    @cities = City.visible
     @cities_by_host  = 
       #TODO: I had standards once
       {single_host: [],
