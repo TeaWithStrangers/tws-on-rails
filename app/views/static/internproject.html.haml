@@ -44,7 +44,7 @@
                 Join for tea time
               %p
                 Tea time is a conversation fueled by the stories, questions, and listening of a few strangers and a super host.
-              = render partial: 'shared/signup', locals: {dropdown: true}
+              = render partial: 'shared/signup', locals: {city: City.for_code('internproject'), dropdown: false}
             %li
               %h4
                 Nominate yourself or a friend to be a host
