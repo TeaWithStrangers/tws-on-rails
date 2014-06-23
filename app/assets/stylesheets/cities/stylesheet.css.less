@@ -516,7 +516,7 @@ a {
         }
       }
       &.action {
-        ul {
+        ul.two-things {
           overflow: hidden;
           text-align: center;
           counter-reset: my-badass-counter;
@@ -791,9 +791,13 @@ a {
     }
     .third {
       width: 100%/3;
-      float: left;
       &.left {
         padding-right: 2%;
+        float: left;
+      }
+      &.right {
+        padding-left: 2%;
+        float: right;
       }
       h3 {
         .bold;
@@ -854,7 +858,10 @@ a {
     }
     .two-third {
       width: 200%/3;
-      float: left;
+      &.left {
+        padding-right: 2%;
+        float: left;
+      }
       &.right {
         padding-left: 2%;
         float: right;
@@ -939,7 +946,7 @@ a {
         }
       }
     }
-    em.starter {
+    .starter, em.starter {
       .bold;
       .fsIV;
       padding-right: 5px;
@@ -1410,6 +1417,39 @@ a {
       }
     }
   }
+  &.about {
+    h2.starter {
+      margin-bottom: 1em;
+    }
+    .two-third {
+      &.left {
+        // border-right: 1px solid @lightred;
+      }
+      h3.sectionhead {
+        text-align: left;
+      }
+    }
+    .third {
+      &.right {
+        padding-left: 0;
+      }
+    }
+    ul {
+      &.about-list {
+        margin-top: 1em;
+        margin-left: -1px;
+        li {
+          padding: .5em;
+          border-radius: 0 .25em .25em 0;
+          &.active {
+            border: 1px solid @lightred;
+            border-left: none;
+            background: @background;
+          }
+        }
+      }
+    }
+  }
   &.internproject {
     p.subheader {
       .fsII;
@@ -1428,6 +1468,9 @@ a {
           line-height: 1.375em;
           margin-bottom: .25em;
         }
+      }
+      .narrow {
+        margin-bottom: 2em;
       }
       .wraparound {
         width: auto;
@@ -1460,6 +1503,49 @@ a {
               margin-bottom: 2em;
             }
           }
+          &.about {
+            bottom: auto;
+            hr {
+              margin: 0;
+              width: 100%;
+              border: none;
+              border-top: 1px solid @lightred;
+              top: 1em;
+              position: relative;
+            }
+            h3 {
+              bottom: auto;
+              margin-bottom: 2em;
+            }
+            ul {
+              overflow: hidden;
+              li.third {
+                width: 33%;
+                padding: 0 2%;
+                float: left;
+                text-align: left;
+                margin-bottom: 0;
+                &:first-child {
+                  padding-right: 2%;
+                  padding-left: 0;
+                }
+                &:last-child {
+                  padding-left: 2%;
+                  padding-right: 0;
+                }
+                h4 {
+                  .fs;
+                  .bold;
+                  color: @red;
+                  text-transform: uppercase;
+                  margin-bottom: .5em;
+                }
+                p {
+                  .fs;
+                }
+              }
+            }
+          }
         }
       }
     }
@@ -1486,33 +1572,39 @@ a {
     }
   }
 }
-form.new_user {
-  overflow: auto;
-  -webkit-font-smoothing: antialiased !important;
-  input, select {
-    width: 100%;
-    clear: both;
-    .fsII;
-    .regular;
-    padding: 10px;
-    border-radius: .35em;
-    border: 1px solid lighten(@gray, 15%);
-    margin-bottom: 10px;
-    color: @black;
-    &:active, &:focus {
-      outline: none;
+form {
+  &.new_user, &.edit_city {
+    overflow: auto;
+    -webkit-font-smoothing: antialiased !important;
+    input, select, textarea {
+      width: 100%;
+      clear: both;
+      .fsII;
+      .regular;
+      padding: 10px;
+      border-radius: .35em;
+      border: 1px solid lighten(@gray, 15%);
+      margin-bottom: 10px;
+      color: @black;
+      &:active, &:focus {
+        outline: none;
+      }
+      &[type="submit"] {
+        .button(@red);
+        margin-bottom: 25px;
+        padding: .25em;
+      }
     }
-    &[type="submit"] {
-      .button(@red);
-      margin-bottom: 25px;
-      padding: .25em;
+    label {
+      .fs;
+      .bold;
     }
-  }
-  h6.footnote {
-    .fs;
-    .bold;
-    text-transform: uppercase;
-    color: @red;
+    h6.footnote {
+      .fs;
+      .bold;
+      text-transform: uppercase;
+      color: @red;
+    }
   }
 }
 

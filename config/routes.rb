@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get '/stories' => 'static#stories', :as => :stories
   get '/questions' => 'static#questions', :as => :questions
   get '/hosting' => 'static#hosting', :as => :hosting
+  get '/about' => 'static#about', :as => :about
   get '/internproject' => 'static#internproject', :as => :internproject
 
 
