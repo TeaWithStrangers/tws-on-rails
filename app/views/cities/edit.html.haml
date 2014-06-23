@@ -1,7 +1,8 @@
-%h1 Editing city
-
-= render 'form'
-
-= link_to 'Show', @city
-\|
-= link_to 'Back', cities_path
+.container.user-form.admin
+  = render partial: 'shared/nav_header'
+  .mobilepad
+    %h2.admin-head Editing City
+    = render 'form'
+    = link_to 'Show', @city
+    \|
+    = link_to 'Back', cities_path
