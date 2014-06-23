@@ -12,22 +12,6 @@
       %p
         %em.starter 
           Thousands of us are here for a summer. Between hackathons and picnics, let's sit for a conversation.
-      / .third.left
-      /   .prompt
-      /     %h3
-      /       A host?
-      /     %p
-      /       Hosts bring the conversations together by killing awkwardness, asking good questions, and keeping the environment warm.
-      /   .prompt
-      /     %h3
-      /       Strangers?
-      /     %p
-      /       You won't know who will be there before you arrive. Except the host. You'll know the host.
-      /   .prompt
-      /     %h3
-      /       Why?
-      /     %p
-      /       Having meaningful conversations is good for the soul. Swag++ if you're meeting new people while you're at it.
       .wraparound
         .narrow
           %p
@@ -38,7 +22,7 @@
             Maybe we even hack together or see each other at work. But let's take a second to share stories and understand each other at tea time.
         .do-it
           %h3 So here's what we gotta do:
-          %ul
+          %ul.two-things
             %li
               %h4
                 Join for tea time
@@ -57,31 +41,29 @@
         .narrow
           %p
             Until July 4th or so, tea times will be available to interns the same way it is to everyone else in SF (i.e. interns and non-interns alike at tea time.) In that time, we'll be getting some interns ready to become hosts themselves, and from early July, we'll be having regular intern-only tea times for the rest of the summer.
-      / %p.subheader
-      /   In the last few months, thousands in SF have already sat for tea, but with all of you flowing into the Bay Area this summer, we knew that there needed to be better, more regular ways to connect meaningfully. That's why The Intern Project and Tea With Strangers are working together to make tea time happen for you guys specifically.
-      / %p.subheader
-      / We follow each other on twitter. We like each other's projects on
-      / %a{href:"https://www.facebook.com/groups/1378139645766413/"} the facebook group.
-      / Maybe we even hack together or see each other at work. But let's take a second to share stories and understand each other at tea time.
-      
-  / .row
-  /   .wide
-  /     %h3.sectionhead Before we make this happen
-  /   .narrow
-  /     .alert-box
-  /       %h1 We need some hosts
-  /       .body
-  /         %p
-  /           Hosts pull tea time together and make sure the conversations run a little bit deeper than the weather. They ask good questions. They have massive hearts, reflect plentifully (even if their reflections don't turn into blog posts), smile a lot, and they know how to make an environment warm. 
-  /         %p 
-  /           If that sounds like you or someone you know, nominate yourself or your pal and let's get this moving.
-  /         .host-material
-  /           = link_to "Apply to Host", "https://docs.google.com/forms/d/1GNJ0jQFFbwC_UsgPKwEfLjkSSZHsLPH-1O0JB4x7tAM/viewform?usp=send_form"
-  / .row
-  /   .wide
-  /     %h3.sectionhead Sign up to join for tea time
-  /   .narrow
-  /     %p
-  /       Right now, we're prioritizing developing a group of hosts to make sure tea time is consistently dope. If you're down to join once we're a go (early July), sign up here.
-  /     = render partial: 'shared/signup', locals: {dropdown: true}
+        .do-it.about
+          %hr
+          %h3 Tea With Strangers?
+          %ul
+            %li.third
+              %h4 Origin
+              %p
+                I started Tea With Strangers as a project six weeks before graduating from UPenn
+                %a{href:"http://tea.byankit.com/penn"} with this website. 
+                Over 200 people took me up on the offer. Every day til graduation, I hosted 3+ hour groups of 6 to sit for a conversation that became tea time. Then I brought it to the Bay Area to see if it would catch on here.
+            %li.third
+              %h4 Present
+              %p
+                Sitting with close to 1000 people in the last year made it apparent that good conversations mattered, but it was hard to guarantee goodness. But I realized that a host could create the space to make that a non-issue.
+            %li.third
+              %h4 Contact
+              %p
+                %a{href:"https://twitter.com/alexeymk"} Alexey,
+                %a{href:"https://twitter.com/theAlexPoon"} Alex,
+                %a{href:"https://twitter.com/nickbarnwell"} Nick,
+                and 
+                %a{href:"https://twitter.com/ankitshah"} Ankit (me) 
+                are making this happen.
+              %p
+                %a{href:"http://facebook.com/teawithstrangers"} Tea With Strangers on facebook
 =content_for(:footer) { render partial: 'shared/footer' }
