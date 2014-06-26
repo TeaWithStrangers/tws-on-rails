@@ -2035,7 +2035,7 @@ form.schedule-tea {
     }
     .row {
       &.mobilewide {
-      padding: 0;
+        padding: 0;
         .mobilepad {
           padding: 0 20px;
         }
@@ -2148,8 +2148,8 @@ form.schedule-tea {
         width: 100%;
         padding: 0;
       }
-      .action {
-        ul {
+      .wide.action, .action {
+        ul.two-things {
           li:nth-child(n) {
             padding: 0 0 1em 0 !important;
             float: none;
@@ -2157,6 +2157,13 @@ form.schedule-tea {
             &:after {
               display: none;
             }
+          }
+        }
+        ul.three-things {
+          li:nth-child(n) {
+            padding: 0 0 1em 0 !important;
+            float: none !important;
+            width: 100% !important;
           }
         }
       }
