@@ -33,4 +33,26 @@ describe 'User' do
       end
     end
   end
+
+  describe 'facebook' do
+    it 'should be able to store a string as a facebook' do
+      user = User.create(facebook: 'foo')
+      expect(user.facebook).to eq 'foo'
+    end
+
+    it 'should not include the http' do
+      user = User.create(facebook: 'http://foo')
+      expect(user.errors.messages[:facebook]).to include "should not include http(s)"
+    end
+
+    it 'should not include https' do
+      user = User.create(facebook: 'https://foo')
+      expect(user.errors.messages[:facebook]).to include "should not include http(s)"
+    end
+
+    it 'should not include facebook.com' do
+      user = User.create(facebook: 'www.facebook.com')
+      expect(user.errors.messages[:facebook]).to include "should not include facebook.com"
+    end
+  end
 end

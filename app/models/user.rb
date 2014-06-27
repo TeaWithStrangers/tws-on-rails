@@ -12,6 +12,9 @@ class User < ActiveRecord::Base
 
   validates_presence_of :home_city_id
 
+  include ActiveModel::Validations
+  validates_with Validators::FacebookUrlValidator
+
   scope :hosts, -> { joins(:roles).where(roles: {name: 'Host'}) }
 
   def future_hosts
