@@ -48,6 +48,12 @@
           <div><%= f.label :home_city %><br />
           <div class="dropdown"><%= select(resource_name, :home_city_id, City.visible.collect{ |p| [p.name, p.id] }) %></div></div>
 
+          <div><%=  f.label :facebook %><br />
+          <%= f.text_field :facebook, placeholder: 'Just the part after http://facebook.com/' %></div>
+
+          <div><%= f.label :twitter %>
+          <%= f.text_field :twitter, placeholder: "Don't include the @" %></div>
+
           <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
             <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
           <% end %>

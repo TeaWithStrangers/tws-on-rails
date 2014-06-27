@@ -44,6 +44,9 @@ RSpec.configure do |config|
   # Include FactoryGirl in specs
   config.include FactoryGirl::Syntax::Methods
 
+  # Include devise test helpers in conroller specs
+  config.include Devise::TestHelpers, :type => :controller
+
   config.before(:all) do
     load Rails.root + "db/seeds_test.rb"
   end
