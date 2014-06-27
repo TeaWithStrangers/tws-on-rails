@@ -55,4 +55,16 @@ describe 'User' do
       expect(user.errors.messages[:facebook]).to include "should not include facebook.com"
     end
   end
+
+  describe 'twitter' do
+    it 'should be able to store a string as a twitter handle' do
+      user = User.new(twitter: 'blablah')
+      expect(user.twitter).to eq 'blablah'
+    end
+
+    it 'should not contain special characters' do
+      user = User.create(twitter: '@asda!^7')
+      expect(user.errors.messages[:twitter]).to include 'not a valid twitter handle'
+    end
+  end
 end

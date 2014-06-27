@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
 
   include ActiveModel::Validations
   validates_with Validators::FacebookUrlValidator
+  validates_with Validators::TwitterHandleValidator
 
   scope :hosts, -> { joins(:roles).where(roles: {name: 'Host'}) }
 
