@@ -24,7 +24,7 @@ rake db:create
 rake db:schema:load
 
 # Start mailcatcher in the background
-mailcatcher &
+mailcatcher & # preview email at localhost:1080
 
 # Start the server
 rails s
@@ -38,3 +38,10 @@ rake db:create_roles
 # This will drop the database if it exists and create it again.
 rake db:seed_dev
 ```
+
+#### Mail
+
+In development, all outgoing email will be intercepted by `mailcatcher`
+and will be previewable at `http://localhost:1080`.
+All you have to do is start the mailcatcher server as specified
+in the directions above (`mailcatcher &` in terminal).
