@@ -34,6 +34,6 @@ class User < ActiveRecord::Base
   end
 
   def host?
-    admin? || super
+    (admin? || role?(:Host))
   end
 end
