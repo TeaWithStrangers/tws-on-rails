@@ -1,12 +1,23 @@
 class TeaTimeMailer < ActionMailer::Base
   default from: "\"Tea With Strangers\" <sayhi@teawithstrangers.com>"
 
+  def host_confirmation(tea_time)
+    @tea_time = tea_time
+    mail.attachments['event.ics'] = {mime_type: "text/calendar", 
+                                     content: @tea_time.ical.to_ical}
+
+    mail(to: tea_time.host.email, 
+         subject: "Tea Time Confirmation for #{@tea_time.friendly_time}").
+    deliver!
+
   def registration(attendance)
     @attendance = attendance
     @tea_time = attendance.tea_time
     @user = attendance.user
 
-    mail.attachments['event.ics'] = {mime_type: "text/calendar", content: @tea_time.ical.to_ical}
+    mail.attachments['event.ics'] = {mime_type: "text/calendar", 
+                                     content: @tea_time.ical.to_ical}
+
     mail(to: attendance.user.email, subject: "See you at tea time!").deliver!
   end
 
