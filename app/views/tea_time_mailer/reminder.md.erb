@@ -2,7 +2,7 @@ Hey hey <%= @user.name %>!
 
 One more reminder about tea time coming up super soon! Here are the details:
 
-<%= render partial: "tea_time_info_nohost", locals: {tea_time: @attendance.tea_time} %>
+<%= render partial: "info_nohost", locals: {tea_time: @attendance.tea_time} %>
 
 See you soon!  
 <%= @attendance.tea_time.host.name %>
