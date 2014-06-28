@@ -15,9 +15,7 @@ class User < ActiveRecord::Base
   scope :hosts, -> { joins(:roles).where(roles: {name: 'Host'}) }
 
   def future_hosts
-    now = DateTime.now.utc.midnight
-    inclusive_of = (now..(now+2.weeks))
-    tea_times.where(start_time: inclusive_of)
+    tea_times.future_until Time.now.utc+2.weeks
   end
 
   def future_attendances
