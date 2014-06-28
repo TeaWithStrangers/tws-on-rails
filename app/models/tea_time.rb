@@ -14,8 +14,8 @@ class TeaTime < ActiveRecord::Base
   end
   scope :before, ->(date)  { where("start_time <= ?", date) }
   scope :after, ->(date)  { where("start_time >= ?", date) }
-  scope :past, -> { before(Time.now.midnight.utc) }
-  scope :future, -> { after(Time.now.midnight.utc) }
+  scope :past, -> { before(Time.now.utc) }
+  scope :future, -> { after(Time.now.utc) }
   scope :future_until, ->(until_time) { future.before(until_time) }
 
   def start_time
