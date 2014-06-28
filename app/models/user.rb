@@ -32,4 +32,8 @@ class User < ActiveRecord::Base
   Role::VALID_ROLES.each do |role|
     define_method("#{role.downcase}?".to_sym) { role? role }
   end
+
+  def host?
+    admin? || super
+  end
 end
