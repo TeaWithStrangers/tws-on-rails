@@ -1,6 +1,49 @@
 require 'spec_helper.rb'
 
 describe TeaTime do
+  describe '.start_time' do
+    before(:each) do
+      @city_pst = create(:city)
+      @city_est = create(:city, timezone: "Eastern Time (US & Canada)")
+      @city_utc = create(:city, timezone: "UTC")
+      #@items = [city_utc, city_pst, city_est].inject({}) {|hsh, c|
+      #  hsh[c] = create(:tea_time, city: c)
+      #  hsh
+      #}
+    end
+
+    it 'should save time as UTC, account for the city TZ difference' do
+      tt = create(:tea_time, city: @city_pst)
+      tt.start_time = Time.new(2014,1,1,16)
+      expect(tt.start_time.utc).to eq(Time.utc(2014,1,2))
+    end
+
+    it 'should save time as UTC, account for the city TZ difference via .update' do
+      tt = create(:tea_time, city: @city_pst)
+      tt.update(start_time: Time.local(2014,1,1,16))
+      expect(tt.start_time.utc).to eq(Time.utc(2014,1,2))
+    end
+
+
+    it 'should always interpret times as taking place in the associated city' do
+      tt = create(:tea_time, city: @city_est)
+      tt.start_time = Time.local(2014,1,1,16)
+      expect(tt.start_time.utc).to eq(Time.utc(2014,1,1,21))
+    end
+
+    it 'should not adjust to maintain the same *local* time if switched between timezones/cities' do
+      tt = create(:tea_time, city: @city_est, start_time: Time.utc(2014,1,1,16))
+      expect(tt.start_time.utc).to eq Time.utc(2014,1,1,21)
+      tt.city = @city_pst
+      expect(tt.start_time.utc).to eq Time.utc(2014,1,1, 21)
+    end
+
+    it 'should allow access when city is nil' do
+      tt = TeaTime.new(start_time: Time.utc(2014,1,1))
+      expect(tt.start_time).not_to eq(nil)
+    end
+  end
+
   describe 'scopes' do
     before(:all) do
       @past_tt = create(:tea_time, :past)
