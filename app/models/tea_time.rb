@@ -72,7 +72,7 @@ class TeaTime < ActiveRecord::Base
       begin 
         self.followup_status = :cancelled
         self.save!
-        UserMailer.tea_time_cancellation(self)
+        TeaTimeMailer.cancellation(self)
         attendances.map { |att|
           att.status = :cancelled
           att.save

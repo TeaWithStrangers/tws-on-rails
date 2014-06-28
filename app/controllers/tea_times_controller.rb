@@ -49,7 +49,7 @@ class TeaTimesController < ApplicationController
     @attendance = Attendance.where(tea_time: @tea_time, user: @user).first_or_create
     @attendance.status = :pending
 
-    UserMailer.tea_time_registration(@attendance)
+    TeaTimeMailer.registration(@attendance)
     if @attendance.save
       respond_to do |format|
         format.html { redirect_to profile_path, notice: 'Registered for Tea Time! See you soon :)' }
@@ -69,7 +69,7 @@ class TeaTimesController < ApplicationController
     @attendance = Attendance.find_by(tea_time: @tea_time, user: current_user)
     @attendance.status = :flake
 
-    UserMailer.tea_time_flake(@attendance)
+    TeaTimeMailer.flake(@attendance)
     respond_to do |format|
       if @attendance.save
         format.html { redirect_to profile_path, notice: 'Tea time was successfully flaked.' }
