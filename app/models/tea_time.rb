@@ -93,18 +93,15 @@ class TeaTime < ActiveRecord::Base
   def ical
     tt = self
     cal = Icalendar::Calendar.new
-    Time.use_zone(tt.city.timezone) do
-      start_time = Time.zone.parse(tt.start_time.utc.strftime("%Y-%m-%d %H:%M"))
-      cal.event do |e|
-        e.dtstart = start_time
-        e.dtend  = (start_time + tt.duration.hours)
-        e.summary = "Tea time with #{tt.host.name}"
-        #FIXME: Come back to this with fresh eyes
-        #e.organizer = "CN=#{tt.host.name}:MAILTO:#{tt.host.email}"
-        e.location = tt.location
-      end
-      cal
+    cal.event do |e|
+      e.dtstart = tt.start_time
+      e.dtend  = (tt.start_time + tt.duration.hours)
+      e.summary = "Tea time with #{tt.host.name}"
+      #FIXME: Come back to this with fresh eyes
+      #e.organizer = "CN=#{tt.host.name}:MAILTO:#{tt.host.email}"
+      e.location = tt.location
     end
+    cal
   end
 
   def todo?
