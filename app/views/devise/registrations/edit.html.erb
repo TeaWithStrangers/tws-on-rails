@@ -51,7 +51,7 @@
           <div><%=  f.label :facebook %><br />
           <%= f.text_field :facebook, placeholder: 'Just the part after http://facebook.com/' %></div>
 
-          <div><%= f.label :twitter %>
+          <div><%= f.label :twitter %><br />
           <%= f.text_field :twitter, placeholder: "Don't include the @" %></div>
 
           <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
