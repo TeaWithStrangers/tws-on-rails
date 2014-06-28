@@ -5,6 +5,7 @@ class TeaTime < ActiveRecord::Base
   validates_presence_of :host, :start_time, :city, :duration
   has_many :attendances, dependent: :destroy
   after_touch :clear_association_cache_wrapper
+  after_create :send_host_confirmation
 
   enum followup_status: [:na, :pending, :sent, :cancelled]
 
@@ -103,6 +104,10 @@ class TeaTime < ActiveRecord::Base
 
   def todo?
     return !! followup_status != :sent && !attendances.select(&:todo?).empty?
+  end
+
+  def send_host_confirmation
+    TeaTimeMailer.host_confirmation(self)
   end
 
   private
