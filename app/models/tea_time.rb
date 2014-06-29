@@ -101,10 +101,8 @@ class TeaTime < ActiveRecord::Base
   end
 
   def send_host_confirmation
-    TeaTimeMailer.host_confirmation(self).deliver!
+    TeaTimeMailer.delay.host_confirmation(self)
   end
-  handle_asynchronously :send_host_confirmation
-
 
   private
     def use_city_timezone(&block)
