@@ -13,6 +13,7 @@ class TeaTime < ActiveRecord::Base
   TeaTime.followup_statuses.each do |k,v|
     scope k, -> { where(followup_status: v) }
   end
+
   scope :before, ->(date)  { where("start_time <= ?", date) }
   scope :after, ->(date)  { where("start_time >= ?", date) }
   scope :past, -> { before(Time.now.utc) }
