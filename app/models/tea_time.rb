@@ -73,22 +73,12 @@ class TeaTime < ActiveRecord::Base
 
   def cancel!
     unless cancelled?
-      # Until we move mailers into something like DJ we run the risk of a failed
-      # email send blocking cancellation and ruining everything. If that happens
-      # I rather abort and return the Requesting thread than 500 error. This is
-      # a short-term fix
-      begin 
-        self.followup_status = :cancelled
-        self.save!
-        TeaTimeMailer.cancellation(self)
-        attendances.map { |att|
-          att.status = :cancelled
-          att.save
-        }
-        return true
-      rescue Exception => e
-        return false
-      end
+      attendances.map { |att| att.update_attribute(:status, :cancelled) }
+      self.update_attribute(:followup_status, :cancelled)
+      TeaTimeMailer.delay.cancellation(self)
+      true
+    else
+      false
     end
   end
 
@@ -111,8 +101,10 @@ class TeaTime < ActiveRecord::Base
   end
 
   def send_host_confirmation
-    TeaTimeMailer.host_confirmation(self)
+    TeaTimeMailer.host_confirmation(self).deliver!
   end
+  handle_asynchronously :send_host_confirmation
+
 
   private
     def use_city_timezone(&block)
