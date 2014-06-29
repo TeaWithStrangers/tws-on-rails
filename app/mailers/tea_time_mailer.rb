@@ -21,23 +21,24 @@ class TeaTimeMailer < ActionMailer::Base
     mail(to: attendance.user.email, subject: "See you at tea time!")
   end
 
-  def reminder(attendance)
+  def reminder(attendance, type)
     @attendance = attendance
     @user = attendance.user
+    @type = type
     tt = attendance.tea_time
     
     mail.attachments['event.ics'] = {mime_type: "text/calendar", 
                                      content: @attendance.tea_time.ical.to_ical}
 
-    mail(from: "\"#{tt.host.name}\" <#{tt.host.email}>", 
-         to: @user.email, 
+    mail(to: @user.email, 
+         from: "\"#{tt.host.name}\" <#{tt.host.email}>", 
          subject: "Confirming tea time", 
-         reply_to: tt.host.email)
+         reply_to: tt.host.email).deliver!
   end
 
   def cancellation(tea_time)
     @tea_time = tea_time
-    tea_time.attendances.map do |att|
+    @tea_time.attendances.map do |att|
       @user = att.user 
       mail(to: @user.email, subject: "Sad days — tea time canceled").deliver!
     end

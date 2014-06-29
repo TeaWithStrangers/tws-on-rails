@@ -6,6 +6,7 @@ class Attendance < ActiveRecord::Base
   validates_uniqueness_of :user_id, scope: :tea_time_id
 
   before_create :check_capacity
+  after_create :queue_reminder_mails
 
   def todo?
     pending?
@@ -14,6 +15,13 @@ class Attendance < ActiveRecord::Base
   def flake!
     update_attribute(:status, :flake)
   end
+
+  def queue_reminder_mails
+    st = self.tea_time.start_time
+    TeaTimeMailer.delay(run_at: st - 2.days).reminder(self, :two_day)
+    TeaTimeMailer.delay(run_at: st - 12.hours).reminder(self, :same_day)
+  end
+
 
   private
     def check_capacity
