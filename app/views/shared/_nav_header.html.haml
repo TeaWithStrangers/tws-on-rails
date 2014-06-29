@@ -9,6 +9,7 @@
       / %li= link_to "Stories", stories_path
       / %li= link_to "Questions", questions_path
       %li= link_to "Hosting", hosting_path
+      / %li=link_to "About", about_path
       - if current_user.nil? 
         %li= link_to 'Login', new_user_session_path, {id: :login}
       - else

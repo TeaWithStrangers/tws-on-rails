@@ -77,6 +77,51 @@
   font-style: normal;
 }
 
+@font-face {
+    font-family: 'MuseoSans-Rounded-Light';
+    src: asset-url('MuseoSans-Rounded-Light.eot');
+    src: asset-url('MuseoSans-Rounded-Light.eot?#iefix') format('embedded-opentype'),
+         asset-url('MuseoSans-Rounded-Light.woff') format('woff'),
+         asset-url('MuseoSans-Rounded-Light.ttf') format('truetype'),
+         asset-url('MuseoSans-Rounded-Light.svg#MuseoSans-Rounded-Light') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'MuseoSans-Rounded-Regular';
+    src: asset-url('MuseoSans-Rounded-Regular.eot');
+    src: asset-url('MuseoSans-Rounded-Regular.eot?#iefix') format('embedded-opentype'),
+         asset-url('MuseoSans-Rounded-Regular.woff') format('woff'),
+         asset-url('MuseoSans-Rounded-Regular.ttf') format('truetype'),
+         asset-url('MuseoSans-Rounded-Regular.svg#MuseoSans-Rounded-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'MuseoSans-Rounded-Semibold';
+    src: asset-url('MuseoSans-Rounded-Semibold.eot');
+    src: asset-url('MuseoSans-Rounded-Semibold.eot?#iefix') format('embedded-opentype'),
+         asset-url('MuseoSans-Rounded-Semibold.woff') format('woff'),
+         asset-url('MuseoSans-Rounded-Semibold.ttf') format('truetype'),
+         asset-url('MuseoSans-Rounded-Semibold.svg#MuseoSans-Rounded-Semibold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'MuseoSans-Rounded-Bold';
+    src: asset-url('MuseoSans-Rounded-Bold.eot');
+    src: asset-url('MuseoSans-Rounded-Bold.eot?#iefix') format('embedded-opentype'),
+         asset-url('MuseoSans-Rounded-Bold.woff') format('woff'),
+         asset-url('MuseoSans-Rounded-Bold.ttf') format('truetype'),
+         asset-url('MuseoSans-Rounded-Bold.svg#MuseoSans-Rounded-Bold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -212,6 +257,22 @@ h1, h2, h3, p, ul, li {
   font-family: 'ProximaNova-Regular', 'Helvetica Neue', Arial, sans-serif;
 }
 
+.museo-light {
+  font-family: 'MuseoSans-Rounded-Light', 'Helvetica Neue', Arial, sans-serif;
+}
+
+.museo-regular {
+  font-family: 'MuseoSans-Rounded-Regular', 'Helvetica Neue', Arial, sans-serif;
+}
+
+.museo-semibold {
+  font-family: 'MuseoSans-Rounded-Semibold', 'Helvetica Neue', Arial, sans-serif;
+}
+
+.museo-bold {
+  font-family: 'MuseoSans-Rounded-Bold', 'Helvetica Neue', Arial, sans-serif;
+}
+
 strong {
   .bold;
 }
@@ -277,7 +338,6 @@ a {
     .transition;
   }
 }
-
 .landscape-header {
   background: asset-url('splash2.jpg') no-repeat center; 
   background-size: cover;
@@ -286,6 +346,9 @@ a {
   min-width: 750px;
   &.city {
     height: 300px;
+  }
+  &.internproject {
+    background-image: asset-url('internproject-redo.jpg') !important;
   }
   .blur-layer {
     position: absolute;
@@ -398,6 +461,19 @@ a {
     margin-bottom: 3em;
     overflow: auto;
     padding: 0 20px;
+    .host-material {
+      margin-bottom: 2em;
+      input[type="submit"] {
+        text-align: center;
+        .button(@red);
+        padding: .25em;
+        display: block;
+        width: 100%;
+      }
+    }
+    p.small {
+      .fs;
+    }
     .alert-box {
       border-radius: 10px;
       border: 5px solid @red;
@@ -440,7 +516,7 @@ a {
         }
       }
       &.action {
-        ul {
+        ul.two-things {
           overflow: hidden;
           text-align: center;
           counter-reset: my-badass-counter;
@@ -454,6 +530,10 @@ a {
               .bold;
               text-transform: uppercase;
               color: @red;
+              &.schedule.button {
+                font-size: 1em;
+                line-height: 1em;
+              }
             }
             &:first-child {
               padding-right: 5%;
@@ -614,6 +694,9 @@ a {
             }
           }
         }
+        &.internproject {
+          display: none;
+        }
       }
       &.single-host, &.no-host {
         li {
@@ -708,9 +791,13 @@ a {
     }
     .third {
       width: 100%/3;
-      float: left;
       &.left {
         padding-right: 2%;
+        float: left;
+      }
+      &.right {
+        padding-left: 2%;
+        float: right;
       }
       h3 {
         .bold;
@@ -748,20 +835,33 @@ a {
         text-transform: uppercase;
         padding-bottom: 1em;
       }
-      form.new_user {
-        input {
-          .fs;
-          padding: 5px;
-          margin-bottom: 5px;
-          &[type="submit"] {
-            margin-bottom: 20px;
+      form.new_user input, input, .host-material input {
+        .fsI;
+        padding: 5px;
+        margin-bottom: 5px;
+        &[type="submit"] {
+          margin-bottom: 20px;
+        }
+      }
+      .already {
+        h4.schedule.button {
+          a {
+            .fsI;
+            padding: 5px;
           }
+        }
+        h5.logout {
+          .fs;
+          padding-top: .5em;
         }
       }
     }
     .two-third {
       width: 200%/3;
-      float: left;
+      &.left {
+        padding-right: 2%;
+        float: left;
+      }
       &.right {
         padding-left: 2%;
         float: right;
@@ -772,6 +872,21 @@ a {
         margin: 0 auto;
         padding: 0 10%;
         margin-bottom: 20px;
+      }
+      .q-a { //this is all unused
+        p.q {
+          .fs;
+          .bold;
+          text-transform: uppercase;
+          margin-bottom: .25em;
+          color: @red;
+          padding: 0 0 .25em .1em;
+          border-bottom: 1px dashed @lightred;
+        }
+        p.a {
+          .fsII;
+          .museo-regular;
+        }
       }
       .prompt {
         margin-bottom: 2em;
@@ -831,7 +946,7 @@ a {
         }
       }
     }
-    em.starter {
+    .starter, em.starter {
       .bold;
       .fsIV;
       padding-right: 5px;
@@ -1029,6 +1144,9 @@ a {
                 h3.attendees {
                   .fsII;
                   .bold;
+                  &.none {
+                    color: lighten(@gray,10%);
+                  }
                 }
                 ul.attendees-list {
                   overflow: auto;
@@ -1299,6 +1417,139 @@ a {
       }
     }
   }
+  &.about {
+    h2.starter {
+      margin-bottom: 1em;
+    }
+    .two-third {
+      &.left {
+        // border-right: 1px solid @lightred;
+      }
+      h3.sectionhead {
+        text-align: left;
+      }
+    }
+    .third {
+      &.right {
+        padding-left: 0;
+      }
+    }
+    ul {
+      &.about-list {
+        margin-top: 1em;
+        margin-left: -1px;
+        li {
+          padding: .5em;
+          border-radius: 0 .25em .25em 0;
+          &.active {
+            border: 1px solid @lightred;
+            border-left: none;
+            background: @background;
+          }
+        }
+      }
+    }
+  }
+  &.internproject {
+    p.subheader {
+      .fsII;
+    }
+    .row {
+      .third {
+        h2 {
+          .fsII;
+          .regular;
+          margin-bottom: 1em;
+        }
+        h3 {
+          background: none;
+          padding: 0;
+          text-align: left;
+          line-height: 1.375em;
+          margin-bottom: .25em;
+        }
+      }
+      .narrow {
+        margin-bottom: 2em;
+      }
+      .wraparound {
+        width: auto;
+        float: none;
+        .prompt {
+          margin-bottom: 1em;
+        }
+        .do-it {
+          clear: both;
+          margin-top: 1em;
+          text-align: center;
+          position: relative;
+          bottom: 1em;
+          h3 {
+            text-align: center;
+            text-transform: uppercase;
+            .fs;
+            .bold;
+            color: @lightred;
+            display: inline-block;
+            padding: .5em;
+            position: relative;
+            bottom: -2.3em;
+            background: @background;
+            z-index: 1;
+            border: 1px solid @lightred;
+          }
+          ul {
+            li {
+              margin-bottom: 2em;
+            }
+          }
+          &.about {
+            bottom: auto;
+            hr {
+              margin: 0;
+              width: 100%;
+              border: none;
+              border-top: 1px solid @lightred;
+              top: 1em;
+              position: relative;
+            }
+            h3 {
+              bottom: auto;
+              margin-bottom: 2em;
+            }
+            ul {
+              overflow: hidden;
+              li.third {
+                width: 33%;
+                padding: 0 2%;
+                float: left;
+                text-align: left;
+                margin-bottom: 0;
+                &:first-child {
+                  padding-right: 2%;
+                  padding-left: 0;
+                }
+                &:last-child {
+                  padding-left: 2%;
+                  padding-right: 0;
+                }
+                h4 {
+                  .fs;
+                  .bold;
+                  color: @red;
+                  text-transform: uppercase;
+                  margin-bottom: .5em;
+                }
+                p {
+                  .fs;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
 #footer {
   background: darken(@lightred,10%);
@@ -1321,32 +1572,39 @@ a {
     }
   }
 }
-form.new_user {
-  overflow: auto;
-  -webkit-font-smoothing: antialiased !important;
-  input, select {
-    width: 100%;
-    clear: both;
-    .fsII;
-    .regular;
-    padding: 10px;
-    border-radius: .35em;
-    border: 1px solid lighten(@gray, 15%);
-    margin-bottom: 10px;
-    color: @black;
-    &:active, &:focus {
-      outline: none;
+form {
+  &.new_user, &.edit_city {
+    overflow: auto;
+    -webkit-font-smoothing: antialiased !important;
+    input, select, textarea {
+      width: 100%;
+      clear: both;
+      .fsII;
+      .regular;
+      padding: 10px;
+      border-radius: .35em;
+      border: 1px solid lighten(@gray, 15%);
+      margin-bottom: 10px;
+      color: @black;
+      &:active, &:focus {
+        outline: none;
+      }
+      &[type="submit"] {
+        .button(@red);
+        margin-bottom: 25px;
+        padding: .25em;
+      }
     }
-    &[type="submit"] {
-      .button(@red);
-      margin-bottom: 25px;
+    label {
+      .fs;
+      .bold;
     }
-  }
-  h6.footnote {
-    .fs;
-    .bold;
-    text-transform: uppercase;
-    color: @red;
+    h6.footnote {
+      .fs;
+      .bold;
+      text-transform: uppercase;
+      color: @red;
+    }
   }
 }
 
@@ -1725,9 +1983,16 @@ form.schedule-tea {
     .landscape-text h1 {
       top: 50%;
       .fsV;
+      font-size: 3em;
+      padding: .25em;
     }
   }
   .container {
+    &.internproject {
+      .row .wraparound .do-it h3 {
+        margin-bottom: 4em;
+      }
+    }
     hr {
       margin-bottom: 1em;
     }
@@ -1770,7 +2035,7 @@ form.schedule-tea {
     }
     .row {
       &.mobilewide {
-      padding: 0;
+        padding: 0;
         .mobilepad {
           padding: 0 20px;
         }
@@ -1883,8 +2148,8 @@ form.schedule-tea {
         width: 100%;
         padding: 0;
       }
-      .action {
-        ul {
+      .wide.action, .action {
+        ul.two-things {
           li:nth-child(n) {
             padding: 0 0 1em 0 !important;
             float: none;
@@ -1892,6 +2157,13 @@ form.schedule-tea {
             &:after {
               display: none;
             }
+          }
+        }
+        ul.three-things {
+          li:nth-child(n) {
+            padding: 0 0 1em 0 !important;
+            float: none !important;
+            width: 100% !important;
           }
         }
       }
