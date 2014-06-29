@@ -4,12 +4,24 @@ class City < ActiveRecord::Base
   before_save :upcase_code
   has_attached_file :header_bg, default_url: "http://placecorgi.com/1280"
   validates_attachment_content_type :header_bg, :content_type => /\Aimage\/.*\Z/
-  enum brew_status: { :cold_water => 0, :warming_up => 1, :fully_brewed => 2}
+  enum brew_status: { cold_water: 0, warming_up: 1, fully_brewed: 2, hidden: 3}
   has_many :tea_times
   has_many :users, foreign_key: 'home_city_id'
 
+  has_and_belongs_to_many :proxy_cities,
+    class_name: 'City',
+    join_table: :proxy_cities,
+    foreign_key: :city_id,
+    association_foreign_key: :proxy_city_id
+
+  validate :proxy_city_not_self
+
+  scope :visible, -> { where.not(brew_status: brew_statuses[:hidden]) }
+  scope :hidden, -> { where(brew_status: brew_statuses[:hidden]) }
+
   def hosts
-    User.hosts.where(home_city: self)
+    hosts = proxy_cities.inject([]) {|lst, c| lst + c.hosts}
+    User.hosts.where(home_city: [self] + proxy_cities)
   end
 
   def timezone=(tz)
@@ -25,9 +37,21 @@ class City < ActiveRecord::Base
     city_code
   end
 
+  def tea_times
+    TeaTime.where(city: [self] + proxy_cities)
+  end
+
   private
     def upcase_code
       write_attribute(:city_code, read_attribute(:city_code).upcase)
+    end
+
+    # Having self as proxy creates an infinite chain of queries when
+    # attempting to resolve tea times for the city.
+    def proxy_city_not_self
+      proxy_cities.each do |proxy_city|
+        errors.add(:proxy_cities) if proxy_city.id == self.id
+      end
     end
 
   class << self
@@ -45,7 +69,7 @@ class City < ActiveRecord::Base
 
     private
       def for_code_proxy(code, method)
-        self.send(method, city_code: code.upcase)
+        unscoped{ self.send(method, city_code: code.upcase) }
       end
   end
 end

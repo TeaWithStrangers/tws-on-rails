@@ -1,7 +1,10 @@
 FactoryGirl.define do
+  sequence(:name) {|n| "City #{n}" }
+  sequence(:city_code) {|n| "city-#{n}" }
+
   factory :city do
-    sequence(:name) {|n| "City #{n}" }
-    sequence(:city_code) {|n| "city-#{n}" }
+    name
+    city_code
     brew_status "fully_brewed"
     timezone "Pacific Time (US & Canada)"
     tagline "Tagline"

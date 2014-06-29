@@ -24,13 +24,10 @@ rake db:create
 rake db:schema:load
 
 # Start mailcatcher in the background
-mailcatcher &
+mailcatcher & # preview email at localhost:1080
 
 # Start the server
 rails s
-
-# For prodution
-rake db:create_roles
 
 # For Development
 # Create some development data to play arond with
@@ -38,3 +35,10 @@ rake db:create_roles
 # This will drop the database if it exists and create it again.
 rake db:seed_dev
 ```
+
+#### Mail
+
+In development, all outgoing email will be intercepted by `mailcatcher`
+and will be previewable at `http://localhost:1080`.
+All you have to do is start the mailcatcher server as specified
+in the directions above (`mailcatcher &` in terminal).
