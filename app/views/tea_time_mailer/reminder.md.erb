@@ -1,10 +1,16 @@
 Hey hey <%= @user.name %>!
 
+<% if @type != :same_day %>
+Just wanted to shoot you a quick reminder about your upcoming tea time! Here are the details:
+<% else %>
 One more reminder about tea time coming up super soon! Here are the details:
+<% end %>
 
 <%= render partial: "info_nohost", locals: {tea_time: @attendance.tea_time} %>
 
-See you soon!  
+Super excited to see you!
+
+Cheers,  
 <%= @attendance.tea_time.host.name %>
 
 P.S. If you need to cancel, it's super easy. Just log into the site, click 'Account' and 
