@@ -14,6 +14,7 @@ class Attendance < ActiveRecord::Base
 
   def flake!
     update_attribute(:status, :flake)
+    TeaTimeMailer.delay.flake(self)
   end
 
   def queue_reminder_mails

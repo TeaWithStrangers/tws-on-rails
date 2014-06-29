@@ -67,11 +67,9 @@ class TeaTimesController < ApplicationController
   # PUT /tea_times/1/attendance/2
   def update_attendance
     @attendance = Attendance.find_by(tea_time: @tea_time, user: current_user)
-    @attendance.status = :flake
-
-    TeaTimeMailer.flake(@attendance)
+    
     respond_to do |format|
-      if @attendance.save
+      if @attendance.flake!
         format.html { redirect_to profile_path, notice: 'Tea time was successfully flaked.' }
         format.json { render :show, status: :created, location: @tea_time }
       else

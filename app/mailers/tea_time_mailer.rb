@@ -7,7 +7,7 @@ class TeaTimeMailer < ActionMailer::Base
                                      content: @tea_time.ical.to_ical}
 
     mail(to: tea_time.host.email, 
-         subject: "Tea Time Confirmation for #{@tea_time.friendly_time}")
+         subject: "Tea Time Confirmation for #{@tea_time.friendly_time}").deliver!
   end
 
   def registration(attendance)
@@ -18,7 +18,7 @@ class TeaTimeMailer < ActionMailer::Base
     mail.attachments['event.ics'] = {mime_type: "text/calendar", 
                                      content: @tea_time.ical.to_ical}
 
-    mail(to: attendance.user.email, subject: "See you at tea time!")
+    mail(to: attendance.user.email, subject: "See you at tea time!").deliver!
   end
 
   def reminder(attendance, type)
@@ -47,6 +47,6 @@ class TeaTimeMailer < ActionMailer::Base
   def flake(attendance)
     @user = attendance.user
     @tea_time = attendance.tea_time
-    mail(to: @user.email, subject: "Let's find another tea time that works!")
+    mail(to: @user.email, subject: "Let's find another tea time that works!").deliver!
   end
 end
