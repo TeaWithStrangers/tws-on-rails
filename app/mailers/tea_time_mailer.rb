@@ -30,10 +30,13 @@ class TeaTimeMailer < ActionMailer::Base
     mail.attachments['event.ics'] = {mime_type: "text/calendar", 
                                      content: @attendance.tea_time.ical.to_ical}
 
-    mail(to: @user.email, 
-         from: "\"#{tt.host.name}\" <#{tt.host.email}>", 
-         subject: "Confirming tea time", 
-         reply_to: tt.host.email).deliver!
+    # We shouldn't send a reminder for a flake or no-show
+    unless !@attendance.pending?
+      mail(to: @user.email, 
+           from: "\"#{tt.host.name}\" <#{tt.host.email}>", 
+           subject: "Confirming tea time", 
+           reply_to: tt.host.email).deliver!
+    end
   end
 
   def cancellation(tea_time)
