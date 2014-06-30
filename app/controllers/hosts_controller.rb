@@ -20,7 +20,7 @@ class HostsController < ApplicationController
     @host.password = generated_password
     if @host.save
       [current_user, @host].each do |user|
-        UserMailer.user_registration(user, generated_password)
+        UserMailer.delay.user_registration(user, generated_password)
       end
       redirect_to profile_path, message: 'New host unsuccesfully created and emailed!'
     else
