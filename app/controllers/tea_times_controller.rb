@@ -2,7 +2,7 @@ class TeaTimesController < ApplicationController
   helper TeaTimesHelper
   before_action :set_tea_time, only: [:show, :edit, :update, :destroy, :update_attendance, :create_attendance, :cancel]
   before_action :prepare_tea_time_for_edit, only: [:create, :update]
-  before_action :authorized?, only: [:create, :update, :cancel]
+  before_action :authenticate_user!, :authorized?, only: [:new, :edit, :create, :update, :cancel]
 
   # GET /tea_times
   # GET /tea_times.json
