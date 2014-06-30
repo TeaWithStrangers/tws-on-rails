@@ -6,7 +6,7 @@ class TeaTime < ActiveRecord::Base
   has_many :attendances, dependent: :destroy
 
   after_touch :clear_association_cache_wrapper
-  after_create :send_host_confirmation
+  after_create :send_host_confirmation, :queue_followup_mails
 
   enum followup_status: [:na, :pending, :sent, :cancelled]
 
@@ -22,6 +22,10 @@ class TeaTime < ActiveRecord::Base
 
   def start_time
     return use_city_timezone { super.in_time_zone if super } || Time.now
+  end
+
+  def end_time
+    self.start_time + self.duration.hours
   end
 
   def start_time=(time)
@@ -102,6 +106,10 @@ class TeaTime < ActiveRecord::Base
 
   def send_host_confirmation
     TeaTimeMailer.delay.host_confirmation(self)
+  end
+
+  def queue_followup_mails
+    TeaTimeMailer.delay(run_at: self.end_time).followup(self)
   end
 
   private
