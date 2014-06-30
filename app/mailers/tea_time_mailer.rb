@@ -33,9 +33,29 @@ class TeaTimeMailer < ActionMailer::Base
     # We shouldn't send a reminder for a flake or no-show
     unless !@attendance.pending?
       mail(to: @user.email, 
-           from: "\"#{tt.host.name}\" <#{tt.host.email}>", 
+           from: tt.host.friendly_email,
            subject: "Confirming tea time", 
            reply_to: tt.host.email).deliver!
+    end
+  end
+
+  def followup(tea_time)
+    as = tea_time.attendances.group_by(&:status)
+    @tea_time = tea_time
+    as.each do |type, attendees|
+      case type
+      when 'flake'
+        template = 'followup_flake_noresched'
+      when 'no_show'
+        template = 'followup_no_show'
+      else
+        template = 'followup'
+      end
+      mail(bcc: attendees.map {|a| a.user.email},
+           from: tea_time.host.friendly_email,
+           reply_to: tea_time.host.email,
+           subject: 'Following up on tea time',
+           template_name: template).deliver!
     end
   end
 
