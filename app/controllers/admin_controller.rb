@@ -1,5 +1,5 @@
 class AdminController < ApplicationController
-  before_filter :authenticate_user!, :authorized?
+  before_action :authenticate_user!, :authorized?
 
   def find
   end
