@@ -61,6 +61,13 @@ class TeaTimeMailer < ActionMailer::Base
     end
   end
 
+  def ethos(user)
+    @user = user
+    mail(to: user.email,
+         subject: "A little info about tea time",
+         template_name: 'registration_followup').deliver!
+  end
+
   def cancellation(tea_time)
     @tea_time = tea_time
     @tea_time.attendances.map do |att|
