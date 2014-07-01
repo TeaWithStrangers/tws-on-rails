@@ -1,5 +1,7 @@
 # TWS
 
+[![Build Status](https://travis-ci.org/TeaWithStrangers/tws-on-rails.svg)](https://travis-ci.org/TeaWithStrangers/tws-on-rails)
+
 ### Development
 
 This is a simple Rails app with a Postgres database.
