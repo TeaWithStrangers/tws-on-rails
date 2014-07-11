@@ -4,7 +4,7 @@ Ankit here, one of the hosts behind Tea With Strangers.
 
 Just wanted to thank you for signing up. The world is better when we take a second to understand each other, and that's what we're going after with tea time. Thanks for being a part of it.
 
-Since you're in <%= @user.home_city.name %>, tea time is happening pretty regularly. If you haven't yet, find a time to sit for tea here: <<%=url_for(controller: 'cities',action: 'schedule',id: @user.home_city.city_code, only_path: false) %>>.
+Tea time is happening pretty regularly in <%= @user.home_city.name %>. If you haven't yet, find a time to sit for tea here: <<%=url_for(controller: 'cities',action: 'schedule',id: @user.home_city.city_code, only_path: false) %>>.
 
 And if you're on facebook, show us some love and 'Like' our page. You know how social media affirmation works: <http://facebook.com/teawithstrangers>. 
 

@@ -18,7 +18,10 @@ class TeaTimeMailer < ActionMailer::Base
     mail.attachments['event.ics'] = {mime_type: "text/calendar", 
                                      content: @tea_time.ical.to_ical}
 
-    mail(to: attendance.user.email, subject: "See you at tea time!").deliver!
+    mail(to: attendance.user.email, 
+         from: @tea_time.host.friendly_email,
+         subject: "See you at tea time!",
+         reply_to: @tea_time.host.email).deliver!
   end
 
   def reminder(attendance, type)
@@ -34,7 +37,7 @@ class TeaTimeMailer < ActionMailer::Base
     unless !@attendance.pending?
       mail(to: @user.email, 
            from: tt.host.friendly_email,
-           subject: "Confirming tea time", 
+           subject: "See you at tea time soon!", 
            reply_to: tt.host.email).deliver!
     end
   end
@@ -53,8 +56,7 @@ class TeaTimeMailer < ActionMailer::Base
           template = 'followup'
         end
         mail(bcc: attendees.map {|a| a.user.email},
-             from: tea_time.host.friendly_email,
-             reply_to: tea_time.host.email,
+             from: "\"Ankit at Tea With Strangers\" <ankit@teawithstrangers.com>",
              subject: 'Following up on tea time',
              template_name: template).deliver!
       end
@@ -64,7 +66,8 @@ class TeaTimeMailer < ActionMailer::Base
   def ethos(user)
     @user = user
     mail(to: user.email,
-         subject: "A little info about tea time",
+         from: "\"Ankit at Tea With Strangers\" <ankit@teawithstrangers.com>",
+         subject: "What tea time is about",
          template_name: 'registration_followup').deliver!
   end
 
@@ -79,6 +82,9 @@ class TeaTimeMailer < ActionMailer::Base
   def flake(attendance)
     @user = attendance.user
     @tea_time = attendance.tea_time
-    mail(to: @user.email, subject: "Let's find another tea time that works!").deliver!
+    mail(to: @user.email, 
+         from: @tea_time.host.friendly_email,
+         reply_to: @tea_time.host.email,
+         subject: "Let's find another tea time that works!").deliver!
   end
 end

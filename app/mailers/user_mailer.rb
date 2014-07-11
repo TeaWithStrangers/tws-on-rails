@@ -8,7 +8,6 @@ class UserMailer < ActionMailer::Base
     mail(from: "\"Ankit at Tea With Strangers\" <ankit@teawithstrangers.com>",
          to: @user.email, 
          subject: 'High fives from Tea With Strangers!',
-        template_name: template).
-         deliver!
+         template_name: template).deliver!
   end
 end
