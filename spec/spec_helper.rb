@@ -5,6 +5,8 @@ require 'rspec/rails'
 require 'rspec/autorun'
 require "cancan/matchers"
 
+load Rails.root + "db/seeds_test.rb"
+
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
@@ -44,7 +46,4 @@ RSpec.configure do |config|
   # Include FactoryGirl in specs
   config.include FactoryGirl::Syntax::Methods
 
-  config.before(:all) do
-    load Rails.root + "db/seeds_test.rb"
-  end
 end
