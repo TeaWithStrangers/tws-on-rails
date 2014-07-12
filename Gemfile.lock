@@ -94,6 +94,7 @@ GEM
       excon (~> 0.27)
       multi_json (~> 1.8)
     hike (1.2.3)
+    hirb (0.7.2)
     httparty (0.13.1)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
@@ -278,6 +279,7 @@ DEPENDENCIES
   factory_girl (~> 4.4)
   factory_girl_rails
   haml-rails (~> 0.5)
+  hirb
   icalendar (~> 2.0)
   jquery-rails
   jquery-ui-rails
