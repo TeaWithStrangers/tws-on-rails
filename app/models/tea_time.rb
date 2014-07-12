@@ -105,11 +105,11 @@ class TeaTime < ActiveRecord::Base
   end
 
   def send_host_confirmation
-    TeaTimeMailer.delay.host_confirmation(self)
+    TeaTimeMailer.delay.host_confirmation(self.id)
   end
 
   def queue_followup_mails
-    TeaTimeMailer.delay(run_at: self.end_time).followup(self)
+    TeaTimeMailer.delay(run_at: self.end_time).followup(self.id)
   end
 
   private
