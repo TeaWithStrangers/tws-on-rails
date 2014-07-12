@@ -24,17 +24,17 @@ class TeaTimeMailer < ActionMailer::Base
          reply_to: @tea_time.host.email).deliver!
   end
 
-  def reminder(attendance, type)
-    @attendance = attendance
-    @user = attendance.user
+  def reminder(attendance_id, type)
+    @attendance = Attendance.find(attendance_id)
+    @user = @attendance.user
     @type = type
-    tt = attendance.tea_time
+    tt = @attendance.tea_time
     
     mail.attachments['event.ics'] = {mime_type: "text/calendar", 
                                      content: @attendance.tea_time.ical.to_ical}
 
-    # We shouldn't send a reminder for a flake or no-show
-    unless !@attendance.pending?
+    # We shouldn't send a reminder for a flake
+    if @attendance.pending?
       mail(to: @user.email, 
            from: tt.host.friendly_email,
            subject: "See you at tea time soon!", 
@@ -63,9 +63,9 @@ class TeaTimeMailer < ActionMailer::Base
     end
   end
 
-  def ethos(user)
-    @user = user
-    mail(to: user.email,
+  def ethos(user_id)
+    @user = User.find(user_id)
+    mail(to: @user.email,
          from: "\"Ankit at Tea With Strangers\" <ankit@teawithstrangers.com>",
          subject: "What tea time is about",
          template_name: 'registration_followup').deliver!
@@ -79,7 +79,8 @@ class TeaTimeMailer < ActionMailer::Base
     end
   end
 
-  def flake(attendance)
+  def flake(attendance_id)
+    attendance = Attendance.find(attendance_id)
     @user = attendance.user
     @tea_time = attendance.tea_time
     mail(to: @user.email, 

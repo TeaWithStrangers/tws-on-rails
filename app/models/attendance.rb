@@ -14,14 +14,14 @@ class Attendance < ActiveRecord::Base
 
   def flake!
     update_attribute(:status, :flake)
-    TeaTimeMailer.delay.flake(self)
+    TeaTimeMailer.delay.flake(self.id)
   end
 
   def queue_reminder_mails
     st = self.tea_time.start_time
-    TeaTimeMailer.delay(run_at: Time.now + 1.hour).ethos(self.user)
-    TeaTimeMailer.delay(run_at: st - 2.days).reminder(self, :two_day)
-    TeaTimeMailer.delay(run_at: st - 12.hours).reminder(self, :same_day)
+    TeaTimeMailer.delay(run_at: Time.now + 1.hour).ethos(user.id)
+    TeaTimeMailer.delay(run_at: st - 2.days).reminder(id, :two_day)
+    TeaTimeMailer.delay(run_at: st - 12.hours).reminder(id, :same_day)
   end
 
 
