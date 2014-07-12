@@ -25,14 +25,14 @@ describe Attendance do
       @tt = create(:tea_time)
     end
     it 'updates status to :flake' do
-      attendance = Attendance.new(tea_time: @tt)
+      attendance = create(:attendance, tea_time: @tt)
 
       attendance.flake!
       expect(attendance.status).to eq "flake"
     end
 
     it 'saves the record' do
-      attendance = Attendance.new(tea_time: @tt)
+      attendance = create(:attendance, tea_time: @tt)
       attendance.flake!
       expect(attendance.changed?).to eq false
     end
