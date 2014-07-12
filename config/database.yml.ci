@@ -1,0 +1,10 @@
+test:
+  adapter: postgresql
+  encoding: utf8
+  host: localhost
+  username: postgres
+  password:
+  min_messages: WARNING
+  timeout: 5000
+  database: travis_ci_test
+

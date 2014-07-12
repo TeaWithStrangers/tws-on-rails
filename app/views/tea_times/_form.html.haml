@@ -7,7 +7,7 @@
   = f.text_field :location
   = f.label :city
   .dropdown
-    = select_tag(:city, options_for_select(City.all.collect{ |p| [p.name, p.id] }, @tea_time.city.id), {:class => "city"})
+    = f.select(:city_id, options_for_select(City.all.collect{ |p| [p.name, p.id] }, @tea_time.city.id), {:class => "city"})
 
   - if @tea_time.errors.any?
     #error_explanation

@@ -59,6 +59,7 @@ gem 'unicorn', group: :production
 
 # Use debugger
 gem 'debugger', group: [:development, :test]
+gem 'hirb', group: :development
 
 # Random debug tools
 group :development, :test do

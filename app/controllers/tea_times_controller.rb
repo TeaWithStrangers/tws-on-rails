@@ -2,7 +2,7 @@ class TeaTimesController < ApplicationController
   helper TeaTimesHelper
   before_action :set_tea_time, only: [:show, :edit, :update, :destroy, :update_attendance, :create_attendance, :cancel]
   before_action :prepare_tea_time_for_edit, only: [:create, :update]
-  before_action :authorized?, only: [:create, :update, :cancel]
+  before_action :authenticate_user!, :authorized?, only: [:new, :edit, :create, :update, :cancel]
 
   # GET /tea_times
   # GET /tea_times.json
@@ -25,7 +25,7 @@ class TeaTimesController < ApplicationController
 
   # GET /tea_times/new
   def new
-    @tea_time = TeaTime.new(city: City.first, start_time: Time.now + 1.day)
+    @tea_time = TeaTime.new(city: City.first, start_time: Time.now.beginning_of_hour + 1.day)
   end
 
   # GET /tea_times/1/edit
@@ -137,7 +137,6 @@ class TeaTimesController < ApplicationController
 
     def prepare_tea_time_for_edit
       @tea_time ||= TeaTime.new(tea_time_params)
-      @tea_time.city = City.find(params[:city])
       @tea_time.host = current_user
     end
 
@@ -146,14 +145,6 @@ class TeaTimesController < ApplicationController
       permitted = [:start_time, :duration, :location, :city]
       #FIXME: Fuck Strong Params
       params.require(:tea_time).permit!
-    end
-
-    def parse_date(params)
-      tt = params[:tea_time]
-      date = tt[:start_date]
-      time = tt[:start_time]
-      d = "#{date} #{time}"
-      Time.zone.strptime(d, "%m/%d/%y %H:%M")
     end
 
     def authorized?

@@ -16,6 +16,10 @@ class ApplicationController < ActionController::Base
     Time.use_zone(zone, &block)
   end
 
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to :back, :alert => exception.message
+  end
+
   protected
 
     def configure_permitted_parameters
