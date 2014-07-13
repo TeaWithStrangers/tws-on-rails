@@ -215,6 +215,8 @@ h1, h2, h3, p, ul, li {
 @darkred: darken(@red, 15%);
 @yellow: #e0a33c;
 @green: #27ae61;
+@fbblue: #3b5998;
+@twblue: #4099ff;
 @background: #fae8d5;
 @width: 790px;
 
@@ -393,12 +395,6 @@ a {
       }
     }
   }
-  &:hover {
-    .blur-layer {
-      background: none;
-      .transition;
-    }
-  }
 }
 
 .container {
@@ -461,7 +457,7 @@ a {
   }
   hr {
     width: 50%;
-    margin: 0 auto 2em;
+    margin: 0 auto 1em;
     border: 1px solid @lightred;
   }
   .row {
@@ -908,6 +904,10 @@ a {
         p {
           .fsI;
           line-height: 1.5em;
+          &.placeholder {
+            color: lighten(@gray, 20%);
+            font-style: italic;
+          }
         }
       }
     }
@@ -1083,6 +1083,14 @@ a {
         }
       }
     }
+    &.host-intro {
+      .wide .half {
+        p.placeholder {
+          color: lighten(@gray, 20%);
+          font-style: italic;
+        }
+      }
+    }
   }
   &.cities-page {
     ul.cities {
@@ -1103,8 +1111,9 @@ a {
         display: none;
       }
       h2 {
-        .fsI;
+        .fsII;
         .bold;
+        padding-bottom: .5em;
       }
       ul.nav-list {
         overflow: auto;
@@ -1555,6 +1564,37 @@ a {
             }
           }
         }
+      }
+    }
+  }
+}
+.social-container {
+  text-align: center;
+  padding: .5em;
+  .social {
+    display: inline-block;
+    padding: 0 .5em;
+    .fs;
+    .bold;
+    text-transform: uppercase;
+    a {
+      text-decoration: none;
+      display: inline-block;
+      padding: .25em .5em;
+      border: 1px solid @red;
+      border-radius: .25em;
+      color: @white;
+    }
+    &.facebook {
+      a {
+        background-color: @fbblue;
+        border-color: darken(@fbblue,10%);
+      }
+    }
+    &.twitter {
+      a {
+        background-color: @twblue;
+        border-color: darken(@twblue,10%);
       }
     }
   }
