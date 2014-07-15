@@ -56,6 +56,30 @@ describe 'User' do
     end
   end
 
+  describe '#facebook_url' do
+    it 'prefixes facebook id with schema' do
+      facebook_id = 'foobarbaz'
+      user = User.new(facebook: facebook_id)
+      expect(user.facebook_url).to eq "https://facebook.com/#{facebook_id}"
+    end
+    it 'returns nil if user does not have a facebook id' do
+      user = User.new(facebook: nil)
+      expect(user.facebook_url).to eq nil
+    end
+  end
+
+  describe '#twitter_url' do
+    it 'prefixes twitter handle with schema' do
+      handle = "twstrangers"
+      user = User.new(twitter: handle)
+      expect(user.twitter_url).to eq "https://twitter.com/#{handle}"
+    end
+    it 'returns nil if user does not have a twitter handle' do
+      user = User.new(twitter: nil)
+      expect(user.twitter_url).to eq nil
+    end
+  end
+
   describe 'twitter' do
     it 'should be able to store a string as a twitter handle' do
       user = User.new(twitter: 'blablah')

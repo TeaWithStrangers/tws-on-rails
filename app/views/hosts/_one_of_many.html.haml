@@ -6,10 +6,10 @@
         .social-container
           - if @host.facebook?
             .social.facebook
-              = link_to "Facebook", "http://facebook.com/" + "#{@host.facebook}"
+              = link_to "Facebook", @host.facebook_url
           - if @host.twitter?
             .social.twitter
-              = link_to "Twitter", "http://twitter.com/" + "#{@host.twitter}"
+              = link_to "Twitter", @host.twitter_url
     .half.left
       %p
         %em.starter= "Hey, I'm #{@host.name}!"
