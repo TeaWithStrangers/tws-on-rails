@@ -2,10 +2,10 @@
   .wide
     .half.right
       %img.host-photo{src: @host.avatar.url(:landscape)}
-      - if @host.facebook? | @host.twitter?
+      - if @host.facebook? || @host.twitter?
         .social-container
           - if @host.facebook?
-            .social.facebook  
+            .social.facebook
               = link_to "Facebook", "http://facebook.com/" + "#{@host.facebook}"
           - if @host.twitter?
             .social.twitter
