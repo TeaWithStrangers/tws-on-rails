@@ -36,8 +36,9 @@ describe 'User' do
 
   describe 'facebook' do
     it 'should be able to store a string as a facebook' do
-      user = User.create(facebook: 'foo')
-      expect(user.facebook).to eq 'foo'
+      user = FactoryGirl.create(:user, facebook: 'hoo')
+      expect(user.facebook).to eq 'hoo'
+      expect(user.id).to_not be_nil
     end
 
     it 'should not include the http' do
