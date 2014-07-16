@@ -2,7 +2,7 @@ class Validators::FacebookUrlValidator < ActiveModel::Validator
   def validate(record)
     facebook_url = record.facebook
     if facebook_url.present?
-      if facebook_url.match(/http?s/)
+      if facebook_url.match(/https?/)
         record.errors[:facebook] << 'should not include http(s)'
       end
 
