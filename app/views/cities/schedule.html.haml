@@ -8,4 +8,4 @@
 
 .container
   = render partial: 'shared/nav_header'
-  = @city.tea_times.empty? ? render(partial: 'sched_no_hosts') : render(partial: 'sched_has_hosts')
+  = @city.hosts.empty? ? render(partial: 'sched_no_hosts') : render(partial: 'sched_has_hosts')

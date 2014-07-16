@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140628183917) do
+ActiveRecord::Schema.define(version: 20140622181052) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,22 +41,6 @@ ActiveRecord::Schema.define(version: 20140628183917) do
   end
 
   add_index "cities", ["city_code"], name: "city_code_idx", unique: true, using: :btree
-
-  create_table "delayed_jobs", force: true do |t|
-    t.integer  "priority",   default: 0, null: false
-    t.integer  "attempts",   default: 0, null: false
-    t.text     "handler",                null: false
-    t.text     "last_error"
-    t.datetime "run_at"
-    t.datetime "locked_at"
-    t.datetime "failed_at"
-    t.string   "locked_by"
-    t.string   "queue"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "proxy_cities", force: true do |t|
     t.integer "city_id"
@@ -112,8 +96,6 @@ ActiveRecord::Schema.define(version: 20140628183917) do
     t.text     "topics"
     t.text     "tagline"
     t.integer  "home_city_id"
-    t.string   "facebook"
-    t.string   "twitter"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

@@ -1,6 +1,6 @@
 %h2.main.upcoming.host Hosting
-- if !current_user.future_hosts.count.zero?
-  %ul.upcoming.host
+%ul.upcoming.host
+  - if current_user.future_hosts
     - current_user.future_hosts.each do |tea_time|
       %li.tea-time
         = render partial: 'teatime_info', locals: {tea_time: tea_time, att: nil}
@@ -19,7 +19,7 @@
           .controls
             %h6.left= link_to 'Edit details', edit_tea_time_path(tea_time)
             %h6.right= link_to 'Cancel tea time', cancel_tea_time_path(tea_time), :method => :put, :data => { :confirm => 'Are you sure?' }
-- else
-  %p
-    You're not hosting any upcoming tea times! Let's change that.
-    =link_to "Create a new tea time!", new_tea_time_path
+  - else
+    %p
+      You're not hosting any upcoming tea times! Let's change that.
+      =link_to "Create a new tea time!", new_tea_time_path
