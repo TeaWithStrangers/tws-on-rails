@@ -2,12 +2,9 @@
   .narrow.howitworks
     %h3.divider Let's find a time that works!
     %p 
-      Each tea time is hosted by someone awesome (trust us, not just anyone
-      gets to host tea time  :). If no times below suit you, we’ll release
-      more soon and fire you an email then. 
-    %p 
-      In either case, you’ll soon receive an email with a link to this page
-      for future access.
+      Each tea time is hosted by someone that gets it. They're all good, but you can learn more about them by checking out their profiles. 
+    %p
+      If no times below suit you, more will be up soon!
       
--if @city.tea_times.future
+-if @city.tea_times
   = render partial: 'shared/tea_times', locals: {tea_times: @city.tea_times.future_until(Date.today+2.weeks).na.order(:start_time => :asc)} 

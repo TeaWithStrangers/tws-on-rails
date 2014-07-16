@@ -1,11 +1,3 @@
-<div class="landscape-header city">
-  <div class="blur-layer"></div>
-  <div class="landscape-text">
-    <h1 class="heycity">
-      Let's get tea.
-    </h1>
-  </div>
-</div>
 <div class="container dashboard edit">
   <%= render partial: 'shared/nav_header' %>
   <div class="row">
@@ -48,22 +40,28 @@
           <div><%= f.label :home_city %><br />
           <div class="dropdown"><%= select(resource_name, :home_city_id, City.visible.collect{ |p| [p.name, p.id] }) %></div></div>
 
+          <div><%=  f.label :facebook %><br />
+          <%= f.text_field :facebook, placeholder: 'Just the part after http://facebook.com/' %></div>
+
+          <div><%= f.label :twitter %><br />
+          <%= f.text_field :twitter, placeholder: "Don't include the @" %></div>
+
           <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
             <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
           <% end %>
 
           <%= render partial: 'host', locals: {f: f } %>
 
-          <h3 class="edit-subheader"> Password </h3>
+          <h3 class="edit-subheader"> Change Your Password </h3>
 
-          <div><%= f.label :password %> <span class="continue-label">(only if making changes)</span><br />
-            <%= f.password_field :password, autocomplete: "off" %></div>
+          <div><%= f.label :password, "New password" %><br />
+            <%= f.password_field :password, autocomplete: "off", placeholder: "New password" %></div>
 
-          <div><%= f.label :password_confirmation %><br />
-            <%= f.password_field :password_confirmation, autocomplete: "off" %></div>
+          <div><%= f.label :password_confirmation, "Confirm new password" %><br />
+            <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "One more time!" %></div>
 
-          <div><%= f.label :current_password %> <span class="continue-label">(to confirm your changes)</span><br />
-            <%= f.password_field :current_password, autocomplete: "off" %></div>
+          <div><%= f.label :current_password %><br />
+            <%= f.password_field :current_password, autocomplete: "off", placeholder: "Current password" %></div>
 
           <div><%= f.submit "Save Changes" %></div>
         <% end %>

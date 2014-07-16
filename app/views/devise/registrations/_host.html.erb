@@ -1,14 +1,14 @@
 <% if current_user.host? && !current_user.roles.nil?%>
-  <h3 class="edit-subheader">Host Page Content</h3>
+  <h3 class="edit-subheader">Your Host Profile</h3>
 
-  <div><%= f.label :avatar %><br />
-  <%= f.file_field :avatar %></div>
-  <div><%= f.label :tagline %><br />
-    <%= f.text_area :tagline %></div>
-  <div><%= f.label :summary %><br />
+  <div><%= f.label :avatar, "Your Picture" %><br />
+    <%= f.file_field :avatar %></div>
+  <div><%= f.label :summary, "Intro" %><br />
     <%= f.text_area :summary %></div>
-  <div><%= f.label :story %><br />
+  <div><%= f.label :story, "What's your story?" %><br />
     <%= f.text_area :story %></div>
-  <div><%= f.label :topics %><br />
+  <div><%= f.label :topics, "What might we talk about?" %><br />
     <%= f.text_area :topics %></div>
+  <div><%= f.label :tagline, "Random sentence" %><br />
+    <%= f.text_field :tagline %></div>
 <% end %>

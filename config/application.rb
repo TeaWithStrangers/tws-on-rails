@@ -21,5 +21,7 @@ module TWSApi
     # config.i18n.default_locale = :de
     config.generators.assets = true
     config.generators.views = true
+
+    config.autoload_paths += %W(#{config.root}/lib)
   end
 end

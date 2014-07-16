@@ -12,7 +12,19 @@ class User < ActiveRecord::Base
 
   validates_presence_of :home_city_id
 
+  include ActiveModel::Validations
+  validates_with Validators::FacebookUrlValidator
+  validates_with Validators::TwitterHandleValidator
+
   scope :hosts, -> { joins(:roles).where(roles: {name: 'Host'}) }
+
+  def twitter_url
+    "https://twitter.com/#{twitter}" if twitter
+  end
+
+  def facebook_url
+    "https://facebook.com/#{facebook}" if facebook
+  end
 
   def future_hosts
     tea_times.future_until Time.now.utc+2.weeks
