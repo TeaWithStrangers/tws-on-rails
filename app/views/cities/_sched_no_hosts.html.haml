@@ -1,12 +1,9 @@
 .row
   .narrow.howitworks
     %h3.divider 
-      = "There are no tea times happening in #{@city.name} at the moment!"
-    - if @city.hosts.empty?
-      %p 
-        We're working to make sure that we have amazing hosts and enough people to ensure that tea time won't just be you and...you. You'll get an email the second we're ready!
-    - else
-      %p= "Our hosts are busy collecting stories that they're probably going to share at tea time, but when they're back, we're going to open up some more tea times ASAP!"
+      = "We're getting closer to bringing tea time to #{@city.name}!"
+    %p 
+      When we reach you, we'll email you and let you know! In the meantime, we're making sure that we have amazing hosts and enough people to ensure that tea time won't just be you and...you.
     %p 
       In the meantime, here are two things you should do:
   .wide.action

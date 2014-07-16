@@ -1,15 +1,11 @@
-.row.host-intro
+.row
   .wide
     .half.right.mobilephoto
       %img.host-photo{src: @host.avatar.url(:landscape)}
     .half.left
       %p
         %em.starter= "Hey, I'm #{@host.name}!"
-      - if @host.summary?
         = simple_format @host.summary
-      - else
-        %p.placeholder
-          I have a dream that one day #{@city.name} will be filled with people that have sat together for tea time. 
     .half.right
       %p
         %em.starter Let's get tea
@@ -20,30 +16,14 @@
   .wide
     .two-third.right
       %img.host-photo.singlehost{src: @host.avatar.url(:landscape)}
-      - if @host.facebook? | @host.twitter?
-        .social-container
-          - if @host.facebook?
-            .social.facebook  
-              = link_to "Facebook", "http://facebook.com/" + "#{@host.facebook}"
-          - if @host.twitter?
-            .social.twitter
-              = link_to "Twitter", "http://twitter.com/" + "#{@host.twitter}"
       .prompt
         %h3
           What's your story?
-        - if @host.story?
-          = simple_format @host.story
-        - else
-          %p.placeholder
-            I once had a really good story, and then I started writing about it. I'm still on that part. When I'm done, it'll be here.
+        = simple_format @host.story
       .prompt
         %h3
           What might we talk about?
-        - if @host.topics?
-          = simple_format @host.topics
-        - else
-          %p.placeholder
-            Lots of really interesting and relatable things that I just haven't specified yet.
+        = simple_format @host.topics
     .third.left
       %h3
         Tea With Strangers
@@ -51,6 +31,6 @@
         Tea time is a conversation fueled by the stories, questions,
         and listening of a few strangers and a super host.
       %h4.signup-cta
-        Let's get tea.
+        Sign up and come sometime.
       = render partial: 'shared/signup'
 =content_for(:footer) { render partial: 'shared/footer' }

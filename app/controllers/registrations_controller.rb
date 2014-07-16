@@ -3,7 +3,7 @@ class RegistrationsController < Devise::RegistrationsController
     city = City.find_by(id: params[:city])
     if params[:user][:autogen]
       generated_password = Devise.friendly_token.first(8)
-      user = User.new(name: params[:user][:name],
+      user = User.new(name: params[:user][:name], 
                       email: params[:user][:email],
                       password: generated_password,
                       home_city: city)

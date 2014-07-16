@@ -48,9 +48,7 @@
 @font-face {
   font-family: 'GothamHTF-Ultra';
   src: asset-url('GothamHTF-Ultra.eot');
-  src: local('☺'), asset-url('GothamHTF-Ultra.woff') format('woff'), 
-        asset-url('GothamHTF-Ultra.ttf') format('truetype'), 
-        asset-url('GothamHTF-Ultra.svg') format('svg');
+  src: local('☺'), asset-url('GothamHTF-Ultra.woff') format('woff'), asset-url('GothamHTF-Ultra.ttf') format('truetype'), asset-url('GothamHTF-Ultra.svg') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -58,9 +56,7 @@
 @font-face {
   font-family: 'ProximaNova-Bold';
   src: asset-url('ProximaNova-Bold.eot');
-  src: local('☺'), asset-url('ProximaNova-Bold.woff') format('woff'), 
-        asset-url('ProximaNova-Bold.ttf') format('truetype'), 
-        asset-url('ProximaNova-Bold.svg') format('svg');
+  src: local('☺'), asset-url('ProximaNova-Bold.woff') format('woff'), asset-url('ProximaNova-Bold.ttf') format('truetype'), asset-url('ProximaNova-Bold.svg') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -68,9 +64,7 @@
 @font-face {
   font-family: 'ProximaNova-Regular';
   src: asset-url('ProximaNova-Regular.eot');
-  src: local('☺'), asset-url('ProximaNova-Regular.woff') format('woff'), 
-        asset-url('ProximaNova-Regular.ttf') format('truetype'), 
-        asset-url('ProximaNova-Regular.svg') format('svg');
+  src: local('☺'), asset-url('ProximaNova-Regular.woff') format('woff'), asset-url('ProximaNova-Regular.ttf') format('truetype'), asset-url('ProximaNova-Regular.svg') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -78,9 +72,7 @@
 @font-face {
   font-family: 'ProximaNova-Light';
   src: asset-url('ProximaNova-Light.eot');
-  src: local('☺'), asset-url('ProximaNova-Light.woff') format('woff'), 
-        asset-url('ProximaNova-Light.ttf') format('truetype'), 
-        asset-url('ProximaNova-Light.svg') format('svg');
+  src: local('☺'), asset-url('ProximaNova-Light.woff') format('woff'), asset-url('ProximaNova-Light.ttf') format('truetype'), asset-url('ProximaNova-Light.svg') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -215,8 +207,6 @@ h1, h2, h3, p, ul, li {
 @darkred: darken(@red, 15%);
 @yellow: #e0a33c;
 @green: #27ae61;
-@fbblue: #3b5998;
-@twblue: #4099ff;
 @background: #fae8d5;
 @width: 790px;
 
@@ -395,6 +385,12 @@ a {
       }
     }
   }
+  &:hover {
+    .blur-layer {
+      background: none;
+      .transition;
+    }
+  }
 }
 
 .container {
@@ -457,7 +453,7 @@ a {
   }
   hr {
     width: 50%;
-    margin: 0 auto 1em;
+    margin: 0 auto 2em;
     border: 1px solid @lightred;
   }
   .row {
@@ -774,9 +770,6 @@ a {
       &.last {
         margin-bottom: 2em;
       }
-      &.placeholder {
-        color: lighten(@gray, 20%);
-      }
     }
     .half {
       float: left;
@@ -907,10 +900,6 @@ a {
         p {
           .fsI;
           line-height: 1.5em;
-          &.placeholder {
-            color: lighten(@gray, 20%);
-            font-style: italic;
-          }
         }
       }
     }
@@ -943,9 +932,6 @@ a {
         background: @yellow;
         text-align: center;
         margin-bottom: 1em;
-        &.placeholder {
-          opacity: 0.75;
-        }
       }
     }
     h4 {
@@ -1089,14 +1075,6 @@ a {
         }
       }
     }
-    &.host-intro {
-      .wide .half {
-        p.placeholder {
-          color: lighten(@gray, 20%);
-          font-style: italic;
-        }
-      }
-    }
   }
   &.cities-page {
     ul.cities {
@@ -1117,9 +1095,8 @@ a {
         display: none;
       }
       h2 {
-        .fsII;
+        .fsI;
         .bold;
-        padding-bottom: .5em;
       }
       ul.nav-list {
         overflow: auto;
@@ -1574,37 +1551,6 @@ a {
     }
   }
 }
-.social-container {
-  text-align: center;
-  padding: .5em;
-  .social {
-    display: inline-block;
-    padding: 0 .5em;
-    .fs;
-    .bold;
-    text-transform: uppercase;
-    a {
-      text-decoration: none;
-      display: inline-block;
-      padding: .25em .5em;
-      border: 1px solid @red;
-      border-radius: .25em;
-      color: @white;
-    }
-    &.facebook {
-      a {
-        background-color: @fbblue;
-        border-color: darken(@fbblue,10%);
-      }
-    }
-    &.twitter {
-      a {
-        background-color: @twblue;
-        border-color: darken(@twblue,10%);
-      }
-    }
-  }
-}
 #footer {
   background: darken(@lightred,10%);
   text-align: center;
@@ -2019,9 +1965,7 @@ form.schedule-tea {
   body {
     // font-size: 32px;
   }
-  .container, .container .row .narrow, .container .row .wide.something-funny p.bigger, 
-  .container .row .wide.something-funny p.big, .landscape-header, .landscape-header .landscape-text h1, 
-  #footer, #footer .wide {
+  .container, .container .row .narrow, .container .row .wide.something-funny p.bigger, .container .row .wide.something-funny p.big, .landscape-header, .landscape-header .landscape-text h1, #footer, #footer .wide {
     width: 100%;
     min-width: 0;
   }

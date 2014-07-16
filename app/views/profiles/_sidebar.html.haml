@@ -1,8 +1,8 @@
 %ul.nav-list
   %li
-    =link_to "Upcoming Tea Times", profile_path
-  / %li
-  /   =link_to "Join Another Tea Time", schedule_city_path(current_user.home_city)
+    =link_to "Tea Times", profile_path
+  %li
+    =link_to "Join Another Tea Time", schedule_city_path(current_user.home_city)
   %li
     - if current_user.host? || current_user.admin?
       = link_to "Create New Tea Time", new_tea_time_path
