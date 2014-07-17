@@ -19,6 +19,18 @@ describe City do
         expect(City.visible).to include(@city, @warm)
         expect(City.visible).not_to include(@hidden)
       end
+
+      it 'should not include hidden cities for normal users' do
+        user = create(:user)
+        expect(City.visible(user)).to include(@city, @warm)
+        expect(City.visible).not_to include(@hidden)
+      end
+
+      it 'should include hidden cities if a user can permissions' do
+        host = create(:user, :host)
+        expect(City.visible(host)).to include(@city, @warm, @hidden)
+      end
+      
     end
 
     describe '#hidden' do

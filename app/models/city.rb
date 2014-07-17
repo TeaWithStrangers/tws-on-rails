@@ -16,7 +16,13 @@ class City < ActiveRecord::Base
 
   validate :proxy_city_not_self
 
-  scope :visible, -> { where.not(brew_status: brew_statuses[:hidden]) }
+  scope :visible, ->(user = nil) { 
+    if (user && user.host?) 
+      all 
+    else 
+      where.not(brew_status: brew_statuses[:hidden]) 
+    end
+  }
   scope :hidden, -> { where(brew_status: brew_statuses[:hidden]) }
 
   def hosts
