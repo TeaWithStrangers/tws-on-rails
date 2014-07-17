@@ -38,7 +38,7 @@
           <%= f.email_field :email %></div>
 
           <div><%= f.label :home_city %><br />
-          <div class="dropdown"><%= select(resource_name, :home_city_id, City.visible.collect{ |p| [p.name, p.id] }) %></div></div>
+          <div class="dropdown"><%= select(resource_name, :home_city_id, City.visible(current_user).collect{ |p| [p.name, p.id] }) %></div></div>
 
           <div><%=  f.label :facebook %><br />
           <%= f.text_field :facebook, placeholder: 'Just the part after http://facebook.com/' %></div>
