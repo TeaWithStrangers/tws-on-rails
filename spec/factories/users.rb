@@ -4,7 +4,7 @@ FactoryGirl.define do
     name "Joe User"
     sequence(:email) { |n| "dummy#{n}@teawithstrangers.com" }
     password "password"
-    home_city_id 1
+    association :home_city, factory: :city
 
     [:host, :admin].each do |t| #YOLO
       trait t do

@@ -17,10 +17,18 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to :back, :alert => exception.message
+    go_back(exception)
   end
 
   protected
+
+    def go_back(exception)
+      begin
+        redirect_to :back, :alert => exception.message
+      rescue ActionController::RedirectBackError
+        redirect_to root_path
+      end
+    end
 
     def configure_permitted_parameters
       permitted = [:name, :email, :password, :password_confirmation, :avatar,
