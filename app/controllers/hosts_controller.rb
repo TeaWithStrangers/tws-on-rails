@@ -16,9 +16,12 @@ class HostsController < ApplicationController
 
   def create
     generated_password = Devise.friendly_token.first(8)
-    @host = User.new(host_params)
+
+    @host = User.find_or_initialize_by(email: host_params[:email])
+    @host.assign_attributes(host_params)
     @host.roles << Role.find_by(name: 'Host')
     @host.password = generated_password
+
     if @host.save
       [current_user, @host].each do |user|
         UserMailer.user_registration(user, generated_password)
