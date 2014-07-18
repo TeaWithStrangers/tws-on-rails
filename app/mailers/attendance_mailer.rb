@@ -21,6 +21,7 @@ class AttendanceMailer < ActionMailer::Base
     
     mail.attachments['event.ics'] = {mime_type: "text/calendar", 
                                      content: @attendance.tea_time.ical.to_ical}
+    cancel_delivery unless @attendance.pending?
 
     mail(to: @attendance.user.email, 
          from: @attendance.tea_time.host.email,
