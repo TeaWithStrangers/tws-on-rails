@@ -7,7 +7,7 @@ class TeaTimeMailer < ActionMailer::Base
                                      content: @tea_time.ical.to_ical}
 
     mail(to: @tea_time.host.email, 
-         subject: "Tea Time Confirmation for #{@tea_time.friendly_time}").deliver!
+         subject: "Tea Time Confirmation for #{@tea_time.friendly_time}")
   end
 
   def followup(tea_time_id)
@@ -27,7 +27,7 @@ class TeaTimeMailer < ActionMailer::Base
         mail(bcc: attendees.map {|a| a.user.email},
              from: "\"Ankit at Tea With Strangers\" <ankit@teawithstrangers.com>",
              subject: 'Following up on tea time',
-             template_name: template).deliver!
+             template_name: template)
       end
     end
   end
@@ -36,7 +36,7 @@ class TeaTimeMailer < ActionMailer::Base
     @tea_time = TeaTime.find(tea_time_id)
     @tea_time.attendances.map do |att|
       @user = att.user 
-      mail(to: @user.email, subject: "Sad days — tea time canceled").deliver!
+      mail(to: @user.email, subject: "Sad days — tea time canceled")
     end
   end
 
@@ -45,6 +45,6 @@ class TeaTimeMailer < ActionMailer::Base
     mail(to: @user.email,
          from: "\"Ankit at Tea With Strangers\" <ankit@teawithstrangers.com>",
          subject: "What tea time is about",
-         template_name: 'registration_followup').deliver!
+         template_name: 'registration_followup')
   end
 end
