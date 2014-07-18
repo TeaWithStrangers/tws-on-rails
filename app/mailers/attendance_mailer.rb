@@ -1,16 +1,16 @@
 class AttendanceMailer < ActionMailer::Base
   def registration(attendance_id)
     @attendance = Attendance.find(attendance_id)
-    @tea_time = attendance.tea_time
-    @user = attendance.user
+    @tea_time = @attendance.tea_time
+    @user = @attendance.user
 
     mail.attachments['event.ics'] = {mime_type: "text/calendar", 
                                      content: @tea_time.ical.to_ical}
 
-    mail(to: attendance.user.email, 
+    mail(to: @attendance.user.email,
          from: @tea_time.host.friendly_email,
          subject: "See you at tea time!",
-         reply_to: @tea_time.host.email).deliver!
+         reply_to: @tea_time.host.email)
   end
 
   def reminder(attendance_id, type)
@@ -22,13 +22,9 @@ class AttendanceMailer < ActionMailer::Base
     mail.attachments['event.ics'] = {mime_type: "text/calendar", 
                                      content: @attendance.tea_time.ical.to_ical}
 
-    # We shouldn't send a reminder for a flake
-    if @attendance.pending?
-      mail(to: @user.email, 
-           from: tt.host.friendly_email,
-           subject: "See you at tea time soon!", 
-           reply_to: tt.host.email).deliver!
-    end
+    mail(to: @attendance.user.email, 
+         from: @attendance.tea_time.host.email,
+         subject: "See you at tea time soon!") 
   end
 
   def flake(attendance_id)
@@ -38,6 +34,6 @@ class AttendanceMailer < ActionMailer::Base
     mail(to: @user.email, 
          from: @tea_time.host.friendly_email,
          reply_to: @tea_time.host.email,
-         subject: "Let's find another tea time that works!").deliver!
+         subject: "Let's find another tea time that works!")
   end
 end
