@@ -69,4 +69,5 @@ group :development, :test do
   gem 'rspec-rails', '~> 2.14.2'
   gem 'factory_girl', '~>4.4'
   gem 'factory_girl_rails'
+  gem 'rails-observers'
 end
