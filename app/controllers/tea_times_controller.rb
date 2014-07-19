@@ -25,7 +25,7 @@ class TeaTimesController < ApplicationController
 
   # GET /tea_times/new
   def new
-    @tea_time = TeaTime.new(city: City.first, start_time: Time.now.beginning_of_hour + 1.day)
+    @tea_time = TeaTime.new(city: current_user.home_city, start_time: Time.now.beginning_of_hour + 1.day)
   end
 
   # GET /tea_times/1/edit
