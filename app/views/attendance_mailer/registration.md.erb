@@ -1,0 +1,16 @@
+Hey hey <%= @user.name %>!
+
+Just confirming the tea time you just signed up for! I included a calendar event with this email so you don't forget. If you hit the 'Add to Calendar' button, it'll be on your cal.
+
+For good measure (in case you really hate calendars), tea time deets are:
+
+<%= render partial: "shared_mailers/info_nohost", locals: {tea_time: @tea_time} %>
+
+Can't wait to have you for tea!
+
+Cheers,  
+<%= @attendance.tea_time.host.name %>
+
+P.S. If you need to bail, take care of it on the sooner side so your spot can be opened for someone else! You can do that by logging into the site and going to the 'Account' link.
+
+In case you forgot your password, [you can reset it easily here](http://www.teawithstrangers.com/users/password/new>).

@@ -8,7 +8,7 @@ class RegistrationsController < Devise::RegistrationsController
                       password: generated_password,
                       home_city: city)
       if user.save
-        UserMailer.user_registration(user, generated_password)
+        UserMailer.delay.registration(user, generated_password)
         sign_in(:user, user)
         message = "All registered! Check your email for your password."
         if city

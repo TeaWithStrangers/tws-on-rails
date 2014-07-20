@@ -1,0 +1,12 @@
+Hey <%= @user.name %>,
+ 
+We're really sorry for this, but your upcoming tea time with <%= @tea_time.host.name %> on <%= @tea_time.friendly_time %> had to be canceled.
+
+We try to make sure this rarely happens, so emails like this are only sent when there's a good reason for it.
+
+In the meantime, we'd love it if there were another time that did work for you. [Check out the schedule here](<%= url_for(controller: 'cities', action: 'schedule', id: @user.home_city.city_code, only_path: false) %>).  
+
+Hope you're having a super duper day! If not, [watch this](https://www.youtube.com/watch?v=eaIvk1cSyG8). It'll change everything.
+
+Thumbs up for rock and roll!  
+The Tea With Strangers family

@@ -6,12 +6,14 @@ class TeaTime < ActiveRecord::Base
   has_many :attendances, dependent: :destroy
 
   after_touch :clear_association_cache_wrapper
+  after_create :send_host_confirmation, :queue_followup_mails
 
   enum followup_status: [:na, :pending, :sent, :cancelled]
 
   TeaTime.followup_statuses.each do |k,v|
     scope k, -> { where(followup_status: v) }
   end
+
   scope :before, ->(date)  { where("start_time <= ?", date) }
   scope :after, ->(date)  { where("start_time >= ?", date) }
   scope :past, -> { before(Time.now.utc) }
@@ -20,6 +22,10 @@ class TeaTime < ActiveRecord::Base
 
   def start_time
     return use_city_timezone { super.in_time_zone if super } || Time.now
+  end
+
+  def end_time
+    self.start_time + self.duration.hours
   end
 
   def start_time=(time)
@@ -71,22 +77,12 @@ class TeaTime < ActiveRecord::Base
 
   def cancel!
     unless cancelled?
-      # Until we move mailers into something like DJ we run the risk of a failed
-      # email send blocking cancellation and ruining everything. If that happens
-      # I rather abort and return the Requesting thread than 500 error. This is
-      # a short-term fix
-      begin 
-        self.followup_status = :cancelled
-        self.save!
-        UserMailer.tea_time_cancellation(self)
-        attendances.map { |att|
-          att.status = :cancelled
-          att.save
-        }
-        return true
-      rescue Exception => e
-        return false
-      end
+      attendances.map { |att| att.update_attribute(:status, :cancelled) }
+      self.update_attribute(:followup_status, :cancelled)
+      TeaTimeMailer.delay.cancellation(self)
+      true
+    else
+      false
     end
   end
 
@@ -106,6 +102,14 @@ class TeaTime < ActiveRecord::Base
 
   def todo?
     return !! followup_status != :sent && !attendances.select(&:todo?).empty?
+  end
+
+  def send_host_confirmation
+    TeaTimeMailer.delay.host_confirmation(self.id)
+  end
+
+  def queue_followup_mails
+    TeaTimeMailer.delay(run_at: self.end_time).followup(self.id)
   end
 
   private
