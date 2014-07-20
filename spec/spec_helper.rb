@@ -5,6 +5,8 @@ require 'rspec/rails'
 require 'rspec/autorun'
 require "cancan/matchers"
 
+load Rails.root + "db/seeds_test.rb"
+
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
@@ -46,8 +48,4 @@ RSpec.configure do |config|
 
   # Include devise test helpers in conroller specs
   config.include Devise::TestHelpers, :type => :controller
-
-  config.before(:all) do
-    load Rails.root + "db/seeds_test.rb"
-  end
 end

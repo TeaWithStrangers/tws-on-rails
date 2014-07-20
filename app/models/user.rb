@@ -35,6 +35,10 @@ class User < ActiveRecord::Base
       merge(TeaTime.future).includes(:tea_time)
   end
 
+  def friendly_email
+    "\"#{self.name}\" <#{self.email}>"
+  end
+
   def role?(role)
     return !! self.roles.find_by_name(role.to_s.camelize)
   end
