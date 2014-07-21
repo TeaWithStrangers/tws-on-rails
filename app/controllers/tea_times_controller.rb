@@ -43,13 +43,13 @@ class TeaTimesController < ApplicationController
                           password: generated_password,
                           home_city: @tea_time.city)
       sign_in(:user, @user)
-      UserMailer.delay.user_registration(@user, generated_password) if @user
+      UserMailer.delay.registration(@user, generated_password) if @user
     end
 
     @attendance = Attendance.where(tea_time: @tea_time, user: @user).first_or_create
     @attendance.status = :pending
 
-    TeaTimeMailer.delay.registration(@attendance)
+    AttendanceMailer.delay.registration(@attendance)
     if @attendance.save
       respond_to do |format|
         format.html { redirect_to profile_path, notice: 'Registered for Tea Time! See you soon :)' }
