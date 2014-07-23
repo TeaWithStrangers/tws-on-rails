@@ -137,6 +137,13 @@ class TeaTimesController < ApplicationController
 
     def prepare_tea_time_for_edit
       @tea_time ||= TeaTime.new(tea_time_params)
+
+      existing_tea_time = TeaTime.where(user_id: current_user.id, start_time: @tea_time.start_time).first
+      if existing_tea_time
+        @tea_time.delete
+        @tea_time = existing_tea_time
+      end
+
       @tea_time.host = current_user
     end
 
