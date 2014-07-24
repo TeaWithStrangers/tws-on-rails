@@ -49,7 +49,6 @@ class TeaTimesController < ApplicationController
     @attendance = Attendance.where(tea_time: @tea_time, user: @user).first_or_create
     @attendance.status = :pending
 
-    AttendanceMailer.delay.registration(@attendance)
     if @attendance.save
       respond_to do |format|
         format.html { redirect_to profile_path, notice: 'Registered for Tea Time! See you soon :)' }
