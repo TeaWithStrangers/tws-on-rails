@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   has_attached_file :avatar, styles: { medium: "300x300", thumb: "100x100", landscape: "500"}, default_url: "/assets/missing.jpg"
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
-  validates_presence_of :home_city_id
+  validates_presence_of :home_city_id, :name
 
   include ActiveModel::Validations
   validates_with Validators::FacebookUrlValidator
