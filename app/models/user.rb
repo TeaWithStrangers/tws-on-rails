@@ -50,4 +50,9 @@ class User < ActiveRecord::Base
   def host?
     (admin? || role?(:Host))
   end
+
+  def attendances_for(tt_period)
+    attendances.where(status: 0).joins(:tea_time).
+      merge(tt_period).includes(:tea_time)
+  end
 end
