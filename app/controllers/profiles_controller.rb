@@ -3,4 +3,7 @@ class ProfilesController < ApplicationController
 
   def show
   end
+
+  def history
+  end
 end
