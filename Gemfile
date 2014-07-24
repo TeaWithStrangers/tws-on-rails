@@ -70,4 +70,5 @@ group :development, :test do
   gem 'factory_girl', '~>4.4'
   gem 'factory_girl_rails'
   gem 'rails-observers'
+  gem 'shoulda-matchers'
 end
