@@ -39,7 +39,6 @@ Rails.application.configure do
   config.action_mailer.default_url_options = {host: 'http://localhost' }
 
   # Background Worker Config
-  config.after_initialize do 
-    Delayed::Job.scaler = :local
-  end
+  # Run DJ jobs synchronously in development
+  Delayed::Worker.delay_jobs = false
 end
