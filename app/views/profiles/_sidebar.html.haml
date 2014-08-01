@@ -4,8 +4,10 @@
   / %li
   /   =link_to "Join Another Tea Time", schedule_city_path(current_user.home_city)
   %li
+    =link_to "Tea Time History", history_path
+  %li
     - if current_user.host? || current_user.admin?
-      = link_to "Create New Tea Time", new_tea_time_path
+      =link_to "Create New Tea Time", new_tea_time_path
   %li
     =link_to "Account Details", edit_user_registration_path
   %li

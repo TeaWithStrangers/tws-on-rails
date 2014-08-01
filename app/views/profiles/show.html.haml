@@ -7,6 +7,5 @@
         = render partial: 'sidebar'
       %hr
       .two-third.right
-        = link_to "View past tea times", history_path
         = render partial: 'host_tea_time_info', locals: {tea_times: @hosting} if current_user.host?
         = render partial: 'user_attendance_info', locals: {attendances: @attending}
