@@ -71,7 +71,7 @@ class TeaTime < ActiveRecord::Base
   end
   
   #Takes :filter, same as attendees
-  def all_attendee_emails(filter: nil)
+  def attendee_emails(filter: nil)
     attendees(filter: filter).map(&:email).join(',')
   end
 
