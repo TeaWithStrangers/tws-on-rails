@@ -1,6 +1,6 @@
 .row.tea-time
   .host-photo
-    %a{href:host_city_path(tea_time.city, tea_time.host)}
+    %a{href:host_city_path(tea_time.city.id, tea_time.host.id)}
       .avatar-container
         .avatar
           %img.avatar-image{src:tea_time.host.avatar.url(:medium)}
