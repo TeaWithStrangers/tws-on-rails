@@ -13,7 +13,7 @@
                   %h4 #{k.capitalize}
                   - v.map(&:user).each do |a|
                     %li.attendee-names= link_to a.name, "mailto:#{a.email}"
-                .email-all= link_to "Email All", "mailto:#{tea_time.all_attendee_emails}"
+                .email-all= link_to "Email All", "mailto:#{tea_time.attendee_emails ->(x) { x.flake? || x.no_show?}}"
             - else
               %h3.attendees.none No attendees yet!
           .controls
