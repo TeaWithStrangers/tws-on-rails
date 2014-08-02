@@ -107,7 +107,7 @@ describe TeaTime do
       expect(@tea_time.attendees(filter: ->(a) { a.flake? })).not_to include(@att_flake.user)
     end 
 
-    describe '.all_attendee_emails' do
+    describe '.attendee_emails' do
       it 'should concatenate email addresses of attendees' do
         tea_time = TeaTime.new
         tea_time.stub(attendees: [
@@ -115,11 +115,11 @@ describe TeaTime do
           mock_model('User', email: 'bar@tws.com', status: 'pending'),
           mock_model('User', email: 'baz@tws.com', status: 'pending'),
         ])
-        expect(tea_time.all_attendee_emails).to eq('foo@tws.com,bar@tws.com,baz@tws.com')
+        expect(tea_time.attendee_emails).to eq('foo@tws.com,bar@tws.com,baz@tws.com')
       end
 
       it 'should exclude items matching a given filter' do
-        expect(@tea_time.all_attendee_emails(filter: :flake?)).not_to include(@att_flake.user.email)
+        expect(@tea_time.attendee_emails(filter: :flake?)).not_to include(@att_flake.user.email)
       end
     end
   end
