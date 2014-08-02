@@ -7,7 +7,7 @@ class ProfilesController < ApplicationController
   end
 
   def history
-    @hosting = current_user.tea_times
-    @attending = current_user.attendances
+    @hosting = current_user.tea_times.past
+    @attending = current_user.attendances.past
   end
 end
