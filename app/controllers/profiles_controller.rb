@@ -7,7 +7,7 @@ class ProfilesController < ApplicationController
   end
 
   def history
-    @hosting = current_user.tea_times.past
-    @attending = current_user.attendances.past
+    @hosting = current_user.tea_times.order("start_time desc")
+    @attending = Attendance.attended.where(user: current_user).joins(:tea_time).order('tea_times.start_time desc')
   end
 end

@@ -8,6 +8,8 @@ class Attendance < ActiveRecord::Base
   before_create :check_capacity
   after_create :queue_mails
 
+  scope :attended, ->() { where(status: [:pending, :present].map {|x| Attendance.statuses[x]}) }
+
   def todo?
     pending?
   end
