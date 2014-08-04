@@ -45,6 +45,9 @@ gem 'workless', '~> 1.2'
 gem 'paperclip', '~> 4.1'
 gem 'aws-sdk', '~> 1.5.7'
 
+# soft-delete
+gem 'paranoia', "~> 2.0"
+
 # Authentication & Permission Gems
 gem 'devise', '~> 3.2.4'
 gem 'cancan', '~> 1.6.10'
