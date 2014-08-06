@@ -1,7 +1,7 @@
 %h2.main.upcoming.host Hosting
 - if !tea_times.count.zero?
   %ul.upcoming.host
-    - tea_times.future.each do |tea_time|
+    - tea_times.each do |tea_time|
       %li.tea-time
         = render partial: 'teatime_info', locals: {tea_time: tea_time, att: nil}
         .attendees-container
