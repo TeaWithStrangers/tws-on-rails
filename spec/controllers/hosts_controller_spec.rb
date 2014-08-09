@@ -2,12 +2,9 @@ require 'spec_helper'
 
 describe HostsController do
   describe '#create' do
-
     before(:each) do
-      admin = create(:user)
-      admin.roles << Role.find_by(name: 'Admin')
+      admin = create(:user, :admin)
 
-      @request.env["devise.mapping"] = Devise.mappings[:user]
       sign_in(admin)
       controller.stub(:needs_password?) { false }
     end
@@ -17,7 +14,7 @@ describe HostsController do
       {
         name: 'Mr. Bean',
         email: 'johnnyenglish@mrbean.com',
-        home_city_id: create(:city).id
+        home_city_id: create(:city)
       }
     end
 
@@ -48,5 +45,46 @@ describe HostsController do
         expect(user.roles.map(&:name)).to include("Host")
       end
     end
+
+  end
+
+  describe '#new' do
+    it 'should 401 anonymous users' do
+      get :new
+      assert_response :unauthorized
+    end
+
+    context 'user is not an admin' do
+      it 'should be unauthorized' do
+        user = create(:user)
+        sign_in user
+
+        get :new
+        expect(response).to redirect_to({:controller => :static, :action => :index})
+      end
+
+      it 'should not allow hosts' do
+        user = create(:user, :host)
+        sign_in user
+
+        get :new
+
+        expect(response).to redirect_to({:controller => :static, :action => :index})
+      end
+    end
+  end
+
+  describe '#show' do
+    let(:host) { create(:user, :host) }
+
+    it 'should show the host' do
+      get :show, {id: host.home_city, host_id: host}
+
+      expect(assigns(:host)).to eq(host)
+      expect(assigns(:city)).to eq(host.home_city)
+
+      assert_response :success
+    end
+
   end
 end
