@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/TeaWithStrangers/tws-on-rails.svg)](https://travis-ci.org/TeaWithStrangers/tws-on-rails)
 [![Coverage Status](https://coveralls.io/repos/TeaWithStrangers/tws-on-rails/badge.png)](https://coveralls.io/r/TeaWithStrangers/tws-on-rails)
+[![Code Climate](https://codeclimate.com/github/TeaWithStrangers/tws-on-rails/badges/gpa.svg)](https://codeclimate.com/github/TeaWithStrangers/tws-on-rails)
 
 ### Development
 
