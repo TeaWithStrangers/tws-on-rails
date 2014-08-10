@@ -39,7 +39,6 @@ gem 'time_zone_ext'
 #Background Jobs
 gem 'delayed_job', '~> 4.0.1'
 gem 'delayed_job_active_record', '~> 4.0.1'
-gem 'workless', '~> 1.2'
 
 # File Storage
 gem 'paperclip', '~> 4.1'
