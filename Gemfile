@@ -30,6 +30,7 @@ gem "active_model_serializers"
 gem 'spring',        group: :development
 gem 'mailcatcher',        group: :development
 gem 'markerb'
+gem 'sendgrid'
 
 # Figaro makes it easy to set env variables without Foreman
 #Calendars
