@@ -6,7 +6,7 @@ class TeaTime < ActiveRecord::Base
   has_many :attendances, dependent: :destroy
 
   after_touch :clear_association_cache_wrapper
-  after_create :send_host_confirmation, :queue_followup_mails
+  after_create :send_host_confirmation, :queue_followup_mails, unless: :skip_callbacks
 
   enum followup_status: [:na, :pending, :sent, :cancelled]
 
