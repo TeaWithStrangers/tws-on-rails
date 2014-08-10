@@ -1,0 +1,18 @@
+.container.dashboard
+  .row
+    .wide
+      %h1 Send a Mass Mail
+      = form_tag(url: {action: 'send_mail'}) do |f|
+        = label_tag :subject, 'Subject'
+        %br
+        = text_field_tag :subject
+        %br
+        = label_tag :body, 'Body'
+        %br
+        = text_area_tag :body
+        %br
+        = label_tag :city, 'City'
+        %br
+        .dropdown
+          = select_tag(:city_id, options_for_select(City.all.collect{ |p| [p.name, p.id] }), {:class => "city"})
+        = submit_tag 'Send Mail', confirm: "This is going to cost a few bucks. Are you sure?"

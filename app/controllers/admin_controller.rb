@@ -10,6 +10,15 @@ class AdminController < ApplicationController
   def users
   end
 
+  def write_mail
+  end
+  
+  def send_mail
+    MassMailer.delay.simple_mail(params)
+    redirect_to action: :write_mail, flash: "Succesfully sent mail"
+  end
+
+
   def ghost
     user = User.find_by(email: params[:email])
     if user

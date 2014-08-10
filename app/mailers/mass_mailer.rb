@@ -9,7 +9,7 @@ class MassMailer < ActionMailer::Base
   def simple_mail(opts = {})
     from = (opts[:from] ||= '"Tea With Strangers" <sayhi@teawithstrangers.com>')
     to = (opts[:to] ||= from)
-    sendgrid_recipients City.for_code!(opts[:city_id]).users.select(:email).map(&:email)
+    sendgrid_recipients City.find(opts[:city_id]).users.select(:email).map(&:email)
 
     mail(to: to, from: from, subject: opts[:subject]) do |f|
       f.html { render inline: markdown(opts[:body]) }
