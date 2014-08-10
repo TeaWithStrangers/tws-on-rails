@@ -6,7 +6,7 @@ class Attendance < ActiveRecord::Base
   validates_uniqueness_of :user_id, scope: :tea_time_id
 
   before_create :check_capacity
-  after_create :queue_mails
+  after_create :queue_mails, unless: :skip_callbacks
 
   def todo?
     pending?

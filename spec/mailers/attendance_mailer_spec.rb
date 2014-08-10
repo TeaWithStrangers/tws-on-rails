@@ -9,10 +9,11 @@ describe AttendanceMailer do
   describe '.reminder' do
     context 'flaked attendees' do
       it "shouldn't be sent a reminder" do
+        AttendanceMailer.stub(:flake)
         @attendance.flake!
         AttendanceMailer.reminder(@attendance.id, :same_day).deliver
         #Flake mails get created, reminder shouldn't be
-        expect(ActionMailer::Base.deliveries.size).to eq(1)
+        expect(ActionMailer::Base.deliveries.size).to eq(0)
       end
     end
     
