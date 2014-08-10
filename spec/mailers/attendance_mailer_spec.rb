@@ -9,8 +9,7 @@ describe AttendanceMailer do
   describe '.reminder' do
     context 'flaked attendees' do
       it "shouldn't be sent a reminder" do
-        AttendanceMailer.stub(:flake)
-        @attendance.flake!
+        @attendance.update_column(:status, 1)
         AttendanceMailer.reminder(@attendance.id, :same_day).deliver
         #Flake mails get created, reminder shouldn't be
         expect(ActionMailer::Base.deliveries.size).to eq(0)
@@ -35,6 +34,8 @@ describe AttendanceMailer do
     end
   end
 
+  #TODO: This is really a test of .flake! not the message itself. Move to
+  #attendance_spec when possible
   describe '.flake' do
     it 'should be sent when .flake! is called' do
       @attendance.flake!
