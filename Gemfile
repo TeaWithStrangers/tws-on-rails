@@ -27,8 +27,6 @@ gem "active_model_serializers"
 
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-gem 'spring',        group: :development
-gem 'mailcatcher',        group: :development
 gem 'markerb'
 
 # Figaro makes it easy to set env variables without Foreman
@@ -57,12 +55,16 @@ gem 'unicorn', group: :production
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-# Use debugger
-gem 'debugger', group: [:development, :test]
-gem 'hirb', group: :development
+# Dev Gems
+group :development do
+  gem 'hirb'
+  gem 'spring'
+  gem 'mailcatcher'
+end
 
 # Random debug tools
 group :development, :test do
+  gem 'debugger'
   gem 'pry-rails'
   gem 'pry-debugger'
   gem 'pry-stack_explorer'
@@ -71,4 +73,5 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'rails-observers'
   gem 'shoulda-matchers'
+  gem 'coveralls', require: false
 end
