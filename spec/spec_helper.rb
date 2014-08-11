@@ -4,6 +4,8 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
 require "cancan/matchers"
+
+#Coveralls Test Coverage
 require 'coveralls'
 Coveralls.wear!
 
