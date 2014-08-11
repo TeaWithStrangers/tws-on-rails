@@ -1,11 +1,13 @@
-%h2 Sign Up a New Host
-
-= form_for(@host, url: create_host_path) do |f|
-  = f.label :name
-  = f.text_field :name, autofocus: true
-  = f.label :email
-  = f.email_field :email, placeholder: "Email Address"
-  = f.label :home_city 
-  = select(resource_name, :home_city_id, City.all.collect{ |p| [p.name, p.id] })
-  = render partial: 'devise/registrations/host', locals: {f: f}
-  = f.submit 'Create Host'
+.container.user-form.edit.dashboard
+  = render partial: 'shared/nav_header'
+  .mobilepad.edit-tea-time
+    %h2.admin-head Sign Up a New Host
+  = form_for(@host, url: create_host_path) do |f|
+    = f.label :name
+    = f.text_field :name, autofocus: true
+    = f.label :email
+    = f.email_field :email, placeholder: "Email Address"
+    = f.label :home_city 
+    = select(resource_name, :home_city_id, City.all.collect{ |p| [p.name, p.id] })
+    = render partial: 'devise/registrations/host', locals: {f: f}
+    = f.submit 'Create Host'
