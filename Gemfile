@@ -28,6 +28,7 @@ gem "active_model_serializers"
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'markerb'
+gem 'sendgrid'
 
 # Figaro makes it easy to set env variables without Foreman
 #Calendars
