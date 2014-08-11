@@ -212,6 +212,9 @@ GEM
     sdoc (0.4.0)
       json (~> 1.8)
       rdoc (~> 4.0, < 5.0)
+    sendgrid (1.2.0)
+      json
+    session (3.2.0)
     shoulda-matchers (2.6.2)
       activesupport (>= 3.0.0)
     simplecov (0.9.0)
@@ -308,6 +311,7 @@ DEPENDENCIES
   rails_12factor
   rspec-rails (~> 2.14.2)
   sdoc (~> 0.4.0)
+  sendgrid
   shoulda-matchers
   spring
   therubyracer (~> 0.12)

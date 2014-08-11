@@ -46,11 +46,16 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/admin/find' => 'admin#find'
-  get '/admin/overview' => 'admin#overview'
-  get '/admin/users' => 'admin#users'
-  post '/admin/ghost' => 'admin#ghost'
+  scope(path: 'admin')  do
+    get '/ghost' => 'admin#find'
+    post '/ghost' => 'admin#ghost'
 
+    get '/overview' => 'admin#overview'
+    get '/users' => 'admin#users'
+
+    get '/mail' => 'admin#write_mail'
+    post '/mail' => 'admin#send_mail'
+  end
   
   match '/profile(/:id)' => 'profiles#show', as: :profile, via: :get
   get '/host/new' => 'hosts#new', as: :new_host
