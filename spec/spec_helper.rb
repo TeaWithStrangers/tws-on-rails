@@ -54,6 +54,7 @@ RSpec.configure do |config|
 
   # Include devise test helpers in controller specs
   config.include Devise::TestHelpers, :type => :controller
+  config.include IntegrationHelpers, :type => :feature
 
   config.before(:all) { ActiveRecord::Base.skip_callbacks = true }
 end
