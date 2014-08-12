@@ -1,4 +1,5 @@
 require 'spec_helper'
+include ControllerHelpers
 
 describe TeaTimesController do
   before(:all) do
