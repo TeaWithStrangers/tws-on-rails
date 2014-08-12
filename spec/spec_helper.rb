@@ -3,6 +3,7 @@ ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'capybara/rails'
+require 'capybara/rspec'
 require 'rspec/autorun'
 require "cancan/matchers"
 
@@ -51,7 +52,7 @@ RSpec.configure do |config|
   # Include FactoryGirl in specs
   config.include FactoryGirl::Syntax::Methods
 
-  # Include devise test helpers in conroller specs
+  # Include devise test helpers in controller specs
   config.include Devise::TestHelpers, :type => :controller
 
   config.before(:all) { ActiveRecord::Base.skip_callbacks = true }
