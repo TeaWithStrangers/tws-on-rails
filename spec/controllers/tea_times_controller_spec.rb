@@ -22,9 +22,9 @@ describe TeaTimesController do
       end
     end
 
-    it 'should be inaccessible to normal and anonymous users' do
+    it 'should redirect normal and anonymous users to sign in' do
       get :index
-      assert_response :unauthorized
+      assert_response :redirect
 
       sign_in @user
       referer '/'

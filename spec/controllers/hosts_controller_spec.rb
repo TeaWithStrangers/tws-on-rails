@@ -49,9 +49,9 @@ describe HostsController do
   end
 
   describe '#new' do
-    it 'should 401 anonymous users' do
+    it 'should redirect anonymous users to sign in' do
       get :new
-      assert_response :unauthorized
+      assert_response :redirect
     end
 
     context 'user is not an admin' do
