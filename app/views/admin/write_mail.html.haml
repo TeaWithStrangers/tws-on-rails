@@ -3,6 +3,9 @@
     .wide
       %h1 Send a Mass Mail
       = form_tag(url: {action: 'send_mail'}) do |f|
+        = label_tag :from, 'From'
+        %br
+        = text_field_tag :from
         = label_tag :subject, 'Subject'
         %br
         = text_field_tag :subject

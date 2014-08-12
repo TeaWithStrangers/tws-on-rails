@@ -13,6 +13,7 @@ class AdminController < ApplicationController
   def write_mail
   end
   
+  #TODO Test and reject invalid inputs
   def send_mail
     MassMailer.delay.simple_mail(params)
     redirect_to action: :write_mail, flash: "Succesfully sent mail"
