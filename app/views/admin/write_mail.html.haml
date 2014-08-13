@@ -2,20 +2,21 @@
   .row
     .wide
       %h1 Send a Mass Mail
-      = form_tag(url: {action: 'send_mail'}) do |f|
-        = label_tag :from, 'From'
+      = form_for(@mail, url: {action: 'send_mail'}) do |f|
+        = f.label :from, 'From (Optional)'
         %br
-        = text_field_tag :from
-        = label_tag :subject, 'Subject'
+        = f.text_field :from
         %br
-        = text_field_tag :subject
+        = f.label :subject, 'Subject'
         %br
-        = label_tag :body, 'Body'
+        = f.text_field :subject
         %br
-        = text_area_tag :body
+        = f.label :body, 'Body'
         %br
-        = label_tag :city, 'City'
+        = f.text_area :body
+        %br
+        = f.label :city, 'Send To Users in:'
         %br
         .dropdown
-          = select_tag(:city_id, options_for_select(City.all.collect{ |p| [p.name, p.id] }), {:class => "city"})
-        = submit_tag 'Send Mail', confirm: "This is going to cost a few bucks. Are you sure?"
+          = f.select(:city_id, options_for_select(City.all.collect{ |p| [p.name, p.id] }), {:class => "city"})
+        = f.submit 'Send Mail', confirm: "This is going to cost a few bucks. Are you sure?"
