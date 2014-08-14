@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get '/hosting' => 'static#hosting', :as => :hosting
   get '/about' => 'static#about', :as => :about
   get '/internproject' => 'static#internproject', :as => :internproject
+  get '/birthdays' => 'static#birthdays', :as => :birthdays
 
 
   # Example of regular route:
