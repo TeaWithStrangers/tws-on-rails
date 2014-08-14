@@ -86,45 +86,45 @@
 }
 
 @font-face {
-    font-family: 'MuseoSans-Rounded-Light';
-    src: asset-url('MuseoSans-Rounded-Light.eot');
-    src: asset-url('MuseoSans-Rounded-Light.eot?#iefix') format('embedded-opentype'),
-         asset-url('MuseoSans-Rounded-Light.woff') format('woff'),
-         asset-url('MuseoSans-Rounded-Light.ttf') format('truetype'),
-         asset-url('MuseoSans-Rounded-Light.svg#MuseoSans-Rounded-Light') format('svg');
+    font-family: 'MuseoSans_500';
+    src: asset-url('MuseoSans_500.eot');
+    src: asset-url('MuseoSans_500.eot?#iefix') format('embedded-opentype'),
+         asset-url('MuseoSans_500.woff') format('woff'),
+         asset-url('MuseoSans_500.ttf') format('truetype'),
+         asset-url('MuseoSans_500.svg#MuseoSans_500') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'MuseoSans-Rounded-Regular';
-    src: asset-url('MuseoSans-Rounded-Regular.eot');
-    src: asset-url('MuseoSans-Rounded-Regular.eot?#iefix') format('embedded-opentype'),
-         asset-url('MuseoSans-Rounded-Regular.woff') format('woff'),
-         asset-url('MuseoSans-Rounded-Regular.ttf') format('truetype'),
-         asset-url('MuseoSans-Rounded-Regular.svg#MuseoSans-Rounded-Regular') format('svg');
+    font-family: 'MuseoSans_700';
+    src: asset-url('MuseoSans_700.eot');
+    src: asset-url('MuseoSans_700.eot?#iefix') format('embedded-opentype'),
+         asset-url('MuseoSans_700.woff') format('woff'),
+         asset-url('MuseoSans_700.ttf') format('truetype'),
+         asset-url('MuseoSans_700.svg#MuseoSans_700') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'MuseoSans-Rounded-Semibold';
-    src: asset-url('MuseoSans-Rounded-Semibold.eot');
-    src: asset-url('MuseoSans-Rounded-Semibold.eot?#iefix') format('embedded-opentype'),
-         asset-url('MuseoSans-Rounded-Semibold.woff') format('woff'),
-         asset-url('MuseoSans-Rounded-Semibold.ttf') format('truetype'),
-         asset-url('MuseoSans-Rounded-Semibold.svg#MuseoSans-Rounded-Semibold') format('svg');
+    font-family: 'MuseoSans_900';
+    src: asset-url('MuseoSans_900.eot');
+    src: asset-url('MuseoSans_900.eot?#iefix') format('embedded-opentype'),
+         asset-url('MuseoSans_900.woff') format('woff'),
+         asset-url('MuseoSans_900.ttf') format('truetype'),
+         asset-url('MuseoSans_900.svg#MuseoSans_900') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'MuseoSans-Rounded-Bold';
-    src: asset-url('MuseoSans-Rounded-Bold.eot');
-    src: asset-url('MuseoSans-Rounded-Bold.eot?#iefix') format('embedded-opentype'),
-         asset-url('MuseoSans-Rounded-Bold.woff') format('woff'),
-         asset-url('MuseoSans-Rounded-Bold.ttf') format('truetype'),
-         asset-url('MuseoSans-Rounded-Bold.svg#MuseoSans-Rounded-Bold') format('svg');
+    font-family: 'MuseoSans-Rounded-Ultra';
+    src: asset-url('MuseoSans-Rounded-Ultra.eot');
+    src: asset-url('MuseoSans-Rounded-Ultra.eot?#iefix') format('embedded-opentype'),
+         asset-url('MuseoSans-Rounded-Ultra.woff') format('woff'),
+         asset-url('MuseoSans-Rounded-Ultra.ttf') format('truetype'),
+         asset-url('MuseoSans-Rounded-Ultra.svg#MuseoSans-Rounded-Ultra') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -267,20 +267,20 @@ h1, h2, h3, p, ul, li {
   font-family: 'ProximaNova-Regular', 'Helvetica Neue', Arial, sans-serif;
 }
 
-.museo-light {
-  font-family: 'MuseoSans-Rounded-Light', 'Helvetica Neue', Arial, sans-serif;
-}
-
 .museo-regular {
-  font-family: 'MuseoSans-Rounded-Regular', 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'MuseoSans_500', 'Helvetica Neue', Arial, sans-serif;
 }
 
 .museo-semibold {
-  font-family: 'MuseoSans-Rounded-Semibold', 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'MuseoSans_700', 'Helvetica Neue', Arial, sans-serif;
 }
 
 .museo-bold {
-  font-family: 'MuseoSans-Rounded-Bold', 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'MuseoSans_900', 'Helvetica Neue', Arial, sans-serif;
+}
+
+.museo-ultra {
+  font-family: 'MuseoSans-Rounded-Ultra', 'Helvetica Neue', Arial, sans-serif;
 }
 
 strong {
@@ -2011,6 +2011,280 @@ form.schedule-tea {
       .bold;
       text-transform: uppercase;
       color: @red;
+    }
+  }
+}
+
+@bdaybg: #e7e8e9;
+@bdaygreen: #0ab66d;
+@bdayred: #d96559;
+
+.body-edit.birthdays {
+  width: 100%;
+  background: @bdaybg;
+  .container {
+    width: 100%;
+    min-width: 800px;
+    max-width: 1200px;
+    margin: 0 auto;
+    .museo-regular;
+    .landscape-header {
+      height: 560px !important;
+      min-width: 800px;
+      margin: 0 !important;
+      background: asset-url('bdaycover.jpg') no-repeat center;
+      background-size: cover;
+    }
+    .content {
+      background: @white;
+      border: 1px solid @bdaygreen;
+      border-top: none;
+      margin-bottom: 3em;
+      .full-strip {
+        padding: 0 20px;
+        &.bday-logo {
+          background: @bdaygreen;
+        }
+        .margin-container {
+          width: 80%;
+          min-width: 800px;
+          margin: 0 auto;
+          &.tws-logo {
+            background: asset-url('bday-tws-logo.png') no-repeat center;
+            background-size: auto 50%;
+            height: 50px;
+            width: 100%;
+            text-indent: -9999px;
+            position: relative;
+            a {
+              display: block;
+              height: 100%;
+              width: 100%;
+            }
+          }
+          &.bday-logo {
+            background: asset-url('bday-logo.png') no-repeat center;
+            background-size: auto 85%;
+            height: 100px;
+          }
+          &.bday-info {
+            height: 100px;
+            .left, .right {
+              // float: left;
+              height: 100%;
+            }
+            .left {
+              width: 26%;
+              background: asset-url('aug30.png') no-repeat left center;
+              background-size: auto 60%;
+            }
+            .right {
+              width: 100%;
+              margin: 0 auto;
+              background: asset-url('celebrating-you.png') no-repeat center;
+              background-size: auto 80%;
+            }
+          }
+        }
+      }
+      .strip {
+        width: 80%;
+        min-width: 800px;
+        margin: 2em auto 0;
+        overflow: auto;
+        p {
+          text-align: center;
+          margin: 0 2.5em 1em;
+          .museo-semibold;
+          .fsII;
+        }
+        .half {
+          float: left;
+          width: 48%;
+          padding: 1em;
+          background: lighten(@bdaybg, 5%);
+          border: 1px solid darken(@bdaybg, 5%);
+          &.right {
+            float: right;
+          }
+          &.no-bg {
+            background: none;
+            border: 0;
+            padding: 0;
+            img {
+              width: 100%;
+            }
+          }
+          &.clear-left {
+            clear: left;
+            margin-top: 2em;
+          }
+          header {
+            text-align: center;
+            padding: 0;
+          }
+          h2 {
+            .museo-ultra;
+            .fsV;
+            font-size: 2.75em;
+            color: @bdayred;
+            text-transform: uppercase;
+          }
+          h3 {
+            .museo-semibold;
+            .fs;
+            color: @bdayred;
+            margin-bottom: 1em;
+          }
+          h4 {
+            .museo-regular;
+            .fs;
+            margin-top: 1em;
+            color: darken(@bdaybg, 25%);
+          }
+        }
+        &.last {
+          margin: 2em auto;
+        }
+      }
+      hr {
+        width: 100%;
+        border: 3px solid @bdaybg;
+        margin: 0;
+      }
+      .form-container {
+        padding: 0 1em;
+        .fs;
+        .ss-q-title {
+          text-transform: uppercase;
+          .museo-bold;
+          display: inline-block;
+        }
+        .ss-q-help {
+          .fs;
+          display: inline-block;
+          color: darken(@bdaybg,25%);
+        }
+        .ss-item {
+          table#navigation-table, tbody, tr, td {
+            display: block;
+            input[type="submit"] {
+              background: @bdaygreen;
+              width: 100%;
+              .fsIV;
+              letter-spacing: 2px;
+              .museo-ultra;
+              -webkit-font-smoothing: antialiased;
+              color: @white;
+              text-transform: uppercase;
+              border: 0;
+              border-radius: 8px;
+              .box-shadow(0 3px 0 darken(@bdaygreen, 10%));
+              &:hover {
+                .translate(0, -2px);
+                .box-shadow(0 5px 0 darken(@bdaygreen, 10%));
+                .transition(0.25s);
+              }
+              &:active {
+                .translate(0, 2px);
+                .box-shadow(0 1px 0 darken(@bdaygreen, 10%));
+                .transition(0.25s);
+              }
+              &:focus {
+                outline: 0;
+              }
+            }
+          }
+        }
+        .required-message {
+          display: none;
+        }
+        .ss-form-entry {
+          margin-bottom: 1em;
+          input[type="text"], input[type="number"], input[type="email"] {
+            width: 100%;
+            padding: .75em .5em;
+            .fs;
+            .museo-regular;
+            border-radius: .25em;
+            border: 1px solid darken(@bdaybg,25%);
+            .box-shadow(inset 0 0 6px lighten(@bdaybg, 10%));
+            &:focus {
+              outline: none;
+              .box-shadow(0 0 0 1px darken(@bdaybg,25%));
+            }
+          }
+          .ss-choices {
+            li.ss-choice-item {
+              display: inline-block;
+              padding: 0 .5em .5em 0;
+              input[type="checkbox"] {
+                margin: 0;
+              }
+              .ss-choice-label {
+                .fs;
+              }
+              &.subheader {
+                display: block;
+                padding: 1em 0 .25em;
+                input[type="checkbox"] {
+                  display: none;
+                }
+                .ss-choice-label {
+                  .fs;
+                  text-transform: uppercase;
+                  .museo-bold;
+                  color: @bdayred;
+                }
+                &.other {
+                  input[type="checkbox"] {
+                    display: inline-block;
+                  }
+                }
+              }
+            }
+          }
+          .dropdown {
+            height: 2.75em;
+            width: 40%;
+            display: inline-block;
+            background-size: .8em;
+            background-position: 95% center;
+            select {
+              .museo-regular;
+              .fs;
+              padding: 10px 40px 10px 10px;
+              &:focus {
+                outline: none;
+                .box-shadow(inset 0 0 0 1px darken(@bdaybg,25%));
+                width: 100% !important;
+              }
+            }
+          }
+          .ss-required-asterisk {
+            color: @bdayred;
+          }
+          .error-message {
+            display: none;
+          }
+        }
+        .ss-password-warning {
+          display: none;
+        }
+      }
+    }
+    .footer {
+      margin-bottom: 4em;
+      .strip {
+        width: 800px;
+        margin: 0 auto;
+        p {
+          .museo-regular;
+          .fsI;
+          line-height: 1.25em;
+          margin-bottom: 1em;
+        }
+      }
     }
   }
 }
