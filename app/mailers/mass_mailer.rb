@@ -3,12 +3,11 @@ class MassMailer < ActionMailer::Base
   include MarkdownHelper
   sendgrid_category :use_subject_lines
 
-  default from: '"Tea With Strangers" <sayhi@teawithstrangers.com>'
-
+  FROM = '"Tea With Strangers" <sayhi@teawithstrangers.com>'
 
   def simple_mail(opts = {})
-    from = (opts[:from] ||= '"Tea With Strangers" <sayhi@teawithstrangers.com>')
-    to = (opts[:to] ||= from)
+    from = (opts[:from] || FROM)
+    to = (opts[:to] || from)
     sendgrid_recipients City.find(opts[:city_id]).users.select(:email).map(&:email)
 
     mail(to: to, from: from, subject: opts[:subject]) do |f|
