@@ -2029,7 +2029,7 @@ form.schedule-tea {
     margin: 0 auto;
     .museo-regular;
     .landscape-header {
-      height: 560px !important;
+      height: 560px;
       min-width: 800px;
       margin: 0 !important;
       background: asset-url('bdaycover.jpg') no-repeat center;
@@ -2097,6 +2097,9 @@ form.schedule-tea {
           margin: 0 2.5em 1em;
           .museo-semibold;
           .fsII;
+          &:last-child {
+            margin-bottom: 0;
+          }
         }
         .details {
           background: asset-url('bday-deets.png') no-repeat center;
@@ -2734,6 +2737,65 @@ form.schedule-tea {
       float: none;
       padding-top: 10px;
       overflow: auto;
+    }
+  }
+  .body-edit.birthdays {
+    .container {
+      min-width: 0;
+      max-width: 100%;
+      .landscape-header {
+        min-width: 0;
+        height: 350px;
+      }
+      .content {
+        border: 0;
+        border-bottom: 1px solid @bdaygreen;
+        .full-strip {
+          padding: 0;
+          .margin-container {
+            width: 100%;
+            min-width: 0;
+            &.bday-logo, &.bday-info .right {
+              background-size: 95% auto;
+              background-position: center;
+            }
+            &.bday-logo, &.bday-info {
+              height: 75px;
+            }
+          }
+        }
+        .strip {
+          width: 100%;
+          min-width: 0;
+          margin-top: 1em;
+          p {
+            margin: 0 1em 1em;
+          }
+          .details {
+            background-size: 90% auto;
+          }
+          &.hr {
+            display: none;
+          }
+          .half {
+            float: none !important;
+            width: 100%;
+            &.clear-left {
+              clear: both;
+              float: none;
+              width: 100%;
+              margin: 0;
+            }
+          }
+        }
+      }
+      .footer {
+        .strip {
+          width: 90%;
+          margin: 0 auto;
+          text-align: center;
+        }
+      }
     }
   }
 }
