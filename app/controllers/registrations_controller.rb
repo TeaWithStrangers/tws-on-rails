@@ -16,6 +16,8 @@ class RegistrationsController < Devise::RegistrationsController
         else
           redirect_to root_path, message: message
         end
+      else
+        redirect_to new_user_registration_path
       end
     else
       super
