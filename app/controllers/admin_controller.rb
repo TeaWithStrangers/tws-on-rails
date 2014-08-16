@@ -22,7 +22,7 @@ class AdminController < ApplicationController
       flash[:notice] = 'Message sent! Woohoo'
       redirect_to action: :write_mail
     else
-      flash[:error] = 'Woopsy. You forgot something. Come again?'
+      flash[:alert] = 'Woopsy. You forgot something. Come again?'
       render :write_mail
     end
   end
