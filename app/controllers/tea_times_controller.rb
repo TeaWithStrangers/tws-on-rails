@@ -98,7 +98,7 @@ class TeaTimesController < ApplicationController
     respond_to do |format|
       if @tea_time.update(tea_time_params)
         format.html { redirect_to profile_path, notice: 'Tea time was successfully updated.' }
-        format.json { render :show, status: :ok, location: @tea_time }
+        format.json { render json: @tea_time, status: :ok, location: @tea_time }
       else
         format.html { render :edit }
         format.json { render json: @tea_time.errors, status: :unprocessable_entity }
@@ -121,10 +121,11 @@ class TeaTimesController < ApplicationController
   # DELETE /tea_times/1
   # DELETE /tea_times/1.json
   def destroy
-    @tea_time.destroy
+    #Uncomment this if for some reason users should be able to delete TTs
+    #@tea_time.destroy
     respond_to do |format|
-      format.html { redirect_to tea_times_url }
-      format.json { head :no_content }
+      format.html { render text: "I can't let you do that, #{current_user.name}" }
+      format.json { head 403 }
     end
   end
 
