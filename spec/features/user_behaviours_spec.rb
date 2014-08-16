@@ -40,9 +40,17 @@ feature 'Tea Time Attendance' do
     click_button 'Confirm'
     expect(@user.attendances.map(&:tea_time)).to include @tt
   end
+
+  scenario 'user can flake' do
+    sign_in @user
+    attend_tt(@user, @tt)
+    visit profile_path
+    click_button 'Cancel my spot'
+    expect(@user.attendances.reload.first.flake?).to eq true
+    #Shouldn't show a flaked TT on Profile page
+    expect(page).not_to have_content @tt.friendly_time
+  end
 end
-
-
 
 private
   def sign_up_with(name, email, opts = nil)
@@ -53,3 +61,8 @@ private
     click_button "Let's Get Tea"
   end
 
+  def attend_tt(user, tea_time)
+    visit tea_time_path(tea_time)
+    click_button 'Confirm'
+    expect(@user.attendances.map(&:tea_time)).to include @tt
+  end
