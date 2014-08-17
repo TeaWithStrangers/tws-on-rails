@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.0'
+gem 'rails', '4.1.1'
 
 gem 'pg'
 
@@ -22,7 +22,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'rails_12factor', group: :production
 gem 'turbolinks'
 gem 'jquery-rails'
-gem 'jquery-ui-rails'
+gem 'jquery-ui-rails', '~> 5.0'
 gem "active_model_serializers"
 
 
