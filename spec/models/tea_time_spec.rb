@@ -2,7 +2,7 @@ require 'spec_helper.rb'
 
 describe TeaTime do
   describe '.start_time' do
-    before(:each) do
+    before(:all) do
       @city_pst = create(:city)
       @city_est = create(:city, timezone: "Eastern Time (US & Canada)")
       @city_utc = create(:city, timezone: "UTC")
@@ -49,6 +49,7 @@ describe TeaTime do
       @past_tt = create(:tea_time, :past)
       @tt = create(:tea_time)
     end
+
     describe '#past' do
       it 'should only include past tea times' do
         expect(TeaTime.past).to include(@past_tt)
@@ -73,7 +74,7 @@ describe TeaTime do
     end
 
     describe '- followup_status' do
-      before(:each) do
+      before(:all) do
         @cancelled = create(:tea_time, :cancelled)
       end
 
