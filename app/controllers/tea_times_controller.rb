@@ -43,8 +43,8 @@ class TeaTimesController < ApplicationController
       if user_data[:new_user?] && user_info[:user].valid?
         @user = user_data[:user]
         sign_in @user
-      elsif !user_info[:new_user?] && user_info[:user].valid?
-        redirect_to new_user_session_path, alert: 'You\'re already registered!'
+      elsif !user_data[:new_user?] && user_data[:user].valid?
+        return redirect_to new_user_session_path, alert: 'You\'re already registered!'
       end
     end
 
