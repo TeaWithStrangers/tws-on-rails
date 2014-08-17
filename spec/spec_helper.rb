@@ -57,4 +57,5 @@ RSpec.configure do |config|
   config.include IntegrationHelpers, :type => :feature
 
   config.before(:all) { ActiveRecord::Base.skip_callbacks = true }
+  config.before(:each) { ActionMailer::Base.deliveries.clear }
 end
