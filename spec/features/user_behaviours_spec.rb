@@ -49,6 +49,15 @@ feature 'Tea Time Attendance' do
     expect(@user.attendances.map(&:tea_time)).to include @tt
   end
 
+  scenario 'logged out user with accounts tries to attend' do
+    visit city_path(@user.home_city)
+    click_link('5 spots left')
+    fill_in :name, with:  @user.name
+    fill_in :email, with: @user.email
+    click_button 'Confirm'
+    expect(current_path).to eq new_user_session_path
+  end
+
   scenario 'user can flake' do
     sign_in @user
     attend_tt(@user, @tt)
