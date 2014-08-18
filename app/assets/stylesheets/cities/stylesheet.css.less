@@ -348,6 +348,27 @@ a {
     .transition;
   }
 }
+
+.flash {
+  position: absolute;
+  top: .5em;
+  padding: .25em 1em;
+  z-index: 10;
+  .bold;
+  .fs;
+  color: @white;
+  left: 50%;
+  .translate(-50%, 0);
+  &.notice {
+    background: @green;
+    border: 1px solid darken(@green,10%);
+  }
+  &.alert {
+    background: @red;
+    border: 1px solid darken(@red,10%);
+  }
+}
+
 .landscape-header {
   background: asset-url('splash2.jpg') no-repeat center; 
   background-size: cover;
