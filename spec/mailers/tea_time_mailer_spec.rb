@@ -33,8 +33,5 @@ describe TeaTimeMailer do
     let!(:mail) {
       TeaTimeMailer.cancellation(@tt).deliver
     }
-    it 'sends mail to all the affected attendees' do
-      expect(ActionMailer::Base.deliveries.count).to eq 2
-    end
   end
 end
