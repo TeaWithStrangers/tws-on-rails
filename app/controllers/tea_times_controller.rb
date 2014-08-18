@@ -44,7 +44,7 @@ class TeaTimesController < ApplicationController
         @user = user_data[:user]
         sign_in @user
       elsif !user_data[:new_user?] && user_data[:user].valid?
-        return redirect_to new_user_session_path, alert: 'You\'re already registered!'
+        return redirect_to new_user_session_path, alert: 'You already have an account. Log in! Then register for the tea time.'
       end
     end
 
