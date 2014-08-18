@@ -96,7 +96,7 @@ describe TeaTime do
 
   describe '.attendees' do
     before(:all) do
-      @tea_time = create(:tt_with_attendees)
+      @tea_time = create(:tea_time, :attended)
       @att_flake = create(:attendance, :flake, tea_time: @tea_time)
     end
 
@@ -127,12 +127,12 @@ describe TeaTime do
 
   describe '.spots_remaining?' do
     it 'should return true if fewer than MAX_ATTENDEES are registered' do
-      tea_time = create(:tt_with_attendees)
+      tea_time = create(:tea_time, :attended)
       expect(tea_time.spots_remaining?).to eq(true)
     end
 
     it 'should return false if MAX_ATTENDEES are registered' do
-      tea_time = create(:tt_with_attendees, :full)
+      tea_time = create(:tea_time, :full)
       expect(tea_time.spots_remaining?).to eq(false)
     end
   end

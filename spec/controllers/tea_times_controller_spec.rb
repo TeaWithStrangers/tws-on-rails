@@ -74,7 +74,14 @@ describe TeaTimesController do
   end
 
   describe '#cancel' do
+    before(:each) do
+      @tt = create(:tea_time, host: @host)
+      sign_in @host
+    end
+
     it 'should be cancelled' do
+      put :cancel, id: @tt
+      expect(@tt.reload.cancelled?).to eq true
     end
   end
 
