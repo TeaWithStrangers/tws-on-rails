@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature 'First time visitor signs up' do
+feature 'Signing In & Up' do
   before(:all) do
     create(:city)
   end
@@ -22,6 +22,14 @@ feature 'First time visitor signs up' do
     expect(current_path).to eq root_path
     expect(page).to have_content 'Schedule tea time'
   end
+
+  scenario 'with an already created user account from a registration form' do
+    user = create(:user)
+    sign_up_with(user.name, user.email)
+    #Should redirect to login page with an alert
+    expect(current_path).to eq new_user_session_path
+    #TODO: Add check for Flash message once it's merged
+  end
 end
 
 feature 'Tea Time Attendance' do
@@ -39,6 +47,15 @@ feature 'Tea Time Attendance' do
     expect(page).to have_content @host.name
     click_button 'Confirm'
     expect(@user.attendances.map(&:tea_time)).to include @tt
+  end
+
+  scenario 'logged out user with accounts tries to attend' do
+    visit city_path(@user.home_city)
+    click_link('5 spots left')
+    fill_in :name, with:  @user.name
+    fill_in :email, with: @user.email
+    click_button 'Confirm'
+    expect(current_path).to eq new_user_session_path
   end
 
   scenario 'user can flake' do

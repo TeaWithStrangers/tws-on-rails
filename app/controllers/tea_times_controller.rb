@@ -37,13 +37,15 @@ class TeaTimesController < ApplicationController
     @user = current_user
     #FIXME: ALL THIS
     if @user.nil?
-      generated_password = Devise.friendly_token.first(8)
-      @user = User.create(name: tea_time_params[:name],
-                          email: tea_time_params[:email], 
-                          password: generated_password,
-                          home_city: @tea_time.city)
-      sign_in(:user, @user)
-      UserMailer.delay.registration(@user, generated_password) if @user
+      user_data = GetOrCreateUser.call({name: tea_time_params[:name],
+                            email: tea_time_params[:email]},
+                           @tea_time.city)
+      if user_data[:new_user?] && user_info[:user].valid?
+        @user = user_data[:user]
+        sign_in @user
+      elsif !user_data[:new_user?] && user_data[:user].valid?
+        return redirect_to new_user_session_path, alert: 'You\'re already registered!'
+      end
     end
 
     @attendance = Attendance.where(tea_time: @tea_time, user: @user).first_or_create

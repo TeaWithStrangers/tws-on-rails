@@ -13,8 +13,10 @@ class Attendance < ActiveRecord::Base
   end
 
   def flake!
-    update_attribute(:status, :flake)
-    AttendanceMailer.delay.flake(self.id)
+    unless flake?
+      update_attribute(:status, :flake)
+      AttendanceMailer.delay.flake(self.id)
+    end
   end
 
   def queue_mails

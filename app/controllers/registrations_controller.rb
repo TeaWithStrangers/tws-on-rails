@@ -1,23 +1,20 @@
 class RegistrationsController < Devise::RegistrationsController
   def create
-    city = City.find_by(id: params[:city])
     if params[:user][:autogen]
-      generated_password = Devise.friendly_token.first(8)
-      user = User.new(name: params[:user][:name],
-                      email: params[:user][:email],
-                      password: generated_password,
-                      home_city: city)
-      if user.save
-        UserMailer.delay.registration(user, generated_password)
-        sign_in(:user, user)
-        message = "All registered! Check your email for your password."
+      city = City.find(params[:city])
+      user_info = GetOrCreateUser.call(params[:user], city)
+      if user_info[:new_user?] && user_info[:user].valid?
+        sign_in user_info[:user]
+        message = "All registered! Check your email for your new password."
         if city
           redirect_to schedule_city_path(city), message: message
         else
           redirect_to root_path, message: message
         end
+      elsif !user_info[:new_user?] && user_info[:user].valid?
+        redirect_to new_user_session_path, alert: 'You\'re already registered!'
       else
-        redirect_to new_user_registration_path
+        redirect_to new_user_registration_path, alert: "We've made a huge mistake."
       end
     else
       super
