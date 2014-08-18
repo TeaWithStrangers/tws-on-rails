@@ -4,23 +4,24 @@
     - tea_times.each do |tea_time|
       %li.tea-time
         = render partial: 'teatime_info', locals: {tea_time: tea_time, att: nil}
-        .attendees-container
-          - if tea_time.attendances.length > 0
-            %h3.attendees Attendees
-            - tea_time.attendances.group_by(&:status).each do |k,v|
-              %ul.attendees-list{:class => "#{k}"}
-                %h4 #{k.capitalize}
-                - v.map(&:user).each do |a|
-                  %li.attendee-names= link_to a.name, "mailto:#{a.email}"
-              .email-all= link_to "Email Attendees", "mailto:#{tea_time.attendee_emails -> (x) { x.flake? || x.no_show? }}"
-          - else
-            %h3.attendees.none No attendees yet!
-        .controls
-          %h6.left= link_to 'Edit details', edit_tea_time_path(tea_time)
-          - unless tea_time.cancelled?
-            %h6.right= link_to 'Cancel tea time', cancel_tea_time_path(tea_time), :method => :put, :data => { :confirm => 'Are you sure?' }
-          - else
-            %h6.right This tea time has been cancelled.
+        - if current_user.host?
+          .attendees-container
+            - if tea_time.attendances.length > 0
+              %h3.attendees Attendees
+              - tea_time.attendances.group_by(&:status).each do |k,v|
+                %ul.attendees-list{:class => "#{k}"}
+                  %h4 #{k.capitalize}
+                  - v.map(&:user).each do |a|
+                    %li.attendee-names= link_to a.name, "mailto:#{a.email}"
+                .email-all= link_to "Email All", "mailto:#{tea_time.attendee_emails(filter: ->(x) { x.flake? || x.no_show?})}"
+            - else
+              %h3.attendees.none No attendees yet!
+          .controls
+            - unless tea_time.cancelled?
+              %h6.left= link_to 'Edit details', edit_tea_time_path(tea_time)
+              %h6.right= link_to 'Cancel tea time', cancel_tea_time_path(tea_time), :method => :put, :data => { :confirm => 'Are you sure?' }
+            - else
+              %h6.right This tea time has been cancelled.
 - else
   %p
     You're not hosting any upcoming tea times! Let's change that.

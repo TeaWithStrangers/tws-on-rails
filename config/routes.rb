@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get '/hosting' => 'static#hosting', :as => :hosting
   get '/about' => 'static#about', :as => :about
   get '/internproject' => 'static#internproject', :as => :internproject
+  get '/birthdays' => 'static#birthdays', :as => :birthdays
 
 
   # Example of regular route:
@@ -46,11 +47,16 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/admin/find' => 'admin#find'
-  get '/admin/overview' => 'admin#overview'
-  get '/admin/users' => 'admin#users'
-  post '/admin/ghost' => 'admin#ghost'
+  scope(path: 'admin')  do
+    get '/ghost' => 'admin#find'
+    post '/ghost' => 'admin#ghost'
 
+    get '/overview' => 'admin#overview'
+    get '/users' => 'admin#users'
+
+    get '/mail' => 'admin#write_mail'
+    post '/mail' => 'admin#send_mail'
+  end
   
   match '/profile' => 'profiles#show', as: :profile, via: :get
   get '/profile/history' => 'profiles#history', as: :history

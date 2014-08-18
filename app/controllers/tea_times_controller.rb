@@ -37,13 +37,15 @@ class TeaTimesController < ApplicationController
     @user = current_user
     #FIXME: ALL THIS
     if @user.nil?
-      generated_password = Devise.friendly_token.first(8)
-      @user = User.create(name: tea_time_params[:name],
-                          email: tea_time_params[:email], 
-                          password: generated_password,
-                          home_city: @tea_time.city)
-      sign_in(:user, @user)
-      UserMailer.delay.registration(@user, generated_password) if @user
+      user_data = GetOrCreateUser.call({name: tea_time_params[:name],
+                                        email: tea_time_params[:email]},
+                                        @tea_time.city)
+      if user_data[:new_user?] && user_info[:user].valid?
+        @user = user_data[:user]
+        sign_in @user
+      elsif !user_data[:new_user?] && user_data[:user].valid?
+        return redirect_to new_user_session_path, alert: 'You\'re already registered!'
+      end
     end
 
     @attendance = Attendance.where(tea_time: @tea_time, user: @user).first_or_create
@@ -54,9 +56,9 @@ class TeaTimesController < ApplicationController
         format.html { redirect_to profile_path, notice: 'Registered for Tea Time! See you soon :)' }
         format.json { @attendance }
       end
-    else 
+    else
       respond_to do |format|
-        format.html { redirect_to schedule_city_path(@tea_time.city), 
+        format.html { redirect_to schedule_city_path(@tea_time.city),
                       notice: "Couldn't register for that, sorry :(" }
         format.json { @attendance }
       end
@@ -66,7 +68,7 @@ class TeaTimesController < ApplicationController
   # PUT /tea_times/1/attendance/2
   def update_attendance
     @attendance = Attendance.find_by(tea_time: @tea_time, user: current_user)
-    
+
     respond_to do |format|
       if @attendance.flake!
         format.html { redirect_to profile_path, notice: 'Tea time was successfully flaked.' }
@@ -98,7 +100,7 @@ class TeaTimesController < ApplicationController
     respond_to do |format|
       if @tea_time.update(tea_time_params)
         format.html { redirect_to profile_path, notice: 'Tea time was successfully updated.' }
-        format.json { render :show, status: :ok, location: @tea_time }
+        format.json { render json: @tea_time, status: :ok, location: @tea_time }
       else
         format.html { render :edit }
         format.json { render json: @tea_time.errors, status: :unprocessable_entity }
@@ -108,7 +110,7 @@ class TeaTimesController < ApplicationController
 
   def cancel
     respond_to do |format|
-      if @tea_time.cancel!
+      if CancelTeaTime.call(@tea_time)
         format.html { redirect_to profile_path, notice: 'Tea time canceled' }
         format.json { render status: 204 }
       else
@@ -121,10 +123,11 @@ class TeaTimesController < ApplicationController
   # DELETE /tea_times/1
   # DELETE /tea_times/1.json
   def destroy
-    @tea_time.destroy
+    #Uncomment this if for some reason users should be able to delete TTs
+    #@tea_time.destroy
     respond_to do |format|
-      format.html { redirect_to tea_times_url }
-      format.json { head :no_content }
+      format.html { render text: "I can't let you do that, #{current_user.name}" }
+      format.json { head 403 }
     end
   end
 

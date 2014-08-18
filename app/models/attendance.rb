@@ -6,7 +6,7 @@ class Attendance < ActiveRecord::Base
   validates_uniqueness_of :user_id, scope: :tea_time_id
 
   before_create :check_capacity
-  after_create :queue_mails
+  after_create :queue_mails, unless: :skip_callbacks
 
   scope :attended, ->() { where(status: [:pending, :present].map {|x| Attendance.statuses[x]}) }
 
@@ -15,8 +15,10 @@ class Attendance < ActiveRecord::Base
   end
 
   def flake!
-    update_attribute(:status, :flake)
-    AttendanceMailer.delay.flake(self.id)
+    unless flake?
+      update_attribute(:status, :flake)
+      AttendanceMailer.delay.flake(self.id)
+    end
   end
 
   def queue_mails

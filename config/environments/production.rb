@@ -100,9 +100,4 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
-
-  # Background Worker Config
-  config.after_initialize do 
-    Delayed::Job.scaler = :heroku_cedar
-  end
 end

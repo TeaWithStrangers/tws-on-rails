@@ -2,7 +2,7 @@ require 'spec_helper.rb'
 
 describe TeaTime do
   describe '.start_time' do
-    before(:each) do
+    before(:all) do
       @city_pst = create(:city)
       @city_est = create(:city, timezone: "Eastern Time (US & Canada)")
       @city_utc = create(:city, timezone: "UTC")
@@ -49,6 +49,7 @@ describe TeaTime do
       @past_tt = create(:tea_time, :past)
       @tt = create(:tea_time)
     end
+
     describe '#past' do
       it 'should only include past tea times' do
         expect(TeaTime.past).to include(@past_tt)
@@ -73,7 +74,7 @@ describe TeaTime do
     end
 
     describe '- followup_status' do
-      before(:each) do
+      before(:all) do
         @cancelled = create(:tea_time, :cancelled)
       end
 
@@ -95,7 +96,7 @@ describe TeaTime do
 
   describe '.attendees' do
     before(:all) do
-      @tea_time = create(:tt_with_attendees)
+      @tea_time = create(:tea_time, :attended)
       @att_flake = create(:attendance, :flake, tea_time: @tea_time)
     end
 
@@ -126,12 +127,12 @@ describe TeaTime do
 
   describe '.spots_remaining?' do
     it 'should return true if fewer than MAX_ATTENDEES are registered' do
-      tea_time = create(:tt_with_attendees)
+      tea_time = create(:tea_time, :attended)
       expect(tea_time.spots_remaining?).to eq(true)
     end
 
     it 'should return false if MAX_ATTENDEES are registered' do
-      tea_time = create(:tt_with_attendees, :full)
+      tea_time = create(:tea_time, :full)
       expect(tea_time.spots_remaining?).to eq(false)
     end
   end

@@ -2,7 +2,7 @@ require 'spec_helper.rb'
 
 describe City do
   context 'scopes' do
-    before(:each) do
+    before(:all) do
       @city = create(:city, :fully_brewed)
       @warm = create(:city, :warming_up)
       @hidden = create(:city, :hidden)
@@ -60,7 +60,7 @@ describe City do
 
 
   context 'proxy_cities' do
-    before(:each) do
+    before(:all) do
       @second_city = create(:city)
       @third_city = create(:city)
       create_list(:tea_time, 3, city: @second_city)

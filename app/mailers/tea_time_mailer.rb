@@ -3,10 +3,10 @@ class TeaTimeMailer < ActionMailer::Base
 
   def host_confirmation(tea_time_id)
     @tea_time = TeaTime.find(tea_time_id)
-    mail.attachments['event.ics'] = {mime_type: "text/calendar", 
+    mail.attachments['event.ics'] = {mime_type: "text/calendar",
                                      content: @tea_time.ical.to_ical}
 
-    mail(to: @tea_time.host.email, 
+    mail(to: @tea_time.host.email,
          subject: "Tea Time Confirmation for #{@tea_time.friendly_time}")
   end
 
@@ -32,12 +32,11 @@ class TeaTimeMailer < ActionMailer::Base
     end
   end
 
-  def cancellation(tea_time_id)
+  def cancellation(tea_time_id, attendance_id)
     @tea_time = TeaTime.find(tea_time_id)
-    @tea_time.attendances.map do |att|
-      @user = att.user 
-      mail(to: @user.email, subject: "Sad days — tea time canceled")
-    end
+    att = Attendance.find(attendance_id)
+    @user = att.user
+    mail(to: @user.email, subject: "Sad days — tea time canceled")
   end
 
   def ethos(user_id)

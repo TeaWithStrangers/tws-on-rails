@@ -1,42 +1,42 @@
 require 'spec_helper'
 
 describe AttendanceMailer do
-  before(:all) do
-    @tt = create(:tea_time)
-    @attendance = create(:attendance, tea_time: @tt)
-  end
+  let(:tt) { create(:tea_time) }
+  let(:attendance) { create(:attendance, tea_time: tt) }
 
   describe '.reminder' do
     context 'flaked attendees' do
       it "shouldn't be sent a reminder" do
-        @attendance.flake!
-        AttendanceMailer.reminder(@attendance.id, :same_day).deliver
+        attendance.update_column(:status, 1)
+        AttendanceMailer.reminder(attendance.id, :same_day).deliver
         #Flake mails get created, reminder shouldn't be
-        expect(ActionMailer::Base.deliveries.size).to eq(1)
+        expect(ActionMailer::Base.deliveries.size).to eq(0)
       end
     end
     
     let(:mail) {
-      AttendanceMailer.reminder(@attendance.id, :same_day)
+      AttendanceMailer.reminder(attendance.id, :same_day)
     }
 
     it 'should come from the host' do
-      expect(mail.from).to eq([@tt.host.email])
+      expect(mail.from).to eq([tt.host.email])
     end
 
     it 'should be sent to attendee' do
-      expect(mail.to).to eq([@attendance.user.email])
+      expect(mail.to).to eq([attendance.user.email])
     end
 
     it 'should contain tea time and host info' do
-      expect(mail.body.encoded).to match(@tt.friendly_time)
-      expect(mail.body.encoded).to match(@tt.host.name)
+      expect(mail.body.encoded).to match(tt.friendly_time)
+      expect(mail.body.encoded).to match(tt.host.name)
     end
   end
 
+  #TODO: This is really a test of .flake! not the message itself. Move to
+  #attendance_spec when possible
   describe '.flake' do
     it 'should be sent when .flake! is called' do
-      @attendance.flake!
+      attendance.flake!
       expect(ActionMailer::Base.deliveries.size).to eq(1)
     end
   end
