@@ -22,6 +22,7 @@ describe Attendance do
 
   describe 'flake!' do
     before(:each) do
+      AttendanceMailer.stub(:flake)
       @tt = create(:tea_time)
     end
     it 'updates status to :flake' do

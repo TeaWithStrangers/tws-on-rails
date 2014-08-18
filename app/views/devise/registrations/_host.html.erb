@@ -1,4 +1,4 @@
-<% if current_user.host? && !current_user.roles.nil?%>
+<% if current_user && current_user.host? %>
   <h3 class="edit-subheader">Your Host Profile</h3>
 
   <div><%= f.label :avatar, "Your Picture" %><br />

@@ -6,7 +6,8 @@ class TeaTime < ActiveRecord::Base
   has_many :attendances, dependent: :destroy
 
   after_touch :clear_association_cache_wrapper
-  after_create :send_host_confirmation, :queue_followup_mails
+  after_create :send_host_confirmation, :queue_followup_mails, unless: :skip_callbacks
+  before_destroy { CancelTeaTime.send_cancellation(self) }
 
   enum followup_status: [:na, :pending, :sent, :cancelled]
 
@@ -79,7 +80,6 @@ class TeaTime < ActiveRecord::Base
     unless cancelled?
       attendances.map { |att| att.update_attribute(:status, :cancelled) }
       self.update_attribute(:followup_status, :cancelled)
-      TeaTimeMailer.delay.cancellation(self)
       true
     else
       false

@@ -1,13 +1,13 @@
 = form_for @tea_time do |f|
-  = label_tag :start_time
-  = datetime_select :tea_time, :start_time
+  = f.label :start_time
+  = f.datetime_select :start_time
   = f.label :duration, 'Duration (in Hours)'
   = f.number_field :duration, value: 2
   = f.label :location, 'Location (Place name & address)'
   = f.text_field :location
   = f.label :city
   .dropdown
-    = f.select(:city_id, options_for_select(City.all.collect{ |p| [p.name, p.id] }, @tea_time.city.id), {:class => "city"})
+    = f.select(:city_id, options_for_select(City.all.select(:id, :name).collect{ |p| [p.name, p.id] }, @tea_time.city.id), {:class => "city"})
 
   - if @tea_time.errors.any?
     #error_explanation

@@ -1,4 +1,6 @@
 class AttendanceMailer < ActionMailer::Base
+  default from: "\"Tea With Strangers\" <sayhi@teawithstrangers.com>"
+
   def registration(attendance_id)
     @attendance = Attendance.find(attendance_id)
     @tea_time = @attendance.tea_time

@@ -6,7 +6,7 @@
       .third.left
         = render partial: 'sidebar'
       %hr
-      .two-third.right
+      .two-third.right.history
         %h1.main Your tea time history
         = render partial: 'host_tea_time_info', locals: {tea_times: @hosting} if current_user.host?
         = render partial: 'user_attendance_info', locals: {attendances: @attending}
