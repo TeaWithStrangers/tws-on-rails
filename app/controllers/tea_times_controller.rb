@@ -38,8 +38,8 @@ class TeaTimesController < ApplicationController
     #FIXME: ALL THIS
     if @user.nil?
       user_data = GetOrCreateUser.call({name: tea_time_params[:name],
-                            email: tea_time_params[:email]},
-                           @tea_time.city)
+                                        email: tea_time_params[:email]},
+                                        @tea_time.city)
       if user_data[:new_user?] && user_info[:user].valid?
         @user = user_data[:user]
         sign_in @user
@@ -56,9 +56,9 @@ class TeaTimesController < ApplicationController
         format.html { redirect_to profile_path, notice: 'Registered for Tea Time! See you soon :)' }
         format.json { @attendance }
       end
-    else 
+    else
       respond_to do |format|
-        format.html { redirect_to schedule_city_path(@tea_time.city), 
+        format.html { redirect_to schedule_city_path(@tea_time.city),
                       notice: "Couldn't register for that, sorry :(" }
         format.json { @attendance }
       end
@@ -68,7 +68,7 @@ class TeaTimesController < ApplicationController
   # PUT /tea_times/1/attendance/2
   def update_attendance
     @attendance = Attendance.find_by(tea_time: @tea_time, user: current_user)
-    
+
     respond_to do |format|
       if @attendance.flake!
         format.html { redirect_to profile_path, notice: 'Tea time was successfully flaked.' }
@@ -110,7 +110,7 @@ class TeaTimesController < ApplicationController
 
   def cancel
     respond_to do |format|
-      if @tea_time.cancel!
+      if CancelTeaTime.call(@tea_time)
         format.html { redirect_to profile_path, notice: 'Tea time canceled' }
         format.json { render status: 204 }
       else

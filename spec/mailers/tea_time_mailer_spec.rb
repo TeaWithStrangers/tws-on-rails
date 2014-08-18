@@ -4,6 +4,7 @@ describe TeaTimeMailer do
   before(:all) do
     @tt = create(:tea_time)
     @attendance = create(:attendance, tea_time: @tt)
+    @attendance2 = create(:attendance, tea_time: @tt)
   end
 
   describe '.host_confirmation' do
@@ -25,6 +26,15 @@ describe TeaTimeMailer do
 
     it 'assigns @name' do
       expect(mail.body.encoded).to match(@tt.host.name)
+    end
+  end
+
+  describe '.cancellation' do
+    let!(:mail) {
+      TeaTimeMailer.cancellation(@tt).deliver
+    }
+    it 'sends mail to all the affected attendees' do
+      expect(ActionMailer::Base.deliveries.count).to eq 2
     end
   end
 end
