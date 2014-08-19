@@ -26,9 +26,9 @@ class HostsController < ApplicationController
       [current_user, @host].each do |user|
         UserMailer.delay.registration(user, generated_password)
       end
-      redirect_to profile_path, message: 'New host unsuccesfully created and emailed!'
+      redirect_to profile_path, notice: 'New host unsuccesfully created and emailed!'
     else
-      redirect_to new_host_path, message: 'New host not created :/'
+      redirect_to new_host_path, alert: 'New host not created :/'
     end
   end
 
