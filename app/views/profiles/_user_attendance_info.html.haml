@@ -4,7 +4,7 @@
     - attendances.each do |a|
       %li.tea-time
         = render partial: 'teatime_info', locals: {tea_time: a.tea_time, att: a, without_button: true}
-        - if a.tea_time.occured?
+        - if a.tea_time.occurred?
           .attendees-container
             - if a.tea_time.attendances.length > 0
               %h3.attendees Fellow Attendees

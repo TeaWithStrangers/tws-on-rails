@@ -76,7 +76,7 @@ class TeaTime < ActiveRecord::Base
     attendees(filter: filter).map(&:email).join(',')
   end
 
-  def occured?
+  def occurred?
     return !cancelled? && Time.now >= end_time
   end
 
