@@ -58,7 +58,8 @@ Rails.application.routes.draw do
     post '/mail' => 'admin#send_mail'
   end
   
-  match '/profile(/:id)' => 'profiles#show', as: :profile, via: :get
+  match '/profile' => 'profiles#show', as: :profile, via: :get
+  get '/profile/history' => 'profiles#history', as: :history
   get '/host/new' => 'hosts#new', as: :new_host
   post '/host' => 'hosts#create', as: :create_host
 

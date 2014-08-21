@@ -1,6 +1,11 @@
 require 'spec_helper.rb'
 
 describe TeaTime do
+  before(:all) do
+    @past_tt = create(:tea_time, :past)
+    @future_tt = create(:tea_time)
+  end
+
   describe '.start_time' do
     before(:all) do
       @city_pst = create(:city)
@@ -45,31 +50,26 @@ describe TeaTime do
   end
 
   describe 'scopes' do
-    before(:all) do
-      @past_tt = create(:tea_time, :past)
-      @tt = create(:tea_time)
-    end
-
     describe '#past' do
       it 'should only include past tea times' do
         expect(TeaTime.past).to include(@past_tt)
-        expect(TeaTime.past).not_to include(@tt)
+        expect(TeaTime.past).not_to include(@future_tt)
       end
     end
 
     describe '#future' do
       it 'should only include future tea times' do
         expect(TeaTime.future).not_to include(@past_tt)
-        expect(TeaTime.future).to include(@tt)
+        expect(TeaTime.future).to include(@future_tt)
       end
     end
 
     describe '#future_until' do
       it 'should only include future tea times up to a given date' do
-        @far_future_tt = create(:tea_time, start_time: @tt.start_time+1.year)
-        until_date = @tt.start_time+1.day
+        @far_future_tt = create(:tea_time, start_time: @future_tt.start_time+1.year)
+        until_date = @future_tt.start_time+1.day
         expect(TeaTime.future_until(until_date)).not_to include(@past_tt, @far_future_tt)
-        expect(TeaTime.future_until(until_date)).to include(@tt)
+        expect(TeaTime.future_until(until_date)).to include(@future_tt)
       end
     end
 
@@ -81,14 +81,14 @@ describe TeaTime do
       describe '#na' do
         it 'should only include tea times with na status' do
           expect(TeaTime.na).not_to include(@cancelled)
-          expect(TeaTime.na).to include(@tt, @past_tt)
+          expect(TeaTime.na).to include(@future_tt, @past_tt)
         end
       end
 
       describe '#cancelled' do
         it 'should only include tea times with cancelled status' do
           expect(TeaTime.cancelled).to include(@cancelled)
-          expect(TeaTime.cancelled).not_to include(@tt, @past_tt)
+          expect(TeaTime.cancelled).not_to include(@future_tt, @past_tt)
         end
       end
     end
@@ -160,6 +160,16 @@ describe TeaTime do
       @tea_time.stub(start_time: DateTime.new(2014,1,1,12, 30),
                     duration: 1.5)
       expect(@tea_time.friendly_time).to include("12:30-2pm")
+    end
+  end
+
+  describe '.occurred?' do
+    it 'should return false for future TTs' do
+      expect(@future_tt.occurred?).to eq false
+    end
+
+    it 'should return true for past TTs' do
+      expect(@past_tt.occurred?).to eq true
     end
   end
 
