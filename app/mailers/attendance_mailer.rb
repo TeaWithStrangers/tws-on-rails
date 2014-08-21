@@ -1,4 +1,7 @@
 class AttendanceMailer < ActionMailer::Base
+  include SendGrid
+  sendgrid_category :use_subject_lines
+
   default from: "\"Tea With Strangers\" <sayhi@teawithstrangers.com>"
 
   def registration(attendance_id)
