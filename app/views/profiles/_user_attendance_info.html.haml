@@ -1,0 +1,20 @@
+%h2.main.upcoming.going  Your Tea Times
+- if !attendances.count.zero?
+  %ul.upcoming.going
+    - attendances.each do |a|
+      %li.tea-time
+        = render partial: 'teatime_info', locals: {tea_time: a.tea_time, att: a, without_button: true}
+        - if a.tea_time.occurred?
+          .attendees-container
+            - if a.tea_time.attendances.length > 0
+              %h3.attendees Fellow Attendees
+              %ul.attendees-list
+                - a.tea_time.attendances.each do |a|
+                  %li.attendee-names= link_to a.user.name, "mailto:#{a.user.email}"
+              .email-all= link_to "Email All", "mailto:#{a.tea_time.attendee_emails(filter: ->(x) { x.flake? || x.no_show?})}"
+            - else
+              %h3.attendees.none No attendees yet!
+- else
+  %p 
+    You're not scheduled for any tea times! Let's change that.
+    =link_to "Go schedule a tea time!", schedule_city_path(current_user.home_city)

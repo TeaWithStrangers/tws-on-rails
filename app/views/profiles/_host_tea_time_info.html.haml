@@ -1,7 +1,7 @@
 %h2.main.upcoming.host Hosting
-- if !current_user.future_hosts.count.zero?
+- if !tea_times.count.zero?
   %ul.upcoming.host
-    - current_user.future_hosts.each do |tea_time|
+    - tea_times.each do |tea_time|
       %li.tea-time
         = render partial: 'teatime_info', locals: {tea_time: tea_time, att: nil}
         - if current_user.host?
@@ -17,8 +17,11 @@
             - else
               %h3.attendees.none No attendees yet!
           .controls
-            %h6.left= link_to 'Edit details', edit_tea_time_path(tea_time)
-            %h6.right= link_to 'Cancel tea time', cancel_tea_time_path(tea_time), :method => :put, :data => { :confirm => 'Are you sure?' }
+            - unless tea_time.occurred? || tea_time.cancelled?
+              %h6.left= link_to 'Edit details', edit_tea_time_path(tea_time)
+              %h6.right= link_to 'Cancel tea time', cancel_tea_time_path(tea_time), :method => :put, :data => { :confirm => 'Are you sure?' }
+            - else
+              %h6.right This tea time has been cancelled.
 - else
   %p
     You're not hosting any upcoming tea times! Let's change that.
