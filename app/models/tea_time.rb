@@ -76,6 +76,10 @@ class TeaTime < ActiveRecord::Base
     attendees(filter: filter).map(&:email).join(',')
   end
 
+  def occured?
+    return !cancelled? && Time.now >= end_time
+  end
+
   def cancel!
     unless cancelled?
       attendances.map { |att| att.update_attribute(:status, :cancelled) }

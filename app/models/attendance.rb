@@ -8,7 +8,7 @@ class Attendance < ActiveRecord::Base
   before_create :check_capacity
   after_create :queue_mails, unless: :skip_callbacks
 
-  scope :attended, ->() { where(status: [:pending, :present].map {|x| Attendance.statuses[x]}) }
+  scope :attended, ->() { where(status: [:cancelled, :pending, :present].map {|x| Attendance.statuses[x]}) }
 
   def todo?
     pending?
@@ -29,6 +29,10 @@ class Attendance < ActiveRecord::Base
     st = self.tea_time.start_time
     AttendanceMailer.delay(run_at: st - 2.days).reminder(self.id, :two_day)
     AttendanceMailer.delay(run_at: st - 12.hours).reminder(self.id, :same_day)
+  end
+
+  def occurred?
+    tea_time.occurred?
   end
 
 

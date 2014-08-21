@@ -52,7 +52,7 @@ class User < ActiveRecord::Base
   end
 
   def attendances_for(tt_period)
-    attendances.where(status: 0).joins(:tea_time).
+    attendances.joins(:tea_time).
       merge(tt_period).includes(:tea_time)
   end
 end
