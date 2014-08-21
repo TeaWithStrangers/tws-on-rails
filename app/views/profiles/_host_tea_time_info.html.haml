@@ -17,7 +17,7 @@
             - else
               %h3.attendees.none No attendees yet!
           .controls
-            - unless tea_time.cancelled?
+            - unless tea_time.occurred? || tea_time.cancelled?
               %h6.left= link_to 'Edit details', edit_tea_time_path(tea_time)
               %h6.right= link_to 'Cancel tea time', cancel_tea_time_path(tea_time), :method => :put, :data => { :confirm => 'Are you sure?' }
             - else
