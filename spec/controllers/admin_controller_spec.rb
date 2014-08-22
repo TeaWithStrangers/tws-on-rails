@@ -19,7 +19,7 @@ describe AdminController do
     it 'should reject invalid mails' do
       mail[:subject] = nil
       post :send_mail, admin_controller_mass_mail: mail
-      expect(request.flash[:error]).not_to eq(nil)
+      expect(request.flash[:alert]).not_to eq(nil)
     end
 
     it 'should send valid mails' do
