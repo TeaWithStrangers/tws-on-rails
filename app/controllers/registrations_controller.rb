@@ -5,14 +5,14 @@ class RegistrationsController < Devise::RegistrationsController
       user_info = GetOrCreateUser.call(params[:user], city)
       if user_info[:new_user?] && user_info[:user].valid?
         sign_in user_info[:user]
-        message = "All registered! Check your email for your new password."
+        message = "You're set! Check your email for your new password."
         if city
           redirect_to schedule_city_path(city), notice: message
         else
           redirect_to root_path, notice: message
         end
       elsif !user_info[:new_user?] && user_info[:user].valid?
-        redirect_to new_user_session_path, alert: 'You\'re already registered!'
+        redirect_to new_user_session_path, alert: 'You\'re already registered! Log in using the same email :)'
       else
         redirect_to new_user_registration_path, alert: "We've made a huge mistake."
       end
