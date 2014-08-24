@@ -19,7 +19,14 @@ bundle install
 
 # create a `tws` role in postgres with the
 # ability to create databases
-createuser tws -d
+sudo -u postgres createuser tws -d
+
+# set user password to 123456 (change if desired)
+echo "ALTER USER tws PASSWORD '123456';" | sudo -u postgres psql
+
+# save the password (same as above) in the environment
+# also add this to ~/.bash_profile so that it will always be set
+export TWS_DB_PASSWORD=123456
 
 # create the dev and test databases
 rake db:create
@@ -28,7 +35,8 @@ rake db:create
 rake db:schema:load
 
 # Start mailcatcher in the background
-mailcatcher & # preview email at localhost:1080
+# so that emails can be previewed at localhost:1080
+mailcatcher &
 
 # Start the server
 rails s
