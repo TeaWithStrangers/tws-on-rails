@@ -3,7 +3,7 @@ default: &default
   encoding: utf8
   host: localhost
   username: tws
-  password:
+  password: <%= ENV["TWS_DB_PASSWORD"] %>
   min_messages: WARNING
   timeout: 5000
 
