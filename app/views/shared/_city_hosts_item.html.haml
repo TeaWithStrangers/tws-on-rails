@@ -11,6 +11,6 @@
           %li
             %a{href:host_city_path(city, h)}
               .avatar-container.quarter
-                .avatar
-                  %img.avatar-image{src:h.avatar.url(:medium)}
+                .avatar{style:"background-image: url(#{h.avatar.url(:medium)});"}
+                  / %img.avatar-image{src:h.avatar.url(:medium)}
               %h5.host-name= link_to h.name, host_city_path(city, h)
