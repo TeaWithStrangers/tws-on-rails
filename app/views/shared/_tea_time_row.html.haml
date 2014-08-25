@@ -2,7 +2,7 @@
   .host-photo
     %a{href:host_city_path(tea_time.city.id, tea_time.host.id)}
       .avatar-container
-        .avatar{style:"background-image: url(#{host.avatar.url(:medium)});"}
+        .avatar{style:"background-image: url(#{tea_time.host.avatar.url(:medium)});"}
           / %img.avatar-image{src:tea_time.host.avatar.url(:medium)}
       %h6.host-name= "#{tea_time.host.name}"
   .everything-else
