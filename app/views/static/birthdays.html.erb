@@ -96,16 +96,6 @@
 
               <ul class="ss-choices ss-choices-required" role="group" aria-label="What are you bringing?  Must select at least 1 options."><li class="ss-choice-item subheader"><label><span class="ss-choice-item-control goog-inline-block"><input type="checkbox" name="entry.261251192" value="SUPPLIES" id="group_261251192_1" role="checkbox" class="ss-q-checkbox subheader" aria-required="true"></span>
               <span class="ss-choice-label">SUPPLIES</span>
-              </label></li> <li class="ss-choice-item"><label><span class="ss-choice-item-control goog-inline-block"><input type="checkbox" name="entry.261251192" value="disposable plates" id="group_261251192_2" role="checkbox" class="ss-q-checkbox" aria-required="true"></span>
-              <span class="ss-choice-label">disposable plates</span>
-              </label></li> <li class="ss-choice-item"><label><span class="ss-choice-item-control goog-inline-block"><input type="checkbox" name="entry.261251192" value="disposable cups" id="group_261251192_3" role="checkbox" class="ss-q-checkbox" aria-required="true"></span>
-              <span class="ss-choice-label">disposable cups</span>
-              </label></li> <li class="ss-choice-item"><label><span class="ss-choice-item-control goog-inline-block"><input type="checkbox" name="entry.261251192" value="napkins" id="group_261251192_4" role="checkbox" class="ss-q-checkbox" aria-required="true"></span>
-              <span class="ss-choice-label">napkins</span>
-              </label></li> <li class="ss-choice-item"><label><span class="ss-choice-item-control goog-inline-block"><input type="checkbox" name="entry.261251192" value="disposable utensils" id="group_261251192_5" role="checkbox" class="ss-q-checkbox" aria-required="true"></span>
-              <span class="ss-choice-label">disposable utensils</span>
-              </label></li> <li class="ss-choice-item"><label><span class="ss-choice-item-control goog-inline-block"><input type="checkbox" name="entry.261251192" value="trash bags" id="group_261251192_6" role="checkbox" class="ss-q-checkbox" aria-required="true"></span>
-              <span class="ss-choice-label">trash bags</span>
               </label></li> <li class="ss-choice-item"><label><span class="ss-choice-item-control goog-inline-block"><input type="checkbox" name="entry.261251192" value="ice chest" id="group_261251192_7" role="checkbox" class="ss-q-checkbox" aria-required="true"></span>
               <span class="ss-choice-label">ice chest</span>
               </label></li> <li class="ss-choice-item"><label><span class="ss-choice-item-control goog-inline-block"><input type="checkbox" name="entry.261251192" value="ice" id="group_261251192_8" role="checkbox" class="ss-q-checkbox" aria-required="true"></span>
@@ -281,8 +271,11 @@
     <div class="footer">
       <div class="strip">
         <p>
-          <%= link_to 'Tea With Strangers', root_path %> is all about bringing people together for meaningful and fun interactions. We're mostly known for tea time — a conversation between a few strangers and a super host. You should sign up and join <%= link_to 'here', root_path %>.
+          <%= link_to 'Tea With Strangers', root_path %> is all about bringing people together for meaningful and fun interactions. We're mostly known for tea time — a conversation between a few strangers and a super host. You should sign up and join (if you've signed up before, <%= link_to 'log in and find a time here', new_user_session_path %>.)
         </p>
+        <div class="signup-center">
+          <%= render partial: 'shared/signup' %>
+        </div>
         <p>
           Birthdays With Strangers is a fun experiment to bring the community together in celebration of each other. There will great conversations, music, food, and stations to make gifts for the birthday boys and girls.
         </p>
