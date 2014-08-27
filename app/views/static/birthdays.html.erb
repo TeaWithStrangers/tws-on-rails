@@ -274,7 +274,7 @@
           <%= link_to 'Tea With Strangers', root_path %> is all about bringing people together for meaningful and fun interactions. We're mostly known for tea time — a conversation between a few strangers and a super host. You should sign up and join (if you've signed up before, <%= link_to 'log in and find a time here', new_user_session_path %>.)
         </p>
         <div class="signup-center">
-          <%= render partial: 'shared/signup' %>
+          <%= render partial: 'shared/signup', locals: {dropdown: true} %>
         </div>
         <p>
           Birthdays With Strangers is a fun experiment to bring the community together in celebration of each other. There will great conversations, music, food, and stations to make gifts for the birthday boys and girls.
