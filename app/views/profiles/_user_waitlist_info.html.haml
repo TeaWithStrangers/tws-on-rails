@@ -1,0 +1,8 @@
+- if !attendances.count.zero?
+  %h2.main.upcoming.going  Your Waitlists
+  %p 
+    =link_to "Go check if a spot has freed up!", schedule_city_path(current_user.home_city)
+  %ul.upcoming.going
+    - attendances.each do |a|
+      %li.tea-time
+        = render partial: 'teatime_info', locals: {tea_time: a.tea_time, att: nil}

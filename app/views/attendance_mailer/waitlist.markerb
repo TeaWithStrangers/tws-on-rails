@@ -1,0 +1,12 @@
+Hey hey <%= @user.name %>!
+
+Just confirming that you have been added ot the waitlist for the following tea time:
+
+<%= render partial: "shared_mailers/info_nohost", locals: {tea_time: @tea_time} %>
+
+You will get another email when a free spot for the tea time opens up!
+
+Cheers,  
+<%= @attendance.tea_time.host.name %>
+
+P.S. In case you forgot your password, [you can reset it easily here](http://www.teawithstrangers.com/users/password/new).

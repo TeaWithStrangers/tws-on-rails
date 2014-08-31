@@ -50,12 +50,21 @@ class TeaTimesController < ApplicationController
     end
 
     @attendance = Attendance.where(tea_time: @tea_time, user: @user).first_or_create
-    @attendance.status = :pending
+    @attendance.try_join
 
     if @attendance.save
-      respond_to do |format|
-        format.html { redirect_to profile_path, notice: 'Registered for Tea Time! See you soon :)' }
-        format.json { @attendance }
+      @attendance.queue_mails
+      if @attendance.waiting_list?
+        respond_to do |format|
+          format.html { redirect_to profile_path, notice: 'Joined the waitlist' }
+          format.json { @attendance }
+        end
+
+      else
+        respond_to do |format|
+          format.html { redirect_to profile_path, notice: 'Registered for Tea Time! See you soon :)' }
+          format.json { @attendance }
+        end
       end
     else
       respond_to do |format|

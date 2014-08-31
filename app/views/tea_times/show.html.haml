@@ -2,7 +2,7 @@
   = render partial: 'shared/nav_header'
   - prefill = !!current_user
   %h2.admin-head
-    Sign up for tea time
+    = @tea_time.spots_remaining? ? 'Sign up for tea time' : 'Join the waitlist for tea time'
   = form_for :tea_time, url: attendance_tea_time_path(@tea_time), html: {class: 'schedule-tea new_user'} do |f|
     .form-body
       = render partial: 'shared/tea_time_row', locals: {tea_time: @tea_time}
@@ -11,6 +11,6 @@
       = f.label :email, "You check email (and manage a calendar) at"
       = f.email_field :email, value: prefill ? current_user.email : '', readonly: prefill,placeholder: 'Email Address'
       .button-container
-        = f.submit 'Confirm', class: 'confirm'
+        = f.submit @tea_time.spots_remaining? ? 'Confirm' : 'Join Waitlist', class: 'confirm'
         = link_to "Nevermind", :back, class: 'cancel'
         

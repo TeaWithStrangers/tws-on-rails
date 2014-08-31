@@ -18,6 +18,17 @@ class AttendanceMailer < ActionMailer::Base
          reply_to: @tea_time.host.email)
   end
 
+  def waitlist(attendance_id)
+    @attendance = Attendance.find(attendance_id)
+    @tea_time = @attendance.tea_time
+    @user = @attendance.user
+
+    mail(to: @attendance.user.email,
+         from: @tea_time.host.friendly_email,
+         subject: "You are waiting for a tea time!",
+         reply_to: @tea_time.host.email)
+  end
+
   def reminder(attendance_id, type)
     @attendance = Attendance.find(attendance_id)
     @user = @attendance.user

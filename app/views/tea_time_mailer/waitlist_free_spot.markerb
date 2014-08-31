@@ -1,0 +1,12 @@
+Hey hey!
+
+Just letting you know that a free spot has opened up for a tea time you are on the waitlist for!
+
+<%= render partial: "shared_mailers/info_nohost", locals: {tea_time: @tea_time} %>
+
+[Grab it quick before it's gone!](<%= profile_url %>)
+
+All good things,  
+Ankit, one of the hosts at TWS
+
+P.S. In case you forgot your password, [you can reset it easily here](http://www.teawithstrangers.com/users/password/new).

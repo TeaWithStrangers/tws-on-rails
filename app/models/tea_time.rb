@@ -63,6 +63,14 @@ class TeaTime < ActiveRecord::Base
   def spots_remaining?
     spots_remaining > 0
   end
+
+  def is_attending?(user)
+    attendances.select(&:pending?).any? { |att| att.user == user }
+  end
+
+  def is_waitlisted?(user)
+    attendances.select(&:waiting_list?).any? { |att| att.user == user }
+  end
   
   #Attendees takes an optional single argument lambda via the :filter keyword arg
   # that is passed to reject. Any items for which the Proc returns true are
@@ -110,6 +118,10 @@ class TeaTime < ActiveRecord::Base
 
   def send_host_confirmation
     TeaTimeMailer.delay.host_confirmation(self.id)
+  end
+
+  def send_waitlist_notifications
+    TeaTimeMailer.delay.waitlist_free_spot(self.id)
   end
 
   def queue_followup_mails
