@@ -1,7 +1,7 @@
 - host_count = city.hosts.count
 %li{:class => "#{city.city_code}"}
   .city-bg
-    %img.city-background-image{src:city.header_bg.url}
+    %img.city-background-image{src:city.header_bg.url(:medium)}
     %a.background-link{href:city_path(city)}
     %h3= link_to city.name, city_path(city), {class: host_count > 1 ?  nil : 'single-host'}
   - if host_count > 0
