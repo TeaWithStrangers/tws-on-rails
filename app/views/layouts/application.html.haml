@@ -6,7 +6,7 @@
     %meta{name: 'author', content: ""}
     %meta{name: 'viewport', content:"width=device-width, initial-scale=1, maximum-scale=1"}
     - if content_for?(:head)
-      =yield(:head)
+      = yield(:head)
     - else
       %meta{:property => "og:url", :content => "http://teawithstrangers.com"}
       %meta{:property => "og:type", :content => "website"}
@@ -32,6 +32,7 @@
     = stylesheet_link_tag('application', :media => 'all', 'data-turbolinks-track' => true)
     = javascript_include_tag('application', 'data-turbolinks-track' => true)
     = csrf_meta_tags
+    = yield(:page_styles)
   %body{class: (params[:controller] ? "controller-#{params[:controller]}" : nil) }
     #fb-root
     :javascript
