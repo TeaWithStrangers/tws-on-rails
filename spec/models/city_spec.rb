@@ -46,6 +46,11 @@ describe City do
       city = create(:city, :hidden, city_code: 'hidden')
       expect(City.for_code('hidden')).to eq(city)
     end
+
+    it 'should find a city by primary key as a fallback' do
+      city = create(:city, city_code: 'hidden')
+      expect(City.for_code(city.id.to_s)).to eq(city)
+    end
   end
 
   describe '.proxy_city=' do
