@@ -1,0 +1,19 @@
+- content_for :page_styles do
+  :css
+    .landscape-header.city {
+      background-image: url(#{@city.header_bg.url(:banner)});
+    }
+    @media only screen and (min-device-width: 320px) and (max-device-width: 568px), (max-width: 800px) {
+      .landscape-header.city {
+        background-image: url(#{@city.header_bg.url(:small)});
+      }
+    }
+
+
+.landscape-header.city
+  .blur-layer
+  .landscape-text
+    %h1.heycity
+      Hey #{@city.name}!
+      %br
+      Let's get tea.

@@ -1,11 +1,4 @@
-.landscape-header.city{style:"background-image: url(#{@city.header_bg.url});"}
-  .blur-layer
-  .landscape-text
-    %h1.heycity
-      Hey #{@city.name}!
-      %br
-      Let's get tea.
-
+= render partial: 'shared/city_banner'
 .container
   = render partial: 'shared/nav_header'
   = @city.tea_times.empty? ? render(partial: 'sched_no_hosts') : render(partial: 'sched_has_hosts')
