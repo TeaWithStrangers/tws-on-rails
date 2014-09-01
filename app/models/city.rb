@@ -75,7 +75,7 @@ class City < ActiveRecord::Base
 
     private
       def for_code_proxy(code, method)
-        unscoped{ self.send(method, city_code: code.upcase) }
+        unscoped{ self.send(method, city_code: code.upcase) || self.send(method, id: code) }
       end
   end
 end
