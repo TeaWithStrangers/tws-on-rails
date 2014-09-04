@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get '/about' => 'static#about', :as => :about
   get '/internproject' => 'static#internproject', :as => :internproject
   get '/birthdays' => 'static#birthdays', :as => :birthdays
-
+  get '/openhouse' => 'static#openhouse', :as => :openhouse
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

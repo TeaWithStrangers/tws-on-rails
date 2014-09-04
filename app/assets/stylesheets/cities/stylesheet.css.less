@@ -2084,12 +2084,190 @@ form.schedule-tea {
 .body-edit.birthdays {
   width: 100%;
   background: @bdaybg;
+  .museo-regular;
+  .event-completion {
+    position: relative;
+    min-height: 100%;
+    width: 100%;
+    padding: 50px;
+    border-bottom: 1px solid #a4a4a4;
+    .completion-note {
+      max-width: 750px;
+      width: 90%;
+      background: #fff;
+      border: 1px solid #a4a4a4;
+      padding: 50px;
+      margin: 0 auto;
+      position: relative;
+      h2 {
+        .museo-ultra;
+        .fsIV;
+        color: @bdayred;
+        margin-bottom: .5em;
+      }
+      p {
+        line-height: 1.5em;
+        margin-bottom: 1em;
+        &:last-child {
+          margin-bottom: 0;
+        }
+        &.next {
+          .museo-bold;
+        }
+      }
+    }
+  }
+  &.openhouse {
+    .container {
+      .landscape-header {
+        background: asset-url('openhouse.jpg') no-repeat center 40%;
+        background-size: cover;
+        height: 410px;
+      }
+      .content {
+        border-color: darken(@bdaybg, 25%);
+        overflow: auto;
+        padding-bottom: 50px;
+        .full-strip {
+          &.logo {
+            background-color: darken(@bdaybg, 45%);
+          }
+          .margin-container {
+            &.logo {
+              background: asset-url('openhouse-logo-white.png') no-repeat left center;
+              background-size: auto 85%;
+              height: 150px;
+              text-indent: -9999px;
+            }
+          }
+        }
+        .strip {
+          overflow: visible;
+          .two-third {
+            float: left;
+            width: 200%/3;
+            overflow: auto;
+            padding: 0 20px;
+            h3 {
+              .museo-bold;
+              .fsIV;
+              margin-bottom: .5em;
+            }
+            p {
+              .museo-semibold;
+              .fsI;
+              line-height: 1.5em;
+              margin: 0;
+              margin-bottom: .75em;
+              text-align: left;
+            }
+          }
+          .third {
+            float: right;
+            width: 100%/3;
+            padding: 0 0 0 20px;
+            position: relative;
+            .ticket-container {
+              background: white;
+              border: 1px solid darken(@bdaybg, 25%);
+              .bold;
+              padding: 20px;
+              margin-top: -150px;
+              span.pre {
+                .fs;
+                font-size: .75em;
+                text-transform: uppercase;
+                display: block;
+              }
+              span.post {
+                .fs;
+                font-size: .75em;
+                text-transform: uppercase;
+                display: block;
+                color: darken(@bdaybg, 25%);
+              }
+              h3 {
+                .fsIII;
+                .ultra;
+                text-transform: uppercase;
+                margin-bottom: .5em;
+              }
+              h4 {
+                .fsI;
+                line-height: 1.25em;
+                margin-bottom: .75em;
+                &.time:before {
+                  content: 'Time   ';
+                  text-transform: uppercase;
+                  .fs;
+                  font-size: .75em;
+                  color: darken(@bdaybg, 25%);
+                  padding-right: 1em;
+                }
+                &.loc:before {
+                  content: 'Place   ';
+                  text-transform: uppercase;
+                  .fs;
+                  font-size: .75em;
+                  color: darken(@bdaybg, 25%);
+                }
+                &.cost:before {
+                  content: 'Cost   ';
+                  text-transform: uppercase;
+                  .fs;
+                  font-size: .75em;
+                  color: darken(@bdaybg, 25%); 
+                }
+              }
+              a.button {
+                display: block;
+                background: @bdaygreen;
+                width: 100%;
+                .fsIII;
+                text-decoration: none;
+                text-align: center;
+                letter-spacing: 0px;
+                padding: .5em;
+                .museo-ultra;
+                -webkit-font-smoothing: antialiased;
+                color: @white;
+                text-transform: uppercase;
+                border: 0;
+                border-radius: 8px;
+                .box-shadow(0 3px 0 darken(@bdaygreen, 10%));
+                -webkit-appearance: none;
+                margin-bottom: 1em;
+                &:hover {
+                  .translate(0, -2px);
+                  .box-shadow(0 5px 0 darken(@bdaygreen, 10%));
+                  .transition(0.25s);
+                }
+                &:active {
+                  .translate(0, 2px);
+                  .box-shadow(0 1px 0 darken(@bdaygreen, 10%));
+                  .transition(0.25s);
+                }
+                &:focus {
+                  outline: 0;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  a {
+    color: @bdayred;
+    &:hover {
+      color: darken(@bdayred,10%);
+    }
+  }
   .container {
     width: 100%;
     min-width: 800px;
     max-width: 1200px;
     margin: 0 auto;
-    .museo-regular;
     .landscape-header {
       height: 560px;
       min-width: 800px;
@@ -2830,6 +3008,35 @@ form.schedule-tea {
     }
   }
   .body-edit.birthdays {
+    &.openhouse {
+      .container {
+        .content {
+          .full-strip {
+            .margin-container {
+              &.logo {
+                background-position: center 30%;
+                background-size: auto 65%;
+                height: 210px;
+              }
+            }
+          }
+          .strip {
+            .third, .two-third {
+              width: 100%;
+              float: none;
+              margin: 0;
+            }
+            .third {
+              padding: 0 20px;
+              margin-bottom: 1em;
+              .ticket-container {
+                margin-top: -50px;
+              }
+            }
+          }
+        }
+      }
+    }
     .container {
       min-width: 0;
       max-width: 100%;
@@ -2898,6 +3105,9 @@ form.schedule-tea {
           width: 90%;
           margin: 0 auto;
           text-align: center;
+        }
+        .signup-center {
+          width: 100%;
         }
       }
     }
