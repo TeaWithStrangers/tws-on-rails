@@ -1,0 +1,69 @@
+<% content_for :head do %>
+  <meta property="og:url" content="http://teawithstrangers.com/openhouse"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="Stranger Open House, by Tea With Strangers"/>
+  <meta property="og:image" content="http://f.cl.ly/items/00161S2K1H2u3I3N1m43/openhouse.jpg"/>
+  <meta property="og:description" content="We're learning how to design an evening of amazing conversations and we're going to be trying new things while we work to find something that we know will be awesome, every time."/>
+<% end %>
+
+<div class="body-edit birthdays openhouse">
+  <div class="container">
+    <div class="landscape-header"></div>
+    <div class="content">
+      <div class="full-strip logo">
+        <div class="margin-container logo">
+          <%= link_to 'Tea With Strangers', root_path %>
+        </div>
+      </div>
+      <div class="strip">
+        <div class="left two-third">
+          <h3>
+            We're learning how to design an evening of amazing conversations.
+          </h3>
+          <p>
+           We're going to be trying new things while we work to find something that we know will be awesome, every time. (Well, a significant portion of the time. No such thing as perfect.)
+          </p>
+          <p>
+            Sometimes, we'll tell you what we're doing. Sometimes, you'll just find out when you get there.
+          </p>
+          <p>
+            This time, we'll share this — we've made two batches of cards with questions on them. One batch is playful, trivia prompts. The other has more personal or "deep" prompts. The first hour, we'll hand out all playful cards. The second hour, we'll add in a personal one. You can use them (or not).
+          </p>
+          <p>
+            Oh, and we'll have great tea and appetizers graciously provided by Samovar Tea Lounge.
+          </p>
+          <p>
+            Can't wait to see you there.
+          </p>
+        </div>
+        <div class="right third">
+          <div class="ticket-container">
+            <span class="pre">Next Event</span>
+            <h3>Tues, September 9</h3>
+            <h4 class="time">7 – 9pm</h4>
+            <h4 class="loc">Samovar Tea Lounge Hayes Valley, 297 Page Street</h4>
+            <h4 class="cost">$25</h4>
+            <a class="button" href="https://www.tilt.com/campaigns/stranger-open-house-by-tea-with-strangers#contribute" title="Buy Tickets Now">Get a ticket!</a>
+            <span class="post">(Before they sell out, really)</span>
+          </div>
+        </div>
+      </div>
+      <div class="full-strip bday-logo openhouse-logo">
+        <div class="margin-container openhouse-logo"></div>
+      </div>
+      
+      <div class="strip last empty"></div>
+      <div class="strip last empty"></div>
+    </div>
+    <div class="footer">
+      <div class="strip">
+        <p>
+          <%= link_to 'Tea With Strangers', root_path %> is all about bringing people together for meaningful and fun interactions. We're mostly known for tea time — a conversation between a few strangers and a super host. You should sign up and join (if you've signed up before, <%= link_to 'log in and find a time here', new_user_session_path %>.)
+        </p>
+        <div class="signup-center">
+          <%= render partial: 'shared/signup', locals: {dropdown: true} %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
