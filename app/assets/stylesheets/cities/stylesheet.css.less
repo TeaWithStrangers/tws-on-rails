@@ -3006,6 +3006,35 @@ form.schedule-tea {
     }
   }
   .body-edit.birthdays {
+    &.openhouse {
+      .container {
+        .content {
+          .full-strip {
+            .margin-container {
+              &.logo {
+                background-position: center 30%;
+                background-size: auto 65%;
+                height: 210px;
+              }
+            }
+          }
+          .strip {
+            .third, .two-third {
+              width: 100%;
+              float: none;
+              margin: 0;
+            }
+            .third {
+              padding: 0 20px;
+              margin-bottom: 1em;
+              .ticket-container {
+                margin-top: -50px;
+              }
+            }
+          }
+        }
+      }
+    }
     .container {
       min-width: 0;
       max-width: 100%;
@@ -3074,6 +3103,9 @@ form.schedule-tea {
           width: 90%;
           margin: 0 auto;
           text-align: center;
+        }
+        .signup-center {
+          width: 100%;
         }
       }
     }
