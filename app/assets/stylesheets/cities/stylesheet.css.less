@@ -2148,7 +2148,8 @@ form.schedule-tea {
             clear: both;
             width: 100%;
             img {
-              width: 100%;
+              width: 50%;
+              float: left;
             }
           }
           .two-third {
@@ -2218,6 +2219,7 @@ form.schedule-tea {
                   .fs;
                   font-size: .75em;
                   color: darken(@bdaybg, 25%);
+                  padding-right: 1em;
                 }
                 &.cost:before {
                   content: 'Cost   ';
@@ -2225,6 +2227,7 @@ form.schedule-tea {
                   .fs;
                   font-size: .75em;
                   color: darken(@bdaybg, 25%); 
+                  padding-right: 1em;
                 }
               }
               a.button {
@@ -3033,12 +3036,18 @@ form.schedule-tea {
               width: 100%;
               float: none;
               margin: 0;
+              padding: 0 20px;
             }
             .third {
               padding: 0 20px;
               margin-bottom: 1em;
               .ticket-container {
                 margin-top: -50px;
+              }
+            }
+            .details-container {
+              img {
+                width: 100%;
               }
             }
           }
