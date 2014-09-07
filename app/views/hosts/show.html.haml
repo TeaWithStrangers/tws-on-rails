@@ -1,3 +1,13 @@
+- content_for :title do 
+  Hey, I'm #{@host.name}! | Tea With Strangers
+- content_for :description do
+  #{@host.name} hosts tea time with Tea With Strangers in #{@city.name}! Meet some strangers!
+- content_for :head do
+  %meta{:property => "og:type", :content => "website"}
+  %meta{:property => "og:title", :content => "Hey, I'm #{@host.name}! | Tea With Strangers"}
+  %meta{:property => "og:image", :content => "#{@host.avatar.url(:landscape)}"}
+  %meta{:property => "og:description", :content => "#{@host.name} hosts tea time with Tea With Strangers in #{@city.name}! Meet some strangers!"}
+
 = render partial: 'shared/city_banner'
 .container
   =content_for :header_logo do
