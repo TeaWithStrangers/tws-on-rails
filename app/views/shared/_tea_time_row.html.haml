@@ -24,7 +24,7 @@
         = link_to tea_time_path(tea_time), class: 'tea-time-scheduling' do
           - if tea_time.spots_remaining?
             %button.button{:class => "spots#{tea_time.spots_remaining}"}
-              = "#{tea_time.spots_remaining} spots left"
+              = "#{tea_time.spots_remaining} spot" + (tea_time.spots_remaining == 1 ? "" : "s") + " left"
           - else
             %button.red.button{disabled: true}
               Full
