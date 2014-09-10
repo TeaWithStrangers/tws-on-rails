@@ -2147,6 +2147,10 @@ form.schedule-tea {
         }
         .strip {
           overflow: visible;
+          p {
+            text-align: left;
+            margin: 0;
+          }
           .details-container {
             float: none;
             clear: both;
@@ -2267,6 +2271,14 @@ form.schedule-tea {
                 }
               }
             }
+          }
+          .old {
+            padding: 25px 20px;
+            background: lighten(@bdaybg, 5%);
+            border: 1px solid darken(@bdaybg, 5%);
+            width: 50%;
+            clear: both;
+            overflow: auto;
           }
         }
       }
