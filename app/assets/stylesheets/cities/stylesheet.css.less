@@ -1214,7 +1214,7 @@ a {
                   h4 {
                     .fs;
                     .bold;
-                    float: left;
+                    padding-bottom: 5px;
                   }
                   &.pending {
                     h4 {
@@ -1232,6 +1232,9 @@ a {
                     text-decoration: none;
                     margin: .5em 0 1em 0;
                     text-align: center;
+                  }
+                  &.flake {
+                    display: none;
                   }
                 }
               }
@@ -1371,7 +1374,6 @@ a {
                 ul.attendees-list {
                   li.attendee-names {
                     .fs;
-                    display: inline-block;
                   }
                 }
                 .email-all {
