@@ -52,6 +52,7 @@ Rails.application.routes.draw do
     post '/ghost' => 'admin#ghost'
 
     get '/overview' => 'admin#overview'
+    get '/overview/hosts' => 'admin#host_overview'
     get '/users' => 'admin#users'
 
     get '/mail' => 'admin#write_mail'
