@@ -1,5 +1,5 @@
 .container
-  - TeaTime.all.order(:start_time).each do |tt|
+  - @tea_times.each do |tt|
     .row
       =render partial: 'shared/tea_time_row', locals: {tea_time: tt}
       %table.attendees
