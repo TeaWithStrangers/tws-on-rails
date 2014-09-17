@@ -5,6 +5,11 @@ class AdminController < ApplicationController
   end
 
   def overview
+    @tea_times = TeaTime.all.order('start_time DESC')
+  end
+
+  def host_overview
+    @hosts = User.hosts.includes(:tea_times)
   end
 
   def users
