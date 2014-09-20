@@ -64,12 +64,14 @@ class TeaTime < ActiveRecord::Base
     spots_remaining > 0
   end
 
-  def is_attending?(user)
-    attendances.select(&:pending?).any? { |att| att.user == user }
+  def attending?(user)
+    !attendances.where(user: user, status: Attendance.statuses[:pending]).empty?
   end
 
-  def is_waitlisted?(user)
-    attendances.select(&:waiting_list?).any? { |att| att.user == user }
+  def waitlisted?(user)
+    #attendances.attended.where(user: user, status: Attendance.statuses[:waiting_list]).take
+    #attendances.select(&:waiting_list?).any? { |att| att.user == user }
+    !attendances.where(user: user, status: Attendance.statuses[:waiting_list]).empty?
   end
   
   #Attendees takes an optional single argument lambda via the :filter keyword arg

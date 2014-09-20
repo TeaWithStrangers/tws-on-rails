@@ -8,4 +8,8 @@ FactoryGirl.define do
   trait :flake do
     status :flake
   end
+
+  trait :waitlist do
+    status :waiting_list
+  end
 end

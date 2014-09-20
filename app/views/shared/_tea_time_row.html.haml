@@ -22,7 +22,7 @@
     - if !(without_button ||= false)
       .button
         = link_to tea_time_path(tea_time), class: 'tea-time-scheduling' do
-          - if tea_time.is_attending?(current_user)
+          - if tea_time.attending?(current_user)
             %button.red.button{disabled: true}
               Signed Up
           - elsif tea_time.spots_remaining?
