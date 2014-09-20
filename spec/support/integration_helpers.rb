@@ -6,6 +6,11 @@ module IntegrationHelpers
     click_button 'Sign in'
   end
 
+  def sign_out
+    visit profile_path
+    click_link 'Sign Out'
+  end
+
   def select_date_and_time(date, options = {})
     field = options[:from]
     if field.kind_of?(Array) 

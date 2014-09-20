@@ -40,7 +40,7 @@ class TeaTimesController < ApplicationController
       user_data = GetOrCreateUser.call({name: tea_time_params[:name],
                                         email: tea_time_params[:email]},
                                         @tea_time.city)
-      if user_data[:new_user?] && user_info[:user].valid?
+      if user_data[:new_user?] && user_data[:user].valid?
         @user = user_data[:user]
         sign_in @user
       elsif !user_data[:new_user?] && user_data[:user].valid?

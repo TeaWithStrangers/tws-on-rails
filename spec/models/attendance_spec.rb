@@ -1,7 +1,6 @@
 require 'spec_helper.rb'
 
 describe Attendance do
-
   describe 'todo?' do
     it 'returns true when pending? is false' do
       attendance = create(:attendance)
@@ -36,6 +35,13 @@ describe Attendance do
       attendance = create(:attendance, tea_time: @tt)
       attendance.flake!
       expect(attendance.changed?).to eq false
+    end
+  end
+
+  describe '.user' do
+    let(:attendance) { create(:attendance, user: nil)}
+    it 'should return a nil_user instance if its user is deleted' do
+      expect(attendance.user).to eql User.nil_user
     end
   end
 end
