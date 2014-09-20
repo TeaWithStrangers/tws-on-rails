@@ -57,8 +57,8 @@ class User < ActiveRecord::Base
   end
 
   class << self
-    def null_user
-      self.new(name: 'Null User')
+    def nil_user
+      @@nil_user ||= self.new(name: 'A Former Tea Timer')
     end
   end
 end
