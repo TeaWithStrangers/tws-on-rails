@@ -51,7 +51,7 @@ class TeaTimeMailer < ActionMailer::Base
     waitlist = @tea_time.attendances.select(&:waiting_list?)
     mail(bcc: waitlist.map {|a| a.user.email},
          from: "\"Ankit at Tea With Strangers\" <ankit@teawithstrangers.com>",
-         subject: 'Free spot for tea time')
+         subject: 'A spot just opened up at tea time')
   end
 
   def cancellation(tea_time_id, attendance_id)

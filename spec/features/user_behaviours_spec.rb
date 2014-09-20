@@ -60,7 +60,7 @@ feature 'Registered User' do
     end
 
     scenario 'user can flake' do
-      attend_tt(@user, @tt)
+      attend_tt(@tt)
       visit profile_path
       click_button 'Cancel my spot'
       expect(@user.attendances.reload.first.flake?).to eq true
@@ -87,6 +87,24 @@ feature 'Registered User' do
       expect(page).to have_content User.nil_user.name
     end
   end
+
+  feature 'Waitlist' do
+    before(:each) do
+      @full_tt = create(:tea_time, :full)
+    end
+
+    scenario 'user can add himself to the waitlist for a full tea time' do
+      attend_tt(@full_tt)
+      expect(@user.attendances.reload.first.waiting_list?).to eq true
+    end
+
+    scenario 'user is informed when someone on the waitlist flakes' do
+      attend_tt(@full_tt)
+      expect(@user.attendances.reload.first.waiting_list?).to eq true
+      @full_tt.attendances.last.flake!
+      expect(ActionMailer::Base.deliveries.map(&:subject)).to include('A spot just opened up at tea time')
+    end
+  end
 end
 
 private
@@ -98,8 +116,8 @@ private
     click_button "Let's Get Tea"
   end
 
-  def attend_tt(user, tea_time)
+  def attend_tt(tea_time)
     visit tea_time_path(tea_time)
-    click_button 'Confirm'
-    expect(@user.attendances.map(&:tea_time)).to include @tt
+    find(:css, 'input.confirm').click
+    expect(@user.attendances.reload.map(&:tea_time)).to include tea_time
   end
