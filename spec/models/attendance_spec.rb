@@ -1,7 +1,6 @@
 require 'spec_helper.rb'
 
 describe Attendance do
-
   describe 'todo?' do
     it 'returns true when pending? is false' do
       attendance = create(:attendance)

@@ -31,41 +31,61 @@ feature 'Signing In & Up' do
     #TODO: Add check for Flash message once it's merged
   end
 end
-
-feature 'Tea Time Attendance' do
-  before(:all) do
+feature 'Registered User' do
+  before(:each) do
     @host = create(:user, :host)
     @user = create(:user, home_city: @host.home_city)
     @tt = create(:tea_time, host: @host, city: @host.home_city)
-  end
-
-  scenario 'allows a user to sign up' do
     sign_in @user
-    visit city_path(@user.home_city)
-    expect(page.status_code).to eq(200)
-    click_link('5 spots left')
-    expect(page).to have_content @host.name
-    click_button 'Confirm'
-    expect(@user.attendances.map(&:tea_time)).to include @tt
   end
 
-  scenario 'logged out user with accounts tries to attend' do
-    visit city_path(@user.home_city)
-    click_link('5 spots left')
-    fill_in :name, with:  @user.name
-    fill_in :email, with: @user.email
-    click_button 'Confirm'
-    expect(current_path).to eq new_user_session_path
+  feature 'Tea Time Attendance' do
+    scenario 'allows a user to sign up' do
+      visit city_path(@user.home_city)
+      expect(page.status_code).to eq(200)
+      click_link('5 spots left')
+      expect(page).to have_content @host.name
+      click_button 'Confirm'
+      expect(@user.attendances.map(&:tea_time)).to include @tt
+    end
+
+    scenario 'logged out user with accounts tries to attend' do
+      sign_out
+      visit city_path(@user.home_city)
+      click_link('5 spots left')
+      fill_in :name, with:  @user.name
+      fill_in :email, with: @user.email
+      click_button 'Confirm'
+      expect(current_path).to eq new_user_session_path
+    end
+
+    scenario 'user can flake' do
+      attend_tt(@user, @tt)
+      visit profile_path
+      click_button 'Cancel my spot'
+      expect(@user.attendances.reload.first.flake?).to eq true
+      #Shouldn't show a flaked TT on Profile page
+      expect(page).not_to have_content @tt.friendly_time
+    end
   end
 
-  scenario 'user can flake' do
-    sign_in @user
-    attend_tt(@user, @tt)
-    visit profile_path
-    click_button 'Cancel my spot'
-    expect(@user.attendances.reload.first.flake?).to eq true
-    #Shouldn't show a flaked TT on Profile page
-    expect(page).not_to have_content @tt.friendly_time
+  feature 'History' do
+    before(:each) do
+      @old_tt = create(:tea_time, :past)
+      create(:attendance, user: @user, tea_time: @old_tt)
+    end
+    scenario 'user can see their history' do
+      visit history_path
+      expect(page).to have_content @old_tt.friendly_time
+    end
+
+    #TODO: This should probably be a unit test
+    scenario 'user can see their history even if another user has deleted their account' do
+      create(:attendance, tea_time: @old_tt, user: nil)
+      visit history_path
+      expect(page).to have_content @old_tt.friendly_time
+      expect(page).to have_content User.nil_user.name
+    end
   end
 end
 
