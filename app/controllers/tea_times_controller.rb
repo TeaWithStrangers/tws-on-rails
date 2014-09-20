@@ -54,17 +54,10 @@ class TeaTimesController < ApplicationController
 
     if @attendance.save
       @attendance.queue_mails
-      if @attendance.waiting_list?
+      message = @attendance.waiting_list? ? 'You\'re on the waitlist!' : "You registered for tea time! See you soon :)"
         respond_to do |format|
-          format.html { redirect_to profile_path, notice: 'Joined the waitlist' }
+          format.html { redirect_to profile_path, notice: message }
           format.json { @attendance }
-        end
-
-      else
-        respond_to do |format|
-          format.html { redirect_to profile_path, notice: 'Registered for Tea Time! See you soon :)' }
-          format.json { @attendance }
-        end
       end
     else
       respond_to do |format|
