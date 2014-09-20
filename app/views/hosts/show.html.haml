@@ -17,3 +17,6 @@
     = render partial: 'one_of_one'
   - else
     = render partial: 'one_of_many'
+
+  -if @host.tea_times.future.count > 0
+    = render partial: 'shared/tea_times', locals: {tea_times: @host.tea_times.future_until(Date.today+2.weeks).na.order(:start_time => :asc)} 
