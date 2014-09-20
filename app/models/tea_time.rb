@@ -116,6 +116,10 @@ class TeaTime < ActiveRecord::Base
     TeaTimeMailer.delay(run_at: self.end_time).followup(self.id)
   end
 
+  def to_s
+    "#{host.name} – #{location} @ #{friendly_time}"
+  end
+
   private
     def use_city_timezone(&block)
       unless city.nil?
