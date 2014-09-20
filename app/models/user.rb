@@ -55,4 +55,10 @@ class User < ActiveRecord::Base
     attendances.joins(:tea_time).
       merge(tt_period).includes(:tea_time)
   end
+
+  class << self
+    def null_user
+      self.new(name: 'Null User')
+    end
+  end
 end
