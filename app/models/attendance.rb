@@ -14,6 +14,10 @@ class Attendance < ActiveRecord::Base
     pending?
   end
 
+  def user
+    super || User.nil_user
+  end
+
   def flake!
     unless flake?
       update_attribute(:status, :flake)
@@ -42,5 +46,4 @@ class Attendance < ActiveRecord::Base
         return false
       end
     end
-
 end
