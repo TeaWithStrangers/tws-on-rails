@@ -69,8 +69,6 @@ class TeaTime < ActiveRecord::Base
   end
 
   def waitlisted?(user)
-    #attendances.attended.where(user: user, status: Attendance.statuses[:waiting_list]).take
-    #attendances.select(&:waiting_list?).any? { |att| att.user == user }
     !attendances.where(user: user, status: Attendance.statuses[:waiting_list]).empty?
   end
   
