@@ -21,20 +21,26 @@ describe Attendance do
 
   describe 'flake!' do
     before(:each) do
-      AttendanceMailer.stub(:flake)
-      @tt = create(:tea_time)
+      @tt = create(:tea_time, :full)
     end
-    it 'updates status to :flake' do
-      attendance = create(:attendance, tea_time: @tt)
 
+    let(:attendance) { create(:attendance, tea_time: @tt) }
+
+    it 'updates status to :flake' do
       attendance.flake!
       expect(attendance.status).to eq "flake"
+      expect(attendance.changed?).to eq false
     end
 
-    it 'saves the record' do
-      attendance = create(:attendance, tea_time: @tt)
+    it 'fires off waitlist notifications' do
+      tt = double('TeaTime', spots_remaining?: false)
+      [:send_waitlist_notifications, :persisted?].each {|m|
+        allow(tt).to receive m
+      }
+      expect(tt).to receive(:send_waitlist_notifications)
+
+      attendance.stub(:tea_time) { tt }
       attendance.flake!
-      expect(attendance.changed?).to eq false
     end
   end
 
