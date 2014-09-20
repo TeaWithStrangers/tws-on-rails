@@ -15,7 +15,7 @@ class Attendance < ActiveRecord::Base
   end
 
   def user
-    super || User.null_user
+    super || User.nil_user
   end
 
   def flake!
@@ -46,5 +46,4 @@ class Attendance < ActiveRecord::Base
         return false
       end
     end
-
 end
