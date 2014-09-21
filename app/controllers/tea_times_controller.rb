@@ -1,6 +1,6 @@
 class TeaTimesController < ApplicationController
   helper TeaTimesHelper
-  before_action :set_tea_time, except: [:index, :create]
+  before_action :set_tea_time, except: [:index, :new, :create]
   before_action :authenticate_user!, :authorized?, only: [:new, :edit, :create, :update, :cancel, :destroy, :index]
 
   # GET /tea_times
