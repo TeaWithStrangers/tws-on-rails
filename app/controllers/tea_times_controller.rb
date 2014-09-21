@@ -1,7 +1,6 @@
 class TeaTimesController < ApplicationController
   helper TeaTimesHelper
-  before_action :set_tea_time, only: [:show, :edit, :update, :destroy, :update_attendance, :create_attendance, :cancel]
-  before_action :prepare_tea_time_for_edit, only: [:create, :update]
+  before_action :set_tea_time, except: [:index, :create]
   before_action :authenticate_user!, :authorized?, only: [:new, :edit, :create, :update, :cancel, :destroy, :index]
 
   # GET /tea_times
@@ -25,7 +24,9 @@ class TeaTimesController < ApplicationController
 
   # GET /tea_times/new
   def new
-    @tea_time = TeaTime.new(city: current_user.home_city, start_time: Time.now.beginning_of_hour + 1.day)
+    @tea_time = TeaTime.new(city: current_user.home_city,
+                            start_time: Time.now.beginning_of_hour + 1.day,
+                            host: current_user)
   end
 
   # GET /tea_times/1/edit
@@ -83,6 +84,7 @@ class TeaTimesController < ApplicationController
   # POST /tea_times
   # POST /tea_times.json
   def create
+    @tea_time = TeaTime.new(tea_time_params)
     respond_to do |format|
       if @tea_time.save
         format.html { redirect_to profile_path, notice: 'Tea time was successfully created.' }
@@ -98,7 +100,7 @@ class TeaTimesController < ApplicationController
   # PATCH/PUT /tea_times/1.json
   def update
     respond_to do |format|
-      if @tea_time.update(tea_time_params)
+      if UpdateTeaTime.call(@tea_time, tea_time_params)
         format.html { redirect_to profile_path, notice: 'Tea time was successfully updated.' }
         format.json { render json: @tea_time, status: :ok, location: @tea_time }
       else
@@ -135,11 +137,6 @@ class TeaTimesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_tea_time
       @tea_time = TeaTime.find(params[:id])
-    end
-
-    def prepare_tea_time_for_edit
-      @tea_time ||= TeaTime.new(tea_time_params)
-      @tea_time.host = current_user
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
