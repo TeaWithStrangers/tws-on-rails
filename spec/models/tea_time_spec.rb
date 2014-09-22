@@ -193,4 +193,23 @@ describe TeaTime do
       a2.should_not be_able_to(:edit, tt)
     end
   end
+
+  context 'waitlist status checkers' do
+    let(:tt) { create(:tea_time, :full) }
+    let(:att) { create(:attendance, :waitlist, tea_time: tt) }
+
+    describe '.attending?' do
+      it 'should return true for pending, false for waitlist' do
+        expect(tt.attending?(tt.attendances.first.user)).to eq true
+        expect(tt.attending?(att.user)).to eq false
+      end
+    end
+
+    describe '.attending?' do
+      it 'should return true for pending, false for waitlist' do
+        expect(tt.waitlisted?(tt.attendances.first.user)).to eq false
+        expect(tt.waitlisted?(att.user)).to eq true
+      end
+    end
+  end
 end

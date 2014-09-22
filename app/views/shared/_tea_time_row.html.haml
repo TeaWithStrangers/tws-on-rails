@@ -22,9 +22,15 @@
     - if !(without_button ||= false)
       .button
         = link_to tea_time_path(tea_time), class: 'tea-time-scheduling' do
-          - if tea_time.spots_remaining?
-            %button.button{:class => "spots#{tea_time.spots_remaining}"}
-              = "#{tea_time.spots_remaining} spot" + (tea_time.spots_remaining == 1 ? "" : "s") + " left"
-          - else
+          - if tea_time.attending?(current_user)
             %button.red.button{disabled: true}
-              Full
+              Signed Up
+          - elsif tea_time.spots_remaining?
+            %button.button{:class => "spots#{tea_time.spots_remaining}"}
+              = "#{tea_time.spots_remaining} #{'spot'.pluralize(tea_time.spots_remaining)} left"
+          - elsif tea_time.waitlisted?(current_user)
+            %button.red.button{disabled: true}
+              Still Full :(
+          - else
+            %button.red.button{disabled: false}
+              Join Waitlist

@@ -1,0 +1,9 @@
+A spot just opened up on the tea time that you were waiting on! I hope you can make it!
+
+<%= render partial: "shared_mailers/info_nohost", locals: {tea_time: @tea_time} %>
+
+[Grab it quick before it's gone!](<%= profile_url %>)
+
+<%= @tea_time.host.name %>
+
+P.S. In case you forgot your password, [you can reset it easily here](http://www.teawithstrangers.com/users/password/new).

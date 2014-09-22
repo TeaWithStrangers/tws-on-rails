@@ -5,10 +5,8 @@ class Attendance < ActiveRecord::Base
   validates_presence_of :user, :tea_time, presence: true
   validates_uniqueness_of :user_id, scope: :tea_time_id
 
-  before_create :check_capacity
-  after_create :queue_mails, unless: :skip_callbacks
-
   scope :attended, ->() { where(status: [:cancelled, :pending, :present].map {|x| Attendance.statuses[x]}) }
+  scope :waitlisted, ->() { where(status: [:waiting_list].map {|x| Attendance.statuses[x]}) }
 
   def todo?
     pending?
@@ -20,30 +18,37 @@ class Attendance < ActiveRecord::Base
 
   def flake!
     unless flake?
+      unless tea_time.spots_remaining?
+        tea_time.send_waitlist_notifications
+      end
       update_attribute(:status, :flake)
       AttendanceMailer.delay.flake(self.id)
     end
   end
 
   def queue_mails
-    #Immediate Attendance Confirmation
-    AttendanceMailer.delay.registration(self.id)
-    #Ethos Email
-    TeaTimeMailer.delay(run_at: Time.now + 1.hour).ethos(self.user.id)
-    st = self.tea_time.start_time
-    AttendanceMailer.delay(run_at: st - 2.days).reminder(self.id, :two_day)
-    AttendanceMailer.delay(run_at: st - 12.hours).reminder(self.id, :same_day)
+    if self.pending?
+      #Immediate Attendance Confirmation
+      AttendanceMailer.delay.registration(self.id)
+      #Ethos Email
+      TeaTimeMailer.delay(run_at: Time.now + 1.hour).ethos(self.user.id)
+      st = self.tea_time.start_time
+      AttendanceMailer.delay(run_at: st - 2.days).reminder(self.id, :two_day)
+      AttendanceMailer.delay(run_at: st - 12.hours).reminder(self.id, :same_day)
+    elsif self.waiting_list?
+      AttendanceMailer.delay.waitlist(self.id)
+    end
   end
 
   def occurred?
     tea_time.occurred?
   end
 
-
-  private
-    def check_capacity
-      if !self.tea_time.spots_remaining?
-        return false
-      end
+  def try_join
+    if self.tea_time.spots_remaining?
+      self.status = :pending
+    else
+      self.status = :waiting_list
     end
+  end
 end
