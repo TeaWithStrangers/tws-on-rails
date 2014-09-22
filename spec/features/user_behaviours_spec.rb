@@ -101,8 +101,8 @@ feature 'Registered User' do
     scenario 'user is informed when someone on the waitlist flakes' do
       attend_tt(@full_tt)
       expect(@user.attendances.reload.first.waiting_list?).to eq true
-      @full_tt.attendances.last.flake!
-      expect(ActionMailer::Base.deliveries.map(&:subject)).to include('A spot just opened up at tea time')
+      @full_tt.attendances.where.not(user_id: @user.id).sample.flake!
+      expect(ActionMailer::Base.deliveries.map(&:subject)).to include('A spot just opened up at tea time! Sign up!')
     end
   end
 end
