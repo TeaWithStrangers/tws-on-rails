@@ -19,12 +19,4 @@
     = render partial: 'one_of_many'
 
   -if @host.tea_times.future.count > 0
-    = render partial: 'shared/tea_times', locals: {tea_times: @host.tea_times.future_until(Date.today+2.weeks).na.order(:start_time => :asc)} 
-    / There should be an h5 at the end of the partial being called like so:
-    / .row.mobilewide
-    /   .wide
-    /     %h3.sectionhead.schedule Join for an upcoming tea time
-    /     .mobilepad
-    /       - tea_times.each do |tt|
-    /         = render partial: 'shared/tea_time_row', locals: {tea_time: tt}
-    /         %h5 If none of these work for you, #{link_to "sign up for a tea time with any of the other hosts in #{@city.name} here!", schedule_city_path(@city)}
+    = render partial: 'shared/tea_times', locals: {tea_times: @host.tea_times.future_until(Date.today+2.weeks).na.order(:start_time => :asc), host: @host}
