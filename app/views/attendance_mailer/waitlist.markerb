@@ -7,4 +7,4 @@ Just confirming that you have been added to the wait list for the following tea 
 If/when a spot opens up, you'll get an email from me so you can join in! Usually, life comes up and one person has to drop out the day-of, so keep an eye out for an email then.
 
 Cheers,  
-<%= @attendance.tea_time.host.name %>
+<%= @tea_time.host.name %>

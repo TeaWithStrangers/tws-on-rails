@@ -36,7 +36,7 @@ class AttendanceMailer < ActionMailer::Base
 
     mail(to: @attendance.user.email,
          from: @tea_time.host.friendly_email,
-         subject: "You're on the wait list for tea time on #{tea_time.start_time.strftime('%B %e')}!",
+         subject: "You're on the wait list for tea time on #{@tea_time.start_time.strftime('%B %e')}!",
          reply_to: @tea_time.host.email)
   end
 
