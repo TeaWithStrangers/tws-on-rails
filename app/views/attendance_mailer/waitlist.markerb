@@ -1,6 +1,6 @@
 Hey hey <%= @user.name %>!
 
-Just confirming that you have been added to the waitlist for the following tea time:
+Just confirming that you have been added to the wait list for the following tea time:
 
 <%= render partial: "shared_mailers/info_nohost", locals: {tea_time: @tea_time} %>
 
