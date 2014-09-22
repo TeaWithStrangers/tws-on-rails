@@ -24,6 +24,19 @@ feature 'Hosting: ' do
       expect(page).to have_content 'Vega'
       expect(@u.tea_times.first.location).to eq 'Vega'
     end
+
+    scenario 'changing tea time host' do
+      @new_host = create(:user, :host)
+      create_tea_time
+      visit edit_tea_time_path(@u.tea_times.first)
+      tt = @u.tea_times.first
+      find('#tea_time_user_id').find(:xpath, "option[@value=#{@new_host.id}]").select_option
+      click_button 'Update Tea Time'
+
+      #TT should now belong to new host
+      expect(@new_host.tea_times).to include(tt)
+      expect(@u.tea_times).to eq([])
+    end
   end
 end
 
