@@ -40,6 +40,6 @@ class AttendanceMailer < ActionMailer::Base
     mail(to: @user.email, 
          from: @tea_time.host.friendly_email,
          reply_to: @tea_time.host.email,
-         subject: "Let's find another tea time that works!")
+         subject: "Come to another tea time?")
   end
 end
