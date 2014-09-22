@@ -18,7 +18,7 @@ But here's the thing — if you don't show up, things get awkward!
 
 It's not a huge deal, but imagine a world where we all just didn't show up to stuff after saying we would! That world sucks.
 
-Let's make sure that world doesn't exist! [Join for tea time again sometime](<%=url_for(controller: 'cities', action: 'schedule', id: @tea_time.city.city_code, only_path: false) %>) and we'll hug it out and call it even, yeah?
+Let's make sure that world doesn't exist! [Join for tea time again sometime](<%=url_for(controller: 'cities', action: 'schedule', id: @tea_time.city.city_code, only_path: false, utm_campaign: 'followupnoshow', utm_medium: 'email', utm_content: 'schedule') %>) and we'll hug it out and call it even, yeah?
 
 Hope you're having the greatest day of all time.
 

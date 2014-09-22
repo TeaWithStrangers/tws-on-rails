@@ -12,7 +12,7 @@ Super love,
 Ankit
 
 <% if @password %>
-P.S. You'll need to be logged in to pick a tea time. For now, your password is <%= @password %> (but you should [change it here](<%= url_for(controller: 'registrations', action: 'edit', only_path: false) %>)).
+P.S. You'll need to be logged in to pick a tea time. For now, your password is <%= @password %> (but you should [change it here](<%= url_for(controller: 'registrations', action: 'edit', only_path: false, utm_campaign: 'registration', utm_medium: 'email', utm_content: 'changepw') %>)).
 <% end %>  
 
-P.P.S. If you want to [host tea time where you are](http://teawithstrangers.com/hosting), learn more about what this is about, talk about how to get involved, exchange digital high fives, whatever, you can (and absolutely should) reply to this note.
+P.P.S. If you want to [host tea time where you are](http://teawithstrangers.com/hosting?utm_campaign=registration&utm_medium=email&utm_content=hosting), learn more about what this is about, talk about how to get involved, exchange digital high fives, whatever, you can (and absolutely should) reply to this note.

@@ -2,14 +2,14 @@
 
 Just wanted to send a quick thank you for joining on behalf of TWS and drop a note about a few things:
 
-1. **[Come to tea time again](<%=url_for(controller: 'cities', action: 'schedule', id: @tea_time.city.city_code,only_path: false) %>)**. You can and should, and you can be sure that every tea time is different. Never gets dull (trust me – I've hosted over 150 of these myself, and I'm still not bored!) [You can find more available tea times here](<%=url_for(controller: 'cities', action: 'schedule', id: @tea_time.city.city_code, only_path: false) %>).
-2. **[Join the tea time group on fb!](https://www.facebook.com/groups/501352496639933/)**. It's a good place to meet and talk to other people who've come to tea times themselves.
-3. **[Like Tea With Strangers on fb!](http://www.facebook.com/teawithstrangers)**. We share awesome content that'll make you laugh, think about better communications, and making our lives better on the day-to-day.
-4. **Tell your friends about it.** That could mean sending them some snail mail or shouting from the mountaintops...of Facebook. Your friends will probably think it's cool that you went, and the more diverse perspectives that show up to tea time, the better the world looks. I don't know about you, but a good looking world doesn't sound too shabby to me. 
+1. **[Come to tea time again](<%=url_for(controller: 'cities', action: 'schedule', id: @tea_time.city.city_code, only_path: false, utm_campaign: 'followupattendance', utm_medium: 'email', utm_content: 'schedule') %>)**. You can and should, and you can be sure that every tea time is different. Never gets dull (trust me – I've hosted over 150 of these myself, and I'm still not bored!) [You can find more available tea times here](<%=url_for(controller: 'cities', action: 'schedule', id: @tea_time.city.city_code, only_path: false, utm_campaign: 'followupattendance', utm_medium: 'email', utm_content: 'schedule') %>).
+2. **[Like Tea With Strangers on fb!](http://www.facebook.com/teawithstrangers)**. We share awesome content that'll make you laugh, think about relationships, and making our lives better on the day-to-day.
+3. **[Join the tea time group on fb!](https://www.facebook.com/groups/501352496639933/)**. It's a good place to meet and talk to other people who've come to tea times themselves.
+4. **Tell your friends about it.** That could mean sending them some snail mail or [shouting from the mountaintops...of Facebook](https://www.facebook.com/sharer/sharer.php?u=http://www.teawithstrangers.com) or [Twitter](https://twitter.com/home?status=I%20can't%20tell%20you%20how%20awesome%20tea%20time%20was%20with%20@teawstrangers.%20You've%20gotta%20go%20to%20one:%20http://teawithstrangers.com). Your friends will probably think it's cool that you went, and the more diverse perspectives that show up to tea time, the better the world looks. I don't know about you, but a good looking world doesn't sound too shabby to me. 
 
 Sound good?
 
 Hope you're having the greatest day of all time.
 
 All good things,  
-Ankit, one of the hosts at TWS
+Ankit, the creator of [Tea With Strangers](http://teawithstrangers.com?utm_campaign=followupattendance&utm_medium=email&utm_content=home)

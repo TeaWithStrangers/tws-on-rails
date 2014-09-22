@@ -12,4 +12,4 @@ Can't wait to see you!
 
 <%= @attendance.tea_time.host.name %>
 
-P.S. If you need to cancel, it's super easy. Just log into the site, click 'Account' and hit the 'Cancel' button. This way, your spot can be opened up for someone else.
+P.S. If you need to cancel, it's super easy. Just [go to your account on the site](http://teawithstrangers.com/profile?utm_campaign=reminder&utm_medium=email&utm_content=cancel) and hit the 'Cancel' button. This way, your spot can be opened up for someone else.

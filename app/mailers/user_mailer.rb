@@ -10,7 +10,8 @@ class UserMailer < ActionMailer::Base
       'registration_no_tea' : 'registration'
     mail(from: "\"Ankit at Tea With Strangers\" <ankit@teawithstrangers.com>",
          to: @user.email, 
-         subject: 'High fives from Tea With Strangers!',
+         subject: 'Thanks for being awesome, #{@user.name}!',
+         # I don't think @user.name is working. Can you fix this Nick?
          template_name: template)
   end
 end
