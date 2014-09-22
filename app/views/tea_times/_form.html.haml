@@ -8,7 +8,9 @@
   = f.label :city
   .dropdown
     = f.select(:city_id, options_for_select(City.all.select(:id, :name).collect{ |p| [p.name, p.id] }, @tea_time.city.id), {:class => "city"})
-
+  = f.label :host
+  .dropdown
+    = f.select(:user_id, options_for_select(User.hosts.select(:id, :name).collect{ |p| [p.name, p.id] }, @tea_time.host.id), {:class => "city"})
   - if @tea_time.errors.any?
     #error_explanation
       %h2= "#{pluralize(@tea_time.errors.count, "error")} prohibited this tea_time from being saved:"

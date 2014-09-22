@@ -1,0 +1,8 @@
+Hey <%= @new.name %>,
+
+Just letting you know you're now the host for this tea time: [<%= @tt %>](<%= url_for(controller: :tea_times, action: :show, id: @tt) %>).
+
+Please speak with <%= @old.name %> if they didn't discuss this with you! (It's probably a mistake).
+
+Cheers,
+The Administrative Staff @ TWS

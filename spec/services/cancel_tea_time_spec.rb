@@ -14,7 +14,7 @@ describe CancelTeaTime do
   describe '#send_cancellations' do
     it 'should send cancellations to affected attendees' do
       CancelTeaTime.send_cancellations(tt)
-      expect(ActionMailer::Base.deliveries.count).to eq 3
+      expect(ActionMailer::Base.deliveries.count).to eq tt.attendances.count
     end
   end
 end
