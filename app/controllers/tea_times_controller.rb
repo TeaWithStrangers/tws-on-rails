@@ -50,12 +50,14 @@ class TeaTimesController < ApplicationController
     end
 
     @attendance = Attendance.where(tea_time: @tea_time, user: @user).first_or_create
-    @attendance.status = :pending
+    @attendance.try_join
 
     if @attendance.save
-      respond_to do |format|
-        format.html { redirect_to profile_path, notice: 'Registered for Tea Time! See you soon :)' }
-        format.json { @attendance }
+      @attendance.queue_mails
+      message = @attendance.waiting_list? ? 'You\'re on the wait list! Check your email!' : "You're all set for tea time! See your email and add it to your calendar :)"
+        respond_to do |format|
+          format.html { redirect_to profile_path, notice: message }
+          format.json { @attendance }
       end
     else
       respond_to do |format|
@@ -72,7 +74,7 @@ class TeaTimesController < ApplicationController
 
     respond_to do |format|
       if @attendance.flake!
-        format.html { redirect_to profile_path, notice: 'Tea time was successfully flaked.' }
+        format.html { redirect_to profile_path, notice: 'Your spot is now open for someone else!' }
         format.json { render :show, status: :created, location: @tea_time }
       else
         format.html { redirect_to profile_path }

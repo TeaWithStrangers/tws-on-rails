@@ -21,5 +21,7 @@
 
 = render partial: 'shared/city_banner'
 .container
+  =content_for :header_logo do
+    = link_to @city.name, city_path(@city), :class => "city-name #{@city.city_code}"
   = render partial: 'shared/nav_header'
-  = @city.tea_times.empty? ? render(partial: 'sched_no_hosts') : render(partial: 'sched_has_hosts')
+  = @city.tea_times.future.empty? ? render(partial: 'sched_no_hosts') : render(partial: 'sched_has_hosts')

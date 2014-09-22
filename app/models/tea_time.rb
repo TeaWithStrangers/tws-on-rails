@@ -57,11 +57,19 @@ class TeaTime < ActiveRecord::Base
   end
 
   def spots_remaining
-    MAX_ATTENDEES - attendances.select(&:pending?).count
+    MAX_ATTENDEES - attendances.pending.count
   end
 
   def spots_remaining?
     spots_remaining > 0
+  end
+
+  def attending?(user)
+    !attendances.where(user: user, status: Attendance.statuses[:pending]).empty?
+  end
+
+  def waitlisted?(user)
+    !attendances.where(user: user, status: Attendance.statuses[:waiting_list]).empty?
   end
   
   #Attendees takes an optional single argument lambda via the :filter keyword arg
@@ -110,6 +118,10 @@ class TeaTime < ActiveRecord::Base
 
   def send_host_confirmation
     TeaTimeMailer.delay.host_confirmation(self.id)
+  end
+
+  def send_waitlist_notifications
+    AttendanceMailer.delay.waitlist_free_spot(self.id)
   end
 
   def queue_followup_mails
