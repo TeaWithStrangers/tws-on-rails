@@ -121,7 +121,7 @@ class TeaTime < ActiveRecord::Base
   end
 
   def send_waitlist_notifications
-    TeaTimeMailer.delay.waitlist_free_spot(self.id)
+    AttendanceMailer.delay.waitlist_free_spot(self.id)
   end
 
   def queue_followup_mails

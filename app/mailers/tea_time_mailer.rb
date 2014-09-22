@@ -45,16 +45,6 @@ class TeaTimeMailer < ActionMailer::Base
     end
   end
 
-  def waitlist_free_spot(tea_time_id)
-    @tea_time = TeaTime.find(tea_time_id)
-
-    waitlist = @tea_time.attendances.select(&:waiting_list?)
-    mail(bcc: waitlist.map {|a| a.user.email},
-         from: @tea_time.host.friendly_email,
-         subject: 'A spot just opened up at tea time! Sign up!',
-         reply_to: @tea_time.host.email)
-  end
-
   def cancellation(tea_time_id, attendance_id)
     @tea_time = TeaTime.find(tea_time_id)
     att = Attendance.find(attendance_id)
