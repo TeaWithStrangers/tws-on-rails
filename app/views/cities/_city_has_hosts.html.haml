@@ -30,5 +30,5 @@
         We sit there and wonder how this doesn't happen more often.
       %li
         Maybe we become friends. Maybe not. That's cool too.
--if @city.tea_times.future
+-if @city.tea_times.future.count > 0
   = render partial: 'shared/tea_times', locals: {tea_times: @city.tea_times.future_until(Date.today+2.weeks).na.order(:start_time => :asc)} 
