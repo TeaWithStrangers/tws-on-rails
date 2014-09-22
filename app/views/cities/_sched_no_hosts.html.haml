@@ -1,12 +1,15 @@
 .row
   .narrow.howitworks
-    %h3.divider 
-      = "There are no tea times happening in #{@city.name} at the moment!"
     - if @city.hosts.empty?
+      %h3.divider 
+        = "There are no tea times happening in #{@city.name} at the moment!"
       %p 
-        We're working to make sure that we have amazing hosts and enough people to ensure that tea time won't just be you and...you. You'll get an email the second we're ready!
+        = "We're working to make sure that we have amazing hosts and enough people to ensure that tea time won't just be you and...you. If you've signed up for TWS in #{@city.name}, you'll get an email the second we're ready! If not,"
+        = link_to "sign up here!", city_path(@city), :class => "city-name #{@city.city_code}"
     - else
-      %p= "Our hosts are busy collecting stories that they're probably going to share at tea time, but when they're back, we're going to open up some more tea times ASAP!"
+      %h3.divider 
+        = "The #{@city.name} hosts are busy collecting stories!"
+      %p= "They'll most certainly be sharing them at tea time, and when they're back, you'll find some tea times here. Check back soon!"
     %p 
       In the meantime, here are two things you should do:
   .wide.action
@@ -15,10 +18,14 @@
         %h4
           Tell not-so-strangers in your area about tea time
         %p
-          = "Post a facebook status or a tweet about Tea With Strangers, linking to #{@city.name}'s page."
+          Post a #{link_to "facebook status", "https://www.facebook.com/sharer/sharer.php?u=" + city_url(@city)} or a #{link_to "tweet", "https://twitter.com/home?status=I%20can't%20wait%20to%20attend%20my%20first%20tea%20time%20with%20@teawstrangers%20" + city_url(@city)} about Tea With Strangers and get your friends in on the conversations.
       %li
         %h4
           Enjoy stories from tea time
         %p
-          We share some good stories from tea time, discuss some of the funny things about open communication, and share lots of behind the scenes details about Tea With Strangers on our facebook page (and very soon, our blog.)
-          %a{href:'http://facebook.com/teawithstrangers'} You should check it out and like our page here.
+          = "We share some good stories from tea time, discuss some of the funny things about open communication, and share lots of behind the scenes details about Tea With Strangers on our "
+          = link_to "facebook page", "http://facebook.com/teawithstrangers" 
+          and #{link_to 'twitter', 'http://twitter.com/teawstrangers'}.
+        <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Ffacebook.com%2Fteawithstrangers&amp;width=0&amp;layout=standard&amp;action=like&amp;show_faces=true&amp;share=false&amp;height=80&amp;appId=360734737286705" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:80px;" allowTransparency="true"></iframe>
+        <a href="https://twitter.com/teawstrangers" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @teawstrangers</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
