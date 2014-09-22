@@ -30,7 +30,7 @@
               = "#{tea_time.spots_remaining} #{'spot'.pluralize(tea_time.spots_remaining)} left"
           - elsif tea_time.is_waitlisted?(current_user)
             %button.red.button{disabled: true}
-              Waitlisted
+              Still Full :(
           - else
             %button.red.button{disabled: false}
-              Waitlist
+              Join Waitlist
