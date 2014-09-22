@@ -10,7 +10,7 @@ class TeaTimeMailer < ActionMailer::Base
                                      content: @tea_time.ical.to_ical}
 
     mail(to: @tea_time.host.email,
-         subject: "Tea Time Confirmation for #{@tea_time.friendly_time}")
+         subject: "Confirming tea time for #{@tea_time.friendly_time}")
   end
 
   def followup(tea_time_id)
@@ -29,7 +29,7 @@ class TeaTimeMailer < ActionMailer::Base
         end
         mail(bcc: attendees.map {|a| a.user.email},
              from: "\"Ankit at Tea With Strangers\" <ankit@teawithstrangers.com>",
-             subject: 'Following up on tea time',
+             subject: 'Hey! Thanks.',
              template_name: template)
       end
     end
@@ -46,7 +46,7 @@ class TeaTimeMailer < ActionMailer::Base
     @user = User.find(user_id)
     mail(to: @user.email,
          from: "\"Ankit at Tea With Strangers\" <ankit@teawithstrangers.com>",
-         subject: "What tea time is about",
+         subject: "What Tea With Strangers is about",
          template_name: 'registration_followup')
   end
 end

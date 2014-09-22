@@ -1,8 +1,8 @@
 Hey hey <%= @user.name %>!
  
-Ankit here, one of the hosts behind Tea With Strangers. 
+Ankit here, the creator of Tea With Strangers.  
 
-Just wanted to thank you for signing up. The world is better when we take a second to understand each other, and that's what we're going after with tea time. Thanks for being a part of it.
+We're building a little community of strangers who are into making our world a little bit smaller. In the big picture, we want to make our neighborhoods more neighborly, our friends more friendly, communities more communal, humans more human. Thanks for being a part of that.  
 
 Tea time is happening pretty regularly in <%= @user.home_city.name %>. If you haven't yet, find a time to sit for tea here: <<%=url_for(controller: 'cities',action: 'schedule',id: @user.home_city.city_code, only_path: false) %>>.
 
