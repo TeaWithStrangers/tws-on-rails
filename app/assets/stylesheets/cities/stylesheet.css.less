@@ -1246,8 +1246,28 @@ a {
             padding-bottom: 1em;
             margin-bottom: 1em;
             border-bottom: 1px solid @lightred;
+            position: relative;
             &:last-child {
               border-bottom: none;
+            }
+            &.cancelled {
+              padding: 15px;
+              opacity: .5;
+              &:after {
+                content: 'Cancelled';
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                background: fade(@red,70%);
+                top: 0;
+                left: 0;
+                text-align: center;
+                padding: 50px;
+                color: @white;
+                text-transform: uppercase;
+                .bold;
+                .fsI;
+              }
             }
             .row.tea-time {
               margin-bottom: 0;
@@ -1896,6 +1916,13 @@ form {
         margin-left: 10px !important;
         float: right;
       }
+    }
+    p.disclaimer {
+      .fs;
+      .bold;
+      text-transform: uppercase;
+      margin-bottom: 1.5em;
+      color: @red;
     }
   }
 }
