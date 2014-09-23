@@ -14,7 +14,7 @@ class AttendanceMailer < ActionMailer::Base
 
     mail(to: @attendance.user.email,
          from: @tea_time.host.friendly_email,
-         subject: "See you at tea time #{@user.name}!",
+         subject: "See you at tea time #{@attendance.user.name}!",
          reply_to: @tea_time.host.email)
   end
 
