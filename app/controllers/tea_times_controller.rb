@@ -1,7 +1,6 @@
 class TeaTimesController < ApplicationController
   helper TeaTimesHelper
-  before_action :set_tea_time, only: [:show, :edit, :update, :destroy, :update_attendance, :create_attendance, :cancel]
-  before_action :prepare_tea_time_for_edit, only: [:create, :update]
+  before_action :set_tea_time, except: [:index, :new, :create]
   before_action :authenticate_user!, :authorized?, only: [:new, :edit, :create, :update, :cancel, :destroy, :index]
 
   # GET /tea_times
@@ -25,7 +24,9 @@ class TeaTimesController < ApplicationController
 
   # GET /tea_times/new
   def new
-    @tea_time = TeaTime.new(city: current_user.home_city, start_time: Time.now.beginning_of_hour + 1.day)
+    @tea_time = TeaTime.new(city: current_user.home_city,
+                            start_time: Time.now.beginning_of_hour + 1.day,
+                            host: current_user)
   end
 
   # GET /tea_times/1/edit
@@ -49,12 +50,14 @@ class TeaTimesController < ApplicationController
     end
 
     @attendance = Attendance.where(tea_time: @tea_time, user: @user).first_or_create
-    @attendance.status = :pending
+    @attendance.try_join
 
     if @attendance.save
-      respond_to do |format|
-        format.html { redirect_to profile_path, notice: 'Registered for Tea Time! See you soon :)' }
-        format.json { @attendance }
+      @attendance.queue_mails
+      message = @attendance.waiting_list? ? 'You\'re on the wait list! Check your email!' : "You're all set for tea time! See your email and add it to your calendar :)"
+        respond_to do |format|
+          format.html { redirect_to profile_path, notice: message }
+          format.json { @attendance }
       end
     else
       respond_to do |format|
@@ -71,7 +74,7 @@ class TeaTimesController < ApplicationController
 
     respond_to do |format|
       if @attendance.flake!
-        format.html { redirect_to profile_path, notice: 'Tea time was successfully flaked.' }
+        format.html { redirect_to profile_path, notice: 'Your spot is now open for someone else!' }
         format.json { render :show, status: :created, location: @tea_time }
       else
         format.html { redirect_to profile_path }
@@ -83,6 +86,7 @@ class TeaTimesController < ApplicationController
   # POST /tea_times
   # POST /tea_times.json
   def create
+    @tea_time = TeaTime.new(tea_time_params)
     respond_to do |format|
       if @tea_time.save
         format.html { redirect_to profile_path, notice: 'Tea time was successfully created.' }
@@ -98,7 +102,7 @@ class TeaTimesController < ApplicationController
   # PATCH/PUT /tea_times/1.json
   def update
     respond_to do |format|
-      if @tea_time.update(tea_time_params)
+      if UpdateTeaTime.call(@tea_time, tea_time_params)
         format.html { redirect_to profile_path, notice: 'Tea time was successfully updated.' }
         format.json { render json: @tea_time, status: :ok, location: @tea_time }
       else
@@ -135,11 +139,6 @@ class TeaTimesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_tea_time
       @tea_time = TeaTime.find(params[:id])
-    end
-
-    def prepare_tea_time_for_edit
-      @tea_time ||= TeaTime.new(tea_time_params)
-      @tea_time.host = current_user
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -1,5 +1,12 @@
+var minimumWidthToDisplayModal = 768;
 var modal;
+
 function loadModal(modalTarget) {
+  console.log(viewportWidth());
+  if(viewportWidth() < minimumWidthToDisplayModal) {
+    return function(evt) { console.debug("Modal not displayed because minimum width not met") }
+  }
+
   return function(evt) {
     evt.preventDefault();
     return $("#modal").load(modalTarget).dialog({
@@ -12,11 +19,16 @@ function loadModal(modalTarget) {
   }
 }
 function closeModal() { modal.dialog('close') }
+
 function ready() {
-  $('#login').click(loadModal('/signin'));
+  $('#login').on('click', function(evt) { 
+    loadModal('/signin')(evt)
+  });
+
   $('.tea-time-scheduling').on('click', function(evt) {
     modal = loadModal(evt.currentTarget.href)(evt)
   });
+
   $('a.cancel').on('click', function(evt) {
     console.log(evt)
     evt.preventDefault();

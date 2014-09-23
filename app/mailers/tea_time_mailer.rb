@@ -13,6 +13,16 @@ class TeaTimeMailer < ActionMailer::Base
          subject: "Confirming tea time for #{@tea_time.friendly_time}")
   end
 
+  def host_changed(tea_time_id, old_host_id)
+    sendgrid_category "Host Changed"
+
+    @tt = TeaTime.find(tea_time_id)
+    @old, @new = [User.find(old_host_id), @tt.host]
+    mail(to: @new.friendly_email,
+         cc: ['ankit@teawithstrangers.com', @old.friendly_email],
+         subject: "You're now the host for #{@tt}")
+  end
+
   def followup(tea_time_id)
     @tea_time = TeaTime.find(tea_time_id)
 
