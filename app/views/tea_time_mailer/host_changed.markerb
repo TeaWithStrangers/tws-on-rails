@@ -4,5 +4,5 @@ Just letting you know you're now the host for this tea time: [<%= @tt %>](<%= ur
 
 Please speak with <%= @old.name %> if they didn't discuss this with you! (It's probably a mistake).
 
-Cheers,  
+Cheers,
 The Robots at Tea With Strangers
