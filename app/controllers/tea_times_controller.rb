@@ -49,7 +49,7 @@ class TeaTimesController < ApplicationController
       end
     end
 
-    @attendance = Attendance.where(tea_time: @tea_time, user: @user).first_or_create
+    @attendance = Attendance.where(tea_time: @tea_time, user: @user).first_or_initialize
     @attendance.try_join
 
     if @attendance.save
