@@ -18,7 +18,7 @@ class Attendance < ActiveRecord::Base
 
   def flake!
     unless flake?
-      unless tea_time.spots_remaining?
+      if !tea_time.spots_remaining?
         tea_time.send_waitlist_notifications
       end
       update_attribute(:status, :flake)
