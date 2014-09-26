@@ -17,6 +17,12 @@ describe UpdateTeaTime do
       expect(TeaTime.find(tt.id).host).to eq User.find(new_host_params[:user_id])
       expect(ActionMailer::Base.deliveries.count).to eq 1
     end
+
+    it 'should not fire a notification for same host' do
+      UpdateTeaTime.call(tt, params)
+      expect(TeaTime.find(tt.id).host).to eq User.find(tt.host.id)
+      expect(ActionMailer::Base.deliveries.count).to eq 0
+    end
   end
   
 end
