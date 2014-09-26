@@ -14,7 +14,7 @@ class UpdateTeaTime
 
     private
     def host_changed?(tea_time, update)
-      tea_time.host.id != update[:user_ud]
+      tea_time.host.id != update[:user_id]
     end
   end
 end
