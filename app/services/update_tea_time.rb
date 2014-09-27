@@ -13,7 +13,7 @@ class UpdateTeaTime
     end
 
     def host_changed?(tea_time, update)
-      update[:user_id] && tea_time.host.id != update[:user_ud]
+      update[:user_id] && tea_time.host != User.find(update[:user_id])
     end
   end
 end
