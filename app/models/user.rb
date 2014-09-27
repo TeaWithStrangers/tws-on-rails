@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :tea_times
   has_many :attendances
   belongs_to :home_city, class_name: 'City'
+
   has_attached_file :avatar, styles: { medium: "300x300", thumb: "100x100", landscape: "500"}, default_url: "/assets/missing.jpg"
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
@@ -15,6 +16,8 @@ class User < ActiveRecord::Base
   include ActiveModel::Validations
   validates_with Validators::FacebookUrlValidator
   validates_with Validators::TwitterHandleValidator
+
+  before_destroy :flake_future
 
   scope :hosts, -> { joins(:roles).where(roles: {name: 'Host'}) }
 
@@ -54,6 +57,12 @@ class User < ActiveRecord::Base
   def attendances_for(tt_period)
     attendances.joins(:tea_time).
       merge(tt_period).includes(:tea_time)
+  end
+
+  def flake_future
+    attendances_for(TeaTime.future).each do |a|
+      a.flake!(email: false)
+    end
   end
 
   class << self

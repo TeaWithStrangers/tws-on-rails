@@ -16,13 +16,13 @@ class Attendance < ActiveRecord::Base
     super || User.nil_user
   end
 
-  def flake!
+  def flake!(opts = {})
     unless flake?
       if !tea_time.spots_remaining?
         tea_time.send_waitlist_notifications
       end
       update_attribute(:status, :flake)
-      AttendanceMailer.delay.flake(self.id)
+      AttendanceMailer.delay.flake(self.id) if !(opts[:email] == false)
     end
   end
 
