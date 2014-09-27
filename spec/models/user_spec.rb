@@ -89,4 +89,24 @@ describe User do
       expect(user.errors.messages[:twitter]).to include 'not a valid twitter handle'
     end
   end
+
+  describe '.flake_future' do
+    let(:tt) { create(:tea_time, attendee_count: 1) }
+    let(:user) { tt.attendances.first.user }
+    let(:past_att) {
+      past_tt = create(:tea_time, :past)
+      create(:attendance, tea_time: past_tt, user: user)
+    }
+
+
+    it 'should flake all future attendances' do
+      user.flake_future
+      expect(user.attendances.first.flake?).to eq(true)
+    end
+
+    it 'should ignore past attendances' do
+      user.flake_future
+      expect(past_att.status).not_to eq(:flake)
+    end
+  end
 end

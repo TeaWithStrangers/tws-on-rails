@@ -58,7 +58,31 @@ class User < ActiveRecord::Base
 
   class << self
     def nil_user
-      @@nil_user ||= self.new(name: 'A Former Tea Timer')
+      @@nil_user ||= NilUser.new
     end
+  end
+end
+
+class NilUser
+  alias_method :persisted?, :blank?
+
+  def marked_for_destruction?
+    false
+  end
+
+  def name
+    "A Former Tea Timer"
+  end
+
+  def email
+    nil
+  end
+
+  def blank?
+    true
+  end
+
+  def id
+    nil
   end
 end
