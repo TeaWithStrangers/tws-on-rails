@@ -9,7 +9,7 @@ class CancelTeaTime
   end
 
   def self.send_cancellations(tea_time)
-    tea_time.attendances.each do |att|
+    tea_time.attendances.select { |x| x.cancelled? || x.pending? }.each do |att|
       TeaTimeMailer.delay.cancellation(tea_time.id, att.id)
     end
   end
