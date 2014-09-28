@@ -4,15 +4,15 @@ Ankit here, the creator of Tea With Strangers.
 
 We're building a little community of strangers who are into making our world a little bit smaller. In the big picture, we want to make our neighborhoods more neighborly, our friends more friendly, communities more communal, humans more human. Thanks for being a part of that.  
 
-Tea time is happening pretty regularly in <%= @user.home_city.name %>. If you haven't yet, find a time to sit for tea here: <<%=url_for(controller: 'cities',action: 'schedule',id: @user.home_city.city_code, only_path: false) %>>.
+Tea time is happening pretty regularly in <%= @user.home_city.name %>. If you haven't yet, [find a time to sit for tea here](<%=url_for(controller: 'cities', action: 'schedule', id: @user.home_city.city_code, only_path: false, utm_campaign: 'registration', utm_medium: 'email', utm_content: 'schedule') %>).
 
-And if you're on facebook, show us some love and 'Like' our page. You know how social media affirmation works: <http://facebook.com/teawithstrangers>. 
+And if you're on facebook, show us some love and ['Like' our page](http://facebook.com/teawithstrangers). You know how social media affirmation works: <http://facebook.com/teawithstrangers>. 
 
 Super love,  
 Ankit
 
 <% if @password %>
-P.S. You'll need to be logged in to pick a tea time. For now, your password is <%= @password %> (but you should [change it here](<%= url_for(controller: 'registrations', action: 'edit', only_path: false, utm_campaign: 'registration', utm_medium: 'email', utm_content: 'changepw') %>)).
+P.S. You'll need to be logged in to pick a tea time. For now, your password is **<%= @password %>** (but you should [change it here](<%= url_for(controller: 'registrations', action: 'edit', only_path: false, utm_campaign: 'registration', utm_medium: 'email', utm_content: 'changepw') %>)).
 <% end %>  
 
 P.P.S. If you want to [host tea time where you are](http://teawithstrangers.com/hosting?utm_campaign=registration&utm_medium=email&utm_content=hosting), learn more about what this is about, talk about how to get involved, exchange digital high fives, whatever, you can (and absolutely should) reply to this note.

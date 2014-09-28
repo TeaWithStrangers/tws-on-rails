@@ -6,4 +6,4 @@ A spot just opened up on the tea time that you were waiting on! I hope you can m
 
 <%= @tea_time.host.name %>
 
-P.S. In case you forgot your password, [you can reset it easily here](http://www.teawithstrangers.com/users/password/new).
+P.S. In case you forgot your password, [you can reset it easily here](http://www.teawithstrangers.com/users/password/new?utm_campaign=waitlistfree&utm_medium=email&utm_content=changepw).
