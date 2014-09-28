@@ -41,6 +41,7 @@ class TeaTimesController < ApplicationController
       user_data = GetOrCreateUser.call({name: tea_time_params[:name],
                                         email: tea_time_params[:email]},
                                         @tea_time.city)
+
       if user_data[:new_user?] && user_data[:user].valid?
         @user = user_data[:user]
         sign_in @user
@@ -48,6 +49,11 @@ class TeaTimesController < ApplicationController
         return redirect_to new_user_session_path, alert: 'You already have an account. Log in! Then register for the tea time.'
       end
     end
+
+    if @user.nil?
+      redirect_to tea_time_path(@tea_time), alert: "Sorry, something has gone terribly wrong. Try again!"
+    end
+
 
     @attendance = Attendance.where(tea_time: @tea_time, user: @user).first_or_initialize
     @attendance.try_join

@@ -80,8 +80,9 @@ feature 'Registered User' do
     end
 
     #TODO: This should probably be a unit test
-    scenario 'user can see their history even if another user has deleted their account' do
-      create(:attendance, tea_time: @old_tt, user: nil)
+    scenario 'can be viewed even if another user has deleted their account' do
+      deleted_att = build(:attendance, tea_time: @old_tt, user: nil)
+      deleted_att.save!(validate: false)
       visit history_path
       expect(page).to have_content @old_tt.friendly_time
       expect(page).to have_content User.nil_user.name
