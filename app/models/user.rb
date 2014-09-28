@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  acts_as_paranoid
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -7,6 +8,7 @@ class User < ActiveRecord::Base
   has_many :tea_times
   has_many :attendances
   belongs_to :home_city, class_name: 'City'
+
   has_attached_file :avatar, styles: { medium: "300x300", thumb: "100x100", landscape: "500"}, default_url: "/assets/missing.jpg"
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
@@ -15,6 +17,8 @@ class User < ActiveRecord::Base
   include ActiveModel::Validations
   validates_with Validators::FacebookUrlValidator
   validates_with Validators::TwitterHandleValidator
+
+  before_destroy :flake_future
 
   scope :hosts, -> { joins(:roles).where(roles: {name: 'Host'}) }
 
@@ -56,9 +60,39 @@ class User < ActiveRecord::Base
       merge(tt_period).includes(:tea_time)
   end
 
+  def flake_future
+    attendances_for(TeaTime.future).each do |a|
+      a.flake!(email: false)
+    end
+  end
+
   class << self
     def nil_user
-      @@nil_user ||= self.new(name: 'A Former Tea Timer')
+      @@nil_user ||= NilUser.new
     end
+  end
+end
+
+class NilUser
+  alias_method :persisted?, :blank?
+
+  def marked_for_destruction?
+    false
+  end
+
+  def name
+    "A Former Tea Timer"
+  end
+
+  def email
+    nil
+  end
+
+  def blank?
+    true
+  end
+
+  def id
+    nil
   end
 end
