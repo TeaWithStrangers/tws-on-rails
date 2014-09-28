@@ -1,6 +1,11 @@
 class RegistrationsController < Devise::RegistrationsController
   def create
     if params[:user][:autogen]
+      error_message = validate_new_user_input(params)
+      if(error_message.to_s != '')
+        redirect_to new_user_session_path, alert: error_message
+        return
+      end
       city = City.find(params[:city])
       user_info = GetOrCreateUser.call(params[:user], city)
       if user_info[:new_user?] && user_info[:user].valid?
@@ -40,6 +45,13 @@ class RegistrationsController < Devise::RegistrationsController
       redirect_to after_update_path_for(@user)
     else
       render "edit"
+    end
+  end
+
+  def validate_new_user_input(params)
+    error_message = nil
+    if(defined? params[:city])
+      error_message = "need a city"
     end
   end
 
