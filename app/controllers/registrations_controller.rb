@@ -3,7 +3,7 @@ class RegistrationsController < Devise::RegistrationsController
     if params[:user][:autogen]
       error_message = validate_new_user_input(params)
       if(error_message.to_s != '')
-        redirect_to new_user_session_path, alert: error_message
+        redirect_to :back, alert: error_message
         return
       end
       city = City.find(params[:city])
@@ -49,9 +49,14 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def validate_new_user_input(params)
-    if(defined? params[:city])
-      error_message = "Hey! You forgot to select a city."
+    if(params[:city].to_s == '')
+      error_message = 'Hey! You forgot to select a city.'
+    elsif(params[:user][:email].to_s == '')
+      error_message = 'Please enter your email.'
+    elsif(params[:user][:name].to_s == '')
+      error_message = 'What\'s your name?'
     end
+
   end
 
   def needs_password?(user, params)
