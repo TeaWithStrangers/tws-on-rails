@@ -49,9 +49,8 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def validate_new_user_input(params)
-    error_message = nil
     if(defined? params[:city])
-      error_message = "need a city"
+      error_message = "Hey! You forgot to select a city."
     end
   end
 
