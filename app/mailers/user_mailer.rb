@@ -9,8 +9,11 @@ class UserMailer < ActionMailer::Base
     template = @user.home_city.tea_times.future_until(2.weeks.from_now).blank? ?
       'registration_no_tea' : 'registration'
     mail(from: "\"Ankit at Tea With Strangers\" <ankit@teawithstrangers.com>",
-         to: @user.email, 
+         to: @user.email,
          subject: 'High fives from Tea With Strangers!',
-         template_name: template)
+         template_name: template) do |format|
+      format.text
+      format.html
+    end
   end
 end
