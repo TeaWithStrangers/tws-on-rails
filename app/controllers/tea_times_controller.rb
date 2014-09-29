@@ -74,21 +74,6 @@ class TeaTimesController < ApplicationController
     end
   end
 
-  # PUT /tea_times/1/attendance/2
-  def update_attendance
-    @attendance = Attendance.find_by(tea_time: @tea_time, user: current_user)
-
-    respond_to do |format|
-      if @attendance.flake!
-        format.html { redirect_to profile_path, notice: 'You\'ve canceled your spot and it\'s now open for someone else!' }
-        format.json { render :show, status: :created, location: @tea_time }
-      else
-        format.html { redirect_to profile_path }
-        format.json { render json: @attendance.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
   # POST /tea_times
   # POST /tea_times.json
   def create
