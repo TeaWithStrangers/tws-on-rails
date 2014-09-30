@@ -32,8 +32,15 @@ describe Attendance do
       expect(attendance.changed?).to eq false
     end
 
+    it 'accepts an optional reason and flakes' do
+      reason = "Yogurt isn't attending"
+      attendance.flake!({reason: reason})
+      expect(attendance.flake?).to eq true
+      expect(attendance.reason).to eq reason
+    end
+
     it 'fires off waitlist notifications' do
-      tt = double('TeaTime', spots_remaining?: false)
+      tt = double('TeaTime', spots_remaining?: false, marked_for_destruction?: false)
       [:send_waitlist_notifications, :persisted?].each {|m|
         allow(tt).to receive m
       }
