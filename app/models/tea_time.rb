@@ -1,4 +1,7 @@
 class TeaTime < ActiveRecord::Base
+  # Only soft-delete tea times
+  acts_as_paranoid
+
   MAX_ATTENDEES = 5
   belongs_to :city
   belongs_to :host, :class_name => 'User', :foreign_key => 'user_id'
@@ -71,14 +74,14 @@ class TeaTime < ActiveRecord::Base
   def waitlisted?(user)
     !attendances.where(user: user, status: Attendance.statuses[:waiting_list]).empty?
   end
-  
+
   #Attendees takes an optional single argument lambda via the :filter keyword arg
   # that is passed to reject. Any items for which the Proc returns true are
   # excluded from the returned list of attendees.
   def attendees(filter: nil)
     attendances.reject(&filter).map(&:user)
   end
-  
+
   #Takes :filter, same as attendees
   def attendee_emails(filter: nil)
     attendees(filter: filter).map(&:email).join(',')
@@ -90,9 +93,10 @@ class TeaTime < ActiveRecord::Base
 
   def cancel!
     unless cancelled?
-      attendances.map { |att| att.update_attribute(:status, :cancelled) }
-      self.update_attribute(:followup_status, :cancelled)
-      true
+      attendances.map do |att|
+        att.update_attribute(:status, :cancelled) if att.pending?
+      end
+      return self.update_attribute(:followup_status, :cancelled)
     else
       false
     end
@@ -143,7 +147,7 @@ class TeaTime < ActiveRecord::Base
 
     def reparse_time_in_tz(time)
       use_city_timezone do
-        fmt = "%Y-%m-%d %H:%M" 
+        fmt = "%Y-%m-%d %H:%M"
         time.strftime(fmt)
         Time.zone.parse(time.strftime(fmt))
       end

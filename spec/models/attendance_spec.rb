@@ -45,7 +45,7 @@ describe Attendance do
   end
 
   describe '.user' do
-    let(:attendance) { create(:attendance, user: nil)}
+    let(:attendance) { build(:attendance, user: nil)}
     it 'should return a nil_user instance if its user is deleted' do
       expect(attendance.user).to eql User.nil_user
     end

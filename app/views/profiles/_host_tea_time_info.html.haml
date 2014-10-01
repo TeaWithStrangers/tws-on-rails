@@ -22,6 +22,8 @@
               %h6.right= link_to 'Cancel tea time', cancel_tea_time_path(tea_time), :method => :put, :data => { :confirm => 'Are you sure?' }
             - else
               %h6.right This tea time has been cancelled.
+  %p 
+    =link_to "Can't get enough? Makes sense. Create another tea time!", new_tea_time_path
 - else
   %p
     You're not hosting any upcoming tea times! Let's change that.
