@@ -10,7 +10,10 @@ class TeaTimeMailer < ActionMailer::Base
                                      content: @tea_time.ical.to_ical}
 
     mail(to: @tea_time.host.email,
-         subject: "Confirming tea time for #{@tea_time.friendly_time}")
+         subject: "Confirming tea time for #{@tea_time.friendly_time}") do |format|
+      format.text
+      format.html
+    end
   end
 
   def host_changed(tea_time_id, old_host_id)
@@ -20,7 +23,10 @@ class TeaTimeMailer < ActionMailer::Base
     @old, @new = [User.find(old_host_id), @tt.host]
     mail(to: @new.friendly_email,
          cc: ['ankit@teawithstrangers.com', @old.friendly_email],
-         subject: "You're now the host for #{@tt}")
+         subject: "You're now the host for #{@tt}") do |format|
+           format.text
+           format.html
+         end
   end
 
   def followup(tea_time_id)
@@ -40,7 +46,10 @@ class TeaTimeMailer < ActionMailer::Base
         mail(bcc: attendees.map {|a| a.user.email},
              from: "\"Ankit at Tea With Strangers\" <ankit@teawithstrangers.com>",
              subject: 'Hey! Thanks.',
-             template_name: template)
+             template_name: template) do |format|
+               format.text
+               format.html
+             end
       end
     end
   end
@@ -49,7 +58,10 @@ class TeaTimeMailer < ActionMailer::Base
     @tea_time = TeaTime.find(tea_time_id)
     att = Attendance.find(attendance_id)
     @user = att.user
-    mail(to: @user.email, subject: "Sad days — tea time canceled")
+    mail(to: @user.email, subject: "Sad days — tea time canceled") do |format|
+      format.text
+      format.html
+    end
   end
 
   def ethos(user_id)
@@ -57,6 +69,9 @@ class TeaTimeMailer < ActionMailer::Base
     mail(to: @user.email,
          from: "\"Ankit at Tea With Strangers\" <ankit@teawithstrangers.com>",
          subject: "What Tea With Strangers is about",
-         template_name: 'registration_followup')
+         template_name: 'registration_followup') do |format|
+           format.text
+           format.html
+         end
   end
 end

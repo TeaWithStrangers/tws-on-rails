@@ -1,4 +1,7 @@
 class Attendance < ActiveRecord::Base
+  # Attendances should never be deleted, only soft-deleted
+  acts_as_paranoid
+
   belongs_to :user
   belongs_to :tea_time, touch: true
   enum :status => [:pending, :flake, :no_show, :present, :waiting_list, :cancelled]
@@ -16,13 +19,13 @@ class Attendance < ActiveRecord::Base
     super || User.nil_user
   end
 
-  def flake!
+  def flake!(opts = {})
     unless flake?
-      unless tea_time.spots_remaining?
+      if !tea_time.spots_remaining?
         tea_time.send_waitlist_notifications
       end
       update_attribute(:status, :flake)
-      AttendanceMailer.delay.flake(self.id)
+      AttendanceMailer.delay.flake(self.id) if !(opts[:email] == false)
     end
   end
 

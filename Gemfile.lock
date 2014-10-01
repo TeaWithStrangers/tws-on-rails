@@ -153,6 +153,8 @@ GEM
       activesupport (>= 3.0.0)
       cocaine (~> 0.5.3)
       mime-types
+    paranoia (2.0.2)
+      activerecord (~> 4.0)
     pg (0.17.1)
     polyglot (0.3.5)
     pry (0.10.1)
@@ -311,6 +313,7 @@ DEPENDENCIES
   markerb
   newrelic_rpm
   paperclip (~> 4.1)
+  paranoia (~> 2.0)
   pg
   pry-debugger
   pry-rails

@@ -1,6 +1,7 @@
 Hey <%= @new.name %>,
 
-Just letting you know you're now the host for this tea time: [<%= @tt %>](<%= url_for(controller: :tea_times, action: :show, id: @tt) %>).
+Just letting you know you're now the host for this tea time: [<%= @tt %>](<%=
+url_for(controller: :tea_times, action: :show, id: @tt, only_path: false) %>).
 
 Please speak with <%= @old.name %> if they didn't discuss this with you! (It's probably a mistake).
 
