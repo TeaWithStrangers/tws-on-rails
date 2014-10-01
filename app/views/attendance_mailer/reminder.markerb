@@ -1,16 +1,15 @@
 Hey hey <%= @user.name %>!
 
 <% if @type != :same_day %>
-Just wanted to shoot you a quick reminder about your upcoming tea time! Here are the details:
+Just wanted to shoot you a quick reminder about our tea time soon! Here are the details:
 <% else %>
-One more reminder about tea time coming up soon! Here are the details:
+One more reminder about tea time in a few hours! Let me know if anything comes up.
 <% end %>
 
 <%= render partial: "shared_mailers/info_nohost", locals: {tea_time: @attendance.tea_time} %>
 
 Can't wait to see you!
 
-Cheers,  
 <%= @attendance.tea_time.host.name %>
 
-P.S. If you need to cancel, it's super easy. Just log into the site, click 'Account' and hit the 'Cancel' button. This way, your spot can be opened up for someone else.
+P.S. If you need to cancel, it's super easy. Just [go to your account on the site](http://teawithstrangers.com/profile?utm_campaign=reminder&utm_medium=email&utm_content=cancel) and hit the 'Cancel' button. This way, your spot can be opened up for someone else.

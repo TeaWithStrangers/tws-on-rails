@@ -1,21 +1,21 @@
 Hey hey <%= @user.name %>!
  
-Ankit here, one of the hosts behind Tea With Strangers. 
+Ankit here, the creator of Tea With Strangers.  
 
-Just wanted to thank you for signing up. The world is better when we take a second to understand each other, and that's what we're going after with tea time. Thanks for being a part of it.
+We're building a little community of strangers who are into making our world a little bit smaller. In the big picture, we want to make our neighborhoods more neighborly, our friends more friendly, communities more communal, humans more human. Thanks for being a part of that.  
 
 We aren't fully set up to get things moving in <%= @user.home_city.name %>, but we'll be there soon! If you'd like to help speed things along, these are two things we need more than any:
 
-1. Great hosts. If you or someone you know would make a great one, [check this out](http://teawithstrangers.com/hosting) and hit us up.
+1. Great hosts. If you or someone you know would make a great one, [check this out](http://teawithstrangers.com/hosting?utm_campaign=registrationupcoming&utm_medium=email&utm_content=hosting) and hit us up.
 2. Great people like yourself to join for tea time! So share TWS with your pals on facebook and twitter :)
 
-And while you're on facebook, show us some love and 'Like' our page. You know how social media affirmation works: <http://facebook.com/teawithstrangers>. 
+And while you're on facebook, show us some love and ['Like' our page](http://facebook.com/teawithstrangers). You know how social media affirmation works: <http://facebook.com/teawithstrangers>. 
 
 Super love,  
 Ankit
 
 <% if @password %>
-P.S. Since you signed up, you'll need to log in to register for tea times when we reach you. For now, your password is <%= @password %> (but you should [change it here](<%= url_for(controller: 'registrations', action: 'edit', only_path: false) %>)).
+P.S. Since you signed up, you'll need to log in to register for tea times when we reach you. For now, your password is **<%= @password %>** (but you should [change it here](<%= url_for(controller: 'registrations', action: 'edit', only_path: false, utm_campaign: 'registrationupcoming', utm_medium: 'email', utm_content: 'changepw') %>)).
 <% end %>  
 
 P.P.S. If you want to learn more about what this is about, talk about how to get involved, exchange digital high fives, whatever, you can (and absolutely should) reply to this note.
