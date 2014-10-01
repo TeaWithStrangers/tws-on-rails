@@ -5,6 +5,8 @@ class AttendanceMailer < ActionMailer::Base
   default from: "\"Tea With Strangers\" <sayhi@teawithstrangers.com>"
 
   def registration(attendance_id)
+    sendgrid_category "Tea Time Registration"
+
     @attendance = Attendance.find(attendance_id)
     @tea_time = @attendance.tea_time
     @user = @attendance.user
@@ -22,6 +24,8 @@ class AttendanceMailer < ActionMailer::Base
   end
 
   def waitlist_free_spot(tea_time_id)
+    sendgrid_category "Waitlist Spot Availability Notification"
+
     @tea_time = TeaTime.find(tea_time_id)
 
     waitlist = @tea_time.attendances.select(&:waiting_list?)
@@ -36,10 +40,11 @@ class AttendanceMailer < ActionMailer::Base
 
 
   def waitlist(attendance_id)
+    sendgrid_category 'Waitlist Enrolment'
+
     @attendance = Attendance.find(attendance_id)
     @tea_time = @attendance.tea_time
     @user = @attendance.user
-    sendgrid_category 'Waiting List Enrollment'
 
     mail(to: @attendance.user.email,
          from: @tea_time.host.friendly_email,
@@ -51,6 +56,8 @@ class AttendanceMailer < ActionMailer::Base
   end
 
   def reminder(attendance_id, type)
+    sendgrid_category "Tea Time Reminder"
+
     @attendance = Attendance.find(attendance_id)
     @user = @attendance.user
     @type = type
@@ -69,6 +76,8 @@ class AttendanceMailer < ActionMailer::Base
   end
 
   def flake(attendance_id)
+    sendgrid_category "Flake Confirmation"
+
     attendance = Attendance.find(attendance_id)
     @user = attendance.user
     @tea_time = attendance.tea_time
