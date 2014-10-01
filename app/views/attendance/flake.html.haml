@@ -1,0 +1,10 @@
+.container.user-form
+  .mobilepad
+    %h2.admin-head Flake? :(
+    = form_for(@attendance, url: update_attendance_tea_time_path(@attendance.tea_time, @attendance), method: :put) do |f|
+      .form-body
+        .button-container
+          = f.label :reason
+          = f.text_field :reason, placeholder: "Why are you flaking?"
+          = f.submit 'Flake', class: 'confirm'
+          = link_to "Nevermind", :back, class: 'cancel'
