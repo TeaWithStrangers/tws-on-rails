@@ -5,25 +5,35 @@ class TeaTimeMailer < ActionMailer::Base
   default from: "\"Tea With Strangers\" <sayhi@teawithstrangers.com>"
 
   def host_confirmation(tea_time_id)
+    sendgrid_category "Tea Time: Creation Confirmation for Host"
+
     @tea_time = TeaTime.find(tea_time_id)
     mail.attachments['event.ics'] = {mime_type: "text/calendar",
                                      content: @tea_time.ical.to_ical}
 
     mail(to: @tea_time.host.email,
-         subject: "Tea Time Confirmation for #{@tea_time.friendly_time}")
+         subject: "Confirming tea time for #{@tea_time.friendly_time}") do |format|
+      format.text
+      format.html
+    end
   end
 
   def host_changed(tea_time_id, old_host_id)
-    sendgrid_category "Host Changed"
+    sendgrid_category "Tea Time Host Changed"
 
     @tt = TeaTime.find(tea_time_id)
     @old, @new = [User.find(old_host_id), @tt.host]
     mail(to: @new.friendly_email,
          cc: ['ankit@teawithstrangers.com', @old.friendly_email],
-         subject: "You're now the host for #{@tt}")
+         subject: "You're now the host for #{@tt}") do |format|
+           format.text
+           format.html
+         end
   end
 
   def followup(tea_time_id)
+    sendgrid_category "Tea Time Post-Attendance Followup"
+
     @tea_time = TeaTime.find(tea_time_id)
 
     unless @tea_time.cancelled?
@@ -39,24 +49,37 @@ class TeaTimeMailer < ActionMailer::Base
         end
         mail(bcc: attendees.map {|a| a.user.email},
              from: "\"Ankit at Tea With Strangers\" <ankit@teawithstrangers.com>",
-             subject: 'Following up on tea time',
-             template_name: template)
+             subject: 'Hey! Thanks.',
+             template_name: template) do |format|
+               format.text
+               format.html
+             end
       end
     end
   end
 
   def cancellation(tea_time_id, attendance_id)
+    sendgrid_category "Tea Time Cancellation Notification"
+
     @tea_time = TeaTime.find(tea_time_id)
     att = Attendance.find(attendance_id)
     @user = att.user
-    mail(to: @user.email, subject: "Sad days — tea time canceled")
+    mail(to: @user.email, subject: "Sad days — tea time canceled") do |format|
+      format.text
+      format.html
+    end
   end
 
   def ethos(user_id)
+    sendgrid_category "Tea Time Ethos"
+
     @user = User.find(user_id)
     mail(to: @user.email,
          from: "\"Ankit at Tea With Strangers\" <ankit@teawithstrangers.com>",
-         subject: "What tea time is about",
-         template_name: 'registration_followup')
+         subject: "What Tea With Strangers is about",
+         template_name: 'registration_followup') do |format|
+           format.text
+           format.html
+         end
   end
 end

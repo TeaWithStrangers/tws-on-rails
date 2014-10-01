@@ -4,15 +4,18 @@ Sorry to hear you won't be able to join for tea, but it's cool! Just for confirm
 
 <%= render partial: "shared_mailers/info_nohost", locals: {tea_time: @tea_time} %>
 
-It'd be awesome if you were able to find another time that does work for you (with me or with any of the other awesome hosts) so be sure to check out the schedule here: <%=
-url_for(controller: 'cities',
-        action: 'schedule',
-        id: @user.home_city.city_code,
-        only_path: false) %>.
+It'd be awesome if you were able to find another time that does work for you (with me or with any of the other awesome hosts) so be sure to 
+[check out the schedule here](<%= url_for(controller: 'cities',
+        action: 'schedule', 
+        id: @user.home_city.city_code, 
+        only_path: false, 
+        utm_campaign: 'cancelspot', 
+        utm_medium: 'email', 
+        utm_content: 'schedule') %>).
 
-Hope your day is going beautifully. If not, grab a bar of chocolate and watch this: https://www.youtube.com/watch?v=l-gQLqv9f4o. 
+Hope your day is going beautifully. If not, grab a bar of chocolate and watch this: <https://www.youtube.com/watch?v=l-gQLqv9f4o>. 
 
 Happy days!  
 <%= @tea_time.host.name %>
 
-P.S. In case you forgot your password, you can reset it with ease here: http://www.teawithstrangers.com/users/password/new.
+P.S. In case you forgot your password, you can reset it with ease here: [http://www.teawithstrangers.com/users/password/new](http://www.teawithstrangers.com/users/password/new?utm_campaign=cancelspot&utm_medium=email&utm_content=changepw).
