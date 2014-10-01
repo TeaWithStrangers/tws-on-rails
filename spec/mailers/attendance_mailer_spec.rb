@@ -38,7 +38,7 @@ describe AttendanceMailer do
       let(:mail) { AttendanceMailer.waitlist(attendance.id) }
 
       it 'should address the user' do
-        expect(mail.body.to_s).to include(attendance.user.name)
+        expect(mail.body.parts.first.to_s).to include(attendance.user.name)
       end
     end
   end
