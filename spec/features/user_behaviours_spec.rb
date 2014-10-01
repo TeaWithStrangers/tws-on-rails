@@ -62,7 +62,8 @@ feature 'Registered User' do
     scenario 'user can flake' do
       attend_tt(@tt)
       visit profile_path
-      click_button 'Cancel my spot'
+      click_link 'Cancel my spot'
+      click_button 'Flake'
       expect(@user.attendances.reload.first.flake?).to eq true
       #Shouldn't show a flaked TT on Profile page
       expect(page).not_to have_content @tt.friendly_time
