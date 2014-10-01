@@ -9,10 +9,6 @@ describe AttendanceMailer do
       AttendanceMailer.registration(attendance.id)
     }
 
-    it 'should come from the host' do
-      expect(mail.from).to eq([tt.host.email])
-    end
-
     it "should include the user's name in the subject" do
       expect(mail.subject).to include(attendance.user.name)
     end
@@ -24,6 +20,26 @@ describe AttendanceMailer do
 
     it 'should be addressed to the attendee' do
       expect(mail.body.to_s).to include(attendance.user.name)
+    end
+  end
+
+  context 'Waiting List Mails:' do
+    let!(:wl_attendances) { create_list(:attendance, 3, tea_time: tt, status: :waiting_list) }
+    describe '#waitilist_free_spot' do
+      let(:mail) { AttendanceMailer.waitlist_free_spot(tt.id) }
+      
+      it 'should be sent to all wait list attendees but no one else' do
+        expect(mail.bcc).to eq wl_attendances.map(&:user).map(&:email) 
+      end
+    end
+
+    describe '#waitlist' do
+      let(:attendance) { wl_attendances.sample }
+      let(:mail) { AttendanceMailer.waitlist(attendance.id) }
+
+      it 'should address the user' do
+        expect(mail.body.to_s).to include(attendance.user.name)
+      end
     end
   end
 
