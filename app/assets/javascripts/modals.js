@@ -25,7 +25,7 @@ function ready() {
     loadModal('/signin')(evt)
   });
 
-  $('.tea-time-scheduling').on('click', function(evt) {
+  $('.edit_attendance , .tea-time-scheduling').on('click', function(evt) {
     modal = loadModal(evt.currentTarget.href)(evt)
   });
 
