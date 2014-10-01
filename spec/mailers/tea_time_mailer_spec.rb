@@ -7,10 +7,8 @@ describe TeaTimeMailer do
     @attendance2 = create(:attendance, tea_time: @tt)
   end
 
-  describe '.host_confirmation' do
-    let(:mail) {
-      TeaTimeMailer.host_confirmation(@tt)
-    }
+  describe '#host_confirmation' do
+    let(:mail) { TeaTimeMailer.host_confirmation(@tt) }
 
     it 'renders the subject' do
       expect(mail.subject).to match(@tt.friendly_time)
@@ -29,9 +27,19 @@ describe TeaTimeMailer do
     end
   end
 
-  describe '.cancellation' do
-    let!(:mail) {
-      TeaTimeMailer.cancellation(@tt).deliver
-    }
+  describe '#host_changed' do
+    let!(:mail) { TeaTimeMailer.host_changed(@tt, create(:user, :host)).deliver }
+  end
+
+  describe '#followup' do
+    let!(:mail) { TeaTimeMailer.followup(@tt).deliver }
+  end
+
+  describe '#cancellation' do
+    let!(:mail) { TeaTimeMailer.cancellation(@tt, @tt.attendances.sample).deliver }
+  end
+
+  describe '#ethos' do
+    let!(:mail) { TeaTimeMailer.ethos(@tt).deliver }
   end
 end
