@@ -39,10 +39,11 @@ class AttendanceMailer < ActionMailer::Base
     @attendance = Attendance.find(attendance_id)
     @tea_time = @attendance.tea_time
     @user = @attendance.user
+    sendgrid_category 'Waiting List Enrollment'
 
     mail(to: @attendance.user.email,
          from: @tea_time.host.friendly_email,
-         subject: "You're on the wait list for tea time on #{@tea_time.start_time.strftime('%B %e')}!",
+         subject: "You're on the wait list for tea time on #{@tea_time.start_time.strftime('%B %-e')}!",
          reply_to: @tea_time.host.email) do |format|
       format.text
       format.html
