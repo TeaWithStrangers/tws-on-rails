@@ -1,7 +1,21 @@
 class AttendanceController < ApplicationController
   before_action :authenticate_user!, :authorized?
-  before_action :set_attendance
+  before_action :set_attendance, except: [:mark]
 
+
+  ############################################
+  # Host-related Attendance Actions
+  ############################################
+
+  def mark
+    @tea_time = TeaTime.new(tea_time_params)
+    binding.pry
+  end
+
+
+  ############################################
+  # User-related Attendance Actions
+  ############################################
   def show
     render :flake, layout: !request.xhr?
   end
