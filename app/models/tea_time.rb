@@ -2,17 +2,19 @@ class TeaTime < ActiveRecord::Base
   # Only soft-delete tea times
   acts_as_paranoid
 
+
   MAX_ATTENDEES = 5
   belongs_to :city
   belongs_to :host, :class_name => 'User', :foreign_key => 'user_id'
   validates_presence_of :host, :start_time, :city, :duration
   has_many :attendances, dependent: :destroy
+  accepts_nested_attributes_for :attendances, update_only: true
 
   after_touch :clear_association_cache_wrapper
   after_create :send_host_confirmation, :queue_followup_mails, unless: :skip_callbacks
   before_destroy { CancelTeaTime.send_cancellation(self) }
 
-  enum followup_status: [:na, :pending, :sent, :cancelled]
+  enum followup_status: { pending: 0, marked_attendance: 1, completed: 2, cancelled: 3 }
 
   TeaTime.followup_statuses.each do |k,v|
     scope k, -> { where(followup_status: v) }
