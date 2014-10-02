@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   resources :tea_times do
     member do
       post '/attendance' => 'tea_times#create_attendance', as: :attendance
+      put '/attendance/all' => 'profiles#mark', as: :mark
       put '/cancel' => 'tea_times#cancel', as: :cancel
       get '/attendance/:attendance_id' => 'attendance#show',
         as: :show_attendance
@@ -60,11 +61,15 @@ Rails.application.routes.draw do
     get '/mail' => 'admin#write_mail'
     post '/mail' => 'admin#send_mail'
   end
-  
-  match '/profile' => 'profiles#show', as: :profile, via: :get
-  get '/profile/history' => 'profiles#history', as: :history
-  get '/host/new' => 'hosts#new', as: :new_host
+
+  get '/host' => 'hosts#new', as: :new_host
   post '/host' => 'hosts#create', as: :create_host
+  
+  scope(path: 'profile') do
+    match '' => 'profiles#show', as: :profile, via: :get
+    get '/history' => 'profiles#history', as: :history
+    get '/tasks' => 'profiles#host_tasks', as: :host_tasks
+  end
 
 
 
