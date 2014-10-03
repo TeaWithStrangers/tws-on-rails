@@ -1,0 +1,20 @@
+.container.dashboard
+  = render partial: 'shared/nav_header'
+  %h1 Mark Attendance
+  %ul.host
+    - @pending.each do |tt|
+      %li.tea-time
+        = render partial: 'teatime_info', locals: {tea_time: tt, att: nil}
+        = form_for(tt, url: mark_tea_time_path(tt)) do |f|
+          %h3 Attendees
+          %ul.attendees
+            = f.fields_for :attendances do |af|
+              - if af.object.pending? || af.object.flake?
+                %li.attendee
+                  = af.object.user.name
+                  - Attendance.host_statuses.each do |s, idx|
+                    = af.label :status, s.humanize
+                    = af.radio_button :status, s
+            = f.submit
+
+  %h1 Send Attendees Email

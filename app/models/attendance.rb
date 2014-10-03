@@ -71,4 +71,11 @@ class Attendance < ActiveRecord::Base
       self.status = :waiting_list
     end
   end
+
+  class << self
+    def host_statuses
+      #TODO: FUCKITSHIPIT
+      self.statuses.to_a.map(&:first) - [:waiting_list, :cancelled].map(&:to_s)
+    end
+  end
 end
