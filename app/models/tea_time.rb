@@ -8,7 +8,7 @@ class TeaTime < ActiveRecord::Base
   belongs_to :host, :class_name => 'User', :foreign_key => 'user_id'
   validates_presence_of :host, :start_time, :city, :duration
   has_many :attendances, dependent: :destroy
-  accepts_nested_attributes_for :attendances, update_only: true
+  accepts_nested_attributes_for :attendances
 
   after_touch :clear_association_cache_wrapper
   after_create :send_host_confirmation, :queue_followup_mails, unless: :skip_callbacks
