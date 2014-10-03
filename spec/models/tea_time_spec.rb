@@ -78,13 +78,6 @@ describe TeaTime do
         @cancelled = create(:tea_time, :cancelled)
       end
 
-      describe '#na' do
-        it 'should only include tea times with na status' do
-          expect(TeaTime.na).not_to include(@cancelled)
-          expect(TeaTime.na).to include(@future_tt, @past_tt)
-        end
-      end
-
       describe '#cancelled' do
         it 'should only include tea times with cancelled status' do
           expect(TeaTime.cancelled).to include(@cancelled)
