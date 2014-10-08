@@ -8,17 +8,21 @@
   = f.label :city
   .dropdown
     = f.select(:city_id, options_for_select(City.all.select(:id, :name).collect{ |p| [p.name, p.id] }, @tea_time.city.id), {:class => "city"})
-  %div{style: ("display: none;" if !@tea_time.persisted?)}
+  - if current_user.admin?
     = f.label :host
     .dropdown
       = f.select(:user_id, options_for_select(User.hosts.select(:id, :name).collect{ |p| [p.name, p.id] }, @tea_time.host.id), {:class => "city"})
+  - else
+    %div{style: ("display: none;" if !@tea_time.persisted?)}
+      = f.label :host
+      .dropdown
+        = f.select(:user_id, options_for_select(User.hosts.select(:id, :name).collect{ |p| [p.name, p.id] }, @tea_time.host.id), {:class => "city"})
   - if @tea_time.errors.any?
     #error_explanation
       %h2= "#{pluralize(@tea_time.errors.count, "error")} prohibited this tea_time from being saved:"
       %ul
         - @tea_time.errors.full_messages.each do |msg|
           %li= msg
-
   .actions 
     .create-button
       = f.submit 'Create Tea Time'

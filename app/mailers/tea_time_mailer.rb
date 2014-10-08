@@ -12,7 +12,7 @@ class TeaTimeMailer < ActionMailer::Base
                                      content: @tea_time.ical.to_ical}
 
     mail(to: @tea_time.host.email,
-         subject: "Confirming tea time for #{@tea_time.friendly_time}") do |format|
+         subject: "Add your tea time (#{@tea_time.start_time.strftime("%-m/%-d, %-l:%M - ")}#{(@tea_time.start_time+2.hours).strftime("%-l:%M%P")}) to the calendar!") do |format|
       format.text
       format.html
     end
