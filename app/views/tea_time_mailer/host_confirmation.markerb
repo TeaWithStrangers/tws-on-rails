@@ -1,10 +1,10 @@
 Hey <%= @tea_time.host.name %>,
 
-This email is just to confirm the tea time you just created. I attached a calendar event here to make life a little bit easier.
+This email is just to confirm the tea time you just created. Attached a calendar event here to make life a little bit easier.
 
 <%= render partial: "shared_mailers/info_nohost", locals: {tea_time: @tea_time} %>
 
 You're awesome.
 
-Much love,
-Ankit
+Bleep bleep bloop,  
+The Robots at Tea With Strangers
