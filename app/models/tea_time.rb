@@ -2,7 +2,6 @@ class TeaTime < ActiveRecord::Base
   # Only soft-delete tea times
   acts_as_paranoid
 
-
   MAX_ATTENDEES = 5
   belongs_to :city
   belongs_to :host, :class_name => 'User', :foreign_key => 'user_id'
