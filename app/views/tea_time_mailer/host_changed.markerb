@@ -5,5 +5,5 @@ url_for(controller: :tea_times, action: :show, id: @tt, only_path: false) %>).
 
 Please speak with <%= @old.name %> if they didn't discuss this with you! (It's probably a mistake).
 
-Cheers,  
+Bleep bleep bloop,  
 The Robots at Tea With Strangers
