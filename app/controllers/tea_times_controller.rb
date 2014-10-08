@@ -80,7 +80,7 @@ class TeaTimesController < ApplicationController
 
     respond_to do |format|
       if @attendance.flake!
-        format.html { redirect_to profile_path, notice: 'Your spot is now open for someone else!' }
+        format.html { redirect_to profile_path, notice: 'You\'ve canceled your spot and it\'s now open for someone else!' }
         format.json { render :show, status: :created, location: @tea_time }
       else
         format.html { redirect_to profile_path }
