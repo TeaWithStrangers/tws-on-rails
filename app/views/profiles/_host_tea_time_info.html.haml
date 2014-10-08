@@ -7,10 +7,9 @@
         - if current_user.host?
           .attendees-container
             - if tea_time.attendances.length > 0
-              %h3.attendees Attendees
               - tea_time.attendances.group_by(&:status).each do |k,v|
                 %ul.attendees-list{:class => "#{k}"}
-                  %h4 #{k.humanize.titleize.pluralize(v.count)}
+                  %h4 #{humanize_attendance_status(k).humanize.titleize.pluralize(v.count)}
                   - v.map(&:user).each do |a|
                     %li.attendee-names= link_to a.name, "mailto:#{a.email}"
                 .email-all{:class => "#{k}"}= link_to "Email All", "mailto:#{tea_time.attendee_emails(filter: ->(x) { x.status != k })}"
