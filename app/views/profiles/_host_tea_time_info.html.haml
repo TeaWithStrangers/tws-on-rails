@@ -12,7 +12,7 @@
                   %h4 #{humanize_attendance_status(k).humanize.titleize.pluralize(v.count)}
                   - v.map(&:user).each do |a|
                     %li.attendee-names= link_to a.name, "mailto:#{a.email}"
-                .email-all{:class => "#{k}"}= link_to "Email All", "mailto:#{tea_time.attendee_emails(filter: ->(x) { x.status != k })}"
+                .email-all{:class => "#{k}", :target => "_blank"}= link_to "Email All", "mailto:#{tea_time.attendee_emails(filter: ->(x) { x.status != k })}"
             - else
               %h3.attendees.none No attendees yet!
           .controls
