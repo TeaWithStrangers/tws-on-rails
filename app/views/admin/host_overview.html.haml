@@ -8,9 +8,9 @@
       %th Total Attendees
     - @hosts.each do |h|
       %tr
-        %td= link_to h.name, host_city_path(h.home_city, h)
+        %td= link_to h.name, host_city_path(h, h.home_city)
         %th= h.tea_times.count
         - t = h.tea_times.where('start_time <= ?', Time.now.utc).last || "No tea time"
-        %th= link_to(t.start_time.strftime('%B %-e'), tea_time_path(t))
+        %th= link_to(t, tea_time_path(t))
         %th= link_to h.tea_times.where('start_time >= ?', Time.now.utc).first || "No teas scheduled"
         %th= h.tea_times.map {|t| t.attendances.count}.inject(0, &:+)
