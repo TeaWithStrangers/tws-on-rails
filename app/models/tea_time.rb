@@ -2,10 +2,13 @@ class TeaTime < ActiveRecord::Base
   # Only soft-delete tea times
   acts_as_paranoid
 
-  MAX_ATTENDEES = 5
+  validates_presence_of :host, :start_time, :city, :duration
+  validate :attendance_marked?, if: :pending?
+
   belongs_to :city
   belongs_to :host, :class_name => 'User', :foreign_key => 'user_id'
-  validates_presence_of :host, :start_time, :city, :duration
+
+  MAX_ATTENDEES = 5
   has_many :attendances, dependent: :destroy
   accepts_nested_attributes_for :attendances
 
@@ -138,6 +141,12 @@ class TeaTime < ActiveRecord::Base
   end
 
   private
+    def attendance_marked?
+      if !attendances.pending.count.zero?
+        errors.add(:attendances, 'must be marked')
+      end
+    end
+
     def use_city_timezone(&block)
       unless city.nil?
         Time.use_zone(city.timezone, &block)
