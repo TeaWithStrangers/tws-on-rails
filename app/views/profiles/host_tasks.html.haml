@@ -8,13 +8,27 @@
         = form_for(tt, url: mark_tea_time_path(tt)) do |f|
           %h3 Attendees
           %ul.attendees
-            = f.fields_for :attendances do |af|
-              - if af.object.pending? || af.object.flake?
-                %li.attendee
-                  = af.object.user.name
-                  - Attendance.host_statuses.each do |s, idx|
-                    = af.label :status, s.humanize
-                    = af.radio_button :status, s
-            = f.submit
+            = f.fields_for :attendances do |att_form|
+              %li.attendee
+                = att_form.object.user.name
+                - Attendance.host_statuses.each do |s, idx|
+                  = att_form.label :status, s.humanize
+                  = att_form.radio_button :status, s
+          = f.submit "Mark Attendance"
 
   %h1 Send Attendees Email
+  %ul.host
+    - @notes.each do |tt|
+      %li.tea-time
+        = render partial: 'teatime_info', locals: {tea_time: tt, att: nil}
+        %h2.attention You still need to email your attendees!
+        %h3.attendees Attendees
+        - tt.attendances.group_by(&:status).each do |k,v|
+          %ul.attendees-list{:class => "#{k}"}
+            %h4 #{k.capitalize}
+            - v.map(&:user).each do |a|
+              %li.attendee-names= link_to a.name, "mailto:#{a.email}"
+
+        = form_for(tt, url: mark_tea_time_path(tt)) do |f|
+          = f.submit "Mark Complete"
+
