@@ -10,11 +10,11 @@ class AttendanceController < ApplicationController
   def mark
     @tea_time = TeaTime.find(params[:id])
     if @tea_time.update(tea_time_params)
-      @tea_time.followup_status = :marked_attendance; @tea_time.save
+      @tea_time.update(followup_status: :marked_attendance)
       redirect_to host_tasks_path, 
         notice: 'Thanks for taking attendance! Now send an email to your attendees :)'
     else
-      redirect_to :back, error: 'Uh-oh. Something went wrong. Care to try again?' 
+      redirect_to :back, alert: 'Uh-oh. Something went wrong. Care to try again?'
     end
   end
 
