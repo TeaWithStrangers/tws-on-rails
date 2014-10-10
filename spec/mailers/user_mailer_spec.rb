@@ -2,12 +2,11 @@ require 'spec_helper'
 
 describe UserMailer do
   describe '#registration' do
-    let(:user) { create(:user) }
-    let(:password) { "passwordQuazBux" }
-    let(:mail) { UserMailer.registration(user, password) }
+    let(:user) { create(:user, :unconfirmed) }
+    let(:mail) { UserMailer.registration(user) }
 
-    it 'should include the password' do
-      expect(mail.parts.first.to_s).to include(password)
+    it 'should include the confirmation link' do
+      expect(mail.parts.first.to_s).to include(user.confirmation_token)
     end
 
     it 'should send the coming soon mail if a user\'s city has no tea times' do
