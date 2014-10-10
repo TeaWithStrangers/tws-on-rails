@@ -12,11 +12,7 @@ class GetOrCreateUser
     if user
       val[:new_user?] = false
     else
-      if(home_city)
-        params.merge!({home_city: home_city})
-      end
-
-      user = User.create!(params)
+      user = User.create(params.merge({home_city: home_city}).symbolize_keys)
 
       email_token = user.confirmation_token
       new_token = Devise.token_generator.digest(User, :confirmation_token, user.confirmation_token)
