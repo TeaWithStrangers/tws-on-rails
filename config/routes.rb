@@ -16,7 +16,6 @@ Rails.application.routes.draw do
   get '/questions'      => 'static#questions',      as: :questions
   get '/stories'        => 'static#stories',        as: :stories
 
-  # Devise and Registration Routes
   devise_for :users, :controllers => {
     :registrations => "registrations",
     :confirmations => "confirmations"

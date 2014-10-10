@@ -2,17 +2,13 @@ class User < ActiveRecord::Base
   include Usable
   acts_as_paranoid
 
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
-
-  include Usable
-  acts_as_paranoid
 
   has_many :tea_times
   has_many :attendances
   belongs_to :home_city, class_name: 'City'
+
   has_attached_file :avatar, styles: { medium: "300x300", thumb: "100x100", landscape: "500"}, default_url: "/assets/missing.jpg"
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
