@@ -1,8 +1,10 @@
 class User < ActiveRecord::Base
+  include Usable
   acts_as_paranoid
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
   has_and_belongs_to_many :roles
   has_many :tea_times
@@ -18,6 +20,8 @@ class User < ActiveRecord::Base
   validates_with Validators::FacebookUrlValidator
   validates_with Validators::TwitterHandleValidator
 
+  #We want to send our own confirmation link
+  before_create :skip_confirmation_notification!
   before_destroy :flake_future
 
   scope :hosts, -> { joins(:roles).where(roles: {name: 'Host'}) }
@@ -41,18 +45,6 @@ class User < ActiveRecord::Base
 
   def friendly_email
     "\"#{self.name}\" <#{self.email}>"
-  end
-
-  def role?(role)
-    return !! self.roles.find_by_name(role.to_s.camelize)
-  end
-
-  Role::VALID_ROLES.each do |role|
-    define_method("#{role.downcase}?".to_sym) { role? role }
-  end
-
-  def host?
-    (admin? || role?(:Host))
   end
 
   def attendances_for(tt_period)
