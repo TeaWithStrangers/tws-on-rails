@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   root 'static#index'
 
+<<<<<<< HEAD
   # Static Landing, FAQ Pages
   get '/about'          => 'static#about',          as: :about
   get '/birthdays'      => 'static#birthdays',      as: :birthdays
@@ -21,6 +22,7 @@ Rails.application.routes.draw do
     :registrations => "registrations",
     :confirmations => "confirmations"
   }, :skip => [:sessions]
+<<<<<<< HEAD
 
   as :user do
     get 'signin' => 'devise/sessions#new', :as => :new_user_session
@@ -28,6 +30,15 @@ Rails.application.routes.draw do
     delete 'signout' => 'devise/sessions#destroy', :as => :destroy_user_session
     get 'logout' => 'devise/sessions#destroy'
     patch '/user/confirmation' => 'confirmations#update', :via => :patch, :as => :update_user_confirmation
+=======
+  
+  as :user do
+    get     'logout'   => 'devise/sessions#destroy'
+    get     'signin'   => 'devise/sessions#new',     as: :new_user_session
+    patch '/user/confirmation' => 'confirmations#update', :via => :patch, :as => :update_user_confirmation
+    post    'signin'   => 'devise/sessions#create',  as: :user_session
+    delete  'signout'  => 'devise/sessions#destroy', as: :destroy_user_session
+>>>>>>> User methods relating to confirmable work; routes created
   end
 
   resources :tea_times do
