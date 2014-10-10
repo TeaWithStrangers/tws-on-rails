@@ -68,6 +68,7 @@ Rails.application.routes.draw do
   end
 
   get '/host' => 'hosts#new', as: :new_host
+  get '/host/new' => 'hosts#new', as: :new_host
   post '/host' => 'hosts#create', as: :create_host
   
   scope(path: 'profile') do
