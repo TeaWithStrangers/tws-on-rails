@@ -6,6 +6,10 @@ FactoryGirl.define do
     password "password"
     association :home_city, factory: :city
 
+    trait :unconfirmed do
+      password nil
+    end
+
     [:host, :admin].each do |t| #YOLO
       trait t do
         name "Joe #{t.capitalize}"

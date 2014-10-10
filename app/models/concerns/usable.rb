@@ -1,16 +1,4 @@
 module Usable
-  def role?(role)
-    return !! self.roles.find_by_name(role.to_s.camelize)
-  end
-
-  Role::VALID_ROLES.each do |role|
-    define_method("#{role.downcase}?".to_sym) { role? role }
-  end
-
-  def host?
-    (admin? || role?(:Host))
-  end
-
   # Devise Methods
   def password_required?
     # Password is required if it is being set, but not for new records
@@ -35,6 +23,6 @@ module Usable
 
   # new function to provide access to protected method unless_confirmed
   def only_if_unconfirmed
-    unless_confirmed {yield}
+    pending_any_confirmation { yield }
   end
 end
