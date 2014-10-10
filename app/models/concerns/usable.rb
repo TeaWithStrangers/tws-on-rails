@@ -28,6 +28,7 @@ module Usable
     p[:password_confirmation] = params[:password_confirmation]
     update_attributes(p)
   end
+
   # new function to return whether a password has been set
   def has_no_password?
     self.encrypted_password.blank?
