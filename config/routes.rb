@@ -23,12 +23,17 @@ Rails.application.routes.draw do
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 
-  devise_for :users, :controllers => {:registrations => "registrations"}, :skip => [:sessions] 
+  devise_for :users, :controllers => {
+    :registrations => "registrations",
+    :confirmations => "confirmations"
+  }, :skip => [:sessions]
+
   as :user do
     get 'signin' => 'devise/sessions#new', :as => :new_user_session
     post 'signin' => 'devise/sessions#create', :as => :user_session
     delete 'signout' => 'devise/sessions#destroy', :as => :destroy_user_session
     get 'logout' => 'devise/sessions#destroy'
+    patch '/user/confirmation' => 'confirmations#update', :via => :patch, :as => :update_user_confirmation
   end
 
   resources :tea_times do

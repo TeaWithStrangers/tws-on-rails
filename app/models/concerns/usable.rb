@@ -35,6 +35,6 @@ module Usable
 
   # new function to provide access to protected method unless_confirmed
   def only_if_unconfirmed
-    unless_confirmed {yield}
+    pending_any_confirmation { yield }
   end
 end
