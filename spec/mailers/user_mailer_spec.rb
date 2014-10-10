@@ -3,12 +3,12 @@ require 'spec_helper'
 describe UserMailer do
   describe '#registration' do
     let(:user) { create(:user, :unconfirmed) }
-
     let(:token) { Devise.token_generator.digest(User, :confirmation_token, "fake") }
     let(:mail) { UserMailer.registration(user, token) }
 
     it 'should include the confirmation link' do
       expect(mail.parts.first.to_s).to include(token)
+    end
 
       it 'should send the coming soon mail if a user\'s city has no tea times' do
         expect(user.home_city.tea_times).to eq []
