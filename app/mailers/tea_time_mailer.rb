@@ -74,12 +74,14 @@ class TeaTimeMailer < ActionMailer::Base
     sendgrid_category "Tea Time Ethos"
 
     @user = User.find(user_id)
+    #TODO: Determine why passing `template_name` key to mail object doesn't work
+    #with format.text and format.html; probably rails magic :'(
+    template = 'registration_followup'
     mail(to: @user.email,
          from: "\"Ankit at Tea With Strangers\" <ankit@teawithstrangers.com>",
-         subject: "What Tea With Strangers is about",
-         template_name: 'registration_followup') do |format|
-           format.text
-           format.html
+         subject: "What Tea With Strangers is about") do |format|
+           format.text { render template }
+           format.html { render template }
          end
   end
 end
