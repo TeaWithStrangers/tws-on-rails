@@ -1,5 +1,7 @@
 class AttendanceController < ApplicationController
-  before_action :authenticate_user!, :authorized?
+  before_action :authenticate_user!
+  before_action :user_authorized?, only: [:show, :update]
+  before_action :host_authorized?, only: [:mark]
   before_action :set_attendance, except: [:mark]
 
 
@@ -9,15 +11,27 @@ class AttendanceController < ApplicationController
 
   def mark
     @tea_time = TeaTime.find(params[:id])
-    if @tea_time.update(tea_time_params)
-      @tea_time.update(followup_status: :marked_attendance)
-      redirect_to host_tasks_path, 
-        notice: 'Thanks for taking attendance! Now send an email to your attendees :)'
-    else
-      redirect_to :back, alert: 'Uh-oh. Something went wrong. Care to try again?'
+
+    case params[:marking]
+    when 'email'
+      if params[:email_sent] == 'true'
+        if @tea_time.advance_state!
+          redirect_to host_tasks_path,
+            notice: 'All done!'
+        else
+          redirect_to :back, alert: "That didn't work. Try again?"
+        end
+      end
+    when 'attendance'
+      tea_time_params = params.fetch(:tea_time, {}).permit!
+      if @tea_time.update!(tea_time_params) && @tea_time.advance_state!
+        redirect_to host_tasks_path,
+          notice: 'Thanks for taking attendance! Now send an email to your attendees :)'
+      else
+        redirect_to :back, alert: 'Uh-oh. Something went wrong. Care to try again?'
+      end
     end
   end
-
 
   ############################################
   # User-related Attendance Actions
@@ -49,14 +63,15 @@ class AttendanceController < ApplicationController
     @attendance = Attendance.find_by(tea_time: @tea_time, user: current_user)
   end
 
-  def authorized?
+  def user_authorized?
     if !(can? :update, (@attendance || Attendance))
       redirect to :back, error: "I can't let you do that Dave"
     end
   end
 
-  def tea_time_params
-    permitted = [:start_time, :duration, :location, :city]
-    params.require(:tea_time).permit!
+  def host_authorized?
+    if !(can? :manage, (@tea_time || TeaTime))
+      redirect to :back, error: "I can't let you do that Dave"
+    end
   end
 end

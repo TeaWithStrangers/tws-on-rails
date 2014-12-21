@@ -141,13 +141,34 @@ class TeaTime < ActiveRecord::Base
     Delayed::Job.enqueue(TeaTimeFollowupNotifier.new(self.id), run_at: self.end_time)
   end
 
+  def advance_state!
+    #TODO: Transform all these psuedo-state machines into actual ones
+    new = nil
+    binding.pry
+    case followup_status
+    when 'pending'
+      if valid?
+        new = :marked_attendance
+      end
+    when 'marked_attendance'
+      new = :completed
+    end
+
+    if new
+      update(followup_status: new)
+    else
+      false
+    end
+
+  end
+
   def to_s
     "#{host.name} – #{location} @ #{friendly_time}"
   end
 
   private
     def attendance_marked?
-      if !attendances.pending.count.zero?
+      if !attendances.inject(Hash.new(0)) { |hsh, a| hsh[a.status] += 1; hsh }[:pending].zero?
         errors.add(:attendances, 'must be marked')
       end
     end
