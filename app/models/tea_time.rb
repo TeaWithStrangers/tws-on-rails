@@ -129,7 +129,7 @@ class TeaTime < ActiveRecord::Base
   end
 
   def queue_followup_mails
-    TeaTimeMailer.delay(run_at: self.end_time).followup(self.id)
+    Delayed::Job.enqueue(TeaTimeFollowupNotifier.new(self.id), run_at: self.end_time)
   end
 
   def to_s
