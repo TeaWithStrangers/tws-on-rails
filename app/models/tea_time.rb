@@ -3,7 +3,7 @@ class TeaTime < ActiveRecord::Base
   acts_as_paranoid
 
   validates_presence_of :host, :start_time, :city, :duration
-  validate :attendance_marked?, if: :pending?
+  validate :attendance_marked?, if: :occurred?
 
   belongs_to :city
   belongs_to :host, :class_name => 'User', :foreign_key => 'user_id'
