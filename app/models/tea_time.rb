@@ -13,7 +13,7 @@ class TeaTime < ActiveRecord::Base
   accepts_nested_attributes_for :attendances
 
   after_touch :clear_association_cache_wrapper
-  after_create :send_host_confirmation, :queue_followup_mails, unless: :skip_callbacks
+  after_create :send_host_confirmation, unless: :skip_callbacks
   before_destroy { CancelTeaTime.send_cancellation(self) }
 
   enum followup_status: { pending: 0, marked_attendance: 1, completed: 2, cancelled: 3 }
@@ -132,18 +132,15 @@ class TeaTime < ActiveRecord::Base
     AttendanceMailer.delay.waitlist_free_spot(self.id)
   end
 
-  def queue_followup_mails
-    Delayed::Job.enqueue(TeaTimeFollowupNotifier.new(self.id), run_at: self.end_time)
-  end
-
   def advance_state!
     #TODO: Transform all these psuedo-state machines into actual ones
     new = nil
-    binding.pry
+
     case followup_status
     when 'pending'
       if valid?
         new = :marked_attendance
+        Delayed::Job.enqueue(TeaTimeFollowupNotifier.new(self.id))
       end
     when 'marked_attendance'
       new = :completed
