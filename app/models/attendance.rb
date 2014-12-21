@@ -24,7 +24,11 @@ class Attendance < ActiveRecord::Base
       if !tea_time.spots_remaining?
         tea_time.send_waitlist_notifications
       end
-      update_attribute(:status, :flake)
+      assign_attributes({
+        status: :flake,
+        reason: opts[:reason]
+      })
+      save!
       AttendanceMailer.delay.flake(self.id) if !(opts[:email] == false)
     end
   end
