@@ -49,7 +49,7 @@ feature 'Registered User' do
       expect(@user.attendances.map(&:tea_time)).to include @tt
     end
 
-    scenario 'logged out user with accounts tries to attend' do
+    scenario 'logged out user with account tries to attend' do
       sign_out
       visit city_path(@user.home_city)
       click_link('5 spots left')
@@ -63,8 +63,10 @@ feature 'Registered User' do
       attend_tt(@tt)
       visit profile_path
       click_link 'Cancel my spot'
-      click_button 'Flake'
+      fill_in :attendance_reason, with: 'flake-y'
+      click_button 'Cancel my spot'
       expect(@user.attendances.reload.first.flake?).to eq true
+      expect(@user.attendances.reload.first.reason).to eq 'flake-y'
       #Shouldn't show a flaked TT on Profile page
       expect(page).not_to have_content @tt.friendly_time
     end
