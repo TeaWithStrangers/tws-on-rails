@@ -30,5 +30,8 @@ class AttendanceController < ApplicationController
   end
 
   def authorized?
+    if !(can? :update, (@attendance || Attendance))
+      redirect to :back, error: "I can't let you do that Dave"
+    end
   end
 end
