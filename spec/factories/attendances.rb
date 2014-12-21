@@ -5,11 +5,19 @@ FactoryGirl.define do
     status :pending
   end
 
+  trait :present do
+    status :present
+  end
+
   trait :flake do
     status :flake
   end
 
   trait :waitlist do
     status :waiting_list
+  end
+
+  trait :no_show do
+    status :no_show
   end
 end
