@@ -69,7 +69,7 @@ class TeaTimesController < ApplicationController
       end
     else
       respond_to do |format|
-        format.html { redirect_to schedule_city_path(@tea_time.city), 
+        format.html { redirect_to schedule_city_path(@tea_time.city),
                       alert: "Couldn't register for that, sorry :(" }
         format.json { @attendance }
       end
