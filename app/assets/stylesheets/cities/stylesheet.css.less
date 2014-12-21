@@ -1366,7 +1366,7 @@ a {
                   }
                 }
               }
-              a.email-host {
+              a.email-host, a.edit_attendance {
                 .fs;
               }
             }
@@ -1743,6 +1743,76 @@ form {
   }
 }
 
+// Modals on mobile are pages. This is where modal 
+// styles are basically copied for non-modal use.
+
+.modal-body {
+  .form-body {
+    overflow: auto;
+    .input-container, .button-container {
+      clear: both;
+      display: block;
+    }
+    .input-container {
+      margin-bottom: 10px;
+      .label-container {
+        display: block;
+        label.reason {
+          .fs;
+          .bold;
+          text-transform: uppercase;
+          display: inline-block;
+        }
+        span.optional {
+          .fs;
+          color: @gray;
+          font-style: italic;
+        }
+      }
+      input[type="text"] {
+        .fsI;
+        .regular;
+        line-height: 1.5em;
+        display: block;
+        width: 100%;
+        border-radius: 5px;
+        padding: 10px;
+        border: 1px solid @gray;
+        &:focus {
+          outline: 0;
+        }
+      }
+    }
+    .button-container {
+      float: right;
+      margin-bottom: 6px;
+      input[type="submit"], a.cancel {
+        width: auto;
+        padding: 5px 20px;
+        margin-bottom: 0;
+      }
+      input[type="submit"] {
+        .button(@green);
+        float: right;
+        margin-left: 10px;
+      }
+      a.cancel {
+        .fsI;
+        color: @red;
+        float: left;
+        padding: 0;
+        padding-top: 8px;
+        padding-right: 10px;
+      }
+    }
+  }
+}
+p.modal-text {
+  .fsI;
+  line-height: 1.5em;
+  margin-bottom: 1em;
+}
+
 // Modal styles
 
 .ui-widget-overlay.ui-front {
@@ -1785,6 +1855,73 @@ form {
     background: @background;
     padding: .75em;
     border-bottom: 1px solid @lightred;
+  }
+  .modal-body {
+    padding: 1em;
+    .form-body {
+      overflow: auto;
+      .input-container, .button-container {
+        clear: both;
+        display: block;
+      }
+      .input-container {
+        margin-bottom: 10px;
+        .label-container {
+          display: block;
+          label.reason {
+            .fs;
+            .bold;
+            text-transform: uppercase;
+            display: inline-block;
+          }
+          span.optional {
+            .fs;
+            color: @gray;
+            font-style: italic;
+          }
+        }
+        input[type="text"] {
+          .fsI;
+          .regular;
+          line-height: 1.5em;
+          display: block;
+          width: 100%;
+          border-radius: 5px;
+          padding: 10px;
+          border: 1px solid @gray;
+          &:focus {
+            outline: 0;
+          }
+        }
+      }
+      .button-container {
+        float: right;
+        margin-bottom: 6px;
+        input[type="submit"], a.cancel {
+          width: auto;
+          padding: 5px 20px;
+          margin-bottom: 0;
+        }
+        input[type="submit"] {
+          .button(@green);
+          float: right;
+          margin-left: 10px;
+        }
+        a.cancel {
+          .fsI;
+          color: @red;
+          float: left;
+          padding: 0;
+          padding-top: 8px;
+          padding-right: 10px;
+        }
+      }
+    }
+  }
+  p.modal-text {
+    .fsI;
+    line-height: 1.5em;
+    margin-bottom: 1em;
   }
   button[type="button"][title="close"] {
     top: 2em;
@@ -3252,6 +3389,26 @@ form.schedule-tea {
       float: none;
       padding-top: 10px;
       overflow: auto;
+    }
+  }
+  // Modal styles for non-modals
+  .modal-body {
+    .form-body {
+      .button-container {
+        float: none;
+        margin: 0;
+        input[type="submit"] {
+          float: none;
+          margin: 0;
+          width: 100%;
+        }
+        a.cancel {
+          padding: 20px 0 10px;
+          text-align: center;
+          display: block;
+          float: none;
+        }
+      }
     }
   }
   .body-edit.birthdays {

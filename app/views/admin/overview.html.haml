@@ -7,10 +7,12 @@
           %td Name
           %td Email
           %td Attendance Status
+          %td Flake Reason
           %td Updated at
         - tt.attendances.each do |a|
           %tr
             %td=  a.user.name
             %td=  a.user.email
-            %td=  a.status.to_s
+            %td=  a.status.to_s.humanize
+            %td=  a.reason
             %td=  a.updated_at 

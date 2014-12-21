@@ -35,7 +35,10 @@ Rails.application.routes.draw do
     member do
       post '/attendance' => 'tea_times#create_attendance', as: :attendance
       put '/cancel' => 'tea_times#cancel', as: :cancel
-      put '/attendance/:attendance_id' => 'tea_times#update_attendance',
+
+      get '/attendance/:attendance_id' => 'attendance#show',
+        as: :show_attendance
+      put '/attendance/:attendance_id' => 'attendance#update',
         as: :update_attendance
     end
   end
