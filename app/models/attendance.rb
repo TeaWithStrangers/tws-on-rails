@@ -33,18 +33,31 @@ class Attendance < ActiveRecord::Base
     end
   end
 
-  def queue_mails
+  def send_mail
     if self.pending?
       #Immediate Attendance Confirmation
       AttendanceMailer.delay.registration(self.id)
+      queue_reminders
+
       #Ethos Email
       TeaTimeMailer.delay(run_at: Time.now + 1.hour).ethos(self.user.id)
-      st = self.tea_time.start_time
-      AttendanceMailer.delay(run_at: st - 2.days).reminder(self.id, :two_day)
-      AttendanceMailer.delay(run_at: st - 12.hours).reminder(self.id, :same_day)
     elsif self.waiting_list?
       AttendanceMailer.delay.waitlist(self.id)
     end
+  end
+
+  def queue_reminders
+      st = self.tea_time.start_time
+
+      two_day_reminder = st - 2.days
+      if !(Time.now > two_day_reminder)
+        AttendanceMailer.delay(run_at: two_day_reminder).reminder(self.id, :two_day)
+      end
+
+      twelve_hour_reminder = st - 12.hours
+      if !(Time.now > twelve_hour_reminder)
+        AttendanceMailer.delay(run_at: twelve_hour_reminder).reminder(self.id, :same_day)
+      end
   end
 
   def occurred?
