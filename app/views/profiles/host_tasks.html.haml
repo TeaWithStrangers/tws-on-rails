@@ -14,6 +14,8 @@
                 - Attendance.host_statuses.each do |s, idx|
                   = att_form.label :status, s.humanize
                   = att_form.radio_button :status, s
+                = att_form.label :potential_host,  "Potential Host?"
+                = att_form.check_box :potential_host
           = f.submit "Mark Attendance"
 
   %h1 Send Attendees Email
