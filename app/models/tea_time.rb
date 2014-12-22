@@ -165,7 +165,7 @@ class TeaTime < ActiveRecord::Base
 
   private
     def attendance_marked?
-      if !attendances.inject(Hash.new(0)) { |hsh, a| hsh[a.status] += 1; hsh }[:pending].zero?
+      if !attendances.inject(Hash.new(0)) { |hsh, a| hsh[a.status] += 1; hsh }['pending'].zero?
         errors.add(:attendances, 'must be marked')
       end
     end
