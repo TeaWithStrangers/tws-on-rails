@@ -31,7 +31,7 @@ class TeaTimeMailer < ActionMailer::Base
          end
   end
 
-  def followup(tea_time_id, attendees, status)
+  def followup(tea_time_id, attendances, status)
     sendgrid_category "Tea Time Post-Attendance Followup: #{status}"
 
     @tea_time = TeaTime.find(tea_time_id)
@@ -47,10 +47,10 @@ class TeaTimeMailer < ActionMailer::Base
       @template = 'followup_present'
     else
       #We don't want to followup without explicitly enabling the scenario
-      cancel_delivery 
+      cancel_delivery
     end
 
-    mail(bcc: attendees.map {|a| a.user.email},
+    mail(bcc: attendances.map {|a| a.user.email},
          from: "\"Ankit at Tea With Strangers\" <ankit@teawithstrangers.com>",
          subject: 'Hey! Thanks.') do |format|
            format.text { render @template }
