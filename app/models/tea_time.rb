@@ -152,7 +152,7 @@ class TeaTime < ActiveRecord::Base
     end
 
     if new
-      update(followup_status: new)
+      update!(followup_status: new)
     else
       false
     end

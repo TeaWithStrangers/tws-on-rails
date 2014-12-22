@@ -40,7 +40,7 @@ class Attendance < ActiveRecord::Base
       queue_reminders
 
       #Ethos Email is sent when a user has never attended a tea time before
-      if user.attendances.present.count == 0
+      if user.attendances.present.count.zero?
         TeaTimeMailer.delay(run_at: Time.now + 1.hour).ethos(self.user.id)
       end
     elsif self.waiting_list?
@@ -76,8 +76,7 @@ class Attendance < ActiveRecord::Base
 
   class << self
     def host_statuses
-      #TODO: FUCKITSHIPIT
-      self.statuses.to_a.map(&:first) - [:waiting_list, :cancelled].map(&:to_s)
+      self.statuses.keys - ['waiting_list', 'cancelled']
     end
   end
 end
