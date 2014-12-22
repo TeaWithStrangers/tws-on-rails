@@ -51,6 +51,21 @@ describe Attendance do
     end
   end
 
+  describe '.queue_reminders' do
+    let!(:attendance) { build(:attendance) }
+
+    it 'should not queue a reminder after it should have been sent' do
+      Time.stub(:now).and_return(attendance.tea_time.start_time + 1.hour)
+      dj_count = Delayed::Job.count
+      attendance.queue_reminders
+      expect(Delayed::Job.count).to eq(dj_count)
+
+      Time.stub(:now).and_return(attendance.tea_time.start_time - 13.hour)
+      attendance.queue_reminders
+      expect(Delayed::Job.count).to eq(dj_count.succ)
+    end
+  end
+
   describe '.user' do
     let(:attendance) { build(:attendance, user: nil)}
     it 'should return a nil_user instance if its user is deleted' do
