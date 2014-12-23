@@ -32,7 +32,7 @@ gem 'sendgrid'
 
 # Figaro makes it easy to set env variables without Foreman
 #Calendars
-gem 'icalendar', '~> 2.0'
+gem 'icalendar', '~> 2.2'
 gem 'time_zone_ext'
 
 #Background Jobs
