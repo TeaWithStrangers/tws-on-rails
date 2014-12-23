@@ -31,31 +31,31 @@ class TeaTimeMailer < ActionMailer::Base
          end
   end
 
-  def followup(tea_time_id)
-    sendgrid_category "Tea Time Post-Attendance Followup"
+  def followup(tea_time_id, attendances, status)
+    sendgrid_category "Tea Time Post-Attendance Followup: #{status}"
 
     @tea_time = TeaTime.find(tea_time_id)
 
-    unless @tea_time.cancelled?
-      as = @tea_time.attendances.group_by(&:status)
-      as.each do |type, attendees|
-        case type
-        when 'flake'
-          template = 'followup_flake_noresched'
-        when 'no_show'
-          template = 'followup_no_show'
-        else
-          template = 'followup'
-        end
-        mail(bcc: attendees.map {|a| a.user.email},
-             from: "\"Ankit at Tea With Strangers\" <ankit@teawithstrangers.com>",
-             subject: 'Hey! Thanks.',
-             template_name: template) do |format|
-               format.text
-               format.html
-             end
-      end
+    # @template is set as instance variable so it can be accessed in the
+    # ActionController context and subsequently tested
+    case status
+    when 'flake'
+      @template = 'followup_flake'
+    when 'no_show'
+      @template = 'followup_no_show'
+    when 'present'
+      @template = 'followup_present'
+    else
+      #We don't want to followup without explicitly enabling the scenario
+      cancel_delivery
     end
+
+    mail(bcc: attendances.map {|a| a.user.email},
+         from: "\"Ankit at Tea With Strangers\" <ankit@teawithstrangers.com>",
+         subject: 'Hey! Thanks.') do |format|
+           format.text { render @template }
+           format.html { render @template }
+         end
   end
 
   def cancellation(tea_time_id, attendance_id)

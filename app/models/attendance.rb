@@ -39,25 +39,27 @@ class Attendance < ActiveRecord::Base
       AttendanceMailer.delay.registration(self.id)
       queue_reminders
 
-      #Ethos Email
-      TeaTimeMailer.delay(run_at: Time.now + 1.hour).ethos(self.user.id)
+      #Ethos Email is sent when a user has never attended a tea time before
+      if user.attendances.present.count.zero?
+        TeaTimeMailer.delay(run_at: Time.now + 1.hour).ethos(self.user.id)
+      end
     elsif self.waiting_list?
       AttendanceMailer.delay.waitlist(self.id)
     end
   end
 
   def queue_reminders
-      st = self.tea_time.start_time
+    st = self.tea_time.start_time
 
-      two_day_reminder = st - 2.days
-      if !(Time.now > two_day_reminder)
-        AttendanceMailer.delay(run_at: two_day_reminder).reminder(self.id, :two_day)
-      end
+    two_day_reminder = st - 2.days
+    if !(Time.now > two_day_reminder)
+      AttendanceMailer.delay(run_at: two_day_reminder).reminder(self.id, :two_day)
+    end
 
-      twelve_hour_reminder = st - 12.hours
-      if !(Time.now > twelve_hour_reminder)
-        AttendanceMailer.delay(run_at: twelve_hour_reminder).reminder(self.id, :same_day)
-      end
+    twelve_hour_reminder = st - 12.hours
+    if !(Time.now > twelve_hour_reminder)
+      AttendanceMailer.delay(run_at: twelve_hour_reminder).reminder(self.id, :same_day)
+    end
   end
 
   def occurred?
@@ -69,6 +71,12 @@ class Attendance < ActiveRecord::Base
       self.status = :pending
     else
       self.status = :waiting_list
+    end
+  end
+
+  class << self
+    def host_statuses
+      self.statuses.keys - ['waiting_list', 'cancelled']
     end
   end
 end

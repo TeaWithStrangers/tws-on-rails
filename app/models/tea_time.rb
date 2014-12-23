@@ -2,17 +2,21 @@ class TeaTime < ActiveRecord::Base
   # Only soft-delete tea times
   acts_as_paranoid
 
-  MAX_ATTENDEES = 5
+  validates_presence_of :host, :start_time, :city, :duration
+  validate :attendance_marked?, if: :occurred?
+
   belongs_to :city
   belongs_to :host, :class_name => 'User', :foreign_key => 'user_id'
-  validates_presence_of :host, :start_time, :city, :duration
+
+  MAX_ATTENDEES = 5
   has_many :attendances, dependent: :destroy
+  accepts_nested_attributes_for :attendances
 
   after_touch :clear_association_cache_wrapper
-  after_create :send_host_confirmation, :queue_followup_mails, unless: :skip_callbacks
+  after_create :send_host_confirmation, :queue_attendance_reminder, unless: :skip_callbacks
   before_destroy { CancelTeaTime.send_cancellation(self) }
 
-  enum followup_status: [:na, :pending, :sent, :cancelled]
+  enum followup_status: { pending: 0, marked_attendance: 1, completed: 2, cancelled: 3 }
 
   TeaTime.followup_statuses.each do |k,v|
     scope k, -> { where(followup_status: v) }
@@ -133,8 +137,31 @@ class TeaTime < ActiveRecord::Base
     AttendanceMailer.delay.waitlist_free_spot(self.id)
   end
 
-  def queue_followup_mails
-    TeaTimeMailer.delay(run_at: self.end_time).followup(self.id)
+  def queue_attendance_reminder
+    AttendanceMailer.delay(run_at: self.end_time + 30.minutes).
+      mark_attendance_reminder(self.id)
+  end
+
+  def advance_state!
+    #TODO: Transform all these psuedo-state machines into actual ones
+    new = nil
+
+    case followup_status
+    when 'pending'
+      if valid?
+        new = :marked_attendance
+        Delayed::Job.enqueue(TeaTimeFollowupNotifier.new(self.id))
+      end
+    when 'marked_attendance'
+      new = :completed
+    end
+
+    if new
+      update!(followup_status: new)
+    else
+      false
+    end
+
   end
 
   def to_s
@@ -142,6 +169,12 @@ class TeaTime < ActiveRecord::Base
   end
 
   private
+    def attendance_marked?
+      if !attendances.inject(Hash.new(0)) { |hsh, a| hsh[a.status] += 1; hsh }['pending'].zero?
+        errors.add(:attendances, 'must be marked')
+      end
+    end
+
     def use_city_timezone(&block)
       unless city.nil?
         Time.use_zone(city.timezone, &block)
