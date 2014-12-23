@@ -40,6 +40,10 @@ class TeaTime < ActiveRecord::Base
     end
   end
 
+  def tzid
+    start_time.time_zone.tzinfo.name
+  end
+
   def duration
     read_attribute(:duration) || 2
   end
@@ -105,13 +109,14 @@ class TeaTime < ActiveRecord::Base
   def ical
     tt = self
     cal = Icalendar::Calendar.new
+    cal.add_timezone(TZInfo::Timezone.get(tt.tzid).ical_timezone(tt.start_time))
     cal.event do |e|
-      e.dtstart = tt.start_time
-      e.dtend  = (tt.start_time + tt.duration.hours)
+      e.uid = tt.id.to_s
+      e.dtstart = Icalendar::Values::DateTime.new tt.start_time, tzid: tt.tzid
+      e.dtend = Icalendar::Values::DateTime.new tt.end_time, tzid: tt.tzid
       e.summary = "Tea time, hosted by #{tt.host.name}"
       #FIXME: Come back to this with fresh eyes
-      #e.organizer = "CN=#{tt.host.name}:MAILTO:#{tt.host.email}"
-      e.location = tt.location
+      e.organizer = Icalendar::Values::CalAddress.new("mailto:#{tt.host.email}", 'CN' => tt.host.name)
     end
     cal
   end
