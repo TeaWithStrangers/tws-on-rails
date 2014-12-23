@@ -100,7 +100,7 @@ class AttendanceMailer < ActionMailer::Base
     @host = @tea_time.host
 
     mail(to: host.friendly_email,
-         subject: "Don't forget to mark attendance for your last tea time!") do |format|
+         subject: "Take a minute and mark attendance for your tea time!") do |format|
       format.text
       format.html
     end
