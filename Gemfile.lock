@@ -108,7 +108,7 @@ GEM
       json (~> 1.8)
       multi_xml (>= 0.5.2)
     i18n (0.6.11)
-    icalendar (2.1.1)
+    icalendar (2.2.1)
     jquery-rails (3.1.1)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
@@ -305,7 +305,7 @@ DEPENDENCIES
   factory_girl_rails
   haml-rails (~> 0.5)
   hirb
-  icalendar (~> 2.0)
+  icalendar (~> 2.2)
   jquery-rails
   jquery-ui-rails (~> 5.0)
   less-rails (~> 2.5)
