@@ -41,4 +41,5 @@
 
               = form_for(tt, url: mark_tea_time_path(tt, marking: 'email', email_sent: true)) do |f|
                 = f.submit "Mark Complete"
-
+              = form_for(tt, url: mark_tea_time_path(tt, marking: 'edit_attendance')) do |f|
+                = f.submit "Edit Attendance"
