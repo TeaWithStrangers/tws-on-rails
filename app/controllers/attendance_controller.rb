@@ -30,6 +30,9 @@ class AttendanceController < ApplicationController
       else
         redirect_to :back, alert: 'Uh-oh. Something went wrong. Care to try again?'
       end
+    when 'edit_attendance'
+      @tea_time.update(followup_status: "pending")
+      redirect_to :back, notice: "OK, care to mark again?"
     end
   end
 

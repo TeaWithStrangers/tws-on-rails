@@ -150,10 +150,10 @@ class TeaTime < ActiveRecord::Base
     when 'pending'
       if valid?
         new = :marked_attendance
-        Delayed::Job.enqueue(TeaTimeFollowupNotifier.new(self.id))
       end
     when 'marked_attendance'
       new = :completed
+      Delayed::Job.enqueue(TeaTimeFollowupNotifier.new(self.id))
     end
 
     if new
