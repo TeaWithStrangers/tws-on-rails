@@ -118,13 +118,8 @@ ActiveRecord::Schema.define(version: 20141221235938) do
     t.string   "facebook"
     t.string   "twitter"
     t.datetime "deleted_at"
-    t.string   "unconfirmed_email"
-    t.string   "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
   end
 
-  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
