@@ -1,6 +1,6 @@
 Hey hey,
 
-The tea time you had to cancel on actually just happened. In case you didn't get a chance to after you had to cancel, I just wanted to make sure you got a chance to reschedule for another tea time. [Here's the schedule!](<%=url_for(controller: 'cities', action: 'schedule', id: @tea_time.city.city_code, only_path: false, utm_campaign: 'followupcancelation', utm_medium: 'email', utm_content: 'schedule') %>) Pick a time that works for you, yeah?
+The tea time you had to cancel on actually just happened. In case you didn't get a chance to, take the chance to reschedule for another tea time. [Here's the schedule!](<%=url_for(controller: 'cities', action: 'schedule', id: @tea_time.city.city_code, only_path: false, utm_campaign: 'followupcancelation', utm_medium: 'email', utm_content: 'schedule') %>) Pick a time that works for you! 
 
-All good things,  
-Ankit
+Bleep bleep bloop,  
+The Robots at Tea With Strangers
