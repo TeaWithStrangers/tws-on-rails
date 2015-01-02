@@ -8,8 +8,7 @@ class ProfilesController < ApplicationController
   end
 
   def host_tasks
-    @pending = current_user.tea_times.pending.past.order("start_time DESC")
-    @notes = current_user.tea_times.marked_attendance.order("start_time DESC")
+    @tasks = current_user.tea_times.where(followup_status: [0, 1]).past.order("start_time DESC")
   end
 
   def history
