@@ -76,7 +76,7 @@ class Attendance < ActiveRecord::Base
 
   class << self
     def host_statuses
-      self.statuses.keys - ['waiting_list', 'cancelled']
+      self.statuses.keys - ['waiting_list', 'cancelled', 'pending']
     end
   end
 end
