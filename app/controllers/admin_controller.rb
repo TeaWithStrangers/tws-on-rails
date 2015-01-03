@@ -15,6 +15,94 @@ class AdminController < ApplicationController
   def users
   end
 
+  @@graph_color_map = [
+    {
+      'strokeColor' => 'rgb(116, 139, 167)',
+      'color' => 'rgb(116, 139, 167)',
+      'fillColor' => 'rgba(116, 139, 167, 0.4)',
+      'highlight' => 'rgba(116, 139, 167, 0.4)'
+    },
+    {
+      'strokeColor' => 'rgb(75, 104, 139)',
+      'color' => 'rgb(75, 104, 139)',
+      'fillColor' => 'rgba(75, 104, 139, 0.4)',
+      'highlight' => 'rgba(75, 104, 139, 0.4)'
+    },
+    {
+      'strokeColor' => 'rgb(20, 49, 83)',
+      'color' => 'rgb(20, 49, 83)',
+      'fillColor' => 'rgba(20, 49, 83, 0.4)',
+      'highlight' => 'rgba(20, 49, 83, 0.4)'
+    },
+    {
+      'strokeColor' => 'rgb(5, 28, 56)',
+      'color' => 'rgb(5, 28, 56)',
+      'fillColor' => 'rgba(5, 28, 56, 0.4)',
+      'highlight' => 'rgba(5, 28, 56, 0.4)'
+    },
+    {
+      'strokeColor' => 'rgb(43, 74, 111)',
+      'color' => 'rgb(43, 74, 111)',
+      'fillColor' => 'rgba(43, 74, 111, 0.4)',
+      'highlight' => 'rgba(43, 74, 111, 0.4)'
+    }
+  ]
+
+  def statistics
+  end
+
+  def stats_api_hosts_by_city
+      @data = []
+
+      @cities = City.all.order('id').all
+      
+      @cities.map {|city|
+        @data << {
+          'label' => city.name,
+          'value' => city.hosts.count
+        }
+      }
+
+      @data.each_with_index { |item, index|
+        item.merge! @@graph_color_map[index]
+        @data[index] = item
+      }
+
+      apiResponse = {'response' => @data}
+
+      if not Rails.env.production?
+        apiResponse = JSON.pretty_generate(apiResponse)
+      end
+
+      render :json => apiResponse
+  end
+
+  def stats_api_teatimes_by_city
+      @data = []
+
+      @cities = City.all.order('id').all
+      
+      @cities.map {|city|
+        @data << {
+          'label' => city.name,
+          'value' => city.tea_times.count
+        }
+      }
+
+      @data.each_with_index { |item, index|
+        item.merge! @@graph_color_map[index]
+        @data[index] = item
+      }
+
+      apiResponse = {'response' => @data}
+
+      if not Rails.env.production?
+        apiResponse = JSON.pretty_generate(apiResponse)
+      end
+
+      render :json => apiResponse
+  end
+
   def write_mail
     @mail = MassMail.new
   end

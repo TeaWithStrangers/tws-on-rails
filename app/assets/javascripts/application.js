@@ -14,7 +14,6 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require jquery-ui/dialog
-//= require_tree .
 
 function viewportWidth() { return (window.innerWidth > 0) ? window.innerWidth : screen.width; }
 

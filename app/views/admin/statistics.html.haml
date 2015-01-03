@@ -1,0 +1,12 @@
+- content_for :footer do
+  = javascript_include_tag "Chart.js"
+  = javascript_include_tag "statistics.js"
+.container
+  %div.chartContainer#hostsByCityDoughnut
+    %div.chartTitle
+    %canvas.chart
+    %div.chartLegend
+  %div.chartContainer#teatimesByCityDoughnut
+    %div.chartTitle
+    %canvas.chart
+    %div.chartLegend

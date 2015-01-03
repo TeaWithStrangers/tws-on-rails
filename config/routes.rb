@@ -60,6 +60,11 @@ Rails.application.routes.draw do
 
     get '/mail' => 'admin#write_mail'
     post '/mail' => 'admin#send_mail'
+
+    get '/statistics' => 'admin#statistics'
+    get '/statistics/api/hosts_by_city' => 'admin#stats_api_hosts_by_city'
+    get '/statistics/api/teatimes_by_city' => 'admin#stats_api_teatimes_by_city'
+
   end
   
   match '/profile' => 'profiles#show', as: :profile, via: :get
