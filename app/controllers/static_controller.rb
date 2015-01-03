@@ -1,14 +1,11 @@
 class StaticController < ApplicationController
   def index
     @cities = City.visible
-    @cities_by_host  = 
-      #TODO: I had standards once
-      {single_host: [],
-       many_hosts: [],
-       no_hosts: []}.merge(@cities.group_by { |x| 
-         if (x.hosts.count > 1 || x.fully_brewed?)
+    @cities_by_host  = Hash.new([]).merge(
+      @cities.group_by { |x|
+         if (x.fully_brewed? || x.hosts.count > 1)
            :many_hosts
-         elsif (x.hosts.count == 1 || x.warming_up?)
+         elsif (x.warming_up? || x.hosts.count == 1)
            :single_host
          else
            :no_hosts
