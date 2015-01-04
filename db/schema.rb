@@ -122,12 +122,11 @@ ActiveRecord::Schema.define(version: 20150103185829) do
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.integer  "roles_mask",             default: 0
+    t.integer  "roles",                  default: 0,  null: false
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-  add_index "users", ["roles_mask"], name: "index_users_on_roles_mask", using: :btree
 
 end
