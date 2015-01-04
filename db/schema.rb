@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140804192355) do
+ActiveRecord::Schema.define(version: 20150103185829) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,11 +19,12 @@ ActiveRecord::Schema.define(version: 20140804192355) do
   create_table "attendances", force: true do |t|
     t.integer  "tea_time_id"
     t.integer  "user_id"
-    t.integer  "status",      default: 0
+    t.integer  "status",         default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "reason"
     t.datetime "deleted_at"
+    t.boolean  "potential_host", default: false, null: false
   end
 
   create_table "cities", force: true do |t|
@@ -117,9 +118,16 @@ ActiveRecord::Schema.define(version: 20140804192355) do
     t.string   "facebook"
     t.string   "twitter"
     t.datetime "deleted_at"
+    t.string   "unconfirmed_email"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.integer  "roles_mask",             default: 0
   end
 
+  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["roles_mask"], name: "index_users_on_roles_mask", using: :btree
 
 end
