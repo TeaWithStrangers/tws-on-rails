@@ -1,6 +1,5 @@
 class User < ActiveRecord::Base
-  ROLES = %w[host admin]
-  include Roleable
+  bitmask :roles, :as => [:host, :admin], :null => false
 
   acts_as_paranoid
 
@@ -21,8 +20,6 @@ class User < ActiveRecord::Base
   validates_with Validators::TwitterHandleValidator
 
   before_destroy :flake_future
-
-  scope :hosts, -> { joins(:roles).where(roles: {name: 'Host'}) }
 
   def twitter_url
     "https://twitter.com/#{twitter}" if twitter
