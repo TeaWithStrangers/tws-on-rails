@@ -7,6 +7,10 @@ function _apiStatisticsData(action, callback) {
     });
 }
 
+function apiActiveHosts(callback) {
+    _apiStatisticsData('active_hosts', callback);
+}
+
 function apiHostsByCity(callback) {
     _apiStatisticsData('hosts_by_city', callback);
 }
@@ -47,9 +51,14 @@ function createChart(chartType, chartSelector, chartOptions, chartDataCallback) 
         }
 
         // Create the Chart
-        chartObject = new Chart($(chartSelector + " > .chart").get(0).getContext("2d"));
+        if(chartType != 'scalar') {
+            chartObject = new Chart($(chartSelector + " > .chart").get(0).getContext("2d"));
+        }
 
         switch(chartType) {
+            case 'scalar':
+                createScalarChart(chartSelector, chartData);
+                break;
             case 'doughnut':
                 chart = createDoughnutChart(chartObject, chartData,
                 {
@@ -102,7 +111,27 @@ function createBarChart(chartObject, chartData, chartOptions) {
     //TODO: Implement
 }
 
+function createScalarChart(scalarStatisticsSelector, scalarData) {
+    var $chart = $(scalarStatisticsSelector + " > .statistics");
+
+    $.each(scalarData, function(i, statistic) {
+        var $row = $([
+            '<div class="statContainer">',
+                '<span class="statTitle">', statistic['stat'], '</span>',
+                '<span class="statValue">', statistic['value'] , '</span>',
+            '</div>'
+        ].join(''));
+        $chart.append($row);
+    });
+}
+
 $(document).ready(function() {
+
+    createChart('scalar', '#scalarStatistics', {
+        'title': "Active Hosts by City (past 2 weeks)",
+        'height': 450,
+        'width': 300
+    }, apiActiveHosts);
 
     createChart('doughnut', '#hostsByCityDoughnut', {
         'title': "Hosts by City",

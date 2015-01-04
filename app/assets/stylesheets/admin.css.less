@@ -2,17 +2,42 @@
 // They will automatically be included in application.css.
 // You can use Less here: http://lesscss.org/
 
-div.chartTitle {
+div.container {
+    overflow: visible;
+}
+
+div.chartTitle, div.statisticsTitle {
     font-size: 1.3em;
     margin-bottom: 30px;
 }
 
-div.chartContainer {
+div.chartContainer, div.statisticsContainer {
     background-color: #DDDDDD;
     padding: 20px;
     float: left;
     border: 1px solid #333333;
     margin: 3px;
+    box-sizing: border-box;
+}
+
+div.statisticsContainer {
+    width: 50%;
+
+    div.statContainer {
+        height: 30px;
+        line-height: 30px;
+        border-top: 1px solid #CCCCCC;
+
+        span.statTitle {
+            font-weight: bold;
+            margin-right: 20px;
+        }
+
+        span.statValue {
+            float: right;
+            padding-right: 40px;
+        }
+    }
 }
 
 .doughnut-legend, .line-legend {

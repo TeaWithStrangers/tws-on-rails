@@ -2,6 +2,9 @@
   = javascript_include_tag "Chart.js"
   = javascript_include_tag "statistics.js"
 .container
+  %div.statisticsContainer#scalarStatistics
+    %div.chartTitle.statisticsTitle
+    %div.chart.statistics
   %div.chartContainer#hostsByCityDoughnut
     %div.chartTitle
     %canvas.chart
