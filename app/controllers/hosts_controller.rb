@@ -19,7 +19,7 @@ class HostsController < ApplicationController
 
     @host = User.find_or_initialize_by(email: host_params[:email])
     @host.assign_attributes(host_params)
-    @host.roles << Role.find_by(name: 'Host')
+    @host.roles << :host
     @host.password = generated_password
 
     if @host.save

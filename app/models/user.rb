@@ -1,6 +1,4 @@
 class User < ActiveRecord::Base
-  bitmask :roles, :as => [:host, :admin], :null => false
-
   acts_as_paranoid
 
   # Include default devise modules. Others available are:
@@ -20,6 +18,10 @@ class User < ActiveRecord::Base
   validates_with Validators::TwitterHandleValidator
 
   before_destroy :flake_future
+
+  bitmask :roles, :as => [:host, :admin], :null => false
+  alias_method :role?, :roles?
+  scope :hosts, -> { with_roles :host }
 
   def twitter_url
     "https://twitter.com/#{twitter}" if twitter
@@ -42,8 +44,12 @@ class User < ActiveRecord::Base
     "\"#{self.name}\" <#{self.email}>"
   end
 
+  def admin?
+    role? :admin
+  end
+
   def host?
-    (admin? || role?(:Host))
+    (admin? || role?(:host))
   end
 
   def attendances_for(tt_period)
