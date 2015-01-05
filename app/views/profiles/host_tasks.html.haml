@@ -9,36 +9,27 @@
       .two-third.right.history
         %h1.main Mark Attendance
         %ul.host.upcoming
-          - @pending.each do |tt|
+          - @tasks.each do |tt|
             - if tt.attendances.count > 0
               %li.tea-time
                 = render partial: 'teatime_info', locals: {tea_time: tt, att: nil}
-                = form_for(tt, html: { class: 'attendance' }, url: mark_tea_time_path(tt, marking: 'attendance')) do |f|
-                  %h3 Attendees
-                  %ul.attendees
-                    = f.fields_for :attendances do |att_form|
-                      %li.attendee
-                        = att_form.object.user.name
-                        - Attendance.host_statuses.each do |s, idx|
-                          = att_form.label :status, s.humanize
-                          = att_form.radio_button :status, s
-                        = att_form.label :potential_host,  "Potential Host?"
-                        = att_form.check_box :potential_host
-                  = f.submit "Mark Attendance"
-
-        %h1.main Send Attendees Email
-        %ul.host.upcoming
-          - @notes.each do |tt|
-            %li.tea-time
-              = render partial: 'teatime_info', locals: {tea_time: tt, att: nil}
-              %h2.attention You still need to email your attendees!
-              %h3.attendees Attendees
-              - tt.attendances.group_by(&:status).each do |k,v|
-                %ul.attendees-list{:class => "#{k}"}
-                  %h4 #{k.humanize.capitalize}
-                  - v.map(&:user).each do |a|
-                    %li.attendee-names= link_to a.name, "mailto:#{a.email}"
-
-              = form_for(tt, url: mark_tea_time_path(tt, marking: 'email', email_sent: true)) do |f|
-                = f.submit "Mark Complete"
+                - if tt.pending?
+                  = form_for(tt, html: { class: 'attendance' }, url: mark_tea_time_path(tt, marking: 'attendance')) do |f|
+                    %h3 Attendees
+                    %ul.attendees
+                      = f.fields_for :attendances do |att_form|
+                        %li.attendee
+                          = att_form.object.user.name
+                          - Attendance.host_statuses.each do |s, idx|
+                            = att_form.label :status, s.humanize
+                            = att_form.radio_button :status, s, 
+                              checked: ((s == 'present' && att_form.object.pending?) || s == att_form.object.status)
+                          = att_form.label :potential_host,  "Potential Host?"
+                          = att_form.check_box :potential_host
+                    = f.submit "Mark Attendance"
+                - if tt.marked_attendance?
+                  = form_for(tt, url: mark_tea_time_path(tt, marking: 'email', email_sent: true)) do |f|
+                    = f.submit "Mark Complete"
+                  = form_for(tt, url: mark_tea_time_path(tt, marking: 'edit_attendance')) do |f|
+                    = f.submit "Edit Attendance"
 
