@@ -11,7 +11,7 @@ FactoryGirl.define do
         name "Joe #{t.capitalize}"
 
         after :build do |u|
-          u.roles << Role.find_by(name: t.capitalize)
+          u.roles << t
         end
       end
     end

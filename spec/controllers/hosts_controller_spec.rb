@@ -27,7 +27,7 @@ describe HostsController do
         # expect that user exists
         new_user = User.find_by(email: host_email)
         expect(new_user).to_not be_nil
-        expect(new_user.roles.map(&:name)).to include("Host")
+        expect(new_user.roles).to include(:host)
       end
     end
 
@@ -37,12 +37,12 @@ describe HostsController do
         user = create(:user, email: host_email)
 
         # expect that user exists but does not have host params
-        expect(user.roles.map(&:name)).not_to include("Host")
+        expect(user.roles).not_to include(:host)
 
         post 'create', user: params
 
         user.reload
-        expect(user.roles.map(&:name)).to include("Host")
+        expect(user.roles).to include(:host)
       end
     end
 
