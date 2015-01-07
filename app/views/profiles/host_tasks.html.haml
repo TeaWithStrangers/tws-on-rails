@@ -7,27 +7,50 @@
         = render partial: 'sidebar'
       %hr
       .two-third.right.history
-        %h1 Mark Attendance
-        %ul.host
+        %h2.main After tea time tasks
+        %p The Stranger Community grows with the attendees of your tea times, so it's important to mark attendance and refer anyone that might make a great host after tea time.
+        %ul.host.upcoming.tasks
           - @tasks.each do |tt|
-            %li.tea-time
-              = render partial: 'teatime_info', locals: {tea_time: tt, att: nil}
-              - if tt.pending?
-                = form_for(tt, url: mark_tea_time_path(tt, marking: 'attendance')) do |f|
-                  %h3 Attendees
-                  %ul.attendees
-                    = f.fields_for :attendances do |att_form|
-                      %li.attendee
-                        = att_form.object.user.name
-                        - Attendance.host_statuses.each do |s, idx|
-                          = att_form.label :status, s.humanize
-                          = att_form.radio_button :status, s, 
-                            checked: ((s == 'present' && att_form.object.pending?) || s == att_form.object.status)
-                        = att_form.label :potential_host,  "Potential Host?"
-                        = att_form.check_box :potential_host
-                  = f.submit "Mark Attendance"
-              - if tt.marked_attendance?
-                = form_for(tt, url: mark_tea_time_path(tt, marking: 'email', email_sent: true)) do |f|
-                  = f.submit "Mark Complete"
-                = form_for(tt, url: mark_tea_time_path(tt, marking: 'edit_attendance')) do |f|
-                  = f.submit "Edit Attendance"
+            - if tt.attendances.count > 0
+              %li.tea-time
+                = render partial: 'teatime_info', locals: {tea_time: tt, att: nil}
+                %h3.tasks Attendance / Host Referrals
+                - if tt.pending?
+                  = form_for(tt, html: { class: 'attendance' }, url: mark_tea_time_path(tt, marking: 'attendance')) do |f|
+                    %ul.attendees
+                      .headers
+                        .col-head.filler
+                          &nbsp;
+                        .col-head.cancel
+                          Canceled
+                        .col-head.no-show
+                          No show
+                        .col-head.present
+                          Attended
+                        .col-head.pot-host
+                          Potential Host
+                      = f.fields_for :attendances do |att_form|
+                        %li.attendee
+                          %span.name 
+                            =att_form.object.user.name
+                          - Attendance.host_statuses.each do |s, idx|
+                            .input-field
+                              = att_form.label :status, s.humanize
+                              = att_form.radio_button :status, s, 
+                                checked: ((s == 'present' && att_form.object.pending?) || s == att_form.object.status)
+                          .input-field
+                            = att_form.label :potential_host,  "Potential Host?"
+                            = att_form.check_box :potential_host
+                    .submit
+                      = f.submit "Save"
+                - if tt.marked_attendance?
+                  .submit.edit
+                    = form_for(tt, url: mark_tea_time_path(tt, marking: 'email', email_sent: true)) do |f|
+                      = f.submit "Submit"
+                    = form_for(tt, url: mark_tea_time_path(tt, marking: 'edit_attendance')) do |f|
+                      = f.submit "Edit"
+            / - else
+            /   %p 
+            /     You're all done! Now might be a great time to 
+            /     =link_to "create a new tea time!", new_tea_time_path
+

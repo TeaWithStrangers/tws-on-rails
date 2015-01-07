@@ -1178,7 +1178,7 @@ a {
           &.host {
             li.tea-time {
               .row.tea-time {
-                width: 70%;
+                width: 100%;
                 float: left;
                 .host-photo {
                   display: none;
@@ -1402,13 +1402,69 @@ a {
                   }
                 }
               }
-            }
-          }
-          form.attendance {
-            clear: both;
-            ul.attendees {
-              li.attendee {
+              h3.tasks {
+                padding: .5em 0 0;
+                margin-bottom: .5em;
+                .fsI;
+                .bold;
+                border-bottom: 4px solid @black;
+              }
+              .col-head {
+                width: 20%;
+                float: left;
+                .bold;
+                .fs;
+                text-align: center;
+                &.filler {
+                  width: 20%;
+                }
+              }
+              form.attendance {
                 clear: both;
+                ul.attendees {
+                  li.attendee {
+                    clear: both;
+                    overflow: auto;
+                    span.name {
+                      .fsI;
+                      float: left;
+                      width: 20%;
+                    }
+                    .input-field {
+                      width: 20%;
+                      float: left;
+                      position: relative;
+                      text-align: center;
+                      padding: 4px; 
+                      label {
+                        display: none;
+                      }
+                      input[type="radio"] {
+                        position: relative;
+                      }
+                    }
+                  }
+                }
+              }
+              .submit {
+                padding-top: 1em;
+                input[type="submit"] {
+                  .button(@green);
+                  .fsII;
+                  padding: .15em 1em;
+                  float: right;
+                  &[value="Edit"] {
+                    margin-right: 1em;
+                  }
+                }
+                &.edit {
+                  padding-top: 0;
+                }
+              }
+            }
+            &.tasks {
+              li.tea-time {
+                border-bottom: 0;
               }
             }
           }
