@@ -30,17 +30,18 @@
                         .col-head.pot-host
                           Potential Host
                       = f.fields_for :attendances do |att_form|
-                        %li.attendee
-                          %span.name
-                            =att_form.object.user.name
-                          - Attendance.host_statuses.each do |s, idx|
+                        - if !att_form.object.waiting_list?
+                          %li.attendee
+                            %span.name
+                              =att_form.object.user.name
+                            - Attendance.host_statuses.each do |s, idx|
+                              .input-field
+                                = att_form.label :status, s.humanize
+                                = att_form.radio_button :status, s,
+                                  checked: ((s == 'present' && att_form.object.pending?) || s == att_form.object.status)
                             .input-field
-                              = att_form.label :status, s.humanize
-                              = att_form.radio_button :status, s,
-                                checked: ((s == 'present' && att_form.object.pending?) || s == att_form.object.status)
-                          .input-field
-                            = att_form.label :potential_host,  "Potential Host?"
-                            = att_form.check_box :potential_host
+                              = att_form.label :potential_host,  "Potential Host?"
+                              = att_form.check_box :potential_host
                     .submit
                       = f.submit "Done!"
 
