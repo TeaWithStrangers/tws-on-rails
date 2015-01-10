@@ -51,10 +51,10 @@ feature 'Hosting: ' do
         choose "tea_time_attendances_attributes_#{counter}_status_#{status}".to_sym
         counter += 1
       end
-      click_button "Mark Attendance"
+      click_button "Done!"
       expect(page).to have_content "Now send an email"
       expect(@past_tt.reload.followup_status).to eq("marked_attendance")
-      click_button "Mark Complete"
+      click_button "All sent!"
       expect(@past_tt.reload.followup_status).to eq("completed")
     end
   end

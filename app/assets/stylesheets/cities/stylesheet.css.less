@@ -1179,7 +1179,6 @@ a {
             li.tea-time {
               .row.tea-time {
                 width: 100%;
-                float: left;
                 .host-photo {
                   display: none;
                 }
@@ -1408,15 +1407,33 @@ a {
                 .fsI;
                 .bold;
                 border-bottom: 4px solid @black;
+                &.incomplete {
+                  padding-left: 2.25em;
+                  background: asset-url('empty-check.png') no-repeat .5em 66%;
+                  background-size: 1.25em;
+                }
+                &.complete {
+                  padding-left: 2.25em;
+                  background: asset-url('full-check.png') no-repeat .5em 66%;
+                  background-size: 1.25em;
+                  display: block;
+                }
               }
-              .col-head {
-                width: 20%;
-                float: left;
-                .bold;
-                .fs;
-                text-align: center;
-                &.filler {
+              p.subtask {
+                .fsI;
+                line-height: 1.5;
+              }
+              .headers {
+                overflow: auto;
+                .col-head {
                   width: 20%;
+                  float: left;
+                  .bold;
+                  .fs;
+                  text-align: center;
+                  &.filler {
+                    width: 20%;
+                  }
                 }
               }
               form.attendance {
@@ -1447,7 +1464,8 @@ a {
                 }
               }
               .submit {
-                padding-top: 1em;
+                padding: 1em 0 .5em;
+                overflow: auto;
                 input[type="submit"] {
                   .button(@green);
                   .fsII;
