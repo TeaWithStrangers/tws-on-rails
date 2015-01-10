@@ -36,10 +36,17 @@ describe TeaTimeMailer do
   end
 
   describe '#followup' do
-    let!(:mail) { TeaTimeMailer.followup(@tt).deliver }
-
-    it 'gets delivered without error' do
-      expect(ActionMailer::Base.deliveries.count).to eq 1
+    let(:statuses) { ['flake', 'no_show', 'present'] }
+    it 'sets template based on the passed in status' do
+      mails = statuses.inject({}) do |hsh, s|
+        hsh[s] = TeaTimeMailer.send(:new, 'followup', @tt, @tt.attendances, s)
+        hsh
+      end
+    #TODO: Monkeypatch `assigns` into all Mailer test contexts so we don't need
+    #to use this hack
+      mails.each do |status, mail|
+        expect(mail.view_assigns.with_indifferent_access[:template]).to eq "followup_#{status}"
+      end
     end
   end
 

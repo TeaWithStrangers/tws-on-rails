@@ -18,7 +18,6 @@
 
 function viewportWidth() { return (window.innerWidth > 0) ? window.innerWidth : screen.width; }
 
-
 $(document).scroll(function() {
   var elem = '#holidays-warning';
   var y = $(this).scrollTop();

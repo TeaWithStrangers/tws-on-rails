@@ -1178,8 +1178,7 @@ a {
           &.host {
             li.tea-time {
               .row.tea-time {
-                width: 70%;
-                float: left;
+                width: 100%;
                 .host-photo {
                   display: none;
                 }
@@ -1401,6 +1400,89 @@ a {
                     text-decoration: none;
                   }
                 }
+              }
+              h3.tasks {
+                padding: .5em 0 0;
+                margin-bottom: .5em;
+                .fsI;
+                .bold;
+                border-bottom: 4px solid @black;
+                &.incomplete {
+                  padding-left: 2.25em;
+                  background: asset-url('empty-check.png') no-repeat .5em 66%;
+                  background-size: 1.25em;
+                }
+                &.complete {
+                  padding-left: 2.25em;
+                  background: asset-url('full-check.png') no-repeat .5em 66%;
+                  background-size: 1.25em;
+                  display: block;
+                }
+              }
+              p.subtask {
+                .fsI;
+                line-height: 1.5;
+              }
+              .headers {
+                overflow: auto;
+                .col-head {
+                  width: 20%;
+                  float: left;
+                  .bold;
+                  .fs;
+                  text-align: center;
+                  &.filler {
+                    width: 20%;
+                  }
+                }
+              }
+              form.attendance {
+                clear: both;
+                ul.attendees {
+                  li.attendee {
+                    clear: both;
+                    overflow: auto;
+                    span.name {
+                      .fsI;
+                      float: left;
+                      width: 20%;
+                    }
+                    .input-field {
+                      width: 20%;
+                      float: left;
+                      position: relative;
+                      text-align: center;
+                      padding: 4px; 
+                      label {
+                        display: none;
+                      }
+                      input[type="radio"] {
+                        position: relative;
+                      }
+                    }
+                  }
+                }
+              }
+              .submit {
+                padding: 1em 0 .5em;
+                overflow: auto;
+                input[type="submit"] {
+                  .button(@green);
+                  .fsII;
+                  padding: .15em 1em;
+                  float: right;
+                  &[value="Edit"] {
+                    margin-right: 1em;
+                  }
+                }
+                &.edit {
+                  padding-top: 0;
+                }
+              }
+            }
+            &.tasks {
+              li.tea-time {
+                border-bottom: 0;
               }
             }
           }

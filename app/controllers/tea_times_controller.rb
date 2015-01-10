@@ -59,15 +59,17 @@ class TeaTimesController < ApplicationController
     @attendance.try_join
 
     if @attendance.save
-      @attendance.send_mail
-      message = @attendance.waiting_list? ? 'You\'re on the wait list! Check your email!' : "You're all set for tea time! See your email and add it to your calendar :)"
+      @attendance.queue_reminders
+      message = @attendance.waiting_list? ?
+        "You're on the wait list! Check your email for details." :
+        "You're set for tea time! Check your email and add it to your calendar :)"
       respond_to do |format|
         format.html { redirect_to profile_path, notice: message }
         format.json { @attendance }
       end
     else
       respond_to do |format|
-        format.html { redirect_to schedule_city_path(@tea_time.city), 
+        format.html { redirect_to schedule_city_path(@tea_time.city),
                       alert: "Couldn't register for that, sorry :(" }
         format.json { @attendance }
       end
