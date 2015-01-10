@@ -3,6 +3,9 @@
     =link_to "Upcoming Tea Times", profile_path
   / %li
   /   =link_to "Join Another Tea Time", schedule_city_path(current_user.home_city)
+  -if current_user.host?
+    %li
+      =link_to "After Tea Time", host_tasks_path
   %li
     =link_to "Tea Time History", history_path
   %li

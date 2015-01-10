@@ -32,4 +32,4 @@
         Maybe we become friends. Maybe not. That's cool too.
 - tts = @city.tea_times.future_until(2.weeks.from_now)
 -if tts.count > 0
-  = render partial: 'shared/tea_times', locals: {tea_times: tts.na.order(:start_time => :asc)} 
+  = render partial: 'shared/tea_times', locals: {tea_times: tts.pending.order(:start_time => :asc)} 

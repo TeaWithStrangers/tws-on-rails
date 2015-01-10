@@ -1,0 +1,14 @@
+Hey hey, 
+
+You were on the waitlist for a tea time today, and sadly (or beautifully,
+depending on how you see it :), spots didn't open in time for you to jump in.  
+
+Bad news? Tea time was probably awesome.  
+
+Good news? There are plenty where that came from. **[Grab a seat at another tea
+time here.](<%=url_for(controller: 'cities', action: 'schedule', id:
+@tea_time.city.city_code, only_path: false, utm_campaign: 'followupwaitlist',
+utm_medium: 'email', utm_content: 'schedule') %>)**  
+
+Bleep bleep bloop, 
+The Robots at Tea With Strangers
