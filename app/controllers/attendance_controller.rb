@@ -11,28 +11,33 @@ class AttendanceController < ApplicationController
 
   def mark
     @tea_time = TeaTime.find(params[:id])
-
-    case params[:marking]
-    when 'email'
-      if params[:email_sent] == 'true'
-        if @tea_time.advance_state!
-          redirect_to host_tasks_path,
-            notice: 'All done!'
-        else
-          redirect_to :back, alert: "That didn't work. Try again?"
+    respond_to do |format|
+      case params[:marking]
+      when 'email'
+        if params[:email_sent] == 'true'
+          if @tea_time.advance_state!
+            format.html { redirect_to host_tasks_path, notice: 'All done!' }
+            format.json { render json: @tea_time }
+          else
+            format.html { redirect_to :back, alert: "That didn't work. Try again?" }
+            format.json { render json: { errors: @tea_time.errors.full_messages } }
+          end
         end
+      when 'attendance'
+        tea_time_params = params.fetch(:tea_time, {}).permit!
+        if @tea_time.update!(tea_time_params) && @tea_time.advance_state!
+          format.html { redirect_to host_tasks_path, notice: 'Thanks for taking
+                        attendance! Now send an email to your attendees :)' }
+          format.json { render json: @tea_time }
+        else
+          format.html {redirect_to :back, alert: 'Uh-oh. Something went wrong.
+                       Care to try again?' }
+          format.json { render json: { errors: @tea_time.errors.full_messages } }
+        end
+      when 'edit_attendance'
+        @tea_time.update(followup_status: "pending")
+        format.html { redirect_to :back, notice: "OK, care to mark again?" }
       end
-    when 'attendance'
-      tea_time_params = params.fetch(:tea_time, {}).permit!
-      if @tea_time.update!(tea_time_params) && @tea_time.advance_state!
-        redirect_to host_tasks_path,
-          notice: 'Thanks for taking attendance! Now send an email to your attendees :)'
-      else
-        redirect_to :back, alert: 'Uh-oh. Something went wrong. Care to try again?'
-      end
-    when 'edit_attendance'
-      @tea_time.update(followup_status: "pending")
-      redirect_to :back, notice: "OK, care to mark again?"
     end
   end
 
