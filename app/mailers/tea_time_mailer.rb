@@ -36,6 +36,11 @@ class TeaTimeMailer < ActionMailer::Base
 
     @tea_time = TeaTime.find(tea_time_id)
 
+    #TODO: Remove once all past attendances are marked
+    if @tea_time.start_time < Time.new(2015, 1, 9)
+      cancel_delivery
+    end
+
     # @template is set as instance variable so it can be accessed in the
     # ActionController context and subsequently tested
     case status
