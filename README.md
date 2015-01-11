@@ -8,7 +8,7 @@
 
 This is a simple Rails app with a Postgres database.
 
-To get it set up locally, make sure you have Ruby and Postgres
+To get it set up locally, make sure you have Ruby, Postgres, and Foreman
 installed, then:
 
 
@@ -34,12 +34,9 @@ rake db:create
 # Load the schema
 rake db:schema:load
 
-# Start mailcatcher in the background
-# so that emails can be previewed at localhost:1080
-mailcatcher &
+# Run the App
 
-# Start the server
-rails s
+foreman -f Procfile-dev
 
 # For Development
 # Create some development data to play arond with
@@ -51,6 +48,5 @@ rake db:seed_dev
 #### Mail
 
 In development, all outgoing email will be intercepted by `mailcatcher`
-and will be previewable at `http://localhost:1080`.
-All you have to do is start the mailcatcher server as specified
-in the directions above (`mailcatcher &` in terminal).
+and will be previewable at `http://localhost:1080`. The mailcatcher instance is
+automatically started by the dev Procfile.

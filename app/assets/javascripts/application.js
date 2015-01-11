@@ -16,4 +16,16 @@
 //= require jquery-ui/dialog
 //= require_tree .
 
- function viewportWidth() { return (window.innerWidth > 0) ? window.innerWidth : screen.width; }
+function viewportWidth() { return (window.innerWidth > 0) ? window.innerWidth : screen.width; }
+
+$(document).scroll(function() {
+  var elem = '#holidays-warning';
+  var y = $(this).scrollTop();
+  var holidaysStart = $(elem).offset().top;
+  console.log(y);
+  if (y > holidaysStart - 875) {
+      $(elem).addClass('visible');
+  } else {
+      $(elem).removeClass('visible');
+  }
+})

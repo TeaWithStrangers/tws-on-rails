@@ -20,12 +20,12 @@ function loadModal(modalTarget) {
 }
 function closeModal() { modal.dialog('close') }
 
-function ready() {
+function modalActivation() {
   $('#login').on('click', function(evt) { 
     loadModal('/signin')(evt)
   });
 
-  $('.edit_attendance , .tea-time-scheduling').on('click', function(evt) {
+  $('.edit_attendance, .tea-time-scheduling').on('click', function(evt) {
     modal = loadModal(evt.currentTarget.href)(evt)
   });
 
@@ -36,5 +36,5 @@ function ready() {
   })
 }
 
-$(document).ready(ready)
-$(document).on('page:load', ready)
+$(document).ready(modalActivation)
+$(document).on('page:load', modalActivation)
