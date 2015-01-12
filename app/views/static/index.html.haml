@@ -29,13 +29,10 @@
         %h3.divider.with-sub
           So let's get tea!
         %h4.divider-sub
-          Get to know our beautiful hosts and their stories below. We bring tea time to cities when we know the locals are into it and we have hosts ready to go!
-      %ul.cities.multiple-hosts
-        - @cities_by_host[:many_hosts].each do |c|
-          = render partial: 'shared/city_hosts_item', locals: {city: c}
+          We bring tea time to cities when we know the locals are into it and we have hosts ready to go!
       %ul.cities.single-host
-        - @cities_by_host[:single_host].each do |c|
-          = render partial: 'shared/city_hosts_item', locals: {city: c}
+        - @cities_by_host[:hosts].each do |c|
+          = render partial: 'shared/city_hosts_item', locals: {city: c, city_class: 'single-host'}
   .upcoming.cities.row.mobilewide
     .wide
       .mobilepad
@@ -44,9 +41,8 @@
         %h4.divider-sub
           We're making sure that tea time is where you are. If any of the below is home for you, sign up so we can keep you posted when we're near!
       %ul.cities.no-host
-        //No host cities (where we'll be soon)
         - @cities_by_host[:no_hosts].each do |c|
-          = render partial: 'shared/city_hosts_item', locals: {city: c}
+          = render partial: 'shared/city_hosts_item', locals: {city: c, city_class: 'single-host'}
       .mobilepad
         %h4.divider-sub.top-margin
           If home is some place else for you and you think you'd lead the charge in bringing tea time there, 

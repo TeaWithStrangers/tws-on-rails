@@ -1,16 +1,5 @@
-- host_count = city.hosts.count
 %li{:class => "#{city.city_code}"}
   .city-bg
     %img.city-background-image{src:city.header_bg.url(:medium)}
     %a.background-link{href:city_path(city)}
-    %h3= link_to city.name, city_path(city), {class: host_count > 1 ?  nil : 'single-host'}
-  - if host_count > 0
-    .host-container
-      %ul.hosts
-        - city.hosts.each do |h|
-          %li
-            %a{href:host_city_path(city, h)}
-              .avatar-container.quarter
-                .avatar{style:"background-image: url('#{h.avatar.url(:medium)}');"}
-                  / %img.avatar-image{src:h.avatar.url(:medium)}
-              %h5.host-name= link_to h.name, host_city_path(city, h)
+      %h3= link_to city.name, city_path(city), {class: (city_class ||= nil)}
