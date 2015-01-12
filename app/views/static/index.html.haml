@@ -29,12 +29,9 @@
         %h3.divider.with-sub
           So let's get tea!
         %h4.divider-sub
-          Get to know our beautiful hosts and their stories below. We bring tea time to cities when we know the locals are into it and we have hosts ready to go!
-      %ul.cities.multiple-hosts
-        - @cities_by_host[:many_hosts].each do |c|
-          = render partial: 'shared/city_hosts_item', locals: {city: c, city_class: nil}
+          We bring tea time to cities when we know the locals are into it and we have hosts ready to go!
       %ul.cities.single-host
-        - @cities_by_host[:single_host].each do |c|
+        - @cities_by_host[:hosts].each do |c|
           = render partial: 'shared/city_hosts_item', locals: {city: c, city_class: 'single-host'}
   .upcoming.cities.row.mobilewide
     .wide
