@@ -2,23 +2,18 @@ class StatisticsController < ActiveRecord::BaseController
   respond_to :json
 
   def active_hosts
-    cities = City.all.order('id')
-
-    @statistics = []
-
-    cities.each { |city|
-
-      @hosts = city.hosts
-      @active_hosts = []
-      @hosts.each { |host|
-        if host.tea_times.where(:start_time => (Time.now.end_of_week - 2.weeks)..Time.now.end_of_week).count
-          @active_hosts << host
+    res = City.all.map do |city|
+      hosts = city.hosts
+      active_hosts = []
+      hosts.each { |host|
+        if host.tea_times.after(Time.now.end_of_week - 2.weeks).before(Time.now.end_of_week).count
+          active_hosts << host
         end
       }
 
       @statistics << {
         'stat' => "#{city.name}",
-        'value' => sprintf("%0.0f%", ((@active_hosts.count == 0 or @hosts.count == 0) ? 0 : (@active_hosts.count.to_f / @hosts.count)*100))
+        'value' => sprintf("%0.0f%", ((active_hosts.count == 0 or hosts.count == 0) ? 0 : (active_hosts.count.to_f / hosts.count)*100))
       }
     }
 
