@@ -5,26 +5,26 @@ class StatisticsController < ActiveRecord::BaseController
     res = City.all.map do |city|
       hosts = city.hosts
       active_hosts = []
-      hosts.each { |host|
+      hosts.each do |host|
         if host.tea_times.after(Time.now.end_of_week - 2.weeks).before(Time.now.end_of_week).count
           active_hosts << host
         end
-      }
+      end
 
-      @statistics << {
-        'stat' => "#{city.name}",
-        'value' => sprintf("%0.0f%", ((active_hosts.count == 0 or hosts.count == 0) ? 0 : (active_hosts.count.to_f / hosts.count)*100))
+      {
+        stat: "#{city.name}",
+        value: sprintf("%0.0f%", ((active_hosts.count == 0 or hosts.count == 0) ? 0 : (active_hosts.count.to_f / hosts.count)*100))
       }
-    }
+    end
 
-    render @statistics
+    render res
   end
 
   def hosts_by_city
     @data = []
 
     @cities = City.all.order('id').all
-    
+
     @cities.map {|city|
       @data << {
         'label' => city.name,
@@ -46,7 +46,7 @@ class StatisticsController < ActiveRecord::BaseController
     @data = []
 
     @cities = City.all.order('id').all
-    
+
     @cities.map {|city|
       @data << {
         'label' => city.name,
