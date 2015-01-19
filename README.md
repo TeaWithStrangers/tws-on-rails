@@ -6,19 +6,17 @@
 
 ### Development
 
-This is a simple Rails app with a Postgres database.
+TWS is a simple Rails+Postgres app.
 
-To get it set up locally, make sure you have Ruby, Postgres, and Foreman
+To get it set up locally, ensure you have Ruby 2.1.0 and PostgreSQL (w. headers)
 installed, then:
 
-
 ```
-git clone https://github.com/TeaWithStrangers/tws-on-rails.git tws
-cd tws
 bundle install
 
 # create a `tws` role in postgres with the
 # ability to create databases
+
 sudo -u postgres createuser tws -d
 
 # set user password to 123456 (change if desired)
@@ -50,3 +48,27 @@ rake db:seed_dev
 In development, all outgoing email will be intercepted by `mailcatcher`
 and will be previewable at `http://localhost:1080`. The mailcatcher instance is
 automatically started by the dev Procfile.
+
+# Development / Contributing
+
+Check out our [Contributing Guide](http://making.teawithstrangers.com/contributing).
+
+## Open Commit Bit
+
+TWS has an open commit bit policy: Anyone with an accepted pull request gets
+added as a repository collaborator. Please try to follow these simple rules:
+
+* Commit directly onto the master branch only for typos, improvements to the
+readme and documentation (please add `[ci skip]` to the commit message).
+
+* Create a feature branch and open a pull request early for any new
+features to get feedback.
+
+* Make sure you adhere to the general pull request rules outlined in the
+  [contributing guide](http://making.teawithstrangers.com/contributing).
+
+### Contributors
+
+We encourage everyone who contributes to Tea With Strangers' projects to add
+themselves to the [list of TWS
+teammembers](http://making.teawithstrangers.com/team/).
