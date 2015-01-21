@@ -1,0 +1,5 @@
+.intro-to-tws {
+  @include cover-photo(image-url('tea-time-table-hands-splash.jpg'),
+                       image-url('tea-time-table-hands-splash.jpg'),
+                       $null-gradient);
+}
