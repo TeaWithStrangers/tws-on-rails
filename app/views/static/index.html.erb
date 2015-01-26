@@ -1,4 +1,4 @@
-<%= render 'shared/header' %>
+<%= render partial: 'shared/header' %>
 <div class='intro-to-tws cover-photo'>
   <div class='content'>
     <div class='content-box'>
@@ -16,7 +16,4 @@
     </div>
   </div>
 </div>
-
-<% content_for(:footer) do %>
-  <p>test</p>
-<%end %>
+<%= render partial: 'shared/press_list', locals: {items: @press}%>
