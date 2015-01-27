@@ -640,11 +640,10 @@ a {
       li {
         overflow: visible;
         position: relative;
-        margin-bottom: 15px;
         .city-bg {
           width: 100%;
           clear: both;
-          height: 270px;
+          height: 200px;
           background-size: cover;
           background-position: center;
           position: relative;
@@ -679,9 +678,10 @@ a {
           .fsIV;
           text-align: center;
           text-transform: uppercase;
-          padding: 10px 10px 0;
+          padding: 10px;
           position: absolute;
           width: 100%;
+          height: 100%;
           top: 0;
           left: 0;
           z-index: 1000;
@@ -689,7 +689,14 @@ a {
             color: @white;
             text-decoration: none;
             text-shadow: 0px 0px 4px @gray;
-            padding: 10px 0;
+            &.single-host, &.no-host, &.multiple-hosts {
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              width: 100%;
+              padding: 10px;
+              .translate(-50%,-50%);
+            }
             &:hover {
               text-decoration: underline;
             }
@@ -726,18 +733,15 @@ a {
       }
       &.single-host, &.no-host {
         li {
-          width: 100%/3;
+          width: 100%/2;
           float: left;
-          &:nth-child(3n+1) { //1,4,7,...
-            padding-right: 40px/3;
+          &:nth-child(2n+1) { //1,3,5,...
+            padding-right: 40px/4;
           }
-          &:nth-child(3n+2) { //2,5,8,...
-            padding: 0 40px/6;
+          &:nth-child(2n) { //2,4,6,...
+            padding-left: 40px/4;
           }
-          &:nth-child(3n) { //3,6,9,...
-            padding-left: 40px/3;
-          }
-          &:nth-child(n+4) { // 4,5,6,...
+          &:nth-child(n+3) { // 3, 4, 5,...
             padding-top: 20px;
           }
           ul.hosts {
