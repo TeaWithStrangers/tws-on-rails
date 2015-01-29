@@ -3,3 +3,12 @@
                        image-url('tea-time-table-hands-splash.jpg'),
                        $null-gradient);
 }
+
+.what-is-tea-time {
+  @include cover-photo(image-url("home/what-is-tws-cover.png"), $gradient: $null-gradient);
+  @include padding(150px 0);
+
+  @include media($tablet) {
+    @include padding(150px 25px);
+  }
+}
