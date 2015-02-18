@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  has_and_belongs_to_many :roles
+  has_and_belongs_to_many :roles, -> { uniq }
   has_many :tea_times
   has_many :attendances
   belongs_to :home_city, class_name: 'City'
