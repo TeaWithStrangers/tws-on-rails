@@ -32,10 +32,9 @@ describe HostsController do
     end
 
     context 'user already exists' do
+      let(:user) { create(:user, email: host_email) }
       it 'should find existing user and assign a host role to it' do
         # create the user first
-        user = create(:user, email: host_email)
-
         # expect that user exists but does not have host params
         expect(user.roles.map(&:name)).not_to include("Host")
 
@@ -43,6 +42,14 @@ describe HostsController do
 
         user.reload
         expect(user.roles.map(&:name)).to include("Host")
+      end
+
+      it 'should leave the passwords of current users alone' do
+        current_pw = user.password
+        post 'create', user: params
+
+        user.reload
+        expect(user.password).to eq(current_pw)
       end
     end
 
