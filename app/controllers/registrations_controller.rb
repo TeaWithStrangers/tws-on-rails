@@ -1,9 +1,16 @@
 class RegistrationsController < Devise::RegistrationsController
   def create
-    if params[:user][:autogen]
+    signup_error_message = validate_new_user_input(params)
+    if(signup_error_message.to_s != '')
+      redirect_to :back, alert: signup_error_message
+      return
+    end
+  
+    if params[:user][:autogen] && params[:city].to_s != ''
       city = City.find(params[:city])
       user_info = GetOrCreateUser.call(params[:user], city)
-      if user_info[:new_user?] && user_info[:user].valid?
+      puts user_info
+      if user_info[:new_user?] && user_info[:user] != nil && user_info[:user].valid?
         sign_in user_info[:user]
         message = "You're set! Check your email for your new password."
         if city
@@ -11,13 +18,15 @@ class RegistrationsController < Devise::RegistrationsController
         else
           redirect_to root_path, notice: message
         end
-      elsif !user_info[:new_user?] && user_info[:user].valid?
+      elsif !user_info[:new_user?] && user_info[:user] != nil && user_info[:user].valid?
         redirect_to new_user_session_path, alert: 'You\'re already registered! Log in using the same email :)'
       else
-        redirect_to new_user_registration_path, alert: "We've made a huge mistake."
+        # redirect_to new_user_registration_path, alert: "We've made a huge mistake."
+        redirect_to :back, alert: 'We\'ve made a huge mistake.'
       end
     else
-      super
+      # super
+      redirect_to :back
     end
   end
 
@@ -40,6 +49,16 @@ class RegistrationsController < Devise::RegistrationsController
       redirect_to after_update_path_for(@user)
     else
       render "edit"
+    end
+  end
+
+  def validate_new_user_input(params)
+    if(params[:city].to_s == '')
+      error_message = 'Hey! You forgot to select a city.'
+    elsif(params[:user][:email].to_s == '')
+      error_message = 'Please enter your email.'
+    elsif(params[:user][:name].to_s == '')
+      error_message = 'What\'s your name?'
     end
   end
 
