@@ -12,15 +12,18 @@ namespace :roles do
     old_roles.each do |uid, rows|
       begin
         user = User.with_deleted.find(uid)
-        roles = rows.map {|r| Role.find(r['role_id']).name.downcase.to_sym }
+        roles = rows.map {|r| Role.find_by(id: r['role_id']) }.reject(&:nil?).map { |r|
+          r.name.downcase.to_sym
+        }
+        Rails.logger.info "Roles #{roles}"
         if !roles.empty?
           user.roles = roles
           user.save
           raise Exception unless user.reload.roles.sort == roles.sort
         end
         succeeded << user.id
-      rescue ActiveRecord::RecordNotFound
-        not_found << uid
+      rescue ActiveRecord::RecordNotFound => msg
+        not_found << [uid, msg]
       rescue Exception => msg
         failed << [uid, msg]
       end
