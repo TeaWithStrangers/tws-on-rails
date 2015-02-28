@@ -18,13 +18,17 @@ class HostsController < ApplicationController
     generated_password = Devise.friendly_token.first(8)
 
     @host = User.find_or_initialize_by(email: host_params[:email])
+    user_exists = @host.persisted?
     @host.assign_attributes(host_params)
     @host.roles << :host
-    @host.password = generated_password
+
+    if !user_exists
+      @host.password = generated_password
+    end
 
     if @host.save
       [current_user, @host].each do |user|
-        UserMailer.delay.registration(user, generated_password)
+        UserMailer.delay.host_registration(user, user_exists ? nil : generated_password)
       end
       redirect_to profile_path, notice: 'New host successfully created and emailed!'
     else
