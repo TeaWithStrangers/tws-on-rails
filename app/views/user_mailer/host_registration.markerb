@@ -1,13 +1,31 @@
 WELCOME WELCOME!
 
-We are thrillled to have you on as a host for Tea With Strangers in <%= @user.home_city.name %>. A few quick things to get you started:
+We are thrillled to have you on as a host for Tea With Strangers in <%=
+@user.home_city.name %>. A few quick things to get you started:
 
-1. Log into your freshly minted host account on the website. Your username is **<%= @user.email %>** and password is **<%= @password %>**. 
-2. Review your beautiful profile on [your Account Settings](http://www.teawithstrangers.com/users/edit). Make yourself look and sound friendly, huggable, and most importantly, like your awesome self.
-3. [Put up your first two tea times here](http://www.teawithstrangers.com/tea_times/new)!
-4. Join the [TWS Worldwide facebook group](https://www.facebook.com/groups/twsWORLDWIDE/). Full of the folks that make this whole shebang happen. 
-5. Introduce yourself on the group and give people the lowdown of what makes you weird.
-6. Make friends with the other hosts. Ask one the fellow locals to tea. Or drinks. Or dancing. They're all fantastic people. 
+1. Log into your freshly minted host account on the website. Your username is
+**<%= @user.email %>** 
+
+<% if @password %>
+2. If you haven't used TWS before, we also created a password for you. It's: is ' <%= @password %> '. 
+<% end %>
+
+3. Review your beautiful profile on [your Account
+Settings](http://www.teawithstrangers.com/users/edit). Make yourself look and
+sound friendly, huggable, and most importantly, like your awesome self.  
+
+4. [Put up your first two tea times
+here](http://www.teawithstrangers.com/tea_times/new)!  
+
+5. Join the [TWS Worldwide facebook
+group](https://www.facebook.com/groups/twsWORLDWIDE/). Full of the folks that
+make this whole shebang happen.  
+
+6. Introduce yourself on the group and give people the lowdown of what makes you
+weird.  
+
+7. Make friends with the other hosts. Ask one the fellow locals to tea. Or
+drinks. Or dancing.  They're all fantastic people. 
 
 That's it for now! Make today awesome!
 
