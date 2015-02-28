@@ -69,9 +69,9 @@ end
 
 # Random debug tools
 group :development, :test do
-  gem 'debugger'
+  gem 'byebug'
   gem 'pry-rails'
-  gem 'pry-debugger'
+  gem 'pry-byebug'
   gem 'pry-stack_explorer'
   gem 'rspec-rails', '~> 2.14.2'
   gem 'capybara'
