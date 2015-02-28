@@ -1,14 +1,13 @@
 class User < ActiveRecord::Base
   acts_as_paranoid
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  has_and_belongs_to_many :roles
   has_many :tea_times
   has_many :attendances
   belongs_to :home_city, class_name: 'City'
-
   has_attached_file :avatar, styles: { medium: "300x300", thumb: "100x100", landscape: "500"}, default_url: "/assets/missing.jpg"
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
@@ -20,7 +19,9 @@ class User < ActiveRecord::Base
 
   before_destroy :flake_future
 
-  scope :hosts, -> { joins(:roles).where(roles: {name: 'Host'}) }
+  bitmask :roles, :as => [:host, :admin], :null => false
+  alias_method :role?, :roles?
+  scope :hosts, -> { with_roles :host }
 
   def twitter_url
     "https://twitter.com/#{twitter}" if twitter
@@ -43,16 +44,12 @@ class User < ActiveRecord::Base
     "\"#{self.name}\" <#{self.email}>"
   end
 
-  def role?(role)
-    return !! self.roles.find_by_name(role.to_s.camelize)
-  end
-
-  Role::VALID_ROLES.each do |role|
-    define_method("#{role.downcase}?".to_sym) { role? role }
+  def admin?
+    role? :admin
   end
 
   def host?
-    (admin? || role?(:Host))
+    (admin? || role?(:host))
   end
 
   def attendances_for(tt_period)
