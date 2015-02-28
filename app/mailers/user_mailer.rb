@@ -20,4 +20,18 @@ class UserMailer < ActionMailer::Base
            format.html { render template }
          end
   end
+
+  def host_registration(user, password)
+    sendgrid_category "Host Registration"
+
+    @user = User.find(user)
+    @password = password
+
+    mail(from: "\"Ankit at Tea With Strangers\" <ankit@teawithstrangers.com>",
+         to: @user.email,
+         subject: "Welcome to The Family") do |format|
+           format.text
+           format.html
+         end
+  end
 end
