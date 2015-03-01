@@ -44,7 +44,6 @@
                               = att_form.check_box :potential_host
                     .submit
                       = f.submit "Done!"
-
                   %h3.tasks.email.incomplete Send Thank You Email
                 - if tt.marked_attendance?
                   %h3.tasks.attendance.complete Attendance / Host Referrals
@@ -52,7 +51,6 @@
                     = form_for(tt, url: mark_tea_time_path(tt, marking: 'edit_attendance')) do |f|
                       = f.submit "Edit attendance"
                   %h3.tasks.email.incomplete Send Thank You Email
-                  / We need to link the 'Email all' bit here for the first sentence
                   .subtask-container
                     %p.subtask
                       = link_to "Click here to email your attendees.", "mailto:#{tt.attendee_emails(filter: ->(x) { x.flake? || x.no_show?})}"
