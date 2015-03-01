@@ -1,19 +1,12 @@
 class User < ActiveRecord::Base
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
 
   include Usable
   acts_as_paranoid
 
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-<<<<<<< HEAD
-  devise :database_authenticatable, :registerable, :confirmable,
-         :recoverable, :rememberable, :trackable, :validatable
-
-=======
-  has_and_belongs_to_many :roles
->>>>>>> fbbd494... User methods relating to confirmable work; routes created
   has_many :tea_times
   has_many :attendances
   belongs_to :home_city, class_name: 'City'
