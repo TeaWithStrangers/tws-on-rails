@@ -67,7 +67,6 @@ Rails.application.routes.draw do
     post '/mail' => 'admin#send_mail'
   end
 
-  get '/host' => 'hosts#new', as: :new_host
   get '/host/new' => 'hosts#new', as: :new_host
   post '/host' => 'hosts#create', as: :create_host
   
