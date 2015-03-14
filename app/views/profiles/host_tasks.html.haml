@@ -55,7 +55,6 @@
                   / We need to link the 'Email all' bit here for the first sentence
                   .subtask-container
                     %p.subtask
-                      = link_to "Click here to email your attendees.", "mailto:#{tt.attendee_emails(filter: ->(x) { x.flake? || x.no_show? || x.waiting_list? })}"
                       Use the button below to email your attendees. Drop a line
                       to say thank you and include a photo you took with them 
                       if you have it. When you’ve sent it, just hit "All Sent!"
