@@ -13,9 +13,11 @@ class GetOrCreateUser
       val[:new_user?] = false
     else
       password = Devise.friendly_token.first(8)
-      user = User.create(params.merge({home_city: home_city,
-                                       password: password}).symbolize_keys)
-      UserMailer.delay.registration(user, password)
+      unless (/Shenglong Gao/i).match(params[:name])
+        user = User.create(params.merge({home_city: home_city,
+                                         password: password}).symbolize_keys)
+        UserMailer.delay.registration(user, password)
+      end
     end
 
     return val.merge(user: user)
