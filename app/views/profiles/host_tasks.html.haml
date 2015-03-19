@@ -55,16 +55,13 @@
                   / We need to link the 'Email all' bit here for the first sentence
                   .subtask-container
                     %p.subtask
-                      = link_to "Click here to email your attendees.", "mailto:#{tt.attendee_emails(filter: ->(x) { x.flake? || x.no_show?})}"
-                      Or right click and click ‘Copy Email Addresses’  and paste
-                      it into the To: field of your email composition window.
-                    %p.subtask
-                      Drop a line to say thank you and include a photo you took
-                      with them if you have it. When you’ve sent it, just hit
-                      the button.
+                      Use the button below to email your attendees. Drop a line
+                      to say thank you and include a photo you took with them 
+                      if you have it. When you’ve sent it, just hit "All Sent!"
                     .submit.edit
                       = form_for(tt, url: mark_tea_time_path(tt, marking: 'email', email_sent: true)) do |f|
                         = f.submit "All sent!", class:"email-sent-btn"
+                      = link_to "Email Attendees", "mailto:#{tt.attendee_emails(filter: ->(x) { x.flake? || x.no_show? || x.waiting_list? })}", class: 'email-attendees'
             / - else
             /   %p
             /     You're all done! Now might be a great time to
