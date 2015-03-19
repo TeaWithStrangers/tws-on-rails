@@ -2,4 +2,4 @@
 - if att ||= nil
   .controls
     =link_to "Cancel my spot", show_attendance_tea_time_path(tea_time, att), class: 'left edit_attendance'
-    =link_to "Email Host", "mailto: #{tea_time.host.email}?subject=Tea%20Time%20Question", :class => "email-host right"
+    =link_to "Email Host", "mailto:#{tea_time.host.email}?subject=Tea%20Time%20Question", :class => "email-host right"
