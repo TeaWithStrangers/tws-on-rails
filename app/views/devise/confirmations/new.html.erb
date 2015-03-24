@@ -1,6 +1,6 @@
 <h2>Account Activation</h2>
 
-<%= form_for resource, :as => resource_name, :url => update_user_confirmation_path, :html => {:method => 'patch'}, :id => 'activation-form' do |f| %>
+<%= form_for resource, as: resource_name, url: update_user_confirmation_path, html: {method: 'patch'}, id: 'activation-form' do |f| %>
   <%= devise_error_messages! %>
   <fieldset>
     <legend>Account Activation<% if resource.name %> for <%= resource.name %><% end %></legend>
