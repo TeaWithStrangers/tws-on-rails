@@ -18,8 +18,8 @@ describe HostsController do
       }
     end
 
-    context 'user does not exist' do
-      it 'should create a new user and assign a host to it' do
+    context 'if user does not exist' do
+      it 'create a new user and assign a host to it' do
         # expect that user doesn't exist
         expect(User.find_by(email: host_email)).to be_nil
         # create host

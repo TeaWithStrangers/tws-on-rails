@@ -20,5 +20,10 @@ describe GetOrCreateUser do
       second = GetOrCreateUser.call(params, city)
       expect(second[:new_user?]).to eq false
     end
+
+    it 'should allow home_city to be nil' do
+      third = GetOrCreateUser.call(params.merge({home_city: city}).symbolize_keys, nil)
+      expect(third[:user].home_city).to eq city
+    end
   end
 end
