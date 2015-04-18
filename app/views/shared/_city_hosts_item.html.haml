@@ -1,5 +1,4 @@
 %li{:class => "#{city.city_code}"}
-  .city-bg
-    %img.city-background-image{src:city.header_bg.url(:medium)}
+  .city-bg.some{:style => "background-image: url(\"#{city.header_bg.url(:medium)}\");"}
     %a.background-link{href:city_path(city)}
       %h3= link_to city.name, city_path(city), {class: (city_class ||= nil)}
