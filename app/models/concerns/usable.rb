@@ -1,12 +1,20 @@
 module Usable
   # Devise Methods
   def password_required?
+    super if confirmed?
     # Password is required if it is being set, but not for new records
     if !persisted? 
       false
     else
       !password.nil? || !password_confirmation.nil?
     end
+  end
+
+  def password_match?
+    self.errors[:password] << "can't be blank" if password.blank?
+    self.errors[:password_confirmation] << "can't be blank" if password_confirmation.blank?
+    self.errors[:password_confirmation] << "does not match password" if password != password_confirmation
+    password == password_confirmation && !password.blank?
   end
 
   # new function to set the password without knowing the current password used in our confirmation controller. 

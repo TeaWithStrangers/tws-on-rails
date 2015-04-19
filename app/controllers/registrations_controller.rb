@@ -50,9 +50,13 @@ class RegistrationsController < Devise::RegistrationsController
       params[:user][:password].present?
   end
 
-  private
+  protected
+    def after_update_path_for(resource)
+      edit_user_registration_path
+    end
 
-  def user_params
-    params[:user].permit(:name, :email, :home_city_id)
-  end
+  private
+    def user_params
+      params[:user].permit(:name, :email, :home_city_id)
+    end
 end
