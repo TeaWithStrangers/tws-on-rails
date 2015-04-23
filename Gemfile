@@ -61,11 +61,7 @@ gem 'unicorn', group: :production
 # gem 'capistrano-rails', group: :development
 
 # Dev Gems
-group :development do
-  gem 'hirb'
-  gem 'spring'
-  gem 'mailcatcher'
-end
+gem 'spring', group: :development
 
 # Random debug tools
 group :development, :test do
