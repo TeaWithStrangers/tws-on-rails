@@ -1,10 +1,11 @@
 class User < ActiveRecord::Base
-  acts_as_paranoid
-
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  include Usable
+  acts_as_paranoid
 
   has_many :tea_times
   has_many :attendances
@@ -18,6 +19,8 @@ class User < ActiveRecord::Base
   validates_with Validators::FacebookUrlValidator
   validates_with Validators::TwitterHandleValidator
 
+  #We want to send our own confirmation link
+  before_create :skip_confirmation_notification!
   before_destroy :flake_future
 
   bitmask :roles, :as => [:host, :admin], :null => false

@@ -80,10 +80,11 @@ GEM
     delayed_job_active_record (4.0.3)
       activerecord (>= 3.0, < 5.0)
       delayed_job (>= 3.0, < 4.1)
-    devise (3.2.4)
+    devise (3.4.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 3.2.6, < 5)
+      responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
@@ -207,6 +208,8 @@ GEM
       json (~> 1.4)
     redcarpet (3.2.2)
     ref (1.0.5)
+    responders (1.1.2)
+      railties (>= 3.2, < 4.2)
     rest-client (1.7.3)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
@@ -228,6 +231,7 @@ GEM
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
     sendgrid (1.2.0)
+      json
       json
     sexp_processor (4.4.5)
     shoulda-matchers (2.8.0)
@@ -306,7 +310,7 @@ DEPENDENCIES
   coveralls
   delayed_job (~> 4.0.1)
   delayed_job_active_record (~> 4.0.1)
-  devise (~> 3.2.4)
+  devise (~> 3.4.x)
   factory_girl (~> 4.4)
   factory_girl_rails
   haml-rails (~> 0.5)

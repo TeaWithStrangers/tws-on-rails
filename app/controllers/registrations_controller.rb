@@ -2,7 +2,9 @@ class RegistrationsController < Devise::RegistrationsController
   def create
     if params[:user][:autogen]
       city = City.find(params[:city])
-      user_info = GetOrCreateUser.call(params[:user], city)
+
+      user_info = GetOrCreateUser.call(user_params, city)
+
       if user_info[:new_user?] && user_info[:user].valid?
         sign_in user_info[:user]
         message = "You're set! Check your email for your new password."
@@ -47,4 +49,14 @@ class RegistrationsController < Devise::RegistrationsController
     user.email != params[:user][:email] ||
       params[:user][:password].present?
   end
+
+  protected
+    def after_update_path_for(resource)
+      edit_user_registration_path
+    end
+
+  private
+    def user_params
+      params[:user].permit(:name, :email, :home_city_id)
+    end
 end
