@@ -119,6 +119,7 @@ class TeaTime < ActiveRecord::Base
       e.dtstart = Icalendar::Values::DateTime.new tt.start_time, tzid: tt.tzid
       e.dtend = Icalendar::Values::DateTime.new tt.end_time, tzid: tt.tzid
       e.summary = "Tea time, hosted by #{tt.host.name}"
+      e.location = tt.location
       #FIXME: Come back to this with fresh eyes
       e.organizer = Icalendar::Values::CalAddress.new("mailto:#{tt.host.email}", 'CN' => tt.host.name)
     end
