@@ -25,7 +25,7 @@ feature 'Signing In & Up' do
 
   scenario 'with an already created user account from a registration form' do
     user = create(:user)
-    sign_up_with(user.name, user.email)
+    sign_up_with(user.nickname, user.email)
     #Should redirect to login page with an alert
     expect(current_path).to eq new_user_session_path
     #TODO: Add check for Flash message once it's merged
@@ -44,7 +44,7 @@ feature 'Registered User' do
       visit city_path(@user.home_city)
       expect(page.status_code).to eq(200)
       click_link('5 spots left')
-      expect(page).to have_content @host.name
+      expect(page).to have_content @host.nickname
       click_button 'Confirm'
       expect(@user.attendances.map(&:tea_time)).to include @tt
     end
@@ -53,7 +53,7 @@ feature 'Registered User' do
       sign_out
       visit city_path(@user.home_city)
       click_link('5 spots left')
-      fill_in :name, with:  @user.name
+      fill_in 'tea_time_nickname', with:  @user.name
       fill_in :email, with: @user.email
       click_button 'Confirm'
       expect(current_path).to eq new_user_session_path
@@ -114,7 +114,7 @@ end
 private
   def sign_up_with(name, email, opts = nil)
     visit root_path
-    fill_in 'user_name', with: name
+    fill_in 'user_nickname', with: name
     fill_in 'user_email', with: email
     select(City.first.name, from: 'city')
     click_button "Let's Get Tea"
