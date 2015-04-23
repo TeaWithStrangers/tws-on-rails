@@ -17,5 +17,3 @@
         =link_to("Schedule tea time", schedule_city_path(@city))
       -else
         =link_to("Schedule tea time", schedule_city_path(current_user.home_city))
-    %h5.logout
-      =link_to "If you're not #{current_user.name}, click here and sign up yourself!", destroy_user_session_path, method: :delete
