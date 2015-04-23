@@ -7,11 +7,11 @@ We are thrillled to have you on as a host for Tea With Strangers in <%=
 **<%= @user.email %>** 
 
 <% if @password %>
-2. If you haven't used TWS before, we also created a password for you. It's: is ' <%= @password %> '. 
+2. If you haven't used TWS before, we also created a password for you. It is ' <%= @password %> '. 
 <% end %>
 
 3. Review your beautiful profile on [your Account
-Settings](http://www.teawithstrangers.com/users/edit). Make yourself look and
+Settings](http://www.teawithstrangers.com/users/edit). Make sure you look and
 sound friendly, huggable, and most importantly, like your awesome self.  
 
 4. [Put up your first two tea times
@@ -30,4 +30,6 @@ drinks. Or dancing.  They're all fantastic people.
 That's it for now! Make today awesome!
 
 Bleep bleep bloop,  
-The Robots at Tea With Strangers
+The Robots at Tea With Strangers  
+
+P.S. Here's a [quick guide of how the site works](https://www.dropbox.com/s/tniodufu27qb1i8/TWS_Site_HowTos.md?dl=0), from changing your profile to reminder emails:
