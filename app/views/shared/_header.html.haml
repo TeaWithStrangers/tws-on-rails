@@ -1,11 +1,11 @@
 %nav.header
   %h1.logo= link_to 'Tea With Strangers', root_path
   %ul.nav-list
-    %li= link_to "Places", cities_path
+    %li= link_to "Cities", cities_path
     %li= link_to "Stories", stories_path
     %li= link_to "Questions", questions_path
     %li= link_to "Hosting", hosting_path
 
-    %li 
+    %li
       =link_to_if current_user.nil?, 'Login', root_path do
         = link_to current_user.name, users_path(current_user.id)
