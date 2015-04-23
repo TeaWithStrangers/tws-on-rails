@@ -26,10 +26,8 @@ class HostsController < ApplicationController
       @host.password = generated_password
     end
 
-    if @host.save!
-      [current_user, @host].each do |user|
-        UserMailer.delay.host_registration(user, user_exists ? nil : generated_password)
-      end
+    if @host.save
+      UserMailer.delay.host_registration(@host, user_exists ? nil : generated_password)
       redirect_to profile_path, notice: 'New host successfully created and emailed!'
     else
       redirect_to new_host_path, alert: 'New host not created :/'
