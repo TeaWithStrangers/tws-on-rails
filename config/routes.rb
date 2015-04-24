@@ -48,18 +48,20 @@ Rails.application.routes.draw do
   scope(path: 'admin')  do
     get '/ghost'          => 'admin#find'
     post '/ghost'         => 'admin#ghost'
+
     get '/overview'       => 'admin#overview'
     get '/overview/hosts' => 'admin#host_overview'
     get '/users'          => 'admin#users'
+
     get '/mail'           => 'admin#write_mail'
     post '/mail'          => 'admin#send_mail'
+
+    get '/host'   => 'hosts#new',     as: :new_host
+    post '/host'  => 'hosts#create',  as: :create_host
   end
 
-  get '/host/new' => 'hosts#new', as: :new_host
-  post '/host' => 'hosts#create', as: :create_host
-
   scope(path: 'profile') do
-    match ''        => 'profiles#show',       as: :profile, via: :get
+    get '/'        => 'profiles#show',       as: :profile, via: :get
     get '/history'  => 'profiles#history',    as: :history
     get '/tasks'    => 'profiles#host_tasks', as: :host_tasks
   end
