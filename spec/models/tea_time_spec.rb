@@ -99,7 +99,7 @@ describe TeaTime do
 
     it 'should remove items matching the given filter proc' do
       expect(@tea_time.attendees(filter: ->(a) { a.flake? })).not_to include(@att_flake.user)
-    end 
+    end
 
     describe '.attendee_emails' do
       it 'should concatenate email addresses of attendees' do
@@ -135,18 +135,31 @@ describe TeaTime do
       @tea_time = TeaTime.new
     end
 
+    describe 'start and end on the same day' do
+      let(:start_time) { DateTime.new(2014,1,1, 9, 0) }
+      describe 'start and end in same meridians' do
+        it 'includes meridian at end of time period' do
+          @tea_time.stub(start_time: start_time, duration: 1)
+          expect(@tea_time.friendly_time).to include("9-10am")
+        end
+      end
+      describe 'start and end in different meridians' do
+        it 'includes meridian for both start and end time' do
+          @tea_time.stub(start_time: start_time, duration: 4)
+          expect(@tea_time.friendly_time).to include("9am-1pm")
+        end
+      end
+    end
+
     it 'should only display mintues if tea time does not begin/end on the hour' do
-      @tea_time.stub(start_time: DateTime.new(2014,1,1, 12, 30),
-                    duration: 2)
+      @tea_time.stub(start_time: DateTime.new(2014,1,1, 12, 30), duration: 2)
       expect(@tea_time.friendly_time).to include("12:30-2:30pm")
     end
 
     it 'should not display mintues if tea time does begin/end on the hour' do
-      @tea_time.stub(start_time: DateTime.new(2014,1,1,12),
-                    duration: 2)
+      @tea_time.stub(start_time: DateTime.new(2014,1,1,12),duration: 2)
       expect(@tea_time.friendly_time).not_to include(":")
       expect(@tea_time.friendly_time).to include("12-2pm")
-
     end
 
     it 'should display minutes for only one of start/end if only one of start/end is not on the hour' do
@@ -171,7 +184,7 @@ describe TeaTime do
       u = create(:user, :admin)
       a = Ability.new(u)
       tt = create(:tea_time)
-      
+
       a.should be_able_to(:edit, tt)
     end
 
@@ -181,7 +194,7 @@ describe TeaTime do
       a = Ability.new(u)
       a2 = Ability.new(u2)
       tt = create(:tea_time, host: u)
-      
+
       a.should be_able_to(:edit, tt)
       a2.should_not be_able_to(:edit, tt)
     end
