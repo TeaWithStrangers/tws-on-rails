@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  namespace :api do
+    namespace :v1 do
+      get 'about', to: 'about#show'
+    end
+  end
 
   root 'static#index'
 
