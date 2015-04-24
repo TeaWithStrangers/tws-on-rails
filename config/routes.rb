@@ -3,16 +3,15 @@ Rails.application.routes.draw do
   root 'static#index'
 
   # Static Landing, FAQ Pages
-  get '/stories'        => 'static#stories',        as: :stories
-  get '/questions'      => 'static#questions',      as: :questions
-  get '/hosting'        => 'static#hosting',        as: :hosting
   get '/about'          => 'static#about',          as: :about
-  get '/internproject'  => 'static#internproject',  as: :internproject
   get '/birthdays'      => 'static#birthdays',      as: :birthdays
+  get '/hosting'        => 'static#hosting',        as: :hosting
+  get '/internproject'  => 'static#internproject',  as: :internproject
   get '/openhouse'      => 'static#openhouse',      as: :openhouse
+  get '/questions'      => 'static#questions',      as: :questions
+  get '/stories'        => 'static#stories',        as: :stories
 
-  devise_for :users, :controllers => {:registrations => "registrations"}, :skip => [:sessions]
-
+  # Devise and Registration Routes
   devise_for :users, :controllers => {
     :registrations => "registrations",
     :confirmations => "confirmations"
