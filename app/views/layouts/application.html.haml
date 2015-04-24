@@ -8,6 +8,7 @@
     - if content_for?(:head)
       = yield(:head)
     - else
+      %meta{:property => "fb:admins", :content => "1362330050"}
       %meta{:property => "og:url", :content => "http://teawithstrangers.com"}
       %meta{:property => "og:type", :content => "website"}
       %meta{:property => "og:title", :content => "Tea With Strangers"}
