@@ -6,6 +6,10 @@ describe TeaTime do
     @future_tt = create(:tea_time)
   end
 
+  it 'should belong to the host' do
+    subject.should belong_to(:host)
+  end
+
   describe '.start_time' do
     before(:all) do
       @city_pst = create(:city)
@@ -193,8 +197,8 @@ describe TeaTime do
       u2 = create(:user, :host)
       a = Ability.new(u)
       a2 = Ability.new(u2)
-      tt = create(:tea_time, host: u)
 
+      tt = create(:tea_time, host: u)
       a.should be_able_to(:edit, tt)
       a2.should_not be_able_to(:edit, tt)
     end
