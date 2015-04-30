@@ -34,7 +34,7 @@ rake db:schema:load
 
 # Run the App
 
-foreman -f Procfile-dev
+foreman start -f Procfile-dev
 
 # For Development
 # Create some development data to play arond with
