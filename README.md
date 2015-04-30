@@ -8,7 +8,7 @@
 
 TWS is a simple Rails+Postgres app.
 
-To get it set up locally, ensure you have Ruby 2.1.0 and PostgreSQL (w. headers)
+To get it set up locally, ensure you have Ruby 2.1.5 and PostgreSQL (w. headers)
 installed, then:
 
 ```
