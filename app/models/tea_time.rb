@@ -6,7 +6,7 @@ class TeaTime < ActiveRecord::Base
   validate :attendance_marked?, if: :occurred?
 
   belongs_to :city
-  belongs_to :host, :class_name => 'User', :foreign_key => 'user_id'
+  belongs_to :host, class_name: 'User'
 
   MAX_ATTENDEES = 5
   has_many :attendances, dependent: :destroy
