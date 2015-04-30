@@ -4,7 +4,7 @@ FactoryGirl.define do
     association :host, factory: [:user, :host]
     start_time DateTime.now.midnight + 2.days + 12.hours
     duration 2
-    ignore {
+    transient {
       present_count 0
       attendee_count 0
       waitlist_count 0
@@ -21,33 +21,33 @@ FactoryGirl.define do
     end
 
     trait :attended do
-      ignore { attendee_count 3 }
+      transient { attendee_count 3 }
     end
 
     trait :was_attended do
-      ignore { present_count 3 }
+      transient { present_count 3 }
     end
 
     trait :attended_flakes do
-      ignore {
+      transient {
         attendee_count 3
         flake_count 2
       }
     end
 
     trait :full do
-      ignore { attendee_count 5 }
+      transient { attendee_count 5 }
     end
 
     trait :full_waitlist do
       full
-      ignore {
+      transient {
         waitlist_count 2
       }
     end
 
     trait :empty_waitlist do
-      ignore {
+      transient {
         waitlist_count 2
       }
     end
@@ -56,7 +56,7 @@ FactoryGirl.define do
       past
       was_attended
 
-      ignore {
+      transient {
         flake_count 2
         waitlist_count 1
         no_show_count 1

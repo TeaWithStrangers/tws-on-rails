@@ -53,18 +53,28 @@ class TeaTime < ActiveRecord::Base
   end
 
   def friendly_time
-    start_t = start_time
-    end_t = (start_t+duration.hours)
-    date = start_t.strftime("%a, %b %d, %Y").strip
-    meridian = end_t.strftime("%P")
+    start_t         = start_time
+    end_t           = start_t + duration.hours
+    start_meridian  = start_t.strftime("%P")
+    end_meridian    = end_t.strftime("%P")
 
-    startT = start_t.strftime("%-l:%M")
-    endT = end_t.strftime("%-l:%M")
+    date            = start_t.strftime("%a, %b %d, %Y").strip
+
+
+    startT    = start_t.strftime("%-l:%M")
+    endT      = end_t.strftime("%-l:%M")
+
     [startT, endT].each {|ft|
       ft.gsub!(":00", "")
     }
 
-    "#{date}, #{startT}-#{endT}#{meridian}"
+    timestamp = if start_meridian.match(end_meridian)
+      "#{startT}-#{endT}#{end_meridian}"
+    else
+      "#{startT}#{start_meridian}-#{endT}#{end_meridian}"
+    end
+
+    return "#{date}, #{timestamp}"
   end
 
   def spots_remaining
@@ -119,6 +129,7 @@ class TeaTime < ActiveRecord::Base
       e.dtstart = Icalendar::Values::DateTime.new tt.start_time, tzid: tt.tzid
       e.dtend = Icalendar::Values::DateTime.new tt.end_time, tzid: tt.tzid
       e.summary = "Tea time, hosted by #{tt.host.name}"
+      e.location = tt.location
       #FIXME: Come back to this with fresh eyes
       e.organizer = Icalendar::Values::CalAddress.new("mailto:#{tt.host.email}", 'CN' => tt.host.name)
     end
