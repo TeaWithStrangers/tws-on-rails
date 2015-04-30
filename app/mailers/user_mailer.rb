@@ -27,7 +27,7 @@ class UserMailer < ActionMailer::Base
     @user = User.find(user)
     @password = password
 
-    mail(from: "\"Ankit at Tea With Strangers\" <ankit@teawithstrangers.com>",
+    mail(from: "\"The Robots at Tea With Strangers\" <sayhi@teawithstrangers.com>",
          to: @user.email,
          subject: "Welcome to The Family") do |format|
            format.text

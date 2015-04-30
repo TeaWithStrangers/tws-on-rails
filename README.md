@@ -47,7 +47,8 @@ rake db:seed_dev
 
 In development, all outgoing email will be intercepted by `mailcatcher`
 and will be previewable at `http://localhost:1080`. The mailcatcher instance is
-automatically started by the dev Procfile.
+automatically started by the dev Procfile. You'll need to run `gem install mailcatcher`
+though, since it's not part of the Gemfile.
 
 # Development / Contributing
 

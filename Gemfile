@@ -7,9 +7,6 @@ gem 'rails', '4.1.1'
 
 gem 'pg'
 
-# Production monitoring
-gem 'newrelic_rpm'
-
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
@@ -55,17 +52,16 @@ gem 'cancan', '~> 1.6.10'
 gem 'bcrypt', '~> 3.1.7'
 
 # Use unicorn as the app server
-gem 'unicorn', group: :production
+group :production do
+  gem 'unicorn'
+  gem 'newrelic_rpm'
+end
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
 # Dev Gems
-group :development do
-  gem 'hirb'
-  gem 'spring'
-  gem 'mailcatcher'
-end
+gem 'spring', group: :development
 
 # Random debug tools
 group :development, :test do
