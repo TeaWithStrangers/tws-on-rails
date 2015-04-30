@@ -17,7 +17,7 @@ bundle install
 # create a `tws` role in postgres with the
 # ability to create databases
 
-sudo -u postgres createuser tws -d
+createuser tws -d
 
 # set user password to 123456 (change if desired)
 echo "ALTER USER tws PASSWORD '123456';" | sudo -u postgres psql
@@ -34,7 +34,7 @@ rake db:schema:load
 
 # Run the App
 
-foreman -f Procfile-dev
+foreman start -f Procfile-dev
 
 # For Development
 # Create some development data to play arond with
