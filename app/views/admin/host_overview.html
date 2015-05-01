@@ -1,0 +1,40 @@
+<script type="text/javascript">
+  function buildRowHost (host) {
+
+    var row = "";
+    row += "<tr>";
+    row += "<td>" + host.name + "</td>";
+    row += "<td>" + host.number_of_teatimes + "</td>";
+
+    if (host.last_teatime) {
+      row += "<td>" + host.last_teatime + "</td>";
+    } else {
+      row += "<td>" + "No teatime" + "</td>";
+    }
+
+    if (host.next_teatime) {
+      row += "<td>" + host.next_teatime + "</td>";
+    } else {
+      row += "<td>" + "No teas scheduled"+ "</td>";
+    }
+
+    row += "<td>" + host.total_attendees + "</td>";
+    row += "</tr>";
+    return row;
+  }
+
+  $.get('/api/v1/hosts', function(response) {
+    response.hosts.forEach(function(host) {
+      $('.container table').append(buildRowHost(host))
+    });
+  });
+</script>
+<div class="container">
+  <table>
+    <th>Host Name</th>
+    <th># TTs</th>
+    <th>Last Tea</th>
+    <th>Next Tea</th>
+    <th>Total Attendees</th>
+  </table>
+</div>
