@@ -53,7 +53,7 @@ feature 'Registered User' do
       sign_out
       visit city_path(@user.home_city)
       click_link('5 spots left')
-      fill_in 'tea_time_nickname', with:  @user.name
+      fill_in :tea_time_nickname, with:  @user.name
       fill_in :email, with: @user.email
       click_button 'Confirm'
       expect(current_path).to eq new_user_session_path
