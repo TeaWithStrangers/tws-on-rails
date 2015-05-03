@@ -16,7 +16,11 @@
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
-    <%= stylesheet_link_tag('application', :media => 'all', 'data-turbolinks-track' => true) %>
+    <% if @use_new_styles ||= false %>
+      <%= stylesheet_link_tag('application', :media => 'all', 'data-turbolinks-track' => true) %>
+    <% else %>
+      <%= stylesheet_link_tag('deprecated', :media => 'all', 'data-turbolinks-track' => true) %>
+    <% end %>
     <%= javascript_include_tag('application', 'data-turbolinks-track' => true) %>
     <%= csrf_meta_tags %>
     <%= yield(:page_styles) %>
