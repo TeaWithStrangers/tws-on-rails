@@ -6,8 +6,8 @@
   = form_for :tea_time, url: attendance_tea_time_path(@tea_time), html: {class: 'schedule-tea new_user'} do |f|
     .form-body
       = render partial: 'shared/tea_time_row', locals: {tea_time: @tea_time}
-      = f.label :name, "Your name is"
-      = f.text_field :name, value: prefill ? current_user.name : '', readonly: prefill, placeholder: 'Full Name'
+      = f.label :nickname, "Your name is"
+      = f.text_field :nickname, value: prefill ? current_user.name : '', readonly: prefill, placeholder: 'Full Name'
       = f.label :email, "You check email (and manage a calendar) at"
       = f.email_field :email, value: prefill ? current_user.email : '', readonly: prefill,placeholder: 'Email Address'
       - if !@tea_time.spots_remaining?

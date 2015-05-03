@@ -2,13 +2,13 @@ require 'spec_helper.rb'
 
 describe GetOrCreateUser do
   context '#call' do
-    let(:params) { {email: 'barf@eagle5.com', name: 'Barf'} } 
+    let(:params) { {email: 'barf@eagle5.com', nickname: 'Barf'} }
     let(:city) { create(:city) }
     let!(:returned) { GetOrCreateUser.call(params, city) }
 
     it 'should accept params and a city and return a matching user' do
       u = returned[:user]
-      expect(u.name).to eq params[:name]
+      expect(u.nickname).to eq params[:nickname]
       expect(u.email).to eq params[:email]
     end
 

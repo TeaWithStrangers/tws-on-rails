@@ -1,8 +1,18 @@
 require 'spec_helper'
 
 describe User do
-  it { expect(subject).to validate_presence_of(:name) }
+  it { expect(subject).to validate_presence_of(:nickname) }
   it { expect(subject).to validate_presence_of(:home_city_id) }
+
+  context 'names' do
+    let(:user) { create(:user) }
+
+    describe '.name' do
+      it 'should proxy to nickname' do
+        expect(user.name).to eq(user.nickname)
+      end
+    end
+  end
 
   context 'roles' do
     let(:admin) { create(:user, :admin) }

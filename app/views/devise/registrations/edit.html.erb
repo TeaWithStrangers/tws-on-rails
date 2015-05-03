@@ -4,47 +4,67 @@
     <div class="wide">
       <h2>Welcome home!</h2>
       <div class="third left">
-        <ul class="nav-list">
-         <li>
-            <%= link_to "Upcoming Tea Times", profile_path %>
-          </li>
-          <li>
-            <%= link_to "Tea Time History", history_path %>
-          </li>
-          <li>
-            <% if current_user.host? || current_user.admin? %>
-              <%= link_to "Create New Tea Time", new_tea_time_path %>
-            <% end %>
-          </li>
-          <li>
-            <%= link_to "Account Details", edit_user_registration_path %>
-          </li>
-          <li>
-            <%= link_to "Sign Out", destroy_user_session_path, :method => :delete %>
-          </li>
-        </ul>
+        <%= render partial: 'profiles/sidebar' %>
       </div>
       <hr>
       <div class="two-third right">
         <h2 class="main">Edit Your Information</h2>
 
-        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, :multipart => true) do |f| %>
+        <%= form_for(resource,
+                     as: resource_name,
+                     url: registration_path(resource_name),
+                     html: { method: :put }, :multipart => true) do |f|
+        %>
           <%= devise_error_messages! %>
-          <h3 class="edit-subheader first"> Personal Information </h3>
-          <div><%= f.label :name %><br />
-          <%= f.text_field :name, autofocus: true %></div>
+          <h3 class="edit-subheader first">Personal Information</h3>
 
-          <div><%= f.label :email %><br />
-          <%= f.email_field :email %></div>
+          <div>
+            <%= f.label :nickname %>
+            <br/>
+            <%= f.text_field :nickname, autofocus: true %>
+          </div>
 
-          <div><%= f.label :home_city %><br />
-          <div class="dropdown"><%= select(resource_name, :home_city_id, City.visible(current_user).collect{ |p| [p.name, p.id] }) %></div></div>
+          <div>
+            <%= f.label :given_name %>
+            <br/>
+            <%= f.text_field :given_name %>
+          </div>
 
-          <div><%=  f.label :facebook %><br />
-          <%= f.text_field :facebook, placeholder: 'Just the part after http://facebook.com/' %></div>
+          <div>
+            <%= f.label :family_name %>
+            <br/>
+            <%= f.text_field :family_name %>
+          </div>
 
-          <div><%= f.label :twitter %><br />
-          <%= f.text_field :twitter, placeholder: "Don't include the @" %></div>
+          <div>
+            <%= f.label :email %>
+            <br/>
+            <%= f.email_field :email %>
+          </div>
+
+          <div>
+            <%= f.label :home_city %>
+            <br/>
+            <div class="dropdown">
+              <%= select(
+                resource_name, :home_city_id,
+                City.visible(current_user).
+                collect{ |p| [p.name, p.id] })
+              =%>
+            </div>
+          </div>
+
+          <div>
+            <%=  f.label :facebook %>
+            <br/>
+            <%= f.text_field :facebook, placeholder: 'Just the part after http://facebook.com/' %>
+          </div>
+
+          <div>
+            <%= f.label :twitter %>
+            <br/>
+            <%= f.text_field :twitter, placeholder: "Don't include the @" %>
+          </div>
 
           <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
             <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
@@ -54,22 +74,36 @@
 
           <h3 class="edit-subheader"> Change Your Password </h3>
 
-          <div><%= f.label :password, "New password" %><br />
-            <%= f.password_field :password, autocomplete: "off", placeholder: "New password" %></div>
+          <div>
+            <%= f.label :password, "New password" %>
+            <br/>
+            <%= f.password_field :password, autocomplete: "off", placeholder: "New password" %>
+          </div>
 
-          <div><%= f.label :password_confirmation, "Confirm new password" %><br />
-            <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "One more time!" %></div>
+          <div>
+            <%= f.label :password_confirmation, "Confirm new password" %>
+            <br/>
+            <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "One more time!" %>
 
-          <div><%= f.label :current_password %><br />
-            <%= f.password_field :current_password, autocomplete: "off", placeholder: "Current password" %></div>
+          </div>
 
-          <div><%= f.submit "Save Changes" %></div>
+          <div>
+            <%= f.label :current_password %>
+            <br/>
+            <%= f.password_field :current_password, autocomplete: "off", placeholder: "Current password" %>
+
+          </div>
+
+          <div>
+            <%= f.submit "Save Changes" %>
+          </div>
         <% end %>
 
-        <!-- <h3 class="edit-subheader">Cancel my account</h3>
-        <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p> -->
-
-        <!-- <%= link_to "Back", :back %> -->
+        <h3 class="edit-subheader">Cancel my account</h3>
+        <p>Unhappy?</p>
+        <%= button_to "Cancel my account",
+          registration_path(resource_name),
+          data: { confirm: "Are you sure?" }, method: :delete %>
       </div>
     </div>
   </div>
