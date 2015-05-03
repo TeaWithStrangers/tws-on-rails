@@ -14,6 +14,9 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 gem 'haml-rails', '~> 0.5'
 gem 'sass-rails', '~> 5.0'
+# For the old-style styles
+gem 'less-rails', '~> 2.5'
+gem 'therubyracer', '~> 0.12'
 
 gem 'uglifier', '>= 1.3.0'
 # Serve Assets in Production
