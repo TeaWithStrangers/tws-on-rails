@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   has_attached_file :avatar, styles: { medium: "300x300", thumb: "100x100", landscape: "500"}, default_url: "/assets/missing.jpg"
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
-  validates_presence_of :home_city_id, :name
+  validates_presence_of :home_city_id, :nickname
 
   include ActiveModel::Validations
   validates_with Validators::FacebookUrlValidator
@@ -23,6 +23,24 @@ class User < ActiveRecord::Base
   bitmask :roles, :as => [:host, :admin], :null => false
   alias_method :role?, :roles?
   scope :hosts, -> { with_roles :host }
+
+  def name(format = nil)
+    names = [given_name, nickname, family_name]
+    case format
+    when :fullest
+      names[1] = "\"#{names[1]}\""
+    when :full
+      names.delete_at(1)
+    when nil
+      names = [names[1]]
+    end
+
+    names.reject(&:nil?).join(' ')
+  end
+
+  def name=(name)
+    nickname = name
+  end
 
   def twitter_url
     "https://twitter.com/#{twitter}" if twitter

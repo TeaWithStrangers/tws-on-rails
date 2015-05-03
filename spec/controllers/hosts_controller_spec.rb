@@ -12,7 +12,7 @@ describe HostsController do
     let(:host_email) { 'johnnyenglish@mrbean.com' }
     let(:params) do
       {
-        name: 'Mr. Bean',
+        nickname: 'Mr. Bean',
         email: 'johnnyenglish@mrbean.com',
         home_city_id: create(:city)
       }
