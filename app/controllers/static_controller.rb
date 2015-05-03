@@ -1,5 +1,7 @@
 class StaticController < ApplicationController
   def index
+    use_new_styles
+
     @press = {
       'fast-company' => 'http://fastcompany.com',
       'forbes' => 'http://forbes.com',
