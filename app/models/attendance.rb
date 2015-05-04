@@ -49,16 +49,14 @@ class Attendance < ActiveRecord::Base
   end
 
   def queue_reminders
-    st = self.tea_time.start_time
+    job = AttendanceReminderJob.new(tea_time)
 
-    two_day_reminder = st - 2.days
-    if !(Time.now > two_day_reminder)
-      AttendanceMailer.delay(run_at: two_day_reminder).reminder(self.id, :two_day)
+    if Time.now < job.two_day_reminder_time
+      job.two_day_reminder(id)
     end
 
-    twelve_hour_reminder = st - 12.hours
-    if !(Time.now > twelve_hour_reminder)
-      AttendanceMailer.delay(run_at: twelve_hour_reminder).reminder(self.id, :same_day)
+    if Time.now < job.twelve_hour_reminder_time
+      job.twelve_hour_reminder(id)
     end
   end
 
