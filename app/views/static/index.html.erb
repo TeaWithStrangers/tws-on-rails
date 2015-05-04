@@ -2,35 +2,62 @@
 <div class='intro-to-tws cover-photo'>
   <div class='content'>
     <div class='content-box'>
-      <h3 class='cover-photo-lede'>
-        Making the world feel smaller,
-        6 cups of tea at a time.
-      </h3>
-      <p class='cover-photo-body'>
-        Tea time is a conversation fueled by the stories, questions, and listenings
-        of a few strangers and a super host.
-      </p>
-      <button class='green cover-photo-cta'>
-        <%= link_to 'Let\'s Get Tea', '#' %>
+      <h2 class='cover-photo-lede'>
+        Expand your world, one 
+        real-life conversation at a time.
+      </h2>
+      <button class='orange cover-photo-cta'>
+        <%= link_to 'Sign Up', '#' %>
       </button>
     </div>
   </div>
 </div>
-<%= render partial: 'shared/press_list', locals: {items: @press}%>
-<div class="what-is-tea-time cover-photo">
-  <div class='content'>
-    <div class='content-box'>
-      <h3 class='cover-photo-lede'>
-        Making the world feel smaller,
-        6 cups of tea at a time.
-      </h3>
-      <p class='cover-photo-body'>
-        Tea time is a conversation fueled by the stories, questions, and listenings
-        of a few strangers and a super host.
-      </p>
-      <button class='green cover-photo-cta'>
-        <%= link_to 'Let\'s Get Tea', '#' %>
-      </button>
+<%#= render partial: 'shared/press_list', locals: {items: @press}%>
+<div class="tea-explainers">
+  <div class="tea-explainer">
+    <div class="tea-explainer-copy">
+    	<h3 class="tea-explainer-header">
+    	  You don’t know most of the people around you
+    	</h3>
+    	<p class="tea-explainer-body">
+    	  And current ways of meeting new people suck. There’s usually strings
+    	  attached, like a business deal or a date. Most conversations never make it
+    	  past happy hour talk of “what do you do?” You never get to talk about
+    	  anything real. About anything that makes us who we are. But what if there
+    	  was a different way?
+    	</p>
+    </div>
+    <%= image_tag 'landing/1.png', class: 'tea-explainer-illustration' %>
+  </div>
+  <div class="tea-explainer">
+    <div class="tea-explainer-copy">
+    	<h3 class="tea-explainer-header">Tea times create space for good
+    	  conversations with good people
+    	</h3>
+    	<p class="tea-explainer-body">
+    	  Five to six strangers get together, sit down, and have a conversation
+    	  about, well, anything and everything. There’s a host who keeps things just
+    	  awkward enough. If you make friends, cool. If you don’t, cool.  
+    	</p>
+    </div>
+    <%= image_tag 'landing/2.png', class: 'tea-explainer-illustration' %>
+  </div>
+  <div class="tea-explainer">
+    <%= image_tag 'landing/3.png', class: 'tea-explainer-illustration' %>
+    <div class="tea-explainer-copy">
+    	<h3 class="tea-explainer-header">Because why not? People are freaking awesome.</h3>
+    	<p class="tea-explainer-body">
+    	  When you’re around strangers, you can be yourself. There’s no presumption
+    	  about who you are; you could legit be anyone you want to be. What’s the best
+    	  that could happen? It’s out of everybody’s comfort zone, but you’ll meet
+    	  people you may have never encountered otherwise.
+    	</p>
     </div>
   </div>
+</div>
+<div class="cta-footer">
+	<h2>Ready to take the plunge?</h2>
+  <button class="orange cover-photo cta">
+    <%= link_to 'Sign Up', '#' %>
+  </button>
 </div>
