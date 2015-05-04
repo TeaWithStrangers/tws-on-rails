@@ -38,7 +38,7 @@ class TeaTimesController < ApplicationController
     @user = current_user
     #FIXME: ALL THIS
     if @user.nil?
-      user_data = GetOrCreateUser.call({name: tea_time_params[:name],
+      user_data = GetOrCreateUser.call({nickname: tea_time_params[:nickname],
                                         email: tea_time_params[:email]},
                                         @tea_time.city)
 
@@ -51,7 +51,7 @@ class TeaTimesController < ApplicationController
     end
 
     if @user.nil?
-      redirect_to tea_time_path(@tea_time), alert: "Sorry, something has gone terribly wrong. Try again!"
+      return redirect_to tea_time_path(@tea_time), alert: "Sorry, something has gone terribly wrong. Try again!"
     end
 
 
@@ -64,12 +64,12 @@ class TeaTimesController < ApplicationController
         "You're on the wait list! Check your email for details." :
         "You're set for tea time! Check your email and add it to your calendar :)"
       respond_to do |format|
-        format.html { redirect_to profile_path, notice: message }
+        format.html { return redirect_to profile_path, notice: message }
         format.json { @attendance }
       end
     else
       respond_to do |format|
-        format.html { redirect_to schedule_city_path(@tea_time.city),
+        format.html { return redirect_to schedule_city_path(@tea_time.city),
                       alert: "Couldn't register for that, sorry :(" }
         format.json { @attendance }
       end
