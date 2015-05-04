@@ -4,13 +4,12 @@
     <span class="menu-expando tws-logo-type" onclick='toggleHeader()'></span>
     <nav class='nav-list'>
       <ul class='nav-links'>
-        <% [["Places", cities_path], ["Stories", stories_path], ["Questions", questions_path],
-            ["Hosting", hosting_path]].each do |li| %>
+        <% [["Cities", cities_path], ["Get Involved", hosting_path]].each do |li| %>
             <li class="nav-link-item"><%= link_to li[0], li[1] %></li>
           <% end %>
           <li class="nav-link-item">
-            <%= link_to_if(current_user.nil?, 'Sign In', new_user_session_path) do
-              link_to('Profile', profile_path)
+            <%= link_to_if(current_user.nil?, 'Sign In', new_user_session_path, class: 'sign-in-emphasis') do
+              link_to('My Account', profile_path)
             end %>
     </ul>
     </nav>
