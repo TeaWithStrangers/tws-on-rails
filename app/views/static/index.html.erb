@@ -13,9 +13,10 @@
   </div>
 </div>
 <%#= render partial: 'shared/press_list', locals: {items: @press}%>
-<div class="tea-explainers">
+<div class="tea-explainers container">
   <div class="tea-explainer">
-    <div class="tea-explainer-copy">
+    <%= image_tag 'landing/1.png', class: ['right', 'tea-explainer-illustration'] %>
+    <div class="tea-explainer-copy left">
     	<h3 class="tea-explainer-header">
     	  You don’t know most of the people around you
     	</h3>
@@ -27,10 +28,10 @@
     	  was a different way?
     	</p>
     </div>
-    <%= image_tag 'landing/1.png', class: 'tea-explainer-illustration' %>
   </div>
   <div class="tea-explainer">
-    <div class="tea-explainer-copy">
+    <%= image_tag 'landing/2.png', class: ['left', 'tea-explainer-illustration'] %>
+    <div class="tea-explainer-copy right">
     	<h3 class="tea-explainer-header">Tea times create space for good
     	  conversations with good people
     	</h3>
@@ -40,11 +41,10 @@
     	  awkward enough. If you make friends, cool. If you don’t, cool.  
     	</p>
     </div>
-    <%= image_tag 'landing/2.png', class: 'tea-explainer-illustration' %>
   </div>
   <div class="tea-explainer">
-    <%= image_tag 'landing/3.png', class: 'tea-explainer-illustration' %>
-    <div class="tea-explainer-copy">
+    <%= image_tag 'landing/3.png', class: ['right', 'tea-explainer-illustration'] %>
+    <div class="tea-explainer-copy left">
     	<h3 class="tea-explainer-header">Because why not? People are freaking awesome.</h3>
     	<p class="tea-explainer-body">
     	  When you’re around strangers, you can be yourself. There’s no presumption
@@ -55,9 +55,15 @@
     </div>
   </div>
 </div>
-<div class="cta-footer">
-	<h2>Ready to take the plunge?</h2>
-  <button class="orange cover-photo cta">
-    <%= link_to 'Sign Up', '#' %>
-  </button>
+<div class="cta-footer cover-photo">
+  <div class='content'>
+    <div class='content-box'>
+      <h2>
+        Ready to take the plunge?
+      </h2>
+      <button class='orange cover-photo-cta'>
+        <%= link_to 'Sign Up', '#' %>
+      </button>
+    </div>
+  </div>
 </div>
