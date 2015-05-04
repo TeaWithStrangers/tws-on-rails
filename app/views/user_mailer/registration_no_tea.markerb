@@ -15,7 +15,7 @@ Super love,
 Ankit
 
 <% if !@user.confirmed? %>
-P.S. You'll need to be logged in to pick a tea time. Right now, you don't have a password. You should [confirm your account and set it here](<%= link_to 'Confirm my account', confirmation_url(User, confirmation_token: @token, utm_campaign: 'registration', utm_medium: 'email', utm_content: 'confirm_account') %>)
+<%= render partial: 'user_password_confirmation' %>
 <% end %>
 
 P.P.S. If you want to learn more about what this is about, talk about how to get involved, exchange digital high fives, whatever, you can (and absolutely should) reply to this note.
