@@ -45,6 +45,8 @@ Rails.application.routes.draw do
     end
   end
 
+  # TODO: You know what to do Tue May 5 2015
+  get '/cities' => 'cities#forbes_index'
   resources :cities do
     member do
       get '/host/:host_id' => 'hosts#show', as: :host

@@ -17,6 +17,10 @@ class CitiesController < ApplicationController
     end
   end
 
+  def forbes_index
+    use_new_styles
+  end
+
   # GET /cities/:city_code
   # GET /cities/:city_code.json
   def show
