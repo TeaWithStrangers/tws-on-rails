@@ -25,7 +25,7 @@
     <%= csrf_meta_tags %>
     <%= yield(:page_styles) %>
   </head>
-  <body>
+  <body class="<%= controller_name %> <%= action_name %>">
     <div class='wrapper'>
       <main class='wrapper-content'>
         <%= yield %>
