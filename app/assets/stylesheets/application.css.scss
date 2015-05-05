@@ -11,10 +11,8 @@
  * file per style scope.
  *
  *= require_self
- *= require_tree ./
  *= require jquery-ui/dialog
  */
 
-
-  
-
+@import "tws-styles/application";
+@import "static/*";

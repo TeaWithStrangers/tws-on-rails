@@ -8,6 +8,10 @@ class ApplicationController < ActionController::Base
     Time.use_zone(zone, &block)
   end
 
+  def use_new_styles
+    @use_new_styles = true
+  end
+
   rescue_from CanCan::AccessDenied do |exception|
     go_back(exception)
   end

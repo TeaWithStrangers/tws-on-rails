@@ -1,0 +1,11 @@
+<div class="container">
+	<div class="press-list">
+	  <% items.each do |press, link| %>
+	    <div class="press-list-item">
+	      <%= link_to link do %>
+	        <%= embedded_svg "press-logos/#{press}.svg", class: 'press-list-icon' %>
+	      <% end %>
+	    </div>
+	  <% end %>
+	</div>
+</div>

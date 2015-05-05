@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Tea With Strangers" %></title>
+    <meta name='description' content="<%=(content_for(:description) || "Tea With
+                                          Strangers is all about making
+                                          meaningful interactions more
+                                          fun.") %>">
+    <meta name='viewport' content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta content='http://teawithstrangers.com' property='og:url'>
+    <meta content='website' property='og:type'>
+    <meta content='Tea With Strangers' property='og:title'>
+    <meta content='http://f.cl.ly/items/3F43223x2A0q0d0U093d/tws-splash-fbimage-01.jpg' property='og:image'>
+    <meta content='Tea With Strangers is all about making meaningful interactions more fun.' property='og:description'>
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
+    <% if @use_new_styles ||= false %>
+      <%= stylesheet_link_tag('application', :media => 'all', 'data-turbolinks-track' => true) %>
+    <% else %>
+      <%= stylesheet_link_tag('deprecated', :media => 'all', 'data-turbolinks-track' => true) %>
+    <% end %>
+    <%= javascript_include_tag('application', 'data-turbolinks-track' => true) %>
+    <%= csrf_meta_tags %>
+    <%= yield(:page_styles) %>
+  </head>
+  <body>
+    <div class='wrapper'>
+      <main class='wrapper-content'>
+        <%= yield %>
+      </main>
+      <% if content_for?(:footer) %>
+        <footer>
+          <%= yield(:footer) %>
+        </footer>
+      <% end %>
+    </div>
+    <script type='text/javascript'>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39634305-2', 'teawithstrangers.com');
+      ga('send', 'pageview');
+    </script>
+  </body>
+</html>
