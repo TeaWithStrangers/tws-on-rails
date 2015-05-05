@@ -16,7 +16,21 @@ class ApplicationController < ActionController::Base
     go_back(exception)
   end
 
+  def after_sign_in_path_for(resource)
+    if !current_user.waitlisted?
+      schedule_city_path(current_user.home_city)
+    else
+      redirect_to root_path
+    end
+  end
+
   protected
+
+    def away_ye_waitlisted
+      if (current_user && current_user.waitlisted? || current_user.nil?)
+        redirect_to root_path, alert: 'Log in before trying that again :)'
+      end
+    end
 
     def go_back(exception)
       begin

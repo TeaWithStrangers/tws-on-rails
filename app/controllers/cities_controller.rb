@@ -1,6 +1,7 @@
 class CitiesController < ApplicationController
   before_action :set_city, only: [:show, :edit, :update, :destroy, :schedule]
   before_action :authenticate_user!, :authorized?, only: [:new, :create, :edit, :update, :destroy]
+  before_filter :away_ye_waitlisted
 
   # GET /cities
   # GET /cities.json
