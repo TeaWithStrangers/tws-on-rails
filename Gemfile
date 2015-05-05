@@ -13,6 +13,8 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 #JS, CSS, Templating
 
 gem 'haml-rails', '~> 0.5'
+gem 'sass-rails', '~> 5.0'
+# For the old-style styles
 gem 'less-rails', '~> 2.5'
 gem 'therubyracer', '~> 0.12'
 
@@ -66,6 +68,8 @@ gem 'spring', group: :development
 # Random debug tools
 group :development, :test do
   gem 'byebug'
+  gem 'guard'
+  gem 'guard-livereload'
   gem 'pry-rails'
   gem 'pry-byebug'
   gem 'pry-stack_explorer'

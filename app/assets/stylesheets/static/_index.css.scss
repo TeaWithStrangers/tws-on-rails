@@ -1,0 +1,59 @@
+.intro-to-tws {
+  @include cover-photo(image-url('landing/landing-graphic-redesign.jpg'),
+                       image-url('landing/landing-graphic-redesign.jpg'),
+                       linear-gradient(to bottom, rgba($tws-yellow, .87), rgba($tws-yellow, .87)));
+  background-position: 50% 30%;
+}
+
+.what-is-tea-time {
+  @include cover-photo(image-url("home/what-is-tws-cover.png"), $gradient: $null-gradient);
+  @include padding(150px 0);
+
+  @include media($tablet) {
+    @include padding(150px 25px);
+  }
+}
+
+.tea-explainer {
+  @include span-columns(12);
+  @include margin(2em 0);
+
+  .left { float: left; }
+  .right { float: right }
+}
+
+.tea-explainer-copy {
+  @include media($tablet) {
+    @include span-columns(6);
+  }
+
+  @include media($desktop) {
+    @include span-columns(6);
+  }
+
+  .tea-explainer-header {
+    color: $tws-orange;
+  }
+}
+
+.tea-explainer-illustration {
+  @include media($desktop) {
+    @include span-columns(5);
+  }
+}
+
+.cta-footer {
+  .content { padding: 2em 0; }
+  .content-box {
+    max-width: none; 
+    h2 {
+      margin: .5em 0;
+    }
+    button {
+      max-width: 540px;
+    }
+  }
+  @include cover-photo(image-url(''),
+                       image-url(''),
+                       linear-gradient(to bottom, rgba($tws-tan, .87), rgba($tws-tan, .87)));
+}
