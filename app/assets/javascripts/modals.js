@@ -21,6 +21,10 @@ function loadModal(modalTarget) {
 function closeModal() { modal.dialog('close') }
 
 function modalActivation() {
+  $('a.sign-up').on('click', function(evt) { 
+    loadModal('/signup')(evt)
+  });
+
   $('#login').on('click', function(evt) { 
     loadModal('/signin')(evt)
   });
