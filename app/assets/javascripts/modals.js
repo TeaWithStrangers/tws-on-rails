@@ -14,6 +14,7 @@ function loadModal(modalTarget) {
       draggable: false,
       resizeable: false,
       width: 500,
+      closeText: "Not now",
       title: null
     });
   }
