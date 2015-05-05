@@ -23,5 +23,10 @@ module TWSApi
     config.generators.views = true
     config.autoload_paths += %W(#{config.root}/lib)
     config.autoload_paths += %W(#{config.root}/app/services)
+     
+    # This allows fonts to be picked up by FF+IE when served from CloudFront
+    config.action_dispatch.default_headers.merge!({
+      'Access-Control-Allow-Origin' => '*',
+    })
   end
 end
