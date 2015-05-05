@@ -8,6 +8,11 @@ FactoryGirl.define do
     password "password"
     association :home_city, factory: :city
 
+    trait :waitlist do
+      waitlisted true
+      waitlisted_at Time.now
+    end
+
     [:host, :admin].each do |t| #YOLO
       trait t do
         nickname "Joe #{t.capitalize}"
