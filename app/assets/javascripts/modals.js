@@ -10,12 +10,13 @@ function loadModal(modalTarget) {
   return function(evt) {
     evt.preventDefault();
     return $("#modal").load(modalTarget).dialog({
+      position: { my: "center top", at: "center top", of: evt.target },
       modal: true,
       draggable: false,
       resizeable: false,
       width: 500,
       closeText: "Not now",
-      title: null
+      title: ''
     });
   }
 }
@@ -23,11 +24,11 @@ function closeModal() { modal.dialog('close') }
 
 function modalActivation() {
   $('a.sign-up').on('click', function(evt) { 
-    loadModal('/signup')(evt)
+    modal = loadModal('/signup')(evt)
   });
 
   $('#login').on('click', function(evt) { 
-    loadModal('/signin')(evt)
+    modal = loadModal('/signin')(evt)
   });
 
   $('.edit_attendance, .tea-time-scheduling').on('click', function(evt) {
