@@ -122,6 +122,10 @@ class NilUser
     nil
   end
 
+  def waitlisted?
+    true
+  end
+
   def blank?
     true
   end

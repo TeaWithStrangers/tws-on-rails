@@ -27,9 +27,9 @@ function modalActivation() {
     modal = loadModal('/signup')(evt)
   });
 
-  $('#login').on('click', function(evt) { 
-    modal = loadModal('/signin')(evt)
-  });
+  //$('#login').on('click', function(evt) { 
+  //  modal = loadModal('/signin')(evt)
+  //});
 
   $('.edit_attendance, .tea-time-scheduling').on('click', function(evt) {
     modal = loadModal(evt.currentTarget.href)(evt)
