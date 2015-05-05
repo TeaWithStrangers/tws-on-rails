@@ -27,4 +27,15 @@ class StaticController < ApplicationController
 
   def hosting
   end
+
+  def jfdi_signup
+    use_new_styles
+    @full_form = !request.xhr?
+    return redirect_to profile_path if current_user
+    if @full_form
+      render 'registrations/sign_up'
+    else
+      render 'shared/_new_sign_up', layout: @full_form
+    end
+  end
 end
