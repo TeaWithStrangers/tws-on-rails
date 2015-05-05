@@ -21,6 +21,17 @@ class UserMailer < ActionMailer::Base
          end
   end
 
+  def waitlisted_registration(user)
+    @user = user;
+
+    mail(from: "\"Ankit at Tea With Strangers\" <ankit@teawithstrangers.com>",
+         to: @user.email, 
+         subject: "ANKIT CHOOSE A SUBJECT LINE") do |format|
+           format.text { render template }
+           format.html { render template }
+         end
+  end
+
   def host_registration(user, password)
     sendgrid_category "Host Registration"
 
