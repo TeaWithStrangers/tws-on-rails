@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   has_attached_file :avatar, styles: { medium: "300x300", thumb: "100x100", landscape: "500"}, default_url: "/assets/missing.jpg"
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
-  validates_presence_of :home_city_id, :nickname
+  validates_presence_of :nickname
 
   include ActiveModel::Validations
   validates_with Validators::FacebookUrlValidator
@@ -40,6 +40,10 @@ class User < ActiveRecord::Base
 
   def name=(name)
     nickname = name
+  end
+
+  def home_city
+    read_attribute(:home_city_id).nil? ? City.first : super
   end
 
   def twitter_url
