@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get '/openhouse'      => 'static#openhouse',      as: :openhouse
   get '/questions'      => 'static#questions',      as: :questions
   get '/stories'        => 'static#stories',        as: :stories
+  get '/signup'         => 'static#jfdi_signup',    as: :sign_up
 
   # Devise and Registration Routes
   devise_for :users, :controllers => {:registrations => "registrations"}, :skip => [:sessions]

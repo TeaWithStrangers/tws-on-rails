@@ -6,9 +6,11 @@
         Expand your world, one 
         real-life conversation at a time.
       </h2>
-      <button class='orange cover-photo-cta'>
-        <%= link_to 'Sign Up', '#' %>
-      </button>
+      <%= link_to sign_up_path, class: 'sign-up' do %>
+        <button class='orange cover-photo-cta'>
+          Sign Up
+        </button>
+      <% end %>
     </div>
   </div>
 </div>
@@ -61,9 +63,11 @@
       <h2>
         Ready to take the plunge?
       </h2>
-      <button class='orange cover-photo-cta'>
-        <%= link_to 'Sign Up', '#' %>
-      </button>
+      <%= link_to sign_up_path, class: 'sign-up' do %>
+        <button class='orange cover-photo-cta'>
+          Sign Up
+        </button>
+      <% end %>
     </div>
   </div>
 </div>

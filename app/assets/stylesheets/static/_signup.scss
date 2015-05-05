@@ -1,0 +1,15 @@
+.full-sign-up {
+  h3 { margin-bottom: 0 }
+  @include media($desktop) {
+    @include shift(3);
+    @include span-columns(6);
+  }
+}
+
+form.sign-up {
+  input[type='submit'] {
+    padding: 1.5em 0;
+  }
+}
+
+
