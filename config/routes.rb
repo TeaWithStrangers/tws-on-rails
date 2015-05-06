@@ -3,6 +3,13 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :cities,  only: [:index]
       resources :hosts,   only: [:index]
+      resources :users do
+        collection do
+          get 'self', to: :self 
+          patch 'self/interests', to: :interests
+        end
+      end
+
     end
   end
 
