@@ -42,7 +42,7 @@ class ApplicationController < ActionController::Base
 
     def configure_permitted_parameters
       permitted = [:nickname, :family_name, :given_name, :email, :password,
-                   :password_confirmation, :avatar, :current_password, :autogen,
+                   :password_confirmation, :avatar, :current_password,
                    :tagline, :summary, :topics, :story, :home_city_id,
                    :facebook, :twitter]
       [:sign_up, :account_update].each do |s|

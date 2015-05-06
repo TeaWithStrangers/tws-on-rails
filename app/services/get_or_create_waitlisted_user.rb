@@ -1,7 +1,7 @@
 class GetOrCreateWaitlistedUser
   # Returns a hash with keys :user and :new_user?
   # :user => User, :new_user? => Boolean
-  def self.call(params, home_city)
+  def self.call(params)
     #Remove autogen directive from parameters if it exists
     params.delete(:autogen)
 
@@ -13,7 +13,13 @@ class GetOrCreateWaitlistedUser
       val[:new_user?] = false
     else
       user = User.new(params)
-      UserMailer.delay.waitlisted_registration(user)
+      user.waitlist
+      user.save!
+      if user.persisted?
+        UserMailer.delay.waitlisted_registration(user)
+      else
+        val[:errors] = user.errors.full_messages
+      end
     end
 
     return val.merge(user: user)
