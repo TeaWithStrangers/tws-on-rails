@@ -100,6 +100,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def tws_interests
+    read_attribute(:tws_interests) || {:hosting => false, :leading => false }.to_json
+  end
+
   class << self
     def nil_user
       @@nil_user ||= NilUser.new
