@@ -13,6 +13,9 @@ To get it set up locally, ensure you have the latest Ruby version as specified b
 ```
 bundle install
 
+# Sync submodules
+git submodule update --init
+
 # create a `tws` role in postgres with the
 # ability to create databases
 
