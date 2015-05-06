@@ -11,6 +11,9 @@ class Ability
       can :create, TeaTime
       can :update, Attendance
       can :read, User
+    elsif user.waitlisted?
+      cannot :create, Attendance
+      cannot :update, Attendance
     else
       can :read, User, :id => user.id
       can :update, Attendance, :user_id => user.id

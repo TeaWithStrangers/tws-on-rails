@@ -86,6 +86,20 @@ class User < ActiveRecord::Base
     end
   end
 
+  def waitlist
+    if !waitlisted?
+      write_attribute(:waitlisted, true)
+      write_attribute(:waitlisted_at, Time.now)
+    end
+  end
+
+  def unwaitlist
+    if waitlisted?
+      write_attribute(:waitlisted, false)
+      write_attribute(:unwaitlisted_at, Time.now)
+    end
+  end
+
   class << self
     def nil_user
       @@nil_user ||= NilUser.new
@@ -106,6 +120,10 @@ class NilUser
 
   def email
     nil
+  end
+
+  def waitlisted?
+    true
   end
 
   def blank?
