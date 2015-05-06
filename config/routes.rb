@@ -6,7 +6,8 @@ Rails.application.routes.draw do
       resources :users do
         collection do
           get 'self', to: :self 
-          patch 'self/interests', to: :interests
+          get 'self/interests', to: :interests
+          patch 'self/interests', to: :update_interests
         end
       end
 
