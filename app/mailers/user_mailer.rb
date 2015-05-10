@@ -4,6 +4,17 @@ class UserMailer < ActionMailer::Base
 
   default from: "\"Tea With Strangers\" <sayhi@teawithstrangers.com>"
 
+  def notify_city_suggestor_of_approval(city_id)
+    @city = City.find_by(id: city_id)
+    return if @city.nil?
+    @user = @city.suggested_by_user
+    return if @user.nil?
+    mail(
+      to: @city.suggested_by_user.email,
+      subject: "#{@city.name} has been approved for Tea!"
+    )
+  end
+
   def registration(user, password)
     sendgrid_category "User Registration"
 
@@ -14,7 +25,7 @@ class UserMailer < ActionMailer::Base
       'registration_no_tea' : 'registration'
 
     mail(from: "\"Ankit at Tea With Strangers\" <ankit@teawithstrangers.com>",
-         to: @user.email, 
+         to: @user.email,
          subject: "Thanks for being awesome, #{@user.name}!") do |format|
            format.text { render template }
            format.html { render template }
@@ -25,7 +36,7 @@ class UserMailer < ActionMailer::Base
     @user = user;
 
     mail(from: "\"Ankit at Tea With Strangers\" <ankit@teawithstrangers.com>",
-         to: @user.email, 
+         to: @user.email,
          subject: "ANKIT CHOOSE A SUBJECT LINE") do |format|
            format.text { render template }
            format.html { render template }

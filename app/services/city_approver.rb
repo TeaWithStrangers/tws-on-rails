@@ -9,7 +9,9 @@ class CityApprover
       raise StandardError
     else
       if @city.brew_status == "unapproved"
-        @city.update_attributes(brew_status: "cold_water")
+        if @city.update_attributes(brew_status: "cold_water")
+          UserMailer.notify_city_suggestor_of_approval(@city).deliver
+        end
       else
         raise "City must be in unapproved state to run this"
       end
