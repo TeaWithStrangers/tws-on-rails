@@ -52,7 +52,7 @@ feature 'Hosting: ' do
         counter += 1
       end
       click_button "Done!"
-      expect(page).to have_content "Now send an email"
+      expect(page).to have_content "say thank you"
       expect(@past_tt.reload.followup_status).to eq("marked_attendance")
       click_button "All sent!"
       expect(@past_tt.reload.followup_status).to eq("completed")
