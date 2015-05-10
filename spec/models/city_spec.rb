@@ -1,6 +1,8 @@
 require 'spec_helper.rb'
 
 describe City do
+  it { expect(subject).to belong_to(:suggested_by_user).class_name('User') }
+
   context 'scopes' do
     before(:all) do
       @city = create(:city, :fully_brewed)
@@ -30,7 +32,6 @@ describe City do
         host = create(:user, :host)
         expect(City.visible(host)).to include(@city, @warm, @hidden)
       end
-      
     end
 
     describe '#hidden' do
@@ -40,7 +41,7 @@ describe City do
       end
     end
   end
-  
+
   describe '#for_code' do
     it 'should find a city regardless of status' do
       city = create(:city, :hidden, city_code: 'hidden')

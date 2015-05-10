@@ -1,6 +1,46 @@
 require 'spec_helper'
 
 describe 'Cities endpoint', type: :request do
+  describe 'create endpoint' do
+    let(:payload) do
+      {
+        city: {
+          name: "Wonderland"
+        }
+      }
+    end
+
+    context 'Logged in users' do
+      let(:created_city) do
+        City.find_by(name: payload[:city][:name])
+      end
+
+      it 'should create a city' do
+        post '/api/v1/cities', payload
+        expect(created_city).not_to be nil
+      end
+      it 'should assign the created_by_user_id to the current user'
+
+      it 'should set status to unapproved' do
+        post '/api/v1/cities', payload
+        expect(created_city.brew_status).to eq "unapproved"
+      end
+      it 'should return a 200' do
+        post '/api/v1/cities', payload
+        expect(response.status).to eq 200
+      end
+      it 'should return created city in JSON response' do
+        post '/api/v1/cities', payload
+        expect(JSON.parse(response.body)['city']['name']).to eq payload[:city][:name]
+      end
+    end
+    context 'Unauthenticated users' do
+      it 'should not create a city'
+      it 'should return a 401'
+      it 'should return unauthenticated in the response body'
+    end
+  end
+
   describe 'index endpoint' do
     before(:each) do
       @cities = FactoryGirl.create_list(:city, 5)
