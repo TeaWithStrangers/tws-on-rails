@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      resources :cities,  only: [:index]
+      resources :cities,  only: [:index, :create]
       resources :hosts,   only: [:index]
       resources :users do
         collection do
-          get 'self', to: :self 
+          get 'self', to: :self
           get 'self/interests', to: :interests
           patch 'self/interests', to: :update_interests
         end
