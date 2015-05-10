@@ -14,7 +14,7 @@ class GetOrCreateWaitlistedUser
     else
       user = User.new(params)
       user.waitlist
-      user.save!
+      user.save
       if user.persisted?
         UserMailer.delay.waitlisted_registration(user)
       else
