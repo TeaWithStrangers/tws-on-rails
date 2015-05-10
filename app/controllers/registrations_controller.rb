@@ -11,7 +11,7 @@ class RegistrationsController < Devise::RegistrationsController
       elsif !user_info[:new_user?] && user_info[:user].valid?
         redirect_to new_user_session_path, alert: 'You\'re already registered! Log in using the same email :)'
       else
-        redirect_to signup_path, alert: "We've made a huge mistake."
+        redirect_to sign_up_path, alert: "We've made a huge mistake."
       end
     end
   end
