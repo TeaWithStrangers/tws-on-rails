@@ -6,7 +6,7 @@ describe CityApprover do
   end
 
   let(:unapproved_city) do
-    create(:city, brew_status: "unapproved")
+    create(:city, brew_status: "unapproved", suggested_by_user: create(:user))
   end
 
   describe '#call' do
@@ -24,6 +24,14 @@ describe CityApprover do
           subject.call
           unapproved_city.reload
           expect(unapproved_city.brew_status).to eq "cold_water"
+        end
+
+        it 'sends an email to the suggested_by_user' do
+          subject = described_class.new(unapproved_city.id)
+          mock_mailer = double('Mail::Message')
+          expect(UserMailer).to receive(:notify_city_suggestor_of_approval).with(unapproved_city).and_return(mock_mailer)
+          expect(mock_mailer).to receive(:deliver)
+          subject.call
         end
       end
 

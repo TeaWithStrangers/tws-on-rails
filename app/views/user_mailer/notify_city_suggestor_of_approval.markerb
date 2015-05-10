@@ -1,0 +1,5 @@
+Woot woot!
+
+<%= @city.name %> has been approved for Tea With Strangers!
+
+Thanks for suggesting it <%= @user.nickname %>!
