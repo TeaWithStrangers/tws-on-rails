@@ -10,9 +10,17 @@ describe 'Cities endpoint', type: :request do
       }
     end
 
+    let(:created_city) do
+      City.find_by(name: payload[:city][:name])
+    end
+
     context 'Logged in users' do
-      let(:created_city) do
-        City.find_by(name: payload[:city][:name])
+
+      before(:each) do
+
+        # TODO figure out how to do this the right way
+        # with Devise helpers
+        allow_any_instance_of(Api::V1::CitiesController).to receive(:user_signed_in?).and_return(true)
       end
 
       it 'should create a city' do
@@ -35,9 +43,18 @@ describe 'Cities endpoint', type: :request do
       end
     end
     context 'Unauthenticated users' do
-      it 'should not create a city'
-      it 'should return a 401'
-      it 'should return unauthenticated in the response body'
+      it 'should not create a city' do
+        post '/api/v1/cities', payload
+        expect(created_city).to be nil
+      end
+      it 'should return a 401' do
+        post '/api/v1/cities', payload
+        expect(response.status).to eq 401
+      end
+      it 'should return unauthenticated in the response body' do
+        post '/api/v1/cities', payload
+        expect(response.body).to match(/unauthenticated/)
+      end
     end
   end
 
