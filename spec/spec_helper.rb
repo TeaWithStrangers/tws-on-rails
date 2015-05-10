@@ -58,4 +58,7 @@ RSpec.configure do |config|
 
   config.before(:all) { ActiveRecord::Base.skip_callbacks = true }
   config.before(:each) { ActionMailer::Base.deliveries.clear }
+
+  config.filter_run focus: true
+  config.run_all_when_everything_filtered = true
 end
