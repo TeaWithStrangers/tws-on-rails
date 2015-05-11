@@ -24,7 +24,7 @@ class CityApprover
   def merge!(existing_city_id)
     existing = City.find(existing_city_id)
     approval_gate do
-      User.where(home_city: @city.id).update_all(home_city: existing)
+      User.where(home_city: @city.id).update_all(home_city_id: existing.id)
       @city.reject!(false)
       UserMailer.delay.notify_city_suggestor(@city, :merged)
     end

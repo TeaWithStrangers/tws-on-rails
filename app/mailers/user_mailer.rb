@@ -5,9 +5,10 @@ class UserMailer < ActionMailer::Base
   default from: "\"Tea With Strangers\" <sayhi@teawithstrangers.com>"
 
   def notify_city_suggestor(city_id, admin_action)
-    @city = City.find_by(id: city_id)
+    @city = City.find(city_id)
     @user = @city.suggested_by_user
-    cancel_delivery if (@city.nil? || @user.nil?)
+    cancel_delivery if @user.nil?
+
     @partial = "city_suggestion_#{admin_action}"
 
     case admin_action
