@@ -12,6 +12,10 @@ class AdminController < ApplicationController
     @hosts = User.hosts.includes(:tea_times)
   end
 
+  def cities_overview
+    @cities = City.order(:created_at).reverse_order
+  end
+
   def users
   end
 
