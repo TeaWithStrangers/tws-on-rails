@@ -6,10 +6,12 @@
         Expand your world, one 
         real-life conversation at a time.
       </h2>
-      <%= link_to sign_up_path, class: 'sign-up' do %>
-        <button class='orange cover-photo-cta'>
-          Sign Up
-        </button>
+      <% if !user_signed_in? %>
+        <%= link_to sign_up_path, class: 'sign-up' do %>
+          <button class='orange cover-photo-cta'>
+            Sign Up
+          </button>
+        <% end %>
       <% end %>
     </div>
   </div>
