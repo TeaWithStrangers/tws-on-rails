@@ -1,0 +1,47 @@
+<script type="text/javascript">
+  function buildRowCity (city) {
+    var user = city.suggested_by_user || {}
+
+    var row = "";
+    row += "<tr>";
+    row += "<td>" + city.name + "</td>";
+    row += "<td>" + ( user['name'] || "No User") + "</td>";
+    row += "<td>" + ( user['email'] || "No Email") + "</td>";
+    row += "<td>" +  city.brew_status + "</td>";
+    row += "<td>" +  "<a href='/cities/" + city.id + "/edit'>Edit City</a>" + "</td>";
+    row += "</tr>";
+    return row;
+  }
+
+  $.get('/api/v1/cities', function(response) {
+    response.cities.forEach(function(city) {
+      if(city.brew_status == 'unapproved') {
+        //$('.container table').append(buildRowCity(city))
+      }
+    });
+  });
+</script>
+
+<div class="container admin">
+  <table class="cities-admin">
+    <th>City Name</th>
+    <th>Suggested By</th>
+    <th>Email</th>
+    <th>Status</th>
+    <th>User Count</th>
+    <th>Actions</th>
+    <% @cities.each do |city| %>
+      <tr>
+        <td><%= city.name %></td>
+        <td><%= !city.suggested_by_user.nil? ? city.suggested_by_user.name : "No User" %></td>
+        <td><%= !city.suggested_by_user.nil? ? city.suggested_by_user.email : "No Email" %></td>
+        <td><%= city.brew_status.humanize %></td>
+        <td><%= city.users.count %></td>
+        <td>
+          <%= link_to 'Edit', edit_city_path(city) %>
+          <%= link_to 'Destroy', city, :method => :delete, :data => { :confirm => 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>
