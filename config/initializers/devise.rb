@@ -229,7 +229,7 @@ Devise.setup do |config|
   # ==> OmniAuth
 
   # THIS WILL FAIL STARTUP IF THE ENV VARS ARE NOT DEFINED
-  config.omniauth :facebook, ENV.fetch('FB_APP_ID'), ENV.fetch('FB_APP_SECRET')
+  config.omniauth :facebook, ENV.fetch('FB_APP_ID'), ENV.fetch('FB_APP_SECRET'), secure_image_url: true
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
