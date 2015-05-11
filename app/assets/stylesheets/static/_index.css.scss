@@ -10,53 +10,80 @@
   background: $tws-tan;
   text-align: center;
   padding: 2em 1em;
+  @include margin(0 0 3em);
   .what-is-tea-time {
     .part {
-      @include span-columns(4 of 12)
+      @include margin(0 0 $base-font-size*2);
+
+      &.last {
+        @include margin(0);
+      }
+
+      .teatime-basics {
+        @include margin(0 0 $base-font-size/2 0);
+      }
+
+      @include media($tablet) {
+        @include span-columns(4 of 12);
+        @include margin(0);
+      }
     }
   }
 }
 
+h3.homepage-section-lead {
+  text-align: center;
+  @include margin(0 0 3em);
+}
+
+.tea-explainers {
+  @include margin(0 auto 3em);
+}
+
 .tea-explainer {
-  @include span-columns(10 of 12);
   @include margin(2em 0);
-  @include shift(1);
+  @include span-columns(12 of 12);
+  @include media($tablet) {
+    @include span-columns(10 of 12);
+    @include shift(1);
+  }
 
   .left { float: left; }
   .right { float: right; margin-right: 0; }
 }
 
 .tea-explainer-copy {
-  @include media($tablet) {
-    @include span-columns(5 of 10);
-  }
+  @include margin(30px 0 0 0);
+
   @include media($desktop) {
     @include span-columns(5 of 10);
+
+    &.weird {
+      @include margin(70px 0 0 0);
+    }
+    &.never-meet {
+      @include margin(25px 0 0 0);
+    }
+    &.high-five {
+      @include margin(20px 0 0 0);
+    }
   }
   .tea-explainer-header {
     color: $tws-orange;
     @include margin(0 0 $base-font-size 0);
-  }
-  &.weird {
-    @include margin(70px 0 0 0);
-  }
-  &.never-meet {
-    @include margin(25px 0 0 0);
-  }
-  &.high-five {
-    @include margin(20px 0 0 0);
   }
 }
 
 .tea-explainer-illustration {
   @include media($desktop) {
     @include span-columns(4 of 10);
-    @shift (1)
   }
 }
 
 .cta-footer {
-  .content { padding: 2em 0; }
+  .content { 
+    padding: 2em 0; 
+  }
   .content-box {
     max-width: none; 
     h2 {
@@ -69,4 +96,74 @@
   @include cover-photo(image-url(''),
                        image-url(''),
                        linear-gradient(to bottom, rgba($tws-tan, .87), rgba($tws-tan, .87)));
+  clear: both;
+  margin-bottom: 2em;
+}
+
+.testimonials {
+  margin-bottom: 2em;
+
+  .quotes {
+    @include span-columns(10 of 12);
+    @include shift(1);
+  }
+
+  @include media($tablet) {
+    .quote {
+      @include span-columns(5 of 10);
+    }
+  }
+}
+
+img.centered {
+  @include span-columns(10 of 12);
+  @include shift(1);
+  margin-bottom: 4em;
+
+  @include media($tablet) {
+    @include span-columns(6 of 12);
+    @include shift(3);
+  }
+
+  @include media($desktop) {
+    @include span-columns(4 of 12);
+    @include shift(4);
+  }
+}
+
+.stranger-letter {
+  @include margin(0 auto 4em);
+  @include span-columns(10 of 12);
+  @include shift(1);
+
+  .left { float: left; }
+  .right { float: right; margin-right: 0; }
+  img.left {
+    @include span-columns(10 of 12);
+    @include shift(1);
+    margin-bottom: 2em;
+
+    @include media($tablet) {
+      @include span-columns(6 of 12);
+      @include shift(3);
+    }
+
+    @include media($desktop) {
+      @include span-columns(4.5 of 10);
+      @include shift(0);
+    }
+  }
+
+  article.right {
+    @include span-columns(12 of 12);
+
+    @include media($desktop) {
+      @include span-columns(5 of 10);
+      @include shift(0.5);
+    }
+  }
+}
+
+.pre-footer {
+  @include margin(auto auto 0 auto);
 }
