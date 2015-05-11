@@ -56,18 +56,19 @@ Rails.application.routes.draw do
   get '/citiles/:city', to: redirect('/cities/%{city}')
 
   scope(path: 'admin')  do
-    get '/ghost'          => 'admin#find'
-    post '/ghost'         => 'admin#ghost'
+    get '/ghost'           => 'admin#find'
+    post '/ghost'          => 'admin#ghost'
 
-    get '/overview'       => 'admin#overview'
-    get '/overview/hosts' => 'admin#host_overview'
-    get '/users'          => 'admin#users'
+    get '/overview'        => 'admin#overview'
+    get '/overview/cities' => 'admin#cities_overview'
+    get '/overview/hosts'  => 'admin#host_overview'
+    get '/users'           => 'admin#users'
 
-    get '/mail'           => 'admin#write_mail'
-    post '/mail'          => 'admin#send_mail'
+    get '/mail'            => 'admin#write_mail'
+    post '/mail'           => 'admin#send_mail'
 
-    get '/host'   => 'hosts#new',     as: :new_host
-    post '/host'  => 'hosts#create',  as: :create_host
+    get '/host'            => 'hosts#new',     as: :new_host
+    post '/host'           => 'hosts#create',  as: :create_host
   end
 
 

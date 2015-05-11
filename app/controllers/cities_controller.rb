@@ -56,6 +56,18 @@ class CitiesController < ApplicationController
   # PATCH/PUT /cities/1
   # PATCH/PUT /cities/1.json
   def update
+    if params[:approval_action]
+      approver = CityApprover.new(@city)
+      case params[:approval_action]
+      when "merge"
+        approver.merge!(params[:merge_city_id])
+      when "approve"
+        approver.approve!
+      when "reject"
+        approver.reject!
+      end
+    end
+
     respond_to do |format|
       if @city.update(city_params)
         format.html { redirect_to @city, notice: 'City was successfully updated.' }
