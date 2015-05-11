@@ -45,6 +45,10 @@ class City < ActiveRecord::Base
     city_code
   end
 
+  def city_code
+    super.downcase
+  end
+
   def tea_times
     TeaTime.where(city: [self] + proxy_cities)
   end

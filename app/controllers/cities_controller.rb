@@ -1,7 +1,7 @@
 class CitiesController < ApplicationController
-  before_action :set_city, only: [:show, :edit, :update, :destroy, :schedule]
+  before_action :set_city, only: [:show, :edit, :update, :destroy, :schedule, :forbes_show]
   before_action :authenticate_user!, :authorized?, only: [:new, :create, :edit, :update, :destroy]
-  before_filter :away_ye_waitlisted
+  before_filter :away_ye_waitlisted, except: [:forbes_index, :forbes_show]
 
   # GET /cities
   # GET /cities.json
@@ -18,6 +18,10 @@ class CitiesController < ApplicationController
   end
 
   def forbes_index
+    use_new_styles
+  end
+
+  def forbes_show
     use_new_styles
   end
 
