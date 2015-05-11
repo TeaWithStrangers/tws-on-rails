@@ -31,7 +31,9 @@ describe CityApprover do
         it 'sends an email to the suggested_by_user' do
           subject = described_class.new(unapproved_city.id)
           mock_mailer = double('Mail::Message')
-          expect(UserMailer).to receive(:notify_city_suggestor_of_approval).with(unapproved_city).and_return(mock_mailer)
+          expect(UserMailer).to receive(:notify_city_suggestor).
+            with(unapproved_city, :approved).
+            and_return(mock_mailer)
           expect(mock_mailer).to receive(:deliver)
           subject.approve!
         end

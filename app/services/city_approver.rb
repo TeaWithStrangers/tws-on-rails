@@ -6,9 +6,27 @@ class CityApprover
 
   def approve!
     approval_gate do
-      if @city.update_attributes(brew_status: "cold_water")
-        UserMailer.notify_city_suggestor_of_approval(@city).deliver
+      if @city.update(brew_status: "cold_water")
+        UserMailer.delay.notify_city_suggestor(@city, :approved)
       end
+    end
+  end
+
+  def reject!(mail_user: true)
+    approval_gate do
+      if @city.update(brew_status: "rejected") && mail_user
+        UserMailer.delay.notify_city_suggestor(@city, :rejected)
+      end
+    end
+  end
+
+  # This merges the users of the target city into the passed in city
+  def merge!(existing_city_id)
+    existing = City.find(existing_city_id)
+    approval_gate do
+      User.where(home_city: @city.id).update_all(home_city: existing)
+      @city.reject!(false)
+      UserMailer.delay.notify_city_suggestor(@city, :merged)
     end
   end
 

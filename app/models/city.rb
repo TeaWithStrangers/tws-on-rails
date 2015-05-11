@@ -5,7 +5,7 @@ class City < ActiveRecord::Base
   has_attached_file :header_bg, styles: {banner: '1280x', medium: '750x>', small: '350x>'},
                                          default_url: "http://placecorgi.com/1280"
   validates_attachment_content_type :header_bg, :content_type => /\Aimage\/.*\Z/
-  enum brew_status: { cold_water: 0, warming_up: 1, fully_brewed: 2, hidden: 3, unapproved: 4 }
+  enum brew_status: { cold_water: 0, warming_up: 1, fully_brewed: 2, hidden: 3, unapproved: 4, rejected: 5 }
   has_many :tea_times
   has_many :users, foreign_key: 'home_city_id'
   belongs_to :suggested_by_user, class_name: 'User'
