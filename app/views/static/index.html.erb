@@ -1,13 +1,13 @@
-<%= render partial: 'shared/header' %>
 <div class='intro-to-tws cover-photo'>
+  <%= render partial: 'shared/header' %>
   <div class='content'>
     <div class='content-box'>
-      <h1 class='cover-photo-lede'>
+      <h1 class='cover-photo-lede spacebelow-x- 2'>
         Everyone is interesting
       </h1>
-      <h4 class='cover-photo-sub'>
+      <span class='cover-photo-sub spacebelow-2x'>
         But you don’t discover that when you’re staring at a screen.
-      </h4>
+      </span>
       <%= link_to sign_up_path, class: 'sign-up' do %>
         <button class='orange cover-photo-cta'>
           Let's Get Tea
@@ -16,43 +16,62 @@
     </div>
   </div>
 </div>
+<div class="what-is-tea-time-wrapper">
+  <div class="what-is-tea-time container space">
+    <div class="part">
+      <h2 class="spacebelow-x-2">Show up for tea time</h2>
+      <p class="clear-margin">You and a few others join a host at a cafe.</p>
+    </div>
+    <div class="part">
+      <h2 class="spacebelow-x-2">Have a real conversation</h2>
+      <p class="clear-margin">You talk for two hours about anything.</p>
+    </div>
+    <div class="part">
+      <h2 class="spacebelow-x-2">See what happens</h2>
+      <p class="clear-margin">That's it. No strings attached.</p>
+    </div>
+  </div>
+</div>
 <%#= render partial: 'shared/press_list', locals: {items: @press}%>
 <div class="tea-explainers container">
   <div class="tea-explainer">
-    <%= image_tag 'landing/1.png', class: ['left', 'tea-explainer-illustration'] %>
-    <div class="tea-explainer-copy right">
+    <%= image_tag 'landing/realpeople.png', class: ['left', 'tea-explainer-illustration'] %>
+    <div class="tea-explainer-copy right weird">
     	<h2 class="tea-explainer-header">
     	  It’s weird.
     	</h2>
-    	<p class="tea-explainer-body">
+    	<p class="tea-explainer-body ">
     	  Everyone at tea time is stepping a little out of their comfort zone. 
         This makes it so much easier to actually learn something unexpected 
-        about the people around you. Because open minds are a prerequisite around here.
+        about the people around you. Because open minds are a prerequisite 
+        around here.
     	</p>
     </div>
   </div>
   <div class="tea-explainer">
-    <%= image_tag 'landing/2.png', class: ['right', 'tea-explainer-illustration'] %>
-    <div class="tea-explainer-copy left">
+    <%= image_tag 'landing/nevermeet.png', class: ['right', 'tea-explainer-illustration'] %>
+    <div class="tea-explainer-copy left never-meet">
     	<h2 class="tea-explainer-header">
         We won't meet otherwise.
     	</h2>
     	<p class="tea-explainer-body">
-    	  In all likelihood, our paths won’t cross for any reason. So often, we meet 
-        through work, school, or friends of friends. Even then, it’s questionable. 
-        So basically, we manufacture serendipity.  
+    	  In all likelihood, our paths won’t cross for any reason. So often, 
+        we only meet people through work, school, or friends of friends. 
+        And even then, it’s questionable. So basically, we manufacture 
+        serendipity.  
     	</p>
     </div>
   </div>
   <div class="tea-explainer">
-    <%= image_tag 'landing/3.png', class: ['left', 'tea-explainer-illustration'] %>
-    <div class="tea-explainer-copy right">
+    <%= image_tag 'landing/highfive.png', class: ['left', 'tea-explainer-illustration'] %>
+    <div class="tea-explainer-copy right high-five">
     	<h2 class="tea-explainer-header">
         Your hands are made for high fiving!
       </h2>
     	<p class="tea-explainer-body">
-    	  And your eyes are made…for eye contact! Real humans are so much cooler than 
-        their tweets or Instagram pictures. We have loads of real humans in these parts.
+    	  And your eyes are made…for eye contact! Real humans are so much 
+        cooler than their tweets or Instagram pictures. Tea time has real 
+        humans! #nofilter!
     	</p>
     </div>
   </div>

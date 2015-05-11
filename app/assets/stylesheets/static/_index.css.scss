@@ -5,40 +5,53 @@
   background-position: 50% 30%;
 }
 
-.what-is-tea-time {
-  @include cover-photo(image-url("home/what-is-tws-cover.png"), $gradient: $null-gradient);
-  @include padding(150px 0);
-
-  @include media($tablet) {
-    @include padding(150px 25px);
+.what-is-tea-time-wrapper {
+  width: 100%;
+  background: $tws-tan;
+  text-align: center;
+  padding: 2em 1em;
+  .what-is-tea-time {
+    .part {
+      @include span-columns(4 of 12)
+    }
   }
 }
 
 .tea-explainer {
-  @include span-columns(12);
+  @include span-columns(10 of 12);
   @include margin(2em 0);
+  @include shift(1);
 
   .left { float: left; }
-  .right { float: right }
+  .right { float: right; margin-right: 0; }
 }
 
 .tea-explainer-copy {
   @include media($tablet) {
-    @include span-columns(6);
+    @include span-columns(5 of 10);
   }
-
   @include media($desktop) {
-    @include span-columns(6);
+    @include span-columns(5 of 10);
   }
-
   .tea-explainer-header {
     color: $tws-orange;
+    @include margin(0 0 $base-font-size 0);
+  }
+  &.weird {
+    @include margin(70px 0 0 0);
+  }
+  &.never-meet {
+    @include margin(25px 0 0 0);
+  }
+  &.high-five {
+    @include margin(20px 0 0 0);
   }
 }
 
 .tea-explainer-illustration {
   @include media($desktop) {
-    @include span-columns(5);
+    @include span-columns(4 of 10);
+    @shift (1)
   }
 }
 
