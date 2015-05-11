@@ -79,4 +79,6 @@ Rails.application.routes.draw do
     get '/history'  => 'profiles#history',    as: :history
     get '/tasks'    => 'profiles#host_tasks', as: :host_tasks
   end
+
+  get '/:id' => 'cities#forbes_show', as: :forbes_city
 end
