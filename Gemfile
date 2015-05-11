@@ -67,7 +67,10 @@ end
 # gem 'capistrano-rails', group: :development
 
 # Dev Gems
-gem 'spring', group: :development
+group :development do
+  gem 'spring'
+  gem 'dotenv-rails'
+end
 
 # Random debug tools
 group :development, :test do
