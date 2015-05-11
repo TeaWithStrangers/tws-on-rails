@@ -10,10 +10,30 @@
   = f.label :timezone
   .dropdown
     = select_tag(:timezone, options_for_select(City.timezone_mappings.keys, @city.timezone), name: 'city[timezone]')
-  .dropdown
-    = select_tag(:brew_status, options_for_select(City.brew_statuses.keys), name: 'city[brew_status]')
   = f.label :header_bg
   = f.file_field :header_bg
+  %h1 City Status
+  - if @city.unapproved?
+    :markdown
+      This city has been suggested by a user. Fill out all the requisite information and choose what to do with it.
+      <br/>
+      <br/>
+      If merging into another city, be sure to select the appropriate to merge
+      into. DON'T MESS UP. IRREVERSIBLE CHANGES. IRREVERSIBLE.
+
+    = label_tag(:approval_action_approve, "Approve City")
+    = radio_button_tag(:approval_action, "approve")
+    = label_tag(:approval_action_merge, "Merge City")
+    = radio_button_tag(:approval_action, "merge")
+    = label_tag(:approval_action_reject, "Reject City")
+    = radio_button_tag(:approval_action, "reject")
+
+    .dropdown
+      = select_tag(:merge_city_id, options_for_select(City.all.select(:id, :name).collect{ |p| [p.name, p.id] }, ""), {:class => "city"})
+    %br
+  - else
+    .dropdown
+      = select_tag(:brew_status, options_for_select(City.brew_statuses.keys), name: 'city[brew_status]')
   - if @city.errors.any?
     #error_explanation
       %h2= "#{pluralize(@city.errors.count, "error")} prohibited this city from being saved:"
