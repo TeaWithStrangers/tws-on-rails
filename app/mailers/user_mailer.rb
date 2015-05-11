@@ -4,15 +4,25 @@ class UserMailer < ActionMailer::Base
 
   default from: "\"Tea With Strangers\" <sayhi@teawithstrangers.com>"
 
-  def notify_city_suggestor_of_approval(city_id)
+  def notify_city_suggestor(city_id, admin_action)
     @city = City.find_by(id: city_id)
-    return if @city.nil?
     @user = @city.suggested_by_user
-    return if @user.nil?
-    mail(
-      to: @city.suggested_by_user.email,
-      subject: "#{@city.name} has been approved for Tea!"
-    )
+    cancel_delivery if (@city.nil? || @user.nil?)
+    @partial = "city_suggestion_#{admin_action}"
+
+    case admin_action
+    when :approved
+      subject = "Thanks for suggesting #{@city.name}, #{@user.name}!"
+    when :rejected
+      subject = "About #{@city.name}, #{@user.name}"
+    when :merged
+      subject = "Thanks for suggesting #{@city.name}, #{@user.name}..."
+    end
+
+    mail(to: @user.email, subject: subject) do |format|
+      format.text { render }
+      format.html { render }
+    end
   end
 
   def registration(user, password)
