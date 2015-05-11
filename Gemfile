@@ -53,9 +53,11 @@ gem 'cancan', '~> 1.6.10'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
-# Use unicorn as the app server
+# Use same server in dev as production
+gem 'unicorn'
+gem 'unicorn-rails'
+
 group :production do
-  gem 'unicorn'
   gem 'newrelic_rpm'
 end
 
