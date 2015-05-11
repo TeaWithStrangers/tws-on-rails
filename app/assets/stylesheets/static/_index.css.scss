@@ -23,6 +23,10 @@
         @include margin(0 0 $base-font-size/2 0);
       }
 
+      .teatime-basics-subtext {
+        @include margin(0);
+      }
+
       @include media($tablet) {
         @include span-columns(4 of 12);
         @include margin(0);
@@ -93,9 +97,7 @@ h3.homepage-section-lead {
       max-width: 540px;
     }
   }
-  @include cover-photo(image-url(''),
-                       image-url(''),
-                       linear-gradient(to bottom, rgba($tws-tan, .87), rgba($tws-tan, .87)));
+  background-color: $tws-tan;
   clear: both;
   margin-bottom: 2em;
 }
