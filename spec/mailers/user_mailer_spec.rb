@@ -1,9 +1,11 @@
 require 'spec_helper'
 
 describe UserMailer do
-  describe '#notify_city_suggestor_of_approval' do
+  describe '#notify_city_suggestor' do
     let(:mock_user) do
-      double('User', email: 'foo@goo.com', nickname: "Anthony Gonsalves")
+      user = double('User', email: 'foo@goo.com', nickname: "Anthony Gonsalves")
+      allow(user).to receive(:name).and_return(user.nickname)
+      user
     end
     let(:mock_city) do
       double('City', id: 5, suggested_by_user: mock_user, name: "Wonderland")
@@ -14,29 +16,28 @@ describe UserMailer do
     before(:each) do
       allow(City).to receive(:find).with(5).and_return(mock_city)
       allow(City).to receive(:find).with(6).and_return(city_without_suggestor)
-      allow(City).to receive(:find_by).with({id: 5}).and_return(mock_city)
-      allow(City).to receive(:find_by).with({id: 6}).and_return(city_without_suggestor)
-      allow(City).to receive(:find_by).with({id: 100}).and_return(nil)
+      allow(City).to receive(:find).with(100).and_raise(ActiveRecord::RecordNotFound)
     end
 
     it 'should not send email if there is no suggestor' do
-      mail = described_class.notify_city_suggestor_of_approval(6)
-      expect(mail.class).to eq ActionMailer::Base::NullMail
+      mail = described_class.notify_city_suggestor(6, :approved)
+      expect(mail).to eq ActionMailer::Base::NullMessage
     end
 
     it 'should send email to the suggestor' do
-      mail = described_class.notify_city_suggestor_of_approval(5)
+      mail = described_class.notify_city_suggestor(5, :approved)
       expect(mail.to).to include mock_user.email
     end
 
     it 'should be from teawithstrangers' do
-      mail = described_class.notify_city_suggestor_of_approval(5)
+      mail = described_class.notify_city_suggestor(5, :merged)
       expect(mail.from).to include "sayhi@teawithstrangers.com"
     end
-    it 'should not send if the city is not found' do
-      mail = described_class.notify_city_suggestor_of_approval(100)
-      expect(mail.class).to eq ActionMailer::Base::NullMail
+
+    it 'should raise an error if the city is not found' do
+      expect { described_class.notify_city_suggestor(100, :approved) }.to raise_error(ActiveRecord::RecordNotFound)
     end
+
   end
 
   describe '#registration' do
