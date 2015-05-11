@@ -9,3 +9,5 @@ before_script:
   - RAILS_ENV=test bundle exec rake db:migrate --trace
 addons:
   postgresql: 9.3
+env:
+  FB_APP_ID=foo FB_APP_SECRET=bar
