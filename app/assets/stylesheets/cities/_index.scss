@@ -1,0 +1,33 @@
+.cities-list {
+  @include outer-container;
+  .city {
+    position: relative;
+
+    @include media($tablet-only) {
+      @include span-columns(6);
+      @include omega(2n);
+    }
+
+    @include media($desktop) {
+      @include span-columns(4);
+      @include omega(3n);
+    }
+
+    .city-name {
+      margin: 0;
+      width: 100%;
+
+      position: absolute;
+      top: 40%;
+
+      text-align: center;
+
+      a {
+        color: $tws-white;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
