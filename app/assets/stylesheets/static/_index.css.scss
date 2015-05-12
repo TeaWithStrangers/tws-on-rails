@@ -67,12 +67,15 @@ h3.homepage-section-lead {
     @include span-columns(5 of 10);
 
     &.weird {
+
       @include margin(70px 0 0 0);
     }
     &.never-meet {
+
       @include margin(25px 0 0 0);
     }
     &.high-five {
+      
       @include margin(20px 0 0 0);
     }
   }
