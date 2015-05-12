@@ -53,7 +53,11 @@ h3.homepage-section-lead {
   }
 
   .left { float: left; }
-  .right { float: right; margin-right: 0; }
+  .right { 
+    float: right; 
+
+    @include omega; 
+  }
 }
 
 .tea-explainer-copy {
