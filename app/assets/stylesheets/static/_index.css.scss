@@ -5,22 +5,22 @@
   background-position: 50% 30%;
 }
 
-.what-is-tea-time-wrapper {
+.tt-description-wrapper {
   width: 100%;
   background: $tws-tan;
   text-align: center;
   padding: 2em 1em;
-  @include margin(0 0 3em);
+  margin-bottom: 3em;
   .what-is-tea-time {
     .part {
-      @include margin(0 0 $base-font-size*2);
+      margin-bottom: $base-font-size*2;
 
       &.last {
         @include margin(0);
       }
 
       .teatime-basics {
-        @include margin(0 0 $base-font-size/2 0);
+        margin-bottom: $base-font-size/2;
       }
 
       .teatime-basics-subtext {
@@ -37,7 +37,7 @@
 
 h3.homepage-section-lead {
   text-align: center;
-  @include margin(0 0 3em);
+  margin-bottom: 3em;
 }
 
 .tea-explainers {
@@ -74,7 +74,7 @@ h3.homepage-section-lead {
   }
   .tea-explainer-header {
     color: $tws-orange;
-    @include margin(0 0 $base-font-size 0);
+    margin-bottom: $base-font-size;
   }
 }
 
@@ -85,9 +85,7 @@ h3.homepage-section-lead {
 }
 
 .cta-footer {
-  .content { 
-    padding: 2em 0; 
-  }
+  .content { padding: 2em 0; }
   .content-box {
     max-width: none; 
     h2 {
@@ -98,8 +96,9 @@ h3.homepage-section-lead {
     }
   }
   background-color: $tws-tan;
-  clear: both;
   margin-bottom: 2em;
+
+  @include row();
 }
 
 .testimonials {
@@ -134,13 +133,21 @@ img.centered {
 }
 
 .stranger-letter {
+
   @include margin(0 auto 4em);
   @include span-columns(10 of 12);
   @include shift(1);
 
   .left { float: left; }
-  .right { float: right; margin-right: 0; }
+  
+  .right { 
+    float: right; 
+
+    @include omega; 
+  }
+  
   img.left {
+    
     @include span-columns(10 of 12);
     @include shift(1);
     margin-bottom: 2em;
