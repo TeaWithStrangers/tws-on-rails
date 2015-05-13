@@ -17,7 +17,6 @@ var onCitiesIndexLoad = function() {
       .sortBy(function(c) {
         switch(c.brew_status) {
           case 'fully_brewed':
-            console.log(100)
               return 100;
           case 'warming_up':
             return 10;
@@ -29,8 +28,6 @@ var onCitiesIndexLoad = function() {
       .value()
 
         $.each(cities, function(index, city){
-
-          console.log(city.name, city.info.user_count, city.brew_status)
             var cityDiv = '<div class="city"><img class="city-image" src="'+city.header_bg+'"/><h3 class="city-name">' + cityLink(city) + '</h3></div>';
           if(city.brew_status === "fully_brewed"){
             listOfActiveCities.push(cityDiv);
