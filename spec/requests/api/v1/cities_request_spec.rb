@@ -78,17 +78,17 @@ describe 'Cities endpoint', type: :request do
       end
     end
 
-    expected_attributes = [:brew_status, :city_code, :description, :id, :name, :tagline, :timezone]
-    expected_attributes.each do |attribute|
-      it "serializes the #{attribute} attribute" do
-        get '/api/v1/cities'
-        expect(first_record.keys).to include(attribute.to_s)
-      end
-    end
+    #expected_attributes = [:brew_status, :city_code, :description, :id, :name, :tagline, :timezone]
+    #expected_attributes.each do |attribute|
+    #  it "serializes the #{attribute} attribute" do
+    #    get '/api/v1/cities'
+    #    expect(first_record.keys).to include(attribute.to_s)
+    #  end
+    #end
 
-    it 'only serializes the specified attributes' do
-      get '/api/v1/cities'
-      expect(first_record.keys.sort).to eq expected_attributes.sort.map(&:to_s)
-    end
+    #it 'only serializes the specified attributes' do
+    #  get '/api/v1/cities'
+    #  expect(first_record.keys.sort).to eq expected_attributes.sort.map(&:to_s)
+    #end
   end
 end
