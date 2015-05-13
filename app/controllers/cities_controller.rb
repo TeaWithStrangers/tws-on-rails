@@ -1,7 +1,7 @@
 class CitiesController < ApplicationController
   before_action :set_city, except: [:index, :new, :forbes_index, :forbes_new, :forbes_create]
   before_action :authenticate_user!, :authorized?, only: [:new, :create, :edit, :update, :destroy]
-  before_filter :away_ye_waitlisted, except: [:forbes_index, :forbes_show, :forbes_new, :forbes_suggest, :forbes_create]
+  before_action :away_ye_waitlisted, except: [:forbes_index, :forbes_show, :forbes_new, :forbes_suggest, :forbes_create]
 
   # GET /cities
   # GET /cities.json
@@ -31,17 +31,14 @@ class CitiesController < ApplicationController
   end
 
   def forbes_create
-    @city = City.new(city_params)
-    @city.city_code = CityCodeGenerator.generate
-    @city.timezone = "Pacific Time (US & Canada)"
-    @city.brew_status = "unapproved"
-    if current_user
-      @city.suggested_by_user = current_user
-    end
+    #NOTE: Seems unnecessary but required for the error case
+    use_new_styles
+
+    @city = NewSuggestedCity.call(city_params, current_user)
 
     respond_to do |format|
-      if @city.save!
-        format.html { redirect_to @city, notice: 'Thanks!' }
+      if @city.persisted?
+        format.html { redirect_to forbes_city_path(@city), notice: 'Thanks!' }
       else
         format.html { render :forbes_new, alert: "Something went wrong, sorry" }
       end
