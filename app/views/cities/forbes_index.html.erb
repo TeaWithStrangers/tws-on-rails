@@ -5,7 +5,7 @@
       <h1 class="dark center">Where can we find you?</h1>
       <p class="header-small">Choose the city where you'd like to join for tea time</p>
       <%= link_to suggest_cities_path do %>
-        <button class="btn new-city-cta">Don’t see your city or college? Add it here!</button>
+        <button class="button new-city-cta top-button ">Don’t see your city? Add it here!</button>
       <% end %>
     </div>
 
@@ -21,10 +21,9 @@
         </div>
       </div>
     </div>
+    <%= link_to suggest_cities_path do %>
+      <button class="btn new-city-cta">Don't see your city? Add it here!</button>
+    <% end %>
   </div>
-
-  <%= link_to suggest_cities_path do %>
-    <button class="btn new-city-cta">Don't see your city listed? Add a new one</button>
-  <% end %>
 </div>
 <%= render partial: 'shared/new_footer' %>
