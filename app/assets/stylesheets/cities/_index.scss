@@ -1,3 +1,7 @@
+.cities-partial {
+  margin-bottom: 3em;
+}
+
 .city-cta-header {
   padding: 3em 0 2em;
 
@@ -18,7 +22,9 @@
   }
 }
 
-form {
+form.dummy {
+  margin-bottom: 3em;
+  overflow: auto;
 
   @include media($tablet) {
     @include span-columns(10 of 12);
@@ -32,29 +38,66 @@ form {
 
   input[type="text"] {
 
+    @include span-columns(12);
+
     @include media($tablet) {
       @include span-columns(7 of 10);
     }
 
     @include media($desktop) {
-      @include span-columns(6 of 8)
+      @include span-columns(6 of 8);
     }
   }
 
   button {
+
+    @include span-columns(12);
 
     @include media($tablet) {
       @include span-columns(3 of 10);
     }
 
     @include media($desktop) {
-      @include span-columns(2 of 8)
+      @include span-columns(2 of 8);
     }
   }
+
+}
+
+button.new-city-cta {
+  line-height: 1.5;
+
+  @include media($tablet) {
+    line-height: 1;
+
+    @include span-columns(10 of 12);
+    @include shift(1);
+  }
+
+  @include media($desktop) {
+    @include span-columns(8 of 12);
+    @include shift(2);
+  }
+}
+
+.cities-lists {
+  @include outer-container;
+  clear: both;
+
+  .cities-section {
+    margin-bottom: $base-font-size*1.5;
+  }
+}
+
+h3.cities-list-header {
+  text-align: center;
+  margin-bottom: $base-font-size*1.5;
 }
 
 .cities-list {
   @include outer-container;
+
+
   .city {
     position: relative;
 
