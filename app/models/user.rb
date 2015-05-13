@@ -42,10 +42,6 @@ class User < ActiveRecord::Base
     nickname = name
   end
 
-  def home_city
-    read_attribute(:home_city_id).nil? ? City.first : super
-  end
-
   def twitter_url
     "https://twitter.com/#{twitter}" if twitter
   end

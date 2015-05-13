@@ -27,6 +27,10 @@ class City < ActiveRecord::Base
   }
   scope :hidden, -> { where(brew_status: brew_statuses[:hidden]) }
 
+  def pending?
+    cold_water? || warming_up? || unapproved?
+  end
+
   def hosts
     hosts = proxy_cities.inject([]) {|lst, c| lst + c.hosts}
     User.hosts.where(home_city: [self] + proxy_cities)
