@@ -9,9 +9,14 @@
     <meta name='viewport' content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta content='http://teawithstrangers.com' property='og:url'>
     <meta content='website' property='og:type'>
-    <meta content='Tea With Strangers' property='og:title'>
-    <meta content='http://f.cl.ly/items/3F43223x2A0q0d0U093d/tws-splash-fbimage-01.jpg' property='og:image'>
-    <meta content='Tea With Strangers is all about making meaningful interactions more fun.' property='og:description'>
+
+    <% if content_for(:head) %>
+      <%= yield(:head) %>
+    <% else %>
+      <meta content='Tea With Strangers' property='og:title'>
+      <meta content='http://f.cl.ly/items/3F43223x2A0q0d0U093d/tws-splash-fbimage-01.jpg' property='og:image'>
+      <meta content='Tea With Strangers is all about making meaningful interactions more fun.' property='og:description'>
+    <% end %>
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
