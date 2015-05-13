@@ -1,0 +1,35 @@
+
+<%= content_for :title do %>
+  <%="#{@city.name} | Tea With Strangers"%>
+<% end %>
+
+<%= content_for :description do %>
+  <%= "Tea With Strangers is all about making meaningful interactions more fun. Meet some strangers in #{@city.name}!"%>
+<% end %>
+
+<%= content_for :head do %>
+  <meta property ="og:type" content="website"/>
+  <meta property ="og:title" content='<%= "Tea With Strangers in # @city.name}"%>'/>
+  <meta property ="og:image" content='<%= "#{@city.header_bg.url}"%>'/>
+  <meta property ="og:description" content ="Tea With Strangers is all about making meaningful interactions more fun. Meet some strangers in your city!"/>
+<% end %>
+
+<%= render partial: 'shared/header' %>
+<%= render partial: 'cities/show/city_banner' %>
+<div class="container">
+  <div class="city-info">
+    <%= render partial: 'cities/show/fallback' %>
+    <!---
+  	<% if @city.unapproved? %>
+  	  <%= render partial: 'cities/show/unconfirmed' %>
+  	<% elsif @city.cold_water? %>
+  	  <%= render partial: 'cities/show/cold_water' %>
+  	<% else %>
+  	  <%= render partial: 'cities/show/active_waitlisted' %>
+  	<% end %>
+  -->
+  </div>
+  <div class='sharing-info'>
+    <%= render partial: 'shared/sharing_widget', locals: {city: @city} %>
+  </div>
+</div>

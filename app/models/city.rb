@@ -3,7 +3,7 @@ class City < ActiveRecord::Base
   validates_presence_of :city_code, :timezone
   before_save :upcase_code
   has_attached_file :header_bg, styles: {banner: '1280x', medium: '750x>', small: '350x>'},
-                                         default_url: "http://placecorgi.com/1280"
+    default_url: ActionController::Base.helpers.asset_url('missing-city-image.jpg')
   validates_attachment_content_type :header_bg, :content_type => /\Aimage\/.*\Z/
   enum brew_status: { cold_water: 0, warming_up: 1, fully_brewed: 2, hidden: 3, unapproved: 4, rejected: 5 }
   has_many :tea_times
@@ -27,6 +27,10 @@ class City < ActiveRecord::Base
   }
   scope :hidden, -> { where(brew_status: brew_statuses[:hidden]) }
 
+  def pending?
+    cold_water? || warming_up? || unapproved?
+  end
+
   def hosts
     hosts = proxy_cities.inject([]) {|lst, c| lst + c.hosts}
     User.hosts.where(home_city: [self] + proxy_cities)
@@ -43,6 +47,10 @@ class City < ActiveRecord::Base
 
   def to_param
     city_code
+  end
+
+  def city_code
+    super.downcase
   end
 
   def tea_times

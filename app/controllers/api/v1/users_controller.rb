@@ -9,8 +9,8 @@ class Api::V1::UsersController < ApplicationController
 
   def update_interests
     u = current_user
-    u.tws_interests.merge(params[:tws_interests])
+    u.tws_interests = u.tws_interests.merge(params[:tws_interests])
     u.save
-    render json: u.persisted?
+    render json: {success: u.persisted?}
   end
 end

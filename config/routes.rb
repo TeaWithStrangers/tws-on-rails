@@ -45,10 +45,17 @@ Rails.application.routes.draw do
     end
   end
 
+  # TODO: You know what to do Tue May 5 2015
+  get '/cities' => 'cities#forbes_index'
   resources :cities do
+    collection do
+      get '/suggest' => 'cities#forbes_new', as: :suggest
+      post '/suggest' => 'cities#forbes_create', as: :suggest_create
+    end
     member do
       get '/host/:host_id' => 'hosts#show', as: :host
       get '/schedule', action: 'schedule',  as: :schedule
+      put '/set', action: 'forbes_set_city',  as: :set
     end
   end
 
@@ -77,4 +84,6 @@ Rails.application.routes.draw do
     get '/history'  => 'profiles#history',    as: :history
     get '/tasks'    => 'profiles#host_tasks', as: :host_tasks
   end
+
+  get '/:id' => 'cities#forbes_show', as: :forbes_city
 end

@@ -303,6 +303,7 @@ GEM
     uglifier (2.7.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    underscore-rails (1.8.2)
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.1)
@@ -364,5 +365,6 @@ DEPENDENCIES
   time_zone_ext
   turbolinks
   uglifier (>= 1.3.0)
+  underscore-rails
   unicorn
   unicorn-rails

@@ -1,0 +1,3 @@
+We hate to be the bearers of bad news, but we had to turn down your request for
+TWS in <%= @city.name %>. We only do this when we can’t figure out where this
+city was or when it looks like a typo. 
