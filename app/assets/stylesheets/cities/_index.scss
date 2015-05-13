@@ -31,3 +31,7 @@
     }
   }
 }
+
+.city-banner {
+  @include cover-photo(url(''), url(''), linear-gradient(to bottom, rgba($tws-yellow, .87), rgba($tws-yellow, .87)));
+}
