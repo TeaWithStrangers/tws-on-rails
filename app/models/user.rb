@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   has_attached_file :avatar, styles: { medium: "300x300", thumb: "100x100", landscape: "500"}, default_url: "/assets/missing.jpg"
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
-  validates_presence_of :home_city_id, :nickname
+  validates_presence_of :nickname
 
   include ActiveModel::Validations
   validates_with Validators::FacebookUrlValidator
@@ -82,6 +82,24 @@ class User < ActiveRecord::Base
     end
   end
 
+  def waitlist
+    if !waitlisted?
+      write_attribute(:waitlisted, true)
+      write_attribute(:waitlisted_at, Time.now)
+    end
+  end
+
+  def unwaitlist
+    if waitlisted?
+      write_attribute(:waitlisted, false)
+      write_attribute(:unwaitlisted_at, Time.now)
+    end
+  end
+
+  def tws_interests
+    super || {'hosting' => false, 'leading' => false }
+  end
+
   class << self
     def nil_user
       @@nil_user ||= NilUser.new
@@ -102,6 +120,10 @@ class NilUser
 
   def email
     nil
+  end
+
+  def waitlisted?
+    true
   end
 
   def blank?

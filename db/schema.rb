@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150417235614) do
+ActiveRecord::Schema.define(version: 20150510013715) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20150417235614) do
     t.string   "header_bg_content_type"
     t.integer  "header_bg_file_size"
     t.datetime "header_bg_updated_at"
+    t.integer  "suggested_by_user_id"
   end
 
   add_index "cities", ["city_code"], name: "city_code_idx", unique: true, using: :btree
@@ -119,15 +120,14 @@ ActiveRecord::Schema.define(version: 20150417235614) do
     t.string   "twitter"
     t.datetime "deleted_at"
     t.integer  "roles",                  default: 0,  null: false
-    t.string   "unconfirmed_email"
-    t.string   "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
     t.text     "given_name"
     t.text     "family_name"
+    t.datetime "waitlisted_at"
+    t.datetime "unwaitlisted_at"
+    t.boolean  "waitlisted"
+    t.json     "tws_interests"
   end
 
-  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 

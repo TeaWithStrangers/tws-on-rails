@@ -13,6 +13,8 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 #JS, CSS, Templating
 
 gem 'haml-rails', '~> 0.5'
+gem 'sass-rails', '~> 5.0'
+# For the old-style styles
 gem 'less-rails', '~> 2.5'
 gem 'therubyracer', '~> 0.12'
 
@@ -22,6 +24,7 @@ gem 'rails_12factor', group: :production
 gem 'turbolinks'
 gem 'jquery-rails'
 gem 'jquery-ui-rails', '~> 5.0'
+gem 'underscore-rails'
 gem "active_model_serializers"
 gem 'bitmask_attributes', '~> 1.0'
 
@@ -51,9 +54,11 @@ gem 'cancan', '~> 1.6.10'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
-# Use unicorn as the app server
+# Use same server in dev as production
+gem 'unicorn'
+gem 'unicorn-rails'
+
 group :production do
-  gem 'unicorn'
   gem 'newrelic_rpm'
 end
 
@@ -66,6 +71,8 @@ gem 'spring', group: :development
 # Random debug tools
 group :development, :test do
   gem 'byebug'
+  gem 'guard'
+  gem 'guard-livereload'
   gem 'pry-rails'
   gem 'pry-byebug'
   gem 'pry-stack_explorer'

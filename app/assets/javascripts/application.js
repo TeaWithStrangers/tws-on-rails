@@ -10,6 +10,7 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require underscore
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
@@ -17,3 +18,12 @@
 //= require_tree .
 
 function viewportWidth() { return (window.innerWidth > 0) ? window.innerWidth : screen.width; }
+
+function toggleHeader(elem) {
+  var a = document.getElementsByClassName('nav-list')[0];
+  if (a.classList.length > 1) {
+    a.className = 'nav-list'
+  } else {
+    a.className += ' open';
+  }
+}

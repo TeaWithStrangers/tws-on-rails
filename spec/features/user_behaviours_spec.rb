@@ -13,14 +13,14 @@ feature 'Signing In & Up' do
   scenario 'with blank name' do
     sign_up_with('', 'drthhlmt@spaceballone.com')
     #User should be redirected to the sign up page
-    expect(current_path).to match new_user_registration_path
+    expect(current_path).to match sign_up_path
   end
 
   scenario 'can sign up, log out, log in' do
     user = create(:user) 
     sign_in user
-    expect(current_path).to eq root_path
-    expect(page).to have_content 'Schedule tea time'
+    expect(current_path).to eq schedule_city_path(user.home_city)
+    expect(page).to have_content user.home_city.name
   end
 
   scenario 'with an already created user account from a registration form' do
@@ -44,19 +44,17 @@ feature 'Registered User' do
       visit city_path(@user.home_city)
       expect(page.status_code).to eq(200)
       click_link('5 spots left')
-      expect(page).to have_content @host.nickname
-      click_button 'Confirm'
+      expect(current_path).to eq tea_time_path(@tt)
+
+      find('input.confirm').click
       expect(@user.attendances.map(&:tea_time)).to include @tt
     end
 
     scenario 'logged out user with account tries to attend' do
       sign_out
       visit city_path(@user.home_city)
-      click_link('5 spots left')
-      fill_in :tea_time_nickname, with:  @user.name
-      fill_in :email, with: @user.email
-      click_button 'Confirm'
-      expect(current_path).to eq new_user_session_path
+      # Should be redirected to the new TWS Sign up experience
+      expect(current_path).to eq root_path
     end
 
     scenario 'user can flake' do
@@ -113,11 +111,11 @@ end
 
 private
   def sign_up_with(name, email, opts = nil)
-    visit root_path
+    visit sign_up_path
     fill_in 'user_nickname', with: name
     fill_in 'user_email', with: email
-    select(City.first.name, from: 'city')
-    click_button "Let's Get Tea"
+    fill_in 'user_password', with: SecureRandom.hex
+    find('input[name="commit"]').click
   end
 
   def attend_tt(tea_time)

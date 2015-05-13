@@ -16,5 +16,5 @@
         %li= link_to "Account", "/profile"
         %li= link_to "Let's Get Tea",
           schedule_city_path((current_user.home_city || City.first))
-        %li=link_to "Logout", destroy_user_session_path, method: :delete
+        %li= link_to "Sign Out", destroy_user_session_path, method: :delete
 %hr

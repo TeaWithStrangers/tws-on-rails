@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe User do
   it { expect(subject).to validate_presence_of(:nickname) }
-  it { expect(subject).to validate_presence_of(:home_city_id) }
+  #it { expect(subject).to validate_presence_of(:home_city_id) }
 
   context 'names' do
     let(:user) { create(:user) }
@@ -100,6 +100,42 @@ describe User do
     end
   end
 
+  context 'Waitlisting:' do
+    let(:user) { create(:user) }
+    let(:wl_user) { create(:user, :waitlist) }
+
+    it "doesn't treat existing users as waitlisted" do
+      expect(user.waitlisted?).to eq false
+    end
+
+    context "modification" do
+      describe ".waitlist" do
+        it "should set WL status and wl'ed_at" do
+          user.waitlist
+          expect(user.waitlisted?).to eq true
+          expect(user.waitlisted_at).not_to eq nil
+        end
+
+        it "should not modify an already waitlisted user" do
+          expect(wl_user.waitlisted?).to eq true
+        end
+      end
+
+      describe ".unwaitlist" do
+        it "should set WL status and wl'ed_at" do
+          wl_user.unwaitlist
+          expect(wl_user.waitlisted?).to eq false
+          expect(wl_user.unwaitlisted_at).not_to eq nil
+        end
+
+        it "should not modify a non-waitlisted user" do
+          user.unwaitlist
+          expect(user.waitlisted?).to eq false
+        end
+      end
+    end
+  end
+
   describe '.flake_future' do
     let(:tt) { create(:tea_time, attendee_count: 1) }
     let(:user) { tt.attendances.first.user }
@@ -107,7 +143,6 @@ describe User do
       past_tt = create(:tea_time, :past)
       create(:attendance, tea_time: past_tt, user: user)
     }
-
 
     it 'should flake all future attendances' do
       user.flake_future

@@ -1,5 +1,5 @@
 - if current_user.nil?
-  = form_for(resource, as: resource_name, url: registration_path(resource_name), class: 'signup') do |f|
+  = form_for(resource, as: resource_name, url: registration_path(resource_name), class: 'sign-up') do |f|
     = f.text_field :nickname, placeholder: 'Nickname'
     = f.email_field :email, placeholder: 'Email Address'
     - if dropdown ||= false

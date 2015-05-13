@@ -5,7 +5,7 @@ feature 'Authentication' do
     @city = create(:city)
     @u = create(:user, :host, home_city: @city)
     sign_in @u
-    expect(page).to have_text("Logout")
+    expect(page).to have_text("Sign Out")
   end
 
   scenario 'logging out' do
@@ -13,6 +13,6 @@ feature 'Authentication' do
     @u = create(:user, :host, home_city: @city)
     sign_in @u
     sign_out
-    expect(page).to have_text("Login")
+    expect(page).to have_text("Sign In")
   end
 end

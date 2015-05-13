@@ -1,23 +1,18 @@
 class RegistrationsController < Devise::RegistrationsController
   def create
-    if params[:user][:autogen]
-      city = City.find(params[:city])
-      user_info = GetOrCreateUser.call(params[:user], city)
+    if params[:referral] == false
+      super
+    else
+      user_info = GetOrCreateWaitlistedUser.call(user_params)
+
       if user_info[:new_user?] && user_info[:user].valid?
         sign_in user_info[:user]
-        message = "You're set! Check your email for your new password."
-        if city
-          redirect_to schedule_city_path(city), notice: message
-        else
-          redirect_to root_path, notice: message
-        end
+        redirect_to cities_path
       elsif !user_info[:new_user?] && user_info[:user].valid?
         redirect_to new_user_session_path, alert: 'You\'re already registered! Log in using the same email :)'
       else
-        redirect_to new_user_registration_path, alert: "We've made a huge mistake."
+        redirect_to sign_up_path, alert: "We've made a huge mistake."
       end
-    else
-      super
     end
   end
 
@@ -47,4 +42,9 @@ class RegistrationsController < Devise::RegistrationsController
     user.email != params[:user][:email] ||
       params[:user][:password].present?
   end
+
+  private
+    def user_params
+      params.require(:user).permit(:nickname, :email, :password)
+    end
 end
