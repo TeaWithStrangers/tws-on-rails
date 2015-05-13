@@ -1,4 +1,5 @@
 class Api::V1::UsersController < ApplicationController
+  before_filter :authenticate_api 
   def self
     render json: current_user
   end
@@ -12,5 +13,11 @@ class Api::V1::UsersController < ApplicationController
     u.tws_interests = u.tws_interests.merge(params[:tws_interests])
     u.save
     render json: {success: u.persisted?}
+  end
+
+  def authenticate_api
+    unless current_user
+      head :no_content
+    end
   end
 end
