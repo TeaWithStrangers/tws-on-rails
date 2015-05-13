@@ -1,0 +1,12 @@
+<div class="progress-bar-block">
+  <p class="description">
+  <% if val < max %>
+    <%= val %> of <%= max %> filled
+  <% else %>
+    Filled
+  <% end %>
+  </p>
+  <div class="progress-bar <%= 'green' if (val >= max ) %>">
+    <span class="bar" style='width: <%= (val.to_f / max) * 100 %>%;'></span>
+  </div>
+</div>

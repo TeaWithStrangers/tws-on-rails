@@ -1,0 +1,147 @@
+<div class='intro-to-tws cover-photo'>
+  <%= render partial: 'shared/header' %>
+  <div class='content'>
+    <div class='content-box'>
+      <h1 class='cover-photo-lede'>
+        Everyone is interesting
+      </h1>
+      <span class='cover-photo-subtext'>
+        But you don’t discover that when you’re staring at a screen.
+      </span>
+      <%= link_to next_step_path, class: 'sign-up' do %>
+        <button class='orange cover-photo-cta'>
+          Let's Get Tea
+        </button>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="tt-description-wrapper">
+  <div class="what-is-tea-time container space">
+    <div class="part">
+      <h2 class="teatime-basics">Show up for tea time</h2>
+      <p class="teatime-basics-subtext">You and a few others join a host at a cafe.</p>
+    </div>
+    <div class="part">
+      <h2 class="teatime-basics">Have a real conversation</h2>
+      <p class="teatime-basics-subtext">You talk for two hours about anything.</p>
+    </div>
+    <div class="part last">
+      <h2 class="teatime-basics">See what happens</h2>
+      <p class="teatime-basics-subtext">That's it. No strings attached.</p>
+    </div>
+  </div>
+</div>
+<%#= render partial: 'shared/press_list', locals: {items: @press}%>
+<div class="container">
+  <div class="tea-explainers">
+    <h3 class="capitalize homepage-section-lead">So why are thousands of people doing it?</h3>
+    <div class="tea-explainer">
+      <%= image_tag 'landing/realpeople.png', class: ['left', 'tea-explainer-illustration'] %>
+      <div class="tea-explainer-copy right weird">
+      	<h2 class="tea-explainer-header">
+      	  It’s weird.
+      	</h2>
+      	<p class="tea-explainer-body ">
+      	  Everyone at tea time is stepping a little out of their comfort zone. 
+          This makes it so much easier to actually learn something unexpected 
+          about the people around you. Because open minds are a prerequisite 
+          around here.
+      	</p>
+      </div>
+    </div>
+    <div class="tea-explainer">
+      <%= image_tag 'landing/nevermeet.png', class: ['right', 'tea-explainer-illustration'] %>
+      <div class="tea-explainer-copy left never-meet">
+      	<h2 class="tea-explainer-header">
+          We won't meet otherwise.
+      	</h2>
+      	<p class="tea-explainer-body">
+      	  In all likelihood, our paths won’t cross for any reason. So often, 
+          we only meet people through work, school, or friends of friends. 
+          And even then, it’s questionable. So basically, we manufacture 
+          serendipity.  
+      	</p>
+      </div>
+    </div>
+    <div class="tea-explainer">
+      <%= image_tag 'landing/highfive.png', class: ['left', 'tea-explainer-illustration'] %>
+      <div class="tea-explainer-copy right high-five">
+      	<h2 class="tea-explainer-header">
+          Your hands are made for high fiving!
+        </h2>
+      	<p class="tea-explainer-body">
+      	  And your eyes are made…for eye contact! Real humans are so much 
+          cooler than their tweets or Instagram pictures. Tea time has real 
+          humans! #nofilter!
+      	</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="cta-footer cover-photo">
+  <div class='content'>
+    <div class='content-box'>
+      <h1 class="small dark mid-page-cta">
+        Actually talk to people.
+      </h1>
+      <%= link_to next_step_path, class: 'sign-up' do %>
+        <button class='orange cover-photo-cta'>
+          Let's get tea
+        </button>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="testimonials">
+    <div class="quotes">
+      <div class="quote">
+        <blockquote>
+          ”I met people who I continue to be in touch with almost a year later, and people who I shared delightful conversations with that day but no more. Both are their own kind of fun.”
+          <span class="source">Freia, NYC</span>
+        </blockquote>
+      </div>
+      <div class="quote">
+        <blockquote>
+          ”I’m not the type of person who talks to strangers. This doesn’t mean I don’t want to. Tea With Strangers just makes it easier because you know everyone there wants it too.”
+          <span class="source">Molly, SF</span>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+  <%= image_tag 'landing/weirdpeople.png', class: ['centered'] %>
+  <div class="stranger-letter">
+    <h3 class="capitalize homepage-section-lead">There's no such thing as a stranger.</h3>
+    <%= image_tag 'landing/campfire.png', class: ['left'] %>
+    <article class="right">
+      <p>
+        Stranger is a completely made-up concept. A word meant to characterize every person in the world with whom we haven’t yet made an acquaintance.
+      </p>
+      <p>
+        Here’s some more words about strangers. Tea With Strangers exists to make everyone feel a sense of home — to turn cities into neighborhoods. Here are more words. 
+      </p>
+      <p>
+        Tea With Strangers exists to make everyone feel a sense of home — to turn cities into neighborhoods. Here are more words. 
+      </p>
+      <p>
+      The way we work is that we have hosts and stuff. It’s a fun thing. you should come sometimes. Hi hello.
+      </p>
+    </article>
+  </div>
+</div>
+<div class="cta-footer cover-photo pre-footer">
+  <div class='content'>
+    <div class='content-box'>
+      <h1 class="small dark mid-page-cta">
+        Do we get to high five yet?
+      </h1>
+      <%= link_to next_step_path, class: 'sign-up' do %>
+        <button class='orange cover-photo-cta'>
+          Yes
+        </button>
+      <% end %>
+    </div>
+  </div>
+</div>
+<%= render partial: 'shared/new_footer' %>

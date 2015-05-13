@@ -1,0 +1,6 @@
+Hey <%= @user.name %>
+
+<%= render partial: @partial %>
+
+Bleep bleep bloop,
+The Robots at Tea With Strangers

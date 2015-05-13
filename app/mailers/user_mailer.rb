@@ -4,6 +4,28 @@ class UserMailer < ActionMailer::Base
 
   default from: "\"Tea With Strangers\" <sayhi@teawithstrangers.com>"
 
+  def notify_city_suggestor(city_id, admin_action)
+    @city = City.find(city_id)
+    @user = @city.suggested_by_user
+    cancel_delivery if @user.nil?
+
+    @partial = "city_suggestion_#{admin_action}"
+
+    case admin_action
+    when :approved
+      subject = "Thanks for suggesting #{@city.name}, #{@user.name}!"
+    when :rejected
+      subject = "About #{@city.name}, #{@user.name}"
+    when :merged
+      subject = "Thanks for suggesting #{@city.name}, #{@user.name}..."
+    end
+
+    mail(to: @user.email, subject: subject) do |format|
+      format.text { render }
+      format.html { render }
+    end
+  end
+
   def registration(user, password)
     sendgrid_category "User Registration"
 
@@ -14,10 +36,21 @@ class UserMailer < ActionMailer::Base
       'registration_no_tea' : 'registration'
 
     mail(from: "\"Ankit at Tea With Strangers\" <ankit@teawithstrangers.com>",
-         to: @user.email, 
+         to: @user.email,
          subject: "Thanks for being awesome, #{@user.name}!") do |format|
            format.text { render template }
            format.html { render template }
+         end
+  end
+
+  def waitlisted_registration(user)
+    @user = user;
+
+    mail(from: "\"Ankit at Tea With Strangers\" <ankit@teawithstrangers.com>",
+         to: @user.email,
+         subject: "Thanks for being awesome #{@user.nickname}") do |format|
+           format.text
+           format.html
          end
   end
 

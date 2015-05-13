@@ -1,0 +1,185 @@
+.intro-to-tws {
+  @include cover-photo(image-url('landing/landing-graphic-redesign.jpg'),
+                       image-url('landing/landing-graphic-redesign.jpg'),
+                       linear-gradient(to bottom, rgba($tws-yellow, .87), rgba($tws-yellow, .87)));
+  background-position: 50% 30%;
+}
+
+.tt-description-wrapper {
+  width: 100%;
+  background: $tws-tan;
+  text-align: center;
+  padding: 2em 1em;
+  margin-bottom: 3em;
+  .what-is-tea-time {
+    .part {
+      margin-bottom: $base-font-size*2;
+
+      &.last {
+        @include margin(0);
+      }
+
+      .teatime-basics {
+        margin-bottom: $base-font-size/2;
+      }
+
+      .teatime-basics-subtext {
+        @include margin(0);
+      }
+
+      @include media($tablet) {
+        @include span-columns(4 of 12);
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+h3.homepage-section-lead {
+  text-align: center;
+  margin-bottom: 3em;
+}
+
+.tea-explainers {
+  @include margin(0 auto 3em);
+}
+
+.tea-explainer {
+  @include margin(2em 0);
+  @include span-columns(12 of 12);
+  @include media($tablet) {
+    @include span-columns(10 of 12);
+    @include shift(1);
+  }
+
+  .left { float: left; }
+  .right { 
+    float: right; 
+
+    @include omega; 
+  }
+}
+
+.tea-explainer-copy {
+  @include margin(30px 0 0 0);
+
+  @include media($desktop) {
+    @include span-columns(5 of 10);
+
+    &.weird {
+
+      @include margin(70px 0 0 0);
+    }
+    &.never-meet {
+
+      @include margin(25px 0 0 0);
+    }
+    &.high-five {
+      
+      @include margin(20px 0 0 0);
+    }
+  }
+  .tea-explainer-header {
+    color: $tws-orange;
+    margin-bottom: $base-font-size;
+  }
+}
+
+.tea-explainer-illustration {
+  @include media($desktop) {
+    @include span-columns(4 of 10);
+  }
+}
+
+.cta-footer {
+  .content { padding: 2em 0; }
+  .content-box {
+    max-width: none; 
+    h2 {
+      margin: .5em 0;
+    }
+    button {
+      max-width: 540px;
+    }
+  }
+  background-color: $tws-tan;
+  margin-bottom: 2em;
+
+  @include row();
+}
+
+.testimonials {
+  margin-bottom: 2em;
+
+  .quotes {
+    @include span-columns(10 of 12);
+    @include shift(1);
+  }
+
+  @include media($tablet) {
+    .quote {
+      @include span-columns(5 of 10);
+    }
+  }
+}
+
+img.centered {
+  @include span-columns(10 of 12);
+  @include shift(1);
+  margin-bottom: 4em;
+
+  @include media($tablet) {
+    @include span-columns(6 of 12);
+    @include shift(3);
+  }
+
+  @include media($desktop) {
+    @include span-columns(4 of 12);
+    @include shift(4);
+  }
+}
+
+.stranger-letter {
+
+  @include margin(0 auto 4em);
+  @include span-columns(10 of 12);
+  @include shift(1);
+
+  .left { float: left; }
+  
+  .right { 
+    float: right; 
+
+    @include omega; 
+  }
+  
+  img.left {
+    
+    @include span-columns(10 of 12);
+    @include shift(1);
+    margin-bottom: 2em;
+
+    @include media($tablet) {
+      @include span-columns(6 of 12);
+      @include shift(3);
+    }
+
+    @include media($desktop) {
+      @include span-columns(4.5 of 10);
+      @include shift(0);
+    }
+  }
+
+  article.right {
+    @include span-columns(12 of 12);
+
+    @include media($desktop) {
+      @include span-columns(5 of 10);
+      @include shift(0.5);
+    }
+  }
+}
+
+.pre-footer {
+  @include margin(auto auto 0 auto);
+}
