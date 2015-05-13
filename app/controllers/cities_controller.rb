@@ -1,7 +1,7 @@
 class CitiesController < ApplicationController
-  before_action :set_city, only: [:show, :edit, :update, :destroy, :schedule]
+  before_action :set_city, except: [:index, :new, :forbes_index, :forbes_new, :forbes_create]
   before_action :authenticate_user!, :authorized?, only: [:new, :create, :edit, :update, :destroy]
-  before_filter :away_ye_waitlisted
+  before_action :away_ye_waitlisted, except: [:forbes_index, :forbes_show, :forbes_new, :forbes_suggest, :forbes_create, :forbes_set_city]
 
   # GET /cities
   # GET /cities.json
@@ -15,6 +15,39 @@ class CitiesController < ApplicationController
     else
       redirect_to root_path+"#cities"
     end
+  end
+
+  def forbes_index
+    use_new_styles
+  end
+
+  def forbes_show
+    use_new_styles
+  end
+
+  def forbes_new
+    use_new_styles
+    @city = City.new
+  end
+
+  def forbes_create
+    #NOTE: Seems unnecessary but required for the error case
+    use_new_styles
+
+    @city = NewSuggestedCity.call(city_params, current_user)
+
+    respond_to do |format|
+      if @city.persisted?
+        format.html { redirect_to forbes_city_path(@city), notice: 'Thanks!' }
+      else
+        format.html { render :forbes_new, alert: "Something went wrong, sorry" }
+      end
+    end
+  end
+
+  def forbes_set_city
+    current_user.update(home_city: @city)
+    redirect_to forbes_city_path(@city)
   end
 
   # GET /cities/:city_code
