@@ -12,7 +12,7 @@
   <div class="cities-list">
     <% City.visible(current_user).each do |c| %>
       <div class="city ">
-        <%= link_to c.name, c %>
+        <%= link_to c.name, forbes_city_path(c) %>
       </div>
     <% end %>
   </div>
