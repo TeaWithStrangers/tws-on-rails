@@ -14,7 +14,7 @@
   <meta property ="og:description" content ="Tea With Strangers is a community of people that bring strangers together for great conversations. We're all about making cities feel more like neighborhoods."/>
 <% end %>
 
-<<<<<<< HEAD
+<div class="light-background">
 <%= render partial: 'shared/header' %>
 <%= render partial: 'cities/show/city_banner' %>
 <div class="container">
@@ -28,27 +28,12 @@
   	<% else %>
   	  <%= render partial: 'cities/show/active_waitlisted' %>
   	<% end %>
-  -->
-=======
-<div class="light-background">
-  <%= render partial: 'shared/header' %>
-  <%= render partial: 'cities/show/city_banner' %>
-  <div class="container">
-    <div class="city-info">
-    	<% if @city.unapproved? %>
-    	  <%= render partial: 'cities/show/unconfirmed' %>
-    	<% elsif @city.cold_water? %>
-    	  <%= render partial: 'cities/show/cold_water' %>
-    	<% else %>
-    	  <%= render partial: 'cities/show/active_waitlisted' %>
-    	<% end %>
-    </div>
     <% if @city.unapproved? %>
     <% else %>
       <div class='sharing-info'>
         <%= render partial: 'shared/sharing_widget', locals: {city: @city} %>
       </div>
     <% end %>
->>>>>>> 4fc6afc... suggest city and city page updates
+    -->
   </div>
 </div>

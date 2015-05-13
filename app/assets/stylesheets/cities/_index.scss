@@ -17,10 +17,6 @@
     margin-bottom: 0;
   }
 
-  @include media($desktop) {
-    @include span-columns(8 of 12);
-    @include shift(2);
-  }
 }
 
 form.dummy {
