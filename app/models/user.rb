@@ -97,7 +97,7 @@ class User < ActiveRecord::Base
   end
 
   def tws_interests
-    read_attribute(:tws_interests) || {:hosting => false, :leading => false }.to_json
+    super || {'hosting' => false, 'leading' => false }
   end
 
   class << self

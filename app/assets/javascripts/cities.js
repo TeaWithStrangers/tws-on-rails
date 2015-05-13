@@ -46,6 +46,42 @@ var onCitiesIndexLoad = function() {
   }
 };
 
+var onCitiesShow = function() {
+  var leading_button = $('a[data-user-interest="leading"]');
+  var hosting_button = $('a[data-user-interest="hosting"]');
 
-$(document).ready(onCitiesIndexLoad)
-$(document).on('page:load', onCitiesIndexLoad)
+  $.get('/api/v1/users/self/interests', function(user_info) {
+    if(user_info.leading) {
+      leading_button.addClass('applied');
+    }
+
+    if(user_info.hosting) {
+      hosting_button.addClass('applied');
+    }
+
+  });
+
+  [leading_button, hosting_button].forEach(function(btn) {
+    btn.on('click', function(evt) {
+      var type = evt.currentTarget.dataset.userInterest;
+      var data = {'tws_interests': {}};
+      data['tws_interests'][type] = true
+        $.ajax({
+          url: '/api/v1/users/self/interests',
+          type: 'PATCH',
+          data: data,
+          success: function(d) {
+            $(evt.currentTarget).addClass('applied', 'disabled')
+          }
+        });
+    });
+  });
+}
+
+
+var fns = [onCitiesIndexLoad, onCitiesShow];
+
+fns.forEach(function(e,i) {
+  $(document).ready(e)
+  $(document).on('page:load', e)
+});
