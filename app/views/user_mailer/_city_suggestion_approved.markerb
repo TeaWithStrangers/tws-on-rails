@@ -1,0 +1,1 @@
+The page for TWS <%= @city.name %> is good to go! Check it out and tell everyone you know about it. You can do all of that right here: <%= @city.name, link_to forbes_city_url(@city) %>
