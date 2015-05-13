@@ -1,22 +1,24 @@
-<%= render partial: 'shared/header' %>
-<div class='container'>
-  <div class="cities-partial">
-    <div>
-      <div class="header-big">Tell us where you are at!</div>
-      <div class="header-small">We'll let you know if we have something near you</div>
-    </div>
+<div class="light-background">
+  <%= render partial: 'shared/header' %>
+  <div class='container'>
+    <div class="cities-partial">
+      <div class="city-cta-header">
+        <h1 class="dark center">Where can we find you?</h1>
+        <p class="header-small">Choose the city where you would like to join for tea time</p>
+      </div>
 
-    <div>
-      <input class="form-control"/>
-      <button class="btn">Submit</button>
+      <form>
+        <input class="form-control" type="text"/>
+        <button class="btn">Submit</button>
+      </form>
+      <h3 class='capitalize cities-list-header'>We're in these cities</h1>
+      <div class="cities-list current-cities-container" data-city-type='active'>
+      </div>
+      <div class="">
+      </div>
+      <h3 class='capitalize cities-list-header'>We're on our way to these cities</h1>
+      <div class="cities-list upcoming-cities-container" data-city-type='upcoming'>
+      <button class="btn">Don't see your city listed? Add a new one</button>
     </div>
-    <h1 class='cities-list-header'>We're in these cities</h1>
-    <div class="cities-list current-cities-container" data-city-type='active'>
-    </div>
-    <div class="">
-    </div>
-    <h1 class='cities-list-header'>We're on our way to these cities</h1>
-    <div class="cities-list upcoming-cities-container" data-city-type='upcoming'>
-    <button class="btn">Don't see your city listed? Add a new one</button>
   </div>
 </div>

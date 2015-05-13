@@ -48,7 +48,7 @@ class UserMailer < ActionMailer::Base
 
     mail(from: "\"Ankit at Tea With Strangers\" <ankit@teawithstrangers.com>",
          to: @user.email,
-         subject: "ANKIT CHOOSE A SUBJECT LINE") do |format|
+         subject: "Thanks for being awesome, #{@user.nickname}!") do |format|
            format.text { render template }
            format.html { render template }
          end
