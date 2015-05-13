@@ -1,11 +1,19 @@
-<h1>Thanks for signing up for TWS!</h1>
-<p>
-	We're wicked excited to have you. Unfortunately, there are approximately <%=
-	number_with_delimiter(User.all.count * (rand(100) + 1))%> people who are just as excited about tea time as you are 
-	and we're having trouble stopping our website from melting.
-</p>
-<p>
-  We're very sorry for the inconenience, and we'll shoot you an email when things
-  have calmed down a bit. In the meantime, here are some photos of puppies!
-</p>
-<%= render partial: 'cities/show/set_city' %>
+<div class="city-container">
+	<h2>You're awesome for being into this.</h2>
+	<p>
+		This is such a weird thing to be interested in, and that 
+		you're here must mean you're at least curious. So thank you for, 
+		well, being you!
+	</p>
+	<p> 
+		Unfortunately, there are approximately <%=
+		number_with_delimiter(User.all.count * (rand(100) + 1))%> people 
+		who are also excited about tea time, and we're having trouble 
+		stopping our website from melting.
+	</p>
+	<p>
+	  We're very sorry for the inconvenience, and we'll shoot you an email when things
+	  have calmed down.
+	</p>
+	<%= render partial: 'cities/show/set_city' %>
+</div>

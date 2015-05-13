@@ -1,9 +1,9 @@
 <div class="city-banner cover-photo" style="background-image: url('<%= @city.header_bg(:medium) %>')">
   <div class="content">
     <div class="content-box">
-      <h1 class="cover-photo-lede"><%= @city.name %></h1>
+      <h1 class="cover-photo-lede city-title"><%= @city.name %></h1>
       <% if @city.pending? %>
-        <span class='cover-photo-subtext'>
+        <span class='cover-photo-subtext city-subtext'>
           Coming Soon
         </span>
     <% end %>
