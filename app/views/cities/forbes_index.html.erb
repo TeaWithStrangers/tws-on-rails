@@ -1,9 +1,10 @@
+<div class="light-background">
 <%= render partial: 'shared/header' %>
 <div class='container'>
   <div class="cities-partial">
-    <div>
-      <div class="header-big">Tell us where you are at!</div>
-      <div class="header-small">We'll let you know if we have something near you</div>
+    <div class="city-cta-header">
+      <h1 class="dark center">Where can we find you?</h1>
+      <p class="header-small">Choose the city where you would like to join for tea time</p>
     </div>
 
     <div>
@@ -11,15 +12,16 @@
         <button class="button">Don’t see your city or college? Add it here!</button>
       <% end %>
     </div>
-    <h1 class='cities-list-header'>We're in these cities</h1>
+    <h3 class='capitalize cities-list-header'>We're in these cities</h1>
     <div class="cities-list current-cities-container" data-city-type='active'>
     </div>
     <div class="">
     </div>
-    <h1 class='cities-list-header'>We're on our way to these cities</h1>
+    <h3 class='capitalize cities-list-header'>We're on our way to these cities</h1>
     <div class="cities-list upcoming-cities-container" data-city-type='upcoming'>
+    </div>
+    <%= link_to suggest_cities_path do %>
+      <button class="button">Don’t see your city or college? Add it here!</button>
+    <% end %>
   </div>
-  <%= link_to suggest_cities_path do %>
-    <button class="button">Don’t see your city or college? Add it here!</button>
-  <% end %>
 </div>
