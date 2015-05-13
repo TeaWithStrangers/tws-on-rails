@@ -55,6 +55,7 @@ Rails.application.routes.draw do
     member do
       get '/host/:host_id' => 'hosts#show', as: :host
       get '/schedule', action: 'schedule',  as: :schedule
+      put '/set', action: 'forbes_set_city',  as: :set
     end
   end
 
