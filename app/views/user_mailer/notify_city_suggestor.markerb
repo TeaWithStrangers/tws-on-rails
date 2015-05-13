@@ -2,5 +2,5 @@ Hey <%= @user.name %>
 
 <%= render partial: @partial %>
 
-Thanks again for your input,
-The TWS Fam
+Bleep bleep bloop,
+The Robots at Tea With Strangers
