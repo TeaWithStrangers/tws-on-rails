@@ -18,6 +18,8 @@
 <%= render partial: 'cities/show/city_banner' %>
 <div class="container">
   <div class="city-info">
+    <%= render partial: 'cities/show/fallback' %>
+    <!---
   	<% if @city.unapproved? %>
   	  <%= render partial: 'cities/show/unconfirmed' %>
   	<% elsif @city.cold_water? %>
@@ -25,6 +27,7 @@
   	<% else %>
   	  <%= render partial: 'cities/show/active_waitlisted' %>
   	<% end %>
+  -->
   </div>
   <div class='sharing-info'>
     <%= render partial: 'shared/sharing_widget', locals: {city: @city} %>
