@@ -1,12 +1,12 @@
-<% if current_user.home_city.nil? %>
+<% if current_user && current_user.home_city.nil? %>
   <%= form_for(@city, url: set_city_path(@city), method: :put) do |f|%>
     <%= f.submit "This is my city!" %>
   <% end %>
-<% elsif current_user.home_city != @city%>
+<% elsif current_user && current_user.home_city != @city%>
   <%= form_for(@city, url: set_city_path(@city), method: :put) do |f|%>
     <%= f.submit "This is my *really* my city!" %>
   <% end %>
-<% elsif current_user.home_city == @city%>
+<% elsif current_user && current_user.home_city == @city%>
   <p>Thanks for signing up! We'll let you know when you can start to join tea times in <%= @city.name %></p>
 <% else %>
   <p>Not where you want to join Tea With Strangers? <%= link_to 'Go here to change it.', cities_path %>
