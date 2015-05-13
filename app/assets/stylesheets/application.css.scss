@@ -17,3 +17,7 @@
 @import "tws-styles/application";
 @import "static/*";
 @import "cities/*";
+
+.jfdi_signup, .forbes_index, .forbes_show {
+  @extend .light-background;
+}
