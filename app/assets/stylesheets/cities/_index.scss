@@ -4,7 +4,7 @@
 }
 
 .city-cta-header {
-  padding: 3em 0 2em;
+  padding: 3em 0 0.5em;
 
   h1 {
     margin-bottom: $base-font-size/2;
@@ -67,6 +67,7 @@ form.dummy {
 
 button.new-city-cta {
   line-height: 1.5;
+  margin: 1em 0;
 
   @include media($tablet) {
     line-height: 1;
