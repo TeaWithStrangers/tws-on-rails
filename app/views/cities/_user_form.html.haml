@@ -1,9 +1,10 @@
-= form_for @city, url: suggest_create_cities_path do |f|
-  = f.text_field :name
+.submit-city-container
+  = form_for @city, html: {class: 'dummy new_city'}, url: suggest_create_cities_path do |f|
+    = f.text_field :name, placeholder: 'Your city or college name'
+    = f.submit 'Submit', data: { confirmation: false }, class: 'save-city'
   .city-confirmation-text
-    %h2
-      Double check your spelling! And make sure it’s just the city or school
-      name.
+    %h2.confirm-message
+      Double check your spelling! And make sure it’s just the city or school name.
     %p
       After you confirm, we’ll make sure everything checks out and email you
       when your friends and neighbors can join you for Tea With Strangers.
@@ -14,6 +15,3 @@
       %ul
         - @city.errors.full_messages.each do |msg|
           %li= msg
-
-  .actions
-    = f.submit 'Submit', data: { confirmation: false }, class: 'save-city'
