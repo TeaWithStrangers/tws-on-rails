@@ -7,8 +7,9 @@
     </div>
 
     <div>
-      <input class="form-control"/>
-      <button class="btn">Submit</button>
+      <%= link_to suggest_cities_path do %>
+        <button class="button">Don’t see your city or college? Add it here!</button>
+      <% end %>
     </div>
     <h1 class='cities-list-header'>We're in these cities</h1>
     <div class="cities-list current-cities-container" data-city-type='active'>
@@ -17,6 +18,8 @@
     </div>
     <h1 class='cities-list-header'>We're on our way to these cities</h1>
     <div class="cities-list upcoming-cities-container" data-city-type='upcoming'>
-    <button class="btn">Don't see your city listed? Add a new one</button>
   </div>
+  <%= link_to suggest_cities_path do %>
+    <button class="button">Don’t see your city or college? Add it here!</button>
+  <% end %>
 </div>
