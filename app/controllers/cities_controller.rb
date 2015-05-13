@@ -28,13 +28,13 @@ class CitiesController < ApplicationController
   def forbes_new
     use_new_styles
     @city = City.new
-    @cities = City.visible(current_user)
   end
 
   def forbes_create
     @city = City.new(city_params)
     @city.city_code = CityCodeGenerator.generate
     @city.timezone = "Pacific Time (US & Canada)"
+    @city.brew_status = "unapproved"
     if current_user
       @city.suggested_by_user = current_user
     end
