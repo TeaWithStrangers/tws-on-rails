@@ -48,6 +48,10 @@ Rails.application.routes.draw do
   # TODO: You know what to do Tue May 5 2015
   get '/cities' => 'cities#forbes_index'
   resources :cities do
+    collection do
+      get '/suggest' => 'cities#forbes_new', as: :suggest
+      post '/suggest' => 'cities#forbes_create', as: :suggest_create
+    end
     member do
       get '/host/:host_id' => 'hosts#show', as: :host
       get '/schedule', action: 'schedule',  as: :schedule

@@ -4,7 +4,7 @@ var onCitiesIndexLoad = function() {
   var listOfUpcomingCities = [];
 
   var cityLink = function(city) {
-    return '<a href="/cities/' + city.city_code + '">' + city.name + "</a>"
+    return '<a href="/' + city.city_code + '">' + city.name + "</a>"
   }
 
   $.get('/api/v1/cities', function(data){

@@ -1,7 +1,7 @@
 class CitiesController < ApplicationController
-  before_action :set_city, only: [:show, :edit, :update, :destroy, :schedule, :forbes_show]
+  before_action :set_city, except: [:index, :new, :forbes_index, :forbes_new, :forbes_create]
   before_action :authenticate_user!, :authorized?, only: [:new, :create, :edit, :update, :destroy]
-  before_filter :away_ye_waitlisted, except: [:forbes_index, :forbes_show]
+  before_filter :away_ye_waitlisted, except: [:forbes_index, :forbes_show, :forbes_new, :forbes_suggest, :forbes_create]
 
   # GET /cities
   # GET /cities.json
@@ -23,6 +23,29 @@ class CitiesController < ApplicationController
 
   def forbes_show
     use_new_styles
+  end
+
+  def forbes_new
+    use_new_styles
+    @city = City.new
+    @cities = City.visible(current_user)
+  end
+
+  def forbes_create
+    @city = City.new(city_params)
+    @city.city_code = CityCodeGenerator.generate
+    @city.timezone = "Pacific Time (US & Canada)"
+    if current_user
+      @city.suggested_by_user = current_user
+    end
+
+    respond_to do |format|
+      if @city.save!
+        format.html { redirect_to @city, notice: 'Thanks!' }
+      else
+        format.html { render :forbes_new, alert: "Something went wrong, sorry" }
+      end
+    end
   end
 
   # GET /cities/:city_code
