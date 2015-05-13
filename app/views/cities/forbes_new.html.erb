@@ -1,0 +1,19 @@
+<%= render 'shared/header' %>
+
+<div class='container'>
+  <h2 class="city-suggestion-title">
+    Let's bring tea to new land!
+  </h2>
+  <h4 class="city-suggestion-title-subtext">
+    If you didn’t find your city in the list before, add it here!
+  </h4>
+  <%= render 'user_form' %>
+  <em>OR CLICK ON YOUR CITY BELOW IF WE’RE ALREADY THERE</em>
+  <div class="cities-list">
+    <% City.visible(current_user).each do |c| %>
+      <div class="city ">
+        <%= link_to c.name, c %>
+      </div>
+    <% end %>
+  </div>
+</div>
