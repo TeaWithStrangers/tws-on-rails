@@ -6,7 +6,11 @@ var onCitiesIndexLoad = function() {
     var listOfUpcomingCities = [];
 
     var cityLink = function(city) {
-      return '<a href="/' + city.city_code + '">' + city.name + "</a>"
+      return '<a class="city-name" href="/' + city.city_code + '">' + city.name + "</a>"
+    }
+
+    var cityLinkBg = function(city) {
+      return '<a class="background-filter" href="/' + city.city_code + '">' + city.name + "</a>"
     }
 
     $.get('/api/v1/cities', function(data){
@@ -28,7 +32,7 @@ var onCitiesIndexLoad = function() {
       .value()
 
         $.each(cities, function(index, city){
-            var cityDiv = '<div class="city"><img class="city-image" src="'+city.header_bg+'"/><h3 class="city-name">' + cityLink(city) + '</h3></div>';
+            var cityDiv = '<div class="city"><div class="city-image" style="background: url('+city.header_bg+') no-repeat 50% 50%; background-size: cover;"><h2 class=" city-name">' + cityLinkBg(city) + cityLink(city) + '</h2></div></div>';
           if(city.brew_status === "fully_brewed"){
             listOfActiveCities.push(cityDiv);
           }
