@@ -1,5 +1,11 @@
+.form-page {
+	padding: 3em 0;
+}
+
 .full-sign-up {
-  h3 { margin-bottom: 0 }
+  @include span-columns(10);
+  @include shift(1);
+  
   @include media($desktop) {
     @include shift(3);
     @include span-columns(6);
@@ -8,8 +14,16 @@
 
 form.sign-up {
   input[type='submit'] {
-    padding: 1.5em 0;
+    padding: 1em 0;
+    line-height: normal;
   }
 }
 
 
+h2.sign-up-header {
+  margin-bottom: $base-font-size;
+}
+
+p.sign-up-text {
+  margin-bottom: $base-font-size;
+}
