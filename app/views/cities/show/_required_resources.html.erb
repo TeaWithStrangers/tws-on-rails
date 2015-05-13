@@ -4,7 +4,7 @@
 		<div class="block">
 			<span class="number">1</span>
 			<p class="description">superstar community leader</p>
-      <a class="button" href="#">I'm interested</a>
+      <a href="#" data-user-interest='leading'>I'm interested</a>
 		</div>
     <%= progress_bar(1, 1) %>
 	</div>
@@ -14,7 +14,9 @@
 			<p class="description">hosts to bring teatime together</p>
       <%= progress_bar(@city.hosts.count, 8) %>
 		</div>
-    <a class="button" href="#">I'm interested</a>
+    <a href="#" data-user-interest='hosting'>
+      I'm interested
+    </a>
 	</div>
 	<div class="city-resource">
 		<div class="block">
@@ -22,6 +24,6 @@
 			<p class="description">strangers ready to share at tea time</p>
       <%= progress_bar(0, 200) %>
 		</div>
-    <a class="button" href="#">Spread the Word</a>
+    <a href="#">Spread the Word</a>
 	</div>
 </div>
