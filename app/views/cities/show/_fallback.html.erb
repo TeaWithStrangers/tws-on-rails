@@ -1,19 +1,36 @@
 <div class="city-container">
-	<h2>You're awesome for being into this.</h2>
+	<h2>Thanks for joining Tea With Strangers in <%= @city.name %>!</h2>
 	<p>
-		This is such a weird thing to be interested in, and that 
-		you're here must mean you're at least curious. So thank you for, 
-		well, being you!
+		We’re thrilled to welcome you to the Tea With Strangers community and can’t wait to see you at a teatime soon.
 	</p>
-	<p> 
+	<p>
 		Unfortunately, there are approximately <%=
-		number_with_delimiter(User.all.count * (rand(100) + 1))%> people 
-		who are also excited about tea time, and we're having trouble 
+		number_with_delimiter(User.all.count * (rand(100) + 1))%> people
+		who are also excited about tea time, and we're having trouble
 		stopping our website from melting.
 	</p>
-	<p>
+	<p >
 	  We're very sorry for the inconvenience, and we'll shoot you an email when things
 	  have calmed down.
 	</p>
+	<h2>You're awesome for being into this.</h2>
+	<p>
+		There's something to be said about the type of person that goes to
+		have a conversation with complete strangers for no reason at all.
+	</p>
+	<blockquote class="wide">
+		Hey, I don't know you guys. I don't have any context to talk to you. I don't know what I can get from you. But for the next two hours, I'm going to sit around, ask some questions, share some stories, and just be with you anyway because why not?
+	</blockquote>
+	<p>
+		Sounds weird, but to do something like that requires a leap of
+		faith on the people around you. Actually taking that leap is so cool
+		because you'll always be surprised by what you find. And it'll
+		(hopefully) leave ya wondering, "Wait, what if I found a way to
+		take this leap on everyone I ever crossed paths with?"
+	</p>
+	<p>
+		Imagine that!
+	</p>
+
 	<%= render partial: 'cities/show/set_city' %>
 </div>
