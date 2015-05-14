@@ -1,2 +1,51 @@
-<h2>Spread the word</h2>
-<p>You give strangers a good rep. You’re the type that asks “How are you?” and means it. You opt for high fives over handshakes. And the friends you attract are similarly awesome. They’ll thank you when you tell them about TWS.</p>
+<div class="sharing-info">
+  <h2>Spread the word</h2>
+  <p>You give strangers a good rep. You’re the type that asks “How are you?” and means it. You opt for high fives over handshakes. And the friends you attract are similarly awesome. They’ll thank you when you tell them about TWS.</p>
+</div>
+
+<div class="sharing-box">
+
+  <div class="sharing-preview sharing-preview-bounce" id="sharing-preview">
+    <%= image_tag 'landing/landing-graphic-redesign.jpg', id: 'sharing-preview-image' %>
+    <div class="sharing-preview-text"><span id="sharing-preview-text-content">Tea With Strangers is all about making meaningful interactions more fun.</span> // <a href="http://teawithstrangers.com/">teawithstrangers.com</a></div>
+  </div>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fteawithstrangers.com%2F&display=popup&ref=plugin" class="sharing-facebook-button sharing-button"><button class="button">Share on Facebook</button></a>
+
+  <div class="sharing-try-blurb">This is easy to post, but if you want to get more creative, we have some other ideas.</div>
+
+  <a href="#" class="sharing-try-button"><button class="button"><%= image_tag 'shuffle.png' %> <span class="sharing-try-button-text">Try this on for size</span></button></a>
+
+  <div class="sharing-elsewhere">
+    <div class="sharing-elsewhere-text">Wanna share somewhere else?</div>
+    <div class="sharing-elsewhere-buttons">
+    
+      <a href="mailto:?subject=Tea%20With%20Strangers&body=Tea%20With%20Strangers%20is%20all%20about%20making%20our%20cities%20feel%20more%20like%20neighborhoods.%20We%27re%20more%20%22connected%22%20than%20ever%20before%2C%20but%20we%27re%20also%20more%20alone.%20And%20all%20we%20want%20to%20do%20is%20bring%20people%20together%20because%2C%20well%2C%20the%20world%20is%20better%20that%20way.%0A%0ACheck%20us%20out%20at%20http%3A//teawithstrangers.com/" class="sharing-email"><%= image_tag 'share/email.png' %></a>
+
+      <a href="https://twitter.com/intent/tweet?text=Tea+With+Strangers+http%3A%2F%2Fteawithstrangers.com%2F" class="sharing-twitter sharing-button twitter-share-button"><%= image_tag 'share/twitter.png' %></a>
+
+      <a href="http://tumblr.com/widgets/share/tool?canonicalUrl=http://teawithstrangers.com/&title=Tea%20With%20Strangers" class="sharing-tumblr sharing-button"><%= image_tag 'share/tumblr.png' %></a>
+    </div>
+  </div>
+
+</div>
+
+<script type="text/javascript">
+SHARE_COLLECTION    = []
+SHARE_COLLECTION[0] = {img: '<%= image_url 'landing/landing-graphic-redesign.jpg' %>', text: 'Tea With Strangers is all about making meaningful interactions more fun.', url: 'http://teawithstrangers.com/'}
+SHARE_COLLECTION[1] = {img: '<%= image_url 'share/share-1.png' %>', text: 'Everyone is interesting', url: 'https://www.facebook.com/teawithstrangers/photos/a.818701241549790.1073741844.542640869155830/818701568216424/?type=3' }
+SHARE_COLLECTION[2] = {img: '<%= image_url 'share/share-2.png' %>', text: 'Real people have #nofilter', url: 'https://www.facebook.com/teawithstrangers/photos/a.818701241549790.1073741844.542640869155830/818701601549754/?type=3' }
+SHARE_COLLECTION[3] = {img: '<%= image_url 'share/share-3.png' %>', text: 'You\'re always invited', url: 'https://www.facebook.com/teawithstrangers/photos/a.818701241549790.1073741844.542640869155830/818701588216422/?type=3' }
+SHARE_COLLECTION[4] = {img: '<%= image_url 'share/share-4.png' %>', text: 'New friends are just old strangers', url: 'https://www.facebook.com/teawithstrangers/photos/a.818701241549790.1073741844.542640869155830/818701541549760/?type=3'}
+SHARE_COLLECTION[5] = {img: '<%= image_url 'share/share-5.png' %>', text: 'New friends are just old strangers', url: 'https://www.facebook.com/teawithstrangers/photos/a.818701241549790.1073741844.542640869155830/818701544883093/?type=3'}
+SHARE_COLLECTION[6] = {img: '<%= image_url 'share/share-6.png' %>', text: 'Real people have #nofilter', url: 'https://www.facebook.com/teawithstrangers/photos/a.818701241549790.1073741844.542640869155830/818701584883089/?type=3' }
+SHARE_COLLECTION[7] = {img: '<%= image_url 'share/share-7.png' %>', text: 'Good vibes only', url: 'https://www.facebook.com/teawithstrangers/photos/a.818701241549790.1073741844.542640869155830/818701578216423/?type=3' }
+SHARE_COLLECTION[8] = {img: '<%= image_url 'share/share-8.png' %>', text: 'Look around', url: 'https://www.facebook.com/teawithstrangers/photos/a.818701241549790.1073741844.542640869155830/818701561549758/?type=3' }
+SHARE_COLLECTION[9] = {img: '<%= image_url 'share/share-9.png' %>', text: 'What\'s your story?', url: 'https://www.facebook.com/teawithstrangers/photos/a.818701241549790.1073741844.542640869155830/818701548216426/?type=3' }
+SHARE_COLLECTION[10] = {img: '<%= image_url 'share/share-10.png' %>', text: 'Hands were made for high-fiving', url: 'https://www.facebook.com/teawithstrangers/photos/a.818701241549790.1073741844.542640869155830/818701534883094/?type=3' }
+
+// Bootstrap the share system (add button events, etc.)
+$(function() {
+  shareBootstrap();
+});
+</script>
