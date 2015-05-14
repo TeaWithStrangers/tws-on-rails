@@ -7,7 +7,7 @@ class NewSuggestedCity
     city.timezone = "Pacific Time (US & Canada)"
     city.brew_status = "unapproved"
     if city.save && user
-      city.update(suggested_by_user: current_user)
+      city.update(suggested_by_user: user)
       user.update(home_city: city) if user.home_city.nil?
     end
 
