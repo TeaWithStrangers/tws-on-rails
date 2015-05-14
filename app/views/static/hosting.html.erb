@@ -60,12 +60,19 @@
       If stories, amazing people, tea, smiles, real conversation and our description of hosting all sound awesome to you then you may already have an inner host within you. So what are you waiting for? Let us know that you want in on our eclectic and extraordinary family.
     </p>
     <h3 class="static-subheader">Join us!</h3>
+
     <% if user_signed_in? %>
       <a href="#" data-user-interest='hosting'>
-        I'm interested
+        <button class='orange full-width-button'>
+          I'm interested
+        </button>
       </a>
     <% else %>
-        <%= link_to "I'm interested", sign_up_path %>
+        <%= link_to sign_up_path do %>
+          <button class='orange full-width-button'>
+            I'm interested
+          </button>
+        <% end %>
     <% end %>
   </div>
 </div>
