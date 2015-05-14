@@ -1,5 +1,6 @@
 .static-container {
-  
+  margin-bottom: $base-font-size*3;
+
   @include media($desktop) {
     @include span-columns(10 of 12);
     @include shift(1);  
