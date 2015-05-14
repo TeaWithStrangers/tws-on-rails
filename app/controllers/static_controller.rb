@@ -28,6 +28,7 @@ class StaticController < ApplicationController
   end
 
   def hosting
+    use_new_styles
   end
 
   def jfdi_signup
