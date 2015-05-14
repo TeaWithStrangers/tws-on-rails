@@ -1,32 +1,105 @@
-.landscape-header
-  .blur-layer
-  .landscape-text
-    %h1 
-      Travel in your own home.
-.container
-  = render partial: 'shared/nav_header'
-  .row
-    .narrow
-      %h3.divider Hosting tea time
-      %p 
-        If you walk around your city or campus and make up stories about the people that walk around you, you'd probably make a great host.
-      %p
-        Tea time hosts bring together conversations by asking questions, smiling a whole bunch, and being really good huggers. To make sure tea time is reliable and the conversation is always awesome (and getting better every time), it's usually best when a host can bring tea time together once every week or two.
-      %p
-        If you're in, 
-        %a{href:'mailto:ankit@teawithstrangers.com?Subject=Hosting%20tea%20time!'} click here to email me (Ankit) and let's talk. 
-        It'd be awesome if you included the following information (feel free to get long winded; stories and details are helpful):
-      %ul.text
-        %li
-          What city you'd host tea time in
-        %li
-          Why you'd like to host
-        %li
-          What would make you an awesome host
-        %li
-          Why you care about the things you care for
-        %li
-          What your dreams for the world are
-        %li
-          The last time you did something for someone else with no expectation for return
-      %p I'll fire back an email within a day or two!
+<%= content_for :title do %>
+  <%="Become a Host with Tea With Strangers!"%>
+<% end %>
+
+<%= content_for :description do %>
+  <%= "Tea With Strangers is a community of people that bring strangers together for great conversations. We're all about making cities feel more like neighborhoods. Come join in #{@city.name}!"%>
+<% end %>
+
+<%= content_for :head do %>
+  <meta property ="og:type" content="website"/>
+  <meta property ="og:title" content='<%= "Become a Host with Tea With Strangers!"%>'/>
+  <meta property ="og:image" content='http://f.cl.ly/items/0L0u3E213R2X0l3n3f0d/facebook-img.jpg'/>
+  <meta property ="og:description" content ="Tea With Strangers is a community of people that bring strangers together for great conversations. We're all about making cities feel more like neighborhoods. You should join. Yes, you."/>
+<% end %>
+
+<div class="light-background">
+<%= render partial: 'shared/header' %>
+<div class="city-banner intro-to-tws cover-photo">
+  <div class="content">
+    <div class="content-box">
+      <h1 class="cover-photo-lede city-title">Travel in your own home</h1>
+    </div>
+  </div>
+</div>
+<div class="container static">
+  <div class="static-container">
+    <h2>Full disclosure: We're hosts. Not mind readers.</h2>
+    <p>
+      But if you're on this page, you might be wondering at least a couple of things.
+    </p>
+    <ol>
+      <li>
+        What / who is a host?
+      </li>
+      <li>
+        Why do hosts love hosting?
+      </li>
+      <li>
+        Am I host material?
+      </li>
+      <li>
+        How can I get involved?
+      </li>
+    </ol>
+    <p>So we asked our hosts some of these questions. Here's what they had to say.</p>
+    <h3 class="static-subheader">A host sometimes asks questions, often smiles, listens wholeheartedly and loves to bring amazing people together.</h3>
+    <p>
+      Each host is different, uniquely amazing and full of stories, smiles, hugs and wonder. But I guess you could say that we do share something — a common core. We love the people around us before they've given us reason to. And we know that real conversations make our communities feel a little more like home.
+    </p>
+    <h3 class="static-subheader">Hosting is an amazing experience.</h3>
+    <p>
+      Hosting Tea With Strangers can make your life feel more fulfilling, more magical, and it might even make you a better person. Every time you host tea time, you're practicing being inclusive, attentive, and curious without inhibition. That's an awesome challenge, and in it is huge opportunity to grow as a person.
+    </p>
+    <p>
+      In addition, the host community is an incredibly supportive, dynamic and exciting group of people that likes to hang together, share love across the globe and support each other on our journeys through our neighborhoods. Imagine joining a new family of awesome people that’s both local and global and is as loving and caring as you are. That’s the host fam.
+    </p>
+    <h3 class="static-subheader">You know yourself better than anyone else.</h3>
+    <p>
+      If stories, amazing people, tea, smiles, real conversation and our description of hosting all sound awesome to you then you may already have an inner host within you. So what are you waiting for? Let us know that you want in on our eclectic and extraordinary family.
+    </p>
+    <h3 class="static-subheader">Join us!</h3>
+    <% if user_signed_in? %>
+      <a href="#" data-user-interest='hosting'>
+        I'm interested
+      </a>
+    <% else %>
+      <!-- HAVE THEM EXPRESS INTEREST FOLLOWED BY SIGN IN -->
+    <% end %>
+  </div>
+</div>
+
+<%= render partial: 'shared/new_footer' %>
+
+/ .landscape-header
+/   .blur-layer
+/   .landscape-text
+/     %h1 
+/       Travel in your own home.
+/ .container
+/   = render partial: 'shared/nav_header'
+/   .row
+/     .narrow
+/       %h3.divider Hosting tea time
+/       %p 
+/         If you walk around your city or campus and make up stories about the people that walk around you, you'd probably make a great host.
+/       %p
+/         Tea time hosts bring together conversations by asking questions, smiling a whole bunch, and being really good huggers. To make sure tea time is reliable and the conversation is always awesome (and getting better every time), it's usually best when a host can bring tea time together once every week or two.
+/       %p
+/         If you're in, 
+/         %a{href:'mailto:ankit@teawithstrangers.com?Subject=Hosting%20tea%20time!'} click here to email me (Ankit) and let's talk. 
+/         It'd be awesome if you included the following information (feel free to get long winded; stories and details are helpful):
+/       %ul.text
+/         %li
+/           What city you'd host tea time in
+/         %li
+/           Why you'd like to host
+/         %li
+/           What would make you an awesome host
+/         %li
+/           Why you care about the things you care for
+/         %li
+/           What your dreams for the world are
+/         %li
+/           The last time you did something for someone else with no expectation for return
+/       %p I'll fire back an email within a day or two!

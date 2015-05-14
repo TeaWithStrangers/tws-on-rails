@@ -1,0 +1,26 @@
+.static-container {
+  
+  @include media($desktop) {
+    @include span-columns(10 of 12);
+    @include shift(1);  
+  }
+
+  @include media($desktop) {
+    @include span-columns(8 of 12);
+    @include shift(2);  
+  }
+  
+  ol {
+    li {
+      padding-left: $base-font-size;
+    }
+  }
+
+  h2 {
+    margin-bottom: $base-font-size;
+  }
+
+  h3.static-subheader {
+    margin-bottom: $base-font-size;
+  }
+}
