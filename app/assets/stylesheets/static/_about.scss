@@ -1,3 +1,7 @@
+.cover-photo.static-banner {
+  margin-bottom: $base-font-size*3;
+}
+
 .static-container {
   margin-bottom: $base-font-size*3;
 
@@ -10,7 +14,7 @@
     @include span-columns(8 of 12);
     @include shift(2);  
   }
-  
+
   ol {
     li {
       padding-left: $base-font-size;
