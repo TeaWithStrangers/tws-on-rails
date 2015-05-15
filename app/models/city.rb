@@ -18,11 +18,11 @@ class City < ActiveRecord::Base
 
   validate :proxy_city_not_self
 
-  scope :visible, ->(user = nil) { 
-    if (user && user.host?) 
-      all 
-    else 
-      where.not(brew_status: brew_statuses[:hidden]) 
+  scope :visible, ->(user = nil) {
+    if (user && user.host?)
+      all
+    else
+      where(brew_status: [brew_statuses[:cold_water], brew_statuses[:warming_up], brew_statuses[:fully_brewed]])
     end
   }
   scope :hidden, -> { where(brew_status: brew_statuses[:hidden]) }
@@ -39,7 +39,7 @@ class City < ActiveRecord::Base
   def timezone=(tz)
     val = tz if City.timezone_mappings.key? tz
     if val
-      write_attribute(:timezone, val) 
+      write_attribute(:timezone, val)
     else
      raise ArgumentError, "TimeZone must be one from TZinfo"
     end
