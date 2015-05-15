@@ -51,6 +51,7 @@ gem 'paranoia', "~> 2.0"
 # Authentication & Permission Gems
 gem 'devise', '~> 3.2.4'
 gem 'cancan', '~> 1.6.10'
+gem 'omniauth-facebook'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
@@ -66,7 +67,10 @@ end
 # gem 'capistrano-rails', group: :development
 
 # Dev Gems
-gem 'spring', group: :development
+group :development do
+  gem 'spring'
+  gem 'dotenv-rails'
+end
 
 # Random debug tools
 group :development, :test do

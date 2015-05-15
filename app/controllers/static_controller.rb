@@ -1,5 +1,5 @@
 class StaticController < ApplicationController
-  before_filter :away_ye_waitlisted, except: [:index, :jfdi_signup]
+  before_filter :away_ye_waitlisted, except: [:index, :jfdi_signup, :hosting, :about]
 
   def index
     use_new_styles
@@ -28,6 +28,11 @@ class StaticController < ApplicationController
   end
 
   def hosting
+    use_new_styles
+  end
+
+  def about
+    use_new_styles
   end
 
   def jfdi_signup

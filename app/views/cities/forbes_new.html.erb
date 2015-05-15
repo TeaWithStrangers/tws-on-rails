@@ -1,19 +1,24 @@
-<%= render 'shared/header' %>
+<div class="light-background">
+  <%= render 'shared/header' %>
 
-<div class='container'>
-  <h2 class="city-suggestion-title">
-    Let's bring tea to new lands!
-  </h2>
-  <h4 class="city-suggestion-title-subtext">
-    If you didn’t find your city in the list before, add it here!
-  </h4>
-  <%= render 'user_form' %>
-  <em>OR CLICK ON YOUR CITY BELOW IF WE’RE ALREADY THERE</em>
-  <div class="cities-list">
-    <% City.visible(current_user).each do |c| %>
-      <div class="city ">
-        <%= link_to c.name, forbes_city_path(c) %>
+  <div class='container'>
+    <div class="cities-partial">
+      <div class="city-cta-header">
+        <h1 class="dark center">Let's bring TWS to new lands!</h1>
+        <p class="header-small">If you didn’t find your city in the list before, add it here!</p>
       </div>
-    <% end %>
+      <%= render 'user_form' %>
+      <div class="active-city-list">
+        <h3 class="capitalize center current-cities-header">Or click your city below if we're already there</h3>
+        <div class="cities-list">
+          <% City.visible(current_user).each do |c| %>
+            <div class="city ">
+              <%= link_to c.name, forbes_city_path(c) %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
+  <%= render partial: 'shared/new_footer' %>
 </div>

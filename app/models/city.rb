@@ -3,7 +3,7 @@ class City < ActiveRecord::Base
   validates_presence_of :city_code, :timezone
   before_save :upcase_code
   has_attached_file :header_bg, styles: {banner: '1280x', medium: '750x>', small: '350x>'},
-    default_url: ActionController::Base.helpers.asset_url('missing-city-image.jpg')
+    default_url: ActionController::Base.helpers.asset_path('missing-city-image.jpg')
   validates_attachment_content_type :header_bg, :content_type => /\Aimage\/.*\Z/
   enum brew_status: { cold_water: 0, warming_up: 1, fully_brewed: 2, hidden: 3, unapproved: 4, rejected: 5 }
   has_many :tea_times
@@ -47,10 +47,6 @@ class City < ActiveRecord::Base
 
   def to_param
     city_code
-  end
-
-  def city_code
-    super.downcase
   end
 
   def tea_times

@@ -1,10 +1,14 @@
+.container.city {
+  margin-bottom: $base-font-size*3;
+}
+
 .cities-partial {
   margin-bottom: 3em;
   overflow: auto;
 }
 
 .city-cta-header {
-  padding: 3em 0 2em;
+  padding: 3em 0 0.5em;
 
   h1 {
     margin-bottom: $base-font-size/2;
@@ -17,15 +21,15 @@
     margin-bottom: 0;
   }
 
-  @include media($desktop) {
-    @include span-columns(8 of 12);
-    @include shift(2);
-  }
 }
 
 form.dummy {
   margin-bottom: 3em;
   overflow: auto;
+
+  &.new_city {
+    margin-bottom: 1em;
+  }
 
   @include media($tablet) {
     @include span-columns(10 of 12);
@@ -50,7 +54,8 @@ form.dummy {
     }
   }
 
-  button {
+  input[type="submit"], button {
+    margin-top: 0;
 
     @include span-columns(12);
 
@@ -67,6 +72,11 @@ form.dummy {
 
 button.new-city-cta {
   line-height: 1.5;
+  margin: 1em 0;
+
+  &.top-button {
+    margin-bottom: $base-font-size*1.5;
+  }
 
   @include media($tablet) {
     line-height: 1;
@@ -166,6 +176,38 @@ h3.cities-list-header {
         }
       }
     }
+  }
+}
+
+.submit-city-container {
+  overflow: auto;
+  margin-bottom: 2em;
+  clear: both;
+}
+
+.city-confirmation-text {
+  clear: both;
+
+  @include span-columns(8 of 12);
+  @include shift(2);
+
+  h2.confirm-message {
+    margin-bottom: $base-font-size;
+  }
+}
+
+.active-city-list {
+  clear: both;
+
+  @include span-columns(8 of 12);
+  @include shift(2);
+
+  h3.current-cities-header {
+    margin-bottom: $base-font-size;
+  }
+
+  .city {
+    text-align: center;
   }
 }
 

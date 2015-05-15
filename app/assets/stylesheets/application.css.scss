@@ -17,3 +17,12 @@
 @import "tws-styles/application";
 @import "static/*";
 @import "cities/*";
+
+.jfdi_signup, .forbes_index, .forbes_show {
+  @extend .light-background;
+}
+
+// put this in the right place later
+button.orange.full-width-button {
+  @include span-columns(8 of 8);
+}
