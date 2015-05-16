@@ -1,13 +1,13 @@
 class CitiesController < ApplicationController
-  before_action :set_city, except: [:new, :forbes_index, :forbes_new, :forbes_create]
+  before_action :set_city, except: [:new, :index, :forbes_new, :forbes_create]
   before_action :authenticate_user!, :authorized?, only: [:new, :create, :edit, :update, :destroy]
-  before_action :away_ye_waitlisted, except: [:forbes_index, :forbes_show, :forbes_new, :forbes_suggest, :forbes_create, :forbes_set_city]
+  before_action :away_ye_waitlisted, except: [:index, :show, :forbes_new, :forbes_suggest, :forbes_create, :forbes_set_city]
 
-  def forbes_index
+  def index
     use_new_styles
   end
 
-  def forbes_show
+  def show
     if current_user
       use_new_styles
     else
