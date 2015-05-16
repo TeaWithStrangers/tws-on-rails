@@ -47,7 +47,7 @@ Rails.application.routes.draw do
 
   # TODO: You know what to do Tue May 5 2015
   get '/cities' => 'cities#forbes_index'
-  resources :cities do
+  resources :cities, except: [:index, :show] do
     collection do
       get '/suggest' => 'cities#forbes_new', as: :suggest
       post '/suggest' => 'cities#forbes_create', as: :suggest_create
