@@ -1,5 +1,5 @@
 class StaticController < ApplicationController
-  before_filter :away_ye_waitlisted, except: [:index, :jfdi_signup, :hosting, :about]
+  before_filter :away_ye_waitlisted, except: [:index, :jfdi_signup, :hosting, :about, :jfdi_signin]
 
   def index
     use_new_styles
@@ -33,6 +33,12 @@ class StaticController < ApplicationController
 
   def about
     use_new_styles
+  end
+
+  def jfdi_signin
+    use_new_styles
+    return redirect_to profile_path if current_user
+    render 'sessions/new'
   end
 
   def jfdi_signup
