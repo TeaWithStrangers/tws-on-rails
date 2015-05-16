@@ -22,6 +22,16 @@
   @extend .light-background;
 }
 
+// This is convoluted because the markup
+// doesn't make it easy to only show the header
+// We want to hide the buttons and the list of cities
+.cities-partial.loading {
+  background: url("spinner.gif") no-repeat center bottom;
+  height: 300px;
+  min-height: 30px;
+  .new-city-cta, .cities-lists, .header-small { display: none !important; }
+}
+
 // put this in the right place later
 button.orange.full-width-button {
   @include span-columns(8 of 8);
