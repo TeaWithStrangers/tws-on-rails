@@ -32,7 +32,12 @@ class CitiesController < ApplicationController
 
   def forbes_new
     use_new_styles
-    @city = City.new
+    if current_user
+      @city = City.new
+    else
+      flash[:notice] = 'You should sign up first!'
+      redirect_to sign_up_path
+    end
   end
 
   def forbes_create
