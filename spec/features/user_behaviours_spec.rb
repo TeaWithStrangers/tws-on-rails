@@ -17,7 +17,7 @@ feature 'Signing In & Up' do
   end
 
   scenario 'can sign up, log out, log in' do
-    user = create(:user) 
+    user = create(:user)
     sign_in user
     expect(current_path).to eq schedule_city_path(user.home_city)
     expect(page).to have_content user.home_city.name
@@ -41,7 +41,7 @@ feature 'Registered User' do
 
   feature 'Tea Time Attendance' do
     scenario 'allows a user to sign up' do
-      visit city_path(@user.home_city)
+      visit forbes_city_path(@user.home_city)
       expect(page.status_code).to eq(200)
       click_link('5 spots left')
       expect(current_path).to eq tea_time_path(@tt)
@@ -52,9 +52,9 @@ feature 'Registered User' do
 
     scenario 'logged out user with account tries to attend' do
       sign_out
-      visit city_path(@user.home_city)
+      visit forbes_city_path(@user.home_city)
       # Should be redirected to the new TWS Sign up experience
-      expect(current_path).to eq root_path
+      expect(current_path).to eq sign_up_path
     end
 
     scenario 'user can flake' do
