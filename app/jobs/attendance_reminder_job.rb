@@ -39,7 +39,7 @@ class AttendanceReminderJob
     end
   end
 
-  handle_asynchronously :twelve_hour_reminder_time,
+  handle_asynchronously :twelve_hour_reminder,
     :run_at => Proc.new { |job| job.twelve_hour_reminder_time }
 
   def twelve_hour_reminder_time
