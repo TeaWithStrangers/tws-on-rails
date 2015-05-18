@@ -11,7 +11,7 @@
       <div class="active-city-list">
         <h3 class="capitalize center current-cities-header">Or click your city below if we're already there</h3>
         <div class="cities-list">
-          <% City.visible(current_user).each do |c| %>
+          <% City.visible.each do |c| %>
             <div class="city ">
               <%= link_to c.name, forbes_city_path(c) %>
             </div>
