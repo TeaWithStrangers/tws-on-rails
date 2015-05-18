@@ -9,9 +9,9 @@ class RegistrationsController < Devise::RegistrationsController
         sign_in user_info[:user]
         redirect_to cities_path
       elsif !user_info[:new_user?] && user_info[:user].valid?
-        redirect_to new_user_session_path, alert: 'You\'re already registered! Log in using the same email :)'
+        redirect_to new_user_session_path, alert: 'You\'ve made an account already. Log in using the same email. Click \'Forgot Password\' if you\'re confused.'
       else
-        redirect_to sign_up_path, alert: "We've made a huge mistake."
+        redirect_to sign_up_path, alert: "We've made a mistake!"
       end
     end
   end

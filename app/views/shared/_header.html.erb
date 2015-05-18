@@ -14,13 +14,12 @@
     </ul>
     </nav>
   </div>
+  <!-- TODO flash messages are in this partial because we want them to be below
+        the header. But this header partial is currently rendered individually
+        in random templates, rather than the layout. -->
+  <% flash.each do |key, value| %>
+    <div class="flash <%= key %>">
+      <%= value %>
+    </div>
+  <% end %>
 </header>
-
-<!-- TODO flash messages are in this partial because we want them to be below
-      the header. But this header partial is currently rendered individually
-      in random templates, rather than the layout. -->
-<% flash.each do |key, value| %>
-  <div class="flash <%= key %>">
-    <%= value %>
-  </div>
-<% end %>
