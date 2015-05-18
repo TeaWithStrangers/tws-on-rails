@@ -35,7 +35,7 @@ class CitiesController < ApplicationController
     if current_user
       @city = City.new
     else
-      flash[:notice] = 'You should sign up first!'
+      flash[:notice] = 'Sign up first so we can let you know when your city is approved!'
       redirect_to sign_up_path
     end
   end
@@ -48,9 +48,9 @@ class CitiesController < ApplicationController
 
     respond_to do |format|
       if @city.persisted?
-        format.html { redirect_to forbes_city_path(@city), notice: 'Thanks!' }
+        format.html { redirect_to forbes_city_path(@city), notice: 'We\'ve gotten your submission and will get to it ASAP.' }
       else
-        format.html { render :forbes_new, alert: "Something went wrong, sorry" }
+        format.html { render :forbes_new, alert: "Something went wrong! Our fault. Could you try again?" }
       end
     end
   end
