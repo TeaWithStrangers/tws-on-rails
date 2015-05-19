@@ -1,6 +1,5 @@
 var onCitiesIndexLoad = function() {
-  if(window.location.pathname === '/cities/' ||
-     window.location.pathname === '/cities') {
+  if (window.location.pathname.indexOf('/cities') >= 0) {
 
     var listOfActiveCities = [];
     var listOfUpcomingCities = [];
