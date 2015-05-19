@@ -1,5 +1,5 @@
 var onCitiesIndexLoad = function() {
-  if(window.location.pathname === '/cities/' || 
+  if(window.location.pathname === '/cities/' ||
      window.location.pathname === '/cities') {
 
     var listOfActiveCities = [];
@@ -13,7 +13,17 @@ var onCitiesIndexLoad = function() {
       return '<a class="background-filter" href="/' + city.city_code + '">' + city.name + "</a>"
     }
 
+    function setLoading() {
+      $('.cities-partial').addClass('loading');
+    }
+
+    function unsetLoading() {
+      $('.cities-partial').removeClass('loading');
+    }
+
+    setLoading();
     $.get('/api/v1/cities', function(data){
+
       var cities = _(data.cities).chain()
         .sortBy(function(c) {
           return c.info.user_count;
@@ -43,6 +53,8 @@ var onCitiesIndexLoad = function() {
         });
       $('.current-cities-container').html(listOfActiveCities.join(' '));
       $('.upcoming-cities-container').html(listOfUpcomingCities.join(' '));
+
+      unsetLoading();
     });
   }
 };
