@@ -15,13 +15,11 @@
 <% end %>
 
 <div class="light-background">
-<%= render partial: 'shared/header' %>
 <%= render partial: 'cities/show/city_banner' %>
 
 <div class="container city">
   <div class="city-info">
-    <%= render partial: 'cities/show/fallback' %>
-    <!---
+    <!-- <%= render partial: 'cities/show/fallback' %> -->
   	<% if @city.unapproved? %>
   	  <%= render partial: 'cities/show/unconfirmed' %>
   	<% elsif @city.cold_water? %>
@@ -32,7 +30,6 @@
     <% if @city.unapproved? %>
     <% else %>
     <% end %>
-    -->
   </div>
 </div>
 <%= render partial: 'shared/new_footer' %>

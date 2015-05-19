@@ -1,3 +1,7 @@
-<h2>You are a champ!</h1>
-<p>You’ll get an email once we’ve made sure everything checks out for <%= @city.name %>.</p>
-<%= render partial: 'shared/sharing_widget', locals: { full: true } %>
+<div class="section city-intro">
+	<h2 class="section-header">You are a champ!</h2>
+	<p>We got your suggestion to start TWS in <%= @city.name %>. You’ll get an email once we’ve made sure everything checks out! </p>
+</div>
+<div class="section">
+	<%= render partial: 'shared/sharing_widget', locals: { full: true } %>
+</div>
