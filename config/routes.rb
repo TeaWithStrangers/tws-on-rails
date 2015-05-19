@@ -45,9 +45,7 @@ Rails.application.routes.draw do
     end
   end
 
-  # TODO: You know what to do Tue May 5 2015
-  get '/cities' => 'cities#forbes_index'
-  resources :cities do
+  resources :cities, except: [:show] do
     collection do
       get '/suggest' => 'cities#forbes_new', as: :suggest
       post '/suggest' => 'cities#forbes_create', as: :suggest_create
@@ -85,5 +83,8 @@ Rails.application.routes.draw do
     get '/tasks'    => 'profiles#host_tasks', as: :host_tasks
   end
 
-  get '/:id' => 'cities#forbes_show', as: :forbes_city
+  # This has to be at the bottom of the file or every
+  # route that is not the root route will match this
+  # and be routed to CitiesController.
+  get '/:id' => 'cities#show', as: :forbes_city
 end
