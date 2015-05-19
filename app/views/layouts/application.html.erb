@@ -36,6 +36,8 @@
   <body class="<%= controller_name %> <%= action_name %>">
     <div class='wrapper'>
       <main class='wrapper-content'>
+        <!-- TODO render header partial here directly so we can also put flash messages here.
+            Flash messages currently live in the shared/header partial -->
         <%= yield %>
       </main>
       <% if content_for?(:footer) %>
