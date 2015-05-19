@@ -1,18 +1,37 @@
 .cover-photo.static-banner {
   margin-bottom: $base-font-size*3;
+
+  &.about {
+    background-position: 50%;
+
+    @include background-image(linear-gradient(to bottom,
+                                              rgba($tws-yellow, 0.87),
+                                              rgba($tws-yellow, 0.87)),
+                              image-url('landing/about-pg-image.jpg'));
+  }
+
+  &.hosting {
+    background-position: 50% 30%;
+
+    @include background-image(linear-gradient(to bottom,
+                                              rgba($tws-yellow, 0.87),
+                                              rgba($tws-yellow, 0.87)),
+                              image-url('landing/host6.jpg'));
+  }
 }
 
 .static-container {
   margin-bottom: $base-font-size*3;
+  overflow: auto;
 
   @include media($desktop) {
     @include span-columns(10 of 12);
-    @include shift(1);  
+    @include shift(1);
   }
 
   @include media($desktop) {
     @include span-columns(8 of 12);
-    @include shift(2);  
+    @include shift(2);
   }
 
   ol {
