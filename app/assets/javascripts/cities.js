@@ -4,25 +4,41 @@ var onCitiesIndexLoad = function() {
     var listOfActiveCities = [];
     var listOfUpcomingCities = [];
 
+    /*
+    ** Returns city link component (string)
+    ** @city Object // City Object with attributes city_code (string) & name (string)
+    */
     var cityLink = function(city) {
       return '<a class="city-name" href="/' + city.city_code + '">' + city.name + "</a>"
     }
 
+    /*
+    ** Returns city link with background filter component (string)
+    ** @city Object // City Object with attributes city_code (string) & name (string)
+    */
     var cityLinkBg = function(city) {
       return '<a class="background-filter" href="/' + city.city_code + '">' + city.name + "</a>"
     }
-
+    
+    /*
+    ** Adds 'loading' class to cities-partial element
+    */
     function setLoading() {
       $('.cities-partial').addClass('loading');
     }
 
+    /*
+    ** Removes 'loading' class to cities-partial element
+    */
     function unsetLoading() {
       $('.cities-partial').removeClass('loading');
     }
-
-    setLoading();
-    $.get('/api/v1/cities', function(data){
-
+    
+    /*
+    ** Loads City Data received from API (TODO refactor method)
+    ** @data Object
+    */
+    function loadCitiesData(data) {
       var cities = _(data.cities).chain()
         .sortBy(function(c) {
           return c.info.user_count;
@@ -30,7 +46,7 @@ var onCitiesIndexLoad = function() {
       .sortBy(function(c) {
         switch(c.brew_status) {
           case 'fully_brewed':
-              return 100;
+            return 100;
           case 'warming_up':
             return 10;
           case 'hidden':
@@ -54,7 +70,17 @@ var onCitiesIndexLoad = function() {
       $('.upcoming-cities-container').html(listOfUpcomingCities.join(' '));
 
       unsetLoading();
-    });
+    }
+    /*
+    ** Error from /cities API
+    ** @error Object
+    */
+    function citiesDataError(error) {
+      throw new Error('Cities could not be loaded: %s', error);
+    }
+
+    setLoading();
+    $.get('/api/v1/cities', loadCitiesData(response), citiesDataError(error));
   }
 };
 
