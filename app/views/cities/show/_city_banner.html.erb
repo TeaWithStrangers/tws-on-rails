@@ -1,4 +1,5 @@
-<div class="city-banner cover-photo" style="background-image: url('<%= @city.header_bg(:medium) %>')">
+<div class="city-banner cover-photo" style="background-image: linear-gradient(to bottom, rgba(247, 191, 77, 0.87), rgba(247, 191, 77, 0.87)), url('<%= @city.header_bg(:medium) %>')">
+  <%= render partial: 'shared/header' %>
   <div class="content">
     <div class="content-box">
       <h1 class="cover-photo-lede city-title"><%= @city.name %></h1>
@@ -6,7 +7,14 @@
         <span class='cover-photo-subtext city-subtext'>
           Coming Soon
         </span>
-    <% end %>
+      <% elsif @city.pending_approval? %>
+        <span class='cover-photo-subtext city-subtext'>
+          Waiting on approval
+        </span>
+      <% end %>
     </div>
   </div>
+  <% if !user_signed_in? %>
+    <%= render partial: 'shared/what_is_tea_time' %>
+  <% end %>
 </div>

@@ -12,6 +12,9 @@ var shareBootstrap = function() {
     if (SHARE_COLLECTION.length == currentShareItem) {
       // Last item reached, loop back to 0
       currentShareItem = 0;
+      if ($('.sharing-try-button-text').text() == 'How about another?') {
+        $('.sharing-try-button-text').text('Ok now share')
+      }
     }
 
     // Get share item at position in the collection
