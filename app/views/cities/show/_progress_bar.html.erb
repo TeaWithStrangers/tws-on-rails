@@ -3,7 +3,7 @@
   <% if val < max %>
     <%= val %> of <%= max %> filled
   <% else %>
-    Filled
+    <%= image_tag 'share/checkmark.png' %> Filled
   <% end %>
   </p>
   <div class="progress-bar <%= 'green' if (val >= max ) %>">

@@ -1,4 +1,56 @@
-<h2>Hold your horses!</h2>
-<p>
-	We’re gonna need a minute before we welcome you in! Awesome that so many people are weird enough to be interested in something like TWS, but we can only high five so many people so quickly!
-</p>
+<div class="section city-intro">
+	<% if !user_signed_in? %>
+		<h2 class="section-header">
+			Join for Tea With Strangers!
+		</h2>
+		<p class="last">
+			Strangers all over the world are sitting together for amazing conversations every day. You should join them.
+		</p>
+		<%= link_to sign_up_path do %>
+			<button class='orange full-width-button'>
+				Let's Get Tea
+			</button>
+		<% end %>
+	<% else %>
+		<h2 class="section-header">
+			Hold your horses!
+		</h2>
+		<p>
+			We’re gonna need a minute before we welcome you in! Awesome that so many people are interested, but we can only high five so many people so quickly!
+		</p>
+		<%= render partial: 'cities/show/set_city' %>
+	<% end %>
+</div>
+
+<div class="section sharing line-divide">
+	<%= render partial: 'shared/sharing_widget', locals: { full: true } %>
+</div>
+
+<div class="section become-host line-divide">
+	<h2 class="section-header">
+		Become a host
+	</h2>
+	<p>
+		Hosts are the backbone of Tea With Strangers. With more of them, we can bring more strangers together, but we pay careful attention to ensure that all of our hosts fit the bill of what we’re trying to create together.
+	</p>
+	<p>
+		If you love bringing people together, asking questions, being yourself, trying to figure out what ‘being yourself’ even means, welcoming others without inhibition, and generally making our world smaller and more awesome, you might be host material.
+	</p>
+	<% if user_signed_in? %>
+	  <a href="/hosting" data-user-interest='hosting'>
+	    <button class='orange full-width-button'>
+	      I'm interested
+	    </button>
+	  </a>
+	<% else %>
+	  <%= link_to sign_up_path, class: "mobile" do %>
+	    <button class='orange full-width-button'>
+	      I'm interested
+	    </button>
+	  <% end %>
+	<% end %>
+</div>
+
+<div class="section learn-more">
+	<%= render partial: 'shared/learn_more' %>
+</div>
