@@ -1,6 +1,25 @@
-<h2>Bring Tea With Strangers to #{@city.name}</h2>
-<p>
-	Tea With Strangers is all about getting rid of strangers and making our cities feel like neighborhoods. This dreamland doesn’t become real with a website, facebook status, or an #instacommunity hashtag. We need people to start making tea time happen!
-</p>
+<div class="section city-intro">
+	<h2 class="section-header">Bring Tea With Strangers to <%= @city.name %></h2>
+	<p class="last">
+		Tea With Strangers is all about getting rid of strangers and making our cities feel like neighborhoods. This dreamland doesn’t become real with a website, facebook status, or an #instacommunity hashtag. We need people to start making tea time happen!
+	</p>
+	<% if !user_signed_in? %>
+		<%= link_to sign_up_path do %>
+			<button class='orange full-width-button'>
+				Let's Get Tea
+			</button>
+		<% end %>
+	<% else %>
+		<%= render partial: 'cities/show/set_city' %>
+	<% end %>
+</div>
+<div class="section required-resources line-divide">
+	<%= render partial: 'cities/show/required_resources' %>
+</div>
+<div class="section sharing line-divide">
+	<%= render partial: 'shared/sharing_widget', locals: { full: true } %>
+</div>
 
-<%= render partial: 'cities/show/required_resources' %>
+<div class="section learn-more">
+	<%= render partial: 'shared/learn_more' %>
+</div>

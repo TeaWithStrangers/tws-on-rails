@@ -22,11 +22,6 @@
   @extend .light-background;
 }
 
-// put this in the right place later
-button.orange.full-width-button {
-  @include span-columns(8 of 8);
-}
-
 .jfdi_signin .remember-me {
   position: relative;
   padding-left: 5px;
@@ -37,9 +32,9 @@ button.orange.full-width-button {
     display: inline-block;
     width: auto;
     margin:0px;padding:0px;
-   margin-top:-2px;
-   margin-left:-2px;
-   width:14px;
-   height:14px;
+    margin-top:-2px;
+    margin-left:-2px;
+    width:14px;
+    height:14px;
   }
 }

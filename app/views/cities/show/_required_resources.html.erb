@@ -1,12 +1,24 @@
-<h2>What we need to get going</h2>
+<h2 class="section-header">What we need to get going</h2>
 <div class="city-resources">
-	<div class="city-resource">
+	<div class="city-resource left">
 		<div class="block">
 			<span class="number">1</span>
 			<p class="description">superstar community leader</p>
-      <a href="#" data-user-interest='leading'>I'm interested</a>
+			<%= progress_bar(1, 1) %>
 		</div>
-    <%= progress_bar(1, 1) %>
+		<% if user_signed_in? %>
+		  <a href="/hosting" class="mobile" data-user-interest='leading'>
+		    <button class='orange'>
+		      I'm interested
+		    </button>
+		  </a>
+		<% else %>
+		  <%= link_to sign_up_path, class: "mobile" do %>
+		    <button class='orange'>
+		      I'm interested
+		    </button>
+		  <% end %>
+		<% end %>
 	</div>
 	<div class="city-resource">
 		<div class="block">
@@ -14,16 +26,69 @@
 			<p class="description">hosts to bring teatime together</p>
       <%= progress_bar(@city.hosts.count, 8) %>
 		</div>
-    <a href="#" data-user-interest='hosting'>
-      I'm interested
-    </a>
+		<% if user_signed_in? %>
+		  <a href="/hosting" class="mobile" data-user-interest='hosting'>
+		    <button class='orange'>
+		      I'm interested
+		    </button>
+		  </a>
+		<% else %>
+		  <%= link_to sign_up_path, class: "mobile" do %>
+		    <button class='orange'>
+		      I'm interested
+		    </button>
+		  <% end %>
+		<% end %>
 	</div>
 	<div class="city-resource">
 		<div class="block">
 			<span class="number">200</span>
 			<p class="description">strangers ready to share at tea time</p>
-      <%= progress_bar(0, 200) %>
+      <%= progress_bar(@city.users.count, 200) %>
 		</div>
-    <a href="#">Spread the Word</a>
+		<a class="mobile" href="#share">
+			<button class="orange">
+		  	Share
+			</button>
+		</a>
+	</div>
+</div>
+<div class="city-resources-buttons">
+	<div class="button-container">
+		<% if user_signed_in? %>
+		  <a href="/hosting" data-user-interest='leading'>
+		    <button class='orange'>
+		      I'm interested
+		    </button>
+		  </a>
+		<% else %>
+		  <%= link_to sign_up_path do %>
+		    <button class='orange'>
+		      I'm interested
+		    </button>
+		  <% end %>
+		<% end %>
+	</div>
+	<div class="button-container">
+		<% if user_signed_in? %>
+		  <a href="/hosting" data-user-interest='hosting'>
+		    <button class='orange'>
+		      I'm interested
+		    </button>
+		  </a>
+		<% else %>
+		  <%= link_to sign_up_path do %>
+		    <button class='orange'>
+		      I'm interested
+		    </button>
+		  <% end %>
+		<% end %>
+	</div>
+	<div class="button-container">
+		<a href="#share">
+			<button class="orange">
+		  	Share
+			</button>
+		</a>
 	</div>
 </div>
