@@ -22,12 +22,7 @@ class CitiesController < ApplicationController
   end
 
   def forbes_show
-    if current_user
-      use_new_styles
-    else
-      flash[:notice] = 'You should sign up first!'
-      redirect_to sign_up_path
-    end
+    use_new_styles
   end
 
   def forbes_new

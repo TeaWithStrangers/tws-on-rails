@@ -28,7 +28,11 @@ class City < ActiveRecord::Base
   scope :hidden, -> { where(brew_status: brew_statuses[:hidden]) }
 
   def pending?
-    cold_water? || warming_up? || unapproved?
+    cold_water? || warming_up?
+  end
+
+  def pending_approval?
+    unapproved?
   end
 
   def hosts
