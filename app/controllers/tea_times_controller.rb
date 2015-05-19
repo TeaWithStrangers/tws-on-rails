@@ -51,7 +51,7 @@ class TeaTimesController < ApplicationController
     end
 
     if @user.nil?
-      return redirect_to tea_time_path(@tea_time), alert: "Sorry, something has gone terribly wrong. Try again!"
+      return redirect_to tea_time_path(@tea_time), alert: "Sorry, something has gone wrong. Our fault. Try again!"
     end
 
 
