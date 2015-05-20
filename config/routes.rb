@@ -27,7 +27,13 @@ Rails.application.routes.draw do
   get '/signup'         => 'static#jfdi_signup',    as: :sign_up
 
   # Devise and Registration Routes
-  devise_for :users, :controllers => {:registrations => "registrations"}, :skip => [:sessions]
+  devise_for :users,
+            controllers: {
+              registrations:      "registrations",
+              omniauth_callbacks: "omniauth_callbacks"   # Callbacks controller for FB login
+            },
+            :skip => [:sessions]
+
   as :user do
     get     'signin'   => 'static#jfdi_signin',      as: :new_user_session
     post    'signin'   => 'devise/sessions#create',  as: :user_session

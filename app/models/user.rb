@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  devise :omniauthable, omniauth_providers: [:facebook]
+
   has_many :tea_times
   has_many :attendances
   belongs_to :home_city, class_name: 'City'
@@ -23,6 +25,16 @@ class User < ActiveRecord::Base
   bitmask :roles, :as => [:host, :admin], :null => false
   alias_method :role?, :roles?
   scope :hosts, -> { with_roles :host }
+
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.email    = auth.info.email
+      user.password = Devise.friendly_token[0,20]
+      user.name     = auth.info.name
+      user.nickname = auth.info.first_name
+      user.avatar   = auth.info.image
+    end
+  end
 
   def name(format = nil)
     names = [given_name, nickname, family_name]
