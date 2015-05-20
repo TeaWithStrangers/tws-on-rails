@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150510013715) do
+ActiveRecord::Schema.define(version: 20150520015332) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20150510013715) do
     t.integer  "header_bg_file_size"
     t.datetime "header_bg_updated_at"
     t.integer  "suggested_by_user_id"
+    t.integer  "users_count",            default: 0
   end
 
   add_index "cities", ["city_code"], name: "city_code_idx", unique: true, using: :btree
