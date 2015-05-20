@@ -13,7 +13,7 @@ class AttendanceMailer < ActionMailer::Base
     @user = @attendance.user
 
     mail.attachments['event.ics'] = {mime_type: "text/calendar",
-                                     content: @tea_time.ical.to_ical}
+                                     content: IcalCreator.new(@tea_time).call.to_ical}
 
     mail(to: @attendance.user.email,
          from: @tea_time.host.friendly_email,
@@ -34,7 +34,8 @@ class AttendanceMailer < ActionMailer::Base
     tt = @attendance.tea_time
 
     mail.attachments['event.ics'] = {mime_type: "text/calendar",
-                                     content: @attendance.tea_time.ical.to_ical}
+
+                                     content: IcalCreator.new(@attendance.tea_time).call.to_ical}
     cancel_delivery unless @attendance.pending?
 
     mail(to: @attendance.user.email,
