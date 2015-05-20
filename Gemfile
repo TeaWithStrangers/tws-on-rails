@@ -28,11 +28,9 @@ gem 'underscore-rails'
 gem "active_model_serializers"
 gem 'bitmask_attributes', '~> 1.0'
 
-# Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'markerb'
 gem 'sendgrid'
 
-# Figaro makes it easy to set env variables without Foreman
 #Calendars
 gem 'icalendar', '~> 2.2'
 gem 'time_zone_ext'
@@ -61,9 +59,6 @@ gem 'unicorn-rails'
 group :production do
   gem 'newrelic_rpm'
 end
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
 
 # Dev Gems
 gem 'spring', group: :development
