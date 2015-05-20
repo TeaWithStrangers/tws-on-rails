@@ -63,12 +63,16 @@ describe 'Cities endpoint', type: :request do
       @cities = FactoryGirl.create_list(:city, 5)
     end
 
+    let(:json_response) do
+      JSON.parse(response.body)
+    end
+
     let(:first_record) do
-      JSON.parse(response.body)['cities'].first
+      json_response['cities'].first
     end
 
     let(:returned_ids) do
-      JSON.parse(response.body)['cities'].map { |c| c['id'] }
+      json_response['cities'].map { |c| c['id'] }
     end
 
     it 'returns all the cities' do
@@ -76,6 +80,14 @@ describe 'Cities endpoint', type: :request do
       @cities.each do |city|
         expect(returned_ids).to include(city.id)
       end
+    end
+
+    it 'should return the users_count' do
+      target_test_city = @cities.first
+      new_users = FactoryGirl.create_list(:user, 2, home_city_id: target_test_city.id)
+      get '/api/v1/cities'
+      returned_target = json_response['cities'].find { |x| x['id'] == target_test_city.id }
+      expect(returned_target['info']['user_count']).to eq new_users.length
     end
 
     #expected_attributes = [:brew_status, :city_code, :description, :id, :name, :tagline, :timezone]
