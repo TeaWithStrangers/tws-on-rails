@@ -89,6 +89,8 @@ var onCitiesShow = function() {
   var hosting_button = $('a[data-user-interest="hosting"]');
 
   $.get('/api/v1/users/self/interests', function(user_info) {
+    if(!user_info) { return; }
+
     if(user_info.leading) {
       leading_button.addClass('applied');
     }
