@@ -47,7 +47,7 @@ gem 'aws-sdk', '~> 1.5.7'
 gem 'paranoia', "~> 2.0"
 
 # Authentication & Permission Gems
-gem 'devise', '~> 3.2.4'
+gem 'devise', '~> 3.4'
 gem 'cancan', '~> 1.6.10'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
