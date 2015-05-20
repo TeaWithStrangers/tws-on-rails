@@ -19,7 +19,7 @@ var onCitiesIndexLoad = function() {
     var cityLinkBg = function(city) {
       return '<a class="background-filter" href="/' + city.city_code + '">' + city.name + "</a>"
     }
-    
+
     /*
     ** Adds 'loading' class to cities-partial element
     */
@@ -33,7 +33,7 @@ var onCitiesIndexLoad = function() {
     function unsetLoading() {
       $('.cities-partial').removeClass('loading');
     }
-    
+
     /*
     ** Loads City Data received from API (TODO refactor method)
     ** @data Object
@@ -80,7 +80,7 @@ var onCitiesIndexLoad = function() {
     }
 
     setLoading();
-    $.get('/api/v1/cities', loadCitiesData(response), citiesDataError(error));
+    $.getJSON('/api/v1/cities', loadCitiesData, citiesDataError);
   }
 };
 
