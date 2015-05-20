@@ -23,6 +23,9 @@
           <li class="nav-link-item">
             <%= link_to 'My Account', profile_path %>
           </li>
+          <li class='nav-link-item'>
+            <%= link_to('Sign out', destroy_user_session_path, class: 'sign-in-emphasis', method: :delete) %>
+          </li>
         <% end %>
       </ul>
     </nav>
