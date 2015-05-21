@@ -82,7 +82,15 @@ describe 'Cities endpoint', type: :request do
       end
     end
 
-    it 'should return the users_count' do
+    it 'should return a URL to small version of the header bg', focus: true do
+      new_city = create(:city, header_bg: File.open("#{Rails.root}/spec/fixtures/missing-city-image.jpg"))
+      get '/api/v1/cities'
+      returned_target = json_response['cities'].find { |x| x['id'] == new_city.id }
+      expect(returned_target['header_bg_small']).to eq new_city.header_bg(:small)
+    end
+
+
+      it 'should return the users_count' do
       target_test_city = @cities.first
       new_users = FactoryGirl.create_list(:user, 2, home_city_id: target_test_city.id)
       get '/api/v1/cities'
