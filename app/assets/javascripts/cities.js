@@ -57,7 +57,7 @@ var onCitiesIndexLoad = function() {
       .value()
 
         $.each(cities, function(index, city){
-            var cityDiv = '<div class="city"><div class="city-image" style="background: url('+city.header_bg+') no-repeat 50% 50%; background-size: cover;"><h2 class=" city-name">' + cityLinkBg(city) + cityLink(city) + '</h2></div></div>';
+            var cityDiv = '<div class="city"><div class="city-image" style="background: url('+city.header_bg_small+') no-repeat 50% 50%; background-size: cover;"><h2 class=" city-name">' + cityLinkBg(city) + cityLink(city) + '</h2></div></div>';
           if(city.brew_status === "fully_brewed"){
             listOfActiveCities.push(cityDiv);
           }
