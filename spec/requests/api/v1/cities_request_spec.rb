@@ -98,6 +98,16 @@ describe 'Cities endpoint', type: :request do
       expect(returned_target['info']['user_count']).to eq new_users.length
     end
 
+    it 'should returns ciites sorted by user count' do
+      # create a different number of users for each city
+      @cities.shuffle.each_with_index do |city, index|
+        num = index + 1
+        num.times { create_list(:user, num, home_city_id: city.id) }
+      end
+      get '/api/v1/cities'
+      expect(returned_ids).to eq City.order(users_count: :desc).map(&:id)
+    end
+
     #expected_attributes = [:brew_status, :city_code, :description, :id, :name, :tagline, :timezone]
     #expected_attributes.each do |attribute|
     #  it "serializes the #{attribute} attribute" do
