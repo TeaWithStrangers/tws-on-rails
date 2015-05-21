@@ -89,8 +89,7 @@ describe 'Cities endpoint', type: :request do
       expect(returned_target['header_bg_small']).to eq new_city.header_bg(:small)
     end
 
-
-      it 'should return the users_count' do
+    it 'should return the users_count' do
       target_test_city = @cities.first
       new_users = FactoryGirl.create_list(:user, 2, home_city_id: target_test_city.id)
       get '/api/v1/cities'
