@@ -82,7 +82,7 @@ describe 'Cities endpoint', type: :request do
       end
     end
 
-    it 'should return a URL to small version of the header bg', focus: true do
+    it 'should return a URL to small version of the header bg' do
       new_city = create(:city, header_bg: File.open("#{Rails.root}/spec/fixtures/missing-city-image.jpg"))
       get '/api/v1/cities'
       returned_target = json_response['cities'].find { |x| x['id'] == new_city.id }
