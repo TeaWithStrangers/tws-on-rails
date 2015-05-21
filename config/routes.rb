@@ -59,9 +59,6 @@ Rails.application.routes.draw do
     end
   end
 
-  # Fix Ankit's Typo Apr 22 2015
-  get '/citiles/:city', to: redirect('/cities/%{city}')
-
   scope(path: 'admin')  do
     get '/ghost'           => 'admin#find'
     post '/ghost'          => 'admin#ghost'
