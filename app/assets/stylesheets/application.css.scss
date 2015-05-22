@@ -18,7 +18,7 @@
 @import "static/*";
 @import "cities/*";
 
-.jfdi_signin, .jfdi_signup, .forbes_index, .forbes_show, .write_mail {
+.jfdi_signin, .jfdi_signup, .forbes_index, .forbes_show, .write_mal, .cities_overview {
   @extend .light-background;
 }
 
@@ -47,4 +47,21 @@
   border-radius: 10px;
   box-shadow: none;
   border: 1px solid #DDD;
+}
+
+.admin {
+  .container {
+    margin: 0 auto;
+    padding: 3em 0 0.5em;
+  }
+  h2 {
+    text-align: center;
+  }
+  .cities-admin {
+    border-collapse: separate;
+    td, th {
+      border: solid 1px;
+      padding: 1px 10px
+    }
+  }
 }

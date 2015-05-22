@@ -13,6 +13,7 @@ class AdminController < ApplicationController
   end
 
   def cities_overview
+    use_new_styles
     @cities = City.order(:created_at).reverse_order
   end
 
