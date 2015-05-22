@@ -19,4 +19,9 @@
         %br
         .dropdown
           = f.select(:city_id, options_for_select(City.all.collect{ |p| [p.name, p.id] }), {:class => "city"})
+        %br
+        = f.label :recipients 'Send to:'
+        %br
+        .dropdown
+          = f.select(:recipients, options_for_select(["all", "waitlisted"])
         = f.submit 'Send Mail', confirm: "This is going to cost a few bucks. Are you sure?"
