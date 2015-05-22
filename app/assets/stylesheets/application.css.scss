@@ -18,7 +18,7 @@
 @import "static/*";
 @import "cities/*";
 
-.jfdi_signin, .jfdi_signup, .forbes_index, .forbes_show {
+.jfdi_signin, .jfdi_signup, .forbes_index, .forbes_show, .write_mail {
   @extend .light-background;
 }
 
@@ -37,4 +37,14 @@
     width:14px;
     height:14px;
   }
+}
+
+.write_mail form textarea {
+  display: block;
+  margin: 0.8125em 0;
+  padding: 1em;
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: none;
+  border: 1px solid #DDD;
 }
