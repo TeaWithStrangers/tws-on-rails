@@ -2,9 +2,9 @@
 class MassMail
   include ActiveModel::Model
 
-  ATTRIBUTES = %i(from to subject city_id body)
+  ATTRIBUTES = %i(from to subject city_id body recipients)
   attr_accessor *ATTRIBUTES
-  validates_presence_of :subject, :body, :city_id
+  validates_presence_of :subject, :body, :city_id, :recipients
 
   def initialize(attributes = {})
     attributes.each do |name, value|
