@@ -8,7 +8,7 @@ class MassMailer < ActionMailer::Base
   def simple_mail(opts = {})
     from = (opts[:from] || FROM)
     to = (opts[:to] || from)
-    sendgrid_recipients City.find(opts[:city_id]).users.select(:email).map(&:email)
+    sendgrid_recipients (opts[:recipients] || City.find(opts[:city_id]).users.select(:email).map(&:email))
 
     mail(to: to, from: from, subject: opts[:subject]) do |f|
       f.html { render inline: markdown(opts[:body]) }
