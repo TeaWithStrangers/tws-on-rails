@@ -9,7 +9,7 @@ class TeaTimeMailer < ActionMailer::Base
 
     @tea_time = TeaTime.find(tea_time_id)
     mail.attachments['event.ics'] = {mime_type: "text/calendar",
-                                     content: @tea_time.ical.to_ical}
+                                     content: IcalCreator.new(@tea_time).call.to_ical}
 
     mail(to: @tea_time.host.email,
          subject: "Add your tea time (#{@tea_time.start_time.strftime("%-m/%-d, %-l:%M - ")}#{(@tea_time.start_time+2.hours).strftime("%-l:%M%P")}) to the calendar!") do |format|
