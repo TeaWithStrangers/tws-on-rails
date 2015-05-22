@@ -22,17 +22,41 @@ class AdminController < ApplicationController
   def write_mail
     @mail = MassMail.new
   end
-  
+
   #TODO Test and reject invalid inputs
   def send_mail
-    @mail = MassMail.new(params[:admin_controller_mass_mail])
-    if @mail.valid?
-      MassMailer.delay.simple_mail(@mail.to_hash)
-      flash[:notice] = 'Message sent! Woohoo'
-      redirect_to action: :write_mail
+    # THE FORM DOESN'T PASS IN A TO FIELD, so that is always set to default
+    opts = {
+      subject:  params[:mass_mail][:subject],
+      body:     params[:mass_mail][:body],
+      city_id:  params[:mass_mail][:city_id],
+    }
+
+    # We assign this only if it exists
+    # because we don't want to set it explicitly to nil
+    opts[:from] = params[:mass_mail][:from] if params[:mass_mail][:from].present?
+
+    # We set the to the same as from address from the form.
+    # The actual recipients are currently assigned based on
+    # users City from the city_id from the form.
+    opts[:to] = params[:mass_mail][:from] if params[:mass_mail][:from].present?
+
+    city = City.find(opts[:city_id])
+    opts[:recipients] = if params[:mass_mail][:recipients] == "all"
+      city.users.select(:email).map(&:email)
     else
+      city.users.where(waitlisted: true).select(:email).map(&:email)
+    end
+
+    # check that all params exist
+    if opts[:subject].nil? || opts[:body].nil? || opts[:city_id].nil?
       flash[:alert] = 'Woopsy. You forgot something. Come again?'
       render :write_mail
+    else
+
+      MassMailer.delay.simple_mail(opts)
+      flash[:notice] = 'Message sent! Woohoo'
+      redirect_to action: :write_mail
     end
   end
 
@@ -59,7 +83,7 @@ class AdminController < ApplicationController
 
       ATTRIBUTES = %i(from to subject city_id body)
       attr_accessor *ATTRIBUTES
-      validates_presence_of :subject, :body, :city_id 
+      validates_presence_of :subject, :body, :city_id
 
       def initialize(attributes = {})
         attributes.each do |name, value|
