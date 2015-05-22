@@ -5,6 +5,7 @@ class AdminController < ApplicationController
   end
 
   def overview
+    use_new_styles
     @tea_times = TeaTime.all.order('start_time DESC')
   end
 
@@ -13,6 +14,7 @@ class AdminController < ApplicationController
   end
 
   def cities_overview
+    use_new_styles
     @cities = City.order(:created_at).reverse_order
   end
 

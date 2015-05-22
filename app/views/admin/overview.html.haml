@@ -1,4 +1,6 @@
+= render partial: 'shared/admin_header'
 .container
+  %h2 Admin: TeaTime Overview
   - @tea_times.each do |tt|
     .row
       =render partial: 'shared/tea_time_row', locals: {tea_time: tt}
@@ -15,4 +17,4 @@
             %td=  a.user.email
             %td=  a.status.to_s.humanize
             %td=  a.reason
-            %td=  a.updated_at 
+            %td=  a.updated_at
