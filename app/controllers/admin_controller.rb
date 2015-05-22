@@ -5,6 +5,7 @@ class AdminController < ApplicationController
   end
 
   def overview
+    use_new_styles
     @tea_times = TeaTime.all.order('start_time DESC')
   end
 
