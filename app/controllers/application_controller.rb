@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
       if !current_user
         redirect_to root_path, alert: 'Log in before trying that again :)'
       elsif current_user && current_user.waitlisted?
-        redirect_to root_path, alert: "Sorry, profile pages aren't available right now!"
+        redirect_to root_path, alert: "We'll have something for you here when we get you off the wait list!"
       end
     end
 
