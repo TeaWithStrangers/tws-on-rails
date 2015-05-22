@@ -1,0 +1,34 @@
+<div class="container dashboard">
+  <div class="row">
+    <div class="wide">
+      <h1>Send a Mass Mail</h1>
+      <%= form_for(@mail, url: {action: 'send_mail'}) do |f| %>
+        <%= f.label :from, 'From (Optional)' %>
+        <br/>
+        <%= f.text_field :from %>
+        <br/>
+        <%= f.label :subject, 'Subject' %>
+        <br/>
+        <%= f.text_field :subject %>
+        <br/>
+        <%= f.label :body, 'Body' %>
+        <br/>
+        <%= f.text_area :body %>
+        <br/>
+        <%= f.label :city, 'Send To Users in:' %>
+        <br/>
+        <div class="dropdown">
+          <%= f.select(:city_id, options_for_select(City.all.collect{ |p| [p.name, p.id] }), {:class => "city"}) %>
+        </div>
+        <br/>
+        <%= f.label :recipients, 'Send to:' %>
+        <br/>
+        <div class="dropdown">
+          <%= f.select(:recipients, options_for_select(["all","waitlisted"]), {:class => "city"}) %>
+
+        </div>
+        <%= f.submit 'Send Mail', confirm: "This is going to cost a few bucks. Are you sure?" %>
+      <% end %>
+    </div>
+  </div>
+</div>
