@@ -59,10 +59,10 @@ var onCitiesIndexLoad = function() {
         $.each(cities, function(index, city){
             var cityDiv = '<div class="city"><div class="city-image" style="background: url('+city.header_bg_small+') no-repeat 50% 50%; background-size: cover;"><h2 class=" city-name">' + cityLinkBg(city) + cityLink(city) + '</h2></div></div>';
           if(city.brew_status === "fully_brewed"){
-            listOfActiveCities.sort().push(cityDiv);
+            listOfActiveCities.push(cityDiv);
           }
           else if(!(city.brew_status === "unapproved") && !(city.brew_status === "hidden")) {
-            listOfUpcomingCities.sort().push(cityDiv);
+            listOfUpcomingCities.push(cityDiv);
 
           }
         });
