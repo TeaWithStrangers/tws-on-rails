@@ -82,20 +82,29 @@ describe 'Cities endpoint', type: :request do
       end
     end
 
-    it 'should return a URL to small version of the header bg', focus: true do
+    it 'should return a URL to small version of the header bg' do
       new_city = create(:city, header_bg: File.open("#{Rails.root}/spec/fixtures/missing-city-image.jpg"))
       get '/api/v1/cities'
       returned_target = json_response['cities'].find { |x| x['id'] == new_city.id }
       expect(returned_target['header_bg_small']).to eq new_city.header_bg(:small)
     end
 
-
-      it 'should return the users_count' do
+    it 'should return the users_count' do
       target_test_city = @cities.first
       new_users = FactoryGirl.create_list(:user, 2, home_city_id: target_test_city.id)
       get '/api/v1/cities'
       returned_target = json_response['cities'].find { |x| x['id'] == target_test_city.id }
       expect(returned_target['info']['user_count']).to eq new_users.length
+    end
+
+    it 'should returns ciites sorted by user count' do
+      # create a different number of users for each city
+      @cities.shuffle.each_with_index do |city, index|
+        num = index + 1
+        num.times { create_list(:user, num, home_city_id: city.id) }
+      end
+      get '/api/v1/cities'
+      expect(returned_ids).to eq City.order(users_count: :desc).map(&:id)
     end
 
     #expected_attributes = [:brew_status, :city_code, :description, :id, :name, :tagline, :timezone]
