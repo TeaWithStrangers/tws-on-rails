@@ -20,6 +20,7 @@ class AdminController < ApplicationController
   end
 
   def write_mail
+    use_new_styles
     @mail = MassMail.new
   end
 
