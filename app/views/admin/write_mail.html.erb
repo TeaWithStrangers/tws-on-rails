@@ -1,7 +1,8 @@
 <div class="container dashboard">
   <div class="row">
     <div class="wide">
-      <h1>Send a Mass Mail</h1>
+      <h1>Send Mass Mail</h1>
+      <p class="flash warning">Be careful of what you do here</p>
       <%= form_for(@mail, url: {action: 'send_mail'}) do |f| %>
         <%= f.label :from, 'From (Optional)' %>
         <%= f.text_field :from %>
