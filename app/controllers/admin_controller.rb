@@ -11,7 +11,7 @@ class AdminController < ApplicationController
 
   def tea_times_overview
     use_new_styles
-    @tea_times = TeaTime.all.order('start_time DESC')
+    @tea_times = TeaTime.order('start_time DESC').paginate(page: params[:page], per_page: 50)
   end
 
   def host_overview
