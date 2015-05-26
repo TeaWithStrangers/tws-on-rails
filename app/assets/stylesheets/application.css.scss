@@ -18,7 +18,11 @@
 @import "static/*";
 @import "cities/*";
 
-.jfdi_signin, .jfdi_signup, .forbes_index, .forbes_show, .write_mail, .cities_overview, .admin.overview {
+.jfdi_signin, .jfdi_signup, .forbes_index, .forbes_show {
+  @extend .light-background;
+}
+
+.admin {
   @extend .light-background;
 }
 
