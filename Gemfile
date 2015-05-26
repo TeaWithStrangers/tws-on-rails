@@ -58,6 +58,8 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'unicorn'
 gem 'unicorn-rails'
 
+gem 'will_paginate'
+
 group :production do
   gem 'newrelic_rpm'
 end
