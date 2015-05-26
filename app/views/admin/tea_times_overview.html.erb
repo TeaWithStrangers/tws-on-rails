@@ -20,11 +20,11 @@
       <td><%= tt.start_time %></td>
       <td><%= tt.host_name %></td>
       <td><%= tt.location %></td>
-      <td><%= tt.attendances(:pending).count %></td>
-      <td><%= tt.attendances(:present).count %></td>
-      <td><%= tt.attendances(:flake).count %></td>
-      <td><%= tt.attendances(:no_show).count %></td>
-      <td><%= tt.attendances(:waitlisted).count %></td>
+      <td><%= tt.attendances.pending.count %></td>
+      <td><%= tt.attendances.present.count %></td>
+      <td><%= tt.attendances.flake.count %></td>
+      <td><%= tt.attendances.no_show.count %></td>
+      <td><%= tt.attendances.waitlisted.count %></td>
       </tr>
     <% end %>
   </table>
