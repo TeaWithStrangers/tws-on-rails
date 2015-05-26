@@ -63,10 +63,11 @@ Rails.application.routes.draw do
     get '/ghost'           => 'admin#find'
     post '/ghost'          => 'admin#ghost'
 
-    get '/overview'        => 'admin#overview'
-    get '/overview/cities' => 'admin#cities_overview'
-    get '/overview/hosts'  => 'admin#host_overview'
-    get '/users'           => 'admin#users'
+    get '/overview'           => 'admin#overview'
+    get '/overview/tea_times' => 'admin#tea_times_overview'
+    get '/overview/cities'    => 'admin#cities_overview'
+    get '/overview/hosts'     => 'admin#host_overview'
+    get '/users'              => 'admin#users'
 
     get '/mail'            => 'admin#write_mail'
     post '/mail'           => 'admin#send_mail'

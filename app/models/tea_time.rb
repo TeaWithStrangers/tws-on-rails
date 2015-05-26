@@ -28,6 +28,14 @@ class TeaTime < ActiveRecord::Base
   scope :future, -> { after(Time.now.utc) }
   scope :future_until, ->(until_time) { future.before(until_time) }
 
+  def date
+    start_time.strftime("%A, %D")
+  end
+
+  def host_name
+    host.name
+  end
+
   def start_time
     return use_city_timezone { super.in_time_zone if super } || Time.now
   end
@@ -42,10 +50,6 @@ class TeaTime < ActiveRecord::Base
     else
       super
     end
-  end
-
-  def tzid
-    start_time.time_zone.tzinfo.name
   end
 
   def duration
