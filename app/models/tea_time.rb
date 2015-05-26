@@ -44,10 +44,6 @@ class TeaTime < ActiveRecord::Base
     end
   end
 
-  def tzid
-    start_time.time_zone.tzinfo.name
-  end
-
   def duration
     read_attribute(:duration) || 2
   end
