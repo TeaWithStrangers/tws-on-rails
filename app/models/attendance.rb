@@ -9,7 +9,12 @@ class Attendance < ActiveRecord::Base
   validates_uniqueness_of :user_id, scope: :tea_time_id
 
   scope :attended, ->() { where(status: [:cancelled, :pending, :present].map {|x| Attendance.statuses[x]}) }
-  scope :waitlisted, ->() { where(status: [:waiting_list].map {|x| Attendance.statuses[x]}) }
+  scope :waitlisted,    ->() { where(status: [:waiting_list].map {|x| Attendance.statuses[x]}) }
+
+  scope :pending,       ->() { where(status: [:pending].map {|x| Attendance.statuses[x]})  }
+  scope :present,       ->() { where(status: [:present].map {|x| Attendance.statuses[x]})  }
+  scope :flake,         ->() { where(status: [:flake].map   {|x| Attendance.statuses[x]})  }
+  scope :no_show,       ->() { where(status: [:no_show].map {|x| Attendance.statuses[x]})  }
 
   def todo?
     pending?
