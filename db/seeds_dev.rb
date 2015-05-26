@@ -47,7 +47,20 @@ admin = User.create(
 )
 
 host_NYC.roles << :host
-host_SF1.roles << :host 
+host_SF1.roles << :host
 host_SF2.roles << :host
 admin.roles << :admin
 [host_NYC, host_SF1, host_SF2, admin].map(&:save)
+
+City.all.each do |city|
+  5.times do |i|
+    if city.hosts.present?
+      TeaTime.create({
+        host: city.hosts.sample,
+        city: city,
+        start_time: DateTime.now + (5..15).to_a.sample.days,
+        duration: 2
+      })
+    end
+  end
+end
