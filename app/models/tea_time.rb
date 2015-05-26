@@ -33,7 +33,7 @@ class TeaTime < ActiveRecord::Base
   end
 
   def host_name
-    host.name
+    host.name if host
   end
 
   def start_time
