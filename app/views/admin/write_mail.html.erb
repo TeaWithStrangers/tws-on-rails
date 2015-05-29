@@ -17,7 +17,7 @@
         </div>
         <%= f.label :recipients, 'Send to:' %>
         <div class="dropdown">
-          <%= f.select(:recipients, options_for_select(["all","waitlisted"]), {:class => "city"}) %>
+          <%= f.select(:recipients, options_for_select(["all","waitlisted", "nonwaitlisted"]), {:class => "city"}) %>
         </div>
         <%= f.submit 'Send Mail', confirm: "This is going to cost a few bucks. Are you sure?" %>
       <% end %>
