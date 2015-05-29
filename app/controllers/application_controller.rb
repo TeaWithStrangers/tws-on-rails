@@ -29,8 +29,10 @@ class ApplicationController < ActionController::Base
   protected
 
     def away_ye_waitlisted
-      if (current_user && current_user.waitlisted? || current_user.nil?)
+      if !current_user
         redirect_to root_path, alert: 'Log in before trying that again :)'
+      elsif current_user && current_user.waitlisted?
+        redirect_to root_path, alert: "We'll have something for you here when we get you off the wait list!"
       end
     end
 

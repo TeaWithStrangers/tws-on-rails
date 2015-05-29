@@ -1,6 +1,6 @@
 class Api::V1::CitiesController < ApplicationController
   def index
-    render json: City.includes(:users), each_serializer: CityOverviewSerializer
+    render json: City.order(users_count: :desc), each_serializer: CityOverviewSerializer
   end
 
   def create

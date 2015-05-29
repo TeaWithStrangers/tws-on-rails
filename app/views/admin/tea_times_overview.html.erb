@@ -1,0 +1,31 @@
+<%= render partial: 'shared/admin_header' %>
+<div class="container ">
+  <table class="container cities-admin">
+    <tr>
+      <th>City Name</th>
+      <th>Date</th>
+      <th>Start Time</th>
+      <th>Host</th>
+      <th>Location</th>
+      <th>Pending</th>
+      <th>Present</th>
+      <th>Flaked</th>
+      <th>No show</th>
+      <th>Waitlisted</th>
+    </tr>
+    <% @tea_times.each do |tt| %>
+      <tr>
+      <td><%= tt.city.name %></td>
+      <td><%= tt.date %></td>
+      <td><%= tt.start_time %></td>
+      <td><%= tt.host_name %></td>
+      <td><%= tt.location %></td>
+      <td><%= tt.attendances.pending.count %></td>
+      <td><%= tt.attendances.present.count %></td>
+      <td><%= tt.attendances.flake.count %></td>
+      <td><%= tt.attendances.no_show.count %></td>
+      <td><%= tt.attendances.waitlisted.count %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

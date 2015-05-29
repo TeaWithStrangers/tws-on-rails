@@ -27,9 +27,11 @@ describe AttendanceMailer do
     let!(:wl_attendances) { create_list(:attendance, 3, tea_time: tt, status: :waiting_list) }
     describe '#waitilist_free_spot' do
       let(:mail) { AttendanceMailer.waitlist_free_spot(tt.id) }
-      
+
       it 'should be sent to all wait list attendees but no one else' do
-        expect(mail.bcc).to eq wl_attendances.map(&:user).map(&:email) 
+        wl_attendances.map(&:user).map(&:email).each do |email|
+          expect(mail.bcc.sort).to include(email)
+        end
       end
     end
 
@@ -52,7 +54,7 @@ describe AttendanceMailer do
         expect(ActionMailer::Base.deliveries.size).to eq(0)
       end
     end
-    
+
     let(:mail) {
       AttendanceMailer.reminder(attendance.id, :same_day)
     }

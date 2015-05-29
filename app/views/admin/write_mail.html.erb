@@ -1,0 +1,26 @@
+<%= render partial: 'shared/admin_header' %>
+<div class="container dashboard">
+  <div class="row">
+    <div class="wide">
+      <h1>Send Mass Mail</h1>
+      <p class="flash warning">Be careful of what you do here</p>
+      <%= form_for(@mail, url: {action: 'send_mail'}) do |f| %>
+        <%= f.label :from, 'From (Optional)' %>
+        <%= f.text_field :from %>
+        <%= f.label :subject, 'Subject' %>
+        <%= f.text_field :subject %>
+        <%= f.label :body, 'Body' %>
+        <%= f.text_area :body, class: 'wide' %>
+        <%= f.label :city, 'Send To Users in:' %>
+        <div class="dropdown">
+          <%= f.select(:city_id, options_for_select(City.all.collect{ |p| [p.name, p.id] }), {:class => "city"}) %>
+        </div>
+        <%= f.label :recipients, 'Send to:' %>
+        <div class="dropdown">
+          <%= f.select(:recipients, options_for_select(["all","waitlisted", "nonwaitlisted"]), {:class => "city"}) %>
+        </div>
+        <%= f.submit 'Send Mail', confirm: "This is going to cost a few bucks. Are you sure?" %>
+      <% end %>
+    </div>
+  </div>
+</div>

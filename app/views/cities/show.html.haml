@@ -9,6 +9,9 @@
   %meta{:property => "og:image", :content => "#{@city.header_bg.url}"}
   %meta{:property => "og:description", :content => "Tea With Strangers is all about making meaningful interactions more fun. Meet some strangers in #{@city.name}!"}
 = render partial: 'shared/city_banner'
+.container
+  .city-flash.notice
+    These old style city pages will be updated to the new style soon!
 .container{:class => "#{@city.city_code}"}
   = render partial: 'shared/nav_header'
   = @city.hosts.empty? ? render(partial: 'city_no_hosts') : render(partial: 'city_has_hosts')

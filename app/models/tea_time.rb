@@ -14,7 +14,7 @@ class TeaTime < ActiveRecord::Base
 
   after_touch :clear_association_cache_wrapper
   after_create :send_host_confirmation, :queue_attendance_reminder, unless: :skip_callbacks
-  before_destroy { CancelTeaTime.send_cancellation(self) }
+  before_destroy { CancelTeaTime.send_cancellations(self) }
 
   enum followup_status: { pending: 0, marked_attendance: 1, completed: 2, cancelled: 3 }
 
@@ -27,6 +27,14 @@ class TeaTime < ActiveRecord::Base
   scope :past, -> { before(Time.now.utc) }
   scope :future, -> { after(Time.now.utc) }
   scope :future_until, ->(until_time) { future.before(until_time) }
+
+  def date
+    start_time.strftime("%A, %D")
+  end
+
+  def host_name
+    host.name if host
+  end
 
   def start_time
     return use_city_timezone { super.in_time_zone if super } || Time.now
@@ -42,10 +50,6 @@ class TeaTime < ActiveRecord::Base
     else
       super
     end
-  end
-
-  def tzid
-    start_time.time_zone.tzinfo.name
   end
 
   def duration
@@ -118,22 +122,6 @@ class TeaTime < ActiveRecord::Base
     else
       false
     end
-  end
-
-  def ical
-    tt = self
-    cal = Icalendar::Calendar.new
-    cal.add_timezone(TZInfo::Timezone.get(tt.tzid).ical_timezone(tt.start_time))
-    cal.event do |e|
-      e.uid = tt.id.to_s
-      e.dtstart = Icalendar::Values::DateTime.new tt.start_time, tzid: tt.tzid
-      e.dtend = Icalendar::Values::DateTime.new tt.end_time, tzid: tt.tzid
-      e.summary = "Tea time, hosted by #{tt.host.name}"
-      e.location = tt.location
-      #FIXME: Come back to this with fresh eyes
-      e.organizer = Icalendar::Values::CalAddress.new("mailto:#{tt.host.email}", 'CN' => tt.host.name)
-    end
-    cal
   end
 
   def todo?
