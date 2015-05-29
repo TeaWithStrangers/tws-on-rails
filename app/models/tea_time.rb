@@ -14,7 +14,7 @@ class TeaTime < ActiveRecord::Base
 
   after_touch :clear_association_cache_wrapper
   after_create :send_host_confirmation, :queue_attendance_reminder, unless: :skip_callbacks
-  before_destroy { CancelTeaTime.send_cancellation(self) }
+  before_destroy { CancelTeaTime.send_cancellations(self) }
 
   enum followup_status: { pending: 0, marked_attendance: 1, completed: 2, cancelled: 3 }
 
