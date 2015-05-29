@@ -50,10 +50,13 @@ class AdminController < ApplicationController
     opts[:to] = params[:mass_mail][:from] if params[:mass_mail][:from].present?
 
     city = City.find(opts[:city_id])
-    opts[:recipients] = if params[:mass_mail][:recipients] == "all"
+    opts[:recipients] = case params[:mass_mail][:recipients]
+    when "all"
       city.users.select(:email).map(&:email)
-    else
+    when "waitlisted"
       city.users.where(waitlisted: true).select(:email).map(&:email)
+    else
+      city.users.where(waitlisted: false).select(:email).map(&:email)
     end
 
     # check that all params exist
