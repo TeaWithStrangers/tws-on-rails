@@ -72,15 +72,20 @@ gem 'spring', group: :development
 
 # Random debug tools
 group :development, :test do
-  gem 'guard'
-  gem 'guard-zeus'
+
   gem 'pry-rails'
   gem 'pry-stack_explorer'
   gem 'rspec-rails', '~> 2.14.2'
-  gem 'capybara'
   gem 'factory_girl', '~>4.4'
   gem 'factory_girl_rails'
   gem 'rails-observers'
   gem 'shoulda-matchers'
   gem 'coveralls', require: false
+end
+
+group :test do
+  gem 'database_cleaner'
+  gem 'capybara'
+  gem 'guard'
+  gem 'guard-zeus'
 end
