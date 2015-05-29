@@ -6,6 +6,14 @@ describe TeaTime do
     @future_tt = create(:tea_time)
   end
 
+  describe '#destroy' do
+    it 'should call CancelTeaTime', focus: true do
+      expect(CancelTeaTime).to receive(:send_cancellations).with(an_instance_of(described_class))
+      tt = create(:tea_time)
+      tt.destroy
+    end
+  end
+
   describe '.start_time' do
     before(:all) do
       @city_pst = create(:city)
