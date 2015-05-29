@@ -72,11 +72,9 @@ gem 'spring', group: :development
 
 # Random debug tools
 group :development, :test do
-  gem 'byebug'
   gem 'guard'
-  gem 'guard-livereload'
+  gem 'guard-zeus'
   gem 'pry-rails'
-  gem 'pry-byebug'
   gem 'pry-stack_explorer'
   gem 'rspec-rails', '~> 2.14.2'
   gem 'capybara'

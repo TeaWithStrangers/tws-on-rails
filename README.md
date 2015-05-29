@@ -56,6 +56,12 @@ though, since it's not part of the Gemfile.
 
 Check out our [Contributing Guide](http://making.teawithstrangers.com/contributing).
 
+# Running Tests
+
+1. Clone repo
+1. `bundle install`
+1. `rake` or `guard` for continuous testing
+
 ## Open Commit Bit
 
 TWS has an open commit bit policy: Anyone with an accepted pull request gets
