@@ -11,10 +11,6 @@ describe TeaTime do
       @city_pst = create(:city)
       @city_est = create(:city, timezone: "Eastern Time (US & Canada)")
       @city_utc = create(:city, timezone: "UTC")
-      #@items = [city_utc, city_pst, city_est].inject({}) {|hsh, c|
-      #  hsh[c] = create(:tea_time, city: c)
-      #  hsh
-      #}
     end
 
     it 'should save time as UTC, account for the city TZ difference' do
