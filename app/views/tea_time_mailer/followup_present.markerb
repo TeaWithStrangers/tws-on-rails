@@ -1,12 +1,12 @@
 ![HEYTHANKS](http://media.giphy.com/media/ip6n2oVNZBHiM/giphy.gif)
 
-Just wanted to send a quick thank you for joining for tea time. [You can (and should!) come again](<%=url_for(controller: 'cities', action: 'schedule', id: @tea_time.city.city_code, only_path: false, utm_campaign: 'followupattendance', utm_medium: 'email', utm_content: 'schedule') %>), as every single time is different. They rarely get dull (trust me, I've hosted over 1000 strangers myself and I'm still goin'). **[Find the tea times here.](<%=url_for(controller: 'cities', action: 'schedule', id: @tea_time.city.city_code, only_path: false, utm_campaign: 'followupattendance', utm_medium: 'email', utm_content: 'schedule') %>)**
+Just wanted to send a quick thank you for joining for tea time. [You can (and should!) come again](<%=url_for(controller: 'cities', action: 'show', id: @tea_time.city.city_code, only_path: false, utm_campaign: 'followupattendance', utm_medium: 'email', utm_content: 'show') %>), as every single time is different. They rarely get dull (trust me, I've hosted over 1000 strangers myself and I'm still goin'). **[Find the tea times here.](<%=url_for(controller: 'cities', action: 'show', id: @tea_time.city.city_code, only_path: false, utm_campaign: 'followupattendance', utm_medium: 'email', utm_content: 'show') %>)**
 
-If you want to send some digital high fives to anyone in your group, you can grab their emails by checking out your [tea time history on the website here](<%= history_url %>). 
+If you want to send some digital high fives to anyone in your group, you can grab their emails by checking out your [tea time history on the website here](<%= history_url %>).
 
-Sound good? Good! Hope you're having the best day ever. 
+Sound good? Good! Hope you're having the best day ever.
 
-Bleep bleep bloop,   
+Bleep bleep bloop,
 The Robots at [Tea With Strangers](http://teawithstrangers.com?utm_campaign=followupattendance&utm_medium=email&utm_content=home)
 **['Like' TWS on facebook!](http://www.facebook.com/teawithstrangers)**
 

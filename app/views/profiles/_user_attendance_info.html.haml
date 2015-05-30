@@ -16,6 +16,6 @@
             - else
               %h3.attendees.none No attendees yet!
 - else
-  %p 
+  %p
     You're not scheduled for any tea times! Let's change that.
-    =link_to "Go schedule a tea time!", schedule_city_path(current_user.home_city)
+    =link_to "Go schedule a tea time!", city_path(current_user.home_city)

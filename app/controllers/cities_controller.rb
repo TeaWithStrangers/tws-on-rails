@@ -67,9 +67,6 @@ class CitiesController < ApplicationController
     end
   end
 
-  def schedule
-  end
-
   # GET /cities/new
   def new
     @city = City.new
