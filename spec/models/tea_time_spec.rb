@@ -7,7 +7,7 @@ describe TeaTime do
   end
 
   describe '#destroy' do
-    it 'should call CancelTeaTime', focus: true do
+    it 'should call CancelTeaTime' do
       expect(CancelTeaTime).to receive(:send_cancellations).with(an_instance_of(described_class))
       tt = create(:tea_time)
       tt.destroy
