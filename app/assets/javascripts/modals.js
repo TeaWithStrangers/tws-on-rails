@@ -23,15 +23,11 @@ function loadModal(modalTarget) {
 function closeModal() { modal.dialog('close') }
 
 function modalActivation() {
-  $('a.sign-up').on('click', function(evt) { 
+  $('a.sign-up').on('click', function(evt) {
     if(evt.currentTarget.href == '/signup') {
       modal = loadModal('/signup')(evt)
     }
   });
-
-  //$('#login').on('click', function(evt) { 
-  //  modal = loadModal('/signin')(evt)
-  //});
 
   $('.edit_attendance, .tea-time-scheduling').on('click', function(evt) {
     modal = loadModal(evt.currentTarget.href)(evt)
