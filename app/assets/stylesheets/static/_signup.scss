@@ -1,14 +1,18 @@
 .form-page {
-	padding: 3em 0;
+	padding-top: 3em;
+  padding-bottom: 3em;
 }
 
 .full-sign-up {
-  @include span-columns(10);
-  @include shift(1);
-  
+
+  @include media($tablet) {
+    @include span-columns(10);
+    @include shift(1);
+  }
+
   @include media($desktop) {
-    @include shift(3);
-    @include span-columns(6);
+    @include span-columns(8);
+    @include shift(2);
   }
 }
 
@@ -26,4 +30,26 @@ h2.sign-up-header {
 
 p.sign-up-text {
   margin-bottom: $base-font-size;
+}
+
+form.new_user {
+  overflow: auto;
+  .left {
+
+    @include media($tablet) {
+      float: left;
+    }
+  }
+  .right {
+
+    @include media($tablet) {
+      float: right;
+    }
+  }
+}
+
+.alternate {
+  text-align: center;
+  clear: both;
+  margin-top: 1em;
 }
