@@ -1,30 +1,37 @@
 <%= render partial: 'shared/header' %>
 
-<div class="container full-sign-up form-page">
-  <h2 class="sign-up-header">Join for tea time</h2>
-  <p class="sign-up-text">
-    Thousands of strangers across the world have sat together for conversations. We can't wait for you to join them.
-  </p>
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-    <div>
-      <%= f.email_field :email, autofocus: true, placeholder: "Email Address" %>
+<div class="container form-page">
+  <div class="full-sign-up">
+    <h2 class="sign-up-header">Hey stranger!</h2>
+    <p class="sign-up-text">
+      It's good to have you back. Sign in here and sign up for your next tea time!
+    </p>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div>
+        <%= f.email_field :email, autofocus: true, placeholder: "Email Address" %>
+      </div>
+
+      <div>
+        <%= f.password_field :password, autocomplete: "off", placeholder: "Password" %>
+      </div>
+
+      <div class="sign-in button"><%= f.submit "Sign in" %></div>
+
+      <div class="left">
+        <% if devise_mapping.rememberable? -%>
+          <div class="remember-me"><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
+        <% end -%>
+      </div>
+
+      <div class="right">
+        <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+          <%= link_to "Forgot your password?", new_password_path(resource_name), :class => "forgot-pw link" %>
+        <% end -%>
+      </div>
+    <% end %>
+
+    <div class="alternate">
+      <%= link_to 'If you\'ve never signed up before, click here and do that', next_step_path %>
     </div>
-
-    <div>
-      <%= f.password_field :password, autocomplete: "off", placeholder: "Password" %>
-    </div>
-
-    <div class="sign-in button"><%= f.submit "Sign in" %></div>
-
-    <div class="left">
-      <% if devise_mapping.rememberable? -%>
-        <div class="remember-me"><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
-      <% end -%>
-
-      <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-        <%= link_to "Forgot your password?", new_password_path(resource_name), :class => "forgot-pw link" %>
-      <% end -%>
-    </div>
-
-  <% end %>
+  </div>
 </div>

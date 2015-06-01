@@ -1,9 +1,16 @@
 <%= render partial: 'shared/header' %>
 
-<div class="container full-sign-up form-page">
-  <h2 class="sign-up-header">Join for tea time</h2>
-  <p class="sign-up-text">
-    Thousands of strangers across the world have sat together for conversations. We can't wait for you to join them.
-  </p>
-  <%= render partial: 'shared/new_sign_up' %>
+<div class="container form-page">
+	<div class="full-sign-up">
+	  <h2 class="sign-up-header">Join for tea time</h2>
+	  <p class="sign-up-text">
+	    Thousands of strangers across the world have sat together for conversations. We can't wait for you to join them.
+	  </p>
+	  <%= render partial: 'shared/new_sign_up' %>
+	  <div class="alternate">
+	  	<%= link_to 'If you\'ve already done this before, click here to log in', new_user_session_path, id: 'login'%>
+  	</div>
+  </div>
 </div>
+
+<%= render partial: 'shared/new_footer' %>
