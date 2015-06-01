@@ -24,7 +24,7 @@
   margin-bottom: $base-font-size*3;
   overflow: auto;
 
-  @include media($desktop) {
+  @include media($tablet) {
     @include span-columns(10 of 12);
     @include shift(1);
   }
