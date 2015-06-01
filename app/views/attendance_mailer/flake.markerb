@@ -15,7 +15,7 @@ It'd be awesome if you were able to find another time that does work for you (wi
 
 Hope your day is going beautifully. If not, grab a bar of chocolate and watch this: <https://www.youtube.com/watch?v=l-gQLqv9f4o>.
 
-Happy days!
+Happy days!  
 <%= @tea_time.host.name %>
 
 P.S. In case you forgot your password, you can reset it with ease here: [http://www.teawithstrangers.com/users/password/new](http://www.teawithstrangers.com/users/password/new?utm_campaign=cancelspot&utm_medium=email&utm_content=changepw).
