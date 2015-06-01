@@ -10,5 +10,5 @@ time here.](<%=url_for(controller: 'cities', action: 'schedule', id:
 @tea_time.city.city_code, only_path: false, utm_campaign: 'followupwaitlist',
 utm_medium: 'email', utm_content: 'schedule') %>)**  
 
-Bleep bleep bloop, 
+Bleep bleep bloop,  
 The Robots at Tea With Strangers
