@@ -2,10 +2,11 @@
 <html>
   <head>
     <title><%= content_for(:title) || "Tea With Strangers" %></title>
-    <meta name='description' content="<%=(content_for(:description) || "Tea With
-                                          Strangers is all about making
-                                          meaningful interactions more
-                                          fun.") %>">
+    <meta name='description' content="<%=(content_for(:description) || "Tea With Strangers
+                                            is a community of people that bring strangers
+                                            together for great conversations. We're all
+                                            about making cities feel more like
+                                            neighborhoods. Join us!") %>">
     <meta name='viewport' content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta content='http://teawithstrangers.com' property='og:url'>
     <meta content='website' property='og:type'>
@@ -15,7 +16,7 @@
     <% else %>
       <meta content='Tea With Strangers' property='og:title'>
       <meta content='http://f.cl.ly/items/3F43223x2A0q0d0U093d/tws-splash-fbimage-01.jpg' property='og:image'>
-      <meta content='Tea With Strangers is all about making meaningful interactions more fun.' property='og:description'>
+      <meta content="Tea With Strangers is a community of people that bring strangers together for great conversations. We're all about making cities feel more like neighborhoods. Join us!" property='og:description'>
     <% end %>
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
