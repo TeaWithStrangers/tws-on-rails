@@ -23,9 +23,13 @@ class CitiesController < ApplicationController
 
   def forbes_show
     use_new_styles
-    if @city.fully_brewed?
-      redirect_to city_path(@city)
-    end
+
+    # NOTE: Mehul, I styled new city pages on the 
+    # forbes_show markup instead of the original. 
+    # Not sure if that was correct, but markup is easy to migrate.
+    # if @city.fully_brewed?
+    #   redirect_to city_path(@city)
+    # end
   end
 
   def forbes_new

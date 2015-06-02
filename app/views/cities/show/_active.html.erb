@@ -1,0 +1,16 @@
+<div class="section city-intro">
+	<h2 class="section-header">
+		Join for a tea time in the next two weeks!
+	</h2>
+	<p>
+		Every tea time is brought together by someone in our host community that gets it. Each of them was brought on by hosts before them. They’re all awesome, but you can get to know them by checking out their profiles.	
+	</p>
+	<%= render partial: 'cities/show/set_city' %>
+</div>
+
+<div class="section tt-schedule">
+<% tts = @city.tea_times.future_until(2.weeks.from_now) %>
+<% if tts.count > 0 %>
+  <%= render partial: 'shared/tea_times', locals: {tea_times: tts.pending.order(:start_time => :asc)} %>
+<% end %>
+</div>
