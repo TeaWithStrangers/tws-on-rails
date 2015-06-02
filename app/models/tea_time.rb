@@ -32,6 +32,14 @@ class TeaTime < ActiveRecord::Base
     start_time.strftime("%A, %D")
   end
 
+  def day
+    start_time.strftime("%A")
+  end
+
+  def date_sans_year
+    start_time.strftime("%b %e")
+  end
+
   def host_name
     host.name if host
   end
@@ -81,6 +89,28 @@ class TeaTime < ActiveRecord::Base
     return "#{date}, #{timestamp}"
   end
 
+  def start_end_hour
+    start_t         = start_time
+    end_t           = start_t + duration.hours
+    start_meridian  = start_t.strftime("%P")
+    end_meridian    = end_t.strftime("%P")
+
+    startT    = start_t.strftime("%-l:%M")
+    endT      = end_t.strftime("%-l:%M")
+
+    [startT, endT].each {|ft|
+      ft.gsub!(":00", "")
+    }
+
+    timestamp = if start_meridian.match(end_meridian)
+      "#{startT} – #{endT}#{end_meridian}"
+    else
+      "#{startT}#{start_meridian} – #{endT}#{end_meridian}"
+    end
+
+    return "#{timestamp}"
+  end
+
   def spots_remaining
     MAX_ATTENDEES - attendances.pending.count
   end
@@ -97,7 +127,7 @@ class TeaTime < ActiveRecord::Base
     !attendances.where(user: user, status: Attendance.statuses[:waiting_list]).empty?
   end
 
-  #Attendees takes an optional single argument lambda via the :filter keyword arg
+  # Attendees takes an optional single argument lambda via the :filter keyword arg
   # that is passed to reject. Any items for which the Proc returns true are
   # excluded from the returned list of attendees.
   def attendees(filter: nil)

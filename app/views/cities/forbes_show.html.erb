@@ -25,7 +25,8 @@
   	<% elsif @city.cold_water? %>
   	  <%= render partial: 'cities/show/cold_water' %>
   	<% else %>
-  	  <%= render partial: 'cities/show/active_waitlisted' %>
+  	  <!-- <%= render partial: 'cities/show/active_waitlisted' %> -->
+      <%= render partial: 'cities/show/active' %>
   	<% end %>
     <% if @city.unapproved? %>
     <% else %>
