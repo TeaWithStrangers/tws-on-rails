@@ -1,0 +1,75 @@
+<div class="tt-container">
+  <div class="tt-box">
+    <div class="tt-card-top">
+      <%= link_to host_city_path(tea_time.city, tea_time.host) do %>
+        <div class="host-container">
+          <div class="host-avatar">
+            <div class="avatar" style="background-image: url('<%= tea_time.host.avatar.url(:medium) %>');"></div>
+          </div>
+          <h6 class="light boldweight capitalize">
+            <%= "#{tea_time.host.name}" %>
+          </h6>
+        </div>
+      <% end %>
+      <div class="date-time">
+        <div class="day">
+          <h6 class="light boldweight capitalize">
+            <%= "#{tea_time.day}" %>
+          </h6>
+        </div>
+        <div class="date">
+          <h3 class="size-up">
+            <%= "#{tea_time.date_sans_year}" %>
+          </h3>
+        </div>
+        <div class="time">
+          <h5 class="boldweight">
+            <%= "#{tea_time.start_end_hour}" %>
+          </h5>
+        </div>
+      </div>
+    </div>
+    <div class="place">
+      <h5 class="light lightweight">
+        <%= "#{tea_time.location}" %>
+      </h5>
+    </div>
+    <% if !(without_button ||= false) %>
+      <hr>
+      <div class="availability">
+        <div class="seats-left">
+          <p class="description">
+            <% if tea_time.spots_remaining? %>
+              <%= "#{tea_time.spots_remaining} #{'seat'.pluralize(tea_time.spots_remaining)} left!" %>
+            <% else %>
+              Packed!
+            <% end %>
+          </p>
+        </div>
+        <%= tea_spots_progress_bar(6 - tea_time.spots_remaining, 6) %>
+      </div>
+    </div>
+    <div class="tt-cta">
+      <%= link_to tea_time_path(tea_time), class: 'tea-time-scheduling' do %>
+        <% if tea_time.attending?(current_user) %>
+          <button class="green" disabled="<%= true %>">
+            Signed Up
+          </button>
+        <% elsif tea_time.spots_remaining? %>
+          <button class="spots<%= tea_time.spots_remaining %>">
+            Count Me In
+          </button>
+        <% elsif tea_time.waitlisted?(current_user) %>
+          <button class="gray button" disabled="<%= true %>">
+            Waitlisted
+          </button>
+        <% else %>
+          <button class="yellow button">
+            Join Waitlist
+          </button>
+        <% end %>
+      <% end %>
+    </div>
+    <% end %>
+</div>
+

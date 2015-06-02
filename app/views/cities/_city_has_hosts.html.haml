@@ -11,7 +11,7 @@
       %p.big
         You should sign up and come sometime. Yes, you.
 - tts = @city.tea_times.future_until(2.weeks.from_now)
--if tts.count > 0
+- if tts.count > 0
   = render partial: 'shared/tea_times', locals: {tea_times: tts.pending.order(:start_time => :asc)}
 
 = render partial: 'host_headshots', locals: {hosts: @city.hosts}

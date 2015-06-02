@@ -1,0 +1,18 @@
+<div class="tt-partial">
+  <% if host ||= nil %>
+    <h3>
+      <!--TODO: Remove after Forbes/Inc-->
+      <%= 'Join for an upcoming tea time with #{host.name}' %>
+    </h3>
+  <% end %>
+  <div class="tt-set-container">
+    <% tea_times.each do |tt| %>
+      <%= render partial: 'shared/tea_time_row', locals: {tea_time: tt} %>
+    <% end %>
+  </div>
+  <% if (host ||= nil) %>
+    <h5>
+      If none of these work for you, #{link_to "sign up for a tea time with any of the other hosts in #{@city.name} here!", city_path(@city)}
+    </h5>
+  <% end %>
+</div>
