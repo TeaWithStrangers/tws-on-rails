@@ -1,0 +1,31 @@
+<% count = hosts.count  %>
+<% many_hosts = hosts.count > 2 %>
+<div class="host-grid-partial">
+  <div class="section host-intro">
+    <h2 class="section-header">
+      Get to know the hosts
+    </h2>
+    <p>
+      The host community is full of folks that generally love 
+      good conversations, bringing people together, and open 
+      minds. Like yourself, each of them has an incredible story 
+      that brought them to where they are right now. 
+    </p>
+  </div>
+  <div class="host-grid-container">
+    <ul class="host-headshots">
+      <% hosts.each do |host| %>
+        <li class="host-container">
+          <a href="<%= host_city_path(@city, host) %>">
+            <div class="host-avatar ">
+              <div class="avatar" style="background-image: url('<%= host.avatar.url(:medium) %>');"></div>
+            </div>
+            <h3 class="center capitalize">
+              <%= link_to(host.name || "No Name :(", host_city_path(@city, host) ) %>
+            </h5>
+          </a>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

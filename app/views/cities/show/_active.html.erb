@@ -9,8 +9,12 @@
 </div>
 
 <div class="section tt-schedule">
-<% tts = @city.tea_times.future_until(2.weeks.from_now) %>
-<% if tts.count > 0 %>
-  <%= render partial: 'shared/tea_times', locals: {tea_times: tts.pending.order(:start_time => :asc)} %>
-<% end %>
+	<% tts = @city.tea_times.future_until(2.weeks.from_now) %>
+	<% if tts.count > 0 %>
+	  <%= render partial: 'shared/tea_times', locals: {tea_times: tts.pending.order(:start_time => :asc)} %>
+	<% end %>
+</div>
+
+<div class="section host-grid">
+	<%= render partial: 'host_headshots', locals: {hosts: @city.hosts} %>
 </div>

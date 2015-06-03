@@ -228,7 +228,7 @@ h3.cities-list-header {
 
 
 
-.city-intro, .learn-more, .required-resources, .sharing, .become-host {
+.city-intro, .learn-more, .required-resources, .sharing, .become-host, .host-intro {
 
   @include media($tablet) {
     @include span-columns(10 of 12);
