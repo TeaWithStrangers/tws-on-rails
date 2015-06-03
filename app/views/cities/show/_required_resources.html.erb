@@ -24,7 +24,7 @@
 		<div class="block">
 			<span class="number">8</span>
 			<p class="description">hosts to bring teatime together</p>
-      <%= progress_bar(@city.hosts.count, 8) %>
+			<%= progress_bar(@city.hosts.count, 8) %>
 		</div>
 		<% if user_signed_in? %>
 		  <a href="/hosting" class="mobile" data-user-interest='hosting'>

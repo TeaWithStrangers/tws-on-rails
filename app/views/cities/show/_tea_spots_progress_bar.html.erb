@@ -1,0 +1,10 @@
+<div class="tea-time progress-bar-block">
+  <div class="progress-bar <%= 'full' if (val >= max ) %>">
+    <span class="bar" style='width: <%= (val.to_f / max) * 100 %>%;'></span>
+    <span class="notch" style='left: <%= 100/6 %>%;'></span>
+    <span class="notch" style='left: <%= 200/6 %>%;'></span>
+    <span class="notch" style='left: <%= 300/6 %>%;'></span>
+    <span class="notch" style='left: <%= 400/6 %>%;'></span>
+    <span class="notch" style='left: <%= 500/6 %>%;'></span>
+  </div>
+</div>
