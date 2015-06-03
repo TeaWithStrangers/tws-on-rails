@@ -23,13 +23,6 @@ class CitiesController < ApplicationController
 
   def forbes_show
     use_new_styles
-
-    # NOTE: Mehul, I styled new city pages on the 
-    # forbes_show markup instead of the original. 
-    # Not sure if that was correct, but markup is easy to migrate.
-    # if @city.fully_brewed?
-    #   redirect_to city_path(@city)
-    # end
   end
 
   def forbes_new
@@ -65,9 +58,13 @@ class CitiesController < ApplicationController
   # GET /cities/:city_code
   # GET /cities/:city_code.json
   def show
-    respond_to do |format|
-      format.html { render layout: !request.xhr? }
-      format.json { render json: @city }
+    if @city.fully_brewed?
+      redirect_to forbes_city_path
+    else
+      respond_to do |format|
+        format.html { render layout: !request.xhr? }
+        format.json { render json: @city }
+      end
     end
   end
 

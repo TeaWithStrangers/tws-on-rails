@@ -13,7 +13,7 @@ feature 'Hosting: ' do
       create_tea_time({location: 'Spaceball One'})
       expect(@u.tea_times.count).to eq 1
       expect(@u.tea_times.first.location).to eq 'Spaceball One'
-      expect(page).to have_content @u.tea_times.first.friendly_time
+      expect(page).to have_content @u.tea_times.first.date_sans_year
     end
 
     scenario 'updating tea time' do
@@ -64,7 +64,7 @@ end
 private
 
 def create_tea_time(opts = {})
-  time = opts[:start_time] || Time.now + 1.day 
+  time = opts[:start_time] || Time.now + 1.day
   location = opts[:location] || 'Druidia'
   city = opts[:city] || City.first.name
 
