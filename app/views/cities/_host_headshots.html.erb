@@ -1,0 +1,37 @@
+<% count = hosts.count  %>
+<% many_hosts = hosts.count > 2 %>
+<div class="row mobilewide">
+  <div class="wide">
+    <% if many_hosts %>
+      <h3 class="sectionhead">Hosts plant seeds for bomb diggity conversations</h3>
+    <% elsif count >= 1 %>
+      <h3 class="sectionhead">We could use some more hosts</h3>
+    <% else %>
+      <h3 class="sectionhead">To bring tea time together, we'll need some hosts</h3>
+    <% end %>
+    <div class="mobilepad">
+      <ul class="host-headshots">
+        <% hosts.each do |host| %>
+          <li class="host">
+            <a href="<%= host_city_path(@city, host) %>">
+              <div class="avatar-container quarter">
+                <div class="avatar" style="background-image: url('<%= host.avatar.url(:medium) %>');">
+                  <!-- %img.avatar-image{src:host.avatar.url(:medium)}
+                  -->
+                </div>
+              </div>
+              <h5 class="host-name">
+                <%= link_to(host.name || "No Name :(", host_city_path(@city, host) ) %>
+              </h5>
+            </a>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <div class="narrow mobilepad">
+    <% if count <= 2 %>
+      <%= render partial: "host_signup", locals: {city: @city, count: count} %>
+    <% end %>
+  </div>
+</div>
