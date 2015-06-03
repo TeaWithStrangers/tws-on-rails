@@ -26,6 +26,18 @@ class UserMailer < ActionMailer::Base
     end
   end
 
+  # TODO this should replace registration
+  def new_registration(user)
+    @user = user;
+
+    mail(from: "\"Ankit at Tea With Strangers\" <ankit@teawithstrangers.com>",
+         to: @user.email,
+         subject: "Thanks for being awesome #{@user.nickname}") do |format|
+           format.text
+           format.html
+         end
+  end
+
   def registration(user, password)
     sendgrid_category "User Registration"
 

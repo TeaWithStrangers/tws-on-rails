@@ -1,0 +1,32 @@
+Hey hey <%= @user.nickname %>!
+
+Ankit here, the creator of [Tea With
+Strangers](http://www.teawithstrangers.com/?utm_source=freshfaces&utm_medium=email&utm_campaign=welcome2&utm_content=active).
+I just wanted to say thanks for signing up.
+
+At TWS, we have a lot of ideas to make our world feel a little smaller,
+our cities more like neighborhoods, our homes more like, well, home. But they
+all start with you, me, and everyone around us actually coming together.
+
+The Internet gives us so many ways to “connect” with strangers, but it’s a
+different story to get past the screen, to talk to those strangers (you know,
+with your mouth), to see they’re not actually that strange. Compare reading
+fitness blogs vs. just...going to the gym. Except in the case of TWS, a six pack
+comes in the form of new perspectives, great stories, a dose of humanity, and —
+if serendipity is having a great day — a new friend.
+
+If you haven't already, make sure you [set your home city](http://www.teawithstrangers.com/cities?utm_source=freshfaces&utm_medium=email&utm_campaign=welcome2&utm_content=active) on the website so you
+can get awesome, relevant updates. If we're in your city already, you'll get 
+emails when we throw community events or have new tea times up. If we're not,
+we'll make sure you know when we are.
+
+In the meantime, catch us on [facebook](https://facebook.com/teawithstrangers),
+[twitter](https://twitter.com/teawstrangers), and tell your friends about
+us. I have a feeling they’ll be glad you did.
+
+All good things,  
+Ankit
+
+P.S. This email is sent via robots, but this is my actual email address, so 
+if you have any questions, thoughts, or just generally want to share great 
+reads, songs, videos, gifs, or outbursts of love, reply!
