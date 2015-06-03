@@ -43,7 +43,7 @@ feature 'Registered User' do
     scenario 'allows a user to sign up' do
       visit city_path(@user.home_city)
       expect(page.status_code).to eq(200)
-      click_link('5 spots left')
+      click_link('Count Me In')
       expect(current_path).to eq tea_time_path(@tt)
 
       find('input.confirm').click
