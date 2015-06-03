@@ -6,6 +6,7 @@ class TeaTimesController < ApplicationController
   # GET /tea_times
   # GET /tea_times.json
   def index
+    use_new_styles
     @tea_times = TeaTime.all
     respond_to do |format|
       format.html { render layout: !request.xhr? }
@@ -16,6 +17,7 @@ class TeaTimesController < ApplicationController
   # GET /tea_times/1
   # GET /tea_times/1.json
   def show
+    use_new_styles
     respond_to do |format|
       format.html { render layout: !request.xhr? }
       format.json { render json: @tea_time }
