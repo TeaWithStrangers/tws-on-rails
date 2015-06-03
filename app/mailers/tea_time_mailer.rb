@@ -45,15 +45,19 @@ class TeaTimeMailer < ActionMailer::Base
     # ActionController context and subsequently tested
     case status
     when 'flake'
+      sender = "\"Tea With Strangers Robots\" <sayhi@teawithstrangers.com>"
       subject = "Wish you'd been there! Try for another tea time?"
       @template = 'followup_flake'
     when 'no_show'
-      subject = "It's so much easier not to do things"
+      sender = "\"Ankit at Tea With Strangers\" <ankit@teawithstrangers.com>"
+      subject = "Was it something I said?"
       @template = 'followup_no_show'
     when 'waitlisted'
+      sender = "\"Tea With Strangers Robots\" <sayhi@teawithstrangers.com>"
       subject = "Try for another tea time?"
-      @template = 'follup_waitlisted'
+      @template = 'followup_waitlisted'
     when 'present'
+      sender = "\"Tea With Strangers Robots\" <sayhi@teawithstrangers.com>"
       subject = "Hey! Thanks."
       @template = 'followup_present'
     else
@@ -62,7 +66,7 @@ class TeaTimeMailer < ActionMailer::Base
     end
 
     mail(bcc: attendances.map {|a| a.user.email},
-         from: "\"Tea With Strangers Robots\" <sayhi@teawithstrangers.com>",
+         from: sender,
          subject: subject) do |format|
            format.text { render @template }
            format.html { render @template }

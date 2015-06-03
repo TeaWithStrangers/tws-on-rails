@@ -37,7 +37,7 @@
 
 h3.homepage-section-lead {
   text-align: center;
-  margin-bottom: 3em;
+  margin-bottom: 1em;
 }
 
 .tea-explainers {
@@ -53,10 +53,10 @@ h3.homepage-section-lead {
   }
 
   .left { float: left; }
-  .right { 
-    float: right; 
+  .right {
+    float: right;
 
-    @include omega; 
+    @include omega;
   }
 }
 
@@ -75,7 +75,7 @@ h3.homepage-section-lead {
       @include margin(25px 0 0 0);
     }
     &.high-five {
-      
+
       @include margin(20px 0 0 0);
     }
   }
@@ -94,7 +94,7 @@ h3.homepage-section-lead {
 .cta-footer {
   .content { padding: 2em 0; }
   .content-box {
-    max-width: none; 
+    max-width: none;
     h2 {
       margin: .5em 0;
     }
@@ -146,15 +146,15 @@ img.centered {
   @include shift(1);
 
   .left { float: left; }
-  
-  .right { 
-    float: right; 
 
-    @include omega; 
+  .right {
+    float: right;
+
+    @include omega;
   }
-  
+
   img.left {
-    
+
     @include span-columns(10 of 12);
     @include shift(1);
     margin-bottom: 2em;

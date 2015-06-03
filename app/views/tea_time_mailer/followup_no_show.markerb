@@ -1,28 +1,47 @@
 ![Boo](http://media2.giphy.com/media/bYTzAKePu8xrO/giphy.gif)
 
-Ankit here, the guy behind Tea With Strangers.
+Ankit here, the creator of Tea With Strangers.
 
-Apparently, you weren't able to make it to tea time earlier, which is a shame, but it seems like you weren't able to cancel your spot on the site earlier.
+The robots tell me you weren't able to make it to tea time earlier, which 
+I'm sorry to hear! But it also seems you weren't able to cancel your spot 
+on the site, which means people were expecting you, and you were no where 
+to be found.  
 
-On a personal level, I get it. Canceling something takes a lot more effort than doing nothing. [Doing *anything* is so much harder than doing nothing](https://www.youtube.com/watch?v=vKaijlTs2Ns).
+This email is only a tiny bit meant to guilt trip you, but more importantly, 
+I want to ask. **What do you think we should do about people who don't 
+show up?** Can we improve something about our emails or the site? Should we 
+text you a reminder? Or should we have a policy that penalizes no shows 
+somehow? This is my actual email, so you can reply and let me know. 
 
-But here's the thing — if you don't show up, things get awkward!
+Also, [sign up for tea time again.](<%=url_for(controller: 'cities', 
+															action: 'show', 
+															id: @tea_time.city.city_code, 
+															only_path: false, 
+															utm_campaign: 'followupnoshow', 
+															utm_medium: 'email', 
+															utm_content: 'show') %>) 
+But actually show up. You'll enjoy it much more when you show up than when 
+you don't...obviously.
 
- - You leave the rest of the group hanging!
- - You take a spot from someone else that could've come.
- - The host is holding their breath and looking at the door every 30 seconds wondering if the next person who walks in is you.
- - The first half hour of conversation is spent wondering if you'll be able to catch up all right (which is an awful feeling of restraint)
- - I spend my entire night wondering what I could've done to emphasize accountability more on the website.
- - More of these automatic passive-aggressive emails get sent out.
- - Also, tea time was probably awesome and you missed out which hurts me to even say because the reason TWS exists is to offer this experience to everyone in the most accessible way possible.
+Now some context (and a little guilt). About 20-30% of people who sign up 
+for tea time end up being no shows, and we want that to drop to 0%. Why? 
+Because on the other side of these emails are real people. **Real good 
+people.** And they're sitting at some cafe, taking time they could spend 
+on literally anything else in the world. And they're choosing to take a 
+leap of faith on strangers around them who made a commitment to showing up. 
 
-It's not a huge deal, but imagine a world where we all just didn't show up to stuff after saying we would! That world sucks.
+Now I don't know how everyone else responds to this, but I know that when 
+this has happened when I've hosted, I feel anything from sadness to anger 
+to self-doubt to frustration to confusion to a whole slew of other emotions. 
 
-Let's make sure that world doesn't exist! [Join for tea time again sometime](<%=url_for(controller: 'cities', action: 'show', id: @tea_time.city.city_code, only_path: false, utm_campaign: 'followupnoshow', utm_medium: 'email', utm_content: 'show') %>) and we'll hug it out and call it even, yeah?
+One thing I don't feel, however, is awesome. I don't think anyone feels 
+awesome when people don't show up. 
 
-Hope you're having the greatest day of all time.
+If tea time were some big party, it might not matter so much that you actually 
+showed up because lots of people come to parties. Tea time is small though, so 
+when one person doesn't show, it actually makes a difference.
 
-High fives all around,
+So how do we change this?
+
+High fives all around,  
 Ankit
-
-P.S. I'd love for you to reply to this email and share whatever's on your mind.

@@ -23,9 +23,6 @@ class CitiesController < ApplicationController
 
   def forbes_show
     use_new_styles
-    if @city.fully_brewed?
-      redirect_to city_path(@city)
-    end
   end
 
   def forbes_new
