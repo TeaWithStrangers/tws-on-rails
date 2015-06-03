@@ -34,7 +34,6 @@
         <%= "#{tea_time.location}" %>
       </h5>
     </div>
-    <% if !(without_button ||= false) %>
     <hr>
     <div class="availability">
       <div class="seats-left">
@@ -49,27 +48,27 @@
       <%= tea_spots_progress_bar(6 - tea_time.spots_remaining, 6) %>
     </div>
   </div>
-  <div class="tt-cta">
-    <%= link_to tea_time_path(tea_time), class: 'tea-time-scheduling' do %>
-      <% if tea_time.attending?(current_user) %>
-        <button class="green" disabled="<%= true %>">
-          Signed Up
-        </button>
-      <% elsif tea_time.spots_remaining? %>
-        <button class="spots<%= tea_time.spots_remaining %>">
-          Count Me In
-        </button>
-      <% elsif tea_time.waitlisted?(current_user) %>
-        <button class="gray button" disabled="<%= true %>">
-          Waitlisted
-        </button>
-      <% else %>
-        <button class="yellow button">
-          Join Waitlist
-        </button>
+  <% if !(without_button ||= false) %>
+    <div class="tt-cta">
+      <%= link_to tea_time_path(tea_time), class: 'tea-time-scheduling' do %>
+        <% if tea_time.attending?(current_user) %>
+          <button class="green" disabled="<%= true %>">
+            Signed Up
+          </button>
+        <% elsif tea_time.spots_remaining? %>
+          <button class="spots<%= tea_time.spots_remaining %>">
+            Count Me In
+          </button>
+        <% elsif tea_time.waitlisted?(current_user) %>
+          <button class="gray button" disabled="<%= true %>">
+            Waitlisted
+          </button>
+        <% else %>
+          <button class="yellow button">
+            Join Waitlist
+          </button>
+        <% end %>
       <% end %>
-    <% end %>
-  </div>
+    </div>
   <% end %>
 </div>
-
