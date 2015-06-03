@@ -58,9 +58,13 @@ class CitiesController < ApplicationController
   # GET /cities/:city_code
   # GET /cities/:city_code.json
   def show
-    respond_to do |format|
-      format.html { render layout: !request.xhr? }
-      format.json { render json: @city }
+    if @city.fully_brewed?
+      redirect_to forbes_city_path
+    else
+      respond_to do |format|
+        format.html { render layout: !request.xhr? }
+        format.json { render json: @city }
+      end
     end
   end
 
