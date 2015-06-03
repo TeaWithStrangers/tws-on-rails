@@ -6,19 +6,22 @@
         = @city.tagline
       = simple_format @city.description
     .half.right
-      %p 
+      %p
         Tea time is a conversation fueled by the stories, questions, and listening of a few strangers and a super host.
       %p.big
         You should sign up and come sometime. Yes, you.
-      = render partial: 'shared/signup'
+- tts = @city.tea_times.future_until(2.weeks.from_now)
+-if tts.count > 0
+  = render partial: 'shared/tea_times', locals: {tea_times: tts.pending.order(:start_time => :asc)}
+
 = render partial: 'host_headshots', locals: {hosts: @city.hosts}
 .row
   .narrow.howitworks
     %h3.divider Here's what happens
     %ol
-      %li 
+      %li
         You and I sit together with 3-5 strangers.
-      %li 
+      %li
         It gets awkward and we'll talk about the weather or some TV show.
       %li
         At some point, someone will ask a question or share a story that breaks the "formality seal," and suddenly, we'll all feel like we can be real people.
@@ -30,6 +33,3 @@
         We sit there and wonder how this doesn't happen more often.
       %li
         Maybe we become friends. Maybe not. That's cool too.
-- tts = @city.tea_times.future_until(2.weeks.from_now)
--if tts.count > 0
-  = render partial: 'shared/tea_times', locals: {tea_times: tts.pending.order(:start_time => :asc)} 

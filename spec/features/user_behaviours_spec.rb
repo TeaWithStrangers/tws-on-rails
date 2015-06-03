@@ -17,9 +17,9 @@ feature 'Signing In & Up' do
   end
 
   scenario 'can sign up, log out, log in' do
-    user = create(:user) 
+    user = create(:user)
     sign_in user
-    expect(current_path).to eq schedule_city_path(user.home_city)
+    expect(current_path).to eq city_path(user.home_city)
     expect(page).to have_content user.home_city.name
   end
 
