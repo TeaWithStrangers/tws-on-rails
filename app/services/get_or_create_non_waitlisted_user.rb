@@ -15,7 +15,7 @@ class GetOrCreateNonWaitlistedUser
       user = User.new(params)
       user.save
       if user.persisted?
-        UserMailer.delay.waitlisted_registration(user)
+        UserMailer.delay.new_registration(user)
       else
         val[:errors] = user.errors.full_messages
       end
