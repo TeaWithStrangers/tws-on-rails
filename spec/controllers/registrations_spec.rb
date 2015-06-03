@@ -10,11 +10,11 @@ describe RegistrationsController do
        nickname: 'Baz'}
     }
 
-    it 'should create a new user and log them in' do
+    it 'should create a new non-waitlisted user and log them in' do
       post 'create', user: params
       u = User.find_by(email: 'foo@foobar.com')
       expect(u).not_to eq nil
-      expect(u.waitlisted?).to eq true
+      expect(u.waitlisted?).to eq false
       expect(response).to redirect_to(cities_path)
     end
   end
