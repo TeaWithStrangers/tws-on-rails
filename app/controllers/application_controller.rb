@@ -18,7 +18,11 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     if !current_user.waitlisted?
-      city_path(current_user.home_city)
+      if current_user.home_city && current_user.home_city.fully_brewed?
+        forbes_city_path(current_user.home_city)
+      else
+        city_path(current_user.home_city)
+      end
     elsif current_user.home_city.nil?
       cities_path
     else
