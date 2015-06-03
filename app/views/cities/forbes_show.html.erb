@@ -19,18 +19,13 @@
 
 <div class="container city">
   <div class="city-info">
-    <!-- <%= render partial: 'cities/show/fallback' %> -->
   	<% if @city.unapproved? %>
   	  <%= render partial: 'cities/show/unconfirmed' %>
   	<% elsif @city.cold_water? %>
   	  <%= render partial: 'cities/show/cold_water' %>
   	<% else %>
-  	  <!-- <%= render partial: 'cities/show/active_waitlisted' %> -->
       <%= render partial: 'cities/show/active' %>
   	<% end %>
-    <% if @city.unapproved? %>
-    <% else %>
-    <% end %>
   </div>
 </div>
 <%= render partial: 'shared/new_footer' %>
