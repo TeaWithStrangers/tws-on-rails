@@ -3,7 +3,7 @@ class RegistrationsController < Devise::RegistrationsController
     if params[:referral] == false
       super
     else
-      user_info = GetOrCreateWaitlistedUser.call(user_params)
+      user_info = GetOrCreateNonWaitlistedUser.call(user_params)
 
       if user_info[:new_user?] && user_info[:user].valid?
         sign_in user_info[:user]
