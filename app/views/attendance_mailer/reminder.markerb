@@ -9,7 +9,7 @@ It's taking place on <%= @attendance.tea_time.friendly_time %> at <%= @attendanc
 If you need to let your host, <%= @attendance.tea_time.host.name %>, know anything in advance, fire them 
 a note at <%= @attendance.tea_time.host.email %>. 
 
-Bleep bleep bloop,
+Bleep bleep bloop,  
 The Robots at Tea With Strangers
 
 P.S. If you can't make it for whatever reason, <%= link_to 'cancel your seat here', profile_path %>. 
