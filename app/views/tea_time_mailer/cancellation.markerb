@@ -4,7 +4,7 @@ We're really sorry for this, but your upcoming tea time with <%= @tea_time.host.
 
 We try to make sure this rarely happens, so emails like this are only sent when there's a good reason for it.
 
-In the meantime, we'd love it if there were another time that did work for you. [Check out the schedule here](<%= url_for(controller: 'cities', action: 'show', id: @user.home_city.city_code, only_path: false, utm_campaign: 'cancelation', utm_medium: 'email', utm_content: 'show') %>).
+In the meantime, we'd love it if there were another time that did work for you. [Check out the schedule here](<%= url_for(controller: 'cities', action: 'show', id: @tea_time.city.city_code, only_path: false, utm_campaign: 'cancelation', utm_medium: 'email', utm_content: 'show') %>).
 
 Hope you're having a super duper day! If not, [watch this](https://www.youtube.com/watch?v=eaIvk1cSyG8). It'll change everything.
 
