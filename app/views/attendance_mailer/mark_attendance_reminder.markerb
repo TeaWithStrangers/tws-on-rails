@@ -2,9 +2,11 @@
 
 **[Mark attendance from your tea time](<%= url_for(controller: :profiles, action: :host_tasks, only_path: false) %>)**. Be sure to check off anyone you'd invite to make a great host!
 
-Afterwards, send the attendees a little thank you note with all the good vibes.
+Afterwards, send the attendees a little thank you note with all sorts of good vibes.
 
-[All of it takes seconds (and it's mobile friendly :)](...). Thanks!
+[All of it takes seconds](<%= url_for(controller: :profiles, action: :host_tasks, only_path: false) %>).
+
+You the best!
 
 Bleep bleep bloop,  
 The Robots at Tea With Strangers

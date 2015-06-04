@@ -1,10 +1,6 @@
-Hey <%= @user.name %>,
+Just wanted to confirm that you canceled your seat at tea time with <%= @tea_time.host.name %> on <%= @tea_time.date_sans_year %>.
 
-Sorry to hear you won't be able to join for tea, but it's cool! Just for confirmation, here are the details of the tea time you just canceled for:
-
-<%= render partial: "shared_mailers/info_nohost", locals: {tea_time: @tea_time} %>
-
-It'd be awesome if you were able to find another time that does work for you (with me or with any of the other awesome hosts) so be sure to
+It'd be awesome if you were able to find another time that does work for you. Be sure to
 [check out the schedule here](<%= url_for(controller: 'cities',
         action: 'show',
         id: @tea_time.city.city_code,
@@ -13,9 +9,7 @@ It'd be awesome if you were able to find another time that does work for you (wi
         utm_medium: 'email',
         utm_content: 'show') %>).
 
-Hope your day is going beautifully. If not, grab a bar of chocolate and watch this: <https://www.youtube.com/watch?v=l-gQLqv9f4o>.
+Hope your day is going beautifully. If not, grab a snack and watch this: <https://www.youtube.com/watch?v=l-gQLqv9f4o>.
 
-Happy days!  
-<%= @tea_time.host.name %>
-
-P.S. In case you forgot your password, you can reset it with ease here: [http://www.teawithstrangers.com/users/password/new](http://www.teawithstrangers.com/users/password/new?utm_campaign=cancelspot&utm_medium=email&utm_content=changepw).
+Bleep bleep bloop,  
+The Robots at Tea With Strangers

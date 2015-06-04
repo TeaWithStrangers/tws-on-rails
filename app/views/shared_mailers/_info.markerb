@@ -1,3 +1,4 @@
+<%= tea_time.host.name %> is hosting. If you want to say hi to them, feel free to email <%= tea_time.host.email %>.
+
 **When:** <%= tea_time.friendly_time %>  
 **Where:** <%= tea_time.location %>  
-**Your host:** <%= tea_time.host.name %>  

@@ -1,15 +1,19 @@
-Hey hey <%= @user.name %>!
+Just confirming the tea time you just signed up for! We attached a calendar event here 
+so you don't forget.
 
-Just confirming the tea time you just signed up for! There's a calendar event attached here. Hit the 'Add to Calendar' button so you don't forget :)
+Here are the details, in case you hate calendars (or you have no idea what to do with 
+the attached calendar event):
 
-For good measure (in case you really hate calendars), here are the tea time details:
+<%= render partial: "shared_mailers/info", locals: {tea_time: @tea_time} %>
 
-<%= render partial: "shared_mailers/info_nohost", locals: {tea_time: @tea_time} %>
+If you have any questions about what to expect, get cold feet 2 hours before tea time 
+and are considering just not showing up, or just want a good song recommendation, reply 
+to this (yes, real people exist behind the robots).
 
-Can't wait to have you for tea! Feel free to reply if you have any questions or just want to say hi.
+Bleep bleep bloop,
+The Robots at Tea With Strangers
 
-<%= @attendance.tea_time.host.name %>
-
-P.S. If you need to cancel your spot, try to do so on the sooner side so your spot can be opened for someone else! You can do that by logging into the site and going to the 'Account' link.
-
-In case you forgot your password, [you can reset it easily here](http://www.teawithstrangers.com/users/password/new?utm_campaign=confirmation&utm_medium=email&utm_content=changepw).
+P.S. If you need to cancel your seat, <%= link_to 'do that here', profile_path %>. 
+Try and do it sooner rather than later because (1) nobody appreciates a last minute 
+cancelation and (2) seats are limited, so if you aren't putting yours to good use, 
+opening it up for someone else is nice.
