@@ -1,8 +1,8 @@
 ![HEYTHANKS](http://media.giphy.com/media/ip6n2oVNZBHiM/giphy.gif)
 
-Just wanted to send a quick thank you for joining for tea time. [You can (and should!) come again](<%=url_for(controller: 'cities', action: 'show', id: @tea_time.city.city_code, only_path: false, utm_campaign: 'followupattendance', utm_medium: 'email', utm_content: 'show') %>), as every single time is different. They rarely get dull (trust me, I've hosted over 1000 strangers myself and I'm still goin'). **[Find the tea times here.](<%=url_for(controller: 'cities', action: 'show', id: @tea_time.city.city_code, only_path: false, utm_campaign: 'followupattendance', utm_medium: 'email', utm_content: 'show') %>)**
+Just wanted to send a quick thank you for joining for tea time. [You can (and should!) come again](<%=url_for(controller: 'cities', action: 'show', id: @tea_time.city.city_code, only_path: false, utm_campaign: 'followupattendance', utm_medium: 'email', utm_content: 'show') %>). Every tea time is a hugely different experience — especially if you pick one with a new host.
 
-If you want to send some digital high fives to anyone in your group, you can grab their emails by checking out your [tea time history on the website here](<%= history_url %>).
+You can reach out to anyone from your tea time by grabbing their emails on via [your tea time history](<%= history_url %>).
 
 Sound good? Good! Hope you're having the best day ever.
 
@@ -10,4 +10,4 @@ Bleep bleep bloop,
 The Robots at [Tea With Strangers](http://teawithstrangers.com?utm_campaign=followupattendance&utm_medium=email&utm_content=home)
 **['Like' TWS on facebook!](http://www.facebook.com/teawithstrangers)**
 
-P.S. Your friends will probably think it's cool that you went to tea time. [Tell 'em about it on Facebook](https://www.facebook.com/sharer/sharer.php?u=http://www.teawithstrangers.com) and/or [Twitter](https://twitter.com/home?status=I%20can't%20tell%20you%20how%20awesome%20tea%20time%20was%20with%20@teawstrangers.%20You've%20gotta%20go%20to%20one:%20http://teawithstrangers.com)
+P.S. If you think this is something your friends would enjoy, [tell 'em about TWS on Facebook](https://www.facebook.com/sharer/sharer.php?u=http://www.teawithstrangers.com) and/or [Twitter](https://twitter.com/home?status=I%20can't%20tell%20you%20how%20awesome%20tea%20time%20was%20with%20@teawstrangers.%20You've%20gotta%20go%20to%20one:%20http://teawithstrangers.com)

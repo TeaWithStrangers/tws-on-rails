@@ -46,7 +46,7 @@ class TeaTimeMailer < ActionMailer::Base
     case status
     when 'flake'
       sender = "\"Tea With Strangers Robots\" <sayhi@teawithstrangers.com>"
-      subject = "Wish you'd been there! Try for another tea time?"
+      subject = "Let's try this again"
       @template = 'followup_flake'
     when 'no_show'
       sender = "\"Ankit at Tea With Strangers\" <ankit@teawithstrangers.com>"
