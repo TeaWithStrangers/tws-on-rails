@@ -32,6 +32,10 @@ class TeaTime < ActiveRecord::Base
     start_time.strftime("%A, %D")
   end
 
+  def day_date
+    start_time.strftime("%A, %b %e")
+  end
+
   def day
     start_time.strftime("%A")
   end

@@ -24,8 +24,8 @@ class TeaTimeMailer < ActionMailer::Base
     @tt = TeaTime.find(tea_time_id)
     @old, @new = [User.find(old_host_id), @tt.host]
     mail(to: @new.friendly_email,
-         cc: ['ankit@teawithstrangers.com', @old.friendly_email],
-         subject: "You're now the host for #{@tt}") do |format|
+         cc: @old.friendly_email,
+         subject: "You're now hosting #{@old.name}'s tea time on #{@tt.day_date}") do |format|
            format.text
            format.html
          end
