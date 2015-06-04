@@ -8,4 +8,5 @@ course.
 **[Find a tea time that suits your schedule here!](<%=url_for(controller: 'cities', action: 'show', id: @tea_time.city.city_code, only_path: false, utm_campaign: 'followupcancelation', utm_medium: 'email', utm_content: 'show') %>)**
 
 Bleep bleep bloop,  
-The Robots at Tea With Strangers
+The Robots at [Tea With Strangers](http://teawithstrangers.com?utm_campaign=followupcancelation&utm_medium=email&utm_content=home)
+**['Like' TWS on facebook!](http://www.facebook.com/teawithstrangers)**

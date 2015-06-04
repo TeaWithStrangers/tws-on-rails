@@ -16,9 +16,7 @@ class AttendanceMailer < ActionMailer::Base
                                      content: IcalCreator.new(@tea_time).call.to_ical}
 
     mail(to: @attendance.user.email,
-         from: @tea_time.host.friendly_email,
-         subject: "See you at tea time #{@attendance.user.name}!",
-         reply_to: @tea_time.host.email) do |format|
+         subject: "#{@attendance.user.name}! Pencil your tea time to your calendar!") do |format|
            format.text
            format.html
          end
@@ -39,8 +37,7 @@ class AttendanceMailer < ActionMailer::Base
     cancel_delivery unless @attendance.pending?
 
     mail(to: @attendance.user.email,
-         from: @attendance.tea_time.host.email,
-         subject: "See you at tea time soon!") do |format|
+         subject: "Your tea time is coming up!") do |format|
       format.text
       format.html
     end
@@ -54,9 +51,7 @@ class AttendanceMailer < ActionMailer::Base
     @user = attendance.user
     @tea_time = attendance.tea_time
     mail(to: @user.email,
-         from: @tea_time.host.friendly_email,
-         reply_to: @tea_time.host.email,
-         subject: "Come to another tea time?") do |format|
+         subject: "Sorry you had to cancel! Find another tea time?") do |format|
       format.text
       format.html
     end
@@ -72,9 +67,7 @@ class AttendanceMailer < ActionMailer::Base
     @user = @attendance.user
 
     mail(to: @attendance.user.email,
-         from: @tea_time.host.friendly_email,
-         subject: "You're on the wait list for tea time on #{@tea_time.start_time.strftime('%B %-e')}!",
-         reply_to: @tea_time.host.email) do |format|
+         subject: "You're on the wait list for tea time on #{@tea_time.start_time.strftime('%B %-e')}!") do |format|
       format.text
       format.html
     end
@@ -88,7 +81,6 @@ class AttendanceMailer < ActionMailer::Base
 
     waitlist = @tea_time.attendances.select(&:waiting_list?)
     mail(bcc: waitlist.map {|a| a.user.email},
-         from: @tea_time.host.friendly_email,
          subject: 'A spot just opened up at tea time! Sign up!',
          reply_to: @tea_time.host.email) do |format|
       format.text
@@ -101,7 +93,7 @@ class AttendanceMailer < ActionMailer::Base
     @host = @tea_time.host
 
     mail(to: @host.friendly_email,
-         subject: "Take a minute and mark attendance for your tea time!") do |format|
+         subject: "Mark attendance for your tea time!") do |format|
       format.text
       format.html
     end
