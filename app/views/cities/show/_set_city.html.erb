@@ -2,7 +2,7 @@
 	<% if current_user && current_user.home_city.nil? %>
 		<h3 class="center">You have no home city yet!</h3>
 	  <%= form_for(@city, url: set_city_path(@city), method: :put) do |f|%>
-	    <%= f.submit "Set this as your home city", class: 'full-width-button' %>
+	    <%= f.submit "This is my home city", class: 'full-width-button' %>
 	  <% end %>
 	<% elsif current_user && current_user.home_city != @city%>
 	  <p>
