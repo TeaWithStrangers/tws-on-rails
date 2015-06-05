@@ -21,12 +21,6 @@ class StaticController < ApplicationController
       })
   end
 
-  def stories
-  end
-
-  def questions
-  end
-
   def hosting
     use_new_styles
   end
