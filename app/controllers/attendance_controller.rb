@@ -9,7 +9,7 @@ class AttendanceController < ApplicationController
     @user = current_user
     @tea_time = TeaTime.find(params[:id])
 
-    @attendance = Attendance.where(tea_time: @tea_time, user: @user).first_or_initialize
+    @attendance = Attendance.where(tea_time_id: @tea_time.id, user_id: @user.id).first_or_initialize
 
     # Set status
     if @attendance.tea_time.spots_remaining?
@@ -19,7 +19,8 @@ class AttendanceController < ApplicationController
     end
 
     if @attendance.save
-      @attendance.queue_reminders
+
+      @attendance.send_mail
 
       message = @attendance.waiting_list? ?
         "You're on the wait list! Check your email for details." :
