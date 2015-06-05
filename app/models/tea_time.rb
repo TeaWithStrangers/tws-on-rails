@@ -171,8 +171,7 @@ class TeaTime < ActiveRecord::Base
   end
 
   def queue_attendance_reminder
-    AttendanceMailer.delay(run_at: self.end_time + 30.minutes).
-      mark_attendance_reminder(self.id)
+    AttendanceReminderJob.new(self).mark_attendance_reminder
   end
 
   def advance_state!
