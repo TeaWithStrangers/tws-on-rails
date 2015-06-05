@@ -1,6 +1,12 @@
-Hey hey,
+We may be automated robots, but we can't say our hearts didn't hurt a tiny when we 
+found out you had to cancel your seat for tea time. 
 
-The tea time you had to cancel on actually just happened. In case you didn't get a chance to, take the chance to reschedule for another tea time. [Here's the schedule!](<%=url_for(controller: 'cities', action: 'show', id: @tea_time.city.city_code, only_path: false, utm_campaign: 'followupcancelation', utm_medium: 'email', utm_content: 'show') %>) Pick a time that works for you!
+That tea time just happened, and there's a good chance you missed out on something 
+good. It's okay though! More good things to come. Well, if you get to tea time, of 
+course.
+
+**[Find a tea time that suits your schedule here!](<%=url_for(controller: 'cities', action: 'show', id: @tea_time.city.city_code, only_path: false, utm_campaign: 'followupcancelation', utm_medium: 'email', utm_content: 'show') %>)**
 
 Bleep bleep bloop,  
-The Robots at Tea With Strangers
+The Robots at [Tea With Strangers](http://teawithstrangers.com?utm_campaign=followupcancelation&utm_medium=email&utm_content=home)
+**['Like' TWS on facebook!](http://www.facebook.com/teawithstrangers)**

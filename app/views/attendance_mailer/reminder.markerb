@@ -1,15 +1,17 @@
-Hey hey <%= @user.name %>!
-
 <% if @type != :same_day %>
-Just wanted to shoot you a quick reminder about our tea time soon! Here are the details:
+A quick reminder about tea time soon! Here are the details again!
 <% else %>
-One more reminder about tea time in a few hours! Let me know if anything comes up.
+If you missed the last note, here's one last reminder about tea time in a few hours! 
 <% end %>
 
-<%= render partial: "shared_mailers/info_nohost", locals: {tea_time: @attendance.tea_time} %>
+It's taking place on <%= @attendance.tea_time.friendly_time %> at <%= @attendance.tea_time.location %>.
 
-Can't wait to see you!
+If you need to let your host, <%= @attendance.tea_time.host.name %>, know anything in advance, fire them 
+a note at <%= @attendance.tea_time.host.email %>. 
 
-<%= @attendance.tea_time.host.name %>
+Bleep bleep bloop,  
+The Robots at Tea With Strangers
 
-P.S. If you need to cancel, it's super easy. Just [go to your account on the site](http://teawithstrangers.com/profile?utm_campaign=reminder&utm_medium=email&utm_content=cancel) and hit the 'Cancel' button. This way, your spot can be opened up for someone else.
+P.S. If you can't make it for whatever reason, <%= link_to 'cancel your seat here', profile_path %>. 
+Since seats are limited, we keep waitlists for each tea time so people can grab open seats as they 
+come, so it's always better to actually cancel than it is to be a no show :).
