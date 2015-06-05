@@ -10,7 +10,13 @@ class AttendanceController < ApplicationController
     @tea_time = TeaTime.find(params[:id])
 
     @attendance = Attendance.where(tea_time: @tea_time, user: @user).first_or_initialize
-    @attendance.try_join
+
+    # Set status
+    if @attendance.tea_time.spots_remaining?
+      @attendance.status = :pending
+    else
+      @attendance.status = :waiting_list
+    end
 
     if @attendance.save
       @attendance.queue_reminders
