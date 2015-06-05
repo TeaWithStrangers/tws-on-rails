@@ -1,10 +1,10 @@
-Just confirming that you've been added to the wait list for tea time with <%= @tea_time.host %>. 
+Just confirming that you've been added to the wait list for tea time with <%= @tea_time.host.name %>.
 Here are the details:
 
 <%= render partial: "shared_mailers/info_nohost", locals: {tea_time: @tea_time} %>
 
-If a spot opens up, you'll get an email from me so you can join in! It's likely someone cancels 
+If a spot opens up, you'll get an email from me so you can join in! It's likely someone cancels
 seat the day of the tea time, so try to keep an eye out for an email then!
 
-Bleep bleep bloop,  
+Bleep bleep bloop,
 The Robots at Tea With Strangers
