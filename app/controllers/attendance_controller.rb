@@ -9,25 +9,6 @@ class AttendanceController < ApplicationController
     @user = current_user
     @tea_time = TeaTime.find(params[:id])
 
-    #FIXME: ALL THIS
-    if @user.nil?
-      user_data = GetOrCreateUser.call({nickname: tea_time_params[:nickname],
-                                        email: tea_time_params[:email]},
-                                        @tea_time.city)
-
-      if user_data[:new_user?] && user_data[:user].valid?
-        @user = user_data[:user]
-        sign_in @user
-      elsif !user_data[:new_user?] && user_data[:user].valid?
-        return redirect_to new_user_session_path, alert: 'You already have an account. Log in! Then register for the tea time.'
-      end
-    end
-
-    if @user.nil?
-      return redirect_to tea_time_path(@tea_time), alert: "Sorry, something has gone wrong. Our fault. Try again!"
-    end
-
-
     @attendance = Attendance.where(tea_time: @tea_time, user: @user).first_or_initialize
     @attendance.try_join
 
