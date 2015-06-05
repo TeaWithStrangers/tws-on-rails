@@ -1,14 +1,17 @@
-Hey hey, 
+Sadly, we never got a chance to get you off the waitlist for the tea time you 
+signed up for. It just happened, and something tells us it was awesome.
 
-You were on the waitlist for a tea time today, and sadly (or beautifully,
-depending on how you see it :), spots didn't open in time for you to jump in.  
+Well, actually, this email is prewritten, so we don't actually know how it went. 
+But one thing's for certain — a few folks open-minded enough to sit around with 
+a group of strangers just expanded their minds and now understand things 
+they didn't even conceive of two hours earlier. Pretttty cool.
 
-Bad news? Tea time was probably awesome.  
-
-Good news? There are plenty where that came from. **[Grab a seat at another tea
-time here.](<%=url_for(controller: 'cities', action: 'schedule', id:
-@tea_time.city.city_code, only_path: false, utm_campaign: 'followupwaitlist',
-utm_medium: 'email', utm_content: 'schedule') %>)**  
+Since you were on the waitlist, you weren't one of them, but no worries! 
+You can be! **[Let's find a tea time that suits your schedule here.](<%=url_for(
+controller: 'cities', action: 'schedule', id: @tea_time.city.city_code, 
+only_path: false, utm_campaign: 'followupwaitlist', utm_medium: 'email', 
+utm_content: 'schedule') %>)**  
 
 Bleep bleep bloop,  
-The Robots at Tea With Strangers
+The Robots at [Tea With Strangers](http://teawithstrangers.com?utm_campaign=followupwaitlist&utm_medium=email&utm_content=home)
+**['Like' TWS on facebook!](http://www.facebook.com/teawithstrangers)**

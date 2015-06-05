@@ -1,9 +1,15 @@
 Hey <%= @new.name %>,
 
-Just letting you know you're now the host for <%= @old.name %>'s tea time. It's
-on [<%= @tt.start_time %> at <%= @tt.location %>](<%= url_for(controller: :tea_times, action: :show, id: @tt, only_path: false) %>).
+Just letting you know <%= @old.name %> made you the host of their tea time.
+It's on <%= @tt.friendly_time %> at <%= @tt.location %>.
 
-Please speak with <%= @old.name %> if they didn't discuss this with you! (It's probably a mistake).
+Right now, our robots are confused and haven't sorted a way to let the attendees
+know about the change, so you should email the attendees and explain the sitch. 
+This will help reduce the confusion! You can find their emails on 
+<%= link_to 'your dashboard here', profile_path %>.
+
+If <%= @old.name %> didn't discuss this with you, this is probably a mistake. 
+If it isn't, you two should sort this out!
 
 Bleep bleep bloop,  
 The Robots at Tea With Strangers
