@@ -37,7 +37,7 @@ Rails.application.routes.draw do
 
   resources :tea_times do
     member do
-      post '/attendance'                => 'tea_times#create_attendance', as: :attendance
+      post '/attendance'                => 'attendance#create', as: :attendance
       patch '/attendance/all'           => 'attendance#mark',             as: :mark
       put '/cancel'                     => 'tea_times#cancel',            as: :cancel
       get '/attendance/:attendance_id'  => 'attendance#show',             as: :show_attendance
