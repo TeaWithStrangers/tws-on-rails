@@ -71,14 +71,6 @@ class Attendance < ActiveRecord::Base
     tea_time.occurred?
   end
 
-  def try_join
-    if self.tea_time.spots_remaining?
-      self.status = :pending
-    else
-      self.status = :waiting_list
-    end
-  end
-
   class << self
     def host_statuses
       self.statuses.keys - ['waiting_list', 'cancelled', 'pending']
