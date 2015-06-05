@@ -59,8 +59,9 @@ describe AttendanceMailer do
       AttendanceMailer.reminder(attendance.id, :same_day)
     }
 
-    it 'should come from the host' do
-      expect(mail.from).to eq([tt.host.email])
+    it 'should come from the default email' do
+       default_from = Mail::Address.new(AttendanceMailer.default[:from]).address
+      expect(mail.from).to eq([default_from])
     end
 
     it 'should be sent to attendee' do
