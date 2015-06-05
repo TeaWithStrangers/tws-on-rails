@@ -2,7 +2,7 @@ class AttendanceMailer < ActionMailer::Base
   include SendGrid
   sendgrid_category :use_subject_lines
 
-  default from: "\"Tea With Strangers\" <sayhi@teawithstrangers.com>"
+  default from: "\"The Robots at Tea With Strangers\" <sayhi@teawithstrangers.com>"
 
   # Sent to a user confirming their registration for a tea time
   def registration(attendance_id)
