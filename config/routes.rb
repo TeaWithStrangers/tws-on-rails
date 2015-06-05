@@ -16,14 +16,8 @@ Rails.application.routes.draw do
 
   root 'static#index'
 
-  # Static Landing, FAQ Pages
   get '/about'          => 'static#about',          as: :about
-  get '/birthdays'      => 'static#birthdays',      as: :birthdays
   get '/hosting'        => 'static#hosting',        as: :hosting
-  get '/internproject'  => 'static#internproject',  as: :internproject
-  get '/openhouse'      => 'static#openhouse',      as: :openhouse
-  get '/questions'      => 'static#questions',      as: :questions
-  get '/stories'        => 'static#stories',        as: :stories
   get '/signup'         => 'static#jfdi_signup',    as: :sign_up
 
   # Devise and Registration Routes
