@@ -38,7 +38,6 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/cities' => 'cities#forbes_index'
   resources :cities do
     collection do
       get '/suggest'  => 'cities#forbes_new',     as: :suggest

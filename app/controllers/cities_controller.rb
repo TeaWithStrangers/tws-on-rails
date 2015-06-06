@@ -1,23 +1,10 @@
 class CitiesController < ApplicationController
-  before_action :set_city, except: [:index, :new, :forbes_index, :forbes_new, :forbes_create]
+  before_action :set_city, except: [:index, :new, :index, :forbes_new, :forbes_create]
   before_action :authenticate_user!, :authorized?, only: [:new, :create, :edit, :update, :destroy]
-  before_action :away_ye_waitlisted, except: [:forbes_index, :forbes_show, :forbes_new, :forbes_suggest, :forbes_create, :forbes_set_city]
+  before_action :away_ye_waitlisted, except: [:index, :forbes_show, :forbes_new, :forbes_suggest, :forbes_create, :forbes_set_city]
 
   # GET /cities
-  # GET /cities.json
   def index
-    if can? :manage, City
-      @cities = City.all
-      respond_to do |format|
-        format.html { render layout: !request.xhr? }
-        format.json { render json: @cities }
-      end
-    else
-      redirect_to root_path+"#cities"
-    end
-  end
-
-  def forbes_index
     use_new_styles
   end
 
