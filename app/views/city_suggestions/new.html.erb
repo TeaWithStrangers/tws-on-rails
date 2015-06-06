@@ -7,7 +7,31 @@
         <h1 class="dark center">Let's bring TWS to new lands!</h1>
         <p class="header-small">If you didn’t find your city in the list before, add it here!</p>
       </div>
-      <%= render 'user_form' %>
+      <div class="submit-city-container">
+        <%= form_for @city, html: {class: 'dummy new_city'}, url: suggest_create_cities_path do |f| %>
+          <%= f.text_field :name, placeholder: 'Your city or college name' %>
+          <%= f.submit 'Submit', data: { confirmation: false }, class: 'save-city' %>
+        <% end %>
+        <div class="city-confirmation-text">
+          <h2 class="confirm-message">
+            Double check your spelling! And make sure it’s just the city or school name.
+          </h2>
+          <p>
+            After you confirm, we’ll make sure everything checks out and email you
+            when your friends and neighbors can join you for Tea With Strangers.
+          </p>
+        </div>
+        <% if @city.errors.any? %>
+          <div id="error_explanation">
+            <h2><%="#{pluralize(@city.errors.count, "error")} prohibited this city from being saved:"%></h2>
+            <ul>
+              <%= @city.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+      </div>
       <div class="active-city-list">
         <h3 class="capitalize center current-cities-header">Or click your city below if we're already there</h3>
         <div class="cities-list">
