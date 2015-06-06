@@ -1,21 +1,5 @@
 Rails.application.routes.draw do
-  namespace :api do
-    namespace :v1 do
-      resources :cities,  only: [:index, :create]
-      resources :hosts,   only: [:index]
-      resources :users do
-        collection do
-          get 'self', to: :self
-          get 'self/interests', to: :interests
-          patch 'self/interests', to: :update_interests
-        end
-      end
-
-    end
-  end
-
   root 'static#index'
-
   get '/about'          => 'static#about',          as: :about
   get '/hosting'        => 'static#hosting',        as: :hosting
   get '/signup'         => 'static#jfdi_signup',    as: :sign_up
@@ -27,6 +11,21 @@ Rails.application.routes.draw do
     post    'signin'   => 'devise/sessions#create',   as: :user_session
     delete  'signout'  => 'devise/sessions#destroy', as: :destroy_user_session
     get     'logout'   => 'devise/sessions#destroy'
+  end
+
+  namespace :api do
+    namespace :v1 do
+      resources :cities,  only: [:index, :create]
+      resources :hosts,   only: [:index]
+      resources :users do
+        collection do
+          get 'self', to: :self
+          get 'self/interests',   to: :interests
+          patch 'self/interests', to: :update_interests
+        end
+      end
+
+    end
   end
 
   resources :tea_times do
