@@ -31,7 +31,7 @@
 <% elsif !current_user.home_city.nil? && attendances.count.zero? %>
   <p>
     You're not scheduled for any tea times! Let's change that.
-    <%= link_to "Go schedule a tea time!", city_path(current_user.home_city) %>
+    <%= link_to "Go schedule a tea time!", forbes_city_path(current_user.home_city) %>
   </p>
 <% else %>
   <p>
