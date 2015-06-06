@@ -40,8 +40,8 @@ Rails.application.routes.draw do
 
   resources :cities do
     collection do
-      get '/suggest'  => 'cities#forbes_new',     as: :suggest
-      post '/suggest' => 'cities#forbes_create',  as: :suggest_create
+      get '/suggest'  => 'city_suggestions#new',     as: :suggest
+      post '/suggest' => 'city_suggestions#create',  as: :suggest_create
     end
     member do
       get '/host/:host_id' => 'hosts#show',   as: :host

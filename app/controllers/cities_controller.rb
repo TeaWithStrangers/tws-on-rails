@@ -1,36 +1,11 @@
 class CitiesController < ApplicationController
-  before_action :set_city, except: [:index, :new, :index, :forbes_new, :forbes_create]
+  before_action :set_city, except: [:index, :new, :index]
   before_action :authenticate_user!, :authorized?, only: [:new, :create, :edit, :update, :destroy]
-  before_action :away_ye_waitlisted, except: [:index, :forbes_show, :forbes_new, :forbes_suggest, :forbes_create, :forbes_set_city]
+  before_action :away_ye_waitlisted, except: [:index, :forbes_show, :forbes_set_city]
 
   # GET /cities
   def index
     use_new_styles
-  end
-
-  def forbes_new
-    use_new_styles
-    if current_user
-      @city = City.new
-    else
-      flash[:notice] = 'Sign up first so we can let you know when your city is approved!'
-      redirect_to sign_up_path
-    end
-  end
-
-  def forbes_create
-    #NOTE: Seems unnecessary but required for the error case
-    use_new_styles
-
-    @city = NewSuggestedCity.call(city_params, current_user)
-
-    respond_to do |format|
-      if @city.persisted?
-        format.html { redirect_to forbes_city_path(@city), notice: 'We\'ve gotten your submission and will get to it ASAP.' }
-      else
-        format.html { render :forbes_new, alert: "Something went wrong! Our fault. Could you try again?" }
-      end
-    end
   end
 
   def forbes_set_city
