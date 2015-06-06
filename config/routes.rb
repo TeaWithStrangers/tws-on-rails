@@ -76,5 +76,5 @@ Rails.application.routes.draw do
     get '/tasks'    => 'profiles#host_tasks', as: :host_tasks
   end
 
-  get '/:id' => 'cities#forbes_show', as: :forbes_city
+  get '/:id' => 'cities#show', as: :forbes_city
 end

@@ -21,10 +21,6 @@ class CitiesController < ApplicationController
     use_new_styles
   end
 
-  def forbes_show
-    use_new_styles
-  end
-
   def forbes_new
     use_new_styles
     if current_user
@@ -55,9 +51,9 @@ class CitiesController < ApplicationController
     redirect_to forbes_city_path(@city)
   end
 
-  # GET /cities/:city_code
+  # GET /:id (city code)
   def show
-    redirect_to forbes_city_path
+    use_new_styles
   end
 
   # GET /cities/new
