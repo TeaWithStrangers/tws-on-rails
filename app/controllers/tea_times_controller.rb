@@ -35,49 +35,6 @@ class TeaTimesController < ApplicationController
   def edit
   end
 
-  # POST /tea_times/1/attendance
-  def create_attendance
-    @user = current_user
-    #FIXME: ALL THIS
-    if @user.nil?
-      user_data = GetOrCreateUser.call({nickname: tea_time_params[:nickname],
-                                        email: tea_time_params[:email]},
-                                        @tea_time.city)
-
-      if user_data[:new_user?] && user_data[:user].valid?
-        @user = user_data[:user]
-        sign_in @user
-      elsif !user_data[:new_user?] && user_data[:user].valid?
-        return redirect_to new_user_session_path, alert: 'You already have an account. Log in! Then register for the tea time.'
-      end
-    end
-
-    if @user.nil?
-      return redirect_to tea_time_path(@tea_time), alert: "Sorry, something has gone wrong. Our fault. Try again!"
-    end
-
-
-    @attendance = Attendance.where(tea_time: @tea_time, user: @user).first_or_initialize
-    @attendance.try_join
-
-    if @attendance.save
-      @attendance.queue_reminders
-      message = @attendance.waiting_list? ?
-        "You're on the wait list! Check your email for details." :
-        "You're set for tea time! Check your email and add it to your calendar :)"
-      respond_to do |format|
-        format.html { return redirect_to profile_path, notice: message }
-        format.json { @attendance }
-      end
-    else
-      respond_to do |format|
-        format.html { return redirect_to city_path(@tea_time.city),
-                      alert: "Couldn't register for that, sorry :(" }
-        format.json { @attendance }
-      end
-    end
-  end
-
   # POST /tea_times
   # POST /tea_times.json
   def create

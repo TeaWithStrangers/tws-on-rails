@@ -4,6 +4,32 @@ class AttendanceController < ApplicationController
   before_action :host_authorized?, only: [:mark]
   before_action :set_attendance, except: [:mark]
 
+  # POST /tea_times/1/attendance
+  def create
+    @user = current_user
+    @tea_time = TeaTime.find(params[:id])
+
+    @attendance = Attendance.where(tea_time_id: @tea_time.id, user_id: @user.id).first_or_initialize
+
+    # Set status
+    if @attendance.tea_time.spots_remaining?
+      @attendance.status = :pending
+    else
+      @attendance.status = :waiting_list
+    end
+
+    if @attendance.save
+
+      @attendance.send_mail
+
+      message = @attendance.waiting_list? ?
+        "You're on the wait list! Check your email for details." :
+        "You're set for tea time! Check your email and add it to your calendar :)"
+      return redirect_to profile_path, notice: message
+    else
+      return redirect_to city_path(@tea_time.city), alert: "Couldn't register for that, sorry :("
+    end
+  end
 
   ############################################
   # Host-related Attendance Actions
