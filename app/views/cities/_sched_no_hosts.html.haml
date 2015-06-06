@@ -1,16 +1,16 @@
 .row
   .narrow.howitworks
     - if @city.hosts.empty?
-      %h3.divider 
+      %h3.divider
         = "There are no tea times happening in #{@city.name} at the moment!"
-      %p 
+      %p
         = "We're working to make sure that we have amazing hosts and enough people to ensure that tea time won't just be you and...you. If you've signed up for TWS in #{@city.name}, you'll get an email the second we're ready! If not,"
-        = link_to "sign up here!", city_path(@city), :class => "city-name #{@city.city_code}"
+        = link_to "sign up here!", forbes_city_path(@city), :class => "city-name #{@city.city_code}"
     - else
-      %h3.divider 
+      %h3.divider
         = "The #{@city.name} hosts are busy collecting stories!"
       %p= "They'll most certainly be sharing them at tea time, and when they're back, you'll find some tea times here. Check back soon!"
-    %p 
+    %p
       In the meantime, here are two things you should do:
   .wide.action
     %ul.two-things
@@ -24,7 +24,7 @@
           Enjoy stories from tea time
         %p
           = "We share some good stories from tea time, discuss some of the funny things about open communication, and share lots of behind the scenes details about Tea With Strangers on our "
-          = link_to "facebook page", "http://facebook.com/teawithstrangers" 
+          = link_to "facebook page", "http://facebook.com/teawithstrangers"
           and #{link_to 'twitter', 'http://twitter.com/teawstrangers'}.
         <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Ffacebook.com%2Fteawithstrangers&amp;width=0&amp;layout=standard&amp;action=like&amp;show_faces=true&amp;share=false&amp;height=80&amp;appId=360734737286705" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:80px;" allowTransparency="true"></iframe>
         <a href="https://twitter.com/teawstrangers" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @teawstrangers</a>
