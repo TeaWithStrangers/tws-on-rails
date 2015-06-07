@@ -8,9 +8,9 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => {:registrations => "registrations"}, :skip => [:sessions]
   as :user do
     get     'signin'   => 'sessions#new',             as: :new_user_session
-    post    'signin'   => 'devise/sessions#create',   as: :user_session
-    delete  'signout'  => 'devise/sessions#destroy', as: :destroy_user_session
-    get     'logout'   => 'devise/sessions#destroy'
+    post    'signin'   => 'sessions#create',          as: :user_session
+    delete  'signout'  => 'sessions#destroy',         as: :destroy_user_session
+    get     'logout'   => 'sessions#destroy'
   end
 
   namespace :api do
