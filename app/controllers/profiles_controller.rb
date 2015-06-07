@@ -1,6 +1,7 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
   before_filter :away_ye_waitlisted
+  before_action :use_new_styles
 
   def show
     @hosting = current_user.tea_times.future.order("start_time ASC")
