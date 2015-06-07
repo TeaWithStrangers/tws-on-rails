@@ -1,6 +1,7 @@
 class CitySuggestionsController < ApplicationController
+  before_action :use_new_styles
+
   def new
-    use_new_styles
     if current_user
       @city = City.new
     else
@@ -10,7 +11,6 @@ class CitySuggestionsController < ApplicationController
   end
 
   def create
-    use_new_styles
     @city = NewSuggestedCity.call(city_params, current_user)
     if @city.persisted?
       redirect_to forbes_city_path(@city), notice: 'We\'ve gotten your submission and will get to it ASAP.'
