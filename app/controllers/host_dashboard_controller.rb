@@ -1,4 +1,5 @@
 class HostDashboardController < ApplicationController
+  before_action :away_ye_waitlisted
   before_action :check_host
   before_action :use_new_styles
 
