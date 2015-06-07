@@ -1,0 +1,18 @@
+<%= render partial: 'shared/header' %>
+
+<div class="container">
+  <h1>Host Dashboard</h1>
+  <p>
+    Dear <%= current_user.name %>,<br>
+    <em>Single sentence inspirational quote by founder that thanks and appreciates host contribution.</em>
+  </p>
+  <%= link_to new_tea_time_path do %>
+    <button class="button">Create Tea Time</button>
+  <% end %>
+  <hr>
+  <h3>List of upcoming Tea Times that user is hosting and their attendance metrics</h3>
+  <hr>
+  <h3>List of other tea times in their host city</h3>
+  <hr>
+  <h3>Quick look comparison to number of tea times hosted in the past</h3>
+</div>

@@ -2,6 +2,9 @@
 <div class="container dashboard">
   <h1 class="center"><%= current_user.name %>'s Account</h1>
   <%= link_to "Edit User Account", edit_user_registration_path(current_user) %>
+  <% if current_user.host? %>
+    <%= link_to "Host Dashboard", host_dashboard_path(current_user) %>
+  <% end %>
   <hr>
   <h2>Tea Times</h2>
   <div class="container">
