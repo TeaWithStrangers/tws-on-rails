@@ -4,7 +4,6 @@ class ProfilesController < ApplicationController
   before_action :use_new_styles
 
   def show
-    @hosting = current_user.tea_times.future.order("start_time ASC")
     @attending = current_user.attendances_for(TeaTime.future).attended.joins(:tea_time).order('tea_times.start_time ASC')
     @waitlist = current_user.attendances_for(TeaTime.future).waiting_list.joins(:tea_time).order('tea_times.start_time ASC')
   end

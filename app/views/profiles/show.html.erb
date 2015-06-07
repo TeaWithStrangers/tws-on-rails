@@ -1,26 +1,42 @@
 <%= render partial: 'shared/header' %>
 <div class="container dashboard">
-  <%= render partial: 'shared/nav_header' %>
-  <div class="row">
-    <div class="wide">
-      <h2>
-        <%= "Welcome home, #{current_user.name}!" %>
-      </h2>
-      <div class="third left">
-        <%= render partial: 'sidebar' %>
-      </div>
-      <hr/>
-      <div class="two-third right">
-        <div class="host-tts">
-          <%= render partial: 'host_tea_time_info', locals: {tea_times: @hosting} if current_user.host? %>
-        </div>
-        <div class="attendee-tts">
-          <%= render partial: 'user_attendance_info', locals: {attendances: @attending} %>
-        </div>
-        <div class="waitlist-tts">
-          <%= render partial: 'user_waitlist_info', locals: {attendances: @waitlist} %>
-        </div>
-      </div>
-    </div>
+  <h1 class="center"><%= current_user.name %>'s Account</h1>
+  <%= link_to "Edit User Account", edit_user_registration_path(current_user) %>
+  <hr>
+  <h2>Tea Times</h2>
+  <div class="container">
+    <h3>Upcoming</h3>
+    <% if @attending.present? %>
+      <% @attending.each do |attendance| %>
+        <%= render partial: 'teatime_info', locals: {tea_time: attendance.tea_time, att: attendance, without_button: true} %>
+      <% end %>
+    <% else %>
+      <p>
+        You're not scheduled for any tea times! Let's change that.
+        <% if current_user.home_city.present? %>
+          <%= link_to "Go schedule a tea time!", forbes_city_path(current_user.home_city) %>
+        <% else %>
+          <%= link_to "Go schedule a tea time!", cities_path %>
+        <% end %>
+      </p>
+    <% end %>
+  </div>
+
+  <div class="container">
+    <h3>Waitlisted</h3>
+    <% if @waitlist.present? %>
+      <% @waitlist.each do |attendance| %>
+        <%= render partial: 'teatime_info', locals: {tea_time: attendance.tea_time, att: attendance, without_button: true} %>
+      <% end %>
+    <% else %>
+      <p>
+        You're not scheduled for any tea times! Let's change that.
+        <% if current_user.home_city.present? %>
+          <%= link_to "Go schedule a tea time!", forbes_city_path(current_user.home_city) %>
+        <% else %>
+          <%= link_to "Go schedule a tea time!", cities_path %>
+        <% end %>
+      </p>
+    <% end %>
   </div>
 </div>
