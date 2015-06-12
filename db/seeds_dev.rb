@@ -7,6 +7,7 @@ chi = City.create( name: 'Chicago', city_code: 'chicago', timezone: 'Central Tim
 # Create a user
 puts "Creating users"
 user = User.create(
+  nickname: 'Foo Bar',
   name: 'Foo Bar',
   email: 'user@tws-int.com',
   password: 'secret1234',
@@ -15,6 +16,7 @@ user = User.create(
 )
 
 host_SF2 = User.create(
+  nickname: 'SF Baz',
   name: 'SF Baz',
   email: 'host.sf1@tws-int.com',
   password: 'secret1234',
@@ -23,6 +25,7 @@ host_SF2 = User.create(
 )
 
 host_SF1 = User.create(
+  nickname: 'SF Boz',
   name: 'SF Boz',
   email: 'host.sf2@tws-int.com',
   password: 'secret1234',
@@ -31,6 +34,7 @@ host_SF1 = User.create(
 )
 
 host_NYC = User.create(
+  nickname: 'NYC Biz',
   name: 'NYC Biz',
   email: 'host.nyc@tws-int.com',
   password: 'secret1234',
@@ -39,6 +43,7 @@ host_NYC = User.create(
 )
 
 admin = User.create(
+  nickname: 'Qux Baz',
   name: 'Qux Baz',
   email: 'admin@tws-int.com',
   password: 'secret1234',
