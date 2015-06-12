@@ -3,7 +3,17 @@ class City < ActiveRecord::Base
   validates_presence_of :city_code, :timezone
   before_save :upcase_code
   has_attached_file :header_bg, styles: {banner: '1280x', medium: '750x>', small: '350x>'},
-    default_url: ('/assets/missing-city-image.jpg')
+    default_url: lambda { |m| m.instance.missing_city_image_url }
+
+  def missing_city_image_url
+    missing_image_filename = "missing-city-image"
+    precompiled_file = Dir["#{Rails.root}/public/assets/#{missing_image_filename}*"].first
+    if precompiled_file.present?
+      "/assets/#{File.basename(precompiled_file)}"
+    else
+      "/assets/#{missing_image_filename}.jpg"
+    end
+  end
   validates_attachment_content_type :header_bg, :content_type => /\Aimage\/.*\Z/
   enum brew_status: { cold_water: 0, warming_up: 1, fully_brewed: 2, hidden: 3, unapproved: 4, rejected: 5 }
   has_many :tea_times
