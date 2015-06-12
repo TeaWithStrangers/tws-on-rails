@@ -4,6 +4,16 @@ class UserMailer < ActionMailer::Base
 
   default from: "\"Tea With Strangers\" <sayhi@teawithstrangers.com>"
 
+  def confirm_city_suggestion(city_id)
+    @city = City.find(city_id)
+    @user = @city.suggested_by_user
+
+    mail(to: @user.email, subject: "We got your suggestion for Tea With Strangers in #{@city.name}") do |format|
+      format.text { render }
+      format.html { render }
+    end
+  end
+
   def notify_city_suggestor(city_id, admin_action)
     @city = City.find(city_id)
     @user = @city.suggested_by_user
