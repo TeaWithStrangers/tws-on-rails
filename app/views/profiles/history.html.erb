@@ -1,0 +1,19 @@
+<div class="container dashboard">
+  <%= render partial: 'shared/nav_header' %>
+  <div class="row">
+    <div class="wide">
+      <h2>
+        <%= "Welcome home, #{current_user.name}!" %>
+      </h2>
+      <div class="third left">
+        <%= render partial: 'sidebar' %>
+      </div>
+      <hr/>
+      <div class="two-third right history">
+        <h1 class="main">Your tea time history</h1>
+        <%= render partial: 'host_tea_time_info', locals: {tea_times: @hosting} if current_user.host? %>
+        <%= render partial: 'user_attendance_info', locals: {attendances: @attending} %>
+      </div>
+    </div>
+  </div>
+</div>

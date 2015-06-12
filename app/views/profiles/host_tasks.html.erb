@@ -1,0 +1,100 @@
+<div class="container dashboard">
+  <%= render partial: 'shared/nav_header' %>
+  <div class="row">
+    <div class="wide">
+      <h2>
+        <%= "Welcome home, #{current_user.name}!" %>
+      </h2>
+      <div class="third left">
+        <%= render partial: 'sidebar' %>
+      </div>
+      <hr/>
+      <div class="two-third right history">
+        <h2 class="main">After tea time tasks</h2>
+        <p>The Stranger Community grows with the attendees of your tea times, so it's important to mark attendance and refer anyone that might make a great host after tea time.</p>
+        <ul class="host upcoming tasks">
+          <% @tasks.each do |tt| %>
+            <% if tt.attendances.count > 0 %>
+              <li class="tea-time" data-tea-time-id="<%= #{tt.id} %>">
+                <%= render partial: 'teatime_info', locals: {tea_time: tt, att: nil} %>
+                <% if tt.pending? %>
+                  <h3 class="tasks attendance incomplete">Attendance / Host Referrals</h3>
+                  <%= form_for(tt, html: { class: 'attendance' }, url: mark_tea_time_path(tt, marking: 'attendance')) do |f| %>
+                    <ul class="attendees">
+                      <div class="headers">
+                        <div class="col-head filler">
+                          &nbsp;
+                        </div>
+                        <div class="col-head cancel">
+                          Canceled
+                        </div>
+                        <div class="col-head no-show">
+                          No Show
+                        </div>
+                        <div class="col-head present">
+                          Attended
+                        </div>
+                        <div class="col-head pot-host">
+                          Potential Host
+                        </div>
+                      </div>
+                      <%= f.fields_for :attendances do |att_form| %>
+                        <% if !att_form.object.waiting_list? %>
+                          <li class="attendee">
+                            <span class="name">
+                              <%= att_form.object.user.name %>
+                            </span>
+                            <% Attendance.host_statuses.each do |s, idx| %>
+                              <div class="input-field">
+                                <%= att_form.label :status, s.humanize %>
+                                <%= att_form.radio_button :status, s, %>
+                                  checked: ((s == 'present' && att_form.object.pending?) || s == att_form.object.status)
+                                <% end %>
+                              </div>
+                            <% end %>
+                            <div class="input-field">
+                              <%= att_form.label :potential_host,  "Potential Host?" %>
+                              <%= att_form.check_box :potential_host %>
+                            </div>
+                          </li>
+                        <% end %>
+                      <% end %>
+                    </ul>
+                    <div class="submit">
+                      <%= f.submit "Done!" %>
+                    </div>
+                  <% end %>
+                  <h3 class="tasks email incomplete">Send Thank You Email</h3>
+                <% end %>
+                <% if tt.marked_attendance? %>
+                  <h3 class="tasks attendance complete">
+                    Attendance / Host Referrals
+                  </h3>
+                  <div class="submit edit">
+                    <%= form_for(tt, url: mark_tea_time_path(tt, marking: 'edit_attendance')) do |f| %>
+                      <%= f.submit "Edit attendance" %>
+                    <% end %>
+                  </div>
+                  <h3 class="tasks email incomplete">Send Thank You Email</h3>
+                  <div class="subtask-container">
+                    <p class="subtask">
+                      Use the button below to email your attendees. Drop a line
+                      to say thank you and include a photo you took with them 
+                      if you have it. When you’ve sent it, just hit "All Sent!"
+                    </p>
+                  </div>
+                  <div class="submit edit">
+                    <%= form_for(tt, url: mark_tea_time_path(tt, marking: 'email', email_sent: true)) do |f| %>
+                      <%= f.submit "All sent!", class:"email-sent-btn" %>
+                    <% end %>
+                    <%= link_to "Email Attendees", "mailto:#{tt.attendee_emails(filter: ->(x) { x.flake? || x.no_show? || x.waiting_list? })}", class: 'email-attendees' %>
+                  </div>
+                <% end %>
+              </li>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

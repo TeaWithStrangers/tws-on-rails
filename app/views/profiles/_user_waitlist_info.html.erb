@@ -1,0 +1,10 @@
+<% if !attendances.count.zero? %>
+  <h2 class="main upcoming going">Waiting Lists</h2>
+  <ul class="upcoming going">
+    <% attendances.each do |a| %>
+      <li class="tea-time">
+        <%= render partial: 'teatime_info', locals: {tea_time: a.tea_time, without_button: false} %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

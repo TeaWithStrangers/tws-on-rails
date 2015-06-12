@@ -1,0 +1,19 @@
+<div class="container dashboard edit">
+  <%= render partial: 'shared/nav_header' %>
+  <div class="row">
+    <div class="wide">
+      <h2>
+        <%= "Welcome home, #{current_user.name}!" %>
+      </h2>
+      <div class="third left">
+        <%= render partial: 'profiles/sidebar' %>
+      </div>
+      <div class="two-third right">
+        <h2 class="main">
+          Create a New Tea Time
+        </h2>
+        <%= render 'form' %>
+      </div>
+    </div>
+  </div>
+</div>

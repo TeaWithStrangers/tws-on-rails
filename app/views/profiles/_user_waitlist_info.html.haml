@@ -1,6 +1,0 @@
-- if !attendances.count.zero?
-  %h2.main.upcoming.going  Waiting Lists
-  %ul.upcoming.going
-    - attendances.each do |a|
-      %li.tea-time
-        = render partial: 'teatime_info', locals: {tea_time: a.tea_time, without_button: false}

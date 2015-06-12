@@ -1,0 +1,21 @@
+<ul class="nav-list">
+  <li>
+    <%= link_to "Upcoming Tea Times", profile_path %>
+  </li>
+  <% if current_user.host? %>
+    <li>
+      <%= link_to "After Tea Time", host_tasks_path %>
+    </li>
+  <% end %>
+  <li>
+    <%= link_to "Tea Time History", history_path %>
+  </li>
+  <li>
+    <% if current_user.host? || current_user.admin? %>
+      <%= link_to "Create New Tea Time", new_tea_time_path %>
+    <% end %>
+  </li>
+  <li>
+    <%= link_to "Account Details", edit_user_registration_path %>
+  </li>
+</ul>

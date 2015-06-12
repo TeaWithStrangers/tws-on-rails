@@ -1,0 +1,51 @@
+<h2 class="main upcoming host">Hosting</h2>
+<% if !tea_times.count.zero? %>
+  <ul class="upcoming host">
+    <% tea_times.each do |tea_time| %>
+      <li class="<%= (:cancelled if tea_time.cancelled?) %> tea-time">
+        <%= render partial: 'teatime_info', locals: {tea_time: tea_time, att: nil} %>
+        <% if current_user.host? %>
+          <div class="attendees-container">
+            <% if tea_time.attendances.length > 0 %>
+              <% tea_time.attendances.group_by(&:status).each do |k,v| %>
+                <ul class="<%= k %> attendees-list">
+                  <h4>#{humanize_attendance_status(k).humanize.titleize.pluralize(v.count)}</h4>
+                  <% v.map(&:user).each do |a| %>
+                    <li class="attendee-names">
+                      <%= link_to a.name, "mailto:#{a.email}" %>
+                    </li>
+                  <% end %>
+                </ul>
+                <div class="<%= k %> email-all" target="_blank">
+                  <%= link_to "Email All", "mailto:#{tea_time.attendee_emails(filter: ->(x) { x.status != k })}" %>
+                </div>
+              <% end %>
+            <% else %>
+              <h3 class="attendees none">No attendees yet!</h3>
+            <% end %>
+          </div>
+          <div class="controls">
+            <% unless tea_time.occurred? || tea_time.cancelled? %>
+              <h6 class="left">
+                <%= link_to 'Edit details', edit_tea_time_path(tea_time) %>
+              </h6>
+              <h6 class="right">
+                <%= link_to 'Cancel tea time', cancel_tea_time_path(tea_time), :method => :put, :data => { :confirm => 'Are you sure?' } %>
+              </h6>
+            <% else %>
+              <h6 class="right">This tea time has been cancelled.</h6>
+            <% end %>
+          </div>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+  <p>
+    <%= link_to "Can't get enough? Makes sense. Create another tea time!", new_tea_time_path %>
+  </p>
+<% else %>
+  <p>
+    You're not hosting any upcoming tea times! Let's change that.
+    <%= link_to "Create a new tea time!", new_tea_time_path %>
+  </p>
+<% end %>
