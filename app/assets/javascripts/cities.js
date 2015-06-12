@@ -53,7 +53,7 @@ var onCitiesIndexLoad = function() {
         if (city.brew_status === "fully_brewed") {
           listOfActiveCities.push(cityDiv);
           /*jshint camelcase: false */
-        } else if (!(city.brew_status === "unapproved") && !(city.brew_status === "hidden")) {
+        } else if (!(city.brew_status === "unapproved") && !(city.brew_status === "hidden") && !(city.brew_status === "rejected")) {
           listOfUpcomingCities.push(cityDiv);
 
         }
