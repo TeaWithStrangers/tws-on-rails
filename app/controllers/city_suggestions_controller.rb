@@ -13,6 +13,7 @@ class CitySuggestionsController < ApplicationController
   def create
     @city = NewSuggestedCity.call(city_params, current_user)
     if @city.persisted?
+      UserMailer.delay.confirm_city_suggestion(@city.id)
       redirect_to forbes_city_path(@city), notice: 'We\'ve gotten your submission and will get to it ASAP.'
     else
       render :new, alert: "Something went wrong! Our fault. Could you try again?"

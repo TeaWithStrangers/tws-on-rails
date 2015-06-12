@@ -1,0 +1,6 @@
+Hi <%= @user.nickname %>!
+
+Just wanted to let ya know that we got your request to start Tea With Strangers in <%= @city.name %>. Thanks so much for sending that! We’re going to take a look and will give you an update very soon!
+
+Bleep bleep bloop,  
+The Robots at Tea With Strangers

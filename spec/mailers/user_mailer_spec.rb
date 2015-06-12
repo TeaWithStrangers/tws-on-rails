@@ -1,6 +1,42 @@
 require 'spec_helper'
 
 describe UserMailer do
+
+  describe 'confirm_city_suggestion' do
+    let(:mock_user) do
+      user = double('User', email: 'foo@goo.com', nickname: "Anthony Gonsalves")
+      allow(user).to receive(:name).and_return(user.nickname)
+      user
+    end
+    let(:mock_city) do
+      double('City', id: 5, suggested_by_user: mock_user, name: "Wonderland")
+    end
+    before(:each) do
+      allow(City).to receive(:find).with(5).and_return(mock_city)
+    end
+
+    it 'should be sent to suggestor' do
+      mail = UserMailer.confirm_city_suggestion(mock_city.id)
+      expect(mail.to).to eq([mock_user.email])
+    end
+    it 'should be sent by deafult email' do
+      mail = UserMailer.confirm_city_suggestion(mock_city.id)
+      expect(mail.from).to include('sayhi@teawithstrangers.com')
+    end
+    it 'should contain the name of the city' do
+      mail = UserMailer.confirm_city_suggestion(mock_city.id)
+      expect(mail.parts.first.to_s).to include(mock_city.name)
+    end
+    it 'should contain the suggestor nickname' do
+      mail = UserMailer.confirm_city_suggestion(mock_city.id)
+      expect(mail.parts.first.to_s).to include(mock_user.nickname)
+    end
+    it 'should have a subject' do
+      mail = UserMailer.confirm_city_suggestion(mock_city.id)
+      expect(mail.subject).to eq "We got your suggestion for Tea With Strangers in #{mock_city.name}"
+    end
+  end
+
   describe '#notify_city_suggestor' do
     let(:mock_user) do
       user = double('User', email: 'foo@goo.com', nickname: "Anthony Gonsalves")
