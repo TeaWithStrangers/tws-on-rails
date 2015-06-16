@@ -1,5 +1,5 @@
 <div class="container dashboard">
-  <%= render partial: 'shared/nav_header' %>
+  <%= render partial: 'shared/header' %>
   <div class="row">
     <div class="wide">
       <h2>
@@ -15,7 +15,7 @@
         <ul class="host upcoming tasks">
           <% @tasks.each do |tt| %>
             <% if tt.attendances.count > 0 %>
-              <li class="tea-time" data-tea-time-id="<%= #{tt.id} %>">
+              <li class="tea-time" data-tea-time-id="<%= tt.id %>">
                 <%= render partial: 'teatime_info', locals: {tea_time: tt, att: nil} %>
                 <% if tt.pending? %>
                   <h3 class="tasks attendance incomplete">Attendance / Host Referrals</h3>
@@ -47,9 +47,7 @@
                             <% Attendance.host_statuses.each do |s, idx| %>
                               <div class="input-field">
                                 <%= att_form.label :status, s.humanize %>
-                                <%= att_form.radio_button :status, s, %>
-                                  checked: ((s == 'present' && att_form.object.pending?) || s == att_form.object.status)
-                                <% end %>
+                                <%= att_form.radio_button :status, s, checked: ((s == 'present' && att_form.object.pending?) || s == att_form.object.status) %>
                               </div>
                             <% end %>
                             <div class="input-field">

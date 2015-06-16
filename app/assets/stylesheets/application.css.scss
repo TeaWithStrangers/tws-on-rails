@@ -18,7 +18,7 @@
 @import "static/*";
 @import "cities/*";
 
-.sessions.new, .jfdi_signup, .cities.index, .forbes_show {
+.sessions.new, .jfdi_signup, .forbes_index, .forbes_show, .registrations, .tea_times, .profiles {
   @extend .light-background;
 }
 

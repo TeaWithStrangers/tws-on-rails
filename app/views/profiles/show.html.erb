@@ -1,5 +1,14 @@
+<%= render partial: 'shared/header' %>
+<div class="dash-banner">
+  <div class="container">
+    <div class="photo-container">
+      <div class="host-photo">
+        <img class="host-img" src="<%= @current_user.avatar.url(:landscape) %>"/>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="container dashboard">
-  <%= render partial: 'shared/nav_header' %>
   <div class="row">
     <div class="wide">
       <h2>
