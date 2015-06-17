@@ -50,13 +50,6 @@ feature 'Registered User' do
       expect(@user.attendances.map(&:tea_time)).to include @tt
     end
 
-    scenario 'logged out user with account tries to attend' do
-      sign_out
-      visit forbes_city_path(@user.home_city)
-      # Should be redirected to the new TWS Sign up experience
-      expect(current_path).to eq root_path
-    end
-
     scenario 'user can flake' do
       attend_tt(@tt)
       visit profile_path
