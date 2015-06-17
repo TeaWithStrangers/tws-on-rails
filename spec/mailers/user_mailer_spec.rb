@@ -82,6 +82,13 @@ describe UserMailer do
       mail = described_class.notify_city_suggestor(mock_city.id, :approved)
       expect(mail.html_part.to_s).to include("Bleep bleep bloop,<br>")
     end
+
+    context 'approved' do
+      it 'should have a link to the city page' do
+        mail = described_class.notify_city_suggestor(mock_city.id, :approved)
+        expect(mail.html_part.to_s).to include("#{forbes_city_url(mock_city.id)}")
+      end
+    end
   end
 
   describe '#registration' do
