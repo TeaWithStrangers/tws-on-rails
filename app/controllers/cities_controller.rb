@@ -1,7 +1,7 @@
 class CitiesController < ApplicationController
   before_action :set_city, except: [:index, :new, :index]
   before_action :authenticate_user!, :authorized?, only: [:new, :create, :edit, :update, :destroy]
-  before_action :away_ye_waitlisted, except: [:index, :forbes_show, :forbes_set_city]
+  before_action :away_ye_waitlisted, except: [:index, :show, :forbes_set_city]
 
   # GET /cities
   def index
