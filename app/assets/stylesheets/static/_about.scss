@@ -1,7 +1,7 @@
 .cover-photo.static-banner {
   margin-bottom: $base-font-size*3;
 
-  &.about {
+  &.about, &.dash {
     background-position: 50%;
 
     @include background-image(linear-gradient(to bottom,

@@ -1,18 +1,34 @@
 <%= render partial: 'shared/header' %>
-<div class="dash-banner">
+<div class="dash static-banner cover-photo">
   <div class="container">
     <div class="photo-container">
       <div class="host-photo">
         <img class="host-img" src="<%= @current_user.avatar.url(:landscape) %>"/>
       </div>
     </div>
+    <div class="dash-navigation">
+
+      <div class="personal-info">
+        <span class="affirmation white capitalize boldweight">
+          You look real good today, 
+        </span>
+        <h2 class="white">
+          <%= "#{current_user.nickname}!" %>
+        </h2>
+      </div>
+      <div class="dash-menu">
+        <%= render partial: 'sidebar' %>
+      </div>
+      
+    </div>
   </div>
 </div>
+
 <div class="container dashboard">
   <div class="row">
     <div class="wide">
       <h2>
-        <%= "Welcome home, #{current_user.name}!" %>
+        
       </h2>
       <div class="third left">
         <%= render partial: 'sidebar' %>
