@@ -35,6 +35,11 @@ describe UserMailer do
       mail = UserMailer.confirm_city_suggestion(mock_city.id)
       expect(mail.subject).to eq "We got your suggestion for Tea With Strangers in #{mock_city.name}"
     end
+
+    it 'should have a line break in sign off' do
+      mail = UserMailer.confirm_city_suggestion(mock_city.id)
+      expect(mail.html_part.to_s).to include("Bleep bleep bloop,<br>")
+    end
   end
 
   describe '#notify_city_suggestor' do
