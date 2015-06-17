@@ -78,7 +78,10 @@ describe UserMailer do
     it 'should raise an error if the city is not found' do
       expect { described_class.notify_city_suggestor(100, :approved) }.to raise_error(ActiveRecord::RecordNotFound)
     end
-
+    it 'should have a line break in sign off' do
+      mail = described_class.notify_city_suggestor(mock_city.id, :approved)
+      expect(mail.html_part.to_s).to include("Bleep bleep bloop,<br>")
+    end
   end
 
   describe '#registration' do
