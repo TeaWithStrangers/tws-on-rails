@@ -63,6 +63,9 @@ Rails.application.routes.draw do
     post '/host'              => 'hosts#create',              as: :create_host
   end
 
+  get '/host_dashboard'               => 'host_dashboard#show', as: :host_dashboard
+  get '/host_dashboard/tea_times/new' => 'host_dashboard#new_tea_time', as: :host_new_tea_time
+
   scope :profile do
     get '/'         => 'profiles#show',       as: :profile, via: :get
     get '/history'  => 'profiles#history',    as: :history

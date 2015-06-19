@@ -18,7 +18,7 @@
 @import "static/*";
 @import "cities/*";
 
-.sessions.new, .jfdi_signup, .cities.index, .forbes_show {
+.sessions.new, .jfdi_signup, .cities.index, .forbes_show, .profiles.show, .host_dashboard {
   @extend .light-background;
 }
 
@@ -67,5 +67,11 @@
       border: solid 1px;
       padding: 1px 10px
     }
+  }
+}
+
+.host_dashboard {
+  input, select {
+    margin-bottom: 10px;
   }
 }
