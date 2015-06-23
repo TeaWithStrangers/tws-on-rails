@@ -13,7 +13,7 @@ feature 'Hosting: ' do
       create_tea_time({location: 'Spaceball One'})
       expect(@u.tea_times.count).to eq 1
       expect(@u.tea_times.first.location).to eq 'Spaceball One'
-      expect(page).to have_content @u.tea_times.first.date_sans_year
+      expect(page).to have_content @u.tea_times.first.date_full_month_sans_year
     end
 
     scenario 'updating tea time' do
