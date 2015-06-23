@@ -1,8 +1,18 @@
 class AttendanceController < ApplicationController
   before_action :authenticate_user!
   before_action :user_authorized?, only: [:show, :update]
-  before_action :host_authorized?, only: [:mark]
+  before_action :host_authorized?, only: [:mark, :cancel]
   before_action :set_attendance, except: [:mark]
+
+  def cancel
+    attendance = Attendance.where(tea_time_id: params[:id], id: params[:attendance_id]).first
+    if attendance
+      attendance.flake!
+      redirect_to edit_tea_time_path(attendance.tea_time), alert: "#{attendance.user.name}'s attendance was canceled!"
+    else
+      redirect_to edit_tea_time_path(attendance.tea_time), alert: "You tried to cancel an attendance that doesn't exist?"
+    end
+  end
 
   # POST /tea_times/1/attendance
   def create
