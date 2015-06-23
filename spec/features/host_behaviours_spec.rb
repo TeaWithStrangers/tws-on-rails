@@ -13,6 +13,7 @@ feature 'Hosting: ' do
       create_tea_time({location: 'Spaceball One'})
       expect(@u.tea_times.count).to eq 1
       expect(@u.tea_times.first.location).to eq 'Spaceball One'
+      visit host_dashboard_path
       expect(page).to have_content @u.tea_times.first.date_full_month_sans_year
     end
 
@@ -21,6 +22,7 @@ feature 'Hosting: ' do
       visit edit_tea_time_path(@u.tea_times.first)
       fill_in :tea_time_location, with: 'Vega'
       click_button 'Update Tea Time'
+      visit host_dashboard_path
       expect(page).to have_content 'Vega'
       expect(@u.tea_times.first.location).to eq 'Vega'
     end

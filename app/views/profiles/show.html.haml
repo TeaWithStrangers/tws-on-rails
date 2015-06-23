@@ -8,7 +8,11 @@
       %hr
       .two-third.right
         .host-tts
-          = render partial: 'host_tea_time_info', locals: {tea_times: @hosting} if current_user.host?
+          - if current_user.host?
+            %h2.main Upcoming Tea Times
+            Check out the new
+            = link_to "Host Dashboard", host_dashboard_path
+            to see your upcoming tea times!
         .attendee-tts
           = render partial: 'user_attendance_info', locals: {attendances: @attending}
         .waitlist-tts
