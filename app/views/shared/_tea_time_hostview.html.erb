@@ -1,0 +1,71 @@
+<div class="tt-container">
+  <div class="tt-box">
+    <div class="tt-card-top">
+      <div class="date-time">
+        <div class="day">
+          <h5 class="light lightweight">
+            <%= "#{tea_time.day}" %>
+          </h5>
+        </div>
+        <div class="date">
+          <h3>
+            <%= "#{tea_time.date_full_month_sans_year}" %>
+          </h3>
+        </div>
+        <div class="time">
+          <h5 class="boldweight">
+            <%= "#{tea_time.start_end_hour}" %>
+          </h5>
+        </div>
+      </div>
+    </div>
+    <div class="place">
+      <h5 class="light lightweight">
+        <%= "#{tea_time.location}" %>
+      </h5>
+    </div>
+  </div>
+  <div class="controls">
+    <% unless tea_time.occurred? || tea_time.cancelled? %>
+      <h6 class="capitalize boldweight">
+        <%= link_to 'Edit details', edit_tea_time_path(tea_time) %>
+      </h6>
+      <h6 class="capitalize boldweight">
+        <%= link_to 'Cancel tea time', cancel_tea_time_path(tea_time), :method => :put, :data => { :confirm => 'Are you sure?' } %>
+      </h6>
+    <% else %>
+      <h6 class="right">This tea time has been cancelled.</h6>
+    <% end %>
+  </div>
+  <% if !(without_button ||= false) %>
+    <div class="tt-cta">
+      <% if current_user %>
+        <%= link_to tea_time_path(tea_time), class: 'tea-time-scheduling' do %>
+          <% if tea_time.attending?(current_user) %>
+            <button class="green" disabled="<%= true %>">
+              Signed Up
+            </button>
+          <% elsif tea_time.spots_remaining? %>
+            <button class="spots<%= tea_time.spots_remaining %>">
+              Count Me In
+            </button>
+          <% elsif tea_time.waitlisted?(current_user) %>
+            <button class="gray button" disabled="<%= true %>">
+              Waitlisted
+            </button>
+          <% else %>
+            <button class="yellow button">
+              Join Waitlist
+            </button>
+          <% end %>
+        <% end %>
+      <% else %>
+        <%= link_to new_user_session_path do %>
+          <button class="yellow button">
+            Sign in to schedule
+          </button>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

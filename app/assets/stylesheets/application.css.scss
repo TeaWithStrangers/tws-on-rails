@@ -18,7 +18,7 @@
 @import "static/*";
 @import "cities/*";
 
-.sessions.new, .jfdi_signup, .cities.index, .forbes_show {
+.sessions.new, .jfdi_signup, .cities.index, .forbes_show, .registrations, .tea_times, .profiles {
   @extend .light-background;
 }
 
@@ -67,5 +67,12 @@
       border: solid 1px;
       padding: 1px 10px
     }
+  }
+}
+
+.container.dashboard {
+  .attendees-list {
+    list-style: none;
+    padding: 0;
   }
 }

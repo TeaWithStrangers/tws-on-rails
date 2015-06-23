@@ -1,0 +1,53 @@
+<% if !tea_times.count.zero? %>
+  <h2>
+    Your upcoming tea times
+  </h2>
+  <ul class="upcoming host">
+    <% tea_times.each do |tea_time| %>
+      <li class="<%= (:cancelled if tea_time.cancelled?) %> tea-time">
+        <div class="tt-deets">
+          <%= render partial: 'teatime_hostinfo', locals: {tea_time: tea_time, att: nil} %>
+        </div>
+        <% if current_user.host? %>
+          <div class="attendees-container">
+            <h3 class="light">
+              Your attendees
+            </h3>
+            <% if tea_time.attendances.length > 0 %>
+              <% tea_time.attendances.group_by(&:status).each do |k,v| %>
+                <h6 class="capitalize boldweight">
+                  <%= humanize_attendance_status(k).humanize.titleize.pluralize(v.count) %>
+                </h6>
+                <ul class="<%= k %> attendees-list">
+                  <% v.map(&:user).each do |a| %>
+                    <li class="attendee-names">
+                      <%= link_to a.name, "mailto:#{a.email}" %>
+                    </li>
+                  <% end %>
+                </ul>
+                <div class="<%= k %> email-all" target="_blank">
+                  <%= link_to "Email All", "mailto:#{tea_time.attendee_emails(filter: ->(x) { x.status != k })}" %>
+                </div>
+              <% end %>
+            <% else %>
+              <h3 class="attendees none lightweight">
+                No attendees yet!
+              </h3>
+            <% end %>
+          </div>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+  <p>
+    <%= link_to "Can't get enough? Makes sense. Create another tea time!", new_tea_time_path %>
+  </p>
+<% else %>
+  <h2>
+    When's your next tea time?
+  </h2>
+  <p>
+    You're not hosting any upcoming tea times! Let's change that.
+    <%= link_to "Create a new tea time!", new_tea_time_path %>
+  </p>
+<% end %>

@@ -44,6 +44,11 @@ class TeaTime < ActiveRecord::Base
     start_time.strftime("%b %e")
   end
 
+  def date_full_month_sans_year
+    start_time.strftime("%B %e")
+  end
+
+
   def host_name
     host.name if host
   end
