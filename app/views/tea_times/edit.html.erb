@@ -3,31 +3,46 @@
   <% prefill = !!current_user %>
   <div class="mobilepad edit-tea-time" %>
     <h2 class="admin-head">Edit tea time details</h2>
+    <%= render 'form' %>
     <div class="controls actions">
       <%= link_to 'Cancel tea time', @tea_time, method: :delete, data: {conform: 'Are you sure?' }, class: 'cancel-button' %>
     </div>
-    <%= render 'form' %>
   </div>
-
-  <div class="edit-tea-time">
-    <h2 class="admin-head">Attending</h2>
-    <ul>
-    <% (@tea_time.attendances.pending + @tea_time.attendances.present).each do |attendance| %>
-      <li>
-        <%= attendance.user.name %>:
-        <%= link_to "Cancel attendance for #{attendance.user.name}",
-            cancel_attendance_tea_time_path(@tea_time.id, attendance.id), method: :put, id: 'cancel-attendance', data: { confirm: "You should only cancel if #{attendance.user.name} emailed you and said they can't make it.\n\n#{attendance.user.name} will get an email when you confirm!" } %>
-      </li>
+  <hr>
+  <br>
+  <h2 class="admin-head">Attending</h2>
+  <% attendees = (@tea_time.attendances.pending + @tea_time.attendances.present) %>
+  <% if attendees.present? %>
+    <table class="attendees">
+      <% attendees.each_with_index do |attendance, i| %>
+        <tr>
+          <td><%= i + 1  %></td>
+          <td><%= attendance.user.name %></td>
+          <td><%= link_to "Cancel attendance",
+              cancel_attendance_tea_time_path(@tea_time.id, attendance.id), method: :put, id: 'cancel-attendance', data: { confirm: "You should only cancel if #{attendance.user.name} emailed you and said they can't make it.\n\n#{attendance.user.name} will get an email when you confirm!" } %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  <% else %>
+    <p>No attendees for this tea time!</p>
+  <% end %>
+  <br>
+  <h2 class="admin-head">Canceled</h2>
+  <ul>
+  <% flakes = @tea_time.attendances.flake %>
+  <% if flakes.present? %>
+    <table class="attendees">
+      <% flakes.each_with_index do |attendance, i| %>
+        <tr>
+          <td><%= i + 1  %></td>
+          <td><%= attendance.user.name %></td>
+        </tr>
+      <% end %>
+    </table>
+  <% else %>
+    <% if attendees.present? %>
+      <p>Yay! No one has canceled yet!</p>
     <% end %>
-    </ul>
-    <h2 class="admin-head">Canceled</h2>
-    <ul>
-    <% (@tea_time.attendances.flake).each do |attendance| %>
-      <li>
-        <%= attendance.user.name %>
-
-      </li>
-    <% end %>
-    </ul>
-  </div>
+  <% end %>
 </div>
