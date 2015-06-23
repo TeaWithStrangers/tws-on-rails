@@ -1,0 +1,26 @@
+<%= render partial: 'shared/header' %>
+<div class="container dashboard">
+  <div class="dash-menu">
+    <%= render partial: 'sidebar' %>
+  </div>
+  <div class="dash-intro">
+    <div class="photo-container">
+      <div class="host-photo">
+        <img class="host-img" src="<%= @current_user.avatar.url(:landscape) %>"/>
+      </div>
+    </div>
+    <div class="hello">
+      <h2>
+        Welcome home, <%= "#{current_user.nickname}!" %>
+      </h2>
+      <h3 class="gray">
+        You look real good today.
+      </h3>
+    </div>
+  </div>
+  <div class="dash-body">
+    <div class="host-teas">
+      <%= render partial: 'host_tea_time_info', locals: {tea_times: @hosting} if current_user.host? %>
+    </div>
+  </div>
+</div>
