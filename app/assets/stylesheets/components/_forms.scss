@@ -1,0 +1,36 @@
+form {
+  input {
+    display: block;
+    margin: $base-spacing / 2 0;
+    padding: 1em;
+    width: 100%;
+    border-radius: $base-button-radius;
+    box-shadow: none;
+    border: $base-border;
+
+    &:focus, &:hover {
+    	outline: none;
+    }
+
+    &:first-of-type {
+      margin-top: 0;
+    }
+  }
+}
+
+input {
+	&.name:after {
+		content: 'Name';
+		position: absolute;
+		font-size: $base-font-size*0.5;
+		top: 50%;
+		right: 50%; 
+		display: inline-block;
+	}
+	&.email:focus {
+
+	}
+	&.password:focus {
+
+	}
+}

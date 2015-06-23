@@ -1,0 +1,82 @@
+// Grid adjustments
+$max-width: 1020px;
+
+// Font Families
+$proxima-nova: "proxima-nova", "Proxima Nova", "Helvetica Neue", sans-serif;
+$prenton: "prenton", "Helvetica Neue", sans-serif;
+$gibson: "canada-type-gibson", "Gibson", "Helvetica Neue", sans-serif;
+
+// Typography
+$base-font-family: $gibson;
+$header-font-family: $gibson;
+
+// Font Sizes
+$base-font-size: 18px;
+$quote-font-size: $base-font-size * 0.9;
+$h1-font-size: 2.5em;
+$h1-small-font-size: 1.875em;
+$h2-font-size: 1.5em;
+$h3-font-size: 1em;
+$h4-font-size: 1em;
+$h5-font-size: 0.8em;
+$h6-font-size: 0.6em;
+
+// Line height
+$base-line-height: 1.625;
+$header-line-height: 1.25;
+
+// Other Sizes
+$base-border-radius: 3px;
+$base-spacing: $base-line-height * 1em;
+$base-z-index: 0;
+
+// Colors
+$blue: #477DCA;
+$dark-gray: #333;
+$medium-gray: #5C5C5C;
+$light-gray: #DDD;
+$tws-medium-gray: #929292;
+$tws-red: #B53D39;
+$tws-green: #57C370;
+$tws-white: #FEFEFE;
+$tws-footer-gray: #1D1D1D;
+
+// Background Color
+$base-background-color: white;
+
+// Redesign Colours
+$tws-offwhite: #FAF6E8;
+$tws-tan: #F3ECCE;
+$tws-yellow: #F7BF4D;
+$tws-orange: #EF6236;
+
+// Font Colors
+$base-font-color: $dark-gray;
+$base-accent-color: $blue;
+
+// Link Colors
+$base-link-color: $tws-orange;
+$hover-link-color: darken($tws-orange, 15);
+$base-button-color: $base-link-color;
+$hover-button-color: $hover-link-color;
+
+// Border color
+$base-border-color: $light-gray;
+$base-border: 1px solid $base-border-color;
+
+// Buttons
+$base-button-radius: 10px;
+
+// Forms
+$form-border-color: $base-border-color;
+$form-border-color-hover: darken($base-border-color, 10);
+$form-border-color-focus: $base-accent-color;
+$form-border-radius: $base-border-radius;
+$form-box-shadow: inset 0 1px 3px rgba(black,0.06);
+$form-box-shadow-focus: $form-box-shadow, 0 0 5px rgba(darken($form-border-color-focus, 5), 0.7);
+$form-font-size: $base-font-size;
+$form-font-family: $base-font-family;
+
+// Gutter Padding
+$container-gutter-padding: 1em;
+$container-gutter-padding-desktop: 0.25em;

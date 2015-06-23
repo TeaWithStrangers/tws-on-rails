@@ -1,0 +1,184 @@
+/*
+
+Stylesheet for all things related to presentation of 
+tea times across the website.
+
+*/
+
+
+.tt-set-container {
+	overflow: auto;
+	clear: both;
+
+}
+
+.tt-solo {
+
+	.section-header {
+		margin-bottom: 1em;
+	}
+
+	.tt-form {
+		margin-bottom: 3em;
+		overflow: auto;
+	}
+
+	.tt-container {
+
+		@include media($tablet) {
+
+			@include span-columns(4 of 12);
+		}
+	}
+
+	form.schedule-tea {
+		margin-top: 1em;
+
+		@include media($tablet) {
+
+			@include span-columns(8 of 12);
+		}
+
+		.button-container {
+			text-align: center;
+
+			a.cancel {	
+				margin-top: 1em;
+			}
+		}
+	}
+}
+
+.tt-container {
+	margin-top: 1em;
+	margin-bottom: 2em;
+
+	@include media($tablet-only) {
+
+		@include span-columns(4 of 12);
+		@include omega(3n);
+	}
+
+	@include media($desktop) {
+		@include span-columns(3 of 12);
+		@include omega(4n);
+	}
+
+	.tt-box {
+		background: $tws-white;
+		border: $base-border;
+		padding: 0.75em 0.75em 1em 0.75em;
+		position: relative;
+	}
+
+	.tt-card-top {
+	    overflow: auto;
+	    margin-top: -2em;
+	    padding-top: 0.4em;
+	    position: relative;
+	}
+
+	.host-container {
+		background: $tws-white;
+		border: $base-border;
+		border-width: 2px;
+		border-color: $tws-yellow;
+		border-radius: $base-border-radius;
+		float: right;
+		position: relative;
+		width: 45%;
+		margin: 0 0 0.5em 0.75em;
+		padding: .25em;
+
+		.host-avatar {
+			width: 100%;
+			padding-bottom: 100%;
+			position: relative;
+			margin-bottom: 0.25em;
+		}
+
+		h6 {
+			@extend a;
+
+			text-align: center;
+		}
+	}
+
+	.avatar {
+		background-position: center;
+		background-size: cover;
+		background-repeat: no-repeat;
+		border-radius: $base-border-radius;
+		position: absolute;
+		width: 100%;
+		padding-bottom: 100%;
+		
+	}
+
+	.date-time {
+		text-transform: uppercase;
+		text-align: center;
+		float: left;
+		width: 48%;
+		position: absolute;
+		top: 35%;
+
+	}
+
+	.place {
+		clear: both;
+		min-height: 2em;
+	}
+
+	p.description {
+		font-size: $base-font-size * 0.8;
+		text-transform: uppercase;
+		text-align: center;
+		color: $tws-medium-gray;
+		margin-bottom: $base-font-size/3;
+	}
+
+}
+
+.progress-bar-block.tea-time {
+	
+	.progress-bar {
+		position: relative; 
+
+		span.notch {
+			position: absolute;
+			height: 100%;
+			border-left: 2px solid $tws-white;
+			top: 0;
+		}
+	}
+
+	.bar {
+
+	}
+
+}
+
+.tt-cta {
+	padding: 1em 0.5em 0;
+
+	button {
+		width: 100%;
+
+		&:disabled {
+			@include inverted-button($base-button-color);
+		}
+		
+		&.green:disabled {
+			@include inverted-button($tws-green);
+		}
+		
+		&.gray:disabled {
+			@include inverted-button($tws-medium-gray);
+		}
+
+		&.yellow:disabled {
+			@include inverted-button($tws-yellow);
+		}
+	}
+}

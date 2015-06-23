@@ -1,0 +1,53 @@
+/*
+All header options in TWS projects.
+
+Any instances of a header that involve greater specificity of styles beyond
+what is found in typography.scss should @extend from there.
+*/
+
+h1 {
+	@extend h1;
+
+	&.dark {
+		color: $medium-gray;
+	}
+
+  &.small {
+  	font-size: $h1-small-font-size;
+  }
+
+  &.mid-page-cta {
+	  margin-bottom: $base-font-size*1.5;
+	}
+
+}
+
+h3 {
+	&.capitalize {
+		@extend h3;
+
+		text-transform: uppercase;
+	}
+
+	&.size-up {
+		font-size: 1.25em;
+	}
+}
+
+h1, h2, h3, h4, h5, h6 {
+	&.center {
+		text-align: center;
+	}
+	&.lightweight {
+		font-weight: 400;
+	}
+	&.light {
+		color: $tws-medium-gray;
+	}
+	&.boldweight {
+		font-weight: 600;
+	}
+	&.capitalize {
+		text-transform: uppercase;
+	}
+}

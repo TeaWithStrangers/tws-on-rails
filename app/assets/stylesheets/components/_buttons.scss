@@ -1,0 +1,122 @@
+/*
+Base class for all buttons in TWS projects.
+
+Any instances of a button that do not use <button> or <input type="submit">
+should @extend from this class.
+*/
+%button {
+  -webkit-font-smoothing: antialiased;
+  background-color: $base-button-color;
+  border: 2px solid $base-button-color;
+  border-radius: $base-button-radius;
+  color: white;
+  display: inline-block;
+  font-size: $base-font-size;
+  font-weight: 600;
+  line-height: 1;
+  padding: 1em 1.5em;
+  letter-spacing: 2px;
+  text-decoration: none;
+
+  &:hover {
+    background-color: $hover-button-color;
+    border-color: $hover-button-color;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+
+/*
+Sets a button's background color for regular and hover states. The hover
+state background will be 5% darker than the base if a $hover-color property is
+not supplied.
+
+$base-color  - The base color
+$hover-color - (Optional): The :hover color
+*/
+@mixin button-color($base-color, $hover-color: null) {
+  $hover-color: darken($base-color, 5) !default;
+  background-color: $base-color;
+  border: 2px solid $base-color;
+
+  &:hover {
+    background-color: $hover-color;
+    border-color: $hover-color;
+  }
+}
+
+/*
+Sets button's inverted state and undoes hover states when a button is in 
+a 'selected' state. This is, at the moment, relevant to host interest,
+and tea time sign up buttons. 
+*/
+
+@mixin inverted-button($base-color, $hover-color: null) {
+  $hover-color: darken($base-color, 5) !default;
+  background-color: transparent;
+  border: 2px solid $base-color;
+  color: $base-color;
+  position: relative;
+  cursor: default;
+  opacity: 1;
+
+  &:hover {
+    border-color: $hover-color;
+    color: $hover-color;
+  }
+}
+
+/*
+The base button for all forms and calls-to-action. Text is centred by default.
+
+:hover - The hover state
+:active - The depressed state
+.green - Button with a base colour of $tws-green
+.red - Button with a base of $tws-red
+.full-width - Stretches to fill width of parent element
+.wide - Adds 2.5em of L+R padding
+
+*/
+button, input[type="submit"] {
+  @extend %button;
+
+  text-transform: uppercase;
+  font-weight: 600;
+  a { color: $tws-white; }
+
+  &.green {
+    @include button-color($tws-green);
+  }
+
+  &.red {
+    @include button-color($tws-red);
+  }
+
+  &.orange {
+    @include button-color($tws-orange);
+  }
+
+  &.yellow {
+    @include button-color($tws-yellow);
+  }
+
+  &.gray {
+    @include button-color($tws-medium-gray);
+  }
+
+  &.fb-blue {
+    @include button-color(#435F9D);
+  }
+
+  &.full-width {
+    width: 100%;
+  }
+
+  &.wide {
+    padding-left: 2.5em;
+    padding-right: 2.5em;
+  }
+}

@@ -1,0 +1,50 @@
+$border-gap: 0.35em;
+
+.post-tags {
+  border-bottom: 1px solid $medium-gray;
+  margin: 0;
+  padding: 0 0 $border-gap 0;
+}
+
+.post-tag {
+  display: inline-block;
+
+  list-style-type: none;
+
+  a {
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #333;
+  }
+
+  &:last-child:after {
+    content: none;
+  }
+
+  &:after {
+    padding: $border-gap;
+    content: "|";
+  }
+}
+
+.post-date {
+  margin: $border-gap 0 0em 0;
+  text-transform: uppercase;
+}
+
+.post-title {
+  margin: 0.5em 0;
+  text-transform: uppercase;
+  font-weight: 300;
+  line-height: 1;
+
+  a { color: #333; }
+
+  @include media($tablet) {
+    margin: 0.5em 0 0.25em;
+  }
+}
+
+.post-metadata {
+  margin: 0em 0 1em;
+}

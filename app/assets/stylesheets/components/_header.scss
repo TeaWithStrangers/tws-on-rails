@@ -1,0 +1,59 @@
+header {
+  @include clearfix();
+  background: rgba($tws-yellow, .87);
+  position: relative;
+
+  .container {
+    $vpadding: 1em;
+    padding-top: $vpadding;
+    padding-bottom: $vpadding;
+  }
+
+  .nav-list {
+    @include media($desktop) {
+      float: right;
+    }
+  }
+}
+
+.tws-logo-type {
+  font-family: "Nanum Pen Script";
+  font-size: 2em;
+  font-weight: 400;
+  color: $tws-white;
+
+  @include media($desktop) {
+    float: left;
+    line-height: 39px;
+  }
+}
+
+.menu-expando {
+  float: right;
+  cursor: pointer;
+
+  &:before {
+    content: "\2261";
+  }
+
+  @include media($desktop) {
+    display: none;
+  }
+}
+
+.flash {
+  @extend h3;
+
+  background: $tws-yellow;
+  padding: .5em 1em;
+  border: 2px solid $tws-white;
+  border-right: none;
+  border-left: none;
+  color: $tws-white;
+  width: 100%;
+  text-align: center;
+
+  &.alert {
+    background: $tws-orange;
+  }
+}

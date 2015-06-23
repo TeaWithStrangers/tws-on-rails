@@ -1,0 +1,118 @@
+/*
+
+Stylesheet for all things related to presentation of 
+modals across the website.
+
+*/
+
+// Overlay behind the modal
+
+.ui-widget-overlay {
+	background: $tws-yellow;
+}
+
+// General modal box positioning
+
+.ui-dialog {
+
+	position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  -webkit-transform: translate(-50%, -50%) !important;
+  -moz-transform:    translate(-50%, -50%) !important;
+  -ms-transform:     translate(-50%, -50%) !important;
+  -o-transform:      translate(-50%, -50%) !important;
+  transform:         translate(-50%, -50%) !important;
+  padding: 0;
+  overflow: visible;
+
+  // Eliminating borders and placing cancelation X properly
+
+  .ui-dialog-titlebar {
+
+  	padding: 0;
+  	top: 0;
+  	right: 0;
+  	position: absolute;
+
+  	// Cancel button
+
+  	.ui-dialog-titlebar-close {
+  		margin: 0px;
+			top: 0.5em;
+			right: -2em;
+
+  	}
+
+  	.ui-button-icon-only .ui-icon {
+  		left: 0;
+  		top: 0;
+  		margin: 0;
+  	}
+
+  	.ui-state-default .ui-icon {
+  		background-image: image-url('landing/close-x.png');
+  		background-position: center;
+			background-size: cover;
+  	}
+  }
+
+  .ui-dialog-content {
+
+  	padding: 0;
+  }
+}
+
+// Content
+
+.ui-dialog-content {
+
+	.container {
+
+		padding: 1.5em;
+	}
+
+	// Honestly just to save vertical space
+	.tt-container {
+
+		hr, .availability {
+			display: none;
+		}
+	}
+
+	.tt-solo .section-header {
+		margin-bottom: 0.5em;
+	}
+
+	.tt-solo .tt-form {
+		margin: 0;
+	}
+
+	.tt-solo .tt-container {
+
+		@include span-columns(8 of 12);
+		@include shift(2);
+	}
+
+	.tt-solo form.schedule-tea {
+		clear: both;
+		margin-top: 0;
+		font-family: $base-font-family;
+
+		@include span-columns(12 of 12);
+	}
+}
+
+.ui-widget {
+	input, select, textarea, button, form {
+
+		font-family: $base-font-family;
+		font-size: $base-font-size;
+	}
+}
+
+.ui-widget-content {
+	a {
+		color: $tws-orange;
+	}
+}

@@ -1,0 +1,175 @@
+.sharing-info {
+  clear: both;
+  margin-bottom: $base-font-size;
+
+  h2 {
+    margin-bottom: $base-font-size;
+  }
+}
+
+.sharing-box {
+  clear: both;
+  border: $base-border;
+  border-radius: $base-border-radius;
+  margin: auto;
+  padding: 20px;
+  background-color: $tws-white;
+
+  @include media($tablet) {
+    @include span-columns(10 of 12);
+    @include shift(1);
+  }
+
+  @include media($desktop) {
+    @include span-columns(8 of 12);
+    @include shift(2);
+  }
+
+  .sharing-preview {
+    border: 1px solid $tws-yellow;
+    border-radius: 4px;
+
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-duration: .75s;
+    animation-duration: .75s;
+
+    &.sharing-preview-bounce {
+      -webkit-animation-name: previewBounceIn;
+      animation-name: previewBounceIn;
+    }
+
+    img#sharing-preview-image {
+      max-width: 100%;
+      display: block;
+      -webkit-border-top-left-radius: 4px;
+      -webkit-border-top-right-radius: 4px;
+      -moz-border-radius-topleft: 4px;
+      -moz-border-radius-topright: 4px;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+    }
+
+    .sharing-preview-text {
+      padding: 15px;
+      font-size: $base-font-size*.9;
+      line-height: 1.5em;
+    }
+  }
+
+  .sharing-facebook-button, .sharing-try-button {
+    display: block;
+    margin-top: 20px;
+    outline: 0;
+
+    button {
+      display: block;
+      width: 100%;
+      -webkit-transition: background-color 0.25s;
+      transition: background-color 0.25s;
+      outline: 0;
+    }
+  }
+
+  .sharing-facebook-button button {
+    background-color: #435F9D;
+
+    &:hover {
+      background-color: #344987;
+    }
+  }
+
+  .sharing-try-button button {
+    background-color: #EFBA4D;
+
+    &:hover {
+      background-color: #EBAA3B;
+    }
+
+    img {
+      height: 20px;
+      vertical-align: middle;
+      margin-right: 5px;
+    }
+  }
+
+  .sharing-try-blurb {
+    font-size: 12pt;
+    text-align: center;
+    margin: 20px auto 0px auto;
+    line-height: 1.3em;
+    color: #555;
+
+    @include media($desktop) {
+      width: 350px;
+    }
+  }
+
+  .sharing-try-blurb + .sharing-try-button {
+    margin-top: 5px;
+  }
+
+  .sharing-elsewhere {
+    margin: 20px 0 0 0;
+    overflow: auto;
+    border-top: 1px solid #CCC;
+    padding-top: 20px;
+    font-size: 12pt;
+
+    .sharing-elsewhere-text {
+      @include media($desktop) {
+        float: left;
+      }
+    }
+
+    .sharing-elsewhere-buttons {
+      margin-top: 10px;
+
+      @include media($desktop) {
+        float: right;
+        margin-top: 0;
+      }
+
+      img {
+        width: 35px;
+        margin-left: 10px;
+      }
+    }
+
+    &:after {
+      clear: both;
+    }
+  }
+}
+
+// Adapted from Animate.css
+@-webkit-keyframes previewBounceIn {
+  0%, 25%, 50%, 75%, 100% {
+    -webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+
+  0% {
+    opacity: 0;
+    -webkit-transform: scale3d(.9, .9, .9);
+    transform: scale3d(.9, .9, .9);
+  }
+
+  25% {
+    -webkit-transform: scale3d(1.03, 1.03, 1.03);
+    transform: scale3d(1.03, 1.03, 1.03);
+  }
+
+  50% {
+    -webkit-transform: scale3d(.97, .97, .97);
+    transform: scale3d(.97, .97, .97);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}

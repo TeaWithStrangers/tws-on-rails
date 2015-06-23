@@ -1,0 +1,168 @@
+/*
+
+Stylesheet for all things related to presentation of
+dashboard related styles (/profile, /users/edit,
+tea_times/new)
+
+*/
+
+.container.dashboard {
+  .dash-menu {
+
+    ul.dash-menu-list {
+      float: left;
+      padding: 0;
+
+      @include span-columns(12 of 12);
+      @include outer-container;
+
+      li.nav-link-item {
+        float: left;
+        padding: 0 1em 0 0;
+        text-align: left;
+        letter-spacing: 0;
+
+        a {
+          color: $base-font-color;
+        }
+      }
+    }
+  }
+  .dash-intro {
+
+    @include media($tablet) {
+      @include span-columns(3 of 12);
+    }
+
+    .photo-container {
+
+      @include span-columns(12 of 12);
+      @include outer-container;
+
+      .host-photo {
+        padding: 0.75em;
+        line-height: 0;
+        border-color: $tws-yellow;
+      }
+    }
+  }
+
+  .dash-body {
+
+    @include media($tablet) {
+
+      @include span-columns(9 of 12);
+    }
+
+    ul.upcoming {
+      list-style: none;
+      padding: 0;
+
+      li.tea-time {
+        overflow: auto;
+        margin-bottom: 2em;
+
+        .tt-deets {
+          overflow: auto;
+
+          @include media($tablet) {
+            @include span-columns(3 of 9);
+          }
+        }
+
+        .tt-container {
+          margin: 0;
+
+          @include span-columns(12 of 12);
+          @include outer-container;
+
+          .tt-box {
+            padding: 0.75em;
+            margin-bottom: 0.5em;
+          }
+
+          .tt-card-top {
+            text-align: left;
+            margin: 0;
+            padding: 0;
+          }
+
+          .date-time {
+            text-align: left;
+            width: 100%;
+            position: relative;
+            top: auto;
+            text-transform: none;
+          }
+        }
+
+        .attendees-container {
+
+          @include media($tablet) {
+            @include span-columns(3 of 9);
+          }
+        }
+      }
+    }
+
+    .host-teas {
+
+    }
+  }
+}
+
+.cover-photo.dash {
+  padding: 1em 0;
+  background: $tws-tan;
+
+  .container {
+    position: relative;
+  }
+
+  .photo-container {
+    margin-bottom: 0;
+
+    .host-photo {
+      padding: 0.25em;
+      line-height: 0;
+    }
+  }
+
+  .dash-navigation {
+    position: relative;
+  }
+
+  .personal-info {
+    padding-bottom: 3em;
+
+    .affirmation {
+      @extend h6;
+    }
+
+  }
+
+  .dash-menu {
+
+  }
+
+  ul.dash-menu-list {
+    list-style: none;
+    font-size: 0.8em;
+    font-weight: 600;
+    text-transform: uppercase;
+
+    li {
+      display: inline-block;
+      padding-right: 1em;
+    }
+
+    a {
+      color: $tws-white;
+
+      &:hover {
+
+      }
+    }
+  }
+
+}
