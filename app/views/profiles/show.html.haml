@@ -7,8 +7,6 @@
         = render partial: 'old_sidebar'
       %hr
       .two-third.right
-        .host-tts
-          = render partial: 'host_tea_time_info', locals: {tea_times: @hosting} if current_user.host?
         .attendee-tts
           = render partial: 'user_attendance_info', locals: {attendances: @attending}
         .waitlist-tts
