@@ -35,6 +35,7 @@ Rails.application.routes.draw do
       put '/cancel'                     => 'tea_times#cancel',            as: :cancel
       get '/attendance/:attendance_id'  => 'attendance#show',             as: :show_attendance
       put '/attendance/:attendance_id'  => 'attendance#update',           as: :update_attendance
+      put '/attendance/:attendance_id/cancel'  => 'attendance#cancel',    as: :cancel_attendance
     end
   end
 
