@@ -1,0 +1,121 @@
+@mixin cover-photo($vertical-image, $horizontal-image: null, $gradient: null) {
+  $horizontal-image: $vertical-image !default;
+  $gradient: linear-gradient(to bottom,
+                             rgba($tws-yellow, .87),
+                             rgba($tws-yellow, .87), 100%) !default;
+
+  @include background-image($gradient, $vertical-image);
+
+  @include media($tablet) {
+    @include background-image($gradient, $horizontal-image);
+  }
+
+  background-position: 50% 50%, 0%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: auto;
+  max-width: 100%;
+}
+
+%vertical-center-flex-container {
+  @include display(flex);
+  @include align-items(center);
+  @include flex-direction(row);
+  @include justify-content(center);
+}
+
+%vertical-center-box {
+  @include flex(1);
+  max-width: 95%;
+
+  @include media($tablet) {
+    width: 70%;
+    max-width: 700px;
+  }
+}
+
+%cover-photo-text {
+  color: $tws-white;
+  margin-top: 0;
+  margin-bottom: 0.25em;
+}
+
+/* Cover Photo Styles */
+.cover-photo {
+
+  &.city-banner {
+    margin-bottom: $base-font-size*3;
+
+  }
+  .content {
+
+    @extend %vertical-center-flex-container;
+
+    @include padding(50px 0);
+
+    @include media($tablet) {
+      @include padding(110px 0);
+    }
+  }
+
+  .content-box {
+    @extend %vertical-center-box;
+    text-align: center;
+  }
+}
+
+.cover-photo-lede {
+  @extend %cover-photo-text;
+  margin-bottom: $base-font-size/2;
+  font-weight: 600;
+}
+
+.city-banner {
+  margin-bottom: 2em;
+}
+
+h1.city-title {
+  text-transform: uppercase;
+  letter-spacing: -1px;
+}
+
+span.city-subtext {
+  @extend %cover-photo-text;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+  font-size: $base-font-size;
+}
+
+.cover-photo-subtext {
+  @extend %cover-photo-text;
+  margin-bottom: $base-font-size*2;
+  display: block;
+  font-size: 1.125em;
+  font-weight: 400;
+}
+
+.cover-photo-body {
+  @extend %cover-photo-text;
+  @include media($tablet) {
+    font-size: 1.15em;
+  }
+}
+
+.cover-photo-cta {
+  width: 80%;
+
+  @include media($tablet) {
+    width: 50%;
+  }
+}
+
+.city-container {
+
+  @include span-columns(8 of 12);
+  @include shift(2);
+
+  h2 {
+    margin-bottom: $base-font-size;
+  }
+}

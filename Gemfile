@@ -1,21 +1,17 @@
 ruby '2.1.5'
 
-
-
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
-
 gem 'pg'
 
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
-#JS, CSS, Templating
-
 gem 'haml-rails', '~> 0.5'
 gem 'sass-rails', '~> 5.0'
+
 # For the old-style styles
 gem 'less-rails', '~> 2.5'
 gem 'therubyracer', '~> 0.12'
@@ -29,6 +25,8 @@ gem 'jquery-ui-rails', '~> 5.0'
 gem 'underscore-rails'
 gem "active_model_serializers"
 gem 'bitmask_attributes', '~> 1.0'
+gem 'bourbon'
+gem 'neat'
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'markerb'

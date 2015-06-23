@@ -40,6 +40,9 @@ GEM
       debug_inspector (>= 0.0.1)
     bitmask_attributes (1.0.0)
       activerecord (>= 3.1)
+    bourbon (4.2.3)
+      sass (~> 3.4)
+      thor
     builder (3.2.2)
     cancan (1.6.10)
     capybara (2.4.4)
@@ -160,6 +163,9 @@ GEM
     mini_portile (0.6.2)
     minitest (5.6.1)
     multi_xml (0.5.5)
+    neat (1.7.2)
+      bourbon (>= 4.0)
+      sass (>= 3.3)
     nenv (0.2.0)
     netrc (0.10.3)
     newrelic_rpm (3.11.2.286)
@@ -321,6 +327,7 @@ DEPENDENCIES
   aws-sdk (~> 1.5.7)
   bcrypt (~> 3.1.7)
   bitmask_attributes (~> 1.0)
+  bourbon
   cancan (~> 1.6.10)
   capybara
   coveralls
@@ -338,6 +345,7 @@ DEPENDENCIES
   jquery-ui-rails (~> 5.0)
   less-rails (~> 2.5)
   markerb
+  neat
   newrelic_rpm
   paperclip (~> 4.1)
   paranoia (~> 2.0)

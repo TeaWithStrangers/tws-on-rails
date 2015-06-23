@@ -10,13 +10,38 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ *= require normalize
  *= require jquery-ui/dialog
  *= require_self
  */
 
-@import "tws-styles/application";
+@import "bourbon";
+@import "neat";
+
+@import "base/variables";
+@import "base/mixins";
+@import "base/gradients";
+@import "base/media-queries";
+@import "base/typography";
+@import "base/enhanced_typography";
+@import "components/*";
 @import "static/*";
-@import "cities/*";
+
+.wrapper {
+  @include display(flex);
+  @include flex-direction(column);
+  min-height: 100vh;
+}
+
+.wrapper-content {
+  @include flex(1);
+}
+
+.container {
+  @include outer-container;
+  @include box-sizing(border-box);
+  @include padding(0 $container-gutter-padding);
+}
 
 .sessions.new, .jfdi_signup, .cities.index, .forbes_show {
   @extend .light-background;

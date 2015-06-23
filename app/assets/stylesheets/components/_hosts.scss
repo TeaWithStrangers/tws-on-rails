@@ -1,0 +1,80 @@
+/*
+
+Stylesheet for all things related to presentation of 
+hosts across the website.
+
+*/
+
+.host-grid-container {
+	margin-top: 1em;
+	margin-bottom: 2em;
+	clear: both;
+	overflow: auto;
+
+	ul.host-headshots {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		overflow: auto;
+
+		li.host-container {
+			background: $tws-white;
+			border: $base-border;
+			padding: 0.5em 0.5em 0 0.5em;
+			position: relative;
+			margin-bottom: 2em;
+
+			h3 {
+				padding: 0.75em 0;
+
+				a {
+					color: $base-font-color;
+				}
+			}
+
+			@include media($mobile-only) {
+				@include span-columns(6 of 12);
+				@include omega(2n);
+			}
+
+			@include media($tablet-only) {
+
+				@include span-columns(4 of 12);
+				@include omega(3n);
+			}
+
+			@include media($tablet) {
+				padding: 0.75em 0.75em 0 0.75em;
+				
+				h3 {
+					padding: 1em 0;
+				}
+			}
+
+			@include media($desktop) {
+				@include span-columns(3 of 12);
+				@include omega(4n);
+			}
+
+		}
+
+		.host-avatar {
+			width: 100%;
+			padding-bottom: 75%;
+			border: $base-border;
+			border-radius: $base-border-radius;
+			position: relative;
+			overflow: hidden;
+		}
+
+		.avatar {
+			background-position: center;
+			background-size: cover;
+			background-repeat: no-repeat;
+			height: 100%;
+			width: 100%;
+			position: absolute;
+		}
+	}
+	
+}
