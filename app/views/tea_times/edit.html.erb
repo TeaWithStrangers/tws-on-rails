@@ -1,0 +1,13 @@
+<div class="container user-form edit dashboard">
+  <%= render partial: 'shared/nav_header' %>
+  <% prefill = !!current_user %>
+  <div class="mobilepad edit-tea-time" %>
+    <h2 class="admin-head">Edit tea time details</h2>
+    <%= render 'form' %>
+    <div class="controls">
+      <h6 class="left">
+        <%= link_to 'Cancel tea time', @tea_time, method: :delete, data: {conform: 'Are you sure?' } %>
+      </h6>
+    </div>
+  </div>
+</div>
