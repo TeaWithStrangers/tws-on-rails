@@ -7,7 +7,7 @@
         <li class="nav-link-item">
           <%= link_to "Cities", cities_path %>
         </li>
-        <% if current_user && !current_user.host? %>
+        <% if !current_user || (current_user && !current_user.host?) %>
           <li class="nav-link-item">
             <%= link_to "Hosting", hosting_path %>
           </li>

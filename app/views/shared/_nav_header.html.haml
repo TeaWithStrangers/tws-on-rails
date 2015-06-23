@@ -6,7 +6,7 @@
         = yield :header_logo
     %ul.nav-list
       %li= link_to "Cities", cities_path
-      - if current_user && !current_user.host?
+      - if !current_user || (current_user && !current_user.host?)
         %li= link_to "Hosting", hosting_path
       %li=link_to "About", about_path
       - if current_user.nil?
