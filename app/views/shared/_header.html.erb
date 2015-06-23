@@ -4,9 +4,17 @@
     <span class="menu-expando tws-logo-type" onclick='toggleHeader()'></span>
     <nav class='nav-list'>
       <ul class='nav-links'>
-        <% [["Cities", cities_path], ["Hosting", hosting_path], ["About", about_path]].each do |li| %>
-          <li class="nav-link-item"><%= link_to li[0], li[1] %></li>
+        <li class="nav-link-item">
+          <%= link_to "Cities", cities_path %>
+        </li>
+        <% if current_user && !current_user.host? %>
+          <li class="nav-link-item">
+            <%= link_to "Hosting", hosting_path %>
+          </li>
         <% end %>
+        <li class="nav-link-item">
+          <%= link_to "About", about_path %>
+        </li>
         <% if current_user.nil? %>
           <li class="nav-link-item">
             <%= link_to 'Sign In', new_user_session_path, id: 'login' %>
@@ -18,6 +26,11 @@
           <li class="nav-link-item">
             <%= link_to 'My Account', profile_path %>
           </li>
+          <% if current_user && current_user.host? %>
+            <li class="nav-link-item">
+              <%= link_to "Host Dashboard", host_dashboard_path %>
+            </li>
+          <% end %>
           <li class='nav-link-item'>
             <%= link_to('Sign out', destroy_user_session_path, class: 'sign-in-emphasis', method: :delete) %>
           </li>
