@@ -1,0 +1,33 @@
+.press-list {
+  @include display(flex);
+  @include flex-wrap(wrap);
+  @include media($mobile-only) {
+    display: none;
+  }
+}
+
+.press-list-item {
+  @include flex-grow(1);
+
+  max-width: 50%;
+  @include media($desktop) {
+    max-width: 25%;
+  }
+  padding: 1em;
+
+}
+
+.press-list-icon {
+  $height: 80px;
+
+  display: block;
+  margin: 0 auto;
+
+  max-width: 100%;
+  height: $height;
+  line-height: $height;
+  path { 
+    fill: $tws-medium-gray !important;
+    stroke: $tws-medium-gray !important;
+  }
+}

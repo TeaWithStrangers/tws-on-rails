@@ -10,13 +10,66 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ *= require normalize
  *= require jquery-ui/dialog
  *= require_self
  */
 
-@import "tws-styles/application";
+@import "bourbon";
+@import "neat";
+
+// Start of TWS imports
+@import "base/variables";
+@import "base/mixins";
+@import "base/gradients";
+@import "base/media-queries";
+@import "base/typography";
+@import "base/enhanced_typography";
+
+// Base & Layout Components
+@import "static/about";
+@import "components/site-wide";
+@import "components/header";
+@import "components/footer";
+@import "components/nav-list";
+@import "components/buttons";
+@import "components/headers";
+@import "components/forms";
+@import "components/quotes";
+@import "components/share";
+@import "components/loader";
+@import "components/tea-time";
+@import "components/host-profiles";
+@import "components/hosts";
+@import "components/modals";
+@import "components/dashboard";
+
+// Block Components
+@import "components/cover-photo";
+@import "components/copy-section";
+@import "components/press-list";
+
 @import "static/*";
 @import "cities/*";
+
+//Blog Import
+@import "components/blog/blog";
+
+.wrapper {
+  @include display(flex);
+  @include flex-direction(column);
+  min-height: 100vh;
+}
+
+.wrapper-content {
+  @include flex(1);
+}
+
+.container {
+  @include outer-container;
+  @include box-sizing(border-box);
+  @include padding(0 $container-gutter-padding);
+}
 
 .sessions.new, .jfdi_signup, .cities.index, .forbes_show, .registrations, .tea_times, .profiles {
   @extend .light-background;

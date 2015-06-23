@@ -1,0 +1,73 @@
+$uncollapse-at: $desktop;
+
+a.tws-logo-type {
+  img {
+    height: $base-font-size*1.5;
+  }
+}
+
+.nav-list {
+  @include transition(max-height 1.0s);
+  @include padding(0);
+  @include margin(0);
+
+  font-family: $gibson;
+  overflow: hidden;
+  max-height: 0;
+
+  &.open {
+    max-height: 600px;
+  }
+
+  @include media($uncollapse-at) {
+    max-height: none;
+  }
+}
+
+.nav-links {
+  text-align: center;
+
+  @include padding(0);
+  @include margin(0);
+
+  @include media($uncollapse-at) {
+    text-align: left;
+  }
+}
+
+.nav-link-item {
+  font-size: 0.8em;
+  list-style-type: none;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-align: center;
+  padding: 1em 2em;
+  display: inline-block;
+  margin-bottom: 1px;
+  a {
+    color: $tws-white;
+
+    &.sign-up-emphasis {
+      padding: $base-font-size/2 $base-font-size;
+      background-color: $tws-white;
+      border: 2px solid $tws-white;
+      border-radius: $base-border-radius;
+      color: $tws-yellow;
+
+      &:hover {
+        color: $tws-white;
+        background: none;
+      }
+    }
+  }
+
+  @include media($uncollapse-at) {
+    float: left;
+    padding: 0;
+    padding-left: $base-font-size;
+    line-height: 39px;
+    text-align: right;
+    display: auto;
+  }
+}

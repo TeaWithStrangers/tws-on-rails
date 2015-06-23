@@ -1,0 +1,44 @@
+.intro {
+  font-size: 1.1 * $base-font-size;
+}
+
+.intro-paragraph {
+  text-align: center;
+  font-size: 1.25 * $base-font-size;
+
+  margin: $base-spacing 0;
+  padding: 3%;
+
+  border-style: solid;
+  border-color: $base-border-color;
+  @include border-width(3px 0);
+}
+
+.label {
+  border-width: 3px 0 3px 0;
+  border-style: solid;
+  border-color: $base-border-color;
+
+  text-align: center;
+  margin: $h4-font-size 0%;
+  padding: 3%;
+}
+
+.pull-quote {
+  margin: 0 1em 1em 0;
+  border-left: 3px solid $medium-gray;
+  padding-left: 0.7em;
+}
+
+.quote {
+  font-size: $quote-font-size;
+  font-style: italic;
+  margin: 0px;
+}
+
+span.dropcap {
+  float: left;
+  font-size: 4 * $base-font-size;
+  line-height: 2 * $base-font-size;
+  padding: 14px 4px 0px 0px;
+}

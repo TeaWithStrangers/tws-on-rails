@@ -1,0 +1,26 @@
+.copy-section {
+  @include media($tablet) {
+    @include span-columns(10);
+    @include shift(1);
+  }
+
+  @include media($desktop) {
+    @include span-columns(8);
+    @include shift(2);
+  }
+}
+
+.copy-section-header {
+  letter-spacing: 0;
+  border-bottom: 7px solid #444;
+  margin-bottom: 0.75em;
+  padding: 1em 0 .5em;
+}
+
+.copy-section-bottom-divider {
+  margin-top: 1em;
+  font-size: $h1-font-size;
+  @include span-columns(12);
+  border-bottom: 1px solid lighten(#808190, 30);
+  display: none;
+}

@@ -1,0 +1,11 @@
+blockquote {
+	@include padding(0.5em 3em 0.5em 0);
+	border-right: 1em solid lighten($tws-yellow,25%);
+	border-left: 0;
+	font-family: $gibson;
+	font-style: normal;
+	span.source {
+		font-weight: 600;
+		color: $tws-orange;
+	}
+}
