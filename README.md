@@ -57,7 +57,7 @@ Check out our [Contributing Guide](http://making.teawithstrangers.com/contributi
 
 1. Clone repo
 1. `bundle install`
-1. `rake` or `guard` for continuous testing
+1. `rake` (or `guard` for continuous testing)
 
 ## Open Commit Bit
 
