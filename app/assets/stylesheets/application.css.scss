@@ -49,6 +49,12 @@
 @import "components/copy-section";
 @import "components/press-list";
 
+.container {
+  @include outer-container;
+  @include box-sizing(border-box);
+  @include padding(0 $container-gutter-padding);
+}
+
 @import "static/*";
 @import "cities/*";
 
@@ -65,11 +71,7 @@
   @include flex(1);
 }
 
-.container {
-  @include outer-container;
-  @include box-sizing(border-box);
-  @include padding(0 $container-gutter-padding);
-}
+
 
 .sessions.new, .jfdi_signup, .cities.index, .forbes_show, .registrations, .tea_times, .profiles {
   @extend .light-background;
