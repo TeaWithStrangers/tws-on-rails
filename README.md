@@ -8,14 +8,13 @@
 
 TWS is a simple Rails+Postgres app.
 
-To get it set up locally, ensure you have the latest Ruby version as specified by .ruby-version and PostgreSQL (w. headers) installed, then:
+To get it set up locally, ensure you have the latest Ruby version as specified by
+`.ruby-version` and PostgreSQL (w. headers) installed, then:
 
 ```shell
 bundle install
 
-# create a `tws` role in postgres with the
-# ability to create databases
-
+# create a `tws` role in postgres with the ability to create databases
 createuser tws -d
 
 # set user password to 123456 (change if desired)
@@ -25,22 +24,19 @@ echo "ALTER USER tws PASSWORD '123456';" | sudo -u postgres psql
 # also add this to ~/.bash_profile so that it will always be set
 export TWS_DB_PASSWORD=123456
 
-# create the dev and test databases
-rake db:create
+rake db:create      # create the dev and test databases
+rake db:schema:load # Load the schema
+foreman start -f Procfile-dev # Run the App
 
-# Load the schema
-rake db:schema:load
-
-# Run the App
-
-foreman start -f Procfile-dev
-
-# For Development
-# Create some development data to play arond with
-# This includes creating roles
-# This will drop the database if it exists and create it again.
+# Create some dev data to play around with
 rake db:seed_dev
 ```
+
+# Running Tests
+
+1. Clone repo
+1. `bundle install`
+1. `rake` (or `guard` for continuous testing)
 
 #### Mail
 
@@ -53,11 +49,8 @@ though, since it's not part of the Gemfile.
 
 Check out our [Contributing Guide](http://making.teawithstrangers.com/contributing).
 
-# Running Tests
-
-1. Clone repo
-1. `bundle install`
-1. `rake` (or `guard` for continuous testing)
+We encourage everyone who contributes to Tea With Strangers' projects to add
+themselves to the [list of TWS team members](http://making.teawithstrangers.com/team/).
 
 ## Open Commit Bit
 
@@ -72,9 +65,3 @@ features to get feedback.
 
 * Make sure you adhere to the general pull request rules outlined in the
   [contributing guide](http://making.teawithstrangers.com/contributing).
-
-### Contributors
-
-We encourage everyone who contributes to Tea With Strangers' projects to add
-themselves to the [list of TWS
-teammembers](http://making.teawithstrangers.com/team/).
