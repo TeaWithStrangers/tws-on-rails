@@ -7,8 +7,9 @@ These are styles related to forms within the user or host dashboards
 .form {
 	label {
 		@extend h5;
-		display: block;
+		display: inline;
 		margin-bottom: 0.5em;
+		line-height: 1.25;
 
 		&.inline {
 			display: inline;
@@ -38,7 +39,7 @@ These are styles related to forms within the user or host dashboards
     border-radius: .35em;
     background: $tws-white asset-url('dropdown-arrow.png') no-repeat 97.5% center;
     background-size: 1em auto;
-    margin-bottom: 0.5em;
+    margin-bottom: 1em;
     select {
       height: 100%;
       line-height: 100%;
@@ -50,6 +51,28 @@ These are styles related to forms within the user or host dashboards
       padding: 1em;
     }
   }
+}
+
+form {
+	.full-name, .name-email, .social, .new-password {
+
+		@include outer-container;
+		@include span-columns(12);
+
+		padding: 0 1em;
+	}
+}
+
+.cancel-account {
+	input.cancel-account {
+		@include inverted-button($tws-orange);
+		cursor: pointer;
+
+		&:hover {
+			background-color: $tws-orange;
+			color: $tws-white;
+		}
+	}
 }
 
 .form.create-tea {
