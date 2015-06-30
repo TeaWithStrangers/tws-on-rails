@@ -8,7 +8,7 @@
   = f.text_field :location
   = f.label :city
   .dropdown
-    = f.select(:city_id, options_for_select(City.all.select(:id, :name).collect{ |p| [p.name, p.id] }, @tea_time.city.id), {:class => "city"})
+    = f.select(:city_id, options_for_select(City.available.select(:id, :name).collect{ |p| [p.name, p.id] }, @tea_time.city.id), {:class => "city"})
   - if current_user.admin?
     = f.label :host
     .dropdown
@@ -24,7 +24,7 @@
       %ul
         - @tea_time.errors.full_messages.each do |msg|
           %li= msg
-  .actions 
+  .actions
     .create-button
       = f.submit 'Create Tea Time'
   .actions
