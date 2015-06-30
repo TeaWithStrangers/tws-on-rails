@@ -1,7 +1,7 @@
 <%= render partial: 'shared/header' %>
 <div class="container dashboard">
   <div class="dash-menu">
-    <%= render partial: 'profiles/sidebar' %>
+    <%= render partial: 'sidebar' %>
   </div>
   <div class="dash-intro">
     <div class="photo-container">
@@ -19,11 +19,19 @@
     </div>
   </div>
   <div class="dash-body">
-    <div class="create-tea form">
-      <h2>
-        Create a new tea time
-      </h2>
-      <%= render 'form' %>
+    <div class="edit-profile form">
+      <%= form_for(resource,
+                     as: resource_name,
+                     url: registration_path(resource_name),
+                     html: { method: :put }, :multipart => true) do |f|
+        %>
+
+        <%= render partial: 'devise/registrations/host', locals: {f: f } %>
+
+      <% end %>
+
     </div>
   </div>
 </div>
+
+<%= render partial: 'shared/new_footer' %>

@@ -1,16 +1,29 @@
-<div class="container dashboard edit">
-  <%= render partial: 'shared/nav_header' %>
-  <div class="row">
-    <div class="wide">
-      <h2>Welcome home!</h2>
-      <div class="third left">
-        <%= render partial: 'profiles/sidebar' %>
+<%= render partial: 'shared/header' %>
+<div class="container dashboard">
+  <div class="dash-menu">
+    <%= render partial: 'profiles/sidebar' %>
+  </div>
+  <div class="dash-intro">
+    <div class="photo-container">
+      <div class="host-photo">
+        <img class="host-img" src="<%= @current_user.avatar.url(:landscape) %>"/>
       </div>
-      <hr>
-      <div class="two-third right">
-        <h2 class="main">Edit Your Information</h2>
-
-        <%= form_for(resource,
+    </div>
+    <div class="hello">
+      <h2>
+        Welcome home, <%= "#{current_user.nickname}!" %>
+      </h2>
+      <h3 class="gray">
+        You look real good today.
+      </h3>
+    </div>
+  </div>
+  <div class="dash-body">
+    <div class="edit-account form">
+      <h2>
+        Edit Your Account
+      </h2>
+      <%= form_for(resource,
                      as: resource_name,
                      url: registration_path(resource_name),
                      html: { method: :put }, :multipart => true) do |f|
@@ -19,32 +32,32 @@
           <h3 class="edit-subheader first">Personal Information</h3>
 
           <div>
-            <%= f.label :nickname %>
-            <br/>
+            <%= f.label :nickname, class: 'capitalize boldweight' %>
+            
             <%= f.text_field :nickname, autofocus: true %>
           </div>
 
           <div>
-            <%= f.label :given_name %>
-            <br/>
+            <%= f.label :given_name, class: 'capitalize boldweight' %>
+            
             <%= f.text_field :given_name %>
           </div>
 
           <div>
-            <%= f.label :family_name %>
-            <br/>
+            <%= f.label :family_name, class: 'capitalize boldweight' %>
+            
             <%= f.text_field :family_name %>
           </div>
 
           <div>
-            <%= f.label :email %>
-            <br/>
+            <%= f.label :email, class: 'capitalize boldweight' %>
+            
             <%= f.email_field :email %>
           </div>
 
           <div>
-            <%= f.label :home_city %>
-            <br/>
+            <%= f.label :home_city, class: 'capitalize boldweight' %>
+            
             <div class="dropdown">
               <%= select(
                 resource_name, :home_city_id,
@@ -54,14 +67,14 @@
           </div>
 
           <div>
-            <%=  f.label :facebook %>
-            <br/>
+            <%=  f.label :facebook, class: 'capitalize boldweight' %>
+            
             <%= f.text_field :facebook, placeholder: 'Just the part after http://facebook.com/' %>
           </div>
 
           <div>
-            <%= f.label :twitter %>
-            <br/>
+            <%= f.label :twitter, class: 'capitalize boldweight' %>
+            
             <%= f.text_field :twitter, placeholder: "Don't include the @" %>
           </div>
 
@@ -69,26 +82,25 @@
             <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
           <% end %>
 
-          <%= render partial: 'host', locals: {f: f } %>
 
           <h3 class="edit-subheader"> Change Your Password </h3>
 
           <div>
-            <%= f.label :password, "New password" %>
-            <br/>
+            <%= f.label :password, "New password", class: 'capitalize boldweight' %>
+            
             <%= f.password_field :password, autocomplete: "off", placeholder: "New password" %>
           </div>
 
           <div>
-            <%= f.label :password_confirmation, "Confirm new password" %>
-            <br/>
+            <%= f.label :password_confirmation, "Confirm new password", class: 'capitalize boldweight' %>
+            
             <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "One more time!" %>
 
           </div>
 
           <div>
-            <%= f.label :current_password %>
-            <br/>
+            <%= f.label :current_password, class: 'capitalize boldweight' %>
+            
             <%= f.password_field :current_password, autocomplete: "off", placeholder: "Current password" %>
 
           </div>
@@ -103,7 +115,8 @@
         <%= button_to "Cancel my account",
           registration_path(resource_name),
           data: { confirm: "Are you sure?" }, method: :delete %>
-      </div>
     </div>
   </div>
 </div>
+
+<%= render partial: 'shared/new_footer' %>

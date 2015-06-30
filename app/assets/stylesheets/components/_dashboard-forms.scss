@@ -9,6 +9,21 @@ These are styles related to forms within the user or host dashboards
 		@extend h5;
 		display: block;
 		margin-bottom: 0.5em;
+
+		&.inline {
+			display: inline;
+			margin-bottom: 0;
+		}
+	}
+
+	span.sub-label {
+		@extend h5;
+		display: inline;
+	}
+
+	.form-label {
+		margin-bottom: 0.5em;
+		line-height: 1.25;
 	}
 
 	input[type="text"] {
