@@ -1,5 +1,5 @@
 form {
-  input {
+  input, select, textarea {
     display: block;
     margin: $base-spacing / 2 0;
     padding: 1em;
@@ -8,9 +8,10 @@ form {
     box-shadow: none;
     border: $base-border;
 
-    &:focus, &:hover {
+    &:focus, &:hover, &:active {
     	outline: none;
     }
+
 
     &:first-of-type {
       margin-top: 0;

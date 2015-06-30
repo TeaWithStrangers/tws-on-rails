@@ -1,0 +1,58 @@
+/* 
+
+These are styles related to forms within the user or host dashboards
+
+*/
+
+.form {
+	label {
+		@extend h5;
+		display: block;
+		margin-bottom: 0.5em;
+	}
+
+	input[type="text"] {
+		margin: 0 0 1em;
+	}
+
+	.dropdown {
+    width: 100%;
+    height: 3.25em;
+    overflow: hidden;
+    border: $base-border;
+    border-radius: .35em;
+    background: $tws-white asset-url('dropdown-arrow.png') no-repeat 97.5% center;
+    background-size: 1em auto;
+    margin-bottom: 0.5em;
+    select {
+      height: 100%;
+      width: 105% !important;
+      border: 0 !important;
+      border-radius: 0;
+      -webkit-appearance: none;
+      background: transparent;
+      padding: 1em;
+    }
+  }
+}
+
+.form.create-tea {
+	.field {
+		margin-bottom: 1em;
+
+		&.duration {
+			display: none;
+		}
+
+		&.datepicker {
+			#tea_time_start_time_1i,
+      #tea_time_start_time_2i,
+      #tea_time_start_time_3i,
+      #tea_time_start_time_4i,
+      #tea_time_start_time_5i {
+      	display: inline-block;
+      	width: auto;
+      }
+		}
+	}
+}
