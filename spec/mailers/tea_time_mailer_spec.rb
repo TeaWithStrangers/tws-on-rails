@@ -7,6 +7,14 @@ describe TeaTimeMailer do
     @attendance2 = create(:attendance, tea_time: @tt)
   end
 
+  describe '#ethos' do
+    it 'should have a line break in sign off' do
+      user = create(:user)
+      mail = TeaTimeMailer.ethos(user.id)
+      expect(mail.html_part.to_s).to include("Have a freaking awesome tea time,<br>")
+    end
+  end
+
   describe '#host_confirmation' do
     let(:mail) { TeaTimeMailer.host_confirmation(@tt) }
 
