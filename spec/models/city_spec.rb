@@ -3,7 +3,7 @@ require 'spec_helper.rb'
 describe City do
   it { expect(subject).to belong_to(:suggested_by_user).class_name('User') }
 
-  describe '.available', focus: true do
+  describe '.available' do
     before(:each) do
       @fully_brewed = create(:city, brew_status: "fully_brewed")
       @warming_up   = create(:city, brew_status: "warming_up")
