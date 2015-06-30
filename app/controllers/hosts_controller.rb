@@ -1,8 +1,8 @@
 class HostsController < ApplicationController
   before_action :authenticate_user!, :authorised?, only: [:new, :create]
+  before_action :use_new_styles, except: [:new, :create]
 
   def show
-    use_new_styles
     @city = City.for_code(params[:id])
     @host = User.find(params[:host_id])
     respond_to do |format|
