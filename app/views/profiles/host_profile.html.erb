@@ -20,11 +20,21 @@
   </div>
   <div class="dash-body">
     <div class="edit-profile form">
-      <%= form_for(resource,
-                     as: resource_name,
-                     url: registration_path(resource_name),
-                     html: { method: :put }, :multipart => true) do |f|
-        %>
+      <h2>
+        Your Host Profile
+      </h2>
+
+      <p>
+        Be yourself, and don't think too hard about this stuff. Remember that strangers are 
+        taking an leap of faith on sitting for tea time with you. The more you put yourself out 
+        there, the more comfortable people feel with the whole idea. So let your personality 
+        show!
+      </p>
+
+      <%= form_for(resource, 
+        as: resource_name, 
+        url: registration_path(resource_name), 
+        html: { method: :put, class: "no-header"}, :multipart => true) do |f| %>
 
         <%= render partial: 'devise/registrations/host', locals: {f: f } %>
 
