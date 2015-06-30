@@ -1,16 +1,15 @@
 class AdminController < ApplicationController
   before_action :authenticate_user!, :authorized?
+  before_action :use_new_styles, except: [:host_overview, :users, :send_mail, :ghost]
 
   def find
   end
 
   def overview
-    use_new_styles
     @tea_times = TeaTime.all.order('start_time DESC')
   end
 
   def tea_times_overview
-    use_new_styles
     @tea_times = TeaTime.order('start_time DESC').paginate(page: params[:page], per_page: 50)
   end
 
@@ -19,7 +18,6 @@ class AdminController < ApplicationController
   end
 
   def cities_overview
-    use_new_styles
     @cities = City.order(:created_at).reverse_order
   end
 
@@ -27,7 +25,6 @@ class AdminController < ApplicationController
   end
 
   def write_mail
-    use_new_styles
     @mail = MassMail.new
   end
 
