@@ -38,6 +38,10 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def edit
+    use_new_styles
+  end
+
   def needs_password?(user, params)
     user.email != params[:user][:email] ||
       params[:user][:password].present?

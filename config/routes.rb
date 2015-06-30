@@ -69,6 +69,7 @@ Rails.application.routes.draw do
     get '/history'          => 'profiles#history',    as: :history
     get '/tasks'            => 'profiles#host_tasks', as: :host_tasks
     get '/host_dashboard'   => 'profiles#host_dashboard', as: :host_dashboard
+    get '/host_profile'     => 'profiles#host_profile', as: :host_profile
   end
 
   get '/:id' => 'cities#show', as: :forbes_city

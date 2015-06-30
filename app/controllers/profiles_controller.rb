@@ -23,4 +23,8 @@ class ProfilesController < ApplicationController
     @attending = current_user.attendances_for(TeaTime.future).attended.joins(:tea_time).order('tea_times.start_time ASC')
     @waitlist = current_user.attendances_for(TeaTime.future).waiting_list.joins(:tea_time).order('tea_times.start_time ASC')
   end
+
+  def host_profile
+    use_new_styles
+  end
 end

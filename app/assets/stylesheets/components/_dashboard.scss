@@ -7,6 +7,7 @@ tea_times/new)
 */
 
 .container.dashboard {
+
   .dash-menu {
 
     ul.dash-menu-list {
@@ -48,10 +49,15 @@ tea_times/new)
   }
 
   .dash-body {
+    margin-bottom: 3em;
 
     @include media($tablet) {
 
       @include span-columns(9 of 12);
+    }
+
+    h2 {
+      margin-bottom: 1em;
     }
 
     ul.upcoming {
