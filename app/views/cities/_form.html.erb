@@ -1,0 +1,53 @@
+<%= form_for @city, multipart: true do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.label :city_code %>
+  <%= f.text_field :city_code %>
+  <%= f.label :tagline %>
+  <%= f.text_field :tagline %>
+  <%= f.label :description %>
+  <%= f.text_area :description %>
+  <%= f.label :timezone %>
+  <div class="dropdown">
+    <%= select_tag(:timezone, options_for_select(City.timezone_mappings.keys, @city.timezone), name: 'city[timezone]') %>
+  </div>
+  <%= f.label :header_bg %>
+  <%= f.file_field :header_bg %>
+  <h1>City Status</h1>
+  <% if @city.unapproved? %>
+    <p>This city has been suggested by a user. Fill out all the requisite information and choose what to do with it.</p>
+    <p>If merging into another city, be sure to select the appropriate to merge
+    into. DON'T MESS UP. IRREVERSIBLE CHANGES. IRREVERSIBLE.</p>
+    <%= label_tag(:approval_action_approve, "Approve City") %>
+    <%= radio_button_tag(:approval_action, "approve") %>
+    <%= label_tag(:approval_action_merge, "Merge City") %>
+    <%= radio_button_tag(:approval_action, "merge") %>
+    <%= label_tag(:approval_action_reject, "Reject City") %>
+    <%= radio_button_tag(:approval_action, "reject") %>
+    <div class="dropdown">
+      <%= select_tag(:merge_city_id, options_for_select(City.all.select(:id, :name).collect{ |p| [p.name, p.id] }, ""), {:class => "city"}) %>
+    </div>
+    <br/>
+  <% else %>
+    <div class="dropdown">
+      <%= select_tag(:brew_status, options_for_select(City.brew_statuses.keys), name: 'city[brew_status]') %>
+    </div>
+  <% end %>
+  <% if @city.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= "#{pluralize(@city.errors.count, "error")} prohibited this city from being saved:" %>
+      </h2>
+      <ul>
+        <% @city.errors.full_messages.each do |msg| %>
+          <li>
+            <%= msg %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="actions">
+    <%= f.submit 'Save' %>
+  </div>
+<% end %>
