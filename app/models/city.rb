@@ -35,7 +35,10 @@ class City < ActiveRecord::Base
       where(brew_status: [brew_statuses[:cold_water], brew_statuses[:warming_up], brew_statuses[:fully_brewed]])
     end
   }
+
   scope :hidden, -> { where(brew_status: brew_statuses[:hidden]) }
+
+  scope :available, ->  { where(brew_status: available_statuses )     }
 
   def pending?
     cold_water? || warming_up?
@@ -97,6 +100,15 @@ class City < ActiveRecord::Base
       def for_code_proxy(code, method)
         unscoped{ self.send(method, city_code: code.upcase) || self.send(method, id: code) }
       end
+
+    def available_statuses
+      [
+        brew_statuses[:cold_water],
+        brew_statuses[:warming_up],
+        brew_statuses[:fully_brewed],
+      ]
+
+    end
   end
 end
 
