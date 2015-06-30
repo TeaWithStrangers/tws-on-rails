@@ -8,35 +8,30 @@
 
 TWS is a simple Rails+Postgres app.
 
-To get it set up locally, ensure you have the latest Ruby version as specified by
-`.ruby-version` and PostgreSQL (w. headers) installed, then:
+Prerequisites:
+
+- Ruby
+- Postgres
+
 
 ```shell
 bundle install
+createuser tws -d       # create postgres role
+rake db:create          # create the dev and test databases
+gem install mailcatcher # install local mail server interceptor
+mailcatcher             # start background server to intercept mail
+rake db:seed_dev        # Loads schema and creates some custom play data
+rails s
 
-# create a `tws` role in postgres with the ability to create databases
-createuser tws -d
-
-# set user password to 123456 (change if desired)
-echo "ALTER USER tws PASSWORD '123456';" | sudo -u postgres psql
-
-# save the password (same as above) in the environment
-# also add this to ~/.bash_profile so that it will always be set
-export TWS_DB_PASSWORD=123456
-
-rake db:create      # create the dev and test databases
-rake db:schema:load # Load the schema
-foreman start -f Procfile-dev # Run the App
-
-# Create some dev data to play around with
-rake db:seed_dev
+# Log in with user@tws.com with password `secret1234`
 ```
 
 # Running Tests
 
-1. Clone repo
-1. `bundle install`
-1. `rake` (or `guard` for continuous testing)
+```shell
+bundle install
+rake
+```
 
 #### Mail
 
