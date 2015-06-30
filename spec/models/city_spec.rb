@@ -3,6 +3,35 @@ require 'spec_helper.rb'
 describe City do
   it { expect(subject).to belong_to(:suggested_by_user).class_name('User') }
 
+  describe '.available', focus: true do
+    before(:each) do
+      @fully_brewed = create(:city, brew_status: "fully_brewed")
+      @warming_up   = create(:city, brew_status: "warming_up")
+      @cold_water   = create(:city, brew_status: "cold_water")
+      @hidden       = create(:city, brew_status: "hidden")
+      @rejected     = create(:city, brew_status: "rejected")
+      @unapproved   = create(:city, brew_status: "unapproved")
+    end
+    it 'includes fully_brewed' do
+      expect(described_class.available).to include(@fully_brewed)
+    end
+    it 'includes warming_up' do
+      expect(described_class.available).to include(@warming_up)
+    end
+    it 'includes cold_water' do
+      expect(described_class.available).to include(@cold_water)
+    end
+    it 'does not include hidden' do
+      expect(described_class.available).not_to include(@hidden)
+    end
+    it 'does not include rejected' do
+      expect(described_class.available).not_to include(@rejected)
+    end
+    it 'does not include unapproved' do
+      expect(described_class.available).not_to include(@unapproved)
+    end
+  end
+
   context 'scopes' do
     before(:all) do
       @city = create(:city, :fully_brewed)
