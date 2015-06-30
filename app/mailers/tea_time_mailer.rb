@@ -94,7 +94,7 @@ class TeaTimeMailer < ActionMailer::Base
     template = 'registration_followup'
     mail(to: @user.email,
          from: "\"Ankit at Tea With Strangers\" <ankit@teawithstrangers.com>",
-         subject: "What Tea With Strangers is about") do |format|
+         subject: "Whoa, is this your first?") do |format|
            format.text { render template }
            format.html { render template }
          end
