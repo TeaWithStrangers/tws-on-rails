@@ -25,7 +25,7 @@
     <%= label_tag(:approval_action_reject, "Reject City") %>
     <%= radio_button_tag(:approval_action, "reject") %>
     <div class="dropdown">
-      <%= select_tag(:merge_city_id, options_for_select(City.all.select(:id, :name).collect{ |p| [p.name, p.id] }, ""), {:class => "city"}) %>
+      <%= select_tag(:merge_city_id, options_for_select(City.available.select(:id, :name).collect{ |p| [p.name, p.id] }, ""), {:class => "city"}) %>
     </div>
     <br/>
   <% else %>
