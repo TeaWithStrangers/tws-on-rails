@@ -13,18 +13,58 @@ tea_times/new)
     ul.dash-menu-list {
       float: left;
       padding: 0;
+      text-align: center;
 
       @include span-columns(12 of 12);
       @include outer-container;
 
+
       li.nav-link-item {
-        float: left;
-        padding: 0 1em 0 0;
+        display: inline-block;
+        // float: left;
+        padding: 0 2em 0 0;
         text-align: left;
         letter-spacing: 0;
 
         a {
           color: $base-font-color;
+        }
+
+        &.new-tea {
+          a {
+
+            @include inverted-button($tws-orange);
+
+            display: inline-block;
+            cursor: pointer;
+            font-size: 0.8em;
+            
+            &:hover {
+              background-color: $tws-orange;
+              color: $tws-white;
+            }
+          }
+        }
+      }
+
+      @include media($tablet) {
+        &.host:before, &.attendee:before {
+          float: left;
+          top: -3px;
+        }
+
+        li.nav-link-item {
+          float: left;
+        }
+      }
+
+      @include media($desktop) {
+        &.host:before, &.attendee:before {
+          top: 5px;
+        }
+
+        li.nav-link-item {
+          padding-right: 1em;
         }
       }
     }
@@ -36,6 +76,7 @@ tea_times/new)
     }
 
     .photo-container {
+      margin-bottom: 0.5em;
 
       @include span-columns(12 of 12);
       @include outer-container;
@@ -45,6 +86,10 @@ tea_times/new)
         line-height: 0;
         border-color: $tws-yellow;
       }
+    }
+
+    h2 {
+      margin-bottom: 0.25em;
     }
   }
 
