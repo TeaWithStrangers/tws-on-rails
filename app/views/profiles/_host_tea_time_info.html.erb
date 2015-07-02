@@ -6,7 +6,7 @@
     <% tea_times.each do |tea_time| %>
       <li class="<%= (:cancelled if tea_time.cancelled?) %> tea-time">
         <div class="tt-deets">
-          <%= render partial: 'teatime_hostinfo', locals: {tea_time: tea_time, att: nil} %>
+          <%= render partial: 'teatime_hostinfo', locals: {tea_time: tea_time, att: nil, without_button: display_button?(local_assigns)} %>
         </div>
         <% if current_user.host? %>
           <div class="attendees-container">

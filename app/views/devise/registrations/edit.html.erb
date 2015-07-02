@@ -1,8 +1,7 @@
 <%= render partial: 'shared/header' %>
+<%= render partial: 'profiles/sidebar' %>
+
 <div class="container dashboard">
-  <div class="dash-menu">
-    <%= render partial: 'profiles/sidebar' %>
-  </div>
   <div class="dash-intro">
     <div class="photo-container">
       <div class="host-photo">
@@ -143,7 +142,7 @@
       <%= button_to "Don't do it",
         registration_path(resource_name), 
         :class => 'cancel-account',
-        data: { confirm: "It doesn't have to be this way. We can make this work. I promise." }, method: :delete %>
+        data: { confirm: "It doesn't have to be this way. We can make this work. I promise. There's still time to hit cancel." }, method: :delete %>
     </div>
   </div>
 </div>

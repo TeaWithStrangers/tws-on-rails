@@ -6,92 +6,159 @@ tea_times/new)
 
 */
 
-.container.dashboard {
-
+.dash-menu-container {
+  background: lighten($tws-yellow, 22);
+  overflow: auto;
+  margin-bottom: 1em;
+  
   .dash-menu {
+    @include outer-container;
+    padding: 0 20px;
+  }
+}
 
-    ul.dash-menu-list {
-      float: left;
+ul.dash-menu-list {
+  text-align: center;
+  overflow: auto;
+  padding: 0;
+  margin-top: 0;
+
+  @include media($tablet) {
+    margin-top: 1em;
+  }
+
+  &.standout {
+    margin-bottom: 0;
+    margin-top: 1em;
+
+    @include media($tablet) {
+      float: right;
       padding: 0;
-      text-align: center;
+      margin: 0;
+    }
+  }
 
-      @include span-columns(12 of 12);
-      @include outer-container;
+  li.nav-link-item {
+    float: left;
+    clear: both;
+    padding: 0 2em 0 0;
+    text-align: left;
+    letter-spacing: 0;
 
+    a {
+      color: $base-font-color;
+    }
 
-      li.nav-link-item {
+    &.new-tea {
+      padding: 0;
+
+      a {
+        @include inverted-button($tws-orange);
+
         display: inline-block;
-        // float: left;
-        padding: 0 2em 0 0;
-        text-align: left;
+        cursor: pointer;
+        font-size: 1em;
+        padding: 0.5em 1em;
+        border-radius: 3px;
         letter-spacing: 0;
-
-        a {
-          color: $base-font-color;
-        }
-
-        &.new-tea {
-          a {
-
-            @include inverted-button($tws-orange);
-
-            display: inline-block;
-            cursor: pointer;
-            font-size: 1em;
-            padding: 0.5em 1em;
-            border-radius: 3px;
-            
-            &:hover {
-              background-color: $tws-orange;
-              color: $tws-white;
-            }
-          }
-        }
-      }
-
-      @include media($tablet) {
-        &.host:before, &.attendee:before {
-          float: left;
-          top: -3px;
-        }
-
-        li.nav-link-item {
-          float: left;
-        }
-      }
-
-      @include media($desktop) {
-        &.host:before, &.attendee:before {
-          top: 5px;
-        }
-
-        li.nav-link-item {
-          padding-right: 1em;
+        
+        &:hover {
+          background-color: $tws-orange;
+          color: $tws-white;
         }
       }
     }
   }
+
+  @include media($tablet) {
+
+    li.nav-link-item {
+      float: left;
+      clear: none;
+
+      &.new-tea {
+        margin: 0;
+        padding: 0;
+        float: right;
+      }
+    }
+  }
+
+  @include media($desktop) {
+    &.host:before, &.attendee:before {
+      top: 5px;
+    }
+
+    li.nav-link-item {
+      padding-right: 1em;
+    }
+  }
+}
+
+.container.dashboard {
+
   .dash-intro {
+    overflow: auto;
+    margin-bottom: 1em;
 
     @include media($tablet) {
       @include span-columns(3 of 12);
+
     }
 
     .photo-container {
       margin-bottom: 0.5em;
 
-      @include span-columns(12 of 12);
-      @include outer-container;
+      @include span-columns(4 of 12);
+
+      @include media($tablet) {
+        @include span-columns(12 of 12);
+        
+      }
 
       .host-photo {
-        padding: 0.75em;
+        padding: 5px;
         line-height: 0;
         border-color: $tws-yellow;
+
+        @include media($tablet) {
+
+          padding: 0.5em;
+        }
       }
     }
 
-    h2 {
-      margin-bottom: 0.25em;
+    .hello {
+      @include span-columns(8 of 12);
+
+      h3 {
+        font-weight: 400;
+      }
+
+      h2 {
+        @extend h3;
+
+        font-weight: 600;
+        color: $tws-orange;
+        margin-bottom: 0.25em;
+      }
+
+      @include media($tablet) {
+        
+        @include span-columns(12 of 12);
+
+      }
+
+      @include media($desktop) {
+        
+        h2 {
+          font-size: 1.5em;
+        }
+
+        h3 {
+          font-weight: 600;
+        }
+      }
     }
   }
 
@@ -105,53 +172,6 @@ tea_times/new)
 
     h2 {
       margin-bottom: 1em;
-    }
-
-    .form {
-
-      @include outer-container;
-
-      &.first {
-        margin-bottom: 2em;
-      }
-
-      form {
-        background: $tws-white;
-        border: $base-border;
-        border-color: $tws-yellow;
-        padding: 0 0 1em;
-
-        &.no-header {
-          padding: 1em 0;
-        }
-      }
-
-      .field {
-        margin: 0 1em;
-
-        &.split2 {
-          margin: 0;
-
-          @include span-columns(6 of 12);
-        }
-
-        &.split1 {
-          clear: both;
-        }
-      }
-
-      h3 {
-        background: darken($tws-tan, 2);
-        border-top: 1px solid $tws-yellow;
-        border-bottom: 1px solid $tws-yellow;
-        padding: 1em;
-        margin-bottom: 1em;
-        clear: both;
-
-        &.first {
-          border-top: 0;
-        }
-      }
     }
 
     ul.upcoming {
