@@ -1,0 +1,79 @@
+/* 
+
+These are styles related to tea time displays on attendee or host dashboards.
+
+*/
+
+.dash-body {
+	ul.upcoming {
+    list-style: none;
+    padding: 0;
+
+    li.tea-time {
+      overflow: auto;
+      margin-bottom: 2em;
+
+      .tt-deets {
+        overflow: auto;
+        margin-bottom: 1em;;
+
+        @include media($tablet) {
+          @include span-columns(4.5 of 9);
+          margin-bottom: 0;
+        }
+
+        @include media($desktop) {
+          @include span-columns(3 of 9);
+        }
+      }
+
+      .tt-container {
+        margin: 0;
+
+        @include span-columns(12 of 12);
+        @include outer-container;
+
+        .tt-box {
+          padding: 0.75em;
+          margin-bottom: 0.5em;
+        }
+
+        .tt-card-top {
+          text-align: left;
+          margin: 0;
+          padding: 0;
+        }
+
+        .date-time {
+          text-align: left;
+          width: 100%;
+          position: relative;
+          top: auto;
+          text-transform: none;
+        }
+
+        .controls {
+          
+          .edit {
+            float: right;
+          }
+
+          .cancel {
+            float: left;
+          }
+        }
+      }
+
+      .attendees-container {
+
+        @include media($tablet) {
+          @include span-columns(4.5 of 9);
+        }
+
+        @include media($desktop) {
+          @include span-columns(3 of 9);
+        }
+      }
+    }
+  }
+}
