@@ -9,6 +9,8 @@ module ProfilesHelper
       'attendee'
     when 'flake'
       'canceled'
+    when 'cancelled'
+      'canceled on'
     else
       status
     end
