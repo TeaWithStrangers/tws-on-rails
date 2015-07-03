@@ -84,6 +84,27 @@ These are styles related to tea time displays on attendee or host dashboards.
       }
     }
 
+    &.cancelled {
+
+    	.tt-deets, .other-deets {
+    		opacity: 0.25;
+    	}
+
+    	.tt-container:before {
+	    	opacity: 1;
+	    	content: 'Tea Time Canceled';
+	    	display: block;
+	    	position: relative;
+	    	width: 100%;
+	    	font-weight: 600;
+	    	font-size: 1em;
+	    	background: $tws-medium-gray;
+	    	color: $tws-white;
+	    	text-align: center;
+	    	letter-spacing: 1px;
+	    	text-transform: uppercase;
+	    }
+	  }
   }
 }
 
@@ -120,6 +141,10 @@ These are styles related to tea time displays on attendee or host dashboards.
 
 		&.flake li.attendee-names:before {
 			background: $tws-red;
+		}
+
+		&.cancelled li.attendee-names:before {
+			background: $tws-medium-gray;
 		}
 
 		&.no_show li.attendee-names:before {
@@ -183,6 +208,14 @@ These are styles related to tea time displays on attendee or host dashboards.
 			}
 		}
 
+		&.cancelled {
+			color: $tws-medium-gray;
+			
+			&:before {
+				background: $tws-medium-gray;
+			}
+		}
+
 		&.no_show {
 			color: $tws-red;
 
@@ -202,6 +235,7 @@ These are styles related to tea time displays on attendee or host dashboards.
 		a {
 			@include inverted-button($tws-orange,$tws-orange);
 
+			cursor: pointer;
 			font-size: 0.6em;
 			font-weight: 600;
 			text-transform: uppercase;
