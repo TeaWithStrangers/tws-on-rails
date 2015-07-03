@@ -113,7 +113,7 @@ These are styles related to forms within the user or host dashboards
 
 .cancel-account {
 	input.cancel-account {
-		@include inverted-button($tws-orange);
+		@include inverted-button($tws-orange, $tws-orange);
 		cursor: pointer;
 
 		&:hover {
