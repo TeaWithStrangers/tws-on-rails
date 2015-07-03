@@ -53,7 +53,7 @@ ul.dash-menu-list {
       padding: 0;
 
       a {
-        @include inverted-button($tws-orange);
+        @include inverted-button($tws-orange,$tws-orange);
 
         display: inline-block;
         cursor: pointer;

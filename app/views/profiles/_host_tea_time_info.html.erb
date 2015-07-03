@@ -8,34 +8,57 @@
         <div class="tt-deets">
           <%= render partial: 'teatime_hostinfo', locals: {tea_time: tea_time, att: nil, without_button: display_button?(local_assigns)} %>
         </div>
-        <% if current_user.host? %>
-          <div class="attendees-container">
-            <h3 class="light">
-              Your attendees
-            </h3>
+        <div class="other-deets">
+          <% if current_user.host? %>
             <% if tea_time.attendances.length > 0 %>
+              <h3 class="light">
+                Your attendees
+              </h3>
+              <div class="attendees-container host-view">
+                <% tea_time.attendances.group_by(&:status).each do |k,v| %>
+                  <div class="attendance-section">
+                    <div class="key">
+                      <span class="attendance-status <%= k %>">
+                        (<%= v.length %>) <%= humanize_attendance_status(k).humanize.titleize.pluralize(v.count) %>
+                      </span>
+                      <span class="email <%= k %>">
+                        <%= link_to "Email", "mailto:#{tea_time.attendee_emails(filter: ->(x) { x.status != k })}", :target => "_blank" %>
+                      </span>
+                    </div>
+                    <ul class="<%= k %> attendees-list">
+                      <% v.map(&:user).each do |a| %>
+                        <li class="attendee-names">
+                          <%= link_to a.name, "mailto:#{a.email}", :target => "_blank" %>
+                        </li>
+                      <% end %>
+                    </ul>
+                  </div>
+                <% end %>
+              </div>
+            <% else %>
+              <div class="attendees-container host-view">
+                <h3 class="light">
+                  Your attendees
+                </h3>
+                <p class="attendees none lightweight">
+                  No attendees yet!
+                </p>
+              </div>
+            <% end %>
+            <!-- div class="attendance-key">
               <% tea_time.attendances.group_by(&:status).each do |k,v| %>
-                <h6 class="capitalize boldweight">
-                  <%= humanize_attendance_status(k).humanize.titleize.pluralize(v.count) %>
-                </h6>
-                <ul class="<%= k %> attendees-list">
-                  <% v.map(&:user).each do |a| %>
-                    <li class="attendee-names">
-                      <%= link_to a.name, "mailto:#{a.email}" %>
-                    </li>
-                  <% end %>
-                </ul>
-                <div class="<%= k %> email-all" target="_blank">
-                  <%= link_to "Email All", "mailto:#{tea_time.attendee_emails(filter: ->(x) { x.status != k })}" %>
+                <div class="key">
+                  <span class="attendance-status <%= k %>">
+                    (<%= v.length %>) <%= humanize_attendance_status(k).humanize.titleize.pluralize(v.count) %>
+                  </span>
+                  <span class="email <%= k %>">
+                    <%= link_to "Email", "mailto:#{tea_time.attendee_emails(filter: ->(x) { x.status != k })}", :target => "_blank" %>
+                  </span>
                 </div>
               <% end %>
-            <% else %>
-              <h3 class="attendees none lightweight">
-                No attendees yet!
-              </h3>
-            <% end %>
-          </div>
-        <% end %>
+            </div-->
+          <% end %>
+        </div>
       </li>
     <% end %>
   </ul>
