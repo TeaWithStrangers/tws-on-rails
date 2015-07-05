@@ -10,13 +10,13 @@ These are styles related to tea time displays on attendee or host dashboards.
     padding: 0;
   }
 
-  li.tea-time {
+  li.tea-time, .edit-tea {
     overflow: auto;
     margin-bottom: 2em;
 
     .tt-deets {
       overflow: auto;
-      margin-bottom: 1em;;
+      margin-bottom: 1em;
 
       @include media($tablet) {
         @include span-columns(4.5 of 9);
@@ -47,6 +47,7 @@ These are styles related to tea time displays on attendee or host dashboards.
         position: relative;
         top: auto;
         text-transform: none;
+
       }
 
       .controls {
@@ -101,10 +102,21 @@ These are styles related to tea time displays on attendee or host dashboards.
 	    	background: $tws-medium-gray;
 	    	color: $tws-white;
 	    	text-align: center;
-	    	letter-spacing: 1px;
+	    	letter-spacing: 2px;
 	    	text-transform: uppercase;
 	    }
 	  }
+  }
+
+  .edit-tea {
+
+    .tt-deets {
+
+      @include media($tablet) {
+        @include span-columns(3 of 9);
+        margin-bottom: 0;
+      }
+    }
   }
 }
 

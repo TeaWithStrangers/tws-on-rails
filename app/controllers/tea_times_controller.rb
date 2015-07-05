@@ -33,6 +33,7 @@ class TeaTimesController < ApplicationController
 
   # GET /tea_times/1/edit
   def edit
+    use_new_styles
   end
 
   # POST /tea_times
