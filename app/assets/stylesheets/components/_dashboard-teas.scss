@@ -1,11 +1,11 @@
-/* 
+/*
 
 These are styles related to tea time displays on attendee or host dashboards.
 
 */
 
 .dash-body {
-	ul.upcoming {
+  ul.upcoming {
     list-style: none;
     padding: 0;
   }
@@ -51,7 +51,7 @@ These are styles related to tea time displays on attendee or host dashboards.
       }
 
       .controls {
-        
+
         .edit {
           float: right;
         }
@@ -63,55 +63,117 @@ These are styles related to tea time displays on attendee or host dashboards.
     }
 
     .other-deets {
-    	@include media($tablet) {
+      @include media($tablet) {
         @include span-columns(4.5 of 9);
       }
     }
 
     h3 {
-    	margin-bottom: 0.75em;
-    	
+      margin-bottom: 0.75em;
+
     }
 
     .attendees-container {
-    	margin-bottom: 1em;
+      margin-bottom: 1em;
 
       ul.attendees-list {
 
-      	li.attendee-names {
+        li.attendee-names {
 
-      		font-size: 0.8em;
-      	}
+          font-size: 0.8em;
+        }
       }
     }
 
     &.cancelled {
 
-    	.tt-deets, .other-deets {
-    		opacity: 0.25;
-    	}
+      .tt-deets, .other-deets {
+        opacity: 0.25;
+      }
 
-    	.tt-container:before {
-	    	opacity: 1;
-	    	content: 'Tea Time Canceled';
-	    	display: block;
-	    	position: relative;
-	    	width: 100%;
-	    	font-weight: 600;
-	    	font-size: 1em;
-	    	background: $tws-medium-gray;
-	    	color: $tws-white;
-	    	text-align: center;
-	    	letter-spacing: 2px;
-	    	text-transform: uppercase;
-	    }
-	  }
+      .tt-container:before {
+        opacity: 1;
+        content: 'Tea Time Canceled';
+        display: block;
+        position: relative;
+        width: 100%;
+        font-weight: 600;
+        font-size: 1em;
+        background: $tws-medium-gray;
+        color: $tws-white;
+        text-align: center;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+    }
+  }
+}
+
+.tt-deets {
+  overflow: auto;
+  margin-bottom: 1em;
+
+  @include media($tablet) {
+    @include span-columns(4.5 of 9);
+    margin-bottom: 0;
   }
 
+  .tt-container {
+    margin: 0;
+
+    @include span-columns(12 of 12);
+    @include outer-container;
+
+    .tt-box {
+      padding: 0.75em;
+      margin-bottom: 0.5em;
+    }
+
+    .tt-card-top {
+      text-align: left;
+      margin: 0;
+      padding: 0;
+    }
+
+    .date-time {
+      text-align: left;
+      width: 100%;
+      position: relative;
+      top: auto;
+      text-transform: none;
+
+    }
+
+    .controls {
+
+      .edit {
+        float: right;
+      }
+
+      .cancel {
+        float: left;
+      }
+    }
+  }
+}
+
+.other-deets {
+  @include media($tablet) {
+    @include span-columns(4.5 of 9);
+  }
+
+}
+
+.dash-intro {
+  .tt-deets {
+    @include span-columns(12 of 12);
+  }
+}
+
+.attendees-container {
+  margin-bottom: 1em;
   .edit-tea {
-
     .tt-deets {
-
       @include media($tablet) {
         @include span-columns(3 of 9);
         margin-bottom: 0;
@@ -121,144 +183,144 @@ These are styles related to tea time displays on attendee or host dashboards.
 }
 
 .attendees-container.host-view {
+  .attendance-section {
+    margin-bottom: 1em;
+  }
 
-	.attendance-section {
-		margin-bottom: 1em;
-	}
+  ul.attendees-list {
 
-	ul.attendees-list {
+    li.attendee-names {
+      padding-left: 1.5em;
+      position: relative;
 
-		li.attendee-names {
-			padding-left: 1.5em;
-			position: relative;
+      &:before {
+        content: '';
+        height: 0.6em;
+        width: 0.6em;
+        border-radius: 50%;
+        background: $tws-green;
+        position: absolute;
+        display: block;
+        left: 0.5em;
+        top: 50%;
 
-			&:before {
-				content: '';
-				height: 0.6em;
-				width: 0.6em;
-				border-radius: 50%;
-				background: $tws-green;
-				position: absolute;
-				display: block;
-				left: 0.5em;
-				top: 50%;
+        @include translate(-50%, -50%);
+      }
+    }
 
-				@include translate(-50%, -50%);
-			}
-		}
+    &.waiting_list li.attendee-names:before {
+      background: $tws-yellow;
+    }
 
-		&.waiting_list li.attendee-names:before {
-			background: $tws-yellow;
-		}
+    &.flake li.attendee-names:before {
+      background: $tws-red;
+    }
 
-		&.flake li.attendee-names:before {
-			background: $tws-red;
-		}
+    &.cancelled li.attendee-names:before {
+      background: $tws-medium-gray;
+    }
 
-		&.cancelled li.attendee-names:before {
-			background: $tws-medium-gray;
-		}
+    &.no_show li.attendee-names:before {
+      border-radius: 0;
+      background: none;
+      content: '\2715';
+      color: $tws-red;
+    }
 
-		&.no_show li.attendee-names:before {
-			border-radius: 0;
-			background: none;
-			content: '\2715';
-			color: $tws-red;
-		}
-
-	}
+  }
 }
 
 .attendance-key {
 
-	@include media($desktop) {
+  @include media($desktop) {
     @include span-columns(2.25 of 4.5);
   }
 }
 
 .key {
-	overflow: auto;
+  overflow: auto;
+  clear: both;
 
-  span.attendance-status {
-  	padding-left: 1.5em;
-		display: block;
-		font-size: 0.8em;
-		font-weight: 600;
-		text-transform: uppercase;
-		position: relative;
-		float: left;
-		clear: both;
-		color: $tws-green;
+  .attendance-status {
+    padding-left: 1.5em;
+    display: block;
+    font-size: 0.8em;
+    font-weight: 600;
+    text-transform: uppercase;
+    position: relative;
+    float: left;
+    clear: both;
+    color: $tws-green;
 
-		&:before {
-			content: '';
-			height: 0.6em;
-			width: 0.6em;
-			border-radius: 50%;
-			background: $tws-green;
-			position: absolute;
-			display: block;
-			left: 0.5em;
-			top: 50%;
+    &:before {
+      content: '';
+      height: 0.6em;
+      width: 0.6em;
+      border-radius: 50%;
+      background: $tws-green;
+      position: absolute;
+      display: block;
+      left: 0.5em;
+      top: 50%;
 
-			@include translate(-50%, -50%);
-		}
+      @include translate(-50%, -50%);
+    }
 
-		&.waiting_list {
-			color: $tws-yellow;
+    &.waiting_list {
+      color: $tws-yellow;
 
-			&:before {
-				background: $tws-yellow;
-			}
-		}
+      &:before {
+        background: $tws-yellow;
+      }
+    }
 
-		&.flake {
-			color: $tws-red;
-			
-			&:before {
-				background: $tws-red;
-			}
-		}
+    &.flake {
+      color: $tws-red;
 
-		&.cancelled {
-			color: $tws-medium-gray;
-			
-			&:before {
-				background: $tws-medium-gray;
-			}
-		}
+      &:before {
+        background: $tws-red;
+      }
+    }
 
-		&.no_show {
-			color: $tws-red;
+    &.cancelled {
+      color: $tws-medium-gray;
 
-			&:before {
-				border-radius: 0;
-				background: none;
-				content: '\2715';
-				color: $tws-red;
-			}
-		}
-	}
+      &:before {
+        background: $tws-medium-gray;
+      }
+    }
 
-	span.email {
-		line-height: 1;
-		float: right;
-		
-		a {
-			@include inverted-button($tws-orange,$tws-orange);
+    &.no_show {
+      color: $tws-red;
 
-			cursor: pointer;
-			font-size: 0.6em;
-			font-weight: 600;
-			text-transform: uppercase;
-			padding: 0.5em 1em;
-			border-radius: 3px;
-			letter-spacing: 0;
+      &:before {
+        border-radius: 0;
+        background: none;
+        content: '\2715';
+        color: $tws-red;
+      }
+    }
+  }
 
-			&:hover {
-				background-color: $tws-orange;
-				color: $tws-white;
-			}
-		}
-	}
+  span.email {
+    line-height: 1;
+    float: right;
+
+    a {
+      @include inverted-button($tws-orange,$tws-orange);
+
+      cursor: pointer;
+      font-size: 0.6em;
+      font-weight: 600;
+      text-transform: uppercase;
+      padding: 0.5em 1em;
+      border-radius: 3px;
+      letter-spacing: 0;
+
+      &:hover {
+        background-color: $tws-orange;
+        color: $tws-white;
+      }
+    }
+  }
 }

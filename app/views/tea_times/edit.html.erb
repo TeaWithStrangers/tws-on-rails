@@ -4,18 +4,87 @@
 
 <div class="container dashboard">
   <div class="dash-intro">
-    <div class="photo-container">
-      <div class="host-photo">
-        <img class="host-img" src="<%= @current_user.avatar.url(:landscape) %>"/>
+    <div class="tt-deets sidebar-section">
+      <h3>
+        Current details
+      </h3>
+      <div class="tt-container">
+        <div class="tt-box">
+          <div class="tt-card-top">
+            <div class="date-time">
+              <div class="day">
+                <h5 class="light lightweight">
+                  <%= "#{@tea_time.day}" %>
+                </h5>
+              </div>
+              <div class="date">
+                <h3>
+                  <%= "#{@tea_time.date_full_month_sans_year}" %>
+                </h3>
+              </div>
+              <div class="time">
+                <h5 class="boldweight">
+                  <%= "#{@tea_time.start_end_hour}" %>
+                </h5>
+              </div>
+            </div>
+          </div>
+          <div class="place">
+            <h5 class="light lightweight">
+              <%= "#{@tea_time.location}" %>
+            </h5>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="hello">
-      <h2>
-        Welcome home, <%= "#{current_user.nickname}!" %>
-      </h2>
-      <h3 class="gray">
-        You look real good today.
-      </h3>
+    <div class="edit-attendee-list sidebar-section">
+      <% attendees = (@tea_time.attendances.pending + @tea_time.attendances.present) %>
+      <div class="key">
+        <span class="attendance-status pending">
+          <%= attendees.count %> Current Attendees
+        </span>
+      </div>
+      <% if attendees.present? %>
+        <ul class="attendees-list">
+          <% attendees.each_with_index do |attendance, i| %>
+            <li class="pending attendee-names">
+              <span class="name">
+                <%= attendance.user.name %>
+              </span>
+              <span class="cancel"><%= link_to "Cancel",
+                  cancel_attendance_tea_time_path(@tea_time.id, attendance.id), method: :put, id: 'cancel-attendance', data: { confirm: "You should only cancel if #{attendance.user.name} emailed you and said they can't make it.\n\n#{attendance.user.name} will get an email when you confirm!" } %>
+              </span>
+            </li>
+          <% end %>
+        </table>
+      <% else %>
+        <p>
+          No attendees yet!
+        </p>
+      <% end %>
+    </div>
+    <div class="canceled-attendee-list sidebar-section">
+      <% flakes = @tea_time.attendances.flake %>
+      <div class="key">
+        <span class="attendance-status flake">
+          <%= flakes.count %> Canceled Attendees
+        </span>
+      </div>
+      <% if flakes.present? %>
+        <ul class="flake attendee-names">
+          <% flakes.each_with_index do |attendance, i| %>
+            <li class="pending attendee-names">
+              <%= attendance.user.name %>
+            </li>
+          <% end %>
+        </table>
+      <% else %>
+        <% if attendees.present? %>
+          <p>
+            Yay! No one has canceled yet!
+          </p>
+        <% end %>
+      <% end %>
     </div>
   </div>
   <div class="dash-body">
@@ -24,43 +93,10 @@
         Edit your tea time
       </h2>
       <p>
-        At the moment, attendees don't automatically get updated when you make changes here. Email them yourself to ensure they're in the loop! And if 
+        At the moment, attendees don't automatically get updated when you make changes here. Email them yourself to ensure they're in the loop! And if
         you're changing the date or time, fire them an email before doing it to
         let them plan ahead, cancel seats if needed, etc.
       </p>
-      <div class="tt-deets">
-        <h3>
-          Current details
-        </h3>
-        <div class="tt-container">
-          <div class="tt-box">
-            <div class="tt-card-top">
-              <div class="date-time">
-                <div class="day">
-                  <h5 class="light lightweight">
-                    <%= "#{@tea_time.day}" %>
-                  </h5>
-                </div>
-                <div class="date">
-                  <h3>
-                    <%= "#{@tea_time.date_full_month_sans_year}" %>
-                  </h3>
-                </div>
-                <div class="time">
-                  <h5 class="boldweight">
-                    <%= "#{@tea_time.start_end_hour}" %>
-                  </h5>
-                </div>
-              </div>
-            </div>
-            <div class="place">
-              <h5 class="light lightweight">
-                <%= "#{@tea_time.location}" %>
-              </h5>
-            </div>
-          </div>
-        </div>
-      </div>
       <h3>
         Changes
       </h3>
@@ -72,52 +108,4 @@
       </div>
     </div>
   </div>
-</div>
-
-
-<div class="container user-form edit dashboard">
-  <%= render partial: 'shared/nav_header' %>
-  <% prefill = !!current_user %>
-  <div class="mobilepad edit-tea-time" %>
-    <h2 class="admin-head">Edit tea time details</h2>
-    <%= render 'form' %>
-    
-  </div>
-  <hr>
-  <br>
-  <h2 class="admin-head">Attending</h2>
-  <% attendees = (@tea_time.attendances.pending + @tea_time.attendances.present) %>
-  <% if attendees.present? %>
-    <table class="attendees">
-      <% attendees.each_with_index do |attendance, i| %>
-        <tr>
-          <td><%= i + 1  %></td>
-          <td><%= attendance.user.name %></td>
-          <td><%= link_to "Cancel attendance",
-              cancel_attendance_tea_time_path(@tea_time.id, attendance.id), method: :put, id: 'cancel-attendance', data: { confirm: "You should only cancel if #{attendance.user.name} emailed you and said they can't make it.\n\n#{attendance.user.name} will get an email when you confirm!" } %>
-          </td>
-        </tr>
-      <% end %>
-    </table>
-  <% else %>
-    <p>No attendees for this tea time!</p>
-  <% end %>
-  <br>
-  <h2 class="admin-head">Canceled</h2>
-  <ul>
-  <% flakes = @tea_time.attendances.flake %>
-  <% if flakes.present? %>
-    <table class="attendees">
-      <% flakes.each_with_index do |attendance, i| %>
-        <tr>
-          <td><%= i + 1  %></td>
-          <td><%= attendance.user.name %></td>
-        </tr>
-      <% end %>
-    </table>
-  <% else %>
-    <% if attendees.present? %>
-      <p>Yay! No one has canceled yet!</p>
-    <% end %>
-  <% end %>
 </div>

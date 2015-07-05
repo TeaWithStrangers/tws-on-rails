@@ -97,6 +97,10 @@ ul.dash-menu-list {
 
 .container.dashboard {
 
+  h3 {
+    margin-bottom: 0.75em;
+  }
+
   .dash-intro {
     overflow: auto;
     margin-bottom: 1em;
@@ -104,6 +108,30 @@ ul.dash-menu-list {
     @include media($tablet) {
       @include span-columns(3 of 12);
 
+    }
+
+    .sidebar-section {
+      margin-bottom: 1em;
+      overflow: auto;
+
+      &.edit-attendee-list, &.canceled-attendee-list {
+        .attendees-list, p {
+          margin: 0;
+          font-size: 0.8em;
+        }
+
+        li.attendee-names {
+          clear: both;
+        }
+
+        span.name {
+          float: left;
+          padding-right: 1em;
+        }
+        span.cancel {
+          float: right;
+        }
+      }
     }
 
     .photo-container {
