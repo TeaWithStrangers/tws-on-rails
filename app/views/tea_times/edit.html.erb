@@ -4,7 +4,7 @@
 
 <div class="container dashboard">
   <div class="dash-intro">
-    <div class="tt-deets">
+    <div class="tt-deets sidebar-section">
       <h3>
         Current details
       </h3>
@@ -37,6 +37,55 @@
         </div>
       </div>
     </div>
+    <div class="edit-attendee-list sidebar-section">
+      <% attendees = (@tea_time.attendances.pending + @tea_time.attendances.present) %>
+      <div class="key">
+        <span class="attendance-status pending">
+          <%= attendees.count %> Current Attendees
+        </span>
+      </div>
+      <% if attendees.present? %>
+        <ul class="attendees-list">
+          <% attendees.each_with_index do |attendance, i| %>
+            <li class="pending attendee-names">
+              <span class="name">
+                <%= attendance.user.name %>
+              </span>
+              <span class="cancel"><%= link_to "Cancel",
+                  cancel_attendance_tea_time_path(@tea_time.id, attendance.id), method: :put, id: 'cancel-attendance', data: { confirm: "You should only cancel if #{attendance.user.name} emailed you and said they can't make it.\n\n#{attendance.user.name} will get an email when you confirm!" } %>
+              </span>
+            </li>
+          <% end %>
+        </table>
+      <% else %>
+        <p>
+          No attendees yet!
+        </p>
+      <% end %>
+    </div>
+    <div class="canceled-attendee-list sidebar-section">
+      <% flakes = @tea_time.attendances.flake %>
+      <div class="key">
+        <span class="attendance-status flake">
+          <%= flakes.count %> Canceled Attendees
+        </span>
+      </div>
+      <% if flakes.present? %>
+        <ul class="flake attendee-names">
+          <% flakes.each_with_index do |attendance, i| %>
+            <li class="pending attendee-names">
+              <%= attendance.user.name %>
+            </li>
+          <% end %>
+        </table>
+      <% else %>
+        <% if attendees.present? %>
+          <p>
+            Yay! No one has canceled yet!
+          </p>
+        <% end %>
+      <% end %>
+    </div>
   </div>
   <div class="dash-body">
     <div class="edit-tea form">
@@ -48,9 +97,6 @@
         you're changing the date or time, fire them an email before doing it to
         let them plan ahead, cancel seats if needed, etc.
       </p>
-      <h3>
-        Changes
-      </h3>
       <%= render 'form' %>
     </div>
   </div>
