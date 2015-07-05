@@ -62,15 +62,82 @@
       </li>
     <% end %>
   </ul>
-  <p>
-    <%= link_to "Can't get enough? Makes sense. Create another tea time!", new_tea_time_path %>
-  </p>
+  <div class="dash-create-new-tea">
+    <%= link_to new_tea_time_path do %>
+      <div class="special-offer-ribbon">
+        Special Offer
+      </div>
+      <div class="tt-box">
+        <div class="special-offer">
+          <div class="offer-text">
+            <h5 class="white center">
+              For the small price of 1 click, 
+              you can have a tea time just like this!
+            </h5>
+            <p class="button">
+              Do it before offer expires!*
+            </p> 
+            <span class="fine-print">
+              *This offer doesn't expire. But this joke will. 
+            </span>
+          </div>
+        </div>
+        <div class="fake-tt">
+          <h5 class="light lightweight">
+            Funday
+          </h5>
+          <h3 class="date">
+            <%= Time.now.strftime("%B %e") %>
+          </h3>
+          <h5 class="boldweight">
+            <%= Time.now.strftime("%-l:%M%P") %> — 2hrs from now 
+          </h5>
+          <h5 class="light lightweight">
+            Stranger Cafe, 2305 TWS Blvd., <%= current_user.home_city.name %>
+          </h5>
+        </div>
+      </div>
+    <% end %>
+  </div>
 <% else %>
   <h2>
     When's your next tea time?
   </h2>
-  <p>
-    You're not hosting any upcoming tea times! Let's change that.
-    <%= link_to "Create a new tea time!", new_tea_time_path %>
-  </p>
+  <div class="dash-create-new-tea">
+    <%= link_to new_tea_time_path do %>
+      <div class="special-offer-ribbon">
+        Special Offer
+      </div>
+      <div class="tt-box">
+        <div class="special-offer">
+          <div class="offer-text">
+            <h5 class="white center">
+              For the small price of 1 click, 
+              you can create a tea time just like this!
+            </h5>
+            <p class="button">
+              Do it before offer expires!*
+            </p> 
+            <span class="fine-print">
+              *This offer doesn't expire. But this joke will. 
+            </span>
+          </div>
+        </div>
+        <div class="fake-tt">
+          <h5 class="light lightweight">
+            Funday
+          </h5>
+          <h3 class="date">
+            <%= Time.now.strftime("%B %e") %>
+          </h3>
+          <h5 class="boldweight">
+            <%= Time.now.strftime("%-l:%M%P") %> — 2hrs from now 
+          </h5>
+          <h5 class="light lightweight">
+            Stranger Cafe, 2305 TWS Blvd., <%= current_user.home_city.name %>
+          </h5>
+        </div>
+      </div>
+    <% end %>
+  </div>
 <% end %>

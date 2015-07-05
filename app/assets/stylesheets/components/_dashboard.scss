@@ -174,5 +174,125 @@ ul.dash-menu-list {
       margin-bottom: 1em;
     }
 
+    p {
+      margin-bottom: 1.5em;
+    }
+
+  }
+}
+
+.dash-create-new-tea {
+  overflow: auto;
+  margin-bottom: 1em;;
+
+  @include media($tablet) {
+    @include span-columns(4.5 of 9);
+    margin-bottom: 0;
+  }
+
+  .special-offer-ribbon {
+    display: block;
+    position: relative;
+    width: 100%;
+    font-weight: 600;
+    font-size: 1em;
+    background: $tws-white;
+    border: 2px dashed $tws-orange;
+    border-bottom: none;
+    color: $tws-orange;
+    text-align: center;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+
+    &:before {
+      content: '🎊👻🙌';
+      display: none; 
+
+      @include media($desktop) {
+        display: inline;
+      }
+    }
+
+    &:after {
+      content: '🙌👻🎊';
+      display: none; 
+
+      @include media($desktop) {
+        display: inline;
+      }
+    }
+  }
+
+  .special-offer {
+    display: block;
+    background: lighten($tws-orange,20);
+    color: $tws-white;
+    text-align: center;
+    padding: 1em;
+
+    h5 {
+      margin-bottom: 1em;
+      font-weight: 600;
+    }
+
+    p.button {
+      @include inverted-button($tws-white,$tws-white);
+
+      font-size: 0.8em;
+      line-height: 1.25;
+      margin-bottom: 1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      @include transition(0.25s);
+    }
+
+    span.fine-print {
+      font-size: 0.6em;
+      line-height: 1.25;
+      margin: 0px;
+      display: block;
+    }
+  }
+
+  .tt-box {
+    background: $tws-white;
+    border: 2px dashed $tws-orange;
+    position: relative;
+
+    .fake-tt {
+      padding: 1em 0.75em 1.25em 0.75em;
+    }
+  }
+
+  h3.date {
+    margin-bottom: 0.75em;
+  }
+
+  a {
+    color: $base-font-color;
+    position: relative;
+
+    &:before {
+      content: '';
+      display: none;
+      height: 100%;
+      width: 100%;
+      background: $tws-white;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    &:hover {
+      @include transition(0.25s);
+
+      .special-offer {
+        p.button {
+          color: $tws-orange;
+          background: $tws-white;
+          @include transition(0.25s);
+        }
+      }
+    }
   }
 }

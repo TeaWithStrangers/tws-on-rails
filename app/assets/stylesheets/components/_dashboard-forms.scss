@@ -51,7 +51,7 @@ These are styles related to forms within the user or host dashboards
     }
   }
 
-  h3 {
+  h3.form-subheader {
     background: darken($tws-tan, 2);
     border-top: 1px solid $tws-yellow;
     border-bottom: 1px solid $tws-yellow;
@@ -123,7 +123,7 @@ These are styles related to forms within the user or host dashboards
 	}
 }
 
-.form.create-tea {
+.form.create-tea, .form.edit-tea {
 	.field {
 		margin-bottom: 1em;
 
@@ -142,4 +142,28 @@ These are styles related to forms within the user or host dashboards
       }
 		}
 	}
+
+  .tt-deets {
+    overflow: auto;
+
+    @include media($tablet) {
+
+      @include span-columns(3 of 9);
+    }
+  }
+
+  form {
+
+    @include media($tablet) {
+
+      @include span-columns(6 of 9);
+    }
+
+    &#new_tea_time {
+      @include media($tablet) {
+
+        @include span-columns(9 of 9);
+      }
+    }
+  }
 }
