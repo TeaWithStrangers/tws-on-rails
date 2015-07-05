@@ -19,7 +19,7 @@
   </div>
   <div class="dash-body">
     <div class="teas host">
-      <%= render partial: 'host_tea_time_info', locals: {tea_times: @hosting} if current_user.host? %>
+      <%= render partial: 'teatimes_being_hosted', locals: {tea_times: @hosting} if current_user.host? %>
     </div>
   </div>
 </div>
