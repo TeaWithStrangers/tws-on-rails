@@ -101,6 +101,7 @@ These are styles related to forms within the user or host dashboards
     margin-bottom: 1em;
     select {
       height: 100%;
+      line-height: 100%;
       width: 105% !important;
       border: 0 !important;
       border-radius: 0;
@@ -149,21 +150,6 @@ These are styles related to forms within the user or host dashboards
     @include media($tablet) {
 
       @include span-columns(3 of 9);
-    }
-  }
-
-  form {
-
-    @include media($tablet) {
-
-      @include span-columns(6 of 9);
-    }
-
-    &#new_tea_time {
-      @include media($tablet) {
-
-        @include span-columns(9 of 9);
-      }
     }
   }
 }

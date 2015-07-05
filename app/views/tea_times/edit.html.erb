@@ -4,18 +4,38 @@
 
 <div class="container dashboard">
   <div class="dash-intro">
-    <div class="photo-container">
-      <div class="host-photo">
-        <img class="host-img" src="<%= @current_user.avatar.url(:landscape) %>"/>
-      </div>
-    </div>
-    <div class="hello">
-      <h2>
-        Welcome home, <%= "#{current_user.nickname}!" %>
-      </h2>
-      <h3 class="gray">
-        You look real good today.
+    <div class="tt-deets">
+      <h3>
+        Current details
       </h3>
+      <div class="tt-container">
+        <div class="tt-box">
+          <div class="tt-card-top">
+            <div class="date-time">
+              <div class="day">
+                <h5 class="light lightweight">
+                  <%= "#{@tea_time.day}" %>
+                </h5>
+              </div>
+              <div class="date">
+                <h3>
+                  <%= "#{@tea_time.date_full_month_sans_year}" %>
+                </h3>
+              </div>
+              <div class="time">
+                <h5 class="boldweight">
+                  <%= "#{@tea_time.start_end_hour}" %>
+                </h5>
+              </div>
+            </div>
+          </div>
+          <div class="place">
+            <h5 class="light lightweight">
+              <%= "#{@tea_time.location}" %>
+            </h5>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <div class="dash-body">
@@ -28,63 +48,14 @@
         you're changing the date or time, fire them an email before doing it to
         let them plan ahead, cancel seats if needed, etc.
       </p>
-      <div class="tt-deets">
-        <h3>
-          Current details
-        </h3>
-        <div class="tt-container">
-          <div class="tt-box">
-            <div class="tt-card-top">
-              <div class="date-time">
-                <div class="day">
-                  <h5 class="light lightweight">
-                    <%= "#{@tea_time.day}" %>
-                  </h5>
-                </div>
-                <div class="date">
-                  <h3>
-                    <%= "#{@tea_time.date_full_month_sans_year}" %>
-                  </h3>
-                </div>
-                <div class="time">
-                  <h5 class="boldweight">
-                    <%= "#{@tea_time.start_end_hour}" %>
-                  </h5>
-                </div>
-              </div>
-            </div>
-            <div class="place">
-              <h5 class="light lightweight">
-                <%= "#{@tea_time.location}" %>
-              </h5>
-            </div>
-          </div>
-        </div>
-      </div>
       <h3>
         Changes
       </h3>
       <%= render 'form' %>
-      <div class="controls actions">
-        <h6 class="cancel capitalize boldweight">
-          <%= link_to 'Cancel tea time', @tea_time, method: :delete, data: {conform: 'Are you sure? If you can, try to ask another host to sub in for you, then make the tea time theirs by hitting \'Edit Tea Time\' If there\'s no other way, cancel and fire the attendees a note so they understand what happened!' }, class: 'cancel-button' %>
-        </h6>
-      </div>
     </div>
   </div>
 </div>
 
-
-<div class="container user-form edit dashboard">
-  <%= render partial: 'shared/nav_header' %>
-  <% prefill = !!current_user %>
-  <div class="mobilepad edit-tea-time" %>
-    <h2 class="admin-head">Edit tea time details</h2>
-    <%= render 'form' %>
-    
-  </div>
-  <hr>
-  <br>
   <h2 class="admin-head">Attending</h2>
   <% attendees = (@tea_time.attendances.pending + @tea_time.attendances.present) %>
   <% if attendees.present? %>

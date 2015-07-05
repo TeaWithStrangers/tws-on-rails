@@ -70,7 +70,6 @@
           </div>
         </div>
 
-
         <div class="field city">
           <div class="form-label">
             <%= f.label :home_city, class: 'capitalize boldweight inline' %>
@@ -78,12 +77,10 @@
               Makes sure you don't miss the good stuff going on near ya
             </span>
           </div>
-          
           <div class="dropdown">
             <%= select(
               resource_name, :home_city_id,
-              City.visible(current_user).
-              collect{ |p| [p.name, p.id] })
+              City.available.collect{ |p| [p.name, p.id] })
             =%>
           </div>
         </div>

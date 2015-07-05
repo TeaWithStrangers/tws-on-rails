@@ -1,6 +1,7 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
   before_filter :away_ye_waitlisted
+  before_action :use_new_styles, except: [:show, :host_tasks, :history]
 
   def show
     @hosting = current_user.tea_times.future.order("start_time ASC")
@@ -18,7 +19,6 @@ class ProfilesController < ApplicationController
   end
 
   def host_dashboard
-    use_new_styles
     @hosting = current_user.tea_times.future.order("start_time ASC")
     @attending = current_user.attendances_for(TeaTime.future).attended.joins(:tea_time).order('tea_times.start_time ASC')
     @waitlist = current_user.attendances_for(TeaTime.future).waiting_list.joins(:tea_time).order('tea_times.start_time ASC')

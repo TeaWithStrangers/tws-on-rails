@@ -14,77 +14,6 @@ These are styles related to tea time displays on attendee or host dashboards.
     overflow: auto;
     margin-bottom: 2em;
 
-    .tt-deets {
-      overflow: auto;
-      margin-bottom: 1em;
-
-      @include media($tablet) {
-        @include span-columns(4.5 of 9);
-        margin-bottom: 0;
-      }
-    }
-
-    .tt-container {
-      margin: 0;
-
-      @include span-columns(12 of 12);
-      @include outer-container;
-
-      .tt-box {
-        padding: 0.75em;
-        margin-bottom: 0.5em;
-      }
-
-      .tt-card-top {
-        text-align: left;
-        margin: 0;
-        padding: 0;
-      }
-
-      .date-time {
-        text-align: left;
-        width: 100%;
-        position: relative;
-        top: auto;
-        text-transform: none;
-
-      }
-
-      .controls {
-        
-        .edit {
-          float: right;
-        }
-
-        .cancel {
-          float: left;
-        }
-      }
-    }
-
-    .other-deets {
-    	@include media($tablet) {
-        @include span-columns(4.5 of 9);
-      }
-    }
-
-    h3 {
-    	margin-bottom: 0.75em;
-    	
-    }
-
-    .attendees-container {
-    	margin-bottom: 1em;
-
-      ul.attendees-list {
-
-      	li.attendee-names {
-
-      		font-size: 0.8em;
-      	}
-      }
-    }
-
     &.cancelled {
 
     	.tt-deets, .other-deets {
@@ -107,16 +36,81 @@ These are styles related to tea time displays on attendee or host dashboards.
 	    }
 	  }
   }
+}
 
-  .edit-tea {
+.tt-deets {
+  overflow: auto;
+  margin-bottom: 1em;
 
-    .tt-deets {
+  @include media($tablet) {
+    @include span-columns(4.5 of 9);
+    margin-bottom: 0;
+  }
 
-      @include media($tablet) {
-        @include span-columns(3 of 9);
-        margin-bottom: 0;
-      }
-    }
+  h3 {
+		margin-bottom: 0.75em;
+	}
+
+  .tt-container {
+	  margin: 0;
+
+	  @include span-columns(12 of 12);
+	  @include outer-container;
+
+	  .tt-box {
+	    padding: 0.75em;
+	    margin-bottom: 0.5em;
+	  }
+
+	  .tt-card-top {
+	    text-align: left;
+	    margin: 0;
+	    padding: 0;
+	  }
+
+	  .date-time {
+	    text-align: left;
+	    width: 100%;
+	    position: relative;
+	    top: auto;
+	    text-transform: none;
+
+	  }
+
+	  .controls {
+	    
+	    .edit {
+	      float: right;
+	    }
+
+	    .cancel {
+	      float: left;
+	    }
+	  }
+	}
+}
+
+.other-deets {
+	@include media($tablet) {
+    @include span-columns(4.5 of 9);
+  }
+}
+
+.dash-intro {
+	.tt-deets {
+		@include span-columns(12 of 12);
+	}
+}
+
+.attendees-container {
+	margin-bottom: 1em;
+
+  ul.attendees-list {
+
+  	li.attendee-names {
+
+  		font-size: 0.8em;
+  	}
   }
 }
 
