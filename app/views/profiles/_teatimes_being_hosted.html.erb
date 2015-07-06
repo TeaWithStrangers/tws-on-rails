@@ -50,80 +50,27 @@
       </li>
     <% end %>
   </ul>
-  <div class="dash-create-new-tea">
-    <%= link_to new_tea_time_path do %>
-      <div class="special-offer-ribbon">
-        Special Offer
-      </div>
-      <div class="tt-box">
-        <div class="special-offer">
-          <div class="offer-text">
-            <h5 class="white center">
-              For the small price of 1 click, 
-              you can have a tea time just like this!
-            </h5>
-            <p class="button">
-              Do it before offer expires!*
-            </p> 
-            <span class="fine-print">
-              *This offer doesn't expire. But this joke will. 
-            </span>
-          </div>
-        </div>
-        <div class="fake-tt">
-          <h5 class="light lightweight">
-            Funday
-          </h5>
-          <h3 class="date">
-            <%= Time.now.strftime("%B %e") %>
-          </h3>
-          <h5 class="boldweight">
-            <%= Time.now.strftime("%-l:%M%P") %> — 2hrs from now 
-          </h5>
-          <h5 class="light lightweight">
-            Stranger Cafe, 2305 TWS Blvd., <%= current_user.home_city.name %>
-          </h5>
-        </div>
-      </div>
-    <% end %>
-  </div>
 <% else %>
   <h2>
     When's the next time you're hosting?
   </h2>
   <div class="dash-create-new-tea">
     <%= link_to new_tea_time_path do %>
-      <div class="special-offer-ribbon">
-        Special Offer
-      </div>
-      <div class="tt-box">
-        <div class="special-offer">
-          <div class="offer-text">
-            <h5 class="white center">
-              For the small price of 1 click, 
-              you can create a tea time just like this!
-            </h5>
-            <p class="button">
-              Do it before offer expires!*
-            </p> 
-            <span class="fine-print">
-              *This offer doesn't expire. But this joke will. 
-            </span>
-          </div>
+      <div class="new-tea-box">
+        <div class="plus-sign-container">
+          <h1>
+            +
+          </h1>
         </div>
-        <div class="fake-tt">
-          <h5 class="light lightweight">
-            Funday
-          </h5>
-          <h3 class="date">
-            <%= Time.now.strftime("%B %e") %>
-          </h3>
-          <h5 class="boldweight">
-            <%= Time.now.strftime("%-l:%M%P") %> — 2hrs from now 
-          </h5>
-          <h5 class="light lightweight">
-            Stranger Cafe, 2305 TWS Blvd., <%= current_user.home_city.name %>
-          </h5>
+        <div class="schedule-text-container">
+          <div class="schedule-text">
+            <h3 class="capitalize">
+              Schedule
+            </h3>
+            <h5 class="boldweight">
+              A Tea Time
+            </h5>
+          </div>
         </div>
       </div>
     <% end %>

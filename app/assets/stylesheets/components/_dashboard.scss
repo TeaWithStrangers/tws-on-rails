@@ -218,74 +218,47 @@ ul.dash-menu-list {
 
 .dash-create-new-tea {
   overflow: auto;
-  margin-bottom: 1em;;
+  margin-bottom: 1em;
 
   @include media($tablet) {
     @include span-columns(4.5 of 9);
     margin-bottom: 0;
   }
 
-  .special-offer-ribbon {
-    display: block;
-    position: relative;
-    width: 100%;
-    font-weight: 600;
-    font-size: 1em;
-    background: $tws-white;
-    border: 2px dashed $tws-orange;
-    border-bottom: none;
-    color: $tws-orange;
+  .new-tea-box {
+    border: 2px dashed $base-font-color;
     text-align: center;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-
-    &:before {
-      content: '🎊👻🙌';
-      display: none; 
-
-      @include media($desktop) {
-        display: inline;
-      }
-    }
-
-    &:after {
-      content: '🙌👻🎊';
-      display: none; 
-
-      @include media($desktop) {
-        display: inline;
-      }
-    }
-  }
-
-  .special-offer {
-    display: block;
-    background: lighten($tws-orange,20);
-    color: $tws-white;
-    text-align: center;
+    overflow: auto;
     padding: 1em;
 
-    h5 {
-      margin-bottom: 1em;
-      font-weight: 600;
+    .plus-sign-container {
+      position: relative;
+
+      @include span-columns(1 of 4);
     }
 
-    p.button {
-      @include inverted-button($tws-white,$tws-white);
+    .schedule-text-container {
+      position: relative;
 
-      font-size: 0.8em;
-      line-height: 1.25;
-      margin-bottom: 1em;
-      text-transform: uppercase;
-      cursor: pointer;
-      @include transition(0.25s);
+      @include span-columns(3 of 4);
     }
 
-    span.fine-print {
-      font-size: 0.6em;
-      line-height: 1.25;
-      margin: 0px;
-      display: block;
+    h1 {
+      font-size: 4em;
+      line-height: 1;
+    }
+
+    .schedule-text {
+      h3 {
+        margin-bottom: 0;
+        text-align: center;
+        font-size: 1.75em;
+      }
+
+      h5 {
+        font-size: 1.25em;
+        text-transform: lowercase;
+      }
     }
   }
 

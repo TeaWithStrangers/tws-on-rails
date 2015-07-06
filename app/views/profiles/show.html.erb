@@ -9,7 +9,7 @@
           <img class="host-img" src="<%= @current_user.avatar.url(:landscape) %>"/>
         </div>
       </div>
-      <div class="hello">
+      <div class="hello sidebar-section">
         <h2>
           Welcome home, <%= "#{current_user.nickname}!" %>
         </h2>
@@ -17,6 +17,12 @@
           You look real good today.
         </h3>
       </div>
+      <% if !@hosting.count.zero? %>
+        <div class="create-new-tea sidebar-section">
+          <%= link_to 'Create Another Tea Time', new_tea_time_path, class: "button create-new-tea" %>
+        </div>
+      <% end %>
+
     <% else %>
       <% if !@attending.count.zero? %>
         <% if !current_user.home_city.nil? %>
