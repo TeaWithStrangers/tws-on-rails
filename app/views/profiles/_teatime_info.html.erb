@@ -25,18 +25,26 @@
       </h5>
     </div>
   </div>
-  <div class="controls">
-    <% unless tea_time.occurred? || tea_time.cancelled? %>
-      <h6 class="edit capitalize boldweight">
-        <%= link_to 'Edit details', edit_tea_time_path(tea_time) %>
-      </h6>
+  <% if current_user.host? %>
+    <div class="host controls">
+      <% unless tea_time.occurred? || tea_time.cancelled? %>
+        <h6 class="edit capitalize boldweight">
+          <%= link_to 'Edit details', edit_tea_time_path(tea_time) %>
+        </h6>
+        <h6 class="cancel capitalize boldweight">
+          <%= link_to 'Cancel tea time', cancel_tea_time_path(tea_time), :method => :put, :data => { :confirm => 'Are you sure? If you can, try to ask another host to sub in for you, then make the tea time theirs by hitting \'Edit Tea Time\' If there\'s no other way, cancel and fire the attendees a note so they understand what happened!' } %>
+        </h6>
+      <% else %>
+        <!--h6 class="right">This tea time has been cancelled.</h6-->
+      <% end %>
+    </div>
+  <% else %>
+    <div class="attendee controls">
       <h6 class="cancel capitalize boldweight">
-        <%= link_to 'Cancel tea time', cancel_tea_time_path(tea_time), :method => :put, :data => { :confirm => 'Are you sure? If you can, try to ask another host to sub in for you, then make the tea time theirs by hitting \'Edit Tea Time\' If there\'s no other way, cancel and fire the attendees a note so they understand what happened!' } %>
-      </h6>
-    <% else %>
-      <!--h6 class="right">This tea time has been cancelled.</h6-->
-    <% end %>
-  </div>
+        <%= link_to "Cancel my spot", show_attendance_tea_time_path(tea_time, att), class: 'left' %>
+      </h6> 
+    </div>
+  <% end %>
 
   <!-- What is this section here for? This partial only gets rendered on the host dashboard under upcoming tea times... -->
   <% if !(without_button ||= false) %>

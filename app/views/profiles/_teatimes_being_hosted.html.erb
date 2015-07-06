@@ -6,7 +6,7 @@
     <% tea_times.each do |tea_time| %>
       <li class="<%= (:cancelled if tea_time.cancelled?) %> tea-time">
         <div class="tt-deets">
-          <%= render partial: 'teatime_info_hostview', locals: {tea_time: tea_time, att: nil, without_button: display_button?(local_assigns)} %>
+          <%= render partial: 'teatime_info', locals: {tea_time: tea_time, att: nil, without_button: display_button?(local_assigns)} %>
         </div>
         <div class="other-deets">
           <% if current_user.host? %>
@@ -45,18 +45,6 @@
                 </p>
               </div>
             <% end %>
-            <!-- div class="attendance-key">
-              <% tea_time.attendances.group_by(&:status).each do |k,v| %>
-                <div class="key">
-                  <span class="attendance-status <%= k %>">
-                    (<%= v.length %>) <%= humanize_attendance_status(k).humanize.titleize.pluralize(v.count) %>
-                  </span>
-                  <span class="email <%= k %>">
-                    <%= link_to "Email", "mailto:#{tea_time.attendee_emails(filter: ->(x) { x.status != k })}", :target => "_blank" %>
-                  </span>
-                </div>
-              <% end %>
-            </div-->
           <% end %>
         </div>
       </li>
@@ -101,7 +89,7 @@
   </div>
 <% else %>
   <h2>
-    When's your next tea time?
+    When's the next time you're hosting?
   </h2>
   <div class="dash-create-new-tea">
     <%= link_to new_tea_time_path do %>

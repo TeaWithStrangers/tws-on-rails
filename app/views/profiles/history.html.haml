@@ -9,4 +9,4 @@
       .two-third.right.history
         %h1.main Your tea time history
         = render partial: 'teatimes_being_hosted', locals: {tea_times: @hosting} if current_user.host?
-        = render partial: 'user_attendance_info', locals: {attendances: @attending}
+        = render partial: 'teatimes_being_attended', locals: {attendances: @attending}

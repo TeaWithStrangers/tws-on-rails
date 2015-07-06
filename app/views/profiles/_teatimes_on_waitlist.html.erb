@@ -1,0 +1,16 @@
+<% if !attendances.count.zero? %>
+  <h2>
+    Tea times for which you're on the waitlist
+  </h2>
+  <ul class="upcoming waitlisted">
+    <% attendances.each do |a| %>
+      <li class="<%= (:cancelled if attendances.cancelled?) %> tea-time">
+        <div class="tt-deets">
+          <%= render partial: 'teatime_info', locals: {tea_time: a.tea_time, without_button: false} %>
+        </div>
+        <div class="host-deets">
+        </div>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

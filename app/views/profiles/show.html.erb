@@ -3,43 +3,45 @@
 
 <div class="container dashboard">
   <div class="dash-intro">
-    <div class="photo-container">
-      <div class="host-photo">
-        <img class="host-img" src="<%= @current_user.avatar.url(:landscape) %>"/>
+    <% if current_user.host? %>
+      <div class="photo-container">
+        <div class="host-photo">
+          <img class="host-img" src="<%= @current_user.avatar.url(:landscape) %>"/>
+        </div>
       </div>
-    </div>
-    <div class="hello">
-      <h2>
-        Welcome home, <%= "#{current_user.nickname}!" %>
-      </h2>
-      <h3 class="gray">
-        What are you grateful for today?
-      </h3>
-    </div>
+      <div class="hello">
+        <h2>
+          Welcome home, <%= "#{current_user.nickname}!" %>
+        </h2>
+        <h3 class="gray">
+          You look real good today.
+        </h3>
+      </div>
+    <% else %>
+      <div class="hello">
+        <h2>
+          Welcome home, <%= "#{current_user.nickname}!" %>
+        </h2>
+        <h3 class="gray">
+          What are you grateful for today?
+        </h3>
+      </div>
+    <% end %>
   </div>
+
   <div class="dash-body">
-    <div class="teas host">
-      <%= render partial: 'teatimes_being_hosted', locals: {tea_times: @hosting} if current_user.host? %>
+    <% if current_user.host? %>
+      <div class="teas host">
+        <%= render partial: 'teatimes_being_hosted', locals: {tea_times: @hosting} if current_user.host? %>
+      </div>
+    <% end %>
+
+    <div class="teas attendee">
+      <%= render partial: 'teatimes_being_attended', locals: {attendances: @attending} %>
+    </div>
+
+    <div class="teas waitlisted">
+      <%= render partial: 'teatimes_on_waitlist', locals: {attendances: @waitlist} %>
     </div>
   </div>
 </div>
-
-.container.dashboard
-  = render partial: 'shared/nav_header'
-  .row
-    .wide
-      %h2= "Welcome home, #{current_user.name}!"
-      .third.left
-        = render partial: 'old_sidebar'
-      %hr
-      .two-third.right
-        .host-tts
-          - if current_user.host?
-            %h2.main Upcoming Tea Times
-            Check out the new
-            = link_to "Host Dashboard", host_dashboard_path
-            to see your upcoming tea times!
-        .attendee-tts
-          = render partial: 'user_attendance_info', locals: {attendances: @attending}
-        .waitlist-tts
-          = render partial: 'user_waitlist_info', locals: {attendances: @waitlist}
