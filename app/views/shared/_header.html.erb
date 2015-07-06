@@ -24,13 +24,8 @@
           </li>
         <% else %>
           <li class="nav-link-item">
-            <%= link_to 'My Account', profile_path %>
+            <%= link_to 'Dashboard', profile_path %>
           </li>
-          <% if current_user && current_user.host? %>
-            <li class="nav-link-item">
-              <%= link_to "Host Dashboard", host_dashboard_path %>
-            </li>
-          <% end %>
           <li class='nav-link-item'>
             <%= link_to('Sign out', destroy_user_session_path, class: 'sign-in-emphasis', method: :delete) %>
           </li>
