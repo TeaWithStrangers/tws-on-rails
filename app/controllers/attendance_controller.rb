@@ -81,6 +81,7 @@ class AttendanceController < ApplicationController
   # User-related Attendance Actions
   ############################################
   def show
+    use_new_styles
     render :flake, layout: !request.xhr?
   end
 
@@ -88,6 +89,8 @@ class AttendanceController < ApplicationController
   # TODO Looks like this ONLY "flakes" the attenance
   # It should probably look at params to see what the update
   # request is trying to do.
+
+
   def update
     respond_to do |format|
       if @attendance.flake!({reason: params[:attendance][:reason]})

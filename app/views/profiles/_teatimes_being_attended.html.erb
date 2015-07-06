@@ -1,0 +1,60 @@
+<% if !attendances.count.zero? %>
+  <h2>
+    Tea times you're attending
+  </h2>
+  <ul class="upcoming attending">
+    <% attendances.each do |a| %>
+      <li class="<%= (:cancelled if a.cancelled?) %> tea-time">
+        <div class="tt-deets">
+          <%= render partial: 'teatime_info', locals: {tea_time: a.tea_time, att: a, without_button: true} %>
+        </div>
+        <div class="host-deets">
+          <h3 class="light">
+            Get to know your host
+          </h3>
+          <div class="tt-host-intro">
+            <div class="photo-container">
+              <div class="host-photo">
+                <img class="host-img" src="<%= a.tea_time.host.avatar.url(:landscape) %>"/>
+              </div>
+            </div>
+            <div class="host-intro-text">
+              <p>
+                Keep an eye open for <%= a.tea_time.host.nickname %>! 
+                So it's easier, here's what they look like :). 
+              </p>
+            </div>
+
+            <div class="tt-host-contact">
+              <%= link_to host_city_path(a.tea_time.city, a.tea_time.host), class: "contact-link"  do %>
+                <%= a.tea_time.host.nickname %>'s Profile
+              <% end %>
+              <%= link_to "Email #{a.tea_time.host.nickname}", "mailto:#{a.tea_time.host.email}?subject=Tea%20Time%20Question", class: "contact-link"  %>
+              <% if a.tea_time.host.facebook? %>
+                <%= link_to "Facebook", a.tea_time.host.facebook_url, class: "contact-link"  %>
+              <% end %>
+              <% if a.tea_time.host.twitter? %>
+                <%= link_to "Twitter", a.tea_time.host.twitter_url, class: "contact-link"  %>
+              <% end %>
+            </div>
+          </div>
+      </li>
+    <% end %>
+  </ul>
+<% elsif !current_user.home_city.nil? && attendances.count.zero? %>
+  <h2>
+    Tea times you're attending
+  </h2>
+  <p>
+    You're not scheduled for any tea times! Let's change that.
+    <%= link_to "Go schedule a tea time!", forbes_city_path(current_user.home_city) %>
+  </p>
+<% else %>
+  <h2>
+    Tea times you're attending
+  </h2>
+  <p>
+    You're not scheduled for any tea times! We should change that. But first,
+    set your home city! <%= link_to 'Find your city here', cities_path %>.
+  </p>
+<% end %>

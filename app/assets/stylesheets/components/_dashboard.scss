@@ -13,7 +13,7 @@ tea_times/new)
   
   .dash-menu {
     @include outer-container;
-    padding: 0 20px;
+    padding: 20px;
   }
 }
 
@@ -21,15 +21,10 @@ ul.dash-menu-list {
   text-align: center;
   overflow: auto;
   padding: 0;
-  margin-top: 0;
-
-  @include media($tablet) {
-    margin-top: 1em;
-  }
+  margin: 0;
 
   &.standout {
-    margin-bottom: 0;
-    margin-top: 1em;
+    margin: 0;
 
     @include media($tablet) {
       float: right;
