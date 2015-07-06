@@ -17,6 +17,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def update
+    use_new_styles
     @user = User.find(current_user.id)
 
     successfully_updated = if needs_password?(@user, params)
@@ -36,6 +37,10 @@ class RegistrationsController < Devise::RegistrationsController
     else
       render "edit"
     end
+  end
+
+  def edit
+    use_new_styles
   end
 
   def needs_password?(user, params)

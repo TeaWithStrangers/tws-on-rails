@@ -1,10 +1,10 @@
 form {
   input, select, textarea {
     display: block;
-    margin: $base-spacing / 2 0;
+    margin: 0 0 $base-spacing / 2 0;
     padding: 1em;
     width: 100%;
-    border-radius: $base-button-radius;
+    border-radius: $base-border-radius;
     box-shadow: none;
     border: $base-border;
 

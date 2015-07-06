@@ -25,6 +25,7 @@ class TeaTimesController < ApplicationController
 
   # GET /tea_times/new
   def new
+    use_new_styles
     @tea_time = TeaTime.new(city: current_user.home_city,
                             start_time: Time.now.beginning_of_hour + 1.day,
                             host: current_user)
@@ -32,6 +33,7 @@ class TeaTimesController < ApplicationController
 
   # GET /tea_times/1/edit
   def edit
+    use_new_styles
   end
 
   # POST /tea_times
