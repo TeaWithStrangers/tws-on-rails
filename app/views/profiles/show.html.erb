@@ -18,14 +18,68 @@
         </h3>
       </div>
     <% else %>
-      <div class="hello">
-        <h2>
-          Welcome home, <%= "#{current_user.nickname}!" %>
-        </h2>
-        <h3 class="gray">
-          What are you grateful for today?
-        </h3>
-      </div>
+      <% if !@attending.count.zero? %>
+        <% if !current_user.home_city.nil? %>
+          <div class="hello sidebar-section">
+            <h2>
+              Welcome home, <%= "#{current_user.nickname}!" %>
+            </h2>
+            <h3 class="gray">
+              What are you grateful for today?
+            </h3>
+          </div>
+          <div class="join-tea sidebar-section">
+            <%= link_to "Find Another Tea Time!", forbes_city_path(current_user.home_city), class: "button signup-tt"  %>
+          </div>
+        <% else %>
+          <div class="hello sidebar-section">
+            <h2>
+              Welcome home, <%= "#{current_user.nickname}!" %>
+            </h2>
+            <h3 class="gray">
+              Where do you call home?
+            </h3>
+            <p>
+              Let's make sure you don't miss anything good happening near you. Set your home city.
+            </p>
+          </div>
+          <div class="join-tea sidebar-section">
+            <%= link_to 'Find Your City', cities_path, class: "button find-city" %>
+          </div>
+        <% end %>
+      <% else %>
+        <% if !current_user.home_city.nil? %>
+          <div class="hello sidebar-section">
+            <h2>
+              Welcome home, <%= "#{current_user.nickname}!" %>
+            </h2>
+            <h3 class="gray">
+              Where do you call home?
+            </h3>
+            <p>
+              Let's make sure you don't miss anything good happening near you. Set your home city.
+            </p>
+          </div>
+          <div class="join-tea sidebar-section">
+            <%= link_to "Sign Up For a Tea Time!", forbes_city_path(current_user.home_city), class: "button signup-tt" %>
+          </div>
+        <% else %>
+          <div class="hello sidebar-section">
+            <h2>
+              Welcome home, <%= "#{current_user.nickname}!" %>
+            </h2>
+            <h3 class="gray">
+              Where do you call home?
+            </h3>
+            <p>
+              Let's make sure you don't miss anything good happening near you. Set your home city.
+            </p>
+          </div>
+          <div class="join-tea sidebar-section">
+            <%= link_to 'Find Your City', cities_path, class: "button find-city" %>
+          </div>
+        <% end %>
+      <% end %>
     <% end %>
   </div>
 
