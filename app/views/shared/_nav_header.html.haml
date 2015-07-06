@@ -12,8 +12,6 @@
       - if current_user.nil?
         %li= link_to 'Login', new_user_session_path, {id: :login}
       - else
-        %li= link_to "Account", "/profile"
-        - if current_user && current_user.host?
-          %li= link_to "Host Dashboard", host_dashboard_path
+        %li= link_to "Dashboard", profile_path
         %li= link_to "Sign Out", destroy_user_session_path, method: :delete
 %hr
