@@ -1,6 +1,6 @@
 <% if current_user.host? %>
   <div class="teas host">
-    <%= render partial: 'hosted_teatimes', locals: {hosted: @hosted} %>
+    <%= render partial: 'hosted_teatimes', locals: {all_hosted: @hosted} %>
   </div>
 <% end %>
 
