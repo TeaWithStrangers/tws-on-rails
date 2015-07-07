@@ -5,7 +5,9 @@ module Delayed
       begin
         perform_original
       rescue DeliveryCancellationException
-        logger.info "Cancelled delivery due to cancel_delivery"
+        logger.error "Cancelled delivery due to cancel_delivery"
+      rescue Errno::ECONNREFUSED
+        logger.error "Failed to send email in #{Rails.env}"
       end
     end
   end
