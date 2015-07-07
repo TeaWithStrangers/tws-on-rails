@@ -1,10 +1,10 @@
-<% if !hosted.count.zero? %>
+<% if !all_hosted.count.zero? %>
 	<h2>
     Tea times you've hosted
   </h2>
 
   <ul class="past host">
-    <% hosted.each do |hosted| %>
+    <% all_hosted.each do |hosted| %>
       <li class="<%= (:cancelled if hosted.cancelled?) %> tea-time">
         <div class="tt-deets">
           <%= render partial: 'teatime_info', locals: {tea_time: hosted, att: nil, without_button: display_button?(local_assigns)} %>
@@ -16,7 +16,7 @@
                 Your attendees
               </h3>
               <div class="attendees-container host-view">
-                <% hosted.attendances.group_by(&:status).each do |k,v| %>
+                <% hosted.attendances.order(:status).group_by(&:status).each do |k,v| %>
                   <div class="attendance-section">
                     <div class="key">
                       <span class="attendance-status <%= k %>">
