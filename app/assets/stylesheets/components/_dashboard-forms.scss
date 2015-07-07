@@ -1,4 +1,4 @@
-/* 
+/*
 
 These are styles related to forms within the user or host dashboards
 
@@ -149,21 +149,6 @@ These are styles related to forms within the user or host dashboards
     @include media($tablet) {
 
       @include span-columns(3 of 9);
-    }
-  }
-
-  form {
-
-    @include media($tablet) {
-
-      @include span-columns(6 of 9);
-    }
-
-    &#new_tea_time {
-      @include media($tablet) {
-
-        @include span-columns(9 of 9);
-      }
     }
   }
 }
