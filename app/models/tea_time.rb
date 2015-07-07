@@ -13,7 +13,7 @@ class TeaTime < ActiveRecord::Base
   accepts_nested_attributes_for :attendances
 
   after_touch :clear_association_cache_wrapper
-  after_create :send_host_confirmation, :queue_attendance_reminder, unless: :skip_callbacks
+  after_commit :send_host_confirmation, :queue_attendance_reminder, unless: :skip_callbacks
   before_destroy { CancelTeaTime.send_cancellations(self) }
 
   enum followup_status: { pending: 0, marked_attendance: 1, completed: 2, cancelled: 3 }
