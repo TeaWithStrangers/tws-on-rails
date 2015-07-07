@@ -5,7 +5,6 @@ class RegistrationsController < Devise::RegistrationsController
       super
     else
       user_info = GetOrCreateNonWaitlistedUser.call(user_params)
-
       if user_info[:new_user?] && user_info[:user].valid?
         sign_in user_info[:user]
         redirect_to cities_path
@@ -49,6 +48,8 @@ class RegistrationsController < Devise::RegistrationsController
 
   private
     def user_params
-      params.require(:user).permit(:nickname, :email, :password)
+      a = params.require(:user).permit(:nickname, :email, :password)
+      a[:given_name] = a[:nickname] if !a[:given_name]
+      a
     end
 end

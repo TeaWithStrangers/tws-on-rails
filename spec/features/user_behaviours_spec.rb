@@ -105,10 +105,10 @@ end
 private
   def sign_up_with(name, email, opts = nil)
     visit sign_up_path
-    fill_in 'user_nickname', with: name
-    fill_in 'user_email', with: email
-    fill_in 'user_password', with: SecureRandom.hex
-    find('input[name="commit"]').click
+    fill_in('user_name', with: name)
+    fill_in('user_email', with: email)
+    fill_in('user_password', with: SecureRandom.hex)
+    click_button("Let's Get Tea")
   end
 
   def attend_tt(tea_time)
