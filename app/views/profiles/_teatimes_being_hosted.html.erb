@@ -15,7 +15,7 @@
                 Your attendees
               </h3>
               <div class="attendees-container host-view">
-                <% tea_time.attendances.group_by(&:status).each do |k,v| %>
+                <% tea_time.attendances.order(:status).group_by(&:status).each do |k,v| %>
                   <div class="attendance-section">
                     <div class="key">
                       <span class="attendance-status <%= k %>">
