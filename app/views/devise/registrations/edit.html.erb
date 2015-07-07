@@ -81,8 +81,7 @@
           <div class="dropdown">
             <%= select(
               resource_name, :home_city_id,
-              City.available(current_user).
-              collect{ |p| [p.name, p.id] })
+              City.available.collect{ |p| [p.name, p.id] })
             =%>
           </div>
         </div>
