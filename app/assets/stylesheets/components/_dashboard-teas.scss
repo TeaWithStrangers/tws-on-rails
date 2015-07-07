@@ -5,9 +5,27 @@ These are styles related to tea time displays on attendee or host dashboards.
 */
 
 .dash-body {
-  ul.upcoming {
+  ul.upcoming, ul.past {
     list-style: none;
     padding: 0;
+  }
+
+  ul.past.attendee {
+    .other-deets {
+      .attendance-section {
+        display: none;
+
+        &.present, &.pending {
+          display: block;
+        }
+      }
+    }
+
+    li.cancelled {
+      .other-deets {
+        display: none;
+      }
+    }
   }
 
   li.tea-time, .edit-tea {
@@ -174,6 +192,8 @@ These are styles related to tea time displays on attendee or host dashboards.
       background: none;
       content: '\2715';
       color: $tws-red;
+      height: auto;
+      width: auto;
     }
 
   }
@@ -240,6 +260,8 @@ These are styles related to tea time displays on attendee or host dashboards.
         background: none;
         content: '\2715';
         color: $tws-red;
+        height: auto;
+        width: auto;
       }
     }
   }

@@ -1,0 +1,77 @@
+<% if !hosted.count.zero? %>
+	<h2>
+    Tea times you've hosted
+  </h2>
+
+  <ul class="past host">
+    <% hosted.each do |hosted| %>
+      <li class="<%= (:cancelled if hosted.cancelled?) %> tea-time">
+        <div class="tt-deets">
+          <%= render partial: 'teatime_info', locals: {tea_time: hosted, att: nil, without_button: display_button?(local_assigns)} %>
+        </div>
+        <div class="other-deets">
+          <% if current_user.host? %>
+            <% if hosted.attendances.length > 0 %>
+              <h3 class="light">
+                Your attendees
+              </h3>
+              <div class="attendees-container host-view">
+                <% hosted.attendances.group_by(&:status).each do |k,v| %>
+                  <div class="attendance-section">
+                    <div class="key">
+                      <span class="attendance-status <%= k %>">
+                        (<%= v.length %>) <%= humanize_attendance_status(k).humanize.titleize.pluralize(v.count) %>
+                      </span>
+                      <span class="email <%= k %>">
+                        <%= link_to "Email", "mailto:#{hosted.attendee_emails(filter: ->(x) { x.status != k })}", :target => "_blank" %>
+                      </span>
+                    </div>
+                    <ul class="<%= k %> attendees-list">
+                      <% v.map(&:user).each do |a| %>
+                        <li class="attendee-names">
+                          <%= link_to a.name, "mailto:#{a.email}", :target => "_blank" %>
+                        </li>
+                      <% end %>
+                    </ul>
+                  </div>
+                <% end %>
+              </div>
+            <% else %>
+              <div class="attendees-container host-view">
+                <h3 class="light">
+                  You had no attendees :(
+                </h3>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+
+<% else %>
+	<h2>
+    You've never hosted a tea time! Let's change that.
+  </h2>
+  <div class="dash-create-new-tea">
+    <%= link_to new_tea_time_path do %>
+      <div class="new-tea-box">
+        <div class="plus-sign-container">
+          <h1>
+            +
+          </h1>
+        </div>
+        <div class="schedule-text-container">
+          <div class="schedule-text">
+            <h3 class="capitalize">
+              Schedule
+            </h3>
+            <h5 class="boldweight">
+              A Tea Time
+            </h5>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
