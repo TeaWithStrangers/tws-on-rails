@@ -63,29 +63,24 @@
         </p>
       <% end %>
     </div>
-    <div class="canceled-attendee-list sidebar-section">
-      <% flakes = @tea_time.attendances.flake %>
-      <div class="key">
-        <span class="attendance-status flake">
-          <%= flakes.count %> Canceled Attendees
-        </span>
-      </div>
-      <% if flakes.present? %>
+
+    <% if flakes.present? %>
+      <div class="canceled-attendee-list sidebar-section">
+        <% flakes = @tea_time.attendances.flake %>
+        <div class="key">
+          <span class="attendance-status flake">
+            <%= flakes.count %> Canceled Attendees
+          </span>
+        </div>
         <ul class="flake attendee-names">
           <% flakes.each_with_index do |attendance, i| %>
             <li class="pending attendee-names">
               <%= attendance.user.name %>
             </li>
           <% end %>
-        </table>
-      <% else %>
-        <% if attendees.present? %>
-          <p>
-            Yay! No one has canceled yet!
-          </p>
-        <% end %>
-      <% end %>
-    </div>
+        </ul>
+      </div>
+    <% end %>
   </div>
   <div class="dash-body">
     <div class="edit-tea form">
@@ -97,15 +92,8 @@
         you're changing the date or time, fire them an email before doing it to
         let them plan ahead, cancel seats if needed, etc.
       </p>
-      <h3>
-        Changes
-      </h3>
+      <h3>Changes</h3>
       <%= render 'form' %>
-      <div class="controls actions">
-        <h6 class="cancel capitalize boldweight">
-          <%= link_to 'Cancel tea time', @tea_time, method: :delete, data: {conform: 'Are you sure? If you can, try to ask another host to sub in for you, then make the tea time theirs by hitting \'Edit Tea Time\' If there\'s no other way, cancel and fire the attendees a note so they understand what happened!' }, class: 'cancel-button' %>
-        </h6>
-      </div>
     </div>
   </div>
 </div>
