@@ -2,7 +2,7 @@ class TeaTimesController < ApplicationController
   helper TeaTimesHelper
   before_action :set_tea_time, except: [:index, :new, :create]
   before_action :authenticate_user!, :authorized?, only: [:new, :edit, :create, :update, :cancel, :destroy, :index]
-  before_action :use_new_styles, except: [:edit, :create, :update, :cancel, :destroy]
+  before_action :use_new_styles, except: [:create, :update, :cancel, :destroy]
 
   # GET /tea_times
   # GET /tea_times.json
@@ -25,7 +25,6 @@ class TeaTimesController < ApplicationController
 
   # GET /tea_times/new
   def new
-    use_new_styles
     @tea_time = TeaTime.new(city: current_user.home_city,
                             start_time: Time.now.beginning_of_hour + 1.day,
                             host: current_user)
@@ -33,7 +32,6 @@ class TeaTimesController < ApplicationController
 
   # GET /tea_times/1/edit
   def edit
-    use_new_styles
   end
 
   # POST /tea_times

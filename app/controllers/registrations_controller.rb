@@ -1,4 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
+  before_action :use_new_styles, only: [:update, :edit]
   def create
     if params[:referral] == false
       super
@@ -17,7 +18,6 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def update
-    use_new_styles
     @user = User.find(current_user.id)
 
     successfully_updated = if needs_password?(@user, params)
@@ -40,7 +40,6 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def edit
-    use_new_styles
   end
 
   def needs_password?(user, params)
