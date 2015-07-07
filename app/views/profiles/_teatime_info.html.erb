@@ -25,7 +25,7 @@
       </h5>
     </div>
   </div>
-  <% if current_user.host? %>
+  <% if current_user.host? && tea_time.host.try(:id) == current_user.id %>
     <div class="host controls">
       <% unless tea_time.occurred? || tea_time.cancelled? %>
         <h6 class="edit capitalize boldweight">
