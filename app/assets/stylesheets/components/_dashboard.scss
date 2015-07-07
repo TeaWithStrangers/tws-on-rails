@@ -127,6 +127,10 @@ ul.dash-menu-list {
           font-size: 0.8em;
         }
 
+        ul.attendees-list {
+          overflow: auto;
+        }
+
         li.attendee-names {
           clear: both;
         }
@@ -165,6 +169,7 @@ ul.dash-menu-list {
 
     .hello {
       @include span-columns(8 of 12);
+      margin-right: 0;
 
       h3 {
         font-weight: 400;
