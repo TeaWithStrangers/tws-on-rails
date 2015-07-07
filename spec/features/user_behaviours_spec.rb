@@ -7,7 +7,7 @@ feature 'Signing In & Up' do
 
   scenario 'with valid email and password' do
     sign_up_with('Darth Helmet', 'drthhlmt@spaceballone.com')
-    expect(page).to have_content 'Account'
+    expect(page).to have_content 'Dashboard'
   end
 
   scenario 'with blank name' do
@@ -70,7 +70,7 @@ feature 'Registered User' do
     end
     scenario 'user can see their history' do
       visit history_path
-      expect(page).to have_content @old_tt.date_sans_year
+      expect(page).to have_content @old_tt.date_full_month_sans_year
     end
 
     #TODO: This should probably be a unit test
@@ -78,7 +78,7 @@ feature 'Registered User' do
       deleted_att = build(:attendance, tea_time: @old_tt, user: nil)
       deleted_att.save!(validate: false)
       visit history_path
-      expect(page).to have_content @old_tt.date_sans_year
+      expect(page).to have_content @old_tt.date_full_month_sans_year
       expect(page).to have_content User.nil_user.name
     end
   end

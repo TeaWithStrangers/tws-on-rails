@@ -4,9 +4,9 @@
   </h2>
   <ul class="upcoming waitlisted">
     <% attendances.each do |a| %>
-      <li class="<%= (:cancelled if attendances.cancelled?) %> tea-time">
+      <li class="<%= (:cancelled if a.cancelled?) %> tea-time">
         <div class="tt-deets">
-          <%= render partial: 'teatime_info', locals: {tea_time: a.tea_time, without_button: false} %>
+          <%= render partial: 'teatime_info', locals: {att: a, tea_time: a.tea_time, without_button: false} %>
         </div>
         <div class="host-deets">
         </div>

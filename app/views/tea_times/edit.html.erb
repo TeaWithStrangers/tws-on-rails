@@ -64,9 +64,9 @@
       <% end %>
     </div>
 
+    <% flakes = @tea_time.attendances.flake %>
     <% if flakes.present? %>
       <div class="canceled-attendee-list sidebar-section">
-        <% flakes = @tea_time.attendances.flake %>
         <div class="key">
           <span class="attendance-status flake">
             <%= flakes.count %> Canceled Attendees
