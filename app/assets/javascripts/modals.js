@@ -29,11 +29,11 @@ function modalActivation() {
     }
   });
 
-  $('.edit_attendance, .tea-time-scheduling').on('click', function(evt) {
+  $('.tea-time-scheduling').on('click', function(evt) {
     modal = loadModal(evt.currentTarget.href)(evt)
   });
 
-  $('a.cancel').on('click', function(evt) {
+  $('.cities.show a.cancel').on('click', function(evt) {
     console.log(evt)
     evt.preventDefault();
     closeModal();
