@@ -22,6 +22,8 @@ class TeaTime < ActiveRecord::Base
     scope k, -> { where(followup_status: v) }
   end
 
+  scope :upcoming, -> { (after(Time.now).before(Time.now + 2.weeks)) }
+
   scope :before, ->(date)  { where("start_time <= ?", date) }
   scope :after, ->(date)  { where("start_time >= ?", date) }
   scope :past, -> { before(Time.now.utc) }
