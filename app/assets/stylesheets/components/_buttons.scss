@@ -58,7 +58,14 @@ and tea time sign up buttons.
   $hover-color: darken($base-color, 5) !default;
   background-color: transparent;
   border: 2px solid $base-color;
+  border-radius: $base-button-radius;
   color: $base-color;
+  display: inline-block;
+  font-size: $base-font-size;
+  font-weight: 600;
+  line-height: 1;
+  padding: 1em 1.5em;
+  letter-spacing: 2px;
   position: relative;
   cursor: default;
   opacity: 1;

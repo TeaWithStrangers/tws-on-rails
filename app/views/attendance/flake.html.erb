@@ -1,0 +1,36 @@
+<%= render partial: 'shared/header' %>
+<% prefill = !!current_user %>
+<%= render partial: 'profiles/sidebar' %>
+<div class="container dashboard">
+  <div class="dash-intro">
+    <div class="canceling sidebar-section">
+      <h3>
+        Canceling your spot
+      </h3>
+      <%= render partial: 'shared/tea_time_row', locals: {tea_time: @attendance.tea_time, without_button: display_button?(local_assigns)} %>
+      <% @tea_time = @attendance.tea_time %>
+    </div>
+  </div>
+  <div class="dash-body">
+    <h2>You'll be missed!</h2>
+    <p class="modal-text">
+      No hard feelings, but could you share a word about what came up? 
+      We could learn something and maybe make it easier to commit in the future.
+    </p>
+    <%= form_for(@attendance, url: update_attendance_tea_time_path(@attendance.tea_time, @attendance), method: :put) do |f| %>
+      <div class="form-body">
+        <div class="input-container">
+          <div class="label-container">
+            <%= f.label :reason, 'I have to skip out because...', class: 'reason' %>
+            <span class="optional">(optional)</span>
+          </div>
+          <%= f.text_field :reason, placeholder: 'My dog ate my tea time spot.' %>
+        </div>
+        <div class="button-container">
+          <%= f.submit 'Cancel my spot', class: 'confirm' %>
+          <%= link_to 'Actually, I\'m in', :back, class: 'cancel' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

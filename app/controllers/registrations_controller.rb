@@ -1,4 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
+  before_action :use_new_styles, only: [:update, :edit]
   def create
     if params[:referral] == false
       super
@@ -36,6 +37,9 @@ class RegistrationsController < Devise::RegistrationsController
     else
       render "edit"
     end
+  end
+
+  def edit
   end
 
   def needs_password?(user, params)

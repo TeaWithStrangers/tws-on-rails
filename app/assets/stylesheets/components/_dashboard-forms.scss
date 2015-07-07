@@ -1,14 +1,89 @@
-/* 
+/*
 
 These are styles related to forms within the user or host dashboards
 
 */
 
 .form {
+
+	@include outer-container;
+
+	&.first {
+    margin-bottom: 2em;
+  }
+
+  form {
+    background: $tws-white;
+    border: $base-border;
+    border-color: $tws-yellow;
+    padding: 0 0 1em;
+
+    &.no-header {
+      padding: 1em 0;
+    }
+
+  	.full-name, .name-email, .social, .new-password {
+			@include outer-container;
+			@include span-columns(12);
+
+			margin: 0;
+
+			@include media($tablet) {
+				padding: 0 1em;
+			}
+		}
+  }
+
+  .field {
+    margin: 0 1em;
+
+    &.split2 {
+
+      @include media($tablet) {
+      	margin: 0;
+
+	      @include span-columns(6 of 12);
+	    }
+    }
+
+    &.split1 {
+      clear: both;
+    }
+  }
+
+  h3.form-subheader {
+    background: darken($tws-tan, 2);
+    border-top: 1px solid $tws-yellow;
+    border-bottom: 1px solid $tws-yellow;
+    padding: 1em;
+    margin-bottom: 1em;
+    clear: both;
+
+    &.first {
+      border-top: 0;
+    }
+  }
+
 	label {
 		@extend h5;
-		display: block;
+		display: inline;
 		margin-bottom: 0.5em;
+		line-height: 1.25;
+
+		&.inline {
+			display: inline;
+			margin-bottom: 0;
+		}
+	}
+
+	span.sub-label {
+		@extend h5;
+		display: inline;
+	}
+
+	.form-label {
+		margin-bottom: 0.5em;
+		line-height: 1.25;
 	}
 
 	input[type="text"] {
@@ -23,7 +98,7 @@ These are styles related to forms within the user or host dashboards
     border-radius: .35em;
     background: $tws-white asset-url('dropdown-arrow.png') no-repeat 97.5% center;
     background-size: 1em auto;
-    margin-bottom: 0.5em;
+    margin-bottom: 1em;
     select {
       height: 100%;
       line-height: 100%;
@@ -37,7 +112,19 @@ These are styles related to forms within the user or host dashboards
   }
 }
 
-.form.create-tea {
+.cancel-account {
+	input.cancel-account {
+		@include inverted-button($tws-orange, $tws-orange);
+		cursor: pointer;
+
+		&:hover {
+			background-color: $tws-orange;
+			color: $tws-white;
+		}
+	}
+}
+
+.form.create-tea, .form.edit-tea {
 	.field {
 		margin-bottom: 1em;
 
@@ -56,4 +143,12 @@ These are styles related to forms within the user or host dashboards
       }
 		}
 	}
+  .tt-deets {
+    overflow: auto;
+
+    @include media($tablet) {
+
+      @include span-columns(3 of 9);
+    }
+  }
 }

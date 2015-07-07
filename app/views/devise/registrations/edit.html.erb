@@ -1,109 +1,148 @@
-<div class="container dashboard edit">
-  <%= render partial: 'shared/nav_header' %>
-  <div class="row">
-    <div class="wide">
-      <h2>Welcome home!</h2>
-      <div class="third left">
-        <%= render partial: 'profiles/sidebar' %>
-      </div>
-      <hr>
-      <div class="two-third right">
-        <h2 class="main">Edit Your Information</h2>
+<%= render partial: 'shared/header' %>
+<%= render partial: 'profiles/sidebar' %>
 
-        <%= form_for(resource,
+<div class="container dashboard">
+  <div class="dash-intro">
+    <div class="photo-container">
+      <div class="host-photo">
+        <img class="host-img" src="<%= @current_user.avatar.url(:landscape) %>"/>
+      </div>
+    </div>
+    <div class="hello">
+      <h2>
+        Welcome home, <%= "#{current_user.nickname}!" %>
+      </h2>
+      <h3 class="gray">
+        You look real good today.
+      </h3>
+    </div>
+  </div>
+  <div class="dash-body">
+    <div class="edit-account form first">
+      <h2>
+        Edit Your Account
+      </h2>
+      <%= form_for(resource,
                      as: resource_name,
                      url: registration_path(resource_name),
                      html: { method: :put }, :multipart => true) do |f|
-        %>
-          <%= devise_error_messages! %>
-          <h3 class="edit-subheader first">Personal Information</h3>
+      %>
+        <%= devise_error_messages! %>
+        <h3 class="first form-subheader">
+          Personal Information
+        </h3>
 
-          <div>
-            <%= f.label :nickname %>
-            <br/>
+        <div class="name-email">
+          <div class="field nickname split2">
+            <div class="form-label">
+              <%= f.label :nickname, "Nickname",class: 'capitalize boldweight' %>
+            </div>
+
             <%= f.text_field :nickname, autofocus: true %>
           </div>
 
-          <div>
-            <%= f.label :given_name %>
-            <br/>
+          <div class="field email split2">
+            <div class="form-label">
+              <%= f.label :email, class: 'capitalize boldweight' %>
+            </div>
+
+            <%= f.email_field :email %>
+          </div>
+        </div>
+
+        <div class="full-name">
+          <div class="field first-name split2">
+            <div class="form-label">
+              <%= f.label :given_name, "First Name", class: 'capitalize boldweight inline' %>
+              <span class="sub-label light">
+                If different from nickname
+              </span>
+            </div>
             <%= f.text_field :given_name %>
           </div>
 
-          <div>
-            <%= f.label :family_name %>
-            <br/>
+          <div class="field last-name split2">
+            <div class="form-label">
+              <%= f.label :family_name, "Last Name", class: 'capitalize boldweight' %>
+            </div>
+
             <%= f.text_field :family_name %>
           </div>
+        </div>
 
-          <div>
-            <%= f.label :email %>
-            <br/>
-            <%= f.email_field :email %>
+        <div class="field city">
+          <div class="form-label">
+            <%= f.label :home_city, class: 'capitalize boldweight inline' %>
+            <span class="sub-label light">
+              Makes sure you don't miss the good stuff going on near ya
+            </span>
           </div>
 
-          <div>
-            <%= f.label :home_city %>
-            <br/>
-            <div class="dropdown">
-              <%= select(
-                resource_name, :home_city_id,
-                City.available.collect{ |p| [p.name, p.id] })
-              =%>
+          <div class="dropdown">
+            <%= select(
+              resource_name, :home_city_id,
+              City.available.collect{ |p| [p.name, p.id] })
+            =%>
+          </div>
+        </div>
+
+
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+        <% end %>
+
+
+        <h3 class="form-subheader">
+          Change Your Password
+        </h3>
+
+        <div class="field">
+          <div class="form-label">
+            <%= f.label :current_password, class: 'capitalize boldweight' %>
+          </div>
+
+          <%= f.password_field :current_password, autocomplete: "off", placeholder: "Current password" %>
+
+        </div>
+
+        <div class="new-password">
+          <div class="field split2">
+            <div class="form-label">
+              <%= f.label :password, "New password", class: 'capitalize boldweight' %>
             </div>
-          </div>
 
-          <div>
-            <%=  f.label :facebook %>
-            <br/>
-            <%= f.text_field :facebook, placeholder: 'Just the part after http://facebook.com/' %>
-          </div>
-
-          <div>
-            <%= f.label :twitter %>
-            <br/>
-            <%= f.text_field :twitter, placeholder: "Don't include the @" %>
-          </div>
-
-          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-            <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-          <% end %>
-
-          <%= render partial: 'host', locals: {f: f } %>
-
-          <h3 class="edit-subheader"> Change Your Password </h3>
-
-          <div>
-            <%= f.label :password, "New password" %>
-            <br/>
             <%= f.password_field :password, autocomplete: "off", placeholder: "New password" %>
           </div>
 
-          <div>
-            <%= f.label :password_confirmation, "Confirm new password" %>
-            <br/>
+          <div class="field split2">
+            <div class="form-label">
+              <%= f.label :password_confirmation, "Confirm new password", class: 'capitalize boldweight' %>
+            </div>
+
             <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "One more time!" %>
 
           </div>
+        </div>
 
-          <div>
-            <%= f.label :current_password %>
-            <br/>
-            <%= f.password_field :current_password, autocomplete: "off", placeholder: "Current password" %>
+        <div class="field">
+          <%= f.submit "Save Changes" %>
+        </div>
+      <% end %>
+    </div>
+    <div class="cancel-account">
+      <h2>
+        Cancel my account
+      </h2>
 
-          </div>
-
-          <div>
-            <%= f.submit "Save Changes" %>
-          </div>
-        <% end %>
-
-        <h3 class="edit-subheader">Cancel my account</h3>
-        <p>Unhappy?</p>
-        <%= button_to "Cancel my account",
-          registration_path(resource_name),
-          data: { confirm: "Are you sure?" }, method: :delete %>
-      </div>
+      <p>
+        Right now, if you have an account, you're getting emails from us. If you want to stop getting them, you have to cancel your account, but we're working on changing this!
+      </p>
+      <%= button_to "Don't do it",
+        registration_path(resource_name),
+        :class => 'cancel-account',
+        data: { confirm: "It doesn't have to be this way. We can make this work. I promise. There's still time to hit cancel." }, method: :delete %>
     </div>
   </div>
 </div>
+
+<%= render partial: 'shared/new_footer' %>

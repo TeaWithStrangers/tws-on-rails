@@ -1,8 +1,7 @@
 <%= render partial: 'shared/header' %>
+<%= render partial: 'profiles/sidebar' %>
+
 <div class="container dashboard">
-  <div class="dash-menu">
-    <%= render partial: 'profiles/sidebar' %>
-  </div>
   <div class="dash-intro">
     <div class="photo-container">
       <div class="host-photo">
@@ -20,6 +19,9 @@
   </div>
   <div class="dash-body">
     <div class="create-tea form">
+      <h2>
+        Create a new tea time
+      </h2>
       <%= render 'form' %>
     </div>
   </div>

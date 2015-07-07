@@ -2,7 +2,7 @@ class TeaTimesController < ApplicationController
   helper TeaTimesHelper
   before_action :set_tea_time, except: [:index, :new, :create]
   before_action :authenticate_user!, :authorized?, only: [:new, :edit, :create, :update, :cancel, :destroy, :index]
-  before_action :use_new_styles, except: [:edit, :create, :update, :cancel, :destroy]
+  before_action :use_new_styles, except: [:create, :update, :cancel, :destroy]
 
   # GET /tea_times
   # GET /tea_times.json

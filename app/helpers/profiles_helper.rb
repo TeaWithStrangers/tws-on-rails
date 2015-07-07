@@ -7,6 +7,10 @@ module ProfilesHelper
     case status
     when 'pending'
       'attendee'
+    when 'flake'
+      'canceled'
+    when 'cancelled'
+      'canceled on'
     else
       status
     end

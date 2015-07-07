@@ -44,6 +44,7 @@
 @import "components/modals";
 @import "components/dashboard";
 @import "components/dashboard-forms";
+@import "components/dashboard-teas";
 
 // Block Components
 @import "components/cover-photo";
@@ -74,7 +75,7 @@
 
 
 
-.sessions.new, .jfdi_signup, .cities.index, .forbes_show, .registrations, .tea_times, .profiles {
+.sessions.new, .jfdi_signup, .cities.index, .forbes_show, .registrations, .tea_times, .profiles, .attendance {
   @extend .light-background;
 }
 

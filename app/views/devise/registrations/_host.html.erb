@@ -1,14 +1,80 @@
 <% if current_user && current_user.host? %>
-  <h3 class="edit-subheader">Your Host Profile</h3>
 
-  <div><%= f.label :avatar, "Your Picture" %><br />
-    <%= f.file_field :avatar %></div>
-  <div><%= f.label :summary, "Intro" %><br />
-    <%= f.text_area :summary %></div>
-  <div><%= f.label :story, "What's your story?" %><br />
-    <%= f.text_area :story %></div>
-  <div><%= f.label :topics, "What might we talk about?" %><br />
-    <%= f.text_area :topics %></div>
-  <div><%= f.label :tagline, "Random sentence" %><br />
-    <%= f.text_field :tagline %></div>
+  <div class="field photo">
+    <div class="form-label">
+      <%= f.label :avatar, "Your Picture", class: 'capitalize boldweight inline' %>
+      <span class="sub-label light">
+        It'd be good to see your face. Save the headshots for LinkedIn. Feel free to get goofy.
+      </span>
+    </div>
+    <%= f.file_field :avatar %>
+  </div>
+
+  <div class="field profile-intro">
+    <div class="form-label">
+      <%= f.label :summary, "Intro", class: 'capitalize boldweight inline' %>
+      <span class="sub-label light">
+        Introduce yourself. Share why you're here! Invite the strangers in.
+      </span>
+    </div>
+    <%= f.text_area :summary %>
+  </div>
+
+  <div class="field story">
+    <div class="form-label">
+      <%= f.label :story, "What's your story?", class: 'capitalize boldweight inline' %>
+      <span class="sub-label light">
+        Run wild. What are you about? What excites you? What brought you to where you are? Where does your free time go? Why?
+      </span>
+    </div>
+    <%= f.text_area :story %>
+  </div>
+
+  <div class="field topics">
+    <div class="form-label">
+      <%= f.label :topics, "What might we talk about?", class: 'capitalize boldweight inline' %>
+      <span class="sub-label light">
+        Feel free to spit a stream of consciousness of ideas, stories, questions, topics that get your conversation juices flowing.
+      </span>
+    </div>
+    <%= f.text_area :topics %>
+  </div>
+
+  <div class="field tagline">
+    <div class="form-label">
+      <%= f.label :tagline, "Random sentence", class: 'capitalize boldweight inline' %>
+      <span class="sub-label light">
+        Purposefully random.
+      </span>
+    </div>
+    <%= f.text_field :tagline %>
+  </div>
+
+  <div class="social">
+    <div class="field split2">
+      <div class="form-label">
+        <%=  f.label :facebook, class: 'capitalize boldweight inline' %>
+        <span class="sub-label light">
+          Just the part after facebook.com/
+        </span>
+      </div>
+      
+      <%= f.text_field :facebook %>
+    </div>
+
+    <div class="field split2">
+      <div class="form-label">
+        <%= f.label :twitter, "Twitter handle", class: 'capitalize boldweight inline' %>
+        <span class="sub-label light">
+          Don't include the @
+        </span>
+      </div>
+      
+      <%= f.text_field :twitter %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= f.submit "Save Changes" %>
+  </div>
 <% end %>

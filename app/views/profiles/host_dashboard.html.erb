@@ -1,8 +1,7 @@
 <%= render partial: 'shared/header' %>
+<%= render partial: 'sidebar' %>
+
 <div class="container dashboard">
-  <div class="dash-menu">
-    <%= render partial: 'sidebar' %>
-  </div>
   <div class="dash-intro">
     <div class="photo-container">
       <div class="host-photo">
@@ -19,8 +18,8 @@
     </div>
   </div>
   <div class="dash-body">
-    <div class="host-teas">
-      <%= render partial: 'host_tea_time_info', locals: {tea_times: @hosting} if current_user.host? %>
+    <div class="teas host">
+      <%= render partial: 'teatimes_being_hosted', locals: {tea_times: @hosting} if current_user.host? %>
     </div>
   </div>
 </div>

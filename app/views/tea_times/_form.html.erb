@@ -1,30 +1,42 @@
 <% host_attributes = [:id, :nickname, :given_name, :family_name] %>
-<%= form_for @tea_time do |f| %>
+<%= form_for @tea_time, :html => {:class => "no-header tea-time"} do |f| %>
   <div class="field datepicker">
-    <%= f.label :start_time, class: 'capitalize boldweight' %>
+    <div class="form-label">
+      <%= f.label :start_time, class: 'capitalize boldweight' %>
+    </div>
     <%= f.datetime_select :start_time %>
   </div>
   <div class="field duration">
-    <%= f.label :duration, 'Duration (in Hours)', class: 'capitalize boldweight'  %>
+    <div class="form-label">
+      <%= f.label :duration, 'Duration (in Hours)', class: 'capitalize boldweight'  %>
+    </div>
     <%= f.number_field :duration, value: 2 %>
   </div>
   <div class="field location">
-    <%= f.label :location, 'Location (Place name & address)', class: 'capitalize boldweight'  %>
+    <div class="form-label">
+      <%= f.label :location, 'Location (Place name & address)', class: 'capitalize boldweight'  %>
+    </div>
     <%= f.text_field :location %>
   </div>
   <div class="field city">
-    <%= f.label :city, class: 'capitalize boldweight'  %>
+    <div class="form-label">
+      <%= f.label :city, class: 'capitalize boldweight'  %>
+    </div>
     <div class="dropdown">
       <%= f.select(:city_id, options_for_select(City.available.select(:id, :name).collect{ |p| [p.name, p.id] }, @tea_time.city.id), {:class => "city"}) %>
     </div>
     <% if current_user.admin? %>
-      <%= f.label :host %>
+      <div class="form-label">
+        <%= f.label :host %>
+      </div>
       <div class="dropdown">
         <%= f.select(:user_id, options_for_select(User.hosts.select(*host_attributes).collect{ |p| [p.name, p.id] }, @tea_time.host.id), {:class => "city"}) %>
       </div>
     <% else %>
       <div style="<%= ("display: none;" if !@tea_time.persisted?) %>">
-        <%= f.label :host %>
+        <div class="form-label">
+          <%= f.label :host, class: 'capitalize boldweight' %>
+        </div>
         <div class="dropdown">
           <%= f.select(:user_id, options_for_select(User.hosts.select(*host_attributes).collect{ |p| [p.name, p.id] }, @tea_time.host.id), {:class => "city"}) %>
         </div>
@@ -45,10 +57,15 @@
       </div>
     <% end %>
   </div>
-  <div class="actions">
+  <div class="actions field">
     <% if @tea_time.persisted? %>
       <div class="update-button">
         <%= f.submit 'Update Tea Time' %>
+      </div>
+      <div class="controls actions">
+        <h6 class="cancel capitalize boldweight">
+          <%= link_to 'Cancel tea time', @tea_time, method: :delete, data: {conform: 'Are you sure? If you can, try to ask another host to sub in for you, then make the tea time theirs by hitting \'Edit Tea Time\' If there\'s no other way, cancel and fire the attendees a note so they understand what happened!' }, class: 'cancel-button' %>
+        </h6>
       </div>
     <% else %>
       <div class="create-button">
