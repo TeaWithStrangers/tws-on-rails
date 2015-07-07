@@ -9,7 +9,7 @@ puts "Creating users"
 user = User.create(
   nickname: 'Foo Bar',
   name: 'Foo Bar',
-  email: 'user@tws-int.com',
+  email: 'user@tws.com',
   password: 'secret1234',
   password_confirmation: 'secret1234',
   home_city_id: sf.id
@@ -18,7 +18,7 @@ user = User.create(
 host_SF2 = User.create(
   nickname: 'SF Baz',
   name: 'SF Baz',
-  email: 'host.sf1@tws-int.com',
+  email: 'host.sf1@tws.com',
   password: 'secret1234',
   password_confirmation: 'secret1234',
   home_city_id: sf.id
@@ -27,7 +27,7 @@ host_SF2 = User.create(
 host_SF1 = User.create(
   nickname: 'SF Boz',
   name: 'SF Boz',
-  email: 'host.sf2@tws-int.com',
+  email: 'host.sf2@tws.com',
   password: 'secret1234',
   password_confirmation: 'secret1234',
   home_city_id: sf.id
@@ -36,16 +36,16 @@ host_SF1 = User.create(
 host_NYC = User.create(
   nickname: 'NYC Biz',
   name: 'NYC Biz',
-  email: 'host.nyc@tws-int.com',
+  email: 'host.nyc@tws.com',
   password: 'secret1234',
   password_confirmation: 'secret1234',
   home_city_id: nyc.id
 )
 
 admin = User.create(
-  nickname: 'Qux Baz',
-  name: 'Qux Baz',
-  email: 'admin@tws-int.com',
+  nickname: 'Admin user',
+  name: 'Admin user',
+  email: 'admin@tws.com',
   password: 'secret1234',
   password_confirmation: 'secret1234',
   home_city_id: sf.id
@@ -54,16 +54,21 @@ admin = User.create(
 host_NYC.roles << :host
 host_SF1.roles << :host
 host_SF2.roles << :host
-admin.roles << :admin
+admin.roles    << :admin
+
 [host_NYC, host_SF1, host_SF2, admin].map(&:save)
 
+puts "Creating tea times"
 City.all.each do |city|
   5.times do |i|
     if city.hosts.present?
+      host = city.hosts.sample
+      date = DateTime.now + (5..15).to_a.sample.days
+      puts "Creating Tea time for #{city.name} with host #{host.name} on date.to_s"
       TeaTime.create({
-        host: city.hosts.sample,
+        host: host,
         city: city,
-        start_time: DateTime.now + (5..15).to_a.sample.days,
+        start_time: date,
         duration: 2
       })
     end
