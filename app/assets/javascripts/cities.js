@@ -86,12 +86,13 @@ var onCitiesShow = function() {
 
   [leading_button, hosting_button].forEach(function(btn) {
     btn.on('click', function(evt) {
-      // var type = evt.currentTarget.dataset.userInterest;
+      evt.preventDefault();
+      var type = evt.currentTarget.dataset.userInterest;
       var data = {
         'tws_interests': {}
       };
       /*jshint camelcase: false */
-      data.tws_interests.type = true;
+      data.tws_interests[type] = true;
       $.ajax({
         url: '/api/v1/users/self/interests',
         type: 'PATCH',
