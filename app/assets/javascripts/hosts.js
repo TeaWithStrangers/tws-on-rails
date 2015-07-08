@@ -63,7 +63,9 @@ $(function() {
   }
 
   // Initialization and Event Hook-ups
-  $('.email-sent-button').on('click', toggleEventAttendance);
+  $(document).ready(function() {
+    $('.email-sent-button').on('click', toggleEventAttendance);
+  });
   $(document).on('page:load', toggleEventAttendance);
 
 });
