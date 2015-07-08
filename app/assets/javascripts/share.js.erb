@@ -53,13 +53,15 @@ $(function() {
 	 * Index for the current share item
 	 * @type {Number}
 	 */
-	var currentShareItem = 0;
+	var currentShareItem = 0,
+		sharePopup,
+		trySharingCallback;
 
 	/**
 	 * Popup open function
 	 * @param  {string} url url path
 	 */
-	var sharePopup = function(url) {
+	sharePopup = function(url) {
 		// Calculate screen dimensions to put window at center
 		var left = (screen.width / 2) - (600 / 2);
 		var top = (screen.height / 2) - (400 / 2);
@@ -70,7 +72,7 @@ $(function() {
 	/**
 	 * Callback for click event when clicking on the `try sharing` button
 	 */
-	var trySharingCallback = function() {
+	trySharingCallback = function() {
 		var shareItem;
 		// Set click behavior of the "Try This On For Size" button
 		$('.sharing-try-button').on('click', function(e) {
@@ -133,7 +135,8 @@ $(function() {
 	};
 
 	// Initialize the share system (add button events, etc.)
-	$(document).ready(function() {
+	$(document).ready(trySharingCallback);
+	$(document).on('page:load', function() {
 	  trySharingCallback();
 	});
 });
