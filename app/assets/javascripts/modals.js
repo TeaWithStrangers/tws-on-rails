@@ -65,8 +65,8 @@ $(function() {
 	 * Activate Modal Callbacks
 	 */
 	modalActivation = function() {
-		$('a.sign-up').on('click', function(evt) {
-			if (evt.currentTarget.href === '/signup') {
+		$('.sign-up-emphasis').on('click', function(evt) {
+			if ($(evt.currentTarget).attr('href') === '/signup') {
 				modal = loadModal('/signup')(evt);
 			}
 		});
@@ -83,8 +83,6 @@ $(function() {
 	};
 
 	// Initialization of Modal
-	$(document).ready(function() {
-		modalActivation();
-	});
+	$(document).ready(modalActivation);
 	$(document).on('page:load', modalActivation);
 });
