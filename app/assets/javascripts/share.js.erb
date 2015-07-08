@@ -72,6 +72,7 @@ var sharePopup = function(url) {
  * Callback for click event when clicking on the `try sharing` button
  */
 var trySharingCallback = function() {
+	var shareItem;
 	// Set click behavior of the "Try This On For Size" button
 	$('.sharing-try-button').on('click', function(e) {
 		// Advance share item index
@@ -87,7 +88,7 @@ var trySharingCallback = function() {
 		}
 
 		// Get share item at position in the collection
-		var shareItem = SHARE_COLLECTION[currentShareItem];
+		shareItem = SHARE_COLLECTION[currentShareItem];
 
 		// Inject image tag into image preview
 		$('#sharing-preview-image').attr('src', shareItem.img);
@@ -132,7 +133,7 @@ var trySharingCallback = function() {
 	});
 };
 
-// Bootstrap the share system (add button events, etc.)
+// Initialize the share system (add button events, etc.)
 $(function() {
   trySharingCallback();
 });
