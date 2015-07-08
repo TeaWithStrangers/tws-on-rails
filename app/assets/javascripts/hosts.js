@@ -1,28 +1,69 @@
-// Place all the behaviors and hooks related to the matching controller here.
-// All this logic will automatically be available in application.js.
-// Yes, to whoever is reading this, I do hate myself. -nb Sat Jan 10 15:05:45
-// Sorry.
+$(function() {
+  'use strict';
 
+  /**
+   * Mark attendance activation after email send callback
+   */
+  function toggleEventAttendance(e) {
+    var form,
+      onAttendanceSuccess,
+      onAttendanceError,
+      sendAttendanceForm;
+    /**
+     * Callback for toggle event attendance ajax response success
+     * @param  {object} data data from API Callback
+     */
+    onAttendanceSuccess = function(data) {
+      /*jshint camelcase: false */
+      var id = data.tea_time.id;
+      /*jshint camelcase: true */
 
-function attendanceMarkingActivtion() {
-  $('.email-sent-btn').on('click', function(evt) {
-    evt.preventDefault();
-    console.log(evt);
-    var form = $(evt.target.form);
-    $.ajax({
-      type: form.attr('method'),
-      url: form.attr('action'),
-      data: form.serialize(),
-      dataType: 'json', //Not sure why this is required
-      success: function(data) {
-        var id = data.tea_time.id;
-        $("[data-tea-time-id='"+id+"'] > h3.tasks.email").attr('class', 'tasks email complete')
-        $(evt.target).parents('.subtask-container').html("<p class='subtask'>All done, thanks!</p>")
-      },
-      error: function(data) { alert('Uh-oh. You shouldn\'t be seeing this.'); }
-    });
-  });
-}
+      // Add class `tasks email complete` to the data-teatime id, selected from the h3.tasks.email chained selector
+      $('[data-tea-time-id=' + id + '] > h3.tasks.email')
+        .attr('class', 'tasks email complete');
 
-$(document).ready(attendanceMarkingActivtion)
-$(document).on('page:load', attendanceMarkingActivtion)
+      // Add subtask container to custom message
+      $(e.target)
+        .parents('.subtask-container')
+        .html('<p class="subtask">All done, thanks!</p>');
+    };
+
+    /**
+     * Callback for toggle event attendance ajax response failure
+     */
+    onAttendanceError = function() {
+      // alert('Uh-oh. You shouldn\'t be seeing this.');
+      // TODO log error (not good in production code)
+    };
+
+    /**
+     * AJAX call to the form method sending JSON
+     * @param  {element} form form element with all its inputs
+     */
+    sendAttendanceForm = function(form) {
+      $.ajax({
+        type: form.attr('method'),
+        url: form.attr('action'),
+        contentType: 'application/json',
+        data: form.serialize(),
+        dataType: 'json',
+        success: onAttendanceSuccess,
+        error: onAttendanceError
+      });
+    };
+
+    // Prevent Default Action
+    e.preventDefault();
+
+    // Form element
+    form = $(e.target.form);
+
+    // Send attendance form to server
+    sendAttendanceForm(form);
+  }
+
+  // Initialization and Event Hook-ups
+  $('.email-sent-button').on('click', toggleEventAttendance);
+  $(document).on('page:load', toggleEventAttendance);
+
+});
