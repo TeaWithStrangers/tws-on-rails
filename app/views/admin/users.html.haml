@@ -3,7 +3,7 @@
     .row
       %h1
         -if city
-          =link_to city.name, forbes_city_path(city)
+          =link_to city.name, city_path(city)
         - else
           No Home City
       %table.attendees

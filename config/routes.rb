@@ -46,7 +46,7 @@ Rails.application.routes.draw do
     end
     member do
       get '/host/:host_id' => 'hosts#show',   as: :host
-      put '/set', action: 'forbes_set_city',  as: :set
+      put '/set', action: 'set_city',  as: :set
     end
   end
 
@@ -71,5 +71,5 @@ Rails.application.routes.draw do
     get '/host_profile'     => 'profiles#host_profile', as: :host_profile
   end
 
-  get '/:id' => 'cities#show', as: :forbes_city
+  get '/:id' => 'cities#show'
 end

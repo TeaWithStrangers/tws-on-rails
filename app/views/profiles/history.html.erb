@@ -36,7 +36,7 @@
             </h3>
           </div>
           <div class="join-tea sidebar-section">
-            <%= link_to "Find Another Tea Time!", forbes_city_path(current_user.home_city), class: "button signup-tt"  %>
+            <%= link_to "Find Another Tea Time!", city_path(current_user.home_city), class: "button signup-tt"  %>
           </div>
         <% else %>
           <div class="hello sidebar-section">
@@ -68,7 +68,7 @@
             </p>
           </div>
           <div class="join-tea sidebar-section">
-            <%= link_to "Sign Up For a Tea Time!", forbes_city_path(current_user.home_city), class: "button signup-tt" %>
+            <%= link_to "Sign Up For a Tea Time!", city_path(current_user.home_city), class: "button signup-tt" %>
           </div>
         <% else %>
           <div class="hello sidebar-section">

@@ -19,7 +19,7 @@ feature 'Signing In & Up' do
   scenario 'can sign up, log out, log in' do
     user = create(:user)
     sign_in user
-    expect(current_path).to eq forbes_city_path(user.home_city)
+    expect(current_path).to eq city_path(user.home_city)
     expect(page).to have_content user.home_city.name
   end
 
@@ -41,7 +41,7 @@ feature 'Registered User' do
 
   feature 'Tea Time Attendance' do
     scenario 'allows a user to sign up' do
-      visit forbes_city_path(@user.home_city)
+      visit city_path(@user.home_city)
       expect(page.status_code).to eq(200)
       click_link('Count Me In')
       expect(current_path).to eq tea_time_path(@tt)

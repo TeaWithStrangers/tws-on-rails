@@ -14,6 +14,6 @@
   .already
     %h4.schedule.button
       - if @city
-        =link_to("Schedule tea time", forbes_city_path(@city))
+        =link_to("Schedule tea time", city_path(@city))
       -else
-        =link_to("Schedule tea time", forbes_city_path(current_user.home_city))
+        =link_to("Schedule tea time", city_path(current_user.home_city))
