@@ -18,14 +18,17 @@ describe RegistrationsController do
       expect(response).to redirect_to(cities_path)
     end
   end
+
   describe 'update' do
-    it 'should be able to update twitter and facebook attributes' do
-      user = create(:user)
-      expect(user.twitter).to eq nil
+    let(:user) { create(:user) }
 
+    before(:each) do
       sign_in user
-
       controller.stub(:needs_password?) { false }
+    end
+
+    it 'should be able to update twitter and facebook attributes' do
+      expect(user.twitter).to eq nil
 
       params = { twitter: 'foo', facebook: 'bar' }
       put 'update', user: params
@@ -33,6 +36,11 @@ describe RegistrationsController do
       user.reload
       expect(user.twitter).to eq 'foo'
       expect(user.facebook).to eq 'bar'
+    end
+
+    it 'should redirect the user to their profile' do
+      put 'update', user: { twitter: 'foo' }
+      expect(response).to redirect_to(profile_path)
     end
   end
 end
