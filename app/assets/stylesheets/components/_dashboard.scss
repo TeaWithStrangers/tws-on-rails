@@ -309,3 +309,34 @@ ul.dash-menu-list {
     }
   }
 }
+
+.dash-outro {
+  background: lighten($tws-yellow, 22);
+  padding: 2em 0;
+  overflow: auto;
+
+  .container {
+
+    @include media($tablet) {
+      @include span-columns(10 of 12);
+      @include shift(1);
+    }
+
+    @include media($desktop) {
+      @include span-columns(8 of 12);
+      @include shift(2);
+    }
+  }
+
+  h5 {
+    margin-bottom: 1em;
+  }
+
+  p {
+    font-size: 0.8em;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

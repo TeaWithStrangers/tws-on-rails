@@ -1,94 +1,182 @@
+<%= render partial: 'shared/header' %>
+<% prefill = !!current_user %>
+<%= render partial: 'profiles/sidebar' %>
+
 <div class="container dashboard">
-  <%= render partial: 'shared/nav_header' %>
-  <div class="row">
-    <div class="wide">
-      <h2>
-        <%= "Welcome home, #{current_user.name}!" %>
-      </h2>
-      <div class="third left">
-        <%= render partial: 'old_sidebar' %>
+  <div class="dash-intro">
+    <div class="photo-container">
+      <div class="host-photo">
+        <img class="host-img" src="<%= @current_user.avatar.url(:landscape) %>"/>
       </div>
-      <hr/> 
-      <div class="two-third right history">
-        <h2 class="main">After tea time tasks</h2>
-        <p>The Stranger Community grows with the attendees of your tea times, so it's important to mark attendance and refer anyone that might make a great host after tea time.</p>
-        <ul class="host upcoming tasks">
+    </div>
+    <div class="hello sidebar-section">
+      <h2>
+        Welcome home, <%= "#{current_user.nickname}!" %>
+      </h2>
+      <h3 class="gray">
+        You look real good today.
+      </h3>
+    </div>
+    <div class="create-new-tea sidebar-section">
+      <%= link_to 'Create New Tea Time!', new_tea_time_path, class: "button create-new-tea" %>
+    </div>
+  </div>
+  <div class="dash-body">
+    <h2>
+      Attendance & Host Referrals
+    </h2>
+    <div class="tasks-container">
+      <% if @tasks.count > 0 %>
+        <ul class="host past tasks">
           <% @tasks.each do |tt| %>
             <% if tt.attendances.count > 0 %>
-              <li class="tea-time">
-                <%= render partial: 'teatime_info', locals: {tea_time: tt, att: nil} %>
-                <% if tt.pending? %>
-                  <h3 class="tasks attendance incomplete">
-                    Attendance / Host Referrals
-                  </h3>
-                  <%= form_for(tt, html: { class: 'attendance' }, url: mark_tea_time_path(tt, marking: 'attendance')) do |f| %>
-                    <ul class="attendees">
-                      <div class="headers">
-                        <div class="col-head filler">
-                          &nbsp;
+              <% if tt.pending? %>
+                <li class="tt pending">
+                  <div class="tt-deets">
+                    <%= render partial: 'teatime_info', locals: {tea_time: tt, att: nil, without_button: display_button?(local_assigns)} %>
+                    <div class="task-list-container">
+                      <div class="task-list">
+                        <div class="first step current">
+                          <div class="task mark-attendance">
+                            Mark attendance
+                          </div>
+                          <div class="task host-referrals">
+                            Refer hosts
+                          </div>
                         </div>
-                        <div class="col-head cancel">
-                          Canceled
-                        </div>
-                        <div class="col-head no-show">
-                          No Show
-                        </div>
-                        <div class="col-head present">
-                          Attended
-                        </div>
-                        <div class="col-head pot-host">
-                          Potential Host
+                        <div class="second step">
+                          <div class="task thanks">
+                            Say thanks!
+                          </div>
                         </div>
                       </div>
-                      <%= f.fields_for :attendances do |att_form| %>
-                        <% if !att_form.object.waiting_list? %>
-                          <li class="attendee">
-                            <span class="name">
-                              <%= att_form.object.user.name %>
-                            </span>
-                            <% Attendance.host_statuses.each do |s, idx| %>
-                              <div class="input-field">
-                                <%= att_form.label :status, s.humanize %>
-                                <%= att_form.radio_button :status, s, checked: ((s == 'present' && att_form.object.pending?) || s == att_form.object.status) %>
-                              </div>
-                            <% end %>
-                            <div class="input-field">
-                              <%= att_form.label :potential_host,  "Potential Host?" %>
-                              <%= att_form.check_box :potential_host %>
-                            </div>
-                          </li>
-                        <% end %>
-                      <% end %>
-                    </ul>
-                    <div class="submit">
-                      <%= f.submit "Done!" %>
                     </div>
-                  <% end %>
-                  <h3 class="tasks email incomplete">Send Thank You Email</h3>
-                <% end %>
-                <% if tt.marked_attendance? %>
-                  <h3 class="tasks attendance complete">Attendance / Host Referrals</h3>
-                  <div class="submit edit">
-                    <%= form_for(tt, url: mark_tea_time_path(tt, marking: 'edit_attendance')) do |f| %>
-                      <%= f.submit "Edit attendance" %>
+                  </div>
+                  <div class="task-deets">
+                    <%= form_for(tt, html: { class: 'attendance' }, url: mark_tea_time_path(tt, marking: 'attendance')) do |f| %>
+                      <div class="task-section attendance-section">
+                        <h3 class="light">
+                          <span class="step-count">1</span>
+                          Mark Attendance
+                        </h3>
+                        <ul class="attendees">
+                          <%= f.fields_for :attendances do |att_form| %>
+                            <% if !att_form.object.waiting_list? %>
+                              <li class="attendee">
+                                <div class="name attendance-section">
+                                  <%= att_form.object.user.name %>
+                                </div>
+                                <% Attendance.host_statuses.each do |s, idx| %>
+                                  <div class="input-field attendance-section <%= s %>">
+                                    <%= att_form.radio_button :status, s, checked: ((s == 'present' && att_form.object.pending?) || s == att_form.object.status) %>
+                                    <%= att_form.label :status, :value => s do %>
+                                      <span class="attendance-status">
+                                        <%= humanize_attendance_status(s) %>
+                                      </span>
+                                    <% end %>
+                                  </div>
+                                <% end %>
+                              </li>
+                            <% end %>
+                          <% end %>
+                        </ul>
+                      </div>
+                      <div class="task-section host-referral-section">
+                        <h3 class="light">
+                          <span class="step-count">2</span>
+                          Was anyone at your tea time host material?
+                        </h3>
+                        <div class="host-material-list">
+                          <%= f.fields_for :attendances do |att_form| %>
+                            <% if !att_form.object.waiting_list? %>
+                              <%= att_form.check_box :potential_host %>
+                              <%= att_form.label :potential_host do %>
+                                <span class="host-material-name">
+                                  <%= att_form.object.user.name %>
+                                </span>
+                              <% end %>
+                            <% end %>
+                          <% end %>
+                        </div>
+                      </div>
+                      <div class="task-section submit">
+                        <%= f.submit "Done!" %>
+                      </div>
                     <% end %>
                   </div>
-                  <h3 class="tasks email incomplete">Send Thank You Email</h3>
-                  <div class="subtask-container">
-                    <p class="subtask"></p>
-                    <div class="submit edit">
-                      <%= form_for(tt, url: mark_tea_time_path(tt, marking: 'email', email_sent: true)) do |f| %>
-                        <%= f.submit "All sent!", class:"email-sent-btn" %>
-                      <% end %>
-                      <%= link_to "Email Attendees", "mailto:#{tt.attendee_emails(filter: ->(x) { x.flake? || x.no_show? || x.waiting_list? })}", class: 'email-attendees' %>
+                </li>
+              <% end %>
+              <% if tt.marked_attendance? %>
+                <li class="tt pending">
+                  <div class="tt-deets">
+                    <%= render partial: 'teatime_info', locals: {tea_time: tt, att: nil, without_button: display_button?(local_assigns)} %>
+                    <div class="task-list-container">
+                      <div class="task-list">
+                        <div class="first step complete">
+                          <div class="task mark-attendance">
+                            Mark attendance
+                          </div>
+                          <div class="task host-referrals">
+                            Refer hosts
+                          </div>
+                        </div>
+                        <div class="second step current">
+                          <div class="task thanks">
+                            Say thanks!
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                <% end %>
-              </li>
+                  <div class="task-deets">
+                    <div class="task-section thanks-section">
+                      <%= form_for(tt, html: { class: 'back' }, url: mark_tea_time_path(tt, marking: 'edit_attendance')) do |f| %>
+                        <%= f.submit "Edit Attendance & Host Referrals" %>
+                      <% end %>
+                      <h3 class="light">
+                        <span class="step-count">3</span>
+                        Say thanks!
+                      </h3>
+                      <p class="task-subnote">
+                        Let the group know what made it for you, share the group photo, 
+                        send a gif, a video, a quote, your facebook link, social security 
+                        number, whatever. Just be thoughtful. Copy and paste their emails 
+                        and fire away!
+                      </p>
+                      <div class="email-list">
+                        <div class="fake-textarea">
+                          <%= tt.attendee_emails_pretty(filter: ->(x) { x.flake? || x.no_show? || x.waiting_list? }) %>
+                        </div>
+                      </div>
+                      <%= form_for(tt, url: mark_tea_time_path(tt, marking: 'email', email_sent: true)) do |f| %>
+                        <%= f.submit "✔✔✔ Gratitude", class: "email-sent-btn" %>
+                      <% end %>
+                    </div>
+                  </div>
+                </li>
+              <% end %>
             <% end %>
           <% end %>
         </ul>
-      </div>
+      <% else %>
+        <p class="task-subnote"> 
+          All done marking attendance, referring hosts, saying thanks. Have a dance party! Or create a tea time! Or create a tea time and have a dance party in the middle!
+        </p>
+      <% end %>
     </div>
+  </div>
+</div>
+
+<div class="dash-outro subfooter">
+  <div class="container">
+    <h5 class="capitalize boldweight">
+      How this works
+    </h5>
+    <p class="task-footnote">
+      People that didn’t show but canceled on the site or with you personally with more than an hour notice are Canceled. If the notice was super last minute (or worse, nonexistent), mark them as No Show.
+    </p>
+    <p class="task-footnote">
+      Right now, when you refer a potential host, it's tracked in our system, but they don't get a note about it. We're building a way to follow through with these referrals, so we can get these superstars on board! Not ready yet, but working on it! Lots of love for your patience + understanding. — Ankit
+    </p>
   </div>
 </div>
