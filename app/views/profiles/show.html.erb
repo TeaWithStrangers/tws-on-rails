@@ -17,12 +17,22 @@
           You look real good today.
         </h3>
       </div>
-      <% if !@hosting.count.zero? %>
-        <div class="create-new-tea sidebar-section">
-          <%= link_to 'Create Another Tea Time', new_tea_time_path, class: "button create-new-tea" %>
-        </div>
-      <% end %>
 
+      <div>
+        <% city = @current_user.home_city %>
+        <h3>Quick Look</h3>
+
+        <% num_of_upcoming_tea_times = city.tea_times.upcoming.count %>
+        <% threshold = 10 %><!-- threshold should be based on number of users and number of hosts in city? -->
+        <% if num_of_upcoming_tea_times < threshold %>
+          <p>Only <%= num_of_upcoming_tea_times %> tea times coming up in <%= city.name %> ☹</p>
+          <div class="create-new-tea sidebar-section">
+            <%= link_to 'Create Another Tea Time', new_tea_time_path, class: "button create-new-tea" %>
+          </div>
+        <% else %>
+          <p><%= city.name %> has <%= num_of_upcoming_tea_times %> tea times coming up in the next 2 weeks! </p>
+        <% end %>
+      </div>
     <% else %>
       <% if !@attending.count.zero? %>
         <% if !current_user.home_city.nil? %>
