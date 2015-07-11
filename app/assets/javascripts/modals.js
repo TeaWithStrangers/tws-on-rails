@@ -65,11 +65,11 @@ $(function() {
    * Activate Modal Callbacks
    */
   modalActivation = function() {
-    $('.sign-up-emphasis').on('click', function(evt) {
-      if ($(evt.currentTarget).attr('href') === '/signup') {
-        modal = loadModal('/signup')(evt);
-      }
-    });
+    // $('.sign-up-emphasis').on('click', function(evt) {
+    //   if ($(evt.currentTarget).attr('href') === '/signup') {
+    //     modal = loadModal('/signup')(evt);
+    //   }
+    // });
 
     $('.tea-time-scheduling').on('click', function(evt) {
       modal = loadModal(evt.currentTarget.href)(evt);
