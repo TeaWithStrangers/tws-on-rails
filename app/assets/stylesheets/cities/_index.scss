@@ -227,11 +227,11 @@ h3.cities-list-header {
 }
 
 
-.city-intro, 
-.learn-more, 
-.required-resources, 
-.sharing, 
-.become-host, 
+.city-intro,
+.learn-more,
+.required-resources,
+.sharing,
+.become-host,
 .host-intro,
 .host-prof-tts {
 
@@ -435,7 +435,7 @@ a.applied {
 }
 
 .progress-bar {
-	height: $base-font-size/2;  
+	height: $base-font-size/2;
 	position: relative;
 	background: $base-border-color;
 	-moz-border-radius: 25px;
@@ -455,4 +455,10 @@ a.applied {
     background-color: $tws-green;
     background-image: linear-gradient(to bottom, $tws-green, $tws-green);
   }
+}
+
+.cities-list .city-image {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
 }
