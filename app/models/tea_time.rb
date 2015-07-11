@@ -150,6 +150,10 @@ class TeaTime < ActiveRecord::Base
     attendees(filter: filter).map(&:email).join(',')
   end
 
+  def attendee_emails_pretty(filter: nil)
+    attendees(filter: filter).map{|f| "\"#{f.nickname}\" <#{f.email}>"}.join(', ')
+  end
+
   def occurred?
     return !cancelled? && Time.now >= end_time
   end

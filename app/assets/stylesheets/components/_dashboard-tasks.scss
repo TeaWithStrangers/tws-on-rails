@@ -1,0 +1,358 @@
+/*
+
+These are styles related to post-tea time tasks.
+
+*/
+
+li.tt {
+  overflow: auto;
+  margin-bottom: 2em;
+}
+
+.tasks-container {
+
+  p.task-subnote, .fake-textarea {
+    font-size: 0.8em;
+  }
+
+	.tt-deets {
+    @include media($tablet) {
+  		@include span-columns(3 of 9);
+  	}
+
+    .tt-box {
+      margin-bottom: 0;
+    }
+
+    // Contingency because controls show during the hours that tea time is happening on task page
+    .controls {
+      display: none;
+    }
+  }
+
+  .task-list-container {
+    background: lighten($tws-yellow, 22);
+    border: 1px solid $tws-yellow;
+    border-top: none;
+    overflow: auto;
+    padding: 10px;
+
+    .step {
+      overflow: auto;
+      border: 2px solid transparent;
+
+      &.current {
+        background: $tws-white;
+        border-radius: $base-border-radius;
+        border-color: $tws-orange;
+      }
+
+      &.complete {
+        .task:before {
+          text-indent: -9999px;
+          background: $tws-orange asset-url('landing/check.png') no-repeat center;
+          background-size: 60%;
+        }
+      }
+    }
+
+    .task {
+      @extend h5;
+      margin-bottom: 0.25em;
+      font-weight: 600;
+      padding: 0.5em;
+      border-radius: $base-border-radius;
+
+      &:before {
+        content: '';
+        height: 1.5em;
+        width: 1.5em;
+        padding-top: 1px;
+        background: $tws-orange;
+        color: $tws-white;
+        margin-right: 0.5em;
+        display: inline-block;
+        text-align: center;
+        border-radius: $base-border-radius;
+      }
+
+      &.mark-attendance:before {
+        content: '1';
+      }
+
+      &.host-referrals:before {
+        content: '2';
+      }
+
+      &.thanks:before {
+        content: '3';
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      &.active {
+        background: $tws-white;
+        border: 2px solid $tws-orange;
+      }
+    }
+  }
+
+  .task-deets {
+
+    @include media($tablet) {
+      @include span-columns(6 of 9);
+    } 
+
+    .task-section {
+      overflow: auto;
+      margin-bottom: 1em;
+
+      h3 span.step-count {
+        display: inline-block;
+        height: 1.5em;
+        width: 1.5em;
+        margin-right: 0.5em;
+        text-align: center;
+        border-radius: $base-border-radius;
+        border: 2px solid $tws-medium-gray;
+      }
+    }
+
+    .fake-textarea {
+      display: block;
+      margin: 0 0 $base-spacing / 2 0;
+      padding: 0.5em;
+      width: 100%;
+      border-radius: $base-border-radius;
+      box-shadow: none;
+      border: $base-border;
+      resize: none;
+      background: $tws-white;
+    }
+
+    p.task-footnote {
+      font-size: 0.8em;
+      color: $tws-medium-gray;
+      clear: both;
+    }
+  }
+}
+
+form.attendance {
+
+  ul.attendees {
+    list-style-type: none;
+    padding: 0;
+    overflow: auto;
+  }
+
+  li.attendee {
+    overflow: auto;
+    margin-bottom: 1em;
+
+    .attendance-section {
+      margin-bottom: 0.5em;
+
+      @include media($mobile-only) {
+        @include span-columns(6 of 12);
+        @include omega(2n);
+      }
+
+      @include media($tablet-only) {
+        @include span-columns(6 of 12);
+        @include omega(2n);
+      }
+
+      @include media($desktop) {
+        @include span-columns(3 of 12);
+        margin-bottom: 0;
+      }
+
+      &.name {
+        font-size: 0.8em;
+        text-align: center;
+        font-weight: 600;
+        text-transform: uppercase;
+
+        @include media($desktop) {
+          text-align: left;
+          font-weight: 400;
+          text-transform: none;
+
+          @include span-columns(3 of 12);
+        }        
+      }
+    }
+  }
+
+  input[type="radio"] {
+    display: none;
+
+    & + label {
+      border: 2px solid lighten($tws-medium-gray, 10);
+      border-radius: $base-border-radius;
+      color: $tws-medium-gray;
+      display: block;
+      padding: 0.25em;
+      text-align: center;
+      text-transform: uppercase;
+      font-weight: 600;
+      font-size: 0.6em;
+      cursor: pointer;
+
+      span {
+        position: relative;
+        padding-left: 1.5em;
+        padding-right: 0.25em;
+
+        &:before {
+          content: '';
+          height: 0.7em;
+          width: 0.7em;
+          border-radius: 50%;
+          background: $tws-medium-gray;
+          position: absolute;
+          display: block;
+          left: 0.5em;
+          top: 50%;
+
+          @include translate(-50%, -50%);
+        }
+      }
+    }
+
+    &:checked + label {
+      color: $tws-white;
+
+      span:before {
+        background: $tws-white;
+      }
+    }
+
+    &[value="no_show"] + label span:before {
+      content: '\2715';
+      background: none;
+      height: auto;
+    }
+
+    &[value="present"] {
+      &:hover + label {
+        border-color: $tws-green;
+        color: $tws-green;
+
+        span:before {
+          background: $tws-green;
+        }
+      }
+
+      &:checked + label {
+        border-color: $tws-green;
+        background: $tws-green;
+      }
+    }
+
+    &[value="flake"] {
+      &:hover + label {
+        border-color: $tws-red;
+        color: $tws-red;
+
+        span:before {
+          background: $tws-red;
+        }
+      }
+
+      &:checked + label {
+        border-color: $tws-red;
+        background: $tws-red;
+      }
+    }
+
+    &[value="no_show"] {
+      &:hover + label {
+        border-color: $base-font-color;
+        color: $base-font-color;
+
+        span:before {
+          color: $base-font-color;
+          background: none;
+        }
+      }
+
+      &:checked + label {
+        border-color: $base-font-color;
+        background: $base-font-color;
+      }
+    }
+  }
+
+  .host-material-list {
+    list-style-type: none;
+  }
+
+  input[type="checkbox"] {
+    display: none;
+
+    & + label {
+      border: 2px solid lighten($tws-medium-gray, 10);
+      border-radius: $base-border-radius;
+      color: $tws-medium-gray;
+      padding: 0.25em 1.25em;
+      text-align: center;
+      text-transform: uppercase;
+      font-weight: 600;
+      font-size: 0.6em;
+      cursor: pointer;
+      float: left;
+      margin-right: 1em;
+      margin-bottom: 1em;
+      text-align: center;
+
+      span {
+        position: relative;
+        padding-left: 2em;
+        background: asset-url('landing/question-mark.png') no-repeat left;
+        background-size: auto 0.9em;
+        @include transition(0.25s);
+      }
+    }
+
+    &:checked + label {
+      border-color: $tws-green;
+      background: $tws-green;
+      color: $tws-white;
+
+      span {
+        background: asset-url('landing/check.png') no-repeat left;
+        background-size: auto 0.9em;
+
+        @include transition(0.25s);
+      }
+    }
+  }
+
+}
+
+form.attendance, .task-section form.edit_tea_time {
+
+  input[type="submit"] {
+    font-size: 0.8em;
+  }
+}
+
+form.back {
+  line-height: 1;
+
+  input[type="submit"] {
+    background: none;
+    font-size: 0.6em;
+    padding: 0;
+    border: 0; 
+    color: $tws-orange;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    text-align: left;
+    border-radius: 0;
+  }
+}
