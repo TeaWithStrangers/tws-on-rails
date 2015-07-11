@@ -11,8 +11,6 @@ module ProfilesHelper
       'canceled'
     when 'cancelled'
       'canceled on'
-    when 'no_show'
-      'no show'
     else
       status
     end

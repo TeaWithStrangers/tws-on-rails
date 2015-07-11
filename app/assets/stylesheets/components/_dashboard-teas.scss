@@ -76,10 +76,6 @@ These are styles related to tea time displays on attendee or host dashboards.
       margin-bottom: 0.5em;
     }
 
-    h3 {
-      margin-bottom: 0;
-    }
-
     .tt-card-top {
       text-align: left;
       margin: 0;
@@ -195,7 +191,7 @@ These are styles related to tea time displays on attendee or host dashboards.
       border-radius: 0;
       background: none;
       content: '\2715';
-      color: $base-font-color;
+      color: $tws-red;
       height: auto;
       width: auto;
     }
@@ -257,13 +253,13 @@ These are styles related to tea time displays on attendee or host dashboards.
     }
 
     &.no_show {
-      color: $base-font-color;
+      color: $tws-red;
 
       &:before {
         border-radius: 0;
         background: none;
         content: '\2715';
-        color: $base-font-color;
+        color: $tws-red;
         height: auto;
         width: auto;
       }

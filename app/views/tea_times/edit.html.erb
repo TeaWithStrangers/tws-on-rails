@@ -41,7 +41,7 @@
       <% attendees = (@tea_time.attendances.pending + @tea_time.attendances.present) %>
       <div class="key">
         <span class="attendance-status pending">
-          (<%= attendees.count %>) Current Attendees
+          <%= attendees.count %> Current Attendees
         </span>
       </div>
       <% if attendees.present? %>
@@ -56,7 +56,7 @@
               </span>
             </li>
           <% end %>
-        </ul>
+        </table>
       <% else %>
         <p>
           No attendees yet!
@@ -69,10 +69,10 @@
       <div class="canceled-attendee-list sidebar-section">
         <div class="key">
           <span class="attendance-status flake">
-            (<%= flakes.count %>) Canceled Attendees
+            <%= flakes.count %> Canceled Attendees
           </span>
         </div>
-        <ul class="flake attendees-list">
+        <ul class="flake attendee-names">
           <% flakes.each_with_index do |attendance, i| %>
             <li class="pending attendee-names">
               <%= attendance.user.name %>

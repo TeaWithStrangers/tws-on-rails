@@ -1,2 +1,2 @@
 The page for TWS <%= @city.name %> is good to go! Check it out and tell everyone
-you know about it. You can do all of that right here: [<%= @city.name %>](<%= city_url(@city.id) %>).
+you know about it. You can do all of that right here: [<%= @city.name %>](<%= forbes_city_url(@city.id) %>).

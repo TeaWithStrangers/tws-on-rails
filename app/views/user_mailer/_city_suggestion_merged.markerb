@@ -1,10 +1,10 @@
 We saw your city request and thought it made sense to set your city as [link_to
-@city.name](<%= city_url(@city) %>). This is most often because the city
+@city.name](<%= forbes_city_url(@city) %>). This is most often because the city
 you submitted is in the same metropolitan area as another one or because the one
 you submitted is a repeat of the one we have on the site.
 
 Check it out and tell everyone you know about it. You can do all of that right
-here: [link_to <%= @city.name %>](<%= city_url(@city.id) %>)
+here: [link_to <%= @city.name %>](<%= forbes_city_url(@city.id) %>)
 
 If you think this may have been a mistake, just reply to this note and let us
 know. We’ll get you sorted!

@@ -127,10 +127,6 @@ ul.dash-menu-list {
           font-size: 0.8em;
         }
 
-        ul.attendees-list {
-          overflow: auto;
-        }
-
         li.attendee-names {
           clear: both;
         }
@@ -169,7 +165,6 @@ ul.dash-menu-list {
 
     .hello {
       @include span-columns(8 of 12);
-      margin-right: 0;
 
       h3 {
         font-weight: 400;
@@ -306,37 +301,6 @@ ul.dash-menu-list {
           @include transition(0.25s);
         }
       }
-    }
-  }
-}
-
-.dash-outro {
-  background: lighten($tws-yellow, 22);
-  padding: 2em 0;
-  overflow: auto;
-
-  .container {
-
-    @include media($tablet) {
-      @include span-columns(10 of 12);
-      @include shift(1);
-    }
-
-    @include media($desktop) {
-      @include span-columns(8 of 12);
-      @include shift(2);
-    }
-  }
-
-  h5 {
-    margin-bottom: 1em;
-  }
-
-  p {
-    font-size: 0.8em;
-
-    &:last-child {
-      margin-bottom: 0;
     }
   }
 }

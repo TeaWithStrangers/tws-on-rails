@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
     if current_user.home_city.nil?
       cities_path
     else
-      city_path(current_user.home_city)
+      forbes_city_path(current_user.home_city)
     end
   end
 

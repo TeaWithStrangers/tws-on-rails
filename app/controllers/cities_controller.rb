@@ -1,16 +1,16 @@
 class CitiesController < ApplicationController
   before_action :set_city, except: [:index, :new, :index]
   before_action :authenticate_user!, :authorized?, only: [:new, :create, :edit, :update, :destroy]
-  before_action :away_ye_waitlisted, except: [:index, :show, :set_city]
-  before_action :use_new_styles, except: [:set_city, :new, :edit, :create, :update, :destroy]
+  before_action :away_ye_waitlisted, except: [:index, :show, :forbes_set_city]
+  before_action :use_new_styles, except: [:forbes_set_city, :new, :edit, :create, :update, :destroy]
 
   # GET /cities
   def index
   end
 
-  def set_city
+  def forbes_set_city
     current_user.update(home_city: @city)
-    redirect_to city_path(@city)
+    redirect_to forbes_city_path(@city)
   end
 
   # GET /:id (city code)

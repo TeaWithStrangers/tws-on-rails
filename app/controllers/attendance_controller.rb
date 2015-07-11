@@ -37,7 +37,7 @@ class AttendanceController < ApplicationController
         "You're set for tea time! Check your email and add it to your calendar :)"
       return redirect_to profile_path, notice: message
     else
-      return redirect_to city_path(@tea_time.city), alert: "Couldn't register for that, sorry :("
+      return redirect_to forbes_city_path(@tea_time.city), alert: "Couldn't register for that, sorry :("
     end
   end
 

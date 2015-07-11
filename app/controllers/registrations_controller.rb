@@ -47,10 +47,6 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   private
-    def after_update_path_for(resource)
-      profile_path
-    end
-
     def user_params
       a = params.require(:user).permit(:nickname, :email, :password)
       a[:given_name] = a[:nickname] if !a[:given_name]
