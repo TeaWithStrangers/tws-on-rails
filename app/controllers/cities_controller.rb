@@ -6,6 +6,8 @@ class CitiesController < ApplicationController
 
   # GET /cities
   def index
+    @active_cities = City.fully_brewed.order(users_count: :desc)
+    @upcoming_cities = City.where.not(brew_status: City.brew_statuses[:fully_brewed]).order(users_count: :desc)
   end
 
   def set_city
