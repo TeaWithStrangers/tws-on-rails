@@ -40,6 +40,7 @@ gem 'time_zone_ext'
 #Background Jobs
 gem 'delayed_job', '~> 4.0.1'
 gem 'delayed_job_active_record', '~> 4.0.1'
+gem "delayed_job_web"
 
 # File Storage
 gem 'paperclip', '~> 4.1'
