@@ -62,6 +62,7 @@ Rails.application.routes.draw do
     post '/mail'              => 'admin#send_mail'
     get '/host'               => 'hosts#new',                 as: :new_host
     post '/host'              => 'hosts#create',              as: :create_host
+    get "/jobs"               => DelayedJobWeb, :anchor => false, via: [:get, :post]
   end
 
   scope :profile do
