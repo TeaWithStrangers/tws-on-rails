@@ -1,142 +1,142 @@
 $(function() {
-	/**
-	 * CONSTANT: share collection
-	 * @type {Collection}
-	 */
-	var SHARE_COLLECTION = [{
-		img: '<%= image_url("landing/landing-graphic-redesign.jpg") %>',
-		text: 'Tea With Strangers is all about making meaningful interactions more fun.',
-		url: 'http://teawithstrangers.com/'
-	}, {
-		img: '<%= image_url("share/share-1.png") %>',
-		text: 'Everyone is interesting',
-		url: 'https://www.facebook.com/teawithstrangers/photos/a.818701241549790.1073741844.542640869155830/818701568216424/?type=3'
-	}, {
-		img: '<%= image_url("share/share-2.png") %>',
-		text: 'Real people have #nofilter',
-		url: 'https://www.facebook.com/teawithstrangers/photos/a.818701241549790.1073741844.542640869155830/818701601549754/?type=3'
-	}, {
-		img: '<%= image_url("share/share-3.png") %>',
-		text: 'You\'re always invited',
-		url: 'https://www.facebook.com/teawithstrangers/photos/a.818701241549790.1073741844.542640869155830/818701588216422/?type=3'
-	}, {
-		img: '<%= image_url("share/share-4.png") %>',
-		text: 'New friends are just old strangers',
-		url: 'https://www.facebook.com/teawithstrangers/photos/a.818701241549790.1073741844.542640869155830/818701541549760/?type=3'
-	}, {
-		img: '<%= image_url("share/share-5.png") %>',
-		text: 'New friends are just old strangers',
-		url: 'https://www.facebook.com/teawithstrangers/photos/a.818701241549790.1073741844.542640869155830/818701544883093/?type=3'
-	}, {
-		img: '<%= image_url("share/share-6.png") %>',
-		text: 'Real people have #nofilter',
-		url: 'https://www.facebook.com/teawithstrangers/photos/a.818701241549790.1073741844.542640869155830/818701584883089/?type=3'
-	}, {
-		img: '<%= image_url("share/share-7.png") %>',
-		text: 'Good vibes only',
-		url: 'https://www.facebook.com/teawithstrangers/photos/a.818701241549790.1073741844.542640869155830/818701578216423/?type=3'
-	}, {
-		img: '<%= image_url("share/share-8.png") %>',
-		text: 'Look around',
-		url: 'https://www.facebook.com/teawithstrangers/photos/a.818701241549790.1073741844.542640869155830/818701561549758/?type=3'
-	}, {
-		img: '<%= image_url("share/share-9.png") %>',
-		text: 'What\'s your story?',
-		url: 'https://www.facebook.com/teawithstrangers/photos/a.818701241549790.1073741844.542640869155830/818701548216426/?type=3'
-	}, {
-		img: '<%= image_url("share/share-10.png") %>',
-		text: 'Hands were made for high-fiving',
-		url: 'https://www.facebook.com/teawithstrangers/photos/a.818701241549790.1073741844.542640869155830/818701534883094/?type=3'
-	}];
+  /**
+   * CONSTANT: share collection
+   * @type {Collection}
+   */
+  var SHARE_COLLECTION = [{
+    img: '<%= image_url("landing/landing-graphic-redesign.jpg") %>',
+    text: 'Tea With Strangers is all about making meaningful interactions more fun.',
+    url: 'http://teawithstrangers.com/'
+  }, {
+    img: '<%= image_url("share/share-1.png") %>',
+    text: 'Everyone is interesting',
+    url: 'https://www.facebook.com/teawithstrangers/photos/a.818701241549790.1073741844.542640869155830/818701568216424/?type=3'
+  }, {
+    img: '<%= image_url("share/share-2.png") %>',
+    text: 'Real people have #nofilter',
+    url: 'https://www.facebook.com/teawithstrangers/photos/a.818701241549790.1073741844.542640869155830/818701601549754/?type=3'
+  }, {
+    img: '<%= image_url("share/share-3.png") %>',
+    text: 'You\'re always invited',
+    url: 'https://www.facebook.com/teawithstrangers/photos/a.818701241549790.1073741844.542640869155830/818701588216422/?type=3'
+  }, {
+    img: '<%= image_url("share/share-4.png") %>',
+    text: 'New friends are just old strangers',
+    url: 'https://www.facebook.com/teawithstrangers/photos/a.818701241549790.1073741844.542640869155830/818701541549760/?type=3'
+  }, {
+    img: '<%= image_url("share/share-5.png") %>',
+    text: 'New friends are just old strangers',
+    url: 'https://www.facebook.com/teawithstrangers/photos/a.818701241549790.1073741844.542640869155830/818701544883093/?type=3'
+  }, {
+    img: '<%= image_url("share/share-6.png") %>',
+    text: 'Real people have #nofilter',
+    url: 'https://www.facebook.com/teawithstrangers/photos/a.818701241549790.1073741844.542640869155830/818701584883089/?type=3'
+  }, {
+    img: '<%= image_url("share/share-7.png") %>',
+    text: 'Good vibes only',
+    url: 'https://www.facebook.com/teawithstrangers/photos/a.818701241549790.1073741844.542640869155830/818701578216423/?type=3'
+  }, {
+    img: '<%= image_url("share/share-8.png") %>',
+    text: 'Look around',
+    url: 'https://www.facebook.com/teawithstrangers/photos/a.818701241549790.1073741844.542640869155830/818701561549758/?type=3'
+  }, {
+    img: '<%= image_url("share/share-9.png") %>',
+    text: 'What\'s your story?',
+    url: 'https://www.facebook.com/teawithstrangers/photos/a.818701241549790.1073741844.542640869155830/818701548216426/?type=3'
+  }, {
+    img: '<%= image_url("share/share-10.png") %>',
+    text: 'Hands were made for high-fiving',
+    url: 'https://www.facebook.com/teawithstrangers/photos/a.818701241549790.1073741844.542640869155830/818701534883094/?type=3'
+  }];
 
-	/**
-	 * Index for the current share item
-	 * @type {Number}
-	 */
-	var currentShareItem = 0,
-		sharePopup,
-		trySharingCallback;
+  /**
+   * Index for the current share item
+   * @type {Number}
+   */
+  var currentShareItem = 0,
+    sharePopup,
+    trySharingCallback;
 
-	/**
-	 * Popup open function
-	 * @param  {string} url url path
-	 */
-	sharePopup = function(url) {
-		// Calculate screen dimensions to put window at center
-		var left = (screen.width / 2) - (600 / 2);
-		var top = (screen.height / 2) - (400 / 2);
+  /**
+   * Popup open function
+   * @param  {string} url url path
+   */
+  sharePopup = function(url) {
+    // Calculate screen dimensions to put window at center
+    var left = (screen.width / 2) - (600 / 2);
+    var top = (screen.height / 2) - (400 / 2);
 
-		window.open(url, '_blank', 'toolbar=no, scrollbars=yes, resizable=yes, width=600, height=400, top=' + top + ', left=' + left);
-	};
+    window.open(url, '_blank', 'toolbar=no, scrollbars=yes, resizable=yes, width=600, height=400, top=' + top + ', left=' + left);
+  };
 
-	/**
-	 * Callback for click event when clicking on the `try sharing` button
-	 */
-	trySharingCallback = function() {
-		var shareItem;
-		// Set click behavior of the "Try This On For Size" button
-		$('.sharing-try-button').on('click', function(e) {
-			// Advance share item index
-			currentShareItem++;
+  /**
+   * Callback for click event when clicking on the `try sharing` button
+   */
+  trySharingCallback = function() {
+    var shareItem;
+    // Set click behavior of the "Try This On For Size" button
+    $('.sharing-try-button').on('click', function(e) {
+      // Advance share item index
+      currentShareItem++;
 
-			// Check if we went past the last item in the collection
-			if (SHARE_COLLECTION.length === currentShareItem) {
-				// Last item reached, loop back to 0
-				currentShareItem = 0;
-				if ($('.sharing-try-button-text').text() === 'How about another?') {
-					$('.sharing-try-button-text').text('Ok now share');
-				}
-			}
+      // Check if we went past the last item in the collection
+      if (SHARE_COLLECTION.length === currentShareItem) {
+        // Last item reached, loop back to 0
+        currentShareItem = 0;
+        if ($('.sharing-try-button-text').text() === 'How about another?') {
+          $('.sharing-try-button-text').text('Ok now share');
+        }
+      }
 
-			// Get share item at position in the collection
-			shareItem = SHARE_COLLECTION[currentShareItem];
+      // Get share item at position in the collection
+      shareItem = SHARE_COLLECTION[currentShareItem];
 
-			// Inject image tag into image preview
-			$('#sharing-preview-image').attr('src', shareItem.img);
+      // Inject image tag into image preview
+      $('#sharing-preview-image').attr('src', shareItem.img);
 
-			// Inject text into content preview
-			$('#sharing-preview-text-content').text(shareItem.text);
+      // Inject text into content preview
+      $('#sharing-preview-text-content').text(shareItem.text);
 
-			// Inject the url into the Facebook share
-			$('.sharing-facebook-button').attr('href', 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(shareItem.url) + '&display=popup&ref=plugin');
+      // Inject the url into the Facebook share
+      $('.sharing-facebook-button').attr('href', 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(shareItem.url) + '&display=popup&ref=plugin');
 
-			// Run animation again: Remove class
-			$('.sharing-preview').removeClass('sharing-preview-bounce');
-			// Reflow
-			document.getElementById('sharing-preview').offsetHeight;
-			// Add class back in
-			$('.sharing-preview').addClass('sharing-preview-bounce');
+      // Run animation again: Remove class
+      $('.sharing-preview').removeClass('sharing-preview-bounce');
+      // Reflow
+      document.getElementById('sharing-preview').offsetHeight;
+      // Add class back in
+      $('.sharing-preview').addClass('sharing-preview-bounce');
 
-			// Change sharing try text if it hasn't already
-			if ($('.sharing-try-button-text').text() === 'Try this on for size') {
-				$('.sharing-try-button-text').text('How about another?');
-			}
+      // Change sharing try text if it hasn't already
+      if ($('.sharing-try-button-text').text() === 'Try this on for size') {
+        $('.sharing-try-button-text').text('How about another?');
+      }
 
-			// Remove the blurb if it hasn't already
-			if ($('.sharing-try-blurb').is(':visible')) {
-				$('.sharing-try-blurb').hide();
-			}
+      // Remove the blurb if it hasn't already
+      if ($('.sharing-try-blurb').is(':visible')) {
+        $('.sharing-try-blurb').hide();
+      }
 
-			// Prevent default (#)
-			e.preventDefault();
-		});
+      // Prevent default (#)
+      e.preventDefault();
+    });
 
-		// Set click behavior of sharing buttons
-		// - Facebook
-		// - Twitter
-		// - Tumblr
-		$('.sharing-button').on('click', function(e) {
-			// Open a popup with the share sheet
-			sharePopup($(this).attr('href'));
+    // Set click behavior of sharing buttons
+    // - Facebook
+    // - Twitter
+    // - Tumblr
+    $('.sharing-button').on('click', function(e) {
+      // Open a popup with the share sheet
+      sharePopup($(this).attr('href'));
 
-			// Prevent default
-			e.preventDefault();
-		});
-	};
+      // Prevent default
+      e.preventDefault();
+    });
+  };
 
-	// Initialize the share system (add button events, etc.)
-	$(document).ready(trySharingCallback);
-	$(document).on('page:load', function() {
-	  trySharingCallback();
-	});
+  // Initialize the share system (add button events, etc.)
+  $(document).ready(trySharingCallback);
+  $(document).on('page:load', function() {
+    trySharingCallback();
+  });
 });

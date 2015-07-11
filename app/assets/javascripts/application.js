@@ -24,7 +24,7 @@ $(function() {
   /**
    * Toggle header
    */
-  toggleHeader = function () {
+  toggleHeader = function() {
     var a = document.getElementsByClassName('nav-list')[0];
     if (a.classList.length > 1) {
       a.className = 'nav-list';
