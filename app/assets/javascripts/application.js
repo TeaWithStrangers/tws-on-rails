@@ -17,13 +17,19 @@
 //= require jquery-ui/dialog
 //= require_tree .
 
-function viewportWidth() { return (window.innerWidth > 0) ? window.innerWidth : screen.width; }
+$(function() {
+  'use strict';
+  var toggleHeader;
 
-function toggleHeader(elem) {
-  var a = document.getElementsByClassName('nav-list')[0];
-  if (a.classList.length > 1) {
-    a.className = 'nav-list'
-  } else {
-    a.className += ' open';
-  }
-}
+  /**
+   * Toggle header
+   */
+  toggleHeader = function() {
+    var a = document.getElementsByClassName('nav-list')[0];
+    if (a.classList.length > 1) {
+      a.className = 'nav-list';
+    } else {
+      a.className += ' open';
+    }
+  };
+});
