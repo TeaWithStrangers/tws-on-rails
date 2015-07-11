@@ -5,7 +5,7 @@
         = "There are no tea times happening in #{@city.name} at the moment!"
       %p
         = "We're working to make sure that we have amazing hosts and enough people to ensure that tea time won't just be you and...you. If you've signed up for TWS in #{@city.name}, you'll get an email the second we're ready! If not,"
-        = link_to "sign up here!", city_path(@city), :class => "city-name #{@city.city_code}"
+        = link_to "sign up here!", forbes_city_path(@city), :class => "city-name #{@city.city_code}"
     - else
       %h3.divider
         = "The #{@city.name} hosts are busy collecting stories!"

@@ -1,7 +1,7 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
   before_filter :away_ye_waitlisted
-  before_action :use_new_styles
+  before_action :use_new_styles, except: [:host_tasks]
 
   def show
     @hosting = current_user.tea_times.future.order("start_time ASC")

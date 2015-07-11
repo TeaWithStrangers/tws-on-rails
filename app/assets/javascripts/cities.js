@@ -30,7 +30,7 @@ var onCitiesIndexLoad = function() {
 
       var cities = _(data.cities).chain()
         .sortBy(function(c) {
-              /*jshint camelcase: false */
+          /*jshint camelcase: false */
           return c.info.user_count;
         }).reverse()
         .sortBy(function(c) {
@@ -73,7 +73,9 @@ var onCitiesShow = function() {
   var hosting_button = $('a[data-user-interest="hosting"]');
 
   $.get('/api/v1/users/self/interests', function(user_info) {
-    if (!user_info) { return; }
+    if (!user_info) {
+      return;
+    }
     if (user_info.leading) {
       leading_button.addClass('applied');
     }
