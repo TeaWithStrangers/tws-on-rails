@@ -30,13 +30,8 @@
         show!
       </p>
 
-      <%= form_for(resource,
-        as: resource_name,
-        url: registration_path(resource_name),
-        html: { method: :put, class: "no-header"}, :multipart => true) do |f| %>
-
-        <%= render partial: 'devise/registrations/host', locals: {f: f } %>
-
+      <% if current_user && current_user.host? %>
+        <%= render partial: 'devise/registrations/host' %>
       <% end %>
 
     </div>

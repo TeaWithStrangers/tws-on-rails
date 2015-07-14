@@ -1,5 +1,4 @@
-<% if current_user && current_user.host? %>
-
+<%= form_for(@user, url: update_host_profile_path, method: :put, html: { class: "no-header"}, multipart: true) do |f| %>
   <div class="field photo">
     <div class="form-label">
       <%= f.label :avatar, "Your Picture", class: 'capitalize boldweight inline' %>
@@ -58,7 +57,7 @@
           Just the part after facebook.com/
         </span>
       </div>
-      
+
       <%= f.text_field :facebook %>
     </div>
 
@@ -69,7 +68,7 @@
           Don't include the @
         </span>
       </div>
-      
+
       <%= f.text_field :twitter %>
     </div>
   </div>

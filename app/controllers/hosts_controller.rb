@@ -35,12 +35,27 @@ class HostsController < ApplicationController
     end
   end
 
-  private
-    def authorised?
-      authorize! :manage, :all
+  # PUT /hosts/update
+  # The form that submits this is at /profiles/host_profile in the UI
+  def update
+    @user = User.find(current_user.id)
+    if @user.update_attributes(update_params)
+      redirect_to host_profile_path
+    else
+      render "host_profile_path"
     end
+  end
 
-    def host_params
-      params.require(:user).permit!
-    end
+private
+  def update_params
+    params.require(:user).permit(:summary, :story, :tagline, :twitter, :topics)
+  end
+
+  def authorised?
+    authorize! :manage, :all
+  end
+
+  def host_params
+    params.require(:user).permit!
+  end
 end
