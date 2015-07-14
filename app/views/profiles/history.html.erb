@@ -90,6 +90,14 @@
     <% end %>
   </div>
   <div class="dash-body">
-    <%= render partial: 'teatimes_history', locals: {hosted: @hosting, attended: @attending, waitlisted: @waitlist} %>
+    <% if current_user.host? %>
+      <div class="teas host">
+        <%= render partial: 'hosted_teatimes', locals: {all_hosted: @hosted} %>
+      </div>
+    <% end %>
+
+    <div class="teas attendee">
+      <%= render partial: 'attended_teatimes', locals: {attended: @attended} %>
+    </div>
   </div>
 </div>
