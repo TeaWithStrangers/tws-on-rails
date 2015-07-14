@@ -64,7 +64,7 @@ City.all.each do |city|
     if city.hosts.present?
       host = city.hosts.sample
       date = DateTime.now + (5..15).to_a.sample.days
-      puts "Creating Tea time for #{city.name} with host #{host.name} on date.to_s"
+      puts "Creating Tea time for #{city.name} with host #{host.name} on #{date.to_s}"
       TeaTime.create({
         host: host,
         city: city,
