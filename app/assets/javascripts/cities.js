@@ -1,20 +1,24 @@
-var onCitiesShow = function() {
-  /*jshint camelcase: false */
+var markLeadingButton = function() {
   var leading_button = $('a[data-user-interest="leading"]');
-  /*jshint camelcase: false */
+  leading_button.addClass('applied');
+}
+
+// On the city page, just change the class
+// on the hosting page, remove the button and show a div
+var markHostingButton = function() {
   var hosting_button = $('a[data-user-interest="hosting"]');
+  if (window.location.pathname.match(/cities/)) {
+    hosting_button.addClass('applied');
+  } else if (window.location.pathname.match(/hosting/)) {
+    hosting_button.css('display', 'none');
+    var hosting_interest = $('.interested-in-hosting.hidden')
+    hosting_interest.removeClass('hidden');
+  }
+}
 
-
-  $.get('/api/v1/users/self/interests', function(user_info) {
-    if (!user_info) { return; }
-    if (user_info.leading) {
-      leading_button.addClass('applied');
-    }
-
-    if (user_info.hosting) {
-      hosting_button.addClass('applied');
-    }
-  });
+var bindInterestButtons = function() {
+  var leading_button = $('a[data-user-interest="leading"]');
+  var hosting_button = $('a[data-user-interest="hosting"]');
 
   [leading_button, hosting_button].forEach(function(btn) {
     btn.on('click', function(evt) {
@@ -24,7 +28,6 @@ var onCitiesShow = function() {
         'tws_interests': {}
       };
 
-      /*jshint camelcase: false */
       data.tws_interests[type] = true;
 
       $.ajax({
@@ -32,12 +35,34 @@ var onCitiesShow = function() {
         type: 'PATCH',
         data: data,
         success: function(d) {
-          $(evt.currentTarget).addClass('applied', 'disabled')
+          if (type === 'leading') {
+            markLeadingButton();
+          } else if (type === 'hosting') {
+            markHostingButton();
+          }
         }
       });
     });
   });
 }
 
-$(document).ready(onCitiesShow);
-$(document).on('page:load', onCitiesShow);
+var getInterests = function() {
+  $.get('/api/v1/users/self/interests', function(user_info) {
+    if (!user_info) { return; }
+
+    if (user_info.leading) {
+      markLeadingButton();
+    }
+
+    if (user_info.hosting) {
+      markHostingButton();
+    }
+  });
+}
+
+if (window.location.pathname.match(/cities/) || window.location.pathname.match(/hosting/)) {
+  $(document).ready(bindInterestButtons);
+  $(document).on('page:load', bindInterestButtons);
+  $(document).ready(getInterests);
+  $(document).on('page:load', getInterests);
+}
