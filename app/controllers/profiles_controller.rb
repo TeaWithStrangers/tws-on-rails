@@ -38,6 +38,6 @@ class ProfilesController < ApplicationController
 
 private
   def update_params
-    params.require(:user).permit(:summary, :story, :tagline, :twitter)
+    params.require(:user).permit(:summary, :story, :tagline, :twitter, :topics)
   end
 end
