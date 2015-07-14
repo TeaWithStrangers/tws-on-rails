@@ -38,11 +38,13 @@
       <% end %>
     </div>
   <% else %>
-    <div class="attendee controls">
-      <h6 class="cancel capitalize boldweight">
-        <%= link_to "Cancel my spot", show_attendance_tea_time_path(tea_time, att), class: 'left' %>
-      </h6> 
-    </div>
+    <% unless tea_time.occurred? %>
+      <div class="attendee controls">
+        <h6 class="cancel capitalize boldweight">
+          <%= link_to "Cancel my spot", show_attendance_tea_time_path(tea_time, att), class: 'left' %>
+        </h6>
+      </div>
+    <% end %>
   <% end %>
 
   <!-- What is this section here for? This partial only gets rendered on the host dashboard under upcoming tea times... -->
