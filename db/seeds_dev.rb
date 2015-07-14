@@ -78,3 +78,15 @@ end
 user.home_city.tea_times.first.attendances.create({
   user_id: user.id
 })
+
+past_tea_time = TeaTime.create({
+  host: sf.hosts.sample,
+  city: sf,
+  start_time: DateTime.now - 7.days,
+  duration: 2
+})
+
+past_tea_time.attendances.create({
+  user_id: user.id,
+  status: "present"
+})
