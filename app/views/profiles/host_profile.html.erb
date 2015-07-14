@@ -30,9 +30,10 @@
         show!
       </p>
 
-      <%= form_for(resource, url: update_host_profile_path, method: :put, html: { class: "no-header"}, multipart: true) do |f| %>
-        <%= render partial: 'devise/registrations/host', locals: {f: f } %>
+      <% if current_user && current_user.host? %>
+        <%= render partial: 'devise/registrations/host' %>
       <% end %>
+
     </div>
   </div>
 </div>
