@@ -22,5 +22,6 @@
 # Ignore files uploaded in dev environment
 /public/system
 .DS_Store
+*.dump
 
 /coverage/
