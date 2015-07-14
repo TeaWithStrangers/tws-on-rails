@@ -21,6 +21,10 @@ class ProfilesController < ApplicationController
   end
 
   def host_profile
-    @user = current_user
+    if @current_user && !@current_user.host?
+      redirect_to hosting_path
+    else
+      @user = current_user
+    end
   end
 end
