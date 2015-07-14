@@ -1,0 +1,21 @@
+<% attendances.each do |att| %>
+  <div class="attendance-section">
+    <div class="key">
+      <span class="attendance-status <%= status %>">
+        (<%= attendances.length %>) <%= humanize_attendance_status(status).humanize.titleize.pluralize(attendances.count) %>
+      </span>
+
+      <span class="email <%= status %>">
+        <%= link_to "Email", "mailto:#{tea_time.attendee_emails_by_status(status)}", :target => "_blank" %>
+      </span>
+    </div>
+
+    <ul class="<%= status %> attendees-list">
+      <% attendances.map(&:user).each do |user| %>
+        <li class="attendee-names">
+          <%= link_to user.name, "mailto:#{user.email}", :target => "_blank" %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

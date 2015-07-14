@@ -12,7 +12,14 @@
         <div class="other-deets">
           <% if hosted.present? %>
             <h3 class="light">Your attendees</h3>
-            <%= render partial: 'profiles/history/attendees_info', locals: {tea_time: hosted, attendances: hosted.attendances } %>
+            <div class="attendees-container host-view">
+              <%= render partial: 'profiles/history/attendances_details', locals: {tea_time: hosted, attendances: hosted.attendances.cancelled, status: 'cancelled'} %>
+              <%= render partial: 'profiles/history/attendances_details', locals: {tea_time: hosted, attendances: hosted.attendances.present, status: 'present'} %>
+              <%= render partial: 'profiles/history/attendances_details', locals: {tea_time: hosted, attendances: hosted.attendances.pending, status: 'pending'} %>
+              <%= render partial: 'profiles/history/attendances_details', locals: {tea_time: hosted, attendances: hosted.attendances.waiting_list, status: 'waiting_list'} %>
+              <%= render partial: 'profiles/history/attendances_details', locals: {tea_time: hosted, attendances: hosted.attendances.flake, status: 'flake'} %>
+              <%= render partial: 'profiles/history/attendances_details', locals: {tea_time: hosted, attendances: hosted.attendances.no_show, status: 'no_show'} %>
+            </div>
           <% else %>
             <div class="attendees-container host-view">
               <h3 class="light">You had no attendees :(</h3>

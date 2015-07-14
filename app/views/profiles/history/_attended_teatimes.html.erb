@@ -11,7 +11,10 @@
         <div class="other-deets">
           <% if a.tea_time.attendances.present? %>
             <h3 class="light">Folks at your tea time</h3>
-            <%= render partial: 'profiles/history/attendees_info', locals: {tea_time: a.tea_time, attendances: a.tea_time.attendances} %>
+            <div class="attendees-container host-view" >
+              <%= render partial: 'profiles/history/attendances_details', locals: {tea_time: a.tea_time, attendances: a.tea_time.attendances.present, status: 'present'} %>
+              <%= render partial: 'profiles/history/attendances_details', locals: {tea_time: a.tea_time, attendances: a.tea_time.attendances.pending, status: 'pending'} %>
+            </div>
           <% end %>
         </div>
       </li>
