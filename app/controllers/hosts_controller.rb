@@ -35,16 +35,14 @@ class HostsController < ApplicationController
     end
   end
 
+  # PUT /hosts/update
+  # The form that submits this is at /profiles/host_profile in the UI
   def update
     @user = User.find(current_user.id)
-    if @user && current_user == @user
-      if @user.update_attributes(update_params)
-        redirect_to host_profile_path
-      else
-        render "host_profile_path"
-      end
+    if @user.update_attributes(update_params)
+      redirect_to host_profile_path
     else
-      redirect_to profile_path(current_user), alert: "Sorry, you can't edit other people's profiles. Duh"
+      render "host_profile_path"
     end
   end
 
