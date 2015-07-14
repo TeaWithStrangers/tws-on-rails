@@ -45,7 +45,7 @@ Rails.application.routes.draw do
     end
     member do
       get '/host/:host_id' => 'hosts#show',   as: :host
-      put '/set', action: 'set_city',  as: :set
+      put '/set', action: 'set_home_city',  as: :set
     end
   end
 
