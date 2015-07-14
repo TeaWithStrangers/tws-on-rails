@@ -1,6 +1,6 @@
 <%= render partial: 'shared/header' %>
 <% prefill = !!current_user %>
-<%= render partial: 'profiles/sidebar' %>
+<%= render partial: 'profiles/navbar' %>
 
 <div class="container dashboard">
   <div class="dash-intro">
@@ -138,9 +138,9 @@
                         Say thanks!
                       </h3>
                       <p class="task-subnote">
-                        Let the group know what made it for you, share the group photo, 
-                        send a gif, a video, a quote, your facebook link, social security 
-                        number, whatever. Just be thoughtful. Copy and paste their emails 
+                        Let the group know what made it for you, share the group photo,
+                        send a gif, a video, a quote, your facebook link, social security
+                        number, whatever. Just be thoughtful. Copy and paste their emails
                         and fire away!
                       </p>
                       <div class="email-list">
@@ -159,7 +159,7 @@
           <% end %>
         </ul>
       <% else %>
-        <p class="task-subnote"> 
+        <p class="task-subnote">
           All done marking attendance, referring hosts, saying thanks. Have a dance party! Or create a tea time! Or create a tea time and have a dance party in the middle!
         </p>
       <% end %>

@@ -1,6 +1,6 @@
 <%= render partial: 'shared/header' %>
 <% prefill = !!current_user %>
-<%= render partial: 'profiles/sidebar' %>
+<%= render partial: 'profiles/navbar' %>
 
 <div class="container dashboard">
   <div class="dash-intro">
@@ -90,6 +90,14 @@
     <% end %>
   </div>
   <div class="dash-body">
-    <%= render partial: 'teatimes_history', locals: {hosted: @hosting, attended: @attending, waitlisted: @waitlist} %>
+    <% if current_user.host? %>
+      <div class="teas host">
+        <%= render partial: 'profiles/history/hosted_teatimes', locals: {all_hosted: @hosted} %>
+      </div>
+    <% end %>
+
+    <div class="teas attendee">
+      <%= render partial: 'profiles/history/attended_teatimes', locals: {attended: @attended} %>
+    </div>
   </div>
 </div>

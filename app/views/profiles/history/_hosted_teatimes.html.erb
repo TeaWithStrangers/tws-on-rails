@@ -1,0 +1,58 @@
+<% if !all_hosted.count.zero? %>
+	<h2>
+    Tea times you've hosted
+  </h2>
+
+  <ul class="past host">
+    <% all_hosted.each do |hosted| %>
+      <li class="<%= (:cancelled if hosted.cancelled?) %> tea-time">
+        <div class="tt-deets">
+          <%= render partial: 'teatime_info', locals: {tea_time: hosted, att: nil, without_button: display_button?(local_assigns)} %>
+        </div>
+        <div class="other-deets">
+          <% if hosted.present? %>
+            <h3 class="light">Your attendees</h3>
+            <div class="attendees-container host-view">
+              <%= render partial: 'profiles/attendances_details', locals: {tea_time: hosted, attendances: hosted.attendances.cancelled,     status: 'cancelled'} %>
+              <%= render partial: 'profiles/attendances_details', locals: {tea_time: hosted, attendances: hosted.attendances.present,       status: 'present'} %>
+              <%= render partial: 'profiles/attendances_details', locals: {tea_time: hosted, attendances: hosted.attendances.pending,       status: 'pending'} %>
+              <%= render partial: 'profiles/attendances_details', locals: {tea_time: hosted, attendances: hosted.attendances.waiting_list,  status: 'waiting_list'} %>
+              <%= render partial: 'profiles/attendances_details', locals: {tea_time: hosted, attendances: hosted.attendances.flake,         status: 'flake'} %>
+              <%= render partial: 'profiles/attendances_details', locals: {tea_time: hosted, attendances: hosted.attendances.no_show,       status: 'no_show'} %>
+            </div>
+          <% else %>
+            <div class="attendees-container host-view">
+              <h3 class="light">You had no attendees :(</h3>
+            </div>
+          <% end %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+
+<% else %>
+	<h2>
+    You've never hosted a tea time! Let's change that.
+  </h2>
+  <div class="dash-create-new-tea">
+    <%= link_to new_tea_time_path do %>
+      <div class="new-tea-box">
+        <div class="plus-sign-container">
+          <h1>
+            +
+          </h1>
+        </div>
+        <div class="schedule-text-container">
+          <div class="schedule-text">
+            <h3 class="capitalize">
+              Schedule
+            </h3>
+            <h5 class="boldweight">
+              A Tea Time
+            </h5>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>

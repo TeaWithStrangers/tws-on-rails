@@ -13,7 +13,7 @@ class TeaTime < ActiveRecord::Base
   accepts_nested_attributes_for :attendances
 
   after_touch :clear_association_cache_wrapper
-  after_commit :send_host_confirmation, :queue_attendance_reminder, 
+  after_commit :send_host_confirmation, :queue_attendance_reminder,
     on: :create,
     unless: :skip_callbacks
   before_destroy { CancelTeaTime.send_cancellations(self) }
@@ -148,6 +148,10 @@ class TeaTime < ActiveRecord::Base
   #Takes :filter, same as attendees
   def attendee_emails(filter: nil)
     attendees(filter: filter).map(&:email).join(',')
+  end
+
+  def attendee_emails_by_status(status)
+    attendee_emails(filter: ->(x) { x.status != status })
   end
 
   def attendee_emails_pretty(filter: nil)
