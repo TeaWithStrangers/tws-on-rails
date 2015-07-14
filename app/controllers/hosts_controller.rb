@@ -12,7 +12,7 @@ class HostsController < ApplicationController
   end
 
   def new
-    @host = User.new
+    @user = User.new
   end
 
   def create
