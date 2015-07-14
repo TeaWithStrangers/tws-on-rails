@@ -13,12 +13,12 @@
           <% if hosted.present? %>
             <h3 class="light">Your attendees</h3>
             <div class="attendees-container host-view">
-              <%= render partial: 'profiles/history/attendances_details', locals: {tea_time: hosted, attendances: hosted.attendances.cancelled, status: 'cancelled'} %>
-              <%= render partial: 'profiles/history/attendances_details', locals: {tea_time: hosted, attendances: hosted.attendances.present, status: 'present'} %>
-              <%= render partial: 'profiles/history/attendances_details', locals: {tea_time: hosted, attendances: hosted.attendances.pending, status: 'pending'} %>
-              <%= render partial: 'profiles/history/attendances_details', locals: {tea_time: hosted, attendances: hosted.attendances.waiting_list, status: 'waiting_list'} %>
-              <%= render partial: 'profiles/history/attendances_details', locals: {tea_time: hosted, attendances: hosted.attendances.flake, status: 'flake'} %>
-              <%= render partial: 'profiles/history/attendances_details', locals: {tea_time: hosted, attendances: hosted.attendances.no_show, status: 'no_show'} %>
+              <%= render partial: 'profiles/attendances_details', locals: {tea_time: hosted, attendances: hosted.attendances.cancelled, status: 'cancelled'} %>
+              <%= render partial: 'profiles/attendances_details', locals: {tea_time: hosted, attendances: hosted.attendances.present, status: 'present'} %>
+              <%= render partial: 'profiles/attendances_details', locals: {tea_time: hosted, attendances: hosted.attendances.pending, status: 'pending'} %>
+              <%= render partial: 'profiles/attendances_details', locals: {tea_time: hosted, attendances: hosted.attendances.waiting_list, status: 'waiting_list'} %>
+              <%= render partial: 'profiles/attendances_details', locals: {tea_time: hosted, attendances: hosted.attendances.flake, status: 'flake'} %>
+              <%= render partial: 'profiles/attendances_details', locals: {tea_time: hosted, attendances: hosted.attendances.no_show, status: 'no_show'} %>
             </div>
           <% else %>
             <div class="attendees-container host-view">
