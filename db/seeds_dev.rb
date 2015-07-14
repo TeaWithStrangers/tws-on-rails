@@ -74,3 +74,7 @@ City.all.each do |city|
     end
   end
 end
+
+user.home_city.tea_times.first.attendances.create({
+  user_id: user.id
+})
