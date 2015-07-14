@@ -19,12 +19,11 @@ Rails.application.routes.draw do
       resources :hosts,   only: [:index]
       resources :users do
         collection do
-          get 'self', to: :self
-          get 'self/interests',   to: :interests
+          get   'self', to: :self
+          get   'self/interests',   to: :interests
           patch 'self/interests', to: :update_interests
         end
       end
-
     end
   end
 
@@ -66,10 +65,11 @@ Rails.application.routes.draw do
   end
 
   scope :profile do
-    get '/'                 => 'profiles#show',       as: :profile, via: :get
-    get '/history'          => 'profiles#history',    as: :history
-    get '/tasks'            => 'profiles#host_tasks', as: :host_tasks
-    get '/host_profile'     => 'profiles#host_profile', as: :host_profile
+    get '/'                 => 'profiles#show',                 as: :profile, via: :get
+    get '/history'          => 'profiles#history',              as: :history
+    get '/tasks'            => 'profiles#host_tasks',           as: :host_tasks
+    get '/host_profile'     => 'profiles#host_profile',         as: :host_profile
+    put '/host_profile'     => 'profiles#update_host_profile',  as: :update_host_profile
   end
 
   get '/:id' => 'cities#show'

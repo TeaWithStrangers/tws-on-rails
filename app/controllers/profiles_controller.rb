@@ -22,4 +22,22 @@ class ProfilesController < ApplicationController
 
   def host_profile
   end
+
+  def update_host_profile
+    @user = User.find(current_user.id)
+    if @user && current_user == @user
+      if @user.update_attributes(update_params)
+        redirect_to host_profile_path
+      else
+        render "host_profile_path"
+      end
+    else
+      redirect_to profile_path(current_user), alert: "Sorry, you can't edit other people's profiles. Duh"
+    end
+  end
+
+private
+  def update_params
+    params.require(:user).permit(:summary, :story, :tagline, :twitter)
+  end
 end
