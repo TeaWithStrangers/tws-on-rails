@@ -15,27 +15,7 @@
               <h3 class="light">
                 Your attendees
               </h3>
-              <div class="attendees-container host-view">
-                <% hosted.attendances.order(:status).group_by(&:status).each do |k,v| %>
-                  <div class="attendance-section">
-                    <div class="key">
-                      <span class="attendance-status <%= k %>">
-                        (<%= v.length %>) <%= humanize_attendance_status(k).humanize.titleize.pluralize(v.count) %>
-                      </span>
-                      <span class="email <%= k %>">
-                        <%= link_to "Email", "mailto:#{hosted.attendee_emails(filter: ->(x) { x.status != k })}", :target => "_blank" %>
-                      </span>
-                    </div>
-                    <ul class="<%= k %> attendees-list">
-                      <% v.map(&:user).each do |a| %>
-                        <li class="attendee-names">
-                          <%= link_to a.name, "mailto:#{a.email}", :target => "_blank" %>
-                        </li>
-                      <% end %>
-                    </ul>
-                  </div>
-                <% end %>
-              </div>
+              <%= render partial: 'profiles/history/tea_time_partial_mk_new', locals: {tea_time: hosted, attendances: hosted.attendances } %>
             <% else %>
               <div class="attendees-container host-view">
                 <h3 class="light">
