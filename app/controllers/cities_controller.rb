@@ -10,8 +10,8 @@ class CitiesController < ApplicationController
     @upcoming_cities = City.where.not(brew_status: City.brew_statuses[:fully_brewed]).order(users_count: :desc)
   end
 
-  def set_city
-    current_user.update(home_city: @city)
+  def set_home_city
+    current_user.update_attributes(home_city: @city)
     redirect_to city_path(@city)
   end
 
