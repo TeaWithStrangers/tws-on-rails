@@ -35,12 +35,29 @@ class HostsController < ApplicationController
     end
   end
 
-  private
-    def authorised?
-      authorize! :manage, :all
+  def update
+    @user = User.find(current_user.id)
+    if @user && current_user == @user
+      if @user.update_attributes(update_params)
+        redirect_to host_profile_path
+      else
+        render "host_profile_path"
+      end
+    else
+      redirect_to profile_path(current_user), alert: "Sorry, you can't edit other people's profiles. Duh"
     end
+  end
 
-    def host_params
-      params.require(:user).permit!
-    end
+private
+  def update_params
+    params.require(:user).permit(:summary, :story, :tagline, :twitter, :topics)
+  end
+
+  def authorised?
+    authorize! :manage, :all
+  end
+
+  def host_params
+    params.require(:user).permit!
+  end
 end

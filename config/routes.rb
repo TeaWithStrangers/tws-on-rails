@@ -69,7 +69,7 @@ Rails.application.routes.draw do
     get '/history'          => 'profiles#history',              as: :history
     get '/tasks'            => 'profiles#host_tasks',           as: :host_tasks
     get '/host_profile'     => 'profiles#host_profile',         as: :host_profile
-    put '/host_profile'     => 'profiles#update_host_profile',  as: :update_host_profile
+    put '/host_profile'     => 'hosts#update',                  as: :update_host_profile
   end
 
   get '/:id' => 'cities#show'
