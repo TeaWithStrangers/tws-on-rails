@@ -9,11 +9,9 @@
           <%= render partial: 'teatime_info', locals: {tea_time: a.tea_time, att: a, without_button: true} %>
         </div>
         <div class="other-deets">
-          <% if a.tea_time.attendances.length > 0 %>
-            <h3 class="light">
-              Folks at your tea time
-            </h3>
-            <%= render partial: 'profiles/history/tea_time_partial_mk_new', locals: {tea_time: a.tea_time, attendances: a.tea_time.attendances} %>
+          <% if a.tea_time.attendances.present? %>
+            <h3 class="light">Folks at your tea time</h3>
+            <%= render partial: 'profiles/history/attendees_info', locals: {tea_time: a.tea_time, attendances: a.tea_time.attendances} %>
           <% end %>
         </div>
       </li>

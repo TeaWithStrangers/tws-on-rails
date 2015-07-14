@@ -10,16 +10,12 @@
           <%= render partial: 'teatime_info', locals: {tea_time: hosted, att: nil, without_button: display_button?(local_assigns)} %>
         </div>
         <div class="other-deets">
-          <% if hosted.attendances.length > 0 %>
-            <h3 class="light">
-              Your attendees
-            </h3>
-            <%= render partial: 'profiles/history/tea_time_partial_mk_new', locals: {tea_time: hosted, attendances: hosted.attendances } %>
+          <% if hosted.present? %>
+            <h3 class="light">Your attendees</h3>
+            <%= render partial: 'profiles/history/attendees_info', locals: {tea_time: hosted, attendances: hosted.attendances } %>
           <% else %>
             <div class="attendees-container host-view">
-              <h3 class="light">
-                You had no attendees :(
-              </h3>
+              <h3 class="light">You had no attendees :(</h3>
             </div>
           <% end %>
         </div>
