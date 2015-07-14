@@ -1,6 +1,6 @@
 <%= render partial: 'shared/header' %>
 <% prefill = !!current_user %>
-<%= render partial: 'profiles/sidebar' %>
+<%= render partial: 'profiles/navbar' %>
 <div class="container dashboard">
   <div class="dash-intro">
     <div class="canceling sidebar-section">
@@ -14,7 +14,7 @@
   <div class="dash-body">
     <h2>You'll be missed!</h2>
     <p class="modal-text">
-      No hard feelings, but could you share a word about what came up? 
+      No hard feelings, but could you share a word about what came up?
       We could learn something and maybe make it easier to commit in the future.
     </p>
     <%= form_for(@attendance, url: update_attendance_tea_time_path(@attendance.tea_time, @attendance), method: :put) do |f| %>
