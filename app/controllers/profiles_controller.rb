@@ -21,5 +21,6 @@ class ProfilesController < ApplicationController
   end
 
   def host_profile
+    @user = current_user
   end
 end
