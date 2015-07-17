@@ -48,7 +48,7 @@ class HostsController < ApplicationController
 
 private
   def update_params
-    params.require(:user).permit(:summary, :story, :tagline, :twitter, :topics)
+    params.require(:user).permit(:summary, :story, :tagline, :twitter, :topics, :avatar)
   end
 
   def authorised?
