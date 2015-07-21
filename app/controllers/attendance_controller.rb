@@ -30,7 +30,9 @@ class AttendanceController < ApplicationController
 
     if @attendance.save
 
+      # sends confirmation email AND queues 2 reminder emails for attendee
       @attendance.send_mail
+
 
       message = @attendance.waiting_list? ?
         "You're on the wait list! Check your email for details." :
