@@ -3,6 +3,9 @@ require 'spec_helper'
 describe User do
   it { expect(subject).to validate_presence_of(:nickname) }
 
+  # TODO this will probably become has_many some day
+  it { expect(subject).to have_one(:email_reminder) }
+
   context 'names' do
     let(:user) { create(:user) }
 
