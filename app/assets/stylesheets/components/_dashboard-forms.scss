@@ -123,8 +123,14 @@ These are styles related to forms within the user or host dashboards
 		}
 	}
 }
-
-.form.create-tea, .form.edit-tea {
+.form.email-reminder {
+  textarea {
+    height: 300px;
+    font-size: 0.8em;
+    line-height: 1em;
+  }
+}
+.form.email-reminder, .form.create-tea, .form.edit-tea {
   .form-checkbox input[type="checkbox"] {
     display: inline-block;
     width: auto;
@@ -150,7 +156,7 @@ These are styles related to forms within the user or host dashboards
       font-size: 1em;
       margin-right: 5px;
     }
-		margin-bottom: 1em;
+    margin-bottom: 1em;
 
 		&.duration {
 			display: none;
