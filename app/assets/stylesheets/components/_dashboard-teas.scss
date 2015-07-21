@@ -11,15 +11,6 @@ These are styles related to tea time displays on attendee or host dashboards.
   }
 
   ul.past.attendee {
-    .other-deets {
-      .attendance-section {
-        display: none;
-
-        &.present, &.pending {
-          display: block;
-        }
-      }
-    }
 
     li.cancelled {
       .other-deets {
