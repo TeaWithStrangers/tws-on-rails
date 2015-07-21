@@ -42,27 +42,31 @@ class Attendance < ActiveRecord::Base
     if self.pending?
       #Immediate Attendance Confirmation
       AttendanceMailer.delay.registration(self.id)
+
       queue_reminders
 
       #Ethos Email is sent when a user has never attended a tea time before
       if user.attendances.present.count.zero?
         TeaTimeMailer.delay(run_at: Time.now + 1.hour).ethos(self.user.id)
       end
+
     elsif self.waiting_list?
       AttendanceMailer.delay.waitlist(self.id)
     end
   end
 
   def queue_reminders
-    st = self.tea_time.start_time
+    start_time = self.tea_time.start_time
 
-    two_day_reminder = st - 2.days
-    if !(Time.now > two_day_reminder)
+    # T - 2day reminder
+    two_day_reminder = start_time - 2.days
+    if two_day_reminder.future?
       AttendanceMailer.delay(run_at: two_day_reminder).reminder(self.id, :two_day)
     end
 
-    twelve_hour_reminder = st - 12.hours
-    if !(Time.now > twelve_hour_reminder)
+    # T - 12hr reminder
+    twelve_hour_reminder = start_time - 12.hours
+    if twelve_hour_reminder.future?
       AttendanceMailer.delay(run_at: twelve_hour_reminder).reminder(self.id, :same_day)
     end
   end
