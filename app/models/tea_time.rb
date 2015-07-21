@@ -14,8 +14,9 @@ class TeaTime < ActiveRecord::Base
 
   after_touch :clear_association_cache_wrapper
 
-  after_commit :queue_reminder_to_mark_attendance,  on: :create, unless: :skip_callbacks
-  after_commit :send_host_confirmation,             on: :create, unless: :skip_callbacks
+  after_commit :queue_reminder_to_mark_attendance,
+               :send_host_confirmation,
+               on: :create, unless: :skip_callbacks
 
   before_destroy { CancelTeaTime.send_cancellations(self) }
 
