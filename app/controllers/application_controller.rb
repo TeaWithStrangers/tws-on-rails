@@ -26,6 +26,18 @@ class ApplicationController < ActionController::Base
 
   protected
 
+    def authorize_host!
+      if @current_user && !@current_user.host?
+        redirect_to hosting_path
+      end
+    end
+
+    def away_non_user
+      if !current_user
+        redirect_to root_path, alert: 'Log in before trying that again :)'
+      end
+    end
+
     def away_ye_waitlisted
       if !current_user
         redirect_to root_path, alert: 'Log in before trying that again :)'
