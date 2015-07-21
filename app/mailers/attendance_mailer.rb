@@ -34,7 +34,7 @@ class AttendanceMailer < ActionMailer::Base
     body = tt.host.email_reminder.body
 
     cancel_delivery unless body
-    TeaTime.first.start_time
+
     body += "\n\n <hr> *Note from the Robots: This email is about your tea time on #{tt.date_to_email}. It's at #{tt.location}. Enjoy it!*"
 
     # See here for options https://github.com/vmg/redcarpet
