@@ -1,5 +1,8 @@
 <% host_attributes = [:id, :nickname, :given_name, :family_name] %>
-<%= form_for @tea_time, :html => {:class => "no-header tea-time"} do |f| %>
+<%= form_for @tea_time, :html => {:class => "tea-time"} do |f| %>
+  <h3 class="form-subheader">
+    Time and Place
+  </h3>
   <div class="field datepicker">
     <div class="form-label">
       <%= f.label :start_time, class: 'capitalize boldweight' %>
