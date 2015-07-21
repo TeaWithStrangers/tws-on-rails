@@ -40,22 +40,17 @@ class Attendance < ActiveRecord::Base
     end
   end
 
-  def send_mail
-    if self.pending?
-      #Immediate Attendance Confirmation
-      AttendanceMailer.delay.registration(self.id)
+  def send_confirmation_mail
+    AttendanceMailer.delay.registration(self.id)
+  end
 
-      queue_first_reminder
-      queue_second_reminder
+  def send_waitlist_mail
+    AttendanceMailer.delay.waitlist(self.id)
+  end
 
-      #Ethos Email is sent when a user has never attended a tea time before
-      if user.attendances.present.count.zero?
-        TeaTimeMailer.delay(run_at: Time.now + 1.hour).ethos(self.user.id)
-      end
-
-    elsif self.waiting_list?
-      AttendanceMailer.delay.waitlist(self.id)
-    end
+  # TODO why is this run specifically 1 hour after creating attendance?
+  def send_ethos_mail
+    TeaTimeMailer.delay(run_at: Time.now + 1.hour).ethos(self.user_id)
   end
 
   # T - 2day reminder
