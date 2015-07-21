@@ -34,6 +34,8 @@ class AttendanceMailer < ActionMailer::Base
     body = tt.host.email_reminder.body
 
     cancel_delivery unless body
+    TeaTime.first.start_time
+    body += "\n\n <hr> *Note from the Robots: This email is about your tea time on #{tt.date_to_email}. It's at #{tt.location}. Enjoy it!*"
 
     # See here for options https://github.com/vmg/redcarpet
     renderer = Redcarpet::Render::HTML.new(filter_html: true, hard_wrap: true, escape_html: true)
@@ -47,6 +49,7 @@ class AttendanceMailer < ActionMailer::Base
     cancel_delivery unless @attendance.pending?
     mail(
       to:           @attendance.user.email,
+      from:         "\"#{tt.host.nickname} at Tea With Strangers\" <#{tt.host.email}>",
       subject:      "Your tea time is coming up!",
       body:         sanitized_body,
       content_type: "text/html")
