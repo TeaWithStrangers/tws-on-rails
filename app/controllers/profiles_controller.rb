@@ -2,6 +2,7 @@ class ProfilesController < ApplicationController
   before_action :authenticate_user!
   before_filter :away_ye_waitlisted
   before_action :use_new_styles
+  before_action :authorize_host!, only: [:host_profile]
 
   def show
     @hosting = current_user.tea_times.future.order("start_time ASC")
@@ -21,10 +22,6 @@ class ProfilesController < ApplicationController
   end
 
   def host_profile
-    if @current_user && !@current_user.host?
-      redirect_to hosting_path
-    else
-      @user = current_user
-    end
+    @user = current_user
   end
 end

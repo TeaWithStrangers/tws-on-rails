@@ -8,7 +8,7 @@
       </ul>
     <% end %>
 
-    <ul class="dash-menu-list">
+    <ul id="profile-nav" class="dash-menu-list">
       <li class="nav-link-item">
         <%= link_to "Upcoming Tea Times", profile_path %>
       </li>
@@ -28,6 +28,11 @@
       <li class="nav-link-item">
         <%= link_to "Account Details", edit_user_registration_path %>
       </li>
+      <% if current_user.host? %>
+        <li class="nav-link-item">
+          <%= link_to "Customize Reminder Email", customize_reminder_email_path %>
+        </li>
+      <% end %>
     </ul>
   </div>
 </div>

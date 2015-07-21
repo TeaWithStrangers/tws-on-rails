@@ -5,6 +5,7 @@ require 'rspec/rails'
 require 'capybara/rails'
 require 'capybara/rspec'
 require "cancan/matchers"
+require 'shoulda/matchers'
 
 #Coveralls Test Coverage
 require 'coveralls'

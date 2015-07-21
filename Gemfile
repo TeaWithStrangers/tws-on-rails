@@ -73,14 +73,13 @@ gem 'spring', group: :development
 
 # Random debug tools
 group :development, :test do
-
   gem 'pry-rails'
   gem 'pry-stack_explorer'
   gem 'rspec-rails', '~> 2.14.2'
   gem 'factory_girl', '~>4.4'
   gem 'factory_girl_rails'
   gem 'rails-observers'
-  gem 'shoulda-matchers'
+  gem 'shoulda-matchers', require: false
   gem 'coveralls', require: false
 end
 
