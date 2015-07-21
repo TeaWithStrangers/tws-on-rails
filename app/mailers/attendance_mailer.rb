@@ -31,10 +31,14 @@ class AttendanceMailer < ActionMailer::Base
     @user = @attendance.user
     tt = @attendance.tea_time
 
-    # should be sanitized and turned into html from whatever format it is stored in
     body = tt.host.email_reminder.body
 
     cancel_delivery unless body
+
+    # See here for options https://github.com/vmg/redcarpet
+    renderer = Redcarpet::Render::HTML.new(filter_html: true, hard_wrap: true, escape_html: true)
+    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
+    sanitized_body = markdown.render(body)
 
     attachments['event.ics'] = {
       mime_type: "text/calendar",
@@ -44,7 +48,7 @@ class AttendanceMailer < ActionMailer::Base
     mail(
       to:           @attendance.user.email,
       subject:      "Your tea time is coming up!",
-      body:         body,
+      body:         sanitized_body,
       content_type: "text/html")
   end
 
