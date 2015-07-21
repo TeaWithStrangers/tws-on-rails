@@ -16,6 +16,8 @@ class Attendance < ActiveRecord::Base
   scope :flake,         ->() { where(status: [:flake].map   {|x| Attendance.statuses[x]})  }
   scope :no_show,       ->() { where(status: [:no_show].map {|x| Attendance.statuses[x]})  }
 
+  delegate :start_time, to: :tea_time, prefix: true
+
   def todo?
     pending?
   end
@@ -43,7 +45,8 @@ class Attendance < ActiveRecord::Base
       #Immediate Attendance Confirmation
       AttendanceMailer.delay.registration(self.id)
 
-      queue_reminders
+      queue_first_reminder
+      queue_second_reminder
 
       #Ethos Email is sent when a user has never attended a tea time before
       if user.attendances.present.count.zero?
@@ -55,17 +58,17 @@ class Attendance < ActiveRecord::Base
     end
   end
 
-  def queue_reminders
-    start_time = self.tea_time.start_time
-
-    # T - 2day reminder
-    two_day_reminder = start_time - 2.days
+  # T - 2day reminder
+  def queue_first_reminder
+    two_day_reminder = tea_time_start_time - 2.days
     if two_day_reminder.future?
       AttendanceMailer.delay(run_at: two_day_reminder).reminder(self.id, :two_day)
     end
+  end
 
-    # T - 12hr reminder
-    twelve_hour_reminder = start_time - 12.hours
+  # T - 12hr reminder
+  def queue_second_reminder
+    twelve_hour_reminder = tea_time_start_time - 12.hours
     if twelve_hour_reminder.future?
       AttendanceMailer.delay(run_at: twelve_hour_reminder).reminder(self.id, :same_day)
     end
