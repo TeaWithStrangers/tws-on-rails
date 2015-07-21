@@ -62,7 +62,12 @@ class Attendance < ActiveRecord::Base
   def queue_first_reminder
     two_day_reminder = tea_time_start_time - 2.days
     if two_day_reminder.future?
-      AttendanceMailer.delay(run_at: two_day_reminder).reminder(self.id, :two_day)
+      if tea_time.use_custom_email_reminder && tea_time.host.email_reminder.present?
+        Rails.logger.info("Sending Custom First Reminder")
+        AttendanceMailer.delay(run_at: two_day_reminder).custom_first_reminder(self.id)
+      else
+        AttendanceMailer.delay(run_at: two_day_reminder).reminder(self.id, :two_day)
+      end
     end
   end
 

@@ -22,6 +22,32 @@ class AttendanceMailer < ActionMailer::Base
          end
   end
 
+  def custom_first_reminder(attendance_id)
+    sendgrid_category "Tea Time Reminder"
+
+    @attendance = Attendance.find(attendance_id)
+    cancel_delivery unless @attendance
+
+    @user = @attendance.user
+    tt = @attendance.tea_time
+
+    # should be sanitized and turned into html from whatever format it is stored in
+    body = tt.host.email_reminder.body
+
+    cancel_delivery unless body
+
+    attachments['event.ics'] = {
+      mime_type: "text/calendar",
+      content: IcalCreator.new(@attendance.tea_time).call.to_ical
+    }
+    cancel_delivery unless @attendance.pending?
+    mail(
+      to:           @attendance.user.email,
+      subject:      "Your tea time is coming up!",
+      body:         body,
+      content_type: "text/html")
+  end
+
   # Twelve-hour and two day reminder of a tea time a user is attending
   def reminder(attendance_id, type)
     sendgrid_category "Tea Time Reminder"
