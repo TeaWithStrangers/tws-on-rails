@@ -60,13 +60,13 @@ class Attendance < ActiveRecord::Base
 
     # T - 2day reminder
     two_day_reminder = start_time - 2.days
-    if !(Time.now > two_day_reminder)
+    if two_day_reminder.future?
       AttendanceMailer.delay(run_at: two_day_reminder).reminder(self.id, :two_day)
     end
 
     # T - 12hr reminder
     twelve_hour_reminder = start_time - 12.hours
-    if !(Time.now > twelve_hour_reminder)
+    if twelve_hour_reminder.future?
       AttendanceMailer.delay(run_at: twelve_hour_reminder).reminder(self.id, :same_day)
     end
   end
