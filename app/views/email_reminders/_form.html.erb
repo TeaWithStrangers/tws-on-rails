@@ -1,0 +1,35 @@
+<%= form_for @email_reminder, url: @form_url, html: {class: "no-header tea-time"} do |f| %>
+  <div class="field city">
+    <div class="form-label">
+      <%= f.label :body, class: 'capitalize boldweight' %>
+    </div>
+    <%= f.text_area :body %>
+  </div>
+
+  <% if @email_reminder.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= "#{pluralize(@email_reminder.errors.count, "error")} prohibited this tea_time from being saved:" %>
+      </h2>
+      <ul>
+        <% @email_reminder.errors.full_messages.each do |msg| %>
+          <li>
+            <%= msg %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions field">
+    <% if @email_reminder.persisted? %>
+      <div class="update-button">
+        <%= f.submit 'Update Email Reminder' %>
+      </div>
+    <% else %>
+      <div class="create-button">
+        <%= f.submit 'Create Email Reminder' %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
