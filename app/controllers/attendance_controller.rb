@@ -30,9 +30,12 @@ class AttendanceController < ApplicationController
 
     if @attendance.save
 
-      # sends confirmation email AND queues 2 reminder emails for attendee
-      @attendance.send_mail
-
+      # Send various emails (Should all be run async)
+      @attendance.send_confirmation_mail  if @attendance.pending?
+      @attendance.queue_first_reminder    if @attendance.pending?
+      @attendance.queue_second_reminder   if @attendance.pending?
+      @attendance.send_ethos_mail         if (@attendance.pending? && @attendance.user.attendances.present.count.zero?)
+      @attendance.send_waitlist_mail      if @attendance.waiting_list?
 
       message = @attendance.waiting_list? ?
         "You're on the wait list! Check your email for details." :

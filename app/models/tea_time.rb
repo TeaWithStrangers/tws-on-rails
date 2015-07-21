@@ -40,6 +40,10 @@ class TeaTime < ActiveRecord::Base
     start_time.strftime("%A, %b %e")
   end
 
+  def date_to_email
+    start_time.strftime("%A, %b %e at %I:%M%P")
+  end
+
   def day
     start_time.strftime("%A")
   end

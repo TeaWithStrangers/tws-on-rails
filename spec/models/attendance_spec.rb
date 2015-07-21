@@ -1,6 +1,8 @@
 require 'spec_helper.rb'
 
 describe Attendance do
+  it { expect(subject).to delegate_method(:start_time).to(:tea_time).with_prefix(true) }
+
   describe 'todo?' do
     it 'returns true when pending? is false' do
       attendance = create(:attendance)
@@ -51,18 +53,53 @@ describe Attendance do
     end
   end
 
-  describe '.queue_reminders' do
+  describe '.queue_first_reminder' do
     let!(:attendance) { build(:attendance) }
 
-    it 'should not queue a reminder after it should have been sent' do
+    it 'should not first second reminder after the tea time has started' do
       Time.stub(:now).and_return(attendance.tea_time.start_time + 1.hour)
       dj_count = Delayed::Job.count
-      attendance.queue_reminders
+      attendance.queue_first_reminder
       expect(Delayed::Job.count).to eq(dj_count)
+    end
 
+    it 'should not queue first reminder less than 48 hours before' do
+      Time.stub(:now).and_return(attendance.tea_time.start_time - 36.hour)
+      dj_count = Delayed::Job.count
+      attendance.queue_first_reminder
+      expect(Delayed::Job.count).to eq(dj_count)
+    end
+
+    it 'should queue first reminder 50 hours before' do
+      Time.stub(:now).and_return(attendance.tea_time.start_time - 50.hour)
+      dj_count = Delayed::Job.count
+      attendance.queue_first_reminder
+      expect(Delayed::Job.count).to eq(dj_count += 1)
+    end
+  end
+
+  describe '.queue_second_reminder' do
+    let!(:attendance) { build(:attendance) }
+
+    it 'should not queue second reminder after the tea time has started' do
+      Time.stub(:now).and_return(attendance.tea_time.start_time + 1.hour)
+      dj_count = Delayed::Job.count
+      attendance.queue_second_reminder
+      expect(Delayed::Job.count).to eq(dj_count)
+    end
+
+    it 'should not queue second reminder less than 12 hours before' do
+      Time.stub(:now).and_return(attendance.tea_time.start_time - 8.hour)
+      dj_count = Delayed::Job.count
+      attendance.queue_second_reminder
+      expect(Delayed::Job.count).to eq(dj_count)
+    end
+
+    it 'should queue the second reminder more than 12 hours before' do
       Time.stub(:now).and_return(attendance.tea_time.start_time - 13.hour)
-      attendance.queue_reminders
-      expect(Delayed::Job.count).to eq(dj_count.succ)
+      dj_count = Delayed::Job.count
+      attendance.queue_second_reminder
+      expect(Delayed::Job.count).to eq(dj_count += 1)
     end
   end
 

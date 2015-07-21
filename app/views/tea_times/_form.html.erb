@@ -1,5 +1,8 @@
 <% host_attributes = [:id, :nickname, :given_name, :family_name] %>
-<%= form_for @tea_time, :html => {:class => "no-header tea-time"} do |f| %>
+<%= form_for @tea_time, :html => {:class => "tea-time"} do |f| %>
+  <h3 class="form-subheader">
+    Time and Place
+  </h3>
   <div class="field datepicker">
     <div class="form-label">
       <%= f.label :start_time, class: 'capitalize boldweight' %>
@@ -56,6 +59,29 @@
         </ul>
       </div>
     <% end %>
+  </div>
+  <h3 class="form-subheader">
+    Reminder Emails
+  </h3>
+  <div class="field">
+    <p class="small">
+      <span class="border-circle">?</span>
+      By default, your attendees get reminded about tea time 48hrs and 12hrs before it starts. These are from "The Robots at Tea With Strangers". You can customize the T-48hrs note to be from "<%= current_user.nickname %> at Tea With Strangers" to include any specific information and allow attendees to reply directly to you.
+      <br>
+
+      <% if current_user.email_reminder.present? %>
+        <%= link_to "Update/View Custom T-48 email", customize_reminder_email_path %>
+        <div class="form-checkbox">
+          <%= check_box('tea_time', 'use_custom_email_reminder', options = {}, checked_value = "1", unchecked_value = "0") %>
+
+          <%= f.label :use_custom_email_reminder do %>
+            <strong>Use Custom Email Reminder 48 hrs before tea time?</strong>
+          <% end %>
+        </div>
+      <% else %>
+        <%= link_to "Set a Custom T-48 email", customize_reminder_email_path %>
+      <% end %>
+    </p>
   </div>
   <div class="actions field">
     <% if @tea_time.persisted? %>

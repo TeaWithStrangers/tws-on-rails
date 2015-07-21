@@ -1,7 +1,19 @@
-<%= form_for @email_reminder, url: @form_url, html: {class: "no-header tea-time"} do |f| %>
+<%= form_for @email_reminder, url: @form_url, html: {class: "tea-time"} do |f| %>
+  <h3 class="form-subheader">
+    Custom Email Reminder
+  </h3>
+  <div class="field">
+    <p class="small">
+      <span class="border-circle">?</span>
+      By default, your attendees get reminded about tea time 48hrs and 12hrs before it starts. These are from "The Robots at Tea With Strangers". You can customize the T-48hrs note to be from "<%= current_user.nickname %> at Tea With Strangers" to include any specific information and allow attendees to reply directly to you.
+      <br>
+    </p>
+  </div>
   <div class="field city">
     <div class="form-label">
-      <%= f.label :body, class: 'capitalize boldweight' %>
+      <%= f.label :body, class: 'capitalize boldweight' do %>
+        Draft
+      <% end %>
     </div>
     <%= f.text_area :body %>
   </div>
