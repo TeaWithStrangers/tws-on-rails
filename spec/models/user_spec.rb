@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe User do
   it { expect(subject).to validate_presence_of(:nickname) }
-  #it { expect(subject).to validate_presence_of(:home_city_id) }
 
   context 'names' do
     let(:user) { create(:user) }
