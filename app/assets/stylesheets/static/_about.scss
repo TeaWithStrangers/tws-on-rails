@@ -48,3 +48,14 @@
     margin-bottom: $base-font-size;
   }
 }
+
+.interested-in-hosting {
+  clear: both;
+  background: lighten($tws-green, 25);
+  color: darken($tws-green,10);
+  padding: 2em 2em 1.5em;
+  
+  &.hidden {
+    display: none;
+  }
+}
