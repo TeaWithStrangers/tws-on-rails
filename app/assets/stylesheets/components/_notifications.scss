@@ -1,0 +1,18 @@
+// These are styles for notifications, alerts & flash banners
+
+.notification {
+  clear: both;
+  background: lighten($tws-green, 25);
+  color: darken($tws-green,10);
+  padding: 2em 2em 1em;
+  overflow: auto;
+
+  &.slim {
+    padding: 1em 1.5em 0.5em;
+  }
+
+  &.alert {
+    background: darken($tws-tan, 2);
+    color: darken($tws-yellow,15);
+  }
+}
