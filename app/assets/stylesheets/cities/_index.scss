@@ -232,8 +232,7 @@ h3.cities-list-header {
 .required-resources,
 .sharing,
 .become-host,
-.host-intro,
-.host-prof-tts {
+.host-intro {
 
   @include media($tablet) {
     @include span-columns(10 of 12);

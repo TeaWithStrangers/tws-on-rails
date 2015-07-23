@@ -6,61 +6,129 @@ host profiles.
 */
 
 .all-bio-content {
-	overflow: auto;
-	margin-bottom: 2em;
-	
-	@include media($tablet) {
-		margin-top: -5em;
-	}
+  overflow: auto;
+  margin-bottom: 2em;
+  
+  @include media($tablet) {
+    margin-top: -5em;
+  }
 }
 
 .photo-container {
 
-	@include media($tablet) {
+  @include media($tablet) {
 
-		@include span-columns(4 of 12);
-	}
+    @include span-columns(4 of 12);
+  }
 
-	.host-photo {
-		background: $tws-white;
-		border: $base-border;
-		padding: 0.75em 0.75em 3em;
+  .host-photo {
+    background: $tws-white;
+    border: $base-border;
+    padding: 0.75em 0.75em 3em;
+    line-height: 0;
+    margin-bottom: 0.5em;
 
-		.host-img {
-			width: 100%;
-			height: auto;
-		}
-	}
+    .host-img {
+      width: 100%;
+      height: auto;
+    }
+  }
+}
+
+.social-container {
+  text-align: center;
+  margin: 1em;
+  .social {
+    display: inline-block;
+    a {
+      font-size: 0.8em;
+      padding: 0.5em;
+      color: $tws-white;
+      background: $fb-blue;
+      border-radius: $base-border-radius;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    &.twitter {
+      a {
+        background: $tw-blue;
+      }
+    }
+  }
 }
 
 .host-bio {
 
-	@include media($tablet) {
-		@include span-columns(8 of 12);
-		@include omega(2n);
+  @include media($tablet) {
+    @include span-columns(8 of 12);
+    @include omega(2n);
 
-		margin-top: 4em;
-	}
+    margin-top: 4em;
+  }
 
-	.bio-section {
-		margin-bottom: 1em;
+  .bio-section {
+    margin-bottom: 1em;
 
-		p.placeholder {
-			color: lighten($tws-medium-gray, 15);
-		}
-	}
+    p.placeholder {
+      color: lighten($tws-medium-gray, 15);
+    }
+  }
 }
 
 
 .host-prof-tts {
-	
-	h2.section-header {
-		margin-bottom: 1em;
-	}
+  
+  h2.section-header {
+    margin-bottom: 0.5em;
+  }
+}
+
+.host-teas .tt-set-container {
+
+  .tt-container {
+    
+    
+    @include span-columns(12 of 12);
+  }
+
+  // This code is about to get messy. We need new partials for tea time displays across the website.
+
+  .host-container {
+    display: none;
+  }
+
+  .tt-card-top {
+    margin: 0;
+  }
+
+  .date-time {
+    width: 100%;
+    text-align: left;
+    float: none;
+    position: relative;
+    top: auto;
+
+    h6.light.boldweight.capitalize {
+      font-size: 0.8em;
+      font-weight: 400;
+      text-transform: capitalize;
+    }
+
+    h3.size-up {
+      text-transform: capitalize; 
+    }
+  }
 }
 
 .teas {
-	clear: both;
-	overflow: auto;
-	margin-bottom: 3em;
+  clear: both;
+  overflow: auto;
+  margin-bottom: 3em;
+}
+
+.subfooter {
+  background: $tws-tan;
+  text-align: center;
+  padding: 2em 1em;
 }
