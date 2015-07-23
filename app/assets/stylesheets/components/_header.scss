@@ -5,8 +5,11 @@ header {
 
   .container {
     $vpadding: 1em;
-    padding-top: $vpadding;
-    padding-bottom: $vpadding;
+    
+    @include media($desktop) {
+      padding-top: $vpadding;
+      padding-bottom: $vpadding;
+    }
   }
 
   .nav-list {
