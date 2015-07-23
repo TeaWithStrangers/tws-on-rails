@@ -168,8 +168,11 @@ ul.dash-menu-list {
     }
 
     .hello {
-      @include span-columns(8 of 12);
-      margin-right: 0;
+
+      &.host {
+        @include span-columns(8 of 12);
+        margin-right: 0;
+      }
 
       h3 {
         font-weight: 400;

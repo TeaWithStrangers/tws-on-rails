@@ -43,12 +43,17 @@
             <h2>
               Welcome home, <%= "#{current_user.nickname}!" %>
             </h2>
-            <h3 class="gray">
-              Where do you call home?
-            </h3>
-            <p>
-              Let's make sure you don't miss anything good happening near you. Set your home city.
-            </p>
+            <div class="notification slim alert">
+              <h3 class="gray">
+                Set your home city!
+              </h3>
+              <p>
+                Don't miss anything good happening around you.
+              </p>
+              <div class="join-tea sidebar-section">
+                <%= link_to 'Find Your City', cities_path, class: "button find-city" %>
+              </div>
+            </div>
           </div>
           <div class="join-tea sidebar-section">
             <%= link_to 'Find Your City', cities_path, class: "button find-city" %>
@@ -61,11 +66,8 @@
               Welcome home, <%= "#{current_user.nickname}!" %>
             </h2>
             <h3 class="gray">
-              Where do you call home?
+              What are you grateful for today?
             </h3>
-            <p>
-              Let's make sure you don't miss anything good happening near you. Set your home city.
-            </p>
           </div>
           <div class="join-tea sidebar-section">
             <%= link_to "Sign Up For a Tea Time!", city_path(current_user.home_city), class: "button signup-tt" %>
@@ -75,12 +77,17 @@
             <h2>
               Welcome home, <%= "#{current_user.nickname}!" %>
             </h2>
-            <h3 class="gray">
-              Where do you call home?
-            </h3>
-            <p>
-              Let's make sure you don't miss anything good happening near you. Set your home city.
-            </p>
+            <div class="notification slim alert">
+              <h3 class="gray">
+                Set your home city!
+              </h3>
+              <p>
+                Don't miss anything good happening around you.
+              </p>
+              <div class="join-tea sidebar-section">
+                <%= link_to 'Find Your City', cities_path, class: "button find-city" %>
+              </div>
+            </div>
           </div>
           <div class="join-tea sidebar-section">
             <%= link_to 'Find Your City', cities_path, class: "button find-city" %>

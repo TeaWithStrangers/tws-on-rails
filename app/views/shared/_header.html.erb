@@ -4,9 +4,19 @@
     <span class="menu-expando tws-logo-type" onclick='toggleHeader()'></span>
     <nav class='nav-list'>
       <ul class='nav-links'>
-        <li class="nav-link-item">
-          <%= link_to "Cities", cities_path %>
-        </li>
+        <% if !current_user %>
+          <li class="nav-link-item">
+            <%= link_to "Cities", cities_path %>
+          </li>
+        <% elsif current_user && current_user.home_city.nil? %>
+          <li class="nav-link-item">
+            <%= link_to "Set Home City", cities_path, class: 'nav-emphasis' %>
+          </li>
+        <% else %>
+          <li class="nav-link-item">
+            <%= link_to current_user.home_city.name, city_path(current_user.home_city) %>
+          </li>
+        <% end %>
         <% if !current_user || (current_user && !current_user.host?) %>
           <li class="nav-link-item">
             <%= link_to "Hosting", hosting_path %>
@@ -20,14 +30,14 @@
             <%= link_to 'Sign In', new_user_session_path, id: 'login' %>
           </li>
           <li class="nav-link-item">
-            <%= link_to 'Sign Up', next_step_path, id: 'signup', class: 'sign-up-emphasis' %>
+            <%= link_to 'Sign Up', next_step_path, id: 'signup', class: 'nav-emphasis' %>
           </li>
         <% else %>
           <li class="nav-link-item">
             <%= link_to 'Dashboard', profile_path %>
           </li>
           <li class='nav-link-item'>
-            <%= link_to('Sign out', destroy_user_session_path, class: 'sign-in-emphasis', method: :delete) %>
+            <%= link_to('Sign out', destroy_user_session_path, method: :delete) %>
           </li>
         <% end %>
       </ul>
