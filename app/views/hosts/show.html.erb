@@ -3,14 +3,14 @@
 <% end %>
 
 <% content_for :description do %>
-  <%= "#{@host.name} hosts tea time with Tea With Strangers in #{@city.name}! Meet some strangers!" %>
+  <%= "#{@host.name} brings strangers together for conversations in #{@city.name}! Join em and share some stories!" %>
 <% end %>
 
 <% content_for :head do %>
-  <meta content="website" property="og:type"/>
-  <meta content="Hey, I'm <%= @host.name %>! | Tea With Strangers" property="og:title"/>
-  <meta content="<%= @host.avatar.url(:landscape) %>" property="og:image"/>
-  <meta content="<%= @host.name %> hosts tea time with Tea With Strangers in <%= @city.name %>! Meet some strangers!" property="og:description"/>
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Hey, I'm <%= @host.name %>! | Tea With Strangers" />
+  <meta property="og:image" content="<%= @host.avatar.url(:landscape) %>" />
+  <meta property="og:description" content="<%= @host.name %> hosts tea time with Tea With Strangers in <%= @city.name %>! Meet some strangers!" />
 <% end %>
 
 <div class="light-background">
