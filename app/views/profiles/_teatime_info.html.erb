@@ -38,7 +38,7 @@
       <% end %>
     </div>
   <% else %>
-    <% unless tea_time.occurred? %>
+    <% unless tea_time.occurred? || tea_time.cancelled? %>
       <div class="attendee controls">
         <h6 class="cancel capitalize boldweight">
           <%= link_to "Cancel my spot", show_attendance_tea_time_path(tea_time, att), class: 'left' %>
