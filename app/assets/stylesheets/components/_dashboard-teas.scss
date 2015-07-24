@@ -86,6 +86,10 @@ These are styles related to tea time displays on attendee or host dashboards.
 
     }
 
+    p.description {
+      margin-bottom: 0;
+    }
+
     .controls {
 
       &.attendee {
@@ -100,8 +104,7 @@ These are styles related to tea time displays on attendee or host dashboards.
           @include span-columns(4.5 of 9);
 
           background: none;
-          border: none;
-          padding: 0;
+          border: none; 
           margin-bottom: 0;
           clear: none;
         }
@@ -284,7 +287,7 @@ These are styles related to tea time displays on attendee or host dashboards.
   }
 }
 
-.attending {
+.attending, .waitlisted {
   .tt-deets {
     margin-bottom: 0;
 
@@ -294,9 +297,20 @@ These are styles related to tea time displays on attendee or host dashboards.
 
     .tt-box {
       margin-bottom: 0;
+    }
 
-      @include media($tablet) {
-        margin-bottom: 0.5em;
+    .place {
+      min-height: auto;
+    }
+
+    .tt-cta {
+      padding: 0.5em;
+      background: $tws-white;
+      border: $base-border;
+      border-top: 0;
+
+      button {
+        font-size: 0.8em;
       }
     }
   }
@@ -305,7 +319,7 @@ These are styles related to tea time displays on attendee or host dashboards.
     background: darken($tws-tan, 0.5);
     border: $base-border;
     border-top: none;
-    padding: 1em;
+    padding: 0.75em;
     margin-bottom: 1em;
     clear: both;
 
@@ -361,8 +375,29 @@ These are styles related to tea time displays on attendee or host dashboards.
     }
 
     .contact-link {
+      &.facebook {
+        border-color: $fb-blue;
+        color: $fb-blue;
+
+        &:hover {
+          border-color: $tw-blue;
+          background-color: $tw-blue;
+        }
+      }
+
+      &.twitter {
+        border-color: $tw-blue;
+        color: $tw-blue;
+
+        &:hover {
+          background-color: $tw-blue;
+          border-color: $tw-blue;
+        }
+      }
+
       @include inverted-button($tws-orange,$tws-orange);
       @include span-columns(2.25 of 4.5);
+      @include omega(2n);
 
       cursor: pointer;
       font-size: 0.6em;
@@ -381,6 +416,8 @@ These are styles related to tea time displays on attendee or host dashboards.
       }
     }
   }
+
+
 }
 
 .canceling {

@@ -6,9 +6,38 @@
     <% attendances.each do |a| %>
       <li class="<%= (:cancelled if a.cancelled?) %> tea-time">
         <div class="tt-deets">
-          <%= render partial: 'teatime_info', locals: {att: a, tea_time: a.tea_time, without_button: false} %>
+          <%= render partial: 'teatime_info_waitlist', locals: {att: a, tea_time: a.tea_time, without_button: false} %>
         </div>
         <div class="host-deets">
+          <h3 class="light">
+            Your host (well, maybe)
+          </h3>
+          <div class="tt-host-intro">
+            <div class="photo-container">
+              <div class="host-photo">
+                <img class="host-img" src="<%= a.tea_time.host.avatar.url(:landscape) %>"/>
+              </div>
+            </div>
+            <div class="host-intro-text">
+              <p>
+                This is what <%= a.tea_time.host.nickname %> in case
+                you need to find them if you get off the waitlist.
+              </p>
+            </div>
+
+            <div class="tt-host-contact">
+              <%= link_to host_city_path(a.tea_time.city, a.tea_time.host), class: "contact-link"  do %>
+                <%= a.tea_time.host.nickname %>'s Profile
+              <% end %>
+              <%= link_to "Email #{a.tea_time.host.nickname}", "mailto:#{a.tea_time.host.email}?subject=Tea%20Time%20Question", class: "contact-link"  %>
+              <% if a.tea_time.host.facebook? %>
+                <%= link_to "Facebook", a.tea_time.host.facebook_url, class: "contact-link facebook"  %>
+              <% end %>
+              <% if a.tea_time.host.twitter? %>
+                <%= link_to "Twitter", a.tea_time.host.twitter_url, class: "contact-link twitter"  %>
+              <% end %>
+            </div>
+          </div>
         </div>
       </li>
     <% end %>

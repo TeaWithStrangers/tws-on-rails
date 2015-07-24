@@ -31,13 +31,14 @@
               <% end %>
               <%= link_to "Email #{a.tea_time.host.nickname}", "mailto:#{a.tea_time.host.email}?subject=Tea%20Time%20Question", class: "contact-link"  %>
               <% if a.tea_time.host.facebook? %>
-                <%= link_to "Facebook", a.tea_time.host.facebook_url, class: "contact-link"  %>
+                <%= link_to "Facebook", a.tea_time.host.facebook_url, class: "contact-link facebook"  %>
               <% end %>
               <% if a.tea_time.host.twitter? %>
-                <%= link_to "Twitter", a.tea_time.host.twitter_url, class: "contact-link"  %>
+                <%= link_to "Twitter", a.tea_time.host.twitter_url, class: "contact-link twitter"  %>
               <% end %>
             </div>
           </div>
+        </div>
       </li>
     <% end %>
   </ul>
