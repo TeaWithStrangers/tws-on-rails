@@ -1,0 +1,54 @@
+<div class="tt-container">
+  <div class="tt-box">
+    <div class="tt-card-top">
+      <div class="date-time">
+        <div class="day">
+          <h5 class="light lightweight">
+            <%= "#{tea_time.day}" %>
+          </h5>
+        </div>
+        <div class="date">
+          <h3>
+            <%= "#{tea_time.date_full_month_sans_year}" %>
+          </h3>
+        </div>
+        <div class="time">
+          <h5 class="boldweight">
+            <%= "#{tea_time.start_end_hour}" %>
+          </h5>
+        </div>
+      </div>
+    </div>
+    <div class="place">
+      <h5 class="light lightweight">
+        <%= "#{tea_time.location}" %>
+      </h5>
+    </div>
+    <hr>
+    <div class="availability">
+      <div class="seats-left">
+        <p class="description">
+          <% if tea_time.spots_remaining? %>
+            <%= "#{tea_time.spots_remaining} #{'seat'.pluralize(tea_time.spots_remaining)} opened up!" %>
+          <% else %>
+            You're still on the waitlist!
+          <% end %>
+        </p>
+      </div>
+      <%= tea_spots_progress_bar(6 - tea_time.spots_remaining, 6) %>
+    </div>
+  </div>
+
+  <% if !(without_button ||= false) %>
+    <% if tea_time.spots_remaining? %>
+      <div class="tt-cta">
+        <%= link_to tea_time_path(tea_time), class: 'tea-time-scheduling' do %>
+          <button class="spots<%= tea_time.spots_remaining %>">
+            Come join!
+          </button>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+  <!-- End of section confusion -->
+</div>
