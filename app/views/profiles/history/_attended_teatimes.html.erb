@@ -5,9 +5,7 @@
   <ul class="past attendee">
     <% attended.each do |a| %>
       <li class="<%= (:cancelled if a.tea_time.cancelled?) %> tea-time">
-        <div class="tt-deets">
-          <%= render partial: 'teatime_info', locals: {tea_time: a.tea_time, att: a, without_button: true} %>
-        </div>
+        <%= render partial: 'shared/tea_time_row', locals: {tea_time: a.tea_time, att: a, without_button: true} %>
         <div class="other-deets">
           <% if a.tea_time.attendances.present? %>
             <h3 class="light">Folks at your tea time</h3>

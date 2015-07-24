@@ -13,7 +13,36 @@ These are styles related to tea time displays on attendee or host dashboards.
   ul.past.attendee {
 
     li.cancelled {
+      opacity: 0.25;
+
       .other-deets {
+        display: none;
+      }
+
+      .tt-container:before {
+        content: 'Canceled';
+        padding-right: 45%;
+      }
+    }
+
+    // This code is about to get messy. We need new partials for tea time displays across the website.
+    .tt-container {
+      @include span-columns(12 of 12);
+
+      @include media($tablet) {
+        @include span-columns(4.5 of 9);
+        margin-bottom: 0;
+      }
+
+      .place {
+        min-height: auto;
+      }
+
+      .date h3 {
+        margin: 0;
+      }
+
+      hr, .availability {
         display: none;
       }
     }
