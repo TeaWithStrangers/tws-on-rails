@@ -245,6 +245,12 @@ ul.dash-menu-list {
       @include span-columns(1 of 4);
     }
 
+    .homecity-text-container {
+      position: relative;
+
+      @include span-columns(4 of 4);
+    }
+
     .schedule-text-container {
       position: relative;
 
