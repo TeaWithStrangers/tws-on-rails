@@ -15,4 +15,8 @@
     background: darken($tws-tan, 2);
     color: darken($tws-yellow,15);
   }
+
+  &.set-city {
+    padding: 1em;
+  }
 }
