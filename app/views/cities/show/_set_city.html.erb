@@ -1,19 +1,21 @@
-<div class="set-city">
-  <% if current_user && current_user.home_city.nil? %>
-    <h3 class="center">You have no home city yet!</h3>
-    <%= form_for(@city, url: set_city_path(@city), method: :put) do |f|%>
-      <%= f.submit "This is my home city", class: 'full-width-button' %>
-    <% end %>
-  <% elsif current_user && current_user.home_city != @city%>
-    <p>
+<div class="notification alert set-city">
+  <div class="set-city">
+    <% if current_user && current_user.home_city.nil? %>
+      <h3 class="center">You have no home city yet!</h3>
       <%= form_for(@city, url: set_city_path(@city), method: :put) do |f|%>
-        <strong>
-          <%= current_user.home_city.name %> is your home city.
-        </strong>
-        <%= f.submit "Click here to change your city to #{@city.name}.", class: 'text' %>
+        <%= f.submit "This is my home city", class: 'full-width-button' %>
       <% end %>
-    </p>
-  <% elsif current_user && current_user.home_city == @city%>
-    <p><strong>This is your home city!</strong> If that's wrong, <%= link_to 'go here to change it.', cities_path %></p>
-  <% end %>
+    <% elsif current_user && current_user.home_city != @city%>
+      <p>
+        <%= form_for(@city, url: set_city_path(@city), method: :put) do |f|%>
+          <h3 class="center">
+            <%= current_user.home_city.name %> is your home city.
+          </h3>
+          <%= f.submit "Click here to change your city to #{@city.name}.", class: 'text' %>
+        <% end %>
+      </p>
+    <% elsif current_user && current_user.home_city == @city%>
+      <p><strong>This is your home city!</strong> If that's wrong, <%= link_to 'go here to change it.', cities_path %></p>
+    <% end %>
+  </div>
 </div>
