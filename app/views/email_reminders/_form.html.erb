@@ -6,23 +6,45 @@
   });
 </script>
 <%= form_for @email_reminder, url: @form_url, html: {class: "tea-time"} do |f| %>
-  <h3 class="form-subheader">
-    Custom Email Reminder
+  <h3 class="form-subheader first">
+    Personalized Email Reminder
   </h3>
   <div class="field">
-    <p class="small">
+    <p class="small informational">
       <span class="border-circle">?</span>
-      By default, your attendees get reminded about tea time 48hrs and 12hrs before it starts. These are from "The Robots at Tea With Strangers". You can customize the T-48hrs note to be from "<%= current_user.nickname %> at Tea With Strangers" to include any specific information and allow attendees to reply directly to you.
-      <br>
+      We're working on making this feature easier to use, but for now, you can include links, use bolds, italics, etc. using Markdown. 
+      <%= link_to 'Some tips on how to use Markdown here', 'https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#emphasis' %>. (Yes, we're going to get rid of this and make it easier.)
     </p>
   </div>
   <div class="field city">
     <div class="form-label">
       <%= f.label :body, class: 'capitalize boldweight' do %>
-        Draft
+        Current Email
       <% end %>
+      <span class="sub-label light">
+        
+      </span>
+    </div>
+    <div class="email-metadata">
+      <div class="datum">
+        <strong>FROM:</strong>
+        "<%= current_user.nickname %> at Tea With Strangers" <<%= current_user.email %> >
+      </div>
+      <div class="datum">
+        <strong>SUBJECT:</strong>
+        Your tea time is coming up!
+      </div>
     </div>
     <%= f.text_area :body %>
+    <div class="addendum">
+      <hr> 
+      <p class="note">
+        Note from the Robots: This email is about your tea time on <%= Time.now.strftime("%A, %b %e at %I:%M%P") %>. It's at Stranger Cafe, 523 14th Street, <%= current_user.home_city.name %>. Enjoy it!
+      </p>
+      <div class="information">
+        ^ This bit is appended to all the emails just to add context.
+      </div>
+    </div>
   </div>
 
   <% if @email_reminder.errors.any? %>

@@ -124,38 +124,93 @@ These are styles related to forms within the user or host dashboards
 }
 .form.email-reminder {
   textarea {
-    height: 300px;
     font-size: 0.8em;
-    line-height: 1em;
+    line-height: 1.625;
+    min-height: 10em;
+    border-top: none;
+    border-bottom: none;
+    margin-bottom: 0;
+    border-radius: 0;
+  }
+
+  .email-metadata {
+    font-size: 0.8em;
+    border: $base-border;
+    border-radius: $base-border-radius $base-border-radius 0 0;
+    padding: 1em 0;
+
+    .datum {
+      display: block;
+      padding: 0 1em;
+    }
+  }
+
+  .addendum {
+    border: $base-border;
+    border-top: none;
+    border-radius: 0 0 $base-border-radius $base-border-radius;
+    padding: 1em;
+    padding-top: 0;
+    margin-bottom: 1.5em;
+
+    p.note {
+      font-size: 0.8em;
+      font-style: italic;
+    }
+
+    hr {
+      margin-top: 0;
+    }
+
+    .information {
+      font-size: 0.6em;
+      color: $tws-medium-gray;
+      background: $base-border-color;
+      padding: 0.5em 1em;
+    }
   }
 }
 .form.email-reminder, .form.create-tea, .form.edit-tea {
+  
   .form-checkbox input[type="checkbox"] {
     display: inline-block;
     width: auto;
-    margin:0px;padding:0px;
+    margin:0px;
+    padding:0px;
     margin-top:-2px;
     margin-left:-2px;
     width:14px;
     height:14px;
   }
 	.field {
-    p.small {
-      font-size: 0.8em;
+    p {
+      margin-bottom: 1em;
+
+      &.small {
+        font-size: 0.8em;
+      }
+
+      &.informational {
+        padding-left: 2em;
+        position: relative;
+      }
     }
+
     .border-circle {
-      border: solid 1px #000;
+      border: 2px solid $base-font-color;
       border-radius: 50%;
-      height: 22px;
-      width: 22px;
+      height: 1.5em;
+      width: 1.5em;
       display: inline-block;
       text-align: center;
       padding: 0;
-      font-weight: 500;
+      font-weight: 600;
       font-size: 1em;
-      margin-right: 5px;
+      line-height: 1.25;
+      position: absolute;
+      top: 0;
+      left: 0;
     }
-    margin-bottom: 1em;
 
 		&.duration {
 			display: none;
