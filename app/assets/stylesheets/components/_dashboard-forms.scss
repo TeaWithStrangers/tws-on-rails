@@ -126,11 +126,15 @@ These are styles related to forms within the user or host dashboards
   textarea {
     font-size: 0.8em;
     line-height: 1.625;
-    min-height: 10em;
+    min-height: 20em;
     border-top: none;
     border-bottom: none;
     margin-bottom: 0;
     border-radius: 0;
+
+    @include media($tablet) {
+      min-height: 10em;
+    }
   }
 
   .email-metadata {
