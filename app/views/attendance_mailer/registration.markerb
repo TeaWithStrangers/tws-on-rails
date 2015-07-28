@@ -13,7 +13,7 @@ to this (yes, real people exist behind the robots).
 Bleep bleep bloop,
 The Robots at Tea With Strangers
 
-P.S. If you need to cancel your seat, <%= link_to 'do that here', profile_path %>. 
+P.S. If you need to cancel your seat, <%= link_to 'do that here', profile_url %>. 
 Try and do it sooner rather than later because (1) nobody appreciates a last minute 
 cancelation and (2) seats are limited, so if you aren't putting yours to good use, 
 opening it up for someone else is nice.
