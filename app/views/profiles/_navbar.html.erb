@@ -12,15 +12,14 @@
       <li class="nav-link-item">
         <%= link_to "Quick Look", profile_path %>
       </li>
-      <% if current_user.host? %>
-        <li class="nav-link-item">
-          <%= link_to "Attendance & Host Referrals", host_tasks_path %>
-        </li>
-      <% end %>
       <li class="nav-link-item">
         <%= link_to "History", history_path %>
       </li>
       <% if current_user.host? %>
+        <li class="nav-link-item separator"></li>
+        <li class="nav-link-item">
+          <%= link_to "Attendance & Host Referrals", host_tasks_path %>
+        </li>
         <li class="nav-link-item">
           <%= link_to "Edit Profile", host_profile_path %>
         </li>
