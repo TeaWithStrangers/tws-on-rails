@@ -9,7 +9,7 @@ form {
     border: $base-border;
 
     &:focus, &:hover, &:active {
-    	outline: none;
+      outline: none;
     }
 
 
@@ -20,18 +20,18 @@ form {
 }
 
 input {
-	&.name:after {
-		content: 'Name';
-		position: absolute;
-		font-size: $base-font-size*0.5;
-		top: 50%;
-		right: 50%; 
-		display: inline-block;
-	}
-	&.email:focus {
+  &.name:after {
+    content: 'Name';
+    position: absolute;
+    font-size: $base-font-size*0.5;
+    top: 50%;
+    right: 50%;
+    display: inline-block;
+  }
+  &.email:focus {
 
-	}
-	&.password:focus {
+  }
+  &.password:focus {
 
-	}
+  }
 }
