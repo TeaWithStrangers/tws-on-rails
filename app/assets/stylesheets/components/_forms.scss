@@ -1,4 +1,8 @@
 form {
+  /* Special formatting for CKEditor elements */
+  div[class^="cke_"] {
+    margin: 0 0 $base-spacing / 2 0;
+  }
   input, select, textarea {
     display: block;
     margin: 0 0 $base-spacing / 2 0;

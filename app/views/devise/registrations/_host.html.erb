@@ -80,3 +80,10 @@
     <%= f.submit "Save Changes" %>
   </div>
 <% end %>
+
+<script>
+  var opts = { allowedContent: 'p b i; a[!href]', height: 100}
+  CKEDITOR.replace('user[summary]', opts);
+  CKEDITOR.replace('user[story]', opts);
+  CKEDITOR.replace('user[topics]', opts);
+</script>
