@@ -12,6 +12,6 @@ a note at <%= @attendance.tea_time.host.email %>.
 Bleep bleep bloop,  
 The Robots at Tea With Strangers
 
-P.S. If you can't make it for whatever reason, <%= link_to 'cancel your seat here', profile_path %>. 
+P.S. If you can't make it for whatever reason, <%= link_to 'cancel your seat here', profile_url %>. 
 Since seats are limited, we keep waitlists for each tea time so people can grab open seats as they 
 come, so it's always better to actually cancel than it is to be a no show :).
