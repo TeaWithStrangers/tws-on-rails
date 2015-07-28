@@ -1,0 +1,57 @@
+/*
+
+Stylesheet to customize styles of CKEditor
+
+*/
+
+
+
+.cke_chrome {
+  border: $base-border !important;
+  box-shadow: none !important;
+}
+
+form div[class^="cke_"] {
+  margin: 0 0 1em;
+}
+
+.cke_top {
+  background: $tws-white !important;
+  border: none !important;
+  border-bottom: $base-border !important;
+  box-shadow: none !important;
+}
+
+.cke_toolbar {
+  .cke_toolgroup {
+    border: $base-border !important;
+    background: lighten($base-border-color, 10) !important;
+
+    .cke_button_on {
+      background: $base-border-color !important;
+      box-shadow: none !important;
+    }
+
+    .cke_button_off {
+      &:hover {
+        background: lighten($base-border-color, 5) !important;
+        box-shadow: none !important;
+      }
+    }
+  }
+
+  .cke_button__about {
+    display: none !important;
+  }
+}
+
+.email_reminders {
+  .cke_chrome {
+    border-top: 0 !important;
+    border-bottom: 0 !important;
+  }
+
+  form div[class^="cke_"] {
+    margin: 0;
+  }
+}
