@@ -46,7 +46,9 @@ class AttendanceMailer < ActionMailer::Base
       mime_type: "text/calendar",
       content: IcalCreator.new(@attendance.tea_time).call.to_ical
     }
+
     cancel_delivery unless @attendance.pending?
+
     mail(
       to:           @attendance.user.email,
       from:         "\"#{tt.host.nickname} at Tea With Strangers\" <#{tt.host.email}>",
@@ -64,9 +66,11 @@ class AttendanceMailer < ActionMailer::Base
     @type = type
     tt = @attendance.tea_time
 
-    mail.attachments['event.ics'] = {mime_type: "text/calendar",
+    mail.attachments['event.ics'] = {
+      mime_type: "text/calendar",
+      content: IcalCreator.new(@attendance.tea_time).call.to_ical
+    }
 
-                                     content: IcalCreator.new(@attendance.tea_time).call.to_ical}
     cancel_delivery unless @attendance.pending?
 
     mail(to: @attendance.user.email,
