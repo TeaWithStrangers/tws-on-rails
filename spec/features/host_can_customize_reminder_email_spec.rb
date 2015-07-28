@@ -5,7 +5,7 @@ feature 'Customizing reminder email' do
     host = create(:user, :host)
     sign_in(host)
     visit profile_path
-    click_on("Customize Reminder Email")
+    click_on("Customize Reminders")
     expect(current_path).to eq '/profile/customize_reminder_email'
   end
 end
