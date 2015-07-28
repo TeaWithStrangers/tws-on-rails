@@ -68,7 +68,7 @@ Rails.application.routes.draw do
     get '/'                 => 'profiles#show',                 as: :profile, via: :get
     get '/history'          => 'profiles#history',              as: :history
     get '/tasks'            => 'profiles#host_tasks',           as: :host_tasks
-    get '/host_profile'     => 'profiles#host_profile',         as: :host_profile
+    get '/host_profile'     => 'hosts#edit',                    as:  :host_profile
     put '/host_profile'     => 'hosts#update',                  as: :update_host_profile
     get '/customize_reminder_email' => 'email_reminders#new'
     get '/customize_reminder_email' => 'email_reminders#edit'
