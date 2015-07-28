@@ -45,3 +45,10 @@
     <% end %>
   </div>
 <% end %>
+<script>
+  // replace the body element of the Rails form helper with the CKEDITOR
+  // See more config options at http://docs.ckeditor.com/#!/api/CKEDITOR.config
+  CKEDITOR.replace( 'email_reminder[body]', {
+    allowedContent: 'p b i; a[!href]',
+  });
+</script>
