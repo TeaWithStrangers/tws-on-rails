@@ -2,7 +2,6 @@ class ProfilesController < ApplicationController
   before_action :authenticate_user!
   before_filter :away_ye_waitlisted
   before_action :use_new_styles
-  before_action :authorize_host!, only: [:host_profile]
 
   def show
     @hosting = current_user.tea_times.future.order("start_time ASC")
@@ -19,9 +18,5 @@ class ProfilesController < ApplicationController
     @attended = current_user.attendances_for(TeaTime.past).attended.joins(:tea_time).order('tea_times.start_time DESC')
     @hosting = current_user.tea_times.future.order("start_time ASC")
     @attending = current_user.attendances_for(TeaTime.future).attended.joins(:tea_time).order('tea_times.start_time ASC')
-  end
-
-  def host_profile
-    @user = current_user
   end
 end

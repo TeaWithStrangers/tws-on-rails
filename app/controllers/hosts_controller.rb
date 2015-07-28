@@ -1,6 +1,7 @@
 class HostsController < ApplicationController
   before_action :authenticate_user!, :authorised?, only: [:new, :create]
   before_action :use_new_styles, except: [:new, :create]
+  before_action :authorize_host!, only: [:host_profile]
 
   def show
     @city = City.for_code(params[:id])
@@ -13,6 +14,10 @@ class HostsController < ApplicationController
 
   def new
     @user = User.new
+  end
+
+  def edit
+    @user = current_user
   end
 
   def create
