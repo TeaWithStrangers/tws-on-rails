@@ -12,12 +12,12 @@ feature 'Profile navigation links' do
     host = create(:user, :host)
     sign_in(host)
     visit profile_path
-    expect(page.find('#profile-nav')).to have_link('Customize Reminder Email')
+    expect(page.find('#profile-nav')).to have_link('Customize Reminders')
   end
   scenario 'As non host' do
     user = create(:user)
     sign_in(user)
     visit profile_path
-    expect(page.find('#profile-nav')).not_to have_link('Customize Reminder Email')
+    expect(page.find('#profile-nav')).not_to have_link('Customize Reminders')
   end
 end
