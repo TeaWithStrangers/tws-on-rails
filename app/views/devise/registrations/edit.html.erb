@@ -3,19 +3,51 @@
 
 <div class="container dashboard">
   <div class="dash-intro">
-    <div class="photo-container">
-      <div class="host-photo">
-        <img class="host-img" src="<%= @current_user.avatar.url(:landscape) %>"/>
+    <% if current_user.host? %>
+      <div class="photo-container">
+        <div class="host-photo">
+          <img class="host-img" src="<%= @current_user.avatar.url(:landscape) %>"/>
+        </div>
       </div>
-    </div>
-    <div class="hello">
-      <h2>
-        Welcome home, <%= "#{current_user.nickname}!" %>
-      </h2>
-      <h3 class="gray">
-        You look real good today.
-      </h3>
-    </div>
+      <div class="hello host sidebar-section">
+        <h2>
+          Welcome home, <%= "#{current_user.nickname}!" %>
+        </h2>
+        <h3 class="gray">
+          You look real good today.
+        </h3>
+      </div>
+      <% if !@hosting.count.zero? %>
+        <div class="create-new-tea sidebar-section">
+          <%= link_to 'Create Another Tea Time', new_tea_time_path, class: "button create-new-tea" %>
+        </div>
+      <% end %>
+    <% else %>
+      <% if !current_user.home_city.nil? %>
+        <div class="hello sidebar-section">
+          <h2>
+            Welcome home, <%= "#{current_user.nickname}!" %>
+          </h2>
+          <h3 class="gray">
+            What are you grateful for today?
+          </h3>
+        </div>
+      <% else %>
+        <div class="hello sidebar-section">
+          <h2>
+            Welcome home, <%= "#{current_user.nickname}!" %>
+          </h2>
+          <div class="notification slim alert">
+            <h3 class="gray">
+              Be sure your city is listed correctly!
+            </h3>
+            <p>
+              You haven't set a home city yet, but you can sort that out in your account details here.
+            </p>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
   </div>
   <div class="dash-body">
     <div class="edit-account form first">
