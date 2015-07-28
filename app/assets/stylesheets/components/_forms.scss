@@ -1,4 +1,8 @@
 form {
+  /* Special formatting for CKEditor elements */
+  div[class^="cke_"] {
+    margin: 0 0 $base-spacing / 2 0;
+  }
   input, select, textarea {
     display: block;
     margin: 0 0 $base-spacing / 2 0;
@@ -9,7 +13,7 @@ form {
     border: $base-border;
 
     &:focus, &:hover, &:active {
-    	outline: none;
+      outline: none;
     }
 
 
@@ -20,18 +24,18 @@ form {
 }
 
 input {
-	&.name:after {
-		content: 'Name';
-		position: absolute;
-		font-size: $base-font-size*0.5;
-		top: 50%;
-		right: 50%; 
-		display: inline-block;
-	}
-	&.email:focus {
+  &.name:after {
+    content: 'Name';
+    position: absolute;
+    font-size: $base-font-size*0.5;
+    top: 50%;
+    right: 50%;
+    display: inline-block;
+  }
+  &.email:focus {
 
-	}
-	&.password:focus {
+  }
+  &.password:focus {
 
-	}
+  }
 }
