@@ -39,6 +39,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def edit
+    @hosting = current_user.tea_times.future.order("start_time ASC")
   end
 
   def needs_password?(user, params)
