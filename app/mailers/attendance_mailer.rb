@@ -29,30 +29,27 @@ class AttendanceMailer < ActionMailer::Base
     cancel_delivery unless @attendance
 
     @user = @attendance.user
-    tt = @attendance.tea_time
+    @tt = @attendance.tea_time
 
-    body = tt.host.email_reminder.body
+    @body = @tt.host.email_reminder.body
 
-    cancel_delivery unless body
-
-    body += "\n\n <hr> *Note from the Robots: This email is about your tea time on #{tt.date_to_email}. It's at #{tt.location}. Enjoy it!*"
-
-    # See here for options https://github.com/vmg/redcarpet
-    renderer = Redcarpet::Render::HTML.new(filter_html: true, hard_wrap: true, escape_html: true)
-    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
-    sanitized_body = markdown.render(body)
+    cancel_delivery unless @body
 
     attachments['event.ics'] = {
       mime_type: "text/calendar",
       content: IcalCreator.new(@attendance.tea_time).call.to_ical
     }
+
     cancel_delivery unless @attendance.pending?
+
     mail(
       to:           @attendance.user.email,
-      from:         "\"#{tt.host.nickname} at Tea With Strangers\" <#{tt.host.email}>",
+      from:         "\"#{@tt.host.nickname} at Tea With Strangers\" <#{@tt.host.email}>",
       subject:      "Your tea time is coming up!",
-      body:         sanitized_body,
-      content_type: "text/html")
+    ) do |format|
+      format.text
+      format.html
+    end
   end
 
   # Twelve-hour and two day reminder of a tea time a user is attending
@@ -64,9 +61,11 @@ class AttendanceMailer < ActionMailer::Base
     @type = type
     tt = @attendance.tea_time
 
-    mail.attachments['event.ics'] = {mime_type: "text/calendar",
+    mail.attachments['event.ics'] = {
+      mime_type: "text/calendar",
+      content: IcalCreator.new(@attendance.tea_time).call.to_ical
+    }
 
-                                     content: IcalCreator.new(@attendance.tea_time).call.to_ical}
     cancel_delivery unless @attendance.pending?
 
     mail(to: @attendance.user.email,

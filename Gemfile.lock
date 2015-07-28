@@ -365,7 +365,6 @@ DEPENDENCIES
   rails (= 4.1.1)
   rails-observers
   rails_12factor
-  redcarpet (>= 2.0)
   rspec-rails (~> 2.14.2)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
