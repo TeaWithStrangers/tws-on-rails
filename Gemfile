@@ -62,6 +62,7 @@ gem 'will_paginate'
 
 group :production do
   gem 'newrelic_rpm'
+  gem 'skylight'
 end
 
 # Use Capistrano for deployment
