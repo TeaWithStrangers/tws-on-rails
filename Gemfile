@@ -17,8 +17,6 @@ gem 'less-rails', '~> 2.5'
 gem 'therubyracer', '~> 0.12'
 
 gem 'uglifier', '>= 1.3.0'
-# Serve Assets in Production
-gem 'rails_12factor', group: :production
 gem 'turbolinks'
 gem 'jquery-rails'
 gem 'jquery-ui-rails', '~> 5.0'
@@ -63,6 +61,7 @@ gem 'will_paginate'
 group :production do
   gem 'newrelic_rpm'
   gem 'skylight'
+  gem 'rails_12factor'
 end
 
 # Use Capistrano for deployment
