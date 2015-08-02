@@ -64,11 +64,9 @@ group :production do
   gem 'rails_12factor'
 end
 
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
-# Dev Gems
-gem 'spring', group: :development
+group :development do
+  gem 'spring'
+end
 
 # Random debug tools
 group :development, :test do
