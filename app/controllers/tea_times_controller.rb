@@ -17,6 +17,7 @@ class TeaTimesController < ApplicationController
   # GET /tea_times/1
   # GET /tea_times/1.json
   def show
+    @new_attendance = @tea_time.attendances.new(user_id: current_user.id, provide_phone_number: true)
     respond_to do |format|
       format.html { render layout: !request.xhr? }
       format.json { render json: @tea_time }

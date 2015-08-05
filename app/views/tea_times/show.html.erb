@@ -8,7 +8,7 @@
       <div class="tt-form boxless form">
         <%= render partial: 'shared/tea_time_row', locals: {tea_time: @tea_time, without_button: display_button?(local_assigns)} %>
 
-        <%= form_for :attendance, url: attendance_tea_time_path(@tea_time), html: {class: 'schedule-tea new_user'} do |f| %>
+        <%= form_for @new_attendance, url: attendance_tea_time_path(@tea_time), html: {class: 'schedule-tea new_user'} do |f| %>
           <div class="form-body">
 
             <div class="name-email-container split-container">
