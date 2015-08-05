@@ -106,6 +106,10 @@ These are styles related to tea time displays on attendee or host dashboards.
       padding: 0;
     }
 
+    .place {
+      min-height: auto;
+    }
+
     .date-time {
       text-align: left;
       width: 100%;
@@ -326,10 +330,6 @@ These are styles related to tea time displays on attendee or host dashboards.
 
     .tt-box {
       margin-bottom: 0;
-    }
-
-    .place {
-      min-height: auto;
     }
 
     .tt-cta {
