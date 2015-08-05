@@ -20,6 +20,14 @@ form {
   }
 }
 
+.sessions.new .remember-me {
+  position: relative;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow: hidden;
+
+}
+
 input {
   &.name:after {
     content: 'Name';
@@ -34,5 +42,31 @@ input {
   }
   &.password:focus {
 
+  }
+
+  &[type="checkbox"] {
+    float: left;
+    width: auto;
+    padding: 0px;
+    width: 14px;
+    height: 14px;
+    margin: 0;
+
+    & + label {
+      margin: 0;
+      margin-top: -2px;
+      float: left;
+      line-height: 1.5;
+    }
+
+    & + label[for="attendance_provide_phone_number"] {
+      width: 96%;
+      padding-left: 2%;
+    }
+
+    & + label[for="user_remember_me"] {
+      padding-left: 5px;
+      margin-top: -4px;
+    }
   }
 }

@@ -40,6 +40,8 @@ describe TeaTimesController do
     end
 
     it 'should assign and display a tea time' do
+      sign_in @user
+      referer '/'
       get :show, {id: @tt}
       expect(assigns(:tea_time)).to eq @tt
       assert_response :success
