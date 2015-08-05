@@ -21,6 +21,14 @@
     </div>
     <%= f.text_field :location %>
   </div>
+
+  <div class="field notes">
+    <div class="form-notes">
+      <%= f.label :notes, 'Notes (Any relevant information)', class: 'capitalize boldweight'  %>
+    </div>
+    <%= f.text_area :notes %>
+  </div>
+
   <div class="field city">
     <div class="form-label">
       <%= f.label :city, class: 'capitalize boldweight'  %>
