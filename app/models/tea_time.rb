@@ -37,6 +37,10 @@ class TeaTime < ActiveRecord::Base
     start_time.strftime("%A, %D")
   end
 
+  def attendees_with_shareable_phone_numbers
+    attendances.where(provide_phone_number: true).map(&:user)
+  end
+
   def day_date
     start_time.strftime("%A, %b %e")
   end
