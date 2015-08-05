@@ -58,7 +58,8 @@ class ApplicationController < ActionController::Base
       permitted = [:nickname, :family_name, :given_name, :email, :password,
                    :password_confirmation, :avatar, :current_password,
                    :tagline, :summary, :topics, :story, :home_city_id,
-                   :facebook, :twitter]
+                   :facebook, :twitter, :phone_number]
+
       [:sign_up, :account_update].each do |s|
         devise_parameter_sanitizer.for(s) do |u|
           u.permit(*permitted)
