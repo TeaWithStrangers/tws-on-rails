@@ -59,6 +59,11 @@ These are styles related to forms within the user or host dashboards
 
     &.split1 {
       clear: both;
+      overflow: hidden;
+    }
+
+    &.last {
+      margin-bottom: 1em;
     }
   }
 

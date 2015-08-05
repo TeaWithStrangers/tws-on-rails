@@ -35,17 +35,23 @@
               </div>
             </div>
 
-            <div class="field phone split1">
-              <div class="form-label">
-                <%= f.label :email, "Phone number", class: 'capitalize boldweight inline' %>
-                <span class="sub-label light">
-                  Optional, but helps <%= @tea_time.host.nickname %> get in touch the day of your tea time
-                </span>
-              </div>
+            <div class="field phone split1 last">
               <% if !current_user.phone_number.blank? %>
+                <div class="form-label">
+                  <%= f.label :phone_number, "Phone number", class: 'capitalize boldweight inline' %>
+                  <span class="sub-label light">
+                    We have your number down as <%= current_user.phone_number %>
+                  </span>
+                </div>
                 <%= f.check_box :provide_phone_number %>
-                <%= f.label "Can we give the host you phone number (#{current_user.phone_number}) in case they need to get in touch?" %>
+                <%= f.label :provide_phone_number, "It's cool to share my number with #{@tea_time.host.nickname} before the tea time, as long as I'm attending" %>
               <% else %>
+                <div class="form-label">
+                  <%= f.label :phone_number, "Phone number", class: 'capitalize boldweight inline' %>
+                  <span class="sub-label light">
+                    Optional, but helps <%= @tea_time.host.nickname %> get in touch the day of your tea time
+                  </span>
+                </div>
                 <%= f.text_field :phone_number,
                     value:        '',
                     placeholder:  '(555) 345-6789'
