@@ -93,7 +93,6 @@ These are styles related to tea time displays on attendee or host dashboards.
 
     .tt-box {
       padding: 0.75em;
-      margin-bottom: 0.5em;
     }
 
     h3 {
@@ -104,6 +103,10 @@ These are styles related to tea time displays on attendee or host dashboards.
       text-align: left;
       margin: 0;
       padding: 0;
+    }
+
+    .place {
+      min-height: auto;
     }
 
     .date-time {
@@ -119,25 +122,32 @@ These are styles related to tea time displays on attendee or host dashboards.
       margin-bottom: 0;
     }
 
+    .notes {
+      padding: 0.75em;
+      background: $tws-white;
+      border: $base-border;
+      border-top: 0;
+      color: $tws-medium-gray;
+
+      &.none {
+        background: none;
+        color: lighten($tws-medium-gray, 10);
+      }
+
+      p {
+        margin-bottom: 0;
+        font-size: 0.8em;
+      }
+    }
+
     .controls {
 
-      &.attendee {
-        background: $tws-white;
-        border: $base-border;
-        border-top: none;
-        padding: 0.5em;
-        clear: both;
-        overflow: auto;
-
-        @include media($tablet) {
-          @include span-columns(4.5 of 9);
-
-          background: none;
-          border: none; 
-          margin-bottom: 0;
-          clear: none;
-        }
-      }
+      background: $tws-white;
+      border: $base-border;
+      border-top: none;
+      padding: 0.5em 0.75em;
+      clear: both;
+      overflow: auto;
 
       .edit {
         float: right;
@@ -322,14 +332,6 @@ These are styles related to tea time displays on attendee or host dashboards.
 
     @include media($tablet) {
       margin-bottom: 1em;
-    }
-
-    .tt-box {
-      margin-bottom: 0;
-    }
-
-    .place {
-      min-height: auto;
     }
 
     .tt-cta {

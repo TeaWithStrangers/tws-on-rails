@@ -25,18 +25,48 @@
       </h5>
     </div>
   </div>
-  <% if current_user.host? && tea_time.host.try(:id) == current_user.id %>
-    <div class="host controls">
+  <% if tea_time.notes? %>
+    <div class="notes">
+      <% if current_user.host? && tea_time.host.try(:id) == current_user.id %>
+        <h5 class="boldweight capitalize">
+          Your note to attendees
+        </h5>
+      <% else %>
+        <h5 class="boldweight capitalize">
+          A note from <%= tea_time.host.nickname %>
+        </h5>
+      <% end %>
+      <p class="small">
+        <%= "#{tea_time.notes}" %>
+      </p>
+    </div>
+  <% else %>
+    <!-- This might be overkill in the future. Might be worth getting rid of this at some point. -->
+    <% if current_user.host? && tea_time.host.try(:id) == current_user.id %>
       <% unless tea_time.occurred? || tea_time.cancelled? %>
+        <div class="notes none">
+          <h5 class="boldweight capitalize">
+            Notes for attendees?
+          </h5>
+          <p class="small">
+            <em>To include a note only attendees will see, <%= link_to 'click here', edit_tea_time_path(tea_time) %></em>
+          </p>
+        </div>
+      <% end %>
+    <% end %>      
+  <% end %>
+  <% if current_user.host? && tea_time.host.try(:id) == current_user.id %>
+    <% unless tea_time.occurred? || tea_time.cancelled? %>
+      <div class="host controls">
         <h6 class="edit capitalize boldweight">
           <%= link_to 'Edit details', edit_tea_time_path(tea_time) %>
         </h6>
         <h6 class="cancel capitalize boldweight">
           <%= link_to 'Cancel tea time', cancel_tea_time_path(tea_time), :method => :put, :data => { :confirm => 'Are you sure? If you can, try to ask another host to sub in for you, then make the tea time theirs by hitting \'Edit Tea Time\' If there\'s no other way, cancel and fire the attendees a note so they understand what happened!' } %>
         </h6>
-      <% else %>
-      <% end %>
-    </div>
+      </div>
+    <% else %>
+    <% end %>
   <% else %>
     <% unless tea_time.occurred? || tea_time.cancelled? %>
       <div class="attendee controls">
