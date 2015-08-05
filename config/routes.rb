@@ -70,10 +70,6 @@ Rails.application.routes.draw do
     get '/tasks'            => 'profiles#host_tasks',           as: :host_tasks
     get '/host_profile'     => 'hosts#edit',                    as:  :host_profile
     put '/host_profile'     => 'hosts#update',                  as: :update_host_profile
-    get '/customize_reminder_email' => 'email_reminders#new'
-    get '/customize_reminder_email' => 'email_reminders#edit'
-    post '/email_reminders'         => 'email_reminders#create', as: :email_reminders
-    patch  '/email_reminders/:id'         => 'email_reminders#update', as: :update_email_reminders
   end
 
   get '/:id' => 'cities#show'
