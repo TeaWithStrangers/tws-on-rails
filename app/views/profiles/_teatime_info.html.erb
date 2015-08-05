@@ -25,6 +25,36 @@
       </h5>
     </div>
   </div>
+  <% if tea_time.notes? %>
+    <div class="notes">
+      <% if current_user.host? && tea_time.host.try(:id) == current_user.id %>
+        <h5 class="boldweight capitalize">
+          Your note to attendees
+        </h5>
+      <% else %>
+        <h5 class="boldweight capitalize">
+          A note from <%= tea_time.host.nickname %>
+        </h5>
+      <% end %>
+      <p class="small">
+        <%= "#{tea_time.notes}" %>
+      </p>
+    </div>
+  <% else %>
+    <!-- This might be overkill in the future. Might be worth getting rid of this at some point. -->
+    <% if current_user.host? && tea_time.host.try(:id) == current_user.id %>
+      <% unless tea_time.occurred? || tea_time.cancelled? %>
+        <div class="notes">
+          <h5 class="boldweight capitalize">
+            Any notes for your attendees?
+          </h5>
+          <p class="small">
+            <em>If there's anything you'd want only your attendees to know, feel free to include it in the notes. Click 'Edit Details' to do so.</em>
+          </p>
+        </div>
+      <% end %>
+    <% end %>      
+  <% end %>
   <% if current_user.host? && tea_time.host.try(:id) == current_user.id %>
     <div class="host controls">
       <% unless tea_time.occurred? || tea_time.cancelled? %>
