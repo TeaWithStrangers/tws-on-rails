@@ -35,17 +35,12 @@ class TeaTimesController < ApplicationController
   end
 
   # POST /tea_times
-  # POST /tea_times.json
   def create
     @tea_time = TeaTime.new(tea_time_params)
-    respond_to do |format|
-      if @tea_time.save
-        format.html { redirect_to profile_path, notice: 'Tea time was successfully created.' }
-        format.json { render :show, status: :created, location: @tea_time }
-      else
-        format.html { render :new }
-        format.json { render json: @tea_time.errors, status: :unprocessable_entity }
-      end
+    if @tea_time.save
+      redirect_to profile_path, notice: 'Tea time was successfully created.'
+    else
+      render :new
     end
   end
 
