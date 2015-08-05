@@ -129,6 +129,11 @@ These are styles related to tea time displays on attendee or host dashboards.
       border-top: 0;
       color: $tws-medium-gray;
 
+      &.none {
+        background: none;
+        color: lighten($tws-medium-gray, 10);
+      }
+
       p {
         margin-bottom: 0;
         font-size: 0.8em;
@@ -143,15 +148,6 @@ These are styles related to tea time displays on attendee or host dashboards.
       padding: 0.5em 0.75em;
       clear: both;
       overflow: auto;
-
-      @include media($tablet) {
-        @include span-columns(4.5 of 9);
-
-        background: none;
-        border: none; 
-        margin-bottom: 0;
-        clear: none;
-      }
 
       .edit {
         float: right;

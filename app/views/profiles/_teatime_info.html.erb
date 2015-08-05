@@ -44,12 +44,12 @@
     <!-- This might be overkill in the future. Might be worth getting rid of this at some point. -->
     <% if current_user.host? && tea_time.host.try(:id) == current_user.id %>
       <% unless tea_time.occurred? || tea_time.cancelled? %>
-        <div class="notes">
+        <div class="notes none">
           <h5 class="boldweight capitalize">
-            Any notes for your attendees?
+            Notes for attendees?
           </h5>
           <p class="small">
-            <em>If there's anything you'd want only your attendees to know, feel free to include it in the notes. Click 'Edit Details' to do so.</em>
+            <em>To include a note just for attendees, <%= link_to 'click here', edit_tea_time_path(tea_time) %></em>
           </p>
         </div>
       <% end %>
