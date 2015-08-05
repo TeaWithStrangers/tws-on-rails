@@ -1,1 +1,31 @@
-Template nudge email
+<% if @tea_time.attendees.present? %>?
+  Hey! Your tea time is on Thursday at 7:00pm. Now would be a good time to email your attendees to confirm they're in, offer a chance for them to cancel if needed, and share whatever other info you might need to. Try to do this today so they have sufficient notice.
+
+  <%= @tea_time.attendees.map(&:name).join(", ") %>  
+  <%= @tea_time.attendees.map(&:email).join(", ") %>
+
+  Some of these folks are super trusting and gave you their numbers. Be cool and use them appropriately. Texting them the day of tea time makes it easier for them to remember you're not all that strange (and that helps ensure they show up with good spirits!)
+
+<% if @shareable_num_string %>
+<%= @shareable_num_string %>
+<% end %>
+
+  In the case you include any info in the email that's not on the site, update the info there for the attendees that sign up after you send your email. <%= link_to "You can do that here", edit_tea_time_url(@tea_time) %>.
+<% else %>
+  Hey! Your tea time is on Thursday at 7:00pm. You don't have any attendees yet :(, but check the site sometime tomorrow and be sure to reach out to the attendees that sign up and confirm their attendance. Also, make sure the info on the site is everything an attendee needs to find you. <%= link_to "Click here to make edits", edit_tea_time_url(@tea_time) %>.
+
+<% end %>
+
+Bleep bleep bloop,
+The Robots at Tea With Strangers
+
+--
+
+<em>
+Current details of your tea time:
+
+When? <%= @tea_time.friendly_time %>  
+Where? <%= @tea_time.location %>  
+Notes: <%= @tea_time.notes.blank? ? "[None]" : @tea_time.notes %>  
+Attendance: <%= @tea_time.attendances.pending.count %> attendees, <%= @tea_time.attendances.flake.count %>, <%= @tea_time.attendances.waitlisted.count %> waitlists
+</em>
