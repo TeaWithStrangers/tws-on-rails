@@ -1,5 +1,4 @@
 <div class="light-background">
-  <% prefill = !!current_user %>
   <div class="container">
     <div class="section tt-solo">
       <h2 class="section-header">
@@ -17,8 +16,8 @@
                   <%= f.label :nickname, "Name", class: 'capitalize boldweight' %>
                 </div>
                 <%= f.text_field :nickname,
-                    value:        prefill ? current_user.name : '',
-                    readonly:     prefill,
+                    value:        @new_attendance.user.name,
+                    readonly:     true,
                     placeholder: 'First name (or nickname)'
                 %>
               </div>
@@ -28,8 +27,8 @@
                   <%= f.label :email, "Email", class: 'capitalize boldweight' %>
                 </div>
                 <%= f.email_field :email,
-                    value:        prefill ? current_user.email : '',
-                    readonly:     prefill,
+                    value:        @new_attendance.user.email,
+                    readonly:     true,
                     placeholder: 'Email Address'
                 %>
               </div>
