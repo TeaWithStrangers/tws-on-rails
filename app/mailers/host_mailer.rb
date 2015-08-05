@@ -7,7 +7,8 @@ class HostMailer < ActionMailer::Base
       "#{u.name} (#{u.phone_number})"
     end.join(", ")
 
-    mail(to: @tea_time.host.email) do |format|
+    mail(to: @tea_time.host.email,
+         subject: "Remind your attendees about tea time!") do |format|
       format.text
       format.html
     end
