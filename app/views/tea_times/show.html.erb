@@ -10,8 +10,18 @@
         <%= form_for :tea_time, url: attendance_tea_time_path(@tea_time), html: {class: 'schedule-tea new_user'} do |f| %>
           <div class="form-body">
 
-            <%= f.text_field :nickname, value: prefill ? current_user.name : '', readonly: prefill, placeholder: 'First name (or nickname)' %>
-            <%= f.email_field :email, value: prefill ? current_user.email : '', readonly: prefill, placeholder: 'Email Address' %>
+            <%= f.text_field :nickname,
+                value:        prefill ? current_user.name : '',
+                readonly:     prefill,
+                placeholder: 'First name (or nickname)'
+            %>
+
+            <%= f.email_field :email,
+                value:        prefill ? current_user.email : '',
+                readonly:     prefill,
+                placeholder: 'Email Address'
+            %>
+
             <% if !@tea_time.spots_remaining? %>
               <p class="disclaimer">You'll get an email the moment someone cancels their seat.</p>
             <% end %>
