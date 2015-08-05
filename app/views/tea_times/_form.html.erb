@@ -5,26 +5,35 @@
   </h3>
   <div class="field datepicker">
     <div class="form-label">
-      <%= f.label :start_time, class: 'capitalize boldweight' %>
+      <%= f.label :start_time, 'When?', class: 'capitalize boldweight' %>
     </div>
     <%= f.datetime_select :start_time %>
   </div>
   <div class="field duration">
     <div class="form-label">
-      <%= f.label :duration, 'Duration (in Hours)', class: 'capitalize boldweight'  %>
+      <%= f.label :duration, 'How long?', class: 'capitalize boldweight inline' %>
+      <span class="sub-label light">
+        In hours
+      </span>
     </div>
     <%= f.number_field :duration, value: 2 %>
   </div>
   <div class="field location">
     <div class="form-label">
-      <%= f.label :location, 'Location (Place name & address)', class: 'capitalize boldweight'  %>
+      <%= f.label :location, 'Where?', class: 'capitalize boldweight inline' %>
+      <span class="sub-label light">
+        Place name and address
+      </span>
     </div>
     <%= f.text_field :location %>
   </div>
 
   <div class="field notes">
     <div class="form-notes">
-      <%= f.label :notes, 'Notes (Any relevant information)', class: 'capitalize boldweight'  %>
+      <%= f.label :notes, 'What should attendees know?', class: 'capitalize boldweight inline' %>
+      <span class="sub-label light">
+        Only attendees see this! Feel free to include easy ways to find you, things to think about, or anything else you'd want them to know
+      </span>
     </div>
     <%= f.text_area :notes %>
   </div>
