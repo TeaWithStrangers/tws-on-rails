@@ -7,7 +7,8 @@
       </h2>
       <div class="tt-form">
         <%= render partial: 'shared/tea_time_row', locals: {tea_time: @tea_time, without_button: display_button?(local_assigns)} %>
-        <%= form_for :tea_time, url: attendance_tea_time_path(@tea_time), html: {class: 'schedule-tea new_user'} do |f| %>
+
+        <%= form_for :attendance, url: attendance_tea_time_path(@tea_time), html: {class: 'schedule-tea new_user'} do |f| %>
           <div class="form-body">
 
             <%= f.text_field :nickname,
