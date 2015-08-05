@@ -64,7 +64,7 @@
           Personal Information
         </h3>
 
-        <div class="name-email">
+        <div class="name-email split-container">
           <div class="field nickname split2">
             <div class="form-label">
               <%= f.label :nickname, "Nickname",class: 'capitalize boldweight' %>
@@ -82,7 +82,7 @@
           </div>
         </div>
 
-        <div class="full-name">
+        <div class="full-name split-container">
           <div class="field first-name split2">
             <div class="form-label">
               <%= f.label :given_name, "First Name", class: 'capitalize boldweight inline' %>
@@ -102,35 +102,37 @@
           </div>
         </div>
 
-        <div class="field phone-number">
-          <div class="form-label">
-            <%= f.label :phone_number, class: 'capitalize boldweight inline' %>
-            <% if current_user.host? %>
-              <span class="sub-label light">
-                Optional; your number is only shared with attendees before tea time so they can get in touch more easily
-              </span>
-            <% else %>
-              <span class="sub-label light">
-                Optional; your number is only shared with your host before tea time if you're attending to make getting in touch easier
-              </span>
-            <% end %>
-          </div>
-          <%= f.text_field :phone_number %>
-        </div>
-
-        <div class="field city">
-          <div class="form-label">
-            <%= f.label :home_city, class: 'capitalize boldweight inline' %>
-            <span class="sub-label light">
-              Makes sure you don't miss the good stuff going on near ya
-            </span>
+        <div class="phone-city split-container">
+          <div class="field phone-number split2">
+            <div class="form-label">
+              <%= f.label :phone_number, class: 'capitalize boldweight inline' %>
+              <% if current_user.host? %>
+                <span class="sub-label light">
+                  Optional; only shared with attendees before tea time
+                </span>
+              <% else %>
+                <span class="sub-label light">
+                  Optional; only shared with your host before tea time
+                </span>
+              <% end %>
+            </div>
+            <%= f.text_field :phone_number %>
           </div>
 
-          <div class="dropdown">
-            <%= select(
-              resource_name, :home_city_id,
-              City.available.collect{ |p| [p.name, p.id] })
-            =%>
+          <div class="field city split2">
+            <div class="form-label">
+              <%= f.label :home_city, class: 'capitalize boldweight inline' %>
+              <span class="sub-label light">
+                Makes sure you don't miss the good stuff going on near ya
+              </span>
+            </div>
+
+            <div class="dropdown">
+              <%= select(
+                resource_name, :home_city_id,
+                City.available.collect{ |p| [p.name, p.id] })
+              =%>
+            </div>
           </div>
         </div>
 
@@ -153,7 +155,7 @@
 
         </div>
 
-        <div class="new-password">
+        <div class="new-password split-container">
           <div class="field split2">
             <div class="form-label">
               <%= f.label :password, "New password", class: 'capitalize boldweight' %>

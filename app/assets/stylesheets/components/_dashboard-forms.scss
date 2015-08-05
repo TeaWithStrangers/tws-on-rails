@@ -33,7 +33,7 @@ These are styles related to forms within the user or host dashboards
       padding: 1em 0;
     }
 
-  	.full-name, .name-email, .social, .new-password {
+  	.split-container, .name-email, .social, .new-password {
 			@include outer-container;
 			@include span-columns(12);
 
