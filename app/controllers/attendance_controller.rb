@@ -21,11 +21,22 @@ class AttendanceController < ApplicationController
 
     @attendance = Attendance.where(tea_time_id: @tea_time.id, user_id: @user.id).first_or_initialize
 
+    if params[:attendance][:provide_phone_number] != "0"
+      @attendance.provide_phone_number = true
+    end
+
     # Set status
     if @attendance.tea_time.spots_remaining?
       @attendance.status = :pending
     else
       @attendance.status = :waiting_list
+    end
+
+    # Save phone number for user if entered
+    # They should not be able to change it from here.
+    # The form field should not be editable
+    if params[:attendance][:phone_number] && current_user.phone_number.blank?
+      current_user.update_attributes(phone_number: params[:attendance][:phone_number])
     end
 
     if @attendance.save
