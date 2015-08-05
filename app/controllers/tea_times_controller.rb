@@ -39,6 +39,7 @@ class TeaTimesController < ApplicationController
     @tea_time = TeaTime.new(tea_time_params)
     if @tea_time.save
       redirect_to profile_path, notice: 'Tea time was successfully created.'
+      HostMailer.delay(run_at: @tea_time.start_time - 2.days).pre_tea_time_nudge(@tea_time.id)
     else
       render :new
     end
