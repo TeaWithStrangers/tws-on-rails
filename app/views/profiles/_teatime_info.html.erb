@@ -56,17 +56,17 @@
     <% end %>      
   <% end %>
   <% if current_user.host? && tea_time.host.try(:id) == current_user.id %>
-    <div class="host controls">
-      <% unless tea_time.occurred? || tea_time.cancelled? %>
+    <% unless tea_time.occurred? || tea_time.cancelled? %>
+      <div class="host controls">
         <h6 class="edit capitalize boldweight">
           <%= link_to 'Edit details', edit_tea_time_path(tea_time) %>
         </h6>
         <h6 class="cancel capitalize boldweight">
           <%= link_to 'Cancel tea time', cancel_tea_time_path(tea_time), :method => :put, :data => { :confirm => 'Are you sure? If you can, try to ask another host to sub in for you, then make the tea time theirs by hitting \'Edit Tea Time\' If there\'s no other way, cancel and fire the attendees a note so they understand what happened!' } %>
         </h6>
-      <% else %>
-      <% end %>
-    </div>
+      </div>
+    <% else %>
+    <% end %>
   <% else %>
     <% unless tea_time.occurred? || tea_time.cancelled? %>
       <div class="attendee controls">
