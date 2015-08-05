@@ -6,9 +6,9 @@
 
   <% if @shareable_num_string %>
 
-    Some of these folks are super trusting and gave you their numbers. Be cool and use them appropriately. Texting them the day of tea time makes it easier for them to remember you're not all that strange (and that helps ensure they show up with good spirits!)
+  Some of these folks are super trusting and gave you their numbers. Be cool and use them appropriately. Texting them the day of tea time makes it easier for them to remember you're not all that strange (and that helps ensure they show up with good spirits!)
 
-    <%= @shareable_num_string %>
+  <%= @shareable_num_string %>
 
   <% end %>
 
