@@ -105,11 +105,17 @@
         <div class="field phone-number">
           <div class="form-label">
             <%= f.label :phone_number, class: 'capitalize boldweight inline' %>
-            <span class="sub-label light">
-              Totally optional
-            </span>
-            <%= f.text_field :phone_number %>
+            <% if current_user.host? %>
+              <span class="sub-label light">
+                Optional; your number is only shared with attendees before tea time so they can get in touch more easily
+              </span>
+            <% else %>
+              <span class="sub-label light">
+                Optional; your number is only shared with your host before tea time if you're attending to make getting in touch easier
+              </span>
+            <% end %>
           </div>
+          <%= f.text_field :phone_number %>
         </div>
 
         <div class="field city">
