@@ -17,6 +17,7 @@ class TeaTime < ActiveRecord::Base
   after_commit :queue_reminder_to_mark_attendance,
                :send_host_confirmation,
                on: :create, unless: :skip_callbacks
+  after_commit :queue_host_nudge_email, on: :create
 
   before_destroy { CancelTeaTime.send_cancellations(self) }
 
@@ -222,6 +223,19 @@ class TeaTime < ActiveRecord::Base
   end
 
   private
+    # schedule 1 OR 2 days before  depending on how far away it is
+    def queue_host_nudge_email
+      days_before = days_till_tea_time_start <= 2 ? 1 : 2
+      schedule_time = start_time - days_before.send(:days)
+      HostMailer.delay(run_at: schedule_time).pre_tea_time_nudge(self.id)
+    end
+
+    def days_till_tea_time_start
+      return 0 if !start_time
+      seconds_in_float = start_time - Time.now
+      (seconds_in_float / 60 / 60 / 24).round # round days to whole number
+    end
+
     def attendance_marked?
       if !attendances.inject(Hash.new(0)) { |hsh, a| hsh[a.status] += 1; hsh }['pending'].zero?
         errors.add(:attendances, 'must be marked')
