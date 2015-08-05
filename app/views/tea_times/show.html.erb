@@ -22,6 +22,11 @@
                 placeholder: 'Email Address'
             %>
 
+            <%= f.text_field :phone_number,
+                value:    current_user.phone_number ? current_user.phone_number : '',
+                placeholder: 'Phone Number (optional)'
+            %>
+
             <% if !@tea_time.spots_remaining? %>
               <p class="disclaimer">You'll get an email the moment someone cancels their seat.</p>
             <% end %>
