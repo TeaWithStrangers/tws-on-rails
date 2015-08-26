@@ -1,7 +1,4 @@
 class Attendance < ActiveRecord::Base
-  # Attendances should never be deleted, only soft-deleted
-  acts_as_paranoid
-
   belongs_to :user
   belongs_to :tea_time, touch: true
   enum :status => [:pending, :flake, :no_show, :present, :waiting_list, :cancelled]
