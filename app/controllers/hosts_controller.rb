@@ -6,6 +6,12 @@ class HostsController < ApplicationController
   def show
     @city = City.for_code(params[:id])
     @host = User.find(params[:host_id])
+    if !@host.host?
+      return redirect_to @city,
+                  alert: "Uh-oh!
+                  We couldn't find who you were looking for. Try another one of
+                  our wonderful hosts?"
+    end
     respond_to do |format|
       format.html { render layout: !request.xhr? }
       format.json { render json: @host }
