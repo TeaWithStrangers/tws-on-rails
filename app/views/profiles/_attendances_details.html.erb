@@ -11,9 +11,15 @@
     </div>
 
     <ul class="<%= status %> attendees-list">
-      <% attendances.map(&:user).each do |user| %>
+      <% attendances.each do |attendance| %>
+        <% user = attendance.user %>
         <li class="attendee-names">
           <%= link_to user.name, "mailto:#{user.email}", :target => "_blank" %>
+          <% if ShowAttendeePhoneNumberForUser.new(current_user, attendance).call() %>
+            <span class="phone-number">
+              , <%= link_to user.phone_number, "tel:#{user.phone_number}" %>
+            </span>
+          <% end %>
         </li>
       <% end %>
     </ul>
