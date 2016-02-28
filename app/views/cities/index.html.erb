@@ -15,7 +15,7 @@
         <div class="cities-list current-cities-container" data-city-type='active'>
           <% @active_cities.each do |city| %>
             <div class="city">
-              <div class="city-image" style="background-image: url('<%= city.header_bg %>');">
+              <div class="city-image" style="background-image: url('<%= city.header_bg(:small) %>');">
                 <h2 class=" city-name">
                   <%= link_to city.name, city_path(city), class: 'background-filter' %>
                   <%= link_to city.name, city_path(city), class: 'city-name' %>
@@ -30,7 +30,7 @@
         <div class="cities-list current-cities-container" data-city-type='active'>
           <% @upcoming_cities.each do |city| %>
             <div class="city">
-              <div class="city-image" style="background-image: url('<%= city.header_bg %>');">
+              <div class="city-image" style="background-image: url('<%= city.header_bg(:small) %>');">
                 <h2 class=" city-name">
                   <%= link_to city.name, city_path(city), class: 'background-filter' %>
                   <%= link_to city.name, city_path(city), class: 'city-name' %>
