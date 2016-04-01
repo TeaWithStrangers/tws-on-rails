@@ -8,7 +8,7 @@
       <%= f.label :email %>
       <%= f.email_field :email, placeholder: "Email Address" %>
       <%= f.label :home_city %>
-      <%= select(resource_name, :home_city_id, City.all.collect{ |p| [p.name, p.id] }) %>
+      <%= select(resource_name, :home_city_id, City.available.collect{ |p| [p.name, p.id] }) %>
       <div class="field photo">
         <div class="form-label">
           <%= f.label :avatar, "Your Picture", class: 'capitalize boldweight inline' %>
