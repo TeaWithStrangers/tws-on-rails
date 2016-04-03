@@ -21,6 +21,14 @@ describe Attendance do
     end
   end
 
+  describe 'validators' do
+    it "bars hosts from attending their own tea time" do
+      att = build(:attendance)
+      att.user = att.tea_time.host
+      expect(att.valid?).to eq false 
+    end
+  end
+
   describe 'flake!' do
     before(:each) do
       @tt = create(:tea_time, :full)
@@ -42,7 +50,7 @@ describe Attendance do
     end
 
     it 'fires off waitlist notifications' do
-      tt = double('TeaTime', spots_remaining?: false, marked_for_destruction?: false)
+      tt = double('TeaTime', spots_remaining?: false, marked_for_destruction?: false, host: 0)
       [:send_waitlist_notifications, :persisted?].each {|m|
         allow(tt).to receive m
       }
