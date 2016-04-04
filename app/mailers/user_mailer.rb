@@ -2,7 +2,7 @@ class UserMailer < ActionMailer::Base
   include SendGrid
   sendgrid_category :use_subject_lines
 
-  default from: "\"Tea With Strangers\" <sayhi@teawithstrangers.com>"
+  default from: "\"Tea With Strangers Robots\" <sayhi@teawithstrangers.com>"
 
   def confirm_city_suggestion(city_id)
     @city = City.find(city_id)
@@ -82,8 +82,7 @@ class UserMailer < ActionMailer::Base
     @user = User.find(user)
     @password = password
 
-    mail(from: "\"The Robots at Tea With Strangers\" <sayhi@teawithstrangers.com>",
-         to: @user.email,
+    mail(to: @user.email,
          subject: "Welcome to The Family") do |format|
            format.text
            format.html
