@@ -4,6 +4,7 @@ class Attendance < ActiveRecord::Base
   enum :status => [:pending, :flake, :no_show, :present, :waiting_list, :cancelled]
   validates_presence_of :user, :tea_time, presence: true
   validates_uniqueness_of :user_id, scope: :tea_time_id
+  validate :host_is_not_own_attendee
 
   scope :attended, ->() { where(status: [:cancelled, :pending, :present].map {|x| Attendance.statuses[x]}) }
   scope :waitlisted,    ->() { where(status: [:waiting_list].map {|x| Attendance.statuses[x]}) }
@@ -52,6 +53,12 @@ class Attendance < ActiveRecord::Base
 
   def occurred?
     tea_time.occurred?
+  end
+
+  def host_is_not_own_attendee
+    if user == tea_time.host
+      errors.add(:user, "host can't attend their own tea time")
+    end
   end
 
   class << self
