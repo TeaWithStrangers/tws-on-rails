@@ -17,7 +17,7 @@ function attendanceMarkingActivtion() {
       success: function(data) {
         var id = data.tea_time.id;
         $("[data-tea-time-id='"+id+"'] > h3.tasks.email").attr('class', 'tasks email complete')
-        $(evt.target).parents('.subtask-container').html("<p class='subtask'>All done, thanks!</p>")
+        $(evt.target).parents('.task-deets').html("<p class='subtask'>All done, thanks!</p>")
       },
       error: function(data) { alert('Uh-oh. You shouldn\'t be seeing this.'); }
     });
