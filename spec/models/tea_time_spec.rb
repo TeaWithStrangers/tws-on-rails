@@ -2,7 +2,8 @@ require 'spec_helper.rb'
 
 describe TeaTime do
   before(:all) do
-    @past_tt = create(:tea_time, :past)
+    @past_tt = create(:tea_time, start_time: Time.now)
+    Timecop.travel(Time.now.tomorrow)
     @future_tt = create(:tea_time)
   end
 
@@ -21,34 +22,43 @@ describe TeaTime do
       @city_utc = create(:city, timezone: "UTC")
     end
 
+    it "should permit future start times" do
+      tt = create(:tea_time)
+      expect(tt).to be_valid
+    end
+
+    it "should not permit start times that have already past" do
+      expect(@past_tt).not_to be_valid
+    end
+
     it 'should save time as UTC, account for the city TZ difference' do
       tt = create(:tea_time, city: @city_pst)
-      tt.start_time = Time.new(2014,1,1,16)
-      expect(tt.start_time.utc).to eq(Time.utc(2014,1,2))
+      tt.start_time = Time.new(2018,1,1,16)
+      expect(tt.start_time.utc).to eq(Time.utc(2018,1,2))
     end
 
     it 'should save time as UTC, account for the city TZ difference via .update' do
       tt = create(:tea_time, city: @city_pst)
-      tt.update(start_time: Time.local(2014,1,1,16))
-      expect(tt.start_time.utc).to eq(Time.utc(2014,1,2))
+      tt.update(start_time: Time.local(2018,1,1,16))
+      expect(tt.start_time.utc).to eq(Time.utc(2018,1,2))
     end
 
 
     it 'should always interpret times as taking place in the associated city' do
       tt = create(:tea_time, city: @city_est)
-      tt.start_time = Time.local(2014,1,1,16)
-      expect(tt.start_time.utc).to eq(Time.utc(2014,1,1,21))
+      tt.start_time = Time.local(2018,1,1,16)
+      expect(tt.start_time.utc).to eq(Time.utc(2018,1,1,21))
     end
 
     it 'should not adjust to maintain the same *local* time if switched between timezones/cities' do
-      tt = create(:tea_time, city: @city_est, start_time: Time.utc(2014,1,1,16))
-      expect(tt.start_time.utc).to eq Time.utc(2014,1,1,21)
+      tt = create(:tea_time, city: @city_est, start_time: Time.utc(2018,1,1,16))
+      expect(tt.start_time.utc).to eq Time.utc(2018,1,1,21)
       tt.city = @city_pst
-      expect(tt.start_time.utc).to eq Time.utc(2014,1,1, 21)
+      expect(tt.start_time.utc).to eq Time.utc(2018,1,1, 21)
     end
 
     it 'should allow access when city is nil' do
-      tt = TeaTime.new(start_time: Time.utc(2014,1,1))
+      tt = TeaTime.new(start_time: Time.utc(2018,1,1))
       expect(tt.start_time).not_to eq(nil)
     end
   end
@@ -140,7 +150,7 @@ describe TeaTime do
     end
 
     describe 'start and end on the same day' do
-      let(:start_time) { DateTime.new(2014,1,1, 9, 0) }
+      let(:start_time) { DateTime.new(2018,1,1, 9, 0) }
       describe 'start and end in same meridians' do
         it 'includes meridian at end of time period' do
           @tea_time.stub(start_time: start_time, duration: 1)
@@ -156,18 +166,18 @@ describe TeaTime do
     end
 
     it 'should only display mintues if tea time does not begin/end on the hour' do
-      @tea_time.stub(start_time: DateTime.new(2014,1,1, 12, 30), duration: 2)
+      @tea_time.stub(start_time: DateTime.new(2018,1,1, 12, 30), duration: 2)
       expect(@tea_time.friendly_time).to include("12:30-2:30pm")
     end
 
     it 'should not display mintues if tea time does begin/end on the hour' do
-      @tea_time.stub(start_time: DateTime.new(2014,1,1,12),duration: 2)
+      @tea_time.stub(start_time: DateTime.new(2018,1,1,12),duration: 2)
       expect(@tea_time.friendly_time).not_to include(":")
       expect(@tea_time.friendly_time).to include("12-2pm")
     end
 
     it 'should display minutes for only one of start/end if only one of start/end is not on the hour' do
-      @tea_time.stub(start_time: DateTime.new(2014,1,1,12, 30),
+      @tea_time.stub(start_time: DateTime.new(2018,1,1,12, 30),
                     duration: 1.5)
       expect(@tea_time.friendly_time).to include("12:30-2pm")
     end

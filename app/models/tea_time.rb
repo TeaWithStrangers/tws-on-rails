@@ -4,7 +4,7 @@ class TeaTime < ActiveRecord::Base
 
   validates_presence_of :host, :start_time, :city, :duration
   validate :attendance_marked?, if: :occurred?
-
+  validate :not_past
   belongs_to :city
   belongs_to :host, :class_name => 'User', :foreign_key => 'user_id'
 
@@ -79,6 +79,15 @@ class TeaTime < ActiveRecord::Base
       write_attribute(:start_time, reparse_time_in_tz(time))
     else
       super
+    end
+  end
+
+  def not_past
+    if Time.now >= self.start_time
+      errors.add(:start_time, 'Must be a future time')
+      false
+    else
+      true
     end
   end
 
