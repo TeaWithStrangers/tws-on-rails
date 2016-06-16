@@ -84,7 +84,7 @@ class TeaTime < ActiveRecord::Base
 
   def has_not_past?
     if Time.now >= self.start_time
-      errors.add(:start_time, 'Must be a future time')
+      errors.add(:start_time, 'must be a future time')
       false
     else
       true
