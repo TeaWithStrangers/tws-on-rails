@@ -74,6 +74,19 @@ describe AttendanceMailer do
     end
   end
 
+  describe '#mark_attendance_reminder' do
+    let(:tt) { create(:tea_time, followup_status: :cancelled) }
+    let(:attendance) { create(:attendance, tea_time: tt) }
+    let(:mail) {
+      AttendanceMailer.mark_attendance_reminder(attendance.id)
+    }
+
+    it "should not send if tea time was cancelled" do
+      mail.deliver
+      expect(ActionMailer::Base.deliveries.size).to eq(0)
+    end
+  end
+
   #TODO: This is really a test of .flake! not the message itself. Move to
   #attendance_spec when possible
   describe '#flake' do

@@ -382,6 +382,3 @@ DEPENDENCIES
   unicorn
   unicorn-rails
   will_paginate
-
-BUNDLED WITH
-   1.10.5
