@@ -122,8 +122,9 @@ class AttendanceMailer < ActionMailer::Base
 
   def mark_attendance_reminder(tea_time_id)
     @tea_time = TeaTime.find(tea_time_id)
-    @host = @tea_time.host
+    cancel_delivery if @tea_time.cancelled?
 
+    @host = @tea_time.host
     mail(to: @host.friendly_email,
          subject: "Mark attendance for your tea time!") do |format|
       format.text

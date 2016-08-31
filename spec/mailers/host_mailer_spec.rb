@@ -11,8 +11,21 @@ describe HostMailer do
       create(:tea_time, user_id: host.id).id
     end
 
+    let(:cancelled_tea_time) do
+      create(:tea_time, user_id: host.id, followup_status: :cancelled)
+    end
+
     let(:mail) do
       described_class.pre_tea_time_nudge(tea_time_id)
+    end
+
+    let(:cancelled_mail) do
+      described_class.pre_tea_time_nudge(cancelled_tea_time.id)
+    end
+
+    it 'should not send for cancelled tea time' do
+      cancelled_mail.deliver
+      expect(ActionMailer::Base.deliveries.size).to eq(0)
     end
 
     it 'should be from the default address' do

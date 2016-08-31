@@ -3,6 +3,8 @@ class HostMailer < ActionMailer::Base
 
   def pre_tea_time_nudge(tea_time_id)
     @tea_time = TeaTime.find_by(id: tea_time_id)
+    cancel_delivery if @tea_time.cancelled?
+
     @shareable_num_string = @tea_time.attendees_with_shareable_phone_numbers.map do |u|
       "#{u.name} (#{u.phone_number})"
     end.join(", ")
