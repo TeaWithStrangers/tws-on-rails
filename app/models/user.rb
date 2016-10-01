@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
 
   has_many :tea_times
   has_many :attendances
+  has_one :host_detail
   has_one :email_reminder, as: :remindable
   belongs_to :home_city, class_name: 'City', counter_cache: true
   has_attached_file :avatar, styles: { medium: "300x300", thumb: "100x100", landscape: "500"}, default_url: "/assets/missing.jpg"
