@@ -76,9 +76,8 @@ describe AttendanceMailer do
 
   describe '#mark_attendance_reminder' do
     let(:tt) { create(:tea_time, followup_status: :cancelled) }
-    let(:attendance) { create(:attendance, tea_time: tt) }
     let(:mail) {
-      AttendanceMailer.mark_attendance_reminder(attendance.id)
+      AttendanceMailer.mark_attendance_reminder(tt.id)
     }
 
     it "should not send if tea time was cancelled" do
