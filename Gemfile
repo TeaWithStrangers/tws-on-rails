@@ -78,7 +78,6 @@ group :development, :test do
   gem 'rails-observers'
   gem 'shoulda-matchers', require: false
   gem 'coveralls', require: false
-  gem 'timecop'
 end
 
 group :test do

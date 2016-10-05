@@ -297,7 +297,6 @@ GEM
     time_zone_ext (0.0.3)
       activesupport
       tzinfo
-    timecop (0.8.1)
     timers (4.0.1)
       hitimes
     tins (1.5.1)
@@ -377,7 +376,6 @@ DEPENDENCIES
   spring
   therubyracer (~> 0.12)
   time_zone_ext
-  timecop
   turbolinks
   uglifier (>= 1.3.0)
   underscore-rails

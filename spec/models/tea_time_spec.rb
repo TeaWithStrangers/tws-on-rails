@@ -2,8 +2,7 @@ require 'spec_helper.rb'
 
 describe TeaTime do
   before(:all) do
-    @past_tt = create(:tea_time, start_time: Time.now)
-    Timecop.travel(Time.now.tomorrow)
+    @past_tt = create(:tea_time, :past)
     @future_tt = create(:tea_time)
   end
 
