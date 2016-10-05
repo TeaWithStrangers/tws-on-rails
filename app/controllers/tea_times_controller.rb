@@ -42,7 +42,7 @@ class TeaTimesController < ApplicationController
     if @tea_time.save
       redirect_to profile_path, notice: 'Tea time was successfully created.'
     else
-      render :new
+      redirect_to :back, notice: "Invalid submission: #{@tea_time.errors.full_messages.join(', ')}"
     end
   end
 
