@@ -6,6 +6,7 @@ require 'capybara/rails'
 require 'capybara/rspec'
 require "cancan/matchers"
 require 'shoulda/matchers'
+require 'factory_girl_rails'
 
 #Coveralls Test Coverage
 require 'coveralls'
