@@ -10,10 +10,12 @@ class RefreshHostActivityStatus
   }
 
   def self.run
-    User.hosts.each do |user|
-      host_detail = user.host_detail
+    User.includes(:host_detail).hosts.select(:id).find_each do |user|
+
       # update or create a host_detail for the host
+      host_detail = user.host_detail
       new_status = find_new_status(user)
+
       if host_detail
         if new_status != host_detail.activity_status
           host_detail.update(:activity_status => new_status)
@@ -29,17 +31,17 @@ class RefreshHostActivityStatus
     tea_times = user.tea_times.order('start_time asc').to_a
     if tea_times.empty?
       # INACTIVE
-      new_status = HostDetail::ACTIVITY_STATUS_INACTIVE
+      new_status = HostDetail::statuses[:inactive]
     elsif tea_times.last.start_time > (Time.now - ACTIVE_EXPIRATION)
       # ACTIVE
-      new_status = HostDetail::ACTIVITY_STATUS_ACTIVE
+      new_status = HostDetail::statuses[:active]
     else
       if legacy_expired?(MILD_LEGACY, tea_times) || legacy_expired?(STRONG_LEGACY, tea_times)
         # INACTIVE (legacy expired)
-        new_status = HostDetail::ACTIVITY_STATUS_INACTIVE
+        new_status = HostDetail::statuses[:inactive]
       else
         # LEGACY
-        new_status = HostDetail::ACTIVITY_STATUS_LEGACY
+        new_status = HostDetail::statuses[:legacy]
       end
     end
   end
