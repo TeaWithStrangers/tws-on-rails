@@ -10,8 +10,8 @@ class RefreshHostActivityStatus
   }
 
   def self.run
-    User.hosts.each do |user|
-      host_detail = user.host_detail
+    User.includes(:host_detail).hosts.select(:id).find_each do |user|
+
       # update or create a host_detail for the host
       host_detail = user.host_detail
       new_status = find_new_status(user)
