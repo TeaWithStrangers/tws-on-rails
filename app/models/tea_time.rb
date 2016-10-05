@@ -4,7 +4,7 @@ class TeaTime < ActiveRecord::Base
 
   validates_presence_of :host, :start_time, :city, :duration
   validate :attendance_marked?, if: :occurred?
-  validate :has_not_past?
+  validate :occurs_in_past?, on: :create
   belongs_to :city
   belongs_to :host, :class_name => 'User', :foreign_key => 'user_id'
 
@@ -82,7 +82,7 @@ class TeaTime < ActiveRecord::Base
     end
   end
 
-  def has_not_past?
+  def occurs_in_past?
     if Time.now >= self.start_time
       errors.add(:start_time, 'must be a future time')
       false
