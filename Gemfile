@@ -29,6 +29,8 @@ gem 'neat'
 gem 'markerb'
 gem 'sendgrid'
 
+gem 'google_drive'
+
 # Figaro makes it easy to set env variables without Foreman
 #Calendars
 gem 'icalendar', '~> 2.2'
