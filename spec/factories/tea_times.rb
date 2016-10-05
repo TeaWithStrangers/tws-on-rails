@@ -63,6 +63,9 @@ FactoryGirl.define do
       }
     end
 
+    #Skip validation on create so past TTs can be generated
+    to_create {|instance| instance.save(validate: false) }
+
     after(:create) do |tt, evaluator|
       create_list(:attendance, evaluator.attendee_count, tea_time: tt)
       create_list(:attendance, evaluator.present_count, :present, tea_time: tt)

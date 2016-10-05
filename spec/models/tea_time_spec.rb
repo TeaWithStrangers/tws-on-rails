@@ -26,8 +26,8 @@ describe TeaTime do
       expect(tt).to be_valid
     end
 
-    it "should not permit start times that have already past" do
-      expect(@past_tt).not_to be_valid
+    it "should not permit start times in the past for new Tea Times" do
+      expect(build(:tea_time, :past)).not_to be_valid
     end
 
     it 'should save time as UTC, account for the city TZ difference' do
