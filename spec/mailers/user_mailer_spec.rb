@@ -19,10 +19,6 @@ describe UserMailer do
       mail = UserMailer.confirm_city_suggestion(mock_city.id)
       expect(mail.to).to eq([mock_user.email])
     end
-    it 'should be sent by deafult email' do
-      mail = UserMailer.confirm_city_suggestion(mock_city.id)
-      expect(mail.from).to include('sayhi@teawithstrangers.com')
-    end
     it 'should contain the name of the city' do
       mail = UserMailer.confirm_city_suggestion(mock_city.id)
       expect(mail.parts.first.to_s).to include(mock_city.name)
@@ -62,17 +58,12 @@ describe UserMailer do
 
     it 'should not send email if there is no suggestor' do
       mail = described_class.notify_city_suggestor(6, :approved)
-      expect(mail).to eq ActionMailer::Base::NullMessage
+      expect(mail).to eq NullMessage
     end
 
     it 'should send email to the suggestor' do
       mail = described_class.notify_city_suggestor(5, :approved)
       expect(mail.to).to include mock_user.email
-    end
-
-    it 'should be from teawithstrangers' do
-      mail = described_class.notify_city_suggestor(5, :merged)
-      expect(mail.from).to include "sayhi@teawithstrangers.com"
     end
 
     it 'should raise an error if the city is not found' do

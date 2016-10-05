@@ -2,7 +2,7 @@ class UserMailer < ActionMailer::Base
   include SendGrid
   sendgrid_category :use_subject_lines
 
-  default from: "\"Tea With Strangers Robots\" <sayhi@teawithstrangers.com>"
+  default from: "\"Ankit Shah, Tea With Strangers\" <ankit@teawithstrangers.com>"
 
   def confirm_city_suggestion(city_id)
     @city = City.find(city_id)
@@ -40,8 +40,7 @@ class UserMailer < ActionMailer::Base
   def new_registration(user)
     @user = user;
 
-    mail(from: "\"Ankit at Tea With Strangers\" <ankit@teawithstrangers.com>",
-         to: @user.email,
+    mail(to: @user.email,
          subject: "Thanks for being awesome #{@user.nickname}") do |format|
            format.text
            format.html
@@ -57,8 +56,7 @@ class UserMailer < ActionMailer::Base
     template = @user.home_city.tea_times.future_until(2.weeks.from_now).empty? ?
       'registration_no_tea' : 'registration'
 
-    mail(from: "\"Ankit at Tea With Strangers\" <ankit@teawithstrangers.com>",
-         to: @user.email,
+    mail(to: @user.email,
          subject: "Thanks for being awesome, #{@user.name}!") do |format|
            format.text { render template }
            format.html { render template }
@@ -68,8 +66,7 @@ class UserMailer < ActionMailer::Base
   def waitlisted_registration(user)
     @user = user;
 
-    mail(from: "\"Ankit at Tea With Strangers\" <ankit@teawithstrangers.com>",
-         to: @user.email,
+    mail(to: @user.email,
          subject: "Thanks for being awesome #{@user.nickname}") do |format|
            format.text
            format.html

@@ -2,7 +2,7 @@ class AttendanceMailer < ActionMailer::Base
   include SendGrid
   sendgrid_category :use_subject_lines
 
-  default from: "\"Tea With Strangers Robots\" <sayhi@teawithstrangers.com>"
+  default from: "\"The Tea With Strangers Robots\" <sayhi@teawithstrangers.com>"
 
   # Sent to a user confirming their registration for a tea time
   def registration(attendance_id)
@@ -29,9 +29,9 @@ class AttendanceMailer < ActionMailer::Base
     cancel_delivery unless @attendance
 
     @user = @attendance.user
-    @tt = @attendance.tea_time
+    @tea_time = @attendance.tea_time
 
-    @body = @tt.host.email_reminder.body
+    @body = @tea_time.host.email_reminder.body
 
     cancel_delivery unless @body
 
@@ -44,7 +44,7 @@ class AttendanceMailer < ActionMailer::Base
 
     mail(
       to:           @attendance.user.email,
-      from:         "\"#{@tt.host.nickname} at Tea With Strangers\" <#{@tt.host.email}>",
+      from:         @tea_time.host.friendly_email(at_tws: true),
       subject:      "Your tea time is coming up!",
     ) do |format|
       format.text
@@ -56,19 +56,20 @@ class AttendanceMailer < ActionMailer::Base
   def reminder(attendance_id, type)
     sendgrid_category "Tea Time Reminder"
 
-    @attendance = Attendance.find(attendance_id)
+    @attendance = Attendance.includes(:tea_time, :user).find(attendance_id)
     @user = @attendance.user
     @type = type
-    tt = @attendance.tea_time
+    @tea_time = @attendance.tea_time
 
     mail.attachments['event.ics'] = {
       mime_type: "text/calendar",
-      content: IcalCreator.new(@attendance.tea_time).call.to_ical
+      content: IcalCreator.new(@tea_time).call.to_ical
     }
 
     cancel_delivery unless @attendance.pending?
 
     mail(to: @attendance.user.email,
+         from: @tea_time.host.friendly_email(at_tws: true),
          subject: "Your tea time is coming up!") do |format|
       format.text
       format.html
@@ -79,10 +80,11 @@ class AttendanceMailer < ActionMailer::Base
   def flake(attendance_id)
     sendgrid_category "Flake Confirmation"
 
-    attendance = Attendance.find(attendance_id)
+    attendance = Attendance.includes(:tea_time, :user).find(attendance_id)
     @user = attendance.user
     @tea_time = attendance.tea_time
     mail(to: @user.email,
+         from: @tea_time.host.friendly_email(at_tws: true),
          subject: "Sorry you had to cancel! Find another tea time?") do |format|
       format.text
       format.html
@@ -99,6 +101,7 @@ class AttendanceMailer < ActionMailer::Base
     @user = @attendance.user
 
     mail(to: @attendance.user.email,
+         from: @tea_time.host.friendly_email(at_tws: true),
          subject: "You're on the wait list for tea time on #{@tea_time.start_time.strftime('%B %-e')}!") do |format|
       format.text
       format.html
@@ -109,10 +112,11 @@ class AttendanceMailer < ActionMailer::Base
   def waitlist_free_spot(tea_time_id)
     sendgrid_category "Waitlist Spot Availability Notification"
 
-    @tea_time = TeaTime.find(tea_time_id)
+    @tea_time = TeaTime.includes(:attendances).find(tea_time_id)
 
     waitlist = @tea_time.attendances.select(&:waiting_list?)
     mail(bcc: waitlist.map {|a| a.user.email},
+         from: @tea_time.host.friendly_email(at_tws: true),
          subject: 'A spot just opened up at tea time! Sign up!',
          reply_to: @tea_time.host.email) do |format|
       format.text
