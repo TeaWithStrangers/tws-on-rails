@@ -16,7 +16,7 @@ class AttendanceMailer < ActionMailer::Base
                                      content: IcalCreator.new(@tea_time).call.to_ical}
 
     mail(to: @attendance.user.email,
-         subject: "#{@attendance.user.name}! Pencil your tea time to your calendar!") do |format|
+         subject: "#{@attendance.user.name}! Pencil in your tea time on your calendar!") do |format|
            format.text
            format.html
          end

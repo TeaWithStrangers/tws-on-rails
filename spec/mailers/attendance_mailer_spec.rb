@@ -44,7 +44,7 @@ describe AttendanceMailer do
       let(:mail) { AttendanceMailer.waitlist(attendance.id) }
 
       it 'should include the host name' do
-        expect(mail.body.parts.first.to_s).to include(tt.host.name)
+        expect(mail.body.encoded).to match(tt.host.nickname)
       end
     end
   end
@@ -73,7 +73,7 @@ describe AttendanceMailer do
 
     it 'should contain tea time and host info' do
       expect(mail.body.encoded).to match(tt.friendly_time)
-      expect(mail.body.encoded).to match(tt.host.name)
+      expect(mail.body.encoded).to match(tt.host.nickname)
     end
   end
 
