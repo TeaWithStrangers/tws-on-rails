@@ -68,7 +68,7 @@ class AttendanceMailer < ActionMailer::Base
 
     cancel_delivery unless @attendance.pending?
 
-    mail(to: @attendance.user.email,
+    mail(to: @user.email,
          from: @tea_time.host.friendly_email(at_tws: true),
          subject: "Your tea time is coming up!") do |format|
       format.text
