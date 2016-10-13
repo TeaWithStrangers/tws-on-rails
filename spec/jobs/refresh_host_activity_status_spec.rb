@@ -13,26 +13,26 @@ describe RefreshHostActivityStatus do
 
     it 'works with no existing host detail' do
       RefreshHostActivityStatus.run
-      expect(host.host_detail.activity_status).to eql HostDetail::statuses[:active]
+      expect(host.host_detail.active?).to eql true
     end
 
     it 'works with an existing host detail' do
       create(:host_detail, :inactive, :user => host)
       RefreshHostActivityStatus.run
-      expect(host.host_detail.reload.activity_status).to eql HostDetail::statuses[:active]
+      expect(host.host_detail.reload.activity_status).to eql "active"
     end
   end
 
   context 'with an inactive host' do
     it 'works with no existing host detail' do
       RefreshHostActivityStatus.run
-      expect(host.host_detail.activity_status).to eql HostDetail::statuses[:inactive]
+      expect(host.host_detail.activity_status).to eql "inactive"
     end
 
     it 'works with an existing host detail' do
       create(:host_detail, :active, :user => host)
       RefreshHostActivityStatus.run
-      expect(host.host_detail.reload.activity_status).to eql HostDetail::statuses[:inactive]
+      expect(host.host_detail.reload.activity_status).to eql "inactive"
     end
   end
 
@@ -47,13 +47,13 @@ describe RefreshHostActivityStatus do
 
     it 'works with no existing host detail' do
       RefreshHostActivityStatus.run
-      expect(host.host_detail.activity_status).to eql HostDetail::statuses[:legacy]
+      expect(host.host_detail.activity_status).to eql "legacy"
     end
 
     it 'works with an existing host detail' do
       create(:host_detail, :active, :user => host)
       RefreshHostActivityStatus.run
-      expect(host.host_detail.reload.activity_status).to eql HostDetail::statuses[:legacy]
+      expect(host.host_detail.reload.activity_status).to eql "legacy"
     end
   end
 
@@ -68,13 +68,13 @@ describe RefreshHostActivityStatus do
       end
       it 'works with no existing host detail' do
         RefreshHostActivityStatus.run
-        expect(host.host_detail.activity_status).to eql HostDetail::statuses[:inactive]
+        expect(host.host_detail.activity_status).to eql "inactive"
       end
 
       it 'works with an existing host detail' do
         create(:host_detail, :active, :user => host)
         RefreshHostActivityStatus.run
-        expect(host.host_detail.reload.activity_status).to eql HostDetail::statuses[:inactive]
+        expect(host.host_detail.reload.activity_status).to eql "inactive"
       end
 
       it 'does not change if tea time is too recent' do
@@ -82,7 +82,7 @@ describe RefreshHostActivityStatus do
         tea_time.save!
         create(:host_detail, :legacy, :user => host)
         RefreshHostActivityStatus.run
-        expect(host.host_detail.reload.activity_status).to eql HostDetail::statuses[:legacy]
+        expect(host.host_detail.reload.activity_status).to eql "legacy"
       end
     end
 
@@ -96,7 +96,7 @@ describe RefreshHostActivityStatus do
           )
         end
         RefreshHostActivityStatus.run
-        expect(host.host_detail.activity_status).to eql HostDetail::statuses[:inactive]
+        expect(host.host_detail.activity_status).to eql "inactive"
       end
 
       it 'works with an existing host detail' do
@@ -109,7 +109,7 @@ describe RefreshHostActivityStatus do
         end
         create(:host_detail, :active, :user => host)
         RefreshHostActivityStatus.run
-        expect(host.host_detail.reload.activity_status).to eql HostDetail::statuses[:inactive]
+        expect(host.host_detail.reload.activity_status).to eql "inactive"
       end
 
       it 'does not change if tea time is too recent' do
@@ -122,7 +122,7 @@ describe RefreshHostActivityStatus do
         end
         create(:host_detail, :legacy, :user => host)
         RefreshHostActivityStatus.run
-        expect(host.host_detail.reload.activity_status).to eql HostDetail::statuses[:legacy]
+        expect(host.host_detail.reload.activity_status).to eql "legacy"
       end
     end
 
@@ -136,7 +136,7 @@ describe RefreshHostActivityStatus do
           )
         end
         RefreshHostActivityStatus.run
-        expect(host.host_detail.activity_status).to eql HostDetail::statuses[:legacy]
+        expect(host.host_detail.activity_status).to eql "legacy"
       end
 
       it 'does nothing with an existing host detail' do
@@ -149,7 +149,7 @@ describe RefreshHostActivityStatus do
         end
         create(:host_detail, :active, :user => host)
         RefreshHostActivityStatus.run
-        expect(host.host_detail.reload.activity_status).to eql HostDetail::statuses[:legacy]
+        expect(host.host_detail.reload.activity_status).to eql "legacy"
       end
 
       it 'does not change if tea time is recent' do
@@ -162,7 +162,7 @@ describe RefreshHostActivityStatus do
         end
         create(:host_detail, :legacy, :user => host)
         RefreshHostActivityStatus.run
-        expect(host.host_detail.reload.activity_status).to eql HostDetail::statuses[:legacy]
+        expect(host.host_detail.reload.activity_status).to eql "legacy"
       end
     end
   end

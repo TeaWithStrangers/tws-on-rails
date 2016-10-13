@@ -31,17 +31,17 @@ class RefreshHostActivityStatus
     tea_times = user.tea_times.order('start_time asc').to_a
     if tea_times.empty?
       # INACTIVE
-      new_status = HostDetail::statuses[:inactive]
+      new_status = :inactive
     elsif tea_times.last.start_time > (Time.now - ACTIVE_EXPIRATION)
       # ACTIVE
-      new_status = HostDetail::statuses[:active]
+      new_status = :active
     else
       if legacy_expired?(MILD_LEGACY, tea_times) || legacy_expired?(STRONG_LEGACY, tea_times)
         # INACTIVE (legacy expired)
-        new_status = HostDetail::statuses[:inactive]
+        new_status = :inactive
       else
         # LEGACY
-        new_status = HostDetail::statuses[:legacy]
+        new_status = :legacy
       end
     end
   end
