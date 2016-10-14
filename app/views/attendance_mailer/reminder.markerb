@@ -1,16 +1,17 @@
+Hey <%= @user.nickname %>,
+
 <% if @type != :same_day %>
-A quick reminder about tea time soon! Here are the details again!
+A quick reminder about your upcoming tea time! Here are the details again!
 <% else %>
 If you missed the last note, here's one last reminder about tea time in a few hours! 
 <% end %>
 
 It's taking place on <%= @attendance.tea_time.friendly_time %> at <%= @attendance.tea_time.location %>.
 
-If you need to let your host, <%= @attendance.tea_time.host.name %>, know anything in advance, fire them 
-a note at <%= @attendance.tea_time.host.email %>. 
+If you need to let me know anything in advance or have questions, just reply to this message.
 
-Bleep bleep bloop,  
-The Robots at Tea With Strangers
+Your host,
+<%= @tea_time.host.nickname %>
 
 P.S. If you can't make it for whatever reason, <%= link_to 'cancel your seat here', profile_url %>. 
 Since seats are limited, we keep waitlists for each tea time so people can grab open seats as they 

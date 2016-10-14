@@ -61,8 +61,9 @@ class User < ActiveRecord::Base
       merge(TeaTime.future).includes(:tea_time)
   end
 
-  def friendly_email
-    "\"#{self.name}\" <#{self.email}>"
+  def friendly_email(at_tws: false)
+    #Pass at TWS to append 'at Tea With Strangers'; useful for host contexts
+    "\"#{self.name}#{at_tws ? ' at Tea With Strangers' : ''}\" <#{self.email}>"
   end
 
   def admin?

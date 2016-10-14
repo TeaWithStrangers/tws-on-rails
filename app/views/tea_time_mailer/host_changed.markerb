@@ -6,7 +6,7 @@ It's on <%= @tt.friendly_time %> at <%= @tt.location %>.
 Right now, our robots are confused and haven't sorted a way to let the attendees
 know about the change, so you should email the attendees and explain the sitch. 
 This will help reduce the confusion! You can find their emails on 
-<%= link_to 'your dashboard here', profile_path %>.
+<%= link_to 'your dashboard here', profile_url %>.
 
 If <%= @old.name %> didn't discuss this with you, this is probably a mistake. 
 If it isn't, you two should sort this out!

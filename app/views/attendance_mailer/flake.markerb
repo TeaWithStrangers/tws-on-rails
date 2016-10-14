@@ -11,5 +11,5 @@ It'd be awesome if you were able to find another time that does work for you. Be
 
 Hope your day is going beautifully. If not, grab a snack and watch this: <https://www.youtube.com/watch?v=l-gQLqv9f4o>.
 
-Bleep bleep bloop,  
-The Robots at Tea With Strangers
+Hope to see you soon!
+<%= @tea_time.host.nickname %>

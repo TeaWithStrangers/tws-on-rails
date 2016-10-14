@@ -28,6 +28,10 @@ describe AttendanceMailer do
     describe '#waitilist_free_spot' do
       let(:mail) { AttendanceMailer.waitlist_free_spot(tt.id) }
 
+      it 'should come from the host' do
+        expect(mail.from).to eq([attendance.tea_time.host.email])
+      end
+
       it 'should be sent to all wait list attendees but no one else' do
         wl_attendances.map(&:user).map(&:email).each do |email|
           expect(mail.bcc.sort).to include(email)
@@ -40,7 +44,7 @@ describe AttendanceMailer do
       let(:mail) { AttendanceMailer.waitlist(attendance.id) }
 
       it 'should include the host name' do
-        expect(mail.body.parts.first.to_s).to include(tt.host.name)
+        expect(mail.body.encoded).to match(tt.host.nickname)
       end
     end
   end
@@ -59,9 +63,8 @@ describe AttendanceMailer do
       AttendanceMailer.reminder(attendance.id, :same_day)
     }
 
-    it 'should come from the default email' do
-       default_from = Mail::Address.new(AttendanceMailer.default[:from]).address
-      expect(mail.from).to eq([default_from])
+    it 'should come from the host' do
+      expect(mail.from).to eq([attendance.tea_time.host.email])
     end
 
     it 'should be sent to attendee' do
@@ -70,7 +73,7 @@ describe AttendanceMailer do
 
     it 'should contain tea time and host info' do
       expect(mail.body.encoded).to match(tt.friendly_time)
-      expect(mail.body.encoded).to match(tt.host.name)
+      expect(mail.body.encoded).to match(tt.host.nickname)
     end
   end
 

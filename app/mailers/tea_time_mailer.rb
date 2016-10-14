@@ -1,8 +1,9 @@
+# coding: utf-8
 class TeaTimeMailer < ActionMailer::Base
   include SendGrid
   sendgrid_category :use_subject_lines
 
-  default from: "\"Tea With Strangers\" <sayhi@teawithstrangers.com>"
+  default from: "\"The Tea With Strangers Robots\" <sayhi@teawithstrangers.com>"
 
   def host_confirmation(tea_time_id)
     sendgrid_category "Tea Time: Creation Confirmation for Host"
@@ -43,21 +44,24 @@ class TeaTimeMailer < ActionMailer::Base
 
     # @template is set as instance variable so it can be accessed in the
     # ActionController context and subsequently tested
+    robots = "\"Tea With Strangers Robots\" <sayhi@teawithstrangers.com>"
+    ankit = "\"Ankit at Tea With Strangers\" <ankit@teawithstrangers.com>"
+
     case status
     when 'flake'
-      sender = "\"Tea With Strangers Robots\" <sayhi@teawithstrangers.com>"
+      sender = robots
       subject = "Let's try this again"
       @template = 'followup_flake'
     when 'no_show'
-      sender = "\"Ankit at Tea With Strangers\" <ankit@teawithstrangers.com>"
+      sender = ankit
       subject = "Was it something I said?"
       @template = 'followup_no_show'
     when 'waitlisted'
-      sender = "\"Tea With Strangers Robots\" <sayhi@teawithstrangers.com>"
+      sender = robots
       subject = "Try for another tea time?"
       @template = 'followup_waitlisted'
     when 'present'
-      sender = "\"Tea With Strangers Robots\" <sayhi@teawithstrangers.com>"
+      sender = robots
       subject = "Hey! Thanks."
       @template = 'followup_present'
     else

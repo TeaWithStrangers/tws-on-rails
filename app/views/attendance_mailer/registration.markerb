@@ -1,4 +1,4 @@
-Just confirming the tea time you just signed up for! We attached a calendar event here 
+Just confirming the tea time you just signed up for! We attached a calendar event
 so you don't forget.
 
 Here are the details, in case you hate calendars (or you have no idea what to do with 
@@ -11,7 +11,7 @@ and are considering just not showing up, or just want a good song recommendation
 to this (yes, real people exist behind the robots).
 
 Bleep bleep bloop,
-The Robots at Tea With Strangers
+The Tea With Strangers Robots
 
 P.S. If you need to cancel your seat, <%= link_to 'do that here', profile_url %>. 
 Try and do it sooner rather than later because (1) nobody appreciates a last minute 
