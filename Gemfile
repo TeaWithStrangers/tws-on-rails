@@ -1,9 +1,9 @@
-ruby '2.1.5'
+ruby '2.3.1'
 
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.1'
+gem 'rails', '~> 4.2'
 gem 'pg'
 
 # bundle exec rake doc:rails generates the API under doc/api.
@@ -12,9 +12,10 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'haml-rails', '~> 0.5'
 gem 'sass-rails', '~> 5.0'
 
-# For the old-style styles
-gem 'less-rails', '~> 2.5'
-gem 'therubyracer', '~> 0.12'
+# remove all of these when we get rid of the LESS styles
+gem "sprockets", '3.6.3'
+gem 'less-rails'
+gem 'therubyracer'
 
 gem 'uglifier', '>= 1.3.0'
 gem 'turbolinks'
@@ -27,11 +28,11 @@ gem 'bourbon'
 gem 'neat'
 
 gem 'markerb'
+gem 'redcarpet'
 gem 'sendgrid'
 
 gem 'google_drive'
 
-# Figaro makes it easy to set env variables without Foreman
 #Calendars
 gem 'icalendar', '~> 2.2'
 gem 'time_zone_ext'
@@ -49,10 +50,10 @@ gem 'aws-sdk', '~> 1.5.7'
 gem 'paranoia', "~> 2.0"
 
 # Authentication & Permission Gems
-gem 'devise', '~> 3.2.4'
-gem 'cancan', '~> 1.6.10'
+gem 'devise', '~> 3.5'
+gem 'cancan', '~> 1.6'
 # Use ActiveModel has_secure_password
-gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1'
 
 # Use same server in dev as production
 gem 'unicorn'
