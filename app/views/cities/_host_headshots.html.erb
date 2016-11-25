@@ -14,13 +14,22 @@
   </div>
   <div class="host-grid-container">
     <ul class="host-headshots">
-      <% hosts.each do |host| %>
+      <% hosts["active"].each do |host| %>
         <li class="host-container">
           <a href="<%= host_city_path(@city, host) %>">
             <div class="host-avatar ">
               <div class="avatar" style="background-image: url('<%= host.avatar.url(:medium) %>');"></div>
             </div>
             <h3 class="center capitalize">
+              <%= link_to(host.name || "No Name :(", host_city_path(@city, host) ) %>
+            </h5>
+          </a>
+        </li>
+      <%end %>
+      <% hosts["legacy"].each do |host| %>
+        <li class="host-container no-photo">
+          <a href="<%= host_city_path(@city, host) %>">
+            <h3 class="center capitalize" >
               <%= link_to(host.name || "No Name :(", host_city_path(@city, host) ) %>
             </h5>
           </a>

@@ -24,6 +24,10 @@ hosts across the website.
 			position: relative;
 			margin-bottom: 2em;
 
+      &.no-photo {
+        padding-top: 0em;
+      }
+
 			h3 {
 				padding: 0.75em 0;
 

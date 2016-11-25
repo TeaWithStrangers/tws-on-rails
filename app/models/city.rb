@@ -49,8 +49,14 @@ class City < ActiveRecord::Base
   end
 
   def hosts
-    hosts = proxy_cities.inject([]) {|lst, c| lst + c.hosts}
     User.hosts.where(home_city: [self] + proxy_cities)
+  end
+  
+  def hosts_by_status
+    users = User.hosts.where(home_city: self.id).includes(:host_detail).group_by {|h| h.host_detail.activity_status }
+    # Return empty array if there are no users in that group
+    users.default = []
+    users
   end
 
   def timezone=(tz)
