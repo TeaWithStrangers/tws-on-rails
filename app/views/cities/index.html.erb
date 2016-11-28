@@ -2,19 +2,23 @@
 <div class='container'>
   <div class="cities-partial">
     <div class="city-cta-header">
-      <h1 class="dark center">Where can we find you?</h1>
-      <p class="header-small">Choose the city you call home to set your home city.</p>
-      <%= link_to suggest_cities_path do %>
-        <button class="button new-city-cta top-button ">Don’t see your city? Add it here!</button>
-      <% end %>
+      <h1 class="dark center">Set your home city</h1>
+      <p class="header-small">Make sure you're the first to hear about Tea With Strangers updates relevant to you!</p>
     </div>
 
     <div class="cities-lists">
       <div class="cities-section">
-        <h3 class='capitalize cities-list-header'>We're in these cities</h3>
+        <div class="cities-list-header"> 
+          <h2 class='center'>
+            We're building our communities here 🏠 
+          </h2>
+          <h4 class="center">
+            You should be able to sign up for a tea time today!
+          </h4>
+        </div>
         <div class="cities-list current-cities-container" data-city-type='active'>
           <% @active_cities.each do |city| %>
-            <div class="city">
+            <div class="city photo">
               <div class="city-image" style="background-image: url('<%= city.header_bg(:small) %>');">
                 <h2 class=" city-name">
                   <%= link_to city.name, city_path(city), class: 'background-filter' %>
@@ -26,24 +30,30 @@
         </div>
       </div>
       <div class="cities-section">
-        <h3 class='capitalize cities-list-header'>We're on our way to these cities</h3>
+        <div class="cities-list-header"> 
+          <h2 class='center'>
+            We'll get here eventually ✈️
+          </h2>
+          <h4>
+            For now, find and set your home city. We'll make sure you know when we Tea With Strangers is coming your way!
+          </h4>
+        </div> 
         <div class="cities-list current-cities-container" data-city-type='active'>
-          <% @upcoming_cities.each do |city| %>
-            <div class="city">
-              <div class="city-image" style="background-image: url('<%= city.header_bg(:small) %>');">
-                <h2 class=" city-name">
-                  <%= link_to city.name, city_path(city), class: 'background-filter' %>
-                  <%= link_to city.name, city_path(city), class: 'city-name' %>
-                </h2>
-              </div>
-            </div>
-          <% end %>
+          <div class="suggest">
+            <%= link_to suggest_cities_path do %>
+              <button class="button new-city-cta top-button ">Don’t see your city? Add it here!</button>
+            <% end %>
+          </div>
+          <ul class="cities-list">
+            <% @upcoming_cities.each do |city| %>
+              <li class="city-no-photo">
+                <%= link_to city.name, city_path(city) %>
+              </li>
+            <% end %>
+          </ul>
         </div>
       </div>
     </div>
-    <%= link_to suggest_cities_path do %>
-      <button class="btn new-city-cta">Don't see your city? Add it here!</button>
-    <% end %>
   </div>
 </div>
 <%= render partial: 'shared/new_footer' %>

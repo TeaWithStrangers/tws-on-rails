@@ -33,14 +33,14 @@
         <% end %>
       </div>
       <div class="active-city-list">
-        <h3 class="capitalize center current-cities-header">Or click your city below if we're already there</h3>
-        <div class="cities-list">
+        <h3 class="capitalize center current-cities-header">Or click your city below if we already have it covered</h3>
+        <ul class="cities-list">
           <% City.visible.each do |c| %>
-            <div class="city no-photo">
+            <li class="city-no-photo">
               <%= link_to c.name, city_path(c) %>
-            </div>
+            </li>
           <% end %>
-        </div>
+        </ul>
       </div>
     </div>
   </div>
