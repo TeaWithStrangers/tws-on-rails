@@ -1,13 +1,5 @@
 <div class="dash-menu-container">
   <div class="dash-menu">
-    <% if current_user.host? || current_user.admin? %>
-      <ul class="dash-menu-list standout">
-        <li class="nav-link-item new-tea">
-          <%= link_to "Create New Tea Time!", new_tea_time_path %>
-        </li>
-      </ul>
-    <% end %>
-
     <ul id="profile-nav" class="dash-menu-list">
       <li class="nav-link-item">
         <%= link_to "Quick Look", profile_path %>
@@ -24,6 +16,9 @@
           <%= link_to "Edit Profile", host_profile_path %>
         </li>
       <% end %>
+      <li class="nav-link-item">
+        <%= link_to "Account Details", edit_user_registration_path %>
+      </li>
     </ul>
   </div>
 </div>
