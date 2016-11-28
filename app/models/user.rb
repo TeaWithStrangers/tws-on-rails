@@ -5,7 +5,6 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-
   has_many :tea_times
   has_many :attendances
   has_one :host_detail
@@ -21,6 +20,7 @@ class User < ActiveRecord::Base
   validates_with Validators::TwitterHandleValidator
 
   before_destroy :flake_future
+  after_create :generate_host_detail
 
   bitmask :roles, :as => [:host, :admin], :null => false
   alias_method :role?, :roles?
@@ -83,6 +83,10 @@ class User < ActiveRecord::Base
     attendances_for(TeaTime.future).each do |a|
       a.flake!(email: false)
     end
+  end
+
+  def generate_host_detail
+    HostDetail.create(user: self)
   end
 
   def waitlist
