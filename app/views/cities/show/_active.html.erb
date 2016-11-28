@@ -2,17 +2,17 @@
 	<% tts = @city.tea_times.future_until(2.weeks.from_now) %>
 	<% if tts.count < 1 %>
 		<h2 class="section-header">
-			There aren't any upcoming tea times!
+			There aren't any upcoming Tea Times!
 		</h2>
 		<p>
 			We're working on getting some more up on the board! Sorry for any disappointment, but if you'd like, <a href="mailto:ankit@teawithstrangers.com?Subject=More%20tea%20times%20please!%21" target="_blank">shoot Ankit, the founder of TWS, an email</a> that he'll screenshot and send to the hosts to give 'em some inspiration.
 		</p>
 	<% else %>
 		<h2 class="section-header">
-			Join for a tea time in the next two weeks!
+			Tea Time is a conversation between a few people who know nothing about each other.
 		</h2>
 		<p>
-			Every tea time is brought together by someone in our host community that gets it. Each of them was brought on by hosts before them. They’re all awesome, but you can get to know them by checking out their profiles.	
+			You'll never leave without questions, new perspectives, and the reminder that we're far more the same than we are different.  
 		</p>
 	<% end %>
 	<%= render partial: 'cities/show/set_city' %>

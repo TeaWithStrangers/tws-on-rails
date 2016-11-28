@@ -210,14 +210,14 @@ h3.cities-list-header {
 }
 
 .city-info {
-  h2.section-header {
+  .section-header {
     margin-bottom: $base-font-size;
   }
 
   .section {
     margin-bottom: $base-font-size*2;
     clear: both;
-    overflow: auto;
+    overflow: visible;
 
     &.line-divide {
       padding-bottom: $base-font-size*2;

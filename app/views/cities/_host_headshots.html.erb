@@ -1,40 +1,63 @@
 <% count = hosts.count  %>
 <% many_hosts = hosts.count > 2 %>
+
 <div class="host-grid-partial">
-  <div class="section host-intro">
-    <h2 class="section-header">
-      Get to know the hosts
-    </h2>
-    <p>
-      The host community is full of folks that generally love 
-      good conversations, bringing people together, and open 
-      minds. Like yourself, each of them has an incredible story 
-      that brought them to where they are right now. 
-    </p>
+  <div class="active-hosts">
+    <div class="section host-intro">
+      <h2 class="section-header">
+        The Host Community is full of amazing stories.
+      </h2>
+      <p>
+        How else would someone end up regularly 
+        bringing strangers together for conversations? 
+        Before each of them were invited to community, 
+        they were attendees that fed their tea times 
+        with their questions, open-mindedness, and 
+        presence.
+      </p>
+    </div>
+    <div class="active-host-container">
+      <ul class="host-headshots">
+        <% hosts["active"].each do |host| %>
+          <li class="host-container">
+            <a href="<%= host_city_path(@city, host) %>">
+              <div class="host-avatar ">
+                <div class="avatar" style="background-image: url('<%= host.avatar.url(:medium) %>');"></div>
+              </div>
+              <h3 class="center capitalize">
+                <%= link_to(host.name || "No Name :(", host_city_path(@city, host) ) %>
+              </h3>
+            </a>
+          </li>
+        <%end %>
+      </ul> 
+    </div>
   </div>
-  <div class="host-grid-container">
-    <ul class="host-headshots">
-      <% hosts["active"].each do |host| %>
-        <li class="host-container">
-          <a href="<%= host_city_path(@city, host) %>">
-            <div class="host-avatar ">
-              <div class="avatar" style="background-image: url('<%= host.avatar.url(:medium) %>');"></div>
-            </div>
-            <h3 class="center capitalize">
-              <%= link_to(host.name || "No Name :(", host_city_path(@city, host) ) %>
-            </h5>
-          </a>
-        </li>
-      <%end %>
-      <% hosts["legacy"].each do |host| %>
-        <li class="host-container no-photo">
-          <a href="<%= host_city_path(@city, host) %>">
-            <h3 class="center capitalize" >
-              <%= link_to(host.name || "No Name :(", host_city_path(@city, host) ) %>
-            </h5>
-          </a>
-        </li>
-      <% end %>
-    </ul>
-  </div>
+
+  <% if hosts["legacy"].count > 0 %>
+    <div class="legacy-hosts">
+      <div class="section host-intro">
+        <h3 class="section-header">
+          Hosts we've missed!
+        </h3>
+        <p>
+          Every host in the community has played a huge role in making this movement come to life. You might not have seen tea times from these hosts in a bit, but without them, Tea With Strangers in <%= "#{@city.name}"%> wouldn't be where it is today.
+        </p>
+      </div>
+      <div class="legacy-host-container">
+        <ul class="host-legacy">
+          <% hosts["legacy"].each do |host| %>
+            <li class="host-container no-photo">
+              <a href="<%= host_city_path(@city, host) %>">
+                <h4 class="center" >
+                  <%= link_to(host.name || "🤔", host_city_path(@city, host) ) %>
+                </h4>
+              </a>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
 </div>
