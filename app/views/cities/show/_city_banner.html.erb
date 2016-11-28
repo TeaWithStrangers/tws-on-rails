@@ -5,7 +5,7 @@
       <h1 class="cover-photo-lede city-title"><%= @city.name %></h1>
       <% if @city.pending? %>
         <span class='cover-photo-subtext city-subtext'>
-          Coming Soon
+          We'll get there eventually!
         </span>
       <% elsif @city.pending_approval? %>
         <span class='cover-photo-subtext city-subtext'>

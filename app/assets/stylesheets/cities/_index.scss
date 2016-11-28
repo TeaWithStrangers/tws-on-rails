@@ -1,5 +1,20 @@
 .container.city {
   margin-bottom: $base-font-size*3;
+  &.no-banner {
+    margin-top: $base-font-size*3;
+    .coldwater-letter {
+      background: $tws-white;
+      border: $base-border;
+      padding: 2em 2em;
+      h3 {
+        margin-bottom: 1em;
+        line-height: 1.25em;
+      }
+      p {
+        font-size: 0.9em;
+      }
+    }
+  }
 }
 
 .cities-partial {
@@ -247,17 +262,9 @@ h3.cities-list-header {
 
 input, button {
   &.full-width-button {
-    @include span-columns(12 of 12);
-
-    @include media($tablet) {
-      @include span-columns(10 of 12);
-      @include shift(1);
-    }
-
-    @include media($desktop) {
-      @include span-columns(8 of 12);
-      @include shift(2);
-    }
+    width: auto;
+    max-width: 100%;
+    white-space: normal;
   }
 
   &.text {
@@ -287,10 +294,19 @@ input, button {
   text-align: center;
 
   h3 {
-    margin-bottom: $base-font-size/2;
+    margin-bottom: 1em;
   }
 
-  p, input {
+  button, input {
+    margin-bottom: 1em;
+  }
+
+  h5 {
+    clear: both; 
+    overflow: auto;
+  }
+
+  p {
     margin-bottom: 0;
   }
 }
