@@ -5,6 +5,9 @@
     <nav class='nav-list'>
       <ul class='nav-links'>
         <% if current_user && current_user.host? %>
+          <li class="nav-link-item new-tea">
+            <%= link_to "Post Tea Time", new_tea_time_path, class: 'nav-emphasis' %>
+          </li>
           <li class="nav-link-item">
             <%= link_to current_user.nickname, host_city_path(current_user.home_city, current_user) %>
           </li>
@@ -46,9 +49,6 @@
         <% else %>
           <li class="nav-link-item">
             <%= link_to 'Dashboard', profile_path %>
-          </li>
-          <li class="nav-link-item">
-            <%= link_to "Account", edit_user_registration_path %>
           </li>
           <li class='nav-link-item'>
             <%= link_to('Sign out', destroy_user_session_path, method: :delete) %>
