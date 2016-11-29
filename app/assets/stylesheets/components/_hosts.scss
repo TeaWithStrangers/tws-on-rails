@@ -5,7 +5,7 @@ hosts across the website.
 
 */
 
-.host-grid-container {
+.active-host-container {
 	margin-top: 1em;
 	margin-bottom: 2em;
 	clear: both;
@@ -77,4 +77,37 @@ hosts across the website.
 		}
 	}
 	
+}
+
+.legacy-hosts {
+  h3 {
+    color: $tws-orange;
+    position: relative;
+  }
+  .legacy-host-container {
+    margin-top: 1em;
+    margin-bottom: 2em;
+    clear: both;
+    overflow: auto;
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+    text-align: center;
+    li {
+      display: inline-block;
+      padding: 0 0.5em;
+      h4:after {
+        content: '•';
+        position: relative;
+        left: 0.5em;
+        color: $tws-yellow;
+      }
+      &:last-child h4:after {
+        content: '';
+      }
+    }
+  }
 }
