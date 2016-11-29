@@ -22,6 +22,9 @@
           <li class="nav-link-item">
             <%= link_to current_user.home_city.name, city_path(current_user.home_city) %>
           </li>
+          <li class="nav-link-item">
+            <%= link_to "Cities", cities_path %>
+          </li>
         <% end %>
 
         <% if !current_user || (current_user && !current_user.host?) %>
