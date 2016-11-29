@@ -1,21 +1,40 @@
 <div class="notification alert set-city">
   <div class="set-city">
-    <% if current_user && current_user.home_city.nil? %>
-      <h3 class="center">You have no home city yet!</h3>
-      <%= form_for(@city, url: set_city_path(@city), method: :put) do |f|%>
-        <%= f.submit "This is my home city", class: 'full-width-button' %>
+    <% if !user_signed_in? %>
+      <h3 class="center">
+        You can set your city once you've signed up!
+      </h3>
+      <%= link_to sign_up_path do %>
+        <button class='orange full-width-button'>
+          Sign Up
+        </button>
       <% end %>
-    <% elsif current_user && current_user.home_city != @city%>
-      <p>
+      <%= link_to new_user_session_path do %>
+        <h5> 
+          Log in if you've signed up before
+        </h5>
+      <% end %>
+    <% else %>
+      <% if current_user && current_user.home_city.nil? %>
+        <h3 class="center">You have no home city yet!</h3>
         <%= form_for(@city, url: set_city_path(@city), method: :put) do |f|%>
-          <h3 class="center">
-            <%= current_user.home_city.name %> is your home city.
-          </h3>
-          <%= f.submit "Click here to change your city to #{@city.name}.", class: 'text' %>
+          <%= f.submit "Set #{@city.name} as my home city", class: 'full-width-button' %>
         <% end %>
-      </p>
-    <% elsif current_user && current_user.home_city == @city%>
-      <p><strong>This is your home city!</strong> If that's wrong, <%= link_to 'go here to change it.', cities_path %></p>
+      <% elsif current_user && current_user.home_city != @city%>
+        <p>
+          <%= form_for(@city, url: set_city_path(@city), method: :put) do |f|%>
+            <h3 class="center">
+              Do you live in <%= "#{@city.name}" %> now?
+            </h3>
+            <%= f.submit "Yes, #{@city.name} should be my home city", class: 'full-width-button' %>
+            <h5>
+              <%= link_to current_user.home_city.name, city_path(current_user.home_city) %> is your home city right now. The big button will change that!
+            </h5>
+          <% end %>
+        </p>
+      <% elsif current_user && current_user.home_city == @city%>
+        <p><strong>This is your home city!</strong> If you've moved, <%= link_to 'change your home city here', cities_path %>.</p>
+      <% end %>
     <% end %>
   </div>
 </div>

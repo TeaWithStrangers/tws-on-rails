@@ -1,25 +1,57 @@
-<div class="section city-intro">
-	<h2 class="section-header">Bring Tea With Strangers to <%= @city.name %></h2>
-	<p class="last">
-		Tea With Strangers is all about getting rid of strangers and making our cities feel like neighborhoods. This dreamland doesn’t become real with a website, facebook status, or an #instacommunity hashtag. We need people to start making tea time happen!
-	</p>
-	<% if !user_signed_in? %>
-		<%= link_to sign_up_path do %>
-			<button class='orange full-width-button'>
-				Let's Get Tea
-			</button>
-		<% end %>
-	<% else %>
-		<%= render partial: 'cities/show/set_city' %>
-	<% end %>
+<div class="section city-intro coldwater-letter">
+	<h2 class="section-header">
+    Dear <%= @city.name %>,
+  </h2>
+  <h3>
+    We don't have an ETA for when we'll get to you yet. The moment we do, <%= @city.users.count %> of you will be emailed about it.
+  </h3>
+  <p>
+    Right now, we're focusing on doing the best job we can in 
+      <a href="http://www.teawithstrangers.com/NYC" target="_blank">New York</a>, 
+      <a href="http://www.teawithstrangers.com/SF" target="_blank">San Francisco and the Bay Area</a>, 
+      <a href="http://www.teawithstrangers.com/LONDON" target="_blank">London</a>, 
+      <a href="http://www.teawithstrangers.com/BOS" target="_blank">Boston</a>, 
+      <a href="http://www.teawithstrangers.com/CHI" target="_blank">Chicago</a>, and
+      <a href="http://www.teawithstrangers.com/DC" target="_blank">DC</a>.
+  </p>
+  <p>
+    That means finding amazing hosts, fostering a strong community amongst them, ensuring that tea times are happening regularly, and that every conversation inspires questions, new perspectives, and the reminder that we're far more the same than we are different.
+  </p>
+  <p>
+    We're still trying to nail the formula to do this well, and when we have more of the puzzle made out, we'll bring Tea With Strangers to more cities.
+  </p>
+  <h3>
+    For now, set your home city so you'll get that email too.
+  </h3>
+  <%= render partial: 'cities/show/set_city' %>
+  <h3>
+    If you're bummed about having to wait...
+  </h3> 
+  <p>
+    Go to your local park, library, cafe, or any other community center and ask someone how they're doing. 
+  </p>
+  <p>
+    Tea With Strangers is a slightly less fear-inducing way of doing pretty much that, but you have all the courage you need to make this happen yourself. Really.
+  </p>
+  <h3>
+    If you are ever in 
+      <a href="http://www.teawithstrangers.com/NYC" target="_blank">NYC</a>, 
+      <a href="http://www.teawithstrangers.com/SF" target="_blank">SF</a>, 
+      <a href="http://www.teawithstrangers.com/LONDON" target="_blank">London</a>, 
+      <a href="http://www.teawithstrangers.com/BOS" target="_blank">Boston</a>, 
+      <a href="http://www.teawithstrangers.com/CHI" target="_blank">Chicago</a>, or
+      <a href="http://www.teawithstrangers.com/DC" target="_blank">DC</a>...
+  </h3>
+  <p>
+    Go to the appropriate city page and go to a tea time there! And tell your friends in those cities to go to tea times and live vicariously through them!
+  </p>
+  <h3>
+    If you want to become a host when we're ready to go in <%= @city.name %>...
+  </h3>
+  <p>
+    Let us know that you want to become a host by going here: <%= link_to "Hosting With Tea With Strangers", hosting_path %>.
+  </p>
 </div>
-<div class="section required-resources line-divide">
-	<%= render partial: 'cities/show/required_resources' %>
-</div>
-<div class="section sharing line-divide">
-	<%= render partial: 'shared/sharing_widget', locals: { full: true } %>
-</div>
-
 <div class="section learn-more">
 	<%= render partial: 'shared/learn_more' %>
 </div>
