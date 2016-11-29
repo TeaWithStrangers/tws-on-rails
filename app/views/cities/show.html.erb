@@ -14,17 +14,27 @@
 <% end %>
 
 <div class="light-background">
-<%= render partial: 'cities/show/city_banner' %>
-
-<div class="container city">
-  <div class="city-info">
-  	<% if @city.unapproved? %>
-  	  <%= render partial: 'cities/show/unconfirmed' %>
-  	<% elsif @city.cold_water? %>
-  	  <%= render partial: 'cities/show/cold_water' %>
-  	<% else %>
-      <%= render partial: 'cities/show/active' %>
-  	<% end %>
-  </div>
+  <% if @city.unapproved? %>
+    <%= render partial: 'shared/header' %>
+    <div class="container city no-banner">
+      <div class="city-info">
+        <%= render partial: 'cities/show/unconfirmed' %>
+      </div>
+    </div>
+  <% elsif @city.cold_water? %>
+    <%= render partial: 'shared/header' %>
+    <div class="container city no-banner">
+      <div class="city-info">
+        <%= render partial: 'cities/show/cold_water' %>
+      </div>
+    </div>
+  <% else %>
+    <%= render partial: 'cities/show/city_banner' %>
+    <div class="container city">
+      <div class="city-info">
+        <%= render partial: 'cities/show/active' %>
+      </div>
+    </div>
+  <% end %>
 </div>
 <%= render partial: 'shared/new_footer' %>
