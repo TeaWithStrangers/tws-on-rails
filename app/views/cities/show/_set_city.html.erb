@@ -26,7 +26,7 @@
             <h3 class="center">
               Do you live in <%= "#{@city.name}" %> now?
             </h3>
-            <%= f.submit "Yes, #{@city.name} should be my home city", class: 'full-width-button' %>
+            <%= f.submit "Yup!", class: 'full-width-button' %>
             <h5>
               <%= link_to current_user.home_city.name, city_path(current_user.home_city) %> is your home city right now. The big button will change that!
             </h5>
