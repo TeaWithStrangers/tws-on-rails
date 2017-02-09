@@ -1,54 +1,40 @@
 class RefreshHostActivityStatus
-  ACTIVE_EXPIRATION = 30.days
-  MILD_LEGACY = {
-    :tea_time_max => 5,
-    :expiration => 2.months,
-  }
-  STRONG_LEGACY = {
-    :tea_time_max => 10,
-    :expiration => 3.months,
-  }
+  ACTIVE_EXPIRATION = 4.weeks
+  LEGACY_EXPIRATION = 6.months
+  PROLIFIC_HOST_CUTOFF = 15
 
   def self.run
     User.includes(:host_detail).hosts.select(:id).find_each do |user|
 
       # update or create a host_detail for the host
-      host_detail = user.host_detail
-      new_status = find_new_status(user)
+      user.build_host_detail unless user.host_detail
 
-      if host_detail
-        if new_status != host_detail.activity_status
-          host_detail.update(:activity_status => new_status)
-        end
-      else
-        detail = user.build_host_detail(:activity_status => new_status)
-        detail.save!
+      host_detail = user.host_detail
+      new_status = find_new_status(user, host_detail.commitment)
+
+      if new_status != host_detail.activity_status
+        host_detail.update(:activity_status => new_status)
       end
     end
   end
 
-  def self.find_new_status(user)
-    tea_times = user.tea_times.order('start_time asc').to_a
-    if tea_times.empty?
-      # INACTIVE
+  def self.find_new_status(user, commitment)
+    tea_times = user.tea_times.completed.order('start_time asc').to_a
+    most_recent = tea_times.last.try(:start_time)
+    if user.tea_times.future.pending.any?
+      new_status = :active
+    elsif tea_times.empty? || commitment == HostDetail::INACTIVE_COMMITMENT
+      # they have never hosted or told us they are inactive
       new_status = :inactive
     elsif tea_times.last.start_time > (Time.now - ACTIVE_EXPIRATION)
-      # ACTIVE
+      # hosted recently or have upcoming tea times
       new_status = :active
+    elsif most_recent < Time.now - LEGACY_EXPIRATION && tea_times.count < PROLIFIC_HOST_CUTOFF
+      # they've dropped off of legacy status into expired
+      new_status = :inactive
     else
-      if legacy_expired?(MILD_LEGACY, tea_times) || legacy_expired?(STRONG_LEGACY, tea_times)
-        # INACTIVE (legacy expired)
-        new_status = :inactive
-      else
-        # LEGACY
-        new_status = :legacy
-      end
+      # temporarily inactive
+      new_status = :legacy
     end
-  end
-
-  def self.legacy_expired?(legacy_type, tea_times)
-    expiration_cutoff = Time.now - ACTIVE_EXPIRATION - legacy_type[:expiration]
-    tea_times.count <= legacy_type[:tea_time_max] &&
-      tea_times.last.start_time < expiration_cutoff
   end
 end

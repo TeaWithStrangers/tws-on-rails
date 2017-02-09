@@ -19,6 +19,8 @@ class User < ActiveRecord::Base
   validates_with Validators::FacebookUrlValidator
   validates_with Validators::TwitterHandleValidator
 
+  delegate :commitment, to: :host_detail
+
   before_destroy :flake_future
   after_create :generate_host_detail
 
@@ -42,6 +44,43 @@ class User < ActiveRecord::Base
 
   def name=(name)
     nickname = name
+  end
+
+  def commitment_overview
+    if commitment.nil? || HostDetail::IRREGULAR_COMMITMENTS.include?(commitment)
+      commitment
+    else
+      HostDetail::REGULAR_COMMITMENT
+    end
+  end
+
+  def commitment_detail
+    commitment
+  end
+
+  def commitment_overview=(overview)
+    if overview.to_s != HostDetail::REGULAR_COMMITMENT.to_s
+      host_detail.commitment = overview
+      host_detail.save!
+    end
+  end
+
+  def commitment_detail=(detail)
+    if detail.to_i > 0
+      host_detail.commitment = detail
+      host_detail.save!
+    end
+  end
+
+  def commitment_text
+    HostDetail::COMMITMENT_OVERVIEW_TEXT[commitment] ||
+        HostDetail::COMMITMENT_OVERVIEW_TEXT[HostDetail::REGULAR_COMMITMENT]
+  end
+
+  def custom_commitment
+    if commitment_overview == HostDetail::REGULAR_COMMITMENT && !HostDetail::COMMITMENT_DETAILS.include?(commitment)
+      commitment
+    end
   end
 
   def twitter_url

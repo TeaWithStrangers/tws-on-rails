@@ -156,4 +156,80 @@ describe User do
       expect(past_att.status).not_to eq(:flake)
     end
   end
+
+  context 'host commitment' do
+    let(:host) { create(:user, :host) }
+    let(:host_detail) { host.host_detail }
+
+    context 'overview' do
+      it 'is inactive if host is inactive' do
+        host_detail.commitment = HostDetail::INACTIVE_COMMITMENT
+        host_detail.save!
+        expect(host.commitment_overview).to eql HostDetail::INACTIVE_COMMITMENT
+      end
+
+      it 'is 0 if host is paused' do
+        host_detail.commitment = 0
+        host_detail.save!
+        expect(host.commitment_overview).to eql 0
+      end
+
+      it 'is REGULAR_COMMITMENT if commitment is, for example, monthly' do
+        host_detail.commitment = 4
+        host_detail.save!
+        expect(host.commitment_overview).to eql HostDetail::REGULAR_COMMITMENT
+      end
+
+      it 'is REGULAR_COMMITMENT if commitment is anything else' do
+        host_detail.commitment = 7
+        host_detail.save!
+        expect(host.commitment_overview).to eql HostDetail::REGULAR_COMMITMENT
+      end
+
+      it 'does not save if it\'s a regular commitment' do
+        # `detail` takes care of this instead
+        host_detail.commitment = 7
+        host_detail.save!
+        host.commitment_overview = HostDetail::REGULAR_COMMITMENT
+        expect(host_detail.reload.commitment).to eql 7
+      end
+
+      it 'does save if it\'s inactive commitment' do
+        host_detail.commitment = 7
+        host_detail.save!
+        host.commitment_overview = HostDetail::INACTIVE_COMMITMENT
+        expect(host_detail.reload.commitment).to eql HostDetail::INACTIVE_COMMITMENT
+      end
+
+      it 'does save if it\'s pause commitment' do
+        host_detail.commitment = 7
+        host_detail.save!
+        host.commitment_overview = 0
+        expect(host_detail.reload.commitment).to eql 0
+      end
+    end
+
+    context 'detail' do
+      it 'doesn\'t save negative numbers' do
+        host_detail.commitment = 7
+        host_detail.save!
+        host.commitment_detail = -5
+        expect(host_detail.reload.commitment).to eql 7
+      end
+
+      it 'doesn\'t save nonintegers' do
+        host_detail.commitment = 7
+        host_detail.save!
+        host.commitment_detail = "hello"
+        expect(host_detail.reload.commitment).to eql 7
+      end
+
+      it 'does save positive integers' do
+        host_detail.commitment = 7
+        host_detail.save!
+        host.commitment_detail = 5
+        expect(host_detail.reload.commitment).to eql 5
+      end
+    end
+  end
 end

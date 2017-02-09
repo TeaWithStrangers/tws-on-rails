@@ -20,6 +20,10 @@ FactoryGirl.define do
       followup_status :cancelled
     end
 
+    trait :completed do
+      followup_status :completed
+    end
+
     trait :attended do
       transient { attendee_count 3 }
     end

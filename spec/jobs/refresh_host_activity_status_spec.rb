@@ -2,118 +2,77 @@ require 'spec_helper.rb'
 
 describe RefreshHostActivityStatus do
   let!(:host) { create(:user, :host) }
-  let(:expiration) { RefreshHostActivityStatus::ACTIVE_EXPIRATION }
-  let(:mild_expiration) { RefreshHostActivityStatus::MILD_LEGACY[:expiration] }
-  let(:strong_expiration) { RefreshHostActivityStatus::STRONG_LEGACY[:expiration] }
-  let(:mild_max) { RefreshHostActivityStatus::MILD_LEGACY[:tea_time_max] }
-  let(:strong_max) { RefreshHostActivityStatus::STRONG_LEGACY[:tea_time_max] }
+  let(:active_expiration) { RefreshHostActivityStatus::ACTIVE_EXPIRATION }
+  let(:legacy_expiration) { RefreshHostActivityStatus::LEGACY_EXPIRATION }
+  let(:prolific_host_cutoff) { RefreshHostActivityStatus::PROLIFIC_HOST_CUTOFF }
 
-  context 'with an active host' do
-    let!(:tea_time) { create(:tea_time, :host => host, :start_time => Time.now - 1.day) }
-    it 'updates status to active' do
-      RefreshHostActivityStatus.run
-      expect(host.host_detail.reload.activity_status).to eql "active"
-    end
+
+  it 'is active if future tea time posted' do
+    create(:tea_time, :host => host, :start_time => Time.now + 1.day)
+    RefreshHostActivityStatus.run
+    expect(host.host_detail.reload.activity_status).to eql 'active'
   end
 
-  context 'with an inactive host' do
-    it 'updates the status to inactive' do
-      host.host_detail.activity_status = :active
-      host.host_detail.save!
-      RefreshHostActivityStatus.run
-      expect(host.host_detail.reload.activity_status).to eql "inactive"
-    end
-  end
-
-  context 'with a legacy host' do
-    let!(:tea_time) do
-      create(
-        :tea_time,
-        :host => host,
-        :start_time => Time.now - expiration - 1.day
-      )
-    end
-    it 'updates the status to legacy' do
-      RefreshHostActivityStatus.run
-      expect(host.host_detail.reload.activity_status).to eql "legacy"
-    end
-  end
-
-  context 'with a host that has been legacy for a while' do
-    context 'and is mild legacy' do
-      let!(:tea_time) do
-        create(
-          :tea_time,
-          :host => host,
-          :start_time => Time.now - expiration - mild_expiration - 1.day,
-        )
+  context 'with no future tea times' do
+    context 'with inactive host commitment' do
+      before(:each) do
+        detail = host.host_detail
+        detail.commitment = HostDetail::INACTIVE_COMMITMENT
+        detail.save!
       end
-      it 'updates to inactive if tea time is long ago' do
-        host.host_detail.activity_status = :active
-        host.host_detail.save!
+
+      it 'is inactive if last tea was within the active_expiration range' do
+        create(:tea_time, :completed, :host => host, :start_time => Time.now + 1.day - active_expiration)
         RefreshHostActivityStatus.run
-        expect(host.host_detail.reload.activity_status).to eql "inactive"
+        expect(host.host_detail.reload.activity_status).to eql 'inactive'
       end
 
-      it 'does not update to inactive if tea time is too recent' do
-        tea_time.start_time = Time.now - expiration - mild_expiration + 1.day
-        tea_time.save!
+      it 'is inactive if last tea was older than the active_expiration range but within legacy expiration' do
+        create(:tea_time, :completed, :host => host, :start_time => Time.now + 1.day - legacy_expiration)
         RefreshHostActivityStatus.run
-        expect(host.host_detail.reload.activity_status).to eql "legacy"
-      end
-    end
-
-    context 'and is strong legacy' do
-      it 'updates to inactive if tea times are long ago' do
-        (mild_max + 1).times do
-          create(
-            :tea_time,
-            :host => host,
-            :start_time => Time.now - expiration - strong_expiration - 1.day,
-          )
-        end
-        host.host_detail.activity_status = :active
-        host.host_detail.save!
-        RefreshHostActivityStatus.run
-        expect(host.host_detail.reload.activity_status).to eql "inactive"
+        expect(host.host_detail.reload.activity_status).to eql 'inactive'
       end
 
-      it 'does not update to inactive if tea time is too recent' do
-        (mild_max + 1).times do
-          create(
-            :tea_time,
-            :host => host,
-            :start_time => Time.now - expiration - strong_expiration + 1.day,
-          )
+      it 'is inactive if last tea is old but host was prolific' do
+        prolific_host_cutoff.times do
+          create(:tea_time, :completed, :host => host, :start_time => Time.now + 1.day - legacy_expiration)
         end
         RefreshHostActivityStatus.run
-        expect(host.host_detail.reload.activity_status).to eql "legacy"
+        expect(host.host_detail.reload.activity_status).to eql 'inactive'
+      end
+
+      it 'is inactive if last tea was older than the legacy_expiration range' do
+        create(:tea_time, :completed, :host => host, :start_time => Time.now - 1.day - legacy_expiration)
+        RefreshHostActivityStatus.run
+        expect(host.host_detail.reload.activity_status).to eql 'inactive'
       end
     end
 
-    context 'and is permanent legacy' do
-      it 'does not update with long ago tea times' do
-        (strong_max + 1).times do
-          create(
-            :tea_time,
-            :host => host,
-            :start_time => Time.now - expiration - strong_expiration - 1.day,
-          )
-        end
+    context 'with not inactive host commitment' do
+      it 'is active if last tea was within the active_expiration range' do
+        create(:tea_time, :completed, :host => host, :start_time => Time.now + 1.day - active_expiration)
         RefreshHostActivityStatus.run
-        expect(host.host_detail.reload.activity_status).to eql "legacy"
+        expect(host.host_detail.reload.activity_status).to eql 'active'
       end
 
-      it 'does not update with recent tea times' do
-        (strong_max + 1).times do
-          create(
-            :tea_time,
-            :host => host,
-            :start_time => Time.now - expiration - strong_expiration + 1.day,
-          )
+      it 'is legacy if last tea was older than the active_expiration range but within legacy expiration' do
+        create(:tea_time, :completed, :host => host, :start_time => Time.now + 1.day - legacy_expiration)
+        RefreshHostActivityStatus.run
+        expect(host.host_detail.reload.activity_status).to eql 'legacy'
+      end
+
+      it 'is legacy if last tea is old but host was prolific' do
+        prolific_host_cutoff.times do
+          create(:tea_time, :completed, :host => host, :start_time => Time.now + 1.day - legacy_expiration)
         end
         RefreshHostActivityStatus.run
-        expect(host.host_detail.reload.activity_status).to eql "legacy"
+        expect(host.host_detail.reload.activity_status).to eql 'legacy'
+      end
+
+      it 'is inactive if last tea was older than the legacy_expiration range' do
+        create(:tea_time, :completed, :host => host, :start_time => Time.now - 1.day - legacy_expiration)
+        RefreshHostActivityStatus.run
+        expect(host.host_detail.reload.activity_status).to eql 'inactive'
       end
     end
   end
