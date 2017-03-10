@@ -20,7 +20,6 @@ class User < ActiveRecord::Base
   validates_with Validators::TwitterHandleValidator
 
   before_destroy :flake_future
-  after_create :generate_host_detail
 
   bitmask :roles, :as => [:host, :admin], :null => false
   alias_method :role?, :roles?
@@ -86,7 +85,7 @@ class User < ActiveRecord::Base
   end
 
   def generate_host_detail
-    HostDetail.create(user: self)
+    HostDetail.create(user: self) unless host_detail
   end
 
   def waitlist

@@ -18,6 +18,10 @@ FactoryGirl.define do
         nickname "Joe #{t.capitalize}"
         family_name "#{t.capitalize}"
 
+        after :create do |u|
+          FactoryGirl.create(:host_detail, :user => u)
+        end
+
         after :build do |u|
           u.roles << t
         end

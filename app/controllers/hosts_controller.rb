@@ -40,6 +40,7 @@ class HostsController < ApplicationController
 
     if @host.save
       UserMailer.delay.host_registration(@host, user_exists ? nil : generated_password)
+      @host.generate_host_detail
       redirect_to profile_path, notice: 'New host successfully created and emailed!'
     else
       redirect_to new_host_path, alert: 'New host not created :/'
