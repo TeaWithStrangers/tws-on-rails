@@ -26,11 +26,11 @@ class HostDetail < ActiveRecord::Base
     2 => 'Two times a month',
     4 => 'Once a month',
     8 => 'Once every two months',
-    'custom' => 'Every __ weeks',
   }
 
   REGULAR_COMMITMENT = 'regular'
   CUSTOM_COMMITMENT = 'custom'
   IRREGULAR_COMMITMENTS = COMMITMENT_OVERVIEW - [REGULAR_COMMITMENT]
+  NO_COMMITMENT = 0
   INACTIVE_COMMITMENT = -1
 end

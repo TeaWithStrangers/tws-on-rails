@@ -1,0 +1,9 @@
+<% commitment_url = url_for(controller: :registrations, action: :edit, only_path: false) %>
+Just noticed you posted your first tea time since you mentioned that you weren’t hosting any longer. If this might be a sign for things to come, yay! [Head on over to the website and adjust your hosting commitment](<%= commitment_url %>).
+
+You don’t have to make any promises to how often you host, but just switching out of the “I’m not hosting anymore” option would be dandy. That way, we can send you more relevant updates about TWS.  
+
+If this was just a one off tea, still dope! Glad you’re here 🤗
+
+That’s all,  
+TWS Robots

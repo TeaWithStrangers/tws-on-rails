@@ -232,4 +232,116 @@ describe User do
       end
     end
   end
+
+  context '.send_drip_email' do
+    let!(:host) { create(:user, :host) }
+    context 'does not send' do
+      it 'with inactive commitment' do
+        expect(ActionMailer::Base.deliveries.size).to eq(0)
+        host.host_detail.destroy
+        create(:host_detail, :user => host, :commitment => HostDetail::INACTIVE_COMMITMENT)
+        tea_time = create(:tea_time, :completed, :host => host, :start_time => Time.now - 3.weeks)
+        host.send_drip_email(tea_time)
+      end
+
+      it 'with no commitment' do
+        expect(ActionMailer::Base.deliveries.size).to eq(0)
+        tea_time = create(:tea_time, :completed, :host => host, :start_time => Time.now - 3.weeks)
+        host.send_drip_email(tea_time)
+      end
+
+      it 'with no tea time' do
+        host.host_detail.destroy
+        create(:host_detail, :user => host, :commitment => HostDetail::NO_COMMITMENT)
+        expect(ActionMailer::Base.deliveries.size).to eq(0)
+        host.send_drip_email(nil)
+      end
+    end
+
+    context 'with every 4 weeks commitment' do
+      before(:each) do
+        host.host_detail.destroy
+        create(:host_detail, :user => host, :commitment => 4)
+      end
+
+      it 'sends first email after 2 weeks' do
+        tea_time = create(:tea_time, :completed, :host => host, :start_time => Time.now - 2.weeks)
+        expect(HostMailer).to receive(:host_drip).with(tea_time.id, 0).and_call_original
+        host.send_drip_email(tea_time)
+      end
+
+      it 'sends first reminder after 2 weeks and 2 days' do
+        tea_time = create(:tea_time, :completed, :host => host, :start_time => Time.now - 2.weeks - 2.days)
+        expect(HostMailer).to receive(:host_drip_reminder).with(tea_time.id, 0).and_call_original
+        host.send_drip_email(tea_time)
+      end
+
+      it 'sends second email after 4 weeks' do
+        tea_time = create(:tea_time, :completed, :host => host, :start_time => Time.now - 4.weeks)
+        expect(HostMailer).to receive(:host_drip).with(tea_time.id, 1).and_call_original
+        host.send_drip_email(tea_time)
+      end
+
+      it 'sends third email after 6 weeks' do
+        tea_time = create(:tea_time, :completed, :host => host, :start_time => Time.now - 6.weeks)
+        expect(HostMailer).to receive(:host_drip).with(tea_time.id, 2).and_call_original
+        host.send_drip_email(tea_time)
+      end
+
+      it 'sends third reminder after 6 weeks and 2 days' do
+        tea_time = create(:tea_time, :completed, :host => host, :start_time => Time.now - 6.weeks - 2.days)
+        expect(HostMailer).to receive(:host_drip_reminder).with(tea_time.id, 2).and_call_original
+        host.send_drip_email(tea_time)
+      end
+
+      it 'sends recurring reminder after 8 weeks' do
+        tea_time = create(:tea_time, :completed, :host => host, :start_time => Time.now - 8.weeks)
+        expect(HostMailer).to receive(:host_drip).with(tea_time.id, 3).and_call_original
+        host.send_drip_email(tea_time)
+      end
+
+      it 'sends recurring reminder after 24 weeks' do
+        tea_time = create(:tea_time, :completed, :host => host, :start_time => Time.now - 24.weeks)
+        expect(HostMailer).to receive(:host_drip).with(tea_time.id, 7).and_call_original
+        host.send_drip_email(tea_time)
+      end
+    end
+
+    context 'with no commitment' do
+      before(:each) do
+        host.host_detail.destroy
+        create(:host_detail, :user => host, :commitment => HostDetail::NO_COMMITMENT)
+      end
+
+      it 'sends first email after 3 weeks' do
+        tea_time = create(:tea_time, :completed, :host => host, :start_time => Time.now - 3.weeks)
+        expect(HostMailer).to receive(:no_commitment_drip).with(tea_time.id, 0).and_call_original
+        host.send_drip_email(tea_time)
+      end
+
+      it 'sends first reminder after 3 weeks + 2 days' do
+        expect(HostMailer).to receive(:no_commitment_drip_reminder).with(host.id).and_call_original
+        tea_time = create(:tea_time, :completed, :host => host, :start_time => Time.now - 3.weeks - 2.days)
+        host.send_drip_email(tea_time)
+      end
+
+      it 'sends recurring reminder after 3 months' do
+        tea_time = create(:tea_time, :completed, :host => host, :start_time => Time.now - 3.months)
+        expect(HostMailer).to receive(:no_commitment_drip).with(tea_time.id, 1).and_call_original
+        host.send_drip_email(tea_time)
+      end
+
+      it 'sends recurring reminder after 6 months' do
+        tea_time = create(:tea_time, :completed, :host => host, :start_time => Time.now - 6.months)
+        expect(HostMailer).to receive(:no_commitment_drip).with(tea_time.id, 2).and_call_original
+        host.send_drip_email(tea_time)
+      end
+
+      it 'sends recurring reminder after 15 months' do
+        tea_time = create(:tea_time, :completed, :host => host, :start_time => Time.now - 15.months)
+        expect(HostMailer).to receive(:no_commitment_drip).with(tea_time.id, 5).and_call_original
+        host.send_drip_email(tea_time)
+      end
+    end
+  end
 end

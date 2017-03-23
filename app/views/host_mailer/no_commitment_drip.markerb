@@ -1,0 +1,30 @@
+<% new_tt_url = url_for(controller: :tea_times, action: :new, only_path: false) %>
+<% case @drip_index %>
+<% when 0 %>
+  Hey, it’s been a few weeks since we last saw you hosting. If you are… 
+
+  - craving another great conversation,
+  - pondering a question and you want to hear what others have to say,
+  - getting tired of seeing the same people on the reg,
+  - searching for an excuse to go to a new cafe, 
+  - looking for a good story, or
+  - generally itching for some reason or another…
+
+  [This might help](<%= new_tt_url %>).
+
+  (Hint: it’s a link to schedule another tea time. The more ahead of time you plan the tea, the more likely it is to fill up!)
+
+  Zip slip bop,  
+  TWS Robots
+
+  PS We keep host pictures up on the site for a month after their last tea time since it helps keep the site more accurate for hosts and attendees (as far as who’s hosting and who’s not). If you post another tea time by <%= (@tt.start_time + RefreshHostActivityStatus::ACTIVE_EXPIRATION).strftime("%B %e") %>, you’ll stick around! Otherwise, your face will grace the <%= @host.home_city.name %> page again when you are able to post another tea time.
+<% else %>
+  Hi hello hey! It’s been months since we’ve seen you. If you’ve been feeling some kinda way lately and think a tea time would do you some good, don’t be bashful.
+
+  [Host a tea time in the next month](<%= new_tt_url %>)! It’s good for the soul. And we miss your face.
+
+  If now’s not a good time, it’s all right. We’ll send you another note in a little while. 
+
+  Bleep bleep bloop,  
+  TWS Robots
+<% end %>

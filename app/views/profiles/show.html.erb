@@ -17,37 +17,7 @@
           You look real good today.
         </h3>
       </div>
-      <div class="edit-host-commitment sidebar-section">
-        <% if current_user.commitment.nil? %>
-          <div class='title orange'>
-            !!!
-          </div>
-          <div class='details'>
-            <span>
-              <b>How often do you plan to host tea time?</b> Set your Host Commitment on the
-              <a href='/users/edit'>Account Details</a> page.
-            </span>
-            <%= link_to 'Set Hosting Commitment', url_for('/users/edit'), class: 'button create-new-tea' %>
-          </div>
-        <% else %>
-          <div class='title'>
-            Hosting Commitment
-          </div>
-          <div class='details'>
-            <% if HostDetail::IRREGULAR_COMMITMENTS.include?(current_user.commitment) %>
-              <span>
-                If you want to host more regularly, set your Hosting Commitment here.
-              </span>
-              <%= link_to 'Set Hosting Commitment', url_for('/users/edit'), class: 'button create-new-tea' %>
-            <% else %>
-              <span>
-                <%= "Thanks so much for hosting tea times <b>every #{current_user.commitment} weeks</b>.".html_safe %>
-              </span>
-              <%= link_to 'Change Your Commitment', url_for('/users/edit'), class: 'button create-new-tea' %>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
+      <%= render partial: 'set_host_commitment' %>
     <% else %>
       <% if !@attending.count.zero? %>
         <% if !current_user.home_city.nil? %>

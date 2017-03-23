@@ -1,12 +1,17 @@
-<%= @tea_time.host.name %>! Hope you had an awesome tea time. Quickly, before you get to the rest of your life...
+<%= @host.nickname %>! Hope you had an awesome tea time. Quick housekeeping (before you get to the rest of your life):
 
-**[Mark attendance from your tea time](<%= url_for(controller: :profiles, action: :host_tasks, only_path: false) %>)**. Be sure to check off anyone you'd invite to make a great host!
+[Mark attendance from your tea time](<%= url_for(controller: :profiles, action: :host_tasks, only_path: false) %>). Be sure to check off anyone you'd invite to make a great host!
 
 Afterwards, send the attendees a little thank you note with all sorts of good vibes.
 
-[All of it takes seconds](<%= url_for(controller: :profiles, action: :host_tasks, only_path: false) %>).
+[All of it takes seconds](<%= url_for(controller: :profiles, action: :host_tasks, only_path: false) %>), and it helps us keep track of things hugely.
 
-You the best!
+<% if @host.commitment_overview == HostDetail::REGULAR_COMMITMENT %>
+  <% commitment = @host.commitment_detail %>
+  [Oh, and get your next tea time up](<%= url_for(controller: :tea_times, action: :new, only_path: false) %>)! You’ve committed to hosting every <%= commitment %> weeks, so your next tea time should be sometime between now and <%= (Date.today + commitment.weeks).strftime("%B %e, %Y") %>. They’re more likely to fill up the more ahead of time you post 🤓
+<% else %>
+  If you’re feeling inspired, [schedule your next tea time](<%= url_for(controller: :tea_times, action: :new, only_path: false) %>)!
+<% end %>
 
-Bleep bleep bloop,  
-The Robots at Tea With Strangers
+Bip bop zip,  
+TWS Robots
