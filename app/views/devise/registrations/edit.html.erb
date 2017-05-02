@@ -136,11 +136,54 @@
           </div>
         </div>
 
-
         <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
           <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
         <% end %>
 
+        <% if resource.host? %>
+          <h3 class="form-subheader">
+            How often do you want to host tea time?
+          </h3>
+
+          <div class="field">
+            <div class="form-label">
+              <%= f.label :commitment, 'Committing makes TWS better.', class: 'capitalize boldweight' %>
+              <span class="sub-label light">
+                By telling us how regularly you want to host, we'll be better positioned to support your hosting goals by driving strangers to your tea times and sending you reminders to post a tea time when you need them.
+              </span>
+            </div>
+            <div id='commitment-form' class='radio-buttons'>
+              <% HostDetail::COMMITMENT_OVERVIEW.each do |overview| %>
+                <div>
+                  <label>
+                    <% params = {} %>
+                    <% params.merge!({ id: 'commitment-regular'}) if overview == HostDetail::REGULAR_COMMITMENT %>
+                    <%= f.radio_button :commitment_overview, overview, params %>
+                    <span><%= HostDetail::COMMITMENT_OVERVIEW_TEXT[overview] %></span>
+                    <% if overview == HostDetail::REGULAR_COMMITMENT %>
+                      <div id='nested-radio-buttons'>
+                        <% HostDetail::COMMITMENT_DETAILS.each do |detail| %>
+                          <label>
+                            <% if detail == HostDetail::CUSTOM_COMMITMENT %>
+                              <%= f.radio_button :commitment_detail, detail, { checked: !!resource.custom_commitment } %>
+                              <span>Every</span>
+                                <% params = { id: 'custom-commitment', value: resource.custom_commitment} %>
+                                <%= f.text_field :commitment_detail, params %>
+                              <span>weeks.</span>
+                            <% else %>
+                              <%= f.radio_button :commitment_detail, detail %>
+                              <span> <%= HostDetail::COMMITMENT_DETAILS_TEXT[detail] %> </span>
+                            <% end %>
+                          </label>
+                        <% end %>
+                      </div>
+                    <% end %>
+                  </label>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
 
         <h3 class="form-subheader">
           Change Your Password
@@ -179,6 +222,7 @@
         </div>
       <% end %>
     </div>
+    <br>
     <div class="cancel-account">
       <h2>
         Cancel my account

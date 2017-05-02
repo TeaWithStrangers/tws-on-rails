@@ -1,0 +1,13 @@
+<% new_tt_url = url_for(controller: :tea_times, action: :new, only_path: false) %>
+<% commitment_url = url_for(controller: :registrations, action: :edit, only_path: false) %>
+
+Just a nudge in case you filed the last email away to come back to later. 
+
+📅 [Here’s that link to schedule a tea time](<%= new_tt_url %>)
+
+We won’t email you again for a few months about hosting tea time, but if you like reminders, you should set a hosting commitment on the website. [Here’s the link to do that](<%= commitment_url %>).
+
+When you do, you’ll get emails in accordance with your commitment reminding you to host tea times when you’re able to. You can adjust or eliminate the commitment whenever.
+
+🖖,  
+TWS Robots 

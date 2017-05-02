@@ -1,0 +1,56 @@
+<% commitment = @host.commitment_detail %>
+<% half_commitment = commitment % 2 == 0 ? commitment / 2 : commitment.to_f / 2 %>
+<% new_tt_url = url_for(controller: :tea_times, action: :new, only_path: false) %>
+<% commitment_url = url_for(controller: :registrations, action: :edit, only_path: false) %>
+<% case @drip_index %>
+<% when 0 %>
+  Hey there, quick nudge. You mentioned you’d want to host every <%= commitment %> weeks, and it’s been <%= half_commitment %> weeks since your last tea (on <%= @tt.start_time.strftime("%B %e") %>). 
+
+  📅 Try to [schedule your next tea time](<%= new_tt_url %>) sometime between now and <%= (@tt.start_time + commitment.weeks).strftime("%B %e") %>. 
+
+  Fascinating conversations, childlike curiosity, and strangers await!
+
+  Bleep bloop,  
+  TWS Robots
+
+  PS If you need to adjust your commitment frequency, [you can do that here](<%= commitment_url %>).
+<% when 1 %>
+  Just thinking about ya. Your last tea time was <%= commitment %> weeks ago.* 
+
+  Life gets busy sometimes, but that’s usually a good sign to slow down with a warm drink and good company. [Tea time is a great time to do that](<%= new_tt_url %>).
+
+  Until the next automatic email,  
+  TWS Robots
+
+  *You mentioned wanting to host every <%= commitment %> weeks on the website, so now’s a good time to uphold that commitment. If you want to change it, [feel free to do so here](<%= commitment_url %>). 
+<% when 2 %>
+  We spent a good five minutes thinking of puns for this last subject line. If you took the same amount of time, you could...
+
+  - Think back to what a great tea time feels like
+  - Reflect on friendships you’ve made through Tea With Strangers
+  - Meditate on a good question you’d want to ask someone
+  - [Schedule your next tea time](<%= new_tt_url %>)
+  - Tell your friends to tell their friends that you haven’t met yet about said tea time
+  - Have a great conversation to look forward to
+
+  We conveniently linked the one that our website can help with 🤓
+
+  Your last tea time was on <%= @tt.start_time.strftime("%B %e") %>, <%= half_commitment * 3 %> weeks ago. If you still want to host every <%= commitment %> weeks, now’s a great time to [put a tea time up](<%= new_tt_url %>). If not, feel free to adjust your hosting commitment [here](<%= commitment_url %>).
+
+  Missing you the way only an automated email could,  
+  TWS Robots
+<% else %>
+  A generic reminder email!
+
+  You’re signed up to host tea times every <%= commitment %> weeks, but your last one was <%= (Date.today - @tt.start_time.to_date).to_i / 7 %> weeks ago. 
+
+  🙈
+
+  [Schedule your next tea time here](<%= new_tt_url %>). 
+  (Or readjust your hosting commitment [here](<%= commitment_url %>).)
+
+  Obviously we think one of those options is way cooler than the other, but we’ll leave that to you. 
+
+  See you soon!  
+  TWS Robots
+<% end %>

@@ -19,6 +19,8 @@ class User < ActiveRecord::Base
   validates_with Validators::FacebookUrlValidator
   validates_with Validators::TwitterHandleValidator
 
+  delegate :commitment, to: :host_detail
+
   before_destroy :flake_future
 
   bitmask :roles, :as => [:host, :admin], :null => false
@@ -41,6 +43,53 @@ class User < ActiveRecord::Base
 
   def name=(name)
     nickname = name
+  end
+
+  def commitment_overview
+    if commitment.nil? || HostDetail::IRREGULAR_COMMITMENTS.include?(commitment)
+      commitment
+    else
+      HostDetail::REGULAR_COMMITMENT
+    end
+  end
+
+  def commitment_detail
+    commitment
+  end
+
+  def commitment_overview=(overview)
+    if overview.to_s != HostDetail::REGULAR_COMMITMENT.to_s
+      if commitment.nil?
+        if overview.to_s == HostDetail::NO_COMMITMENT.to_s
+          HostMailer.commitment_intro(id).deliver
+        elsif overview.to_s == HostDetail::INACTIVE_COMMITMENT.to_s
+          HostMailer.pause(id).deliver
+        end
+      end
+      host_detail.commitment = overview
+      host_detail.save!
+    end
+  end
+
+  def commitment_detail=(detail)
+    if commitment.nil? && detail
+      HostMailer.commitment_intro(id).deliver
+    end
+    if detail.to_i > 0
+      host_detail.commitment = detail
+      host_detail.save!
+    end
+  end
+
+  def commitment_text
+    HostDetail::COMMITMENT_OVERVIEW_TEXT[commitment] ||
+        HostDetail::COMMITMENT_OVERVIEW_TEXT[HostDetail::REGULAR_COMMITMENT]
+  end
+
+  def custom_commitment
+    if commitment_overview == HostDetail::REGULAR_COMMITMENT && !HostDetail::COMMITMENT_DETAILS.include?(commitment)
+      commitment
+    end
   end
 
   def twitter_url
@@ -104,6 +153,45 @@ class User < ActiveRecord::Base
 
   def tws_interests
     super || {'hosting' => false, 'leading' => false }
+  end
+
+  def send_drip_email(tea_time)
+    return unless commitment
+    return if commitment == HostDetail::INACTIVE_COMMITMENT
+    return unless tea_time
+    tt_time = tea_time.start_time
+    tt_date = tt_time.to_date
+    return if tt_date > Date.today
+    if commitment == HostDetail::NO_COMMITMENT
+      drip_delay = 3.weeks
+      reminder_delay = 2.days
+      recurring_reminder_delay_months = 3
+      if tt_date + drip_delay == Date.today
+        HostMailer.no_commitment_drip(tea_time.id, 0).deliver
+      elsif tt_date + drip_delay + reminder_delay == Date.today
+        HostMailer.no_commitment_drip_reminder(id).deliver
+      else # Every 3 months
+        month_difference = (Date.today.year * 12 + Date.today.month) - (tt_date.year * 12 + tt_date.month)
+        cycles_mod = month_difference % recurring_reminder_delay_months
+        if tt_date.day == Date.today.day && (cycles_mod == 0)
+          HostMailer.no_commitment_drip(tea_time.id, month_difference / recurring_reminder_delay_months).deliver
+        end
+      end
+    else
+      drip_delays = [0.5, 1, 1.5].map{ |n| n * commitment.weeks }
+      reminder_delays = [2.days, nil, 2.days]
+      drip_delays.each_with_index do |delay, i|
+        if (tt_time + delay).to_date == Date.today
+          return HostMailer.host_drip(tea_time.id, i).deliver
+        elsif reminder_delays[i] && (tt_time + delay + reminder_delays[i]).to_date == Date.today
+          return HostMailer.host_drip_reminder(tea_time.id, i).deliver
+        end
+      end
+      cycles_passed = (Date.today - tt_date).to_f / (commitment * 7) + 1
+      if cycles_passed % 1 == 0
+        HostMailer.host_drip(tea_time.id, cycles_passed).deliver
+      end
+    end
   end
 
   class << self

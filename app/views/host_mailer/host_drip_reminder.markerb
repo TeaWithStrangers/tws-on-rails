@@ -1,0 +1,24 @@
+<% commitment = @host.commitment_detail %>
+<% half_commitment = commitment % 2 == 0 ? commitment / 2 : commitment.to_f / 2 %>
+<% new_tt_url = url_for(controller: :tea_times, action: :new, only_path: false) %>
+<% commitment_url = url_for(controller: :registrations, action: :edit, only_path: false) %>
+<% case @drip_index %>
+<% when 0 %>
+  Just a nudge because emails get lost sometimes. [Here's that link again :)](<%= new_tt_url %>).
+
+  Try for sometime before <%= (@tt.start_time + commitment.weeks).strftime("%B %e") %> to keep up the commitment to hosting every <%= commitment %> weeks. No harm done if you can’t host til after that.*
+
+  Automatedly yours,  
+  TWS Robots
+
+  *If you’d like to change your commitment frequency, [you can do that here](<%= commitment_url %>).
+<% when 2 %>
+  👋 
+
+  Bumping this email in case you filed it away to check back later. 
+
+  [Here’s that link to create a new tea time](<%= new_tt_url %>). 
+
+  Zip zoom zap!  
+  TWS Robots
+<% end %>

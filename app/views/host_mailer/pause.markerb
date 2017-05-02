@@ -1,0 +1,12 @@
+<% commitment_url = url_for(controller: :registrations, action: :edit, only_path: false) %>
+
+Hey, we just heard that you won’t be hosting anymore. Totally understand, but just wanted to check in — should we still be letting you know what’s the latest in the world of Tea With Strangers by email?
+
+Let us know by filling out [this form](https://goo.gl/forms/vIXoVpOI6Dx2N2jC3). It’ll take 5 seconds, but it’ll let us know that you’re still interested in what’s going on in our world so we can be sure to get that info to you!
+
+If not, you’ll probably see the occasional facebook notification, but nothing else otherwise. 
+
+TTFN,  
+TWS Robots
+
+PS If you change your mind at any point, just [head here and change your hosting commitment](<%= commitment_url %>) accordingly :)

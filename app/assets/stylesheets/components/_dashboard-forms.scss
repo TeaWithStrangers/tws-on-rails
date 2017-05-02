@@ -129,6 +129,77 @@ These are styles related to forms within the user or host dashboards
   }
 }
 
+.radio-buttons {
+  label {
+    width: 100%;
+    display: inline-block;
+    input {
+      width: 25px;
+      display: inline-block;
+    }
+  }
+  #nested-radio-buttons {
+    padding-left: 5%;
+    label {
+      display: inline-block;
+      padding-right: 1.5%;
+      font-size: 14px;
+      margin-bottom: 0;
+      width: auto;
+    }
+    input {
+      margin-bottom: 0;
+      width: 25px;
+      display: inline-block;
+    }
+    [type="text"] {
+      border-top: none;
+      border-right: none;
+      border-left: none;
+      border-radius: 0;
+      padding: 0.3em;
+      text-align: center;
+      margin-bottom: 0;
+    }
+  }
+}
+
+.edit-host-commitment {
+  .title {
+    width: 80%;
+    border: solid $tws-orange 1px;
+    border-radius: 2px;
+    background-color: white;
+    margin: 0 auto;
+    margin-bottom: -1em;
+    font-size: 0.8em;
+    font-weight: bold;
+    padding: .2em 0;
+    text-align: center;
+    position: relative;
+  }
+
+  .orange {
+    color: $tws-orange;
+  }
+
+  .details {
+    border: solid $tws-orange 1px;
+    border-radius: 2px;
+    padding: 1em;
+    padding-top: 1.5em;
+    font-size: 0.8em;
+    .button {
+      margin-top: 10px;
+      font-size: 1em !important;
+    }
+  }
+}
+
+.faded {
+  opacity: 0.4;
+}
+
 .cancel-account {
 	input.cancel-account {
 		@include inverted-button($tws-orange, $tws-orange);
@@ -193,7 +264,7 @@ These are styles related to forms within the user or host dashboards
   }
 }
 .form.email-reminder, .form.create-tea, .form.edit-tea {
-  
+
   .form-checkbox input[type="checkbox"] {
     display: inline-block;
     width: auto;

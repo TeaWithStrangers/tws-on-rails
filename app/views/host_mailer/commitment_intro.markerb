@@ -1,0 +1,26 @@
+<% settings_url = url_for(controller: :registrations, action: :edit, only_path: false) %>
+<% if @host.commitment == HostDetail::NO_COMMITMENT %>
+  Hey! Just confirming that you just set your Host Commitment to “I’ll host when I want.” 
+
+  So you know — setting Host Commitment on the website makes it easier for us to help you host as often as you’d like. Since you haven’t set a specific frequency for your commitment, you can expect to get a reminder to host tea time once in a while. 
+
+  They won’t be too frequent, as they’re just meant to let you know that hosting tea time is always something you can do whenever the inspiration strikes. 
+
+  You can always adjust your commitment by going to [your Account Settings](<%= settings_url %>).
+
+  That’s all! We should be getting oolong now. Happy tea times!  
+  TWS Robots
+<% elsif @host.commitment != HostDetail::INACTIVE_COMMITMENT %>
+  Hey, just heard that you’re planning to host every <%= @host.commitment %> weeks! That’s awesome.  
+
+  So you know — this is just meant to help you host as often as you’d like. 
+
+  For us behind the scenes at TWS, it helps us make sure we’re getting enough people to the website to keep your tea times well-stocked with strangers :)
+
+  It’s not binding, and nothing happens to you if you don’t uphold the commitment, but you’ll get emails every so often to nudge ya to post tea times as often as you said you’d like to. 
+
+  You can always adjust your commitment by going to [Account Settings](<%= settings_url %>).
+
+  That’s all! We should be getting oolong now. Happy tea times!  
+  TWS Robots
+<% end %>

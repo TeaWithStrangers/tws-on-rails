@@ -2,6 +2,7 @@ FactoryGirl.define do
   factory :host_detail, class: 'HostDetail' do
     association :user, factory: [:user, :host]
     activity_status 0
+    commitment 0
 
     trait :inactive do
     end
