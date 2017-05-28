@@ -41,4 +41,6 @@ Rails.application.configure do
   # Background Worker Config
   # Run DJ jobs synchronously in development
   Delayed::Worker.delay_jobs = false
+
+  config.assets.quiet = true
 end
