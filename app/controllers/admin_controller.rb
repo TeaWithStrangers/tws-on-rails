@@ -46,8 +46,8 @@ class AdminController < ApplicationController
     # users City from the city_id from the form.
     opts[:to] = params[:mass_mail][:from] if params[:mass_mail][:from].present?
 
-    if opts[:city_id].zero?
-      opts[:recipients] = Users.all.select(:email).map(&:email) 
+    if opts[:city_id].to_i.zero?
+      opts[:recipients] = User.all.select(:email).map(&:email) 
     else
       city = City.find(opts[:city_id])
       opts[:recipients] = case params[:mass_mail][:recipients]
