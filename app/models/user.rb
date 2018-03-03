@@ -61,9 +61,9 @@ class User < ActiveRecord::Base
     if overview.to_s != HostDetail::REGULAR_COMMITMENT.to_s
       if commitment.nil?
         if overview.to_s == HostDetail::NO_COMMITMENT.to_s
-          HostMailer.commitment_intro(id).deliver
+          HostMailer.commitment_intro(id).deliver_later
         elsif overview.to_s == HostDetail::INACTIVE_COMMITMENT.to_s
-          HostMailer.pause(id).deliver
+          HostMailer.pause(id).deliver_later
         end
       end
       host_detail.commitment = overview
@@ -73,7 +73,7 @@ class User < ActiveRecord::Base
 
   def commitment_detail=(detail)
     if commitment.nil? && detail
-      HostMailer.commitment_intro(id).deliver
+      HostMailer.commitment_intro(id).deliver_later
     end
     if detail.to_i > 0
       host_detail.commitment = detail
@@ -167,14 +167,14 @@ class User < ActiveRecord::Base
       reminder_delay = 2.days
       recurring_reminder_delay_months = 3
       if tt_date + drip_delay == Date.today
-        HostMailer.no_commitment_drip(tea_time.id, 0).deliver
+        HostMailer.no_commitment_drip(tea_time.id, 0).deliver_later
       elsif tt_date + drip_delay + reminder_delay == Date.today
-        HostMailer.no_commitment_drip_reminder(id).deliver
+        HostMailer.no_commitment_drip_reminder(self.id).deliver_later
       else # Every 3 months
         month_difference = (Date.today.year * 12 + Date.today.month) - (tt_date.year * 12 + tt_date.month)
         cycles_mod = month_difference % recurring_reminder_delay_months
         if tt_date.day == Date.today.day && (cycles_mod == 0)
-          HostMailer.no_commitment_drip(tea_time.id, month_difference / recurring_reminder_delay_months).deliver
+          HostMailer.no_commitment_drip(tea_time.id, month_difference / recurring_reminder_delay_months).deliver_later
         end
       end
     else
@@ -182,14 +182,14 @@ class User < ActiveRecord::Base
       reminder_delays = [2.days, nil, 2.days]
       drip_delays.each_with_index do |delay, i|
         if (tt_time + delay).to_date == Date.today
-          return HostMailer.host_drip(tea_time.id, i).deliver
+          return HostMailer.host_drip(tea_time.id, i).deliver_later
         elsif reminder_delays[i] && (tt_time + delay + reminder_delays[i]).to_date == Date.today
-          return HostMailer.host_drip_reminder(tea_time.id, i).deliver
+          return HostMailer.host_drip_reminder(tea_time.id, i).deliver_later
         end
       end
       cycles_passed = (Date.today - tt_date).to_f / (commitment * 7) + 1
       if cycles_passed % 1 == 0
-        HostMailer.host_drip(tea_time.id, cycles_passed).deliver
+        HostMailer.host_drip(tea_time.id, cycles_passed).deliver_later
       end
     end
   end

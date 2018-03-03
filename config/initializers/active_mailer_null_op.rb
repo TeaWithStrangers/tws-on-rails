@@ -2,6 +2,14 @@ class NullMessage < Mail::Message
   def self.deliver
     false
   end
+
+  def self.deliver_later
+    false
+  end
+
+  def self.deliver_now
+    false
+  end
 end
 
 ActionMailer::Base.class_eval do
@@ -19,5 +27,5 @@ ActionMailer::Base.class_eval do
     rescue DeliveryCancellationException
       self.message = NullMessage
     end
-  end 
+  end
 end
