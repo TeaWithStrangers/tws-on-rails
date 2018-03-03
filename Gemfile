@@ -21,7 +21,7 @@ gem 'turbolinks'
 gem 'jquery-rails'
 gem 'jquery-ui-rails', '~> 5.0'
 gem 'underscore-rails'
-gem "active_model_serializers"
+gem "active_model_serializers", "~> 0.9.3"
 gem 'bitmask_attributes', '~> 1.0'
 gem 'bourbon', '~> 4'
 gem 'neat', '~> 1'
