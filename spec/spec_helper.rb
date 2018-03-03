@@ -48,6 +48,11 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, :type => :controller
   config.include IntegrationHelpers, :type => :feature
 
+  #rspec-rails 3 will no longer automatically infer an example group's spec type
+  #from the file location. You can explicitly opt-in to this feature using this
+  #snippet:
+  config.infer_spec_type_from_file_location!
+
   config.before(:all) { ActiveRecord::Base.skip_callbacks = true }
   config.before(:each) { ActionMailer::Base.deliveries.clear }
 
