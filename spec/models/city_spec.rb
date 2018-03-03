@@ -89,7 +89,7 @@ describe City do
 
       city.proxy_cities << city
       expect(city.save).to eq(false)
-      expect{ city.save! }.to raise_exception
+      expect{ city.save! }.to raise_exception(ActiveRecord::RecordInvalid)
     end
   end
 

@@ -198,7 +198,7 @@ describe TeaTime do
       a = Ability.new(u)
       tt = create(:tea_time)
 
-      a.should be_able_to(:edit, tt)
+      expect(a).to be_able_to(:edit, tt)
     end
 
     it 'should let hosts edit only their own tea times' do
@@ -208,8 +208,8 @@ describe TeaTime do
       a2 = Ability.new(u2)
       tt = create(:tea_time, host: u)
 
-      a.should be_able_to(:edit, tt)
-      a2.should_not be_able_to(:edit, tt)
+      expect(a).to be_able_to(:edit, tt)
+      expect(a2).to_not be_able_to(:edit, tt)
     end
   end
 

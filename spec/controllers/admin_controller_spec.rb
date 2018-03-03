@@ -3,9 +3,7 @@ require 'spec_helper'
 describe AdminController do
   before do
     [:authenticate_user!, :authorized?].each do |s|
-      controller.stub(s) {
-        true
-      }
+      allow(controller).to receive(s).and_return true
     end
   end
 
