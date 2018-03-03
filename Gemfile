@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.2'
-gem 'pg', '< 1'
+gem 'pg', '0.20'
 
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', group: :doc
@@ -37,8 +37,8 @@ gem 'icalendar', '~> 2.2'
 gem 'time_zone_ext'
 
 #Background Jobs
-gem 'delayed_job', '~> 4.0.1'
-gem 'delayed_job_active_record', '~> 4.0.1'
+gem 'delayed_job', '~> 4.1'
+gem 'delayed_job_active_record'
 gem "delayed_job_web"
 
 # File Storage
@@ -74,7 +74,7 @@ end
 group :development, :test do
   gem 'pry-rails'
   gem 'pry-stack_explorer'
-  gem 'rspec-rails', '~> 2.14.2'
+  gem 'rspec-rails', '~> 2.99'
   gem 'factory_bot', '~> 4.8'
   gem 'factory_bot_rails'
   gem 'rails-observers'

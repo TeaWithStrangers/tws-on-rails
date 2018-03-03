@@ -58,3 +58,10 @@ RSpec.configure do |config|
   config.filter_run focus: true
   config.run_all_when_everything_filtered = true
 end
+
+Shoulda::Matchers.configure do |config|
+	config.integrate do |with|
+		with.test_framework :rspec
+		with.library :rails
+	end
+end
