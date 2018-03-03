@@ -45,7 +45,7 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
 
   # Include devise test helpers in controller specs
-  config.include Devise::TestHelpers, :type => :controller
+  config.include Devise::Test::ControllerHelpers, :type => :controller
   config.include IntegrationHelpers, :type => :feature
 
   config.before(:all) { ActiveRecord::Base.skip_callbacks = true }

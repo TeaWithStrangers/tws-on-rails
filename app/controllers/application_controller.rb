@@ -61,7 +61,7 @@ class ApplicationController < ActionController::Base
                    :facebook, :twitter, :phone_number, :commitment_overview,
                    :commitment_detail]
       [:sign_up, :account_update].each do |s|
-        devise_parameter_sanitizer.for(s) do |u|
+        devise_parameter_sanitizer.permit(s) do |u|
           u.permit(*permitted)
         end
       end
