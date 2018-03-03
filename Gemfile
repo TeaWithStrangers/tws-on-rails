@@ -23,8 +23,8 @@ gem 'jquery-ui-rails', '~> 5.0'
 gem 'underscore-rails'
 gem "active_model_serializers"
 gem 'bitmask_attributes', '~> 1.0'
-gem 'bourbon'
-gem 'neat'
+gem 'bourbon', '~> 4'
+gem 'neat', '~> 1'
 
 gem 'markerb'
 gem 'redcarpet', '~> 3.4'
