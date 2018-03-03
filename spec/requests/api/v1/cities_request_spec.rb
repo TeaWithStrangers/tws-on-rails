@@ -27,7 +27,6 @@ describe 'Cities endpoint', type: :request do
         post '/api/v1/cities', payload
         expect(created_city).not_to be nil
       end
-      it 'should assign the created_by_user_id to the current user'
 
       it 'should set status to unapproved' do
         post '/api/v1/cities', payload
