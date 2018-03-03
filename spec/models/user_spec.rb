@@ -45,7 +45,7 @@ describe User do
 
   describe 'facebook' do
     it 'should be able to store a string as a facebook' do
-      user = FactoryGirl.create(:user, facebook: 'hoo')
+      user = FactoryBot.create(:user, facebook: 'hoo')
       expect(user.facebook).to eq 'hoo'
       expect(user.id).to_not be_nil
     end

@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :host_detail, class: 'HostDetail' do
     association :user, factory: [:user, :host]
     activity_status 0

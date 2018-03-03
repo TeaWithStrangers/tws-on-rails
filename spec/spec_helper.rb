@@ -6,7 +6,7 @@ require 'capybara/rails'
 require 'capybara/rspec'
 require "cancan/matchers"
 require 'shoulda/matchers'
-require 'factory_girl_rails'
+require 'factory_bot_rails'
 
 #Coveralls Test Coverage
 require 'coveralls'
@@ -41,8 +41,8 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 
-  # Include FactoryGirl in specs
-  config.include FactoryGirl::Syntax::Methods
+  # Include FactoryBot in specs
+  config.include FactoryBot::Syntax::Methods
 
   # Include devise test helpers in controller specs
   config.include Devise::TestHelpers, :type => :controller
