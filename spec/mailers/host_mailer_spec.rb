@@ -1,3 +1,4 @@
+# coding: utf-8
 require 'spec_helper'
 
 describe HostMailer do
@@ -18,7 +19,7 @@ describe HostMailer do
     end
 
     it 'should not send for cancelled tea time' do
-      cancelled_mail.deliver
+      cancelled_mail.deliver_now
       expect(ActionMailer::Base.deliveries.size).to eq(0)
     end
 
@@ -52,7 +53,7 @@ describe HostMailer do
     end
 
     it 'doesn\'t send without tt' do
-      described_class.host_drip(tea_time_id + 1, 0).deliver
+      described_class.host_drip(tea_time_id + 1, 0).deliver_now
       expect(ActionMailer::Base.deliveries.size).to eq(0)
     end
 
@@ -60,13 +61,13 @@ describe HostMailer do
       hd = host.host_detail
       hd.commitment = -1
       hd.save!
-      described_class.host_drip(tea_time_id, 0).deliver
+      described_class.host_drip(tea_time_id, 0).deliver_now
       expect(ActionMailer::Base.deliveries.size).to eq(0)
     end
 
     it 'sends first reminder' do
       mail = described_class.host_drip(tea_time_id, 0)
-      mail.deliver
+      mail.deliver_now
       expect(mail.to).to eq [host.email]
       expect(mail.subject).to eql("Your next tea time")
       expect(ActionMailer::Base.deliveries.size).to eq(1)
@@ -74,7 +75,7 @@ describe HostMailer do
 
     it 'sends second reminder' do
       mail = described_class.host_drip(tea_time_id, 1)
-      mail.deliver
+      mail.deliver_now
       expect(mail.to).to eq [host.email]
       expect(mail.subject).to eql("Hi there")
       expect(ActionMailer::Base.deliveries.size).to eq(1)
@@ -82,7 +83,7 @@ describe HostMailer do
 
     it 'sends third reminder' do
       mail = described_class.host_drip(tea_time_id, 2)
-      mail.deliver
+      mail.deliver_now
       expect(mail.to).to eq [host.email]
       expect(mail.subject).to eql("Moving oolong 🍵")
       expect(ActionMailer::Base.deliveries.size).to eq(1)
@@ -90,7 +91,7 @@ describe HostMailer do
 
     it 'sends repeating reminder' do
       mail = described_class.host_drip(tea_time_id, 5)
-      mail.deliver
+      mail.deliver_now
       expect(mail.to).to eq [host.email]
       expect(mail.subject).to eql("🤗: Knock knock! 🤔: Who’s there?")
       expect(ActionMailer::Base.deliveries.size).to eq(1)
@@ -105,7 +106,7 @@ describe HostMailer do
     end
 
     it 'doesn\'t send without tt' do
-      described_class.host_drip_reminder(tea_time_id + 1, 0).deliver
+      described_class.host_drip_reminder(tea_time_id + 1, 0).deliver_now
       expect(ActionMailer::Base.deliveries.size).to eq(0)
     end
 
@@ -113,13 +114,13 @@ describe HostMailer do
       hd = host.host_detail
       hd.commitment = -1
       hd.save!
-      described_class.host_drip_reminder(tea_time_id, 0).deliver
+      described_class.host_drip_reminder(tea_time_id, 0).deliver_now
       expect(ActionMailer::Base.deliveries.size).to eq(0)
     end
 
     it 'sends first reminder' do
       mail = described_class.host_drip_reminder(tea_time_id, 0)
-      mail.deliver
+      mail.deliver_now
       expect(mail.to).to eq [host.email]
       expect(mail.subject).to eql("Your next tea time")
       expect(ActionMailer::Base.deliveries.size).to eq(1)
@@ -127,7 +128,7 @@ describe HostMailer do
 
     it 'sends third reminder' do
       mail = described_class.host_drip_reminder(tea_time_id, 2)
-      mail.deliver
+      mail.deliver_now
       expect(mail.to).to eq [host.email]
       expect(mail.subject).to eql("Moving oolong 🍵")
       expect(ActionMailer::Base.deliveries.size).to eq(1)
@@ -142,7 +143,7 @@ describe HostMailer do
     end
 
     it 'doesn\'t send without tt' do
-      described_class.no_commitment_drip(tea_time_id + 1, 0).deliver
+      described_class.no_commitment_drip(tea_time_id + 1, 0).deliver_now
       expect(ActionMailer::Base.deliveries.size).to eq(0)
     end
 
@@ -150,13 +151,13 @@ describe HostMailer do
       hd = host.host_detail
       hd.commitment = 4
       hd.save!
-      described_class.no_commitment_drip(tea_time_id, 0).deliver
+      described_class.no_commitment_drip(tea_time_id, 0).deliver_now
       expect(ActionMailer::Base.deliveries.size).to eq(0)
     end
 
     it 'sends first reminder' do
       mail = described_class.no_commitment_drip(tea_time_id, 0)
-      mail.deliver
+      mail.deliver_now
       expect(mail.to).to eq [host.email]
       expect(mail.subject).to eql("Thinking about ya")
       expect(ActionMailer::Base.deliveries.size).to eq(1)
@@ -164,7 +165,7 @@ describe HostMailer do
 
     it 'sends repeating reminder' do
       mail = described_class.no_commitment_drip(tea_time_id, 5)
-      mail.deliver
+      mail.deliver_now
       expect(mail.to).to eq [host.email]
       expect(mail.subject).to eql("It’s been a while!")
       expect(ActionMailer::Base.deliveries.size).to eq(1)
@@ -179,7 +180,7 @@ describe HostMailer do
     end
 
     it 'doesn\'t send without host' do
-      described_class.no_commitment_drip_reminder(host.id + 1).deliver
+      described_class.no_commitment_drip_reminder(host.id + 1).deliver_now
       expect(ActionMailer::Base.deliveries.size).to eq(0)
     end
 
@@ -187,13 +188,13 @@ describe HostMailer do
       hd = host.host_detail
       hd.commitment = 4
       hd.save!
-      described_class.no_commitment_drip_reminder(host.id).deliver
+      described_class.no_commitment_drip_reminder(host.id).deliver_now
       expect(ActionMailer::Base.deliveries.size).to eq(0)
     end
 
     it 'sends first reminder' do
       mail = described_class.no_commitment_drip_reminder(host.id)
-      mail.deliver
+      mail.deliver_now
       expect(mail.to).to eq [host.email]
       expect(mail.subject).to eql("Thinking about ya")
       expect(ActionMailer::Base.deliveries.size).to eq(1)
@@ -208,7 +209,7 @@ describe HostMailer do
     end
 
     it 'doesn\'t send without host' do
-      described_class.pause(host.id + 1).deliver
+      described_class.pause(host.id + 1).deliver_now
       expect(ActionMailer::Base.deliveries.size).to eq(0)
     end
 
@@ -216,13 +217,13 @@ describe HostMailer do
       hd = host.host_detail
       hd.commitment = 4
       hd.save!
-      described_class.pause(host.id).deliver
+      described_class.pause(host.id).deliver_now
       expect(ActionMailer::Base.deliveries.size).to eq(0)
     end
 
     it 'sends' do
       mail = described_class.pause(host.id)
-      mail.deliver
+      mail.deliver_now
       expect(mail.to).to eq [host.email]
       expect(mail.subject).to eql("We just heard the news…")
       expect(ActionMailer::Base.deliveries.size).to eq(1)
@@ -240,7 +241,7 @@ describe HostMailer do
     end
 
     it 'doesn\'t send without host' do
-      described_class.inactive_host_posted(host.id + 1).deliver
+      described_class.inactive_host_posted(host.id + 1).deliver_now
       expect(ActionMailer::Base.deliveries.size).to eq(0)
     end
 
@@ -248,7 +249,7 @@ describe HostMailer do
       hd = host.host_detail
       hd.commitment = 4
       hd.save!
-      described_class.inactive_host_posted(host.id).deliver
+      described_class.inactive_host_posted(host.id).deliver_now
       expect(ActionMailer::Base.deliveries.size).to eq(0)
     end
 
@@ -256,13 +257,13 @@ describe HostMailer do
       tt = TeaTime.find(tea_time_id)
       tt.start_time = Time.now - 1.day
       tt.save!
-      described_class.inactive_host_posted(host.id).deliver
+      described_class.inactive_host_posted(host.id).deliver_now
       expect(ActionMailer::Base.deliveries.size).to eq(0)
     end
 
     it 'sends' do
       mail = described_class.inactive_host_posted(host.id)
-      mail.deliver
+      mail.deliver_now
       expect(mail.to).to eq [host.email]
       expect(mail.subject).to eql("Hello again!")
       expect(ActionMailer::Base.deliveries.size).to eq(1)

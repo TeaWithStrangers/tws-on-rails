@@ -53,7 +53,7 @@ describe AttendanceMailer do
     context 'flaked attendees' do
       it "shouldn't be sent a reminder" do
         attendance.update_column(:status, 1)
-        AttendanceMailer.reminder(attendance.id, :same_day).deliver
+        AttendanceMailer.reminder(attendance.id, :same_day).deliver_now
         #Flake mails get created, reminder shouldn't be
         expect(ActionMailer::Base.deliveries.size).to eq(0)
       end
@@ -84,7 +84,7 @@ describe AttendanceMailer do
     }
 
     it "should not send if tea time was cancelled" do
-      mail.deliver
+      mail.deliver_now
       expect(ActionMailer::Base.deliveries.size).to eq(0)
     end
   end

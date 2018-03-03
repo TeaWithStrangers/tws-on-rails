@@ -7,15 +7,14 @@ describe TeaTimeFollowupNotifier do
 
   describe '.perform' do
     it 'should send a mail per attendance group (flake, attendee, &c.)' do
-      TeaTimeFollowupNotifier.new(tt).perform
+      TeaTimeFollowupNotifier.new(tt.id).perform
       expect(ActionMailer::Base.deliveries.count).to eq 3
     end
 
     it 'should not send mail to waitlisted attendees' do
-      TeaTimeFollowupNotifier.new(waitlist_only_tt).perform
-      TeaTimeFollowupNotifier.new(cancelled_tt).perform
+      TeaTimeFollowupNotifier.new(waitlist_only_tt.id).perform
+      TeaTimeFollowupNotifier.new(cancelled_tt.id).perform
       expect(ActionMailer::Base.deliveries.count).to eq 0
     end
   end
 end
-

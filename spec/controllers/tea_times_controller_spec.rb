@@ -94,8 +94,8 @@ describe TeaTimesController do
     end
 
     it 'should not be possible (through the site)' do
-      delete :destroy, {id: @tt}
-      expect(TeaTime.exists?(@tt)).to eq true
+      delete :destroy, {id: @tt.id}
+      expect(TeaTime.exists?(@tt.id)).to eq true
     end
   end
 end

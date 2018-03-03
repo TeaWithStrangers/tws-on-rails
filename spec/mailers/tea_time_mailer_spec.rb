@@ -16,7 +16,7 @@ describe TeaTimeMailer do
   end
 
   describe '#host_confirmation' do
-    let(:mail) { TeaTimeMailer.host_confirmation(@tt) }
+    let(:mail) { TeaTimeMailer.host_confirmation(@tt.id) }
 
     # it 'renders the subject' do
     #   expect(mail.subject).to match(@tt.friendly_time)
@@ -36,7 +36,7 @@ describe TeaTimeMailer do
   end
 
   describe '#host_changed' do
-    let!(:mail) { TeaTimeMailer.host_changed(@tt, create(:user, :host)).deliver }
+    let!(:mail) { TeaTimeMailer.host_changed(@tt.id, create(:user, :host).id).deliver_now }
 
     it 'gets delivered without error' do
       expect(ActionMailer::Base.deliveries.count).to eq 1
@@ -47,7 +47,7 @@ describe TeaTimeMailer do
     let(:statuses) { ['flake', 'no_show', 'present'] }
     it 'sets template based on the passed in status' do
       mails = statuses.inject({}) do |hsh, s|
-        hsh[s] = TeaTimeMailer.send(:new, 'followup', @tt, @tt.attendances, s)
+        hsh[s] = TeaTimeMailer.send(:new, 'followup', @tt.id, @tt.attendances, s)
         hsh
       end
     #TODO: Monkeypatch `assigns` into all Mailer test contexts so we don't need
@@ -59,7 +59,7 @@ describe TeaTimeMailer do
   end
 
   describe '#cancellation' do
-    let!(:mail) { TeaTimeMailer.cancellation(@tt, @tt.attendances.sample).deliver }
+    let!(:mail) { TeaTimeMailer.cancellation(@tt.id, @tt.attendances.sample.id).deliver_now }
 
     it 'gets delivered without error' do
       expect(ActionMailer::Base.deliveries.count).to eq 1
@@ -67,7 +67,7 @@ describe TeaTimeMailer do
   end
 
   describe '#ethos' do
-    let!(:mail) { TeaTimeMailer.ethos(@tt.host).deliver }
+    let!(:mail) { TeaTimeMailer.ethos(@tt.host.id).deliver_now }
 
     it 'gets delivered without error' do
       expect(ActionMailer::Base.deliveries.count).to eq 1
