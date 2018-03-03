@@ -1,4 +1,4 @@
-ruby '2.1.5'
+ruby '2.5'
 
 source 'https://rubygems.org'
 
@@ -74,7 +74,7 @@ end
 group :development, :test do
   gem 'pry-rails'
   gem 'pry-stack_explorer'
-  gem 'rspec-rails', '~> 2.99'
+  gem 'rspec-rails', '~> 3.7'
   gem 'rspec-activemodel-mocks'
   gem 'factory_bot', '~> 4.8'
   gem 'factory_bot_rails'
