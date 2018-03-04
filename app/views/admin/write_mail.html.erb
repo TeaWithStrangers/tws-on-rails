@@ -13,7 +13,7 @@
         <%= f.text_area :body, class: 'wide' %>
         <%= f.label :city, 'Send To Users in:' %>
         <div class="dropdown">
-          <%= f.select(:city_id, options_for_select(City.all.collect{ |p| [p.name, p.id] }), {:class => "city"}) %>
+          <%= f.select(:city_id, options_for_select(City.all.collect{ |p| [p.name, p.id] } << ["All", 0]), {:class => "city"}) %>
         </div>
         <%= f.label :recipients, 'Send to:' %>
         <div class="dropdown">
