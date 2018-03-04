@@ -44,6 +44,7 @@ gem "delayed_job_web"
 
 # File Storage
 gem 'paperclip', '~> 4.1'
+gem 'aws-sdk'
 gem 'aws-sdk-s3', '~> 1.8'
 
 # soft-delete
