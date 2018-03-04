@@ -6,7 +6,6 @@ rvm:
 bundler_args: --without production
 before_script:
   - cp config/database.yml.ci config/database.yml
-  - bundle exec rake db:create
-  - RAILS_ENV=test bundle exec rake db:migrate --trace
+  - RAILS_ENV=test bundle exec rake db:setup --trace
 addons:
   postgresql: "9.6"
