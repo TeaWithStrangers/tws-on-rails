@@ -7,7 +7,7 @@ class CreateCities < ActiveRecord::Migration
       t.text :tagline
       t.integer :brew_status
 
-      t.timestamps
+      t.timestamps null: true
     end
   end
 end

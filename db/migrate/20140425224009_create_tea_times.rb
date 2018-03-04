@@ -7,7 +7,7 @@ class CreateTeaTimes < ActiveRecord::Migration
       t.text :location
       t.belongs_to :city
 
-      t.timestamps
+      t.timestamps null: true
     end
   end
 end
