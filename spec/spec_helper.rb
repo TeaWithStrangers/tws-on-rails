@@ -6,7 +6,7 @@ require 'capybara/rails'
 require 'capybara/rspec'
 require "cancan/matchers"
 require 'shoulda/matchers'
-require 'factory_girl_rails'
+require 'factory_bot_rails'
 
 #Coveralls Test Coverage
 require 'coveralls'
@@ -41,12 +41,17 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 
-  # Include FactoryGirl in specs
-  config.include FactoryGirl::Syntax::Methods
+  # Include FactoryBot in specs
+  config.include FactoryBot::Syntax::Methods
 
   # Include devise test helpers in controller specs
-  config.include Devise::TestHelpers, :type => :controller
+  config.include Devise::Test::ControllerHelpers, :type => :controller
   config.include IntegrationHelpers, :type => :feature
+
+  #rspec-rails 3 will no longer automatically infer an example group's spec type
+  #from the file location. You can explicitly opt-in to this feature using this
+  #snippet:
+  config.infer_spec_type_from_file_location!
 
   config.before(:all) { ActiveRecord::Base.skip_callbacks = true }
   config.before(:each) { ActionMailer::Base.deliveries.clear }
@@ -57,4 +62,11 @@ RSpec.configure do |config|
 
   config.filter_run focus: true
   config.run_all_when_everything_filtered = true
+end
+
+Shoulda::Matchers.configure do |config|
+	config.integrate do |with|
+		with.test_framework :rspec
+		with.library :rails
+	end
 end

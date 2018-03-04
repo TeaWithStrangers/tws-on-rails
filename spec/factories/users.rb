@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
 
   factory :user do
     nickname "Joe"
@@ -19,7 +19,7 @@ FactoryGirl.define do
         family_name "#{t.capitalize}"
 
         after :create do |u|
-          FactoryGirl.create(:host_detail, :user => u)
+          FactoryBot.create(:host_detail, :user => u)
         end
 
         after :build do |u|

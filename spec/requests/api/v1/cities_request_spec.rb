@@ -27,7 +27,6 @@ describe 'Cities endpoint', type: :request do
         post '/api/v1/cities', payload
         expect(created_city).not_to be nil
       end
-      it 'should assign the created_by_user_id to the current user'
 
       it 'should set status to unapproved' do
         post '/api/v1/cities', payload
@@ -60,7 +59,7 @@ describe 'Cities endpoint', type: :request do
 
   describe 'index endpoint' do
     before(:each) do
-      @cities = FactoryGirl.create_list(:city, 5)
+      @cities = FactoryBot.create_list(:city, 5)
     end
 
     let(:json_response) do
@@ -91,7 +90,7 @@ describe 'Cities endpoint', type: :request do
 
     it 'should return the users_count' do
       target_test_city = @cities.first
-      new_users = FactoryGirl.create_list(:user, 2, home_city_id: target_test_city.id)
+      new_users = FactoryBot.create_list(:user, 2, home_city_id: target_test_city.id)
       get '/api/v1/cities'
       returned_target = json_response['cities'].find { |x| x['id'] == target_test_city.id }
       expect(returned_target['info']['user_count']).to eq new_users.length

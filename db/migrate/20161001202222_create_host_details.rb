@@ -4,7 +4,7 @@ class CreateHostDetails < ActiveRecord::Migration
       t.references :user
       t.integer :activity_status, :default => 0
 
-      t.timestamps
+      t.timestamps null: true
     end
   end
 

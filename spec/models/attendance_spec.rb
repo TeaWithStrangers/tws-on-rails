@@ -16,7 +16,7 @@ describe Attendance do
 
     it 'returns foo when pending? is foo' do
       attendance = Attendance.new
-      attendance.stub(:pending?) { 'foo' }
+      allow(attendance).to receive(:pending?).and_return('foo') 
       expect(attendance.todo?).to eq 'foo'
     end
   end
@@ -56,7 +56,7 @@ describe Attendance do
       }
       expect(tt).to receive(:send_waitlist_notifications)
 
-      attendance.stub(:tea_time) { tt }
+      allow(attendance).to receive(:tea_time).and_return tt
       attendance.flake!
     end
   end

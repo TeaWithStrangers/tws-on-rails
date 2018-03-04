@@ -6,7 +6,7 @@ class CreateEmailReminders < ActiveRecord::Migration
       t.text :body
       t.integer :t_minus_in_hours
 
-      t.timestamps
+      t.timestamps null: true
     end
   end
 end

@@ -24,7 +24,7 @@ describe RegistrationsController do
 
     before(:each) do
       sign_in user
-      controller.stub(:needs_password?) { false }
+      allow(controller).to receive(:needs_password?) { false }
     end
 
     it 'should be able to update twitter and facebook attributes' do

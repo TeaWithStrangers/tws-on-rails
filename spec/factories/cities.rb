@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   sequence(:name) {|n| "City #{n}" }
   sequence(:city_code) {|n| "city-#{n}" }
 

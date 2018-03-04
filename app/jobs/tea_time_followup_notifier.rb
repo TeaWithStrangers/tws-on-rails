@@ -9,7 +9,7 @@ class TeaTimeFollowupNotifier
       groups = tt.attendances.group_by(&:status)
 
       groups.each do |status, attendances|
-        TeaTimeMailer.followup(@tea_time_id, attendances, status).deliver
+        TeaTimeMailer.followup(@tea_time_id, attendances, status).deliver_now
       end
     end
   end

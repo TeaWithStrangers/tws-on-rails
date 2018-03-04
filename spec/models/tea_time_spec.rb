@@ -117,11 +117,9 @@ describe TeaTime do
     describe '.attendee_emails' do
       it 'should concatenate email addresses of attendees' do
         tea_time = TeaTime.new
-        tea_time.stub(attendees: [
-          mock_model('User', email: 'foo@tws.com', status: 'pending'),
-          mock_model('User', email: 'bar@tws.com', status: 'pending'),
-          mock_model('User', email: 'baz@tws.com', status: 'pending'),
-        ])
+        allow(tea_time). to receive(:attendees) { [ mock_model('User', email: 'foo@tws.com', status: 'pending'),
+                                                    mock_model('User', email: 'bar@tws.com', status: 'pending'),
+                                                    mock_model('User', email: 'baz@tws.com', status: 'pending') ]}
         expect(tea_time.attendee_emails).to eq('foo@tws.com,bar@tws.com,baz@tws.com')
       end
 
@@ -152,32 +150,36 @@ describe TeaTime do
       let(:start_time) { DateTime.new(2018,1,1, 9, 0) }
       describe 'start and end in same meridians' do
         it 'includes meridian at end of time period' do
-          @tea_time.stub(start_time: start_time, duration: 1)
+          allow(@tea_time).to receive(:start_time) { start_time }  
+          allow(@tea_time).to receive(:duration) { 1 } 
           expect(@tea_time.friendly_time).to include("9-10am")
         end
       end
       describe 'start and end in different meridians' do
         it 'includes meridian for both start and end time' do
-          @tea_time.stub(start_time: start_time, duration: 4)
+          allow(@tea_time).to receive(:start_time) { start_time }  
+          allow(@tea_time).to receive(:duration) { 4 } 
           expect(@tea_time.friendly_time).to include("9am-1pm")
         end
       end
     end
 
     it 'should only display mintues if tea time does not begin/end on the hour' do
-      @tea_time.stub(start_time: DateTime.new(2018,1,1, 12, 30), duration: 2)
+      allow(@tea_time).to receive(:start_time) { DateTime.new(2018,1,1,12, 30) }
+      allow(@tea_time).to receive(:duration) { 2 } 
       expect(@tea_time.friendly_time).to include("12:30-2:30pm")
     end
 
     it 'should not display mintues if tea time does begin/end on the hour' do
-      @tea_time.stub(start_time: DateTime.new(2018,1,1,12),duration: 2)
+      allow(@tea_time).to receive(:start_time) { DateTime.new(2018,1,1,12) }
+      allow(@tea_time).to receive(:duration) { 2 } 
       expect(@tea_time.friendly_time).not_to include(":")
       expect(@tea_time.friendly_time).to include("12-2pm")
     end
 
     it 'should display minutes for only one of start/end if only one of start/end is not on the hour' do
-      @tea_time.stub(start_time: DateTime.new(2018,1,1,12, 30),
-                    duration: 1.5)
+      allow(@tea_time).to receive(:start_time) { DateTime.new(2018,1,1,12, 30) }
+      allow(@tea_time).to receive(:duration) { 1.5 }
       expect(@tea_time.friendly_time).to include("12:30-2pm")
     end
   end
@@ -198,7 +200,7 @@ describe TeaTime do
       a = Ability.new(u)
       tt = create(:tea_time)
 
-      a.should be_able_to(:edit, tt)
+      expect(a).to be_able_to(:edit, tt)
     end
 
     it 'should let hosts edit only their own tea times' do
@@ -208,8 +210,8 @@ describe TeaTime do
       a2 = Ability.new(u2)
       tt = create(:tea_time, host: u)
 
-      a.should be_able_to(:edit, tt)
-      a2.should_not be_able_to(:edit, tt)
+      expect(a).to be_able_to(:edit, tt)
+      expect(a2).to_not be_able_to(:edit, tt)
     end
   end
 

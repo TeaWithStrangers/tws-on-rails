@@ -19,9 +19,9 @@ Rails.application.routes.draw do
       resources :hosts,   only: [:index]
       resources :users do
         collection do
-          get   'self', to: :self
-          get   'self/interests',   to: :interests
-          patch 'self/interests', to: :update_interests
+          get   'self', action: :self
+          get   'self/interests',   action: :interests
+          patch 'self/interests', action: :update_interests
         end
       end
     end

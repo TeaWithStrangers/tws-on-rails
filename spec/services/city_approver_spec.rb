@@ -12,8 +12,7 @@ describe CityApprover do
   describe "#initialize" do
     context 'Invalid city_id is provided' do
       it 'raises an error' do
-         
-        expect { described_class.new(non_existent_city_id) }.to raise_error
+        expect { described_class.new(non_existent_city_id) }.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
   end

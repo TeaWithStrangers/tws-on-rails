@@ -5,7 +5,7 @@ class CreateAttendances < ActiveRecord::Migration
       t.references :user
       t.integer :status, :default => 0
 
-      t.timestamps
+      t.timestamps null: true
     end
   end
 end

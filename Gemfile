@@ -1,56 +1,57 @@
-ruby '2.1.5'
+ruby '2.5'
 
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.1'
-gem 'pg'
+gem 'rails', '~> 4.2'
+gem 'pg', '0.20'
+gem 'rollbar'
 
 # bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0',          group: :doc
+gem 'sdoc', group: :doc
 
-gem 'haml-rails', '~> 0.5'
+gem 'haml-rails', '~> 1.0'
 gem 'sass-rails', '~> 5.0'
 
 # For the old-style styles
-gem 'less-rails', '~> 2.5'
+gem 'less-rails', '~> 3.0'
 gem 'therubyracer', '~> 0.12'
 
-gem 'uglifier', '>= 1.3.0'
+gem 'uglifier', '~> 4.1.6'
 gem 'turbolinks'
 gem 'jquery-rails'
 gem 'jquery-ui-rails', '~> 5.0'
 gem 'underscore-rails'
-gem "active_model_serializers"
+gem "active_model_serializers", "~> 0.9.3"
 gem 'bitmask_attributes', '~> 1.0'
-gem 'bourbon'
-gem 'neat'
+gem 'bourbon', '~> 4'
+gem 'neat', '~> 1'
 
 gem 'markerb'
+gem 'redcarpet', '~> 3.4'
 gem 'sendgrid'
 
 gem 'google_drive'
 
-# Figaro makes it easy to set env variables without Foreman
 #Calendars
 gem 'icalendar', '~> 2.2'
 gem 'time_zone_ext'
 
 #Background Jobs
-gem 'delayed_job', '~> 4.0.1'
-gem 'delayed_job_active_record', '~> 4.0.1'
+gem 'delayed_job', '~> 4.1'
+gem 'delayed_job_active_record'
 gem "delayed_job_web"
 
 # File Storage
 gem 'paperclip', '~> 4.1'
-gem 'aws-sdk', '~> 1.5.7'
+gem 'aws-sdk-s3', '~> 1.8'
 
 # soft-delete
 gem 'paranoia', "~> 2.0"
 
 # Authentication & Permission Gems
-gem 'devise', '~> 3.2.4'
-gem 'cancan', '~> 1.6.10'
+gem 'devise', '~> 4.2'
+gem 'cancancan', '~> 2.1'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
@@ -74,9 +75,10 @@ end
 group :development, :test do
   gem 'pry-rails'
   gem 'pry-stack_explorer'
-  gem 'rspec-rails', '~> 2.14.2'
-  gem 'factory_girl', '~>4.4'
-  gem 'factory_girl_rails'
+  gem 'rspec-rails', '~> 3.7'
+  gem 'rspec-activemodel-mocks'
+  gem 'factory_bot', '~> 4.8'
+  gem 'factory_bot_rails'
   gem 'rails-observers'
   gem 'shoulda-matchers', require: false
   gem 'coveralls', require: false

@@ -1,7 +1,7 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :attendance do
     tea_time
-    user_id { FactoryGirl.create(:user).id }
+    user_id { FactoryBot.create(:user).id }
     status :pending
   end
 

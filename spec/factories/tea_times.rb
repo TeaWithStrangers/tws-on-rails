@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :tea_time do
     city
     association :host, factory: [:user, :host]

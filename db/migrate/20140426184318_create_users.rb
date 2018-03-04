@@ -4,7 +4,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :name
       t.string :phone
 
-      t.timestamps
+      t.timestamps null: true
     end
 
     add_attachment :users, :avatar
