@@ -6,7 +6,7 @@ describe HostsController do
       admin = create(:user, :admin)
 
       sign_in(admin)
-      controller.stub(:needs_password?) { false }
+      allow(controller).to receive(:needs_password?) { false }
     end
 
     let(:host_email) { 'johnnyenglish@mrbean.com' }
