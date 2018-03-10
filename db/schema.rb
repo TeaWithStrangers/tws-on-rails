@@ -11,19 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170203195548) do
+ActiveRecord::Schema.define(version: 20180310035701) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "ar_internal_metadata", id: false, force: true do |t|
-    t.string   "key",        limit: nil, null: false
-    t.string   "value",      limit: nil
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+  create_table "ar_internal_metadata", id: false, force: :cascade do |t|
+    t.string   "key",        null: false
+    t.string   "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "attendances", force: true do |t|
+  create_table "attendances", force: :cascade do |t|
     t.integer  "tea_time_id"
     t.integer  "user_id"
     t.integer  "status",               default: 0
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 20170203195548) do
     t.boolean  "provide_phone_number", default: false
   end
 
-  create_table "cities", force: true do |t|
+  create_table "cities", force: :cascade do |t|
     t.string   "name"
     t.string   "city_code"
     t.text     "description"
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 20170203195548) do
 
   add_index "cities", ["city_code"], name: "city_code_idx", unique: true, using: :btree
 
-  create_table "delayed_jobs", force: true do |t|
+  create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
     t.integer  "attempts",   default: 0, null: false
     t.text     "handler",                null: false
@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 20170203195548) do
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
-  create_table "email_reminders", force: true do |t|
+  create_table "email_reminders", force: :cascade do |t|
     t.integer  "remindable_id"
     t.string   "remindable_type"
     t.text     "body"
@@ -79,15 +79,15 @@ ActiveRecord::Schema.define(version: 20170203195548) do
     t.datetime "updated_at"
   end
 
-  create_table "host_details", force: true do |t|
+  create_table "host_details", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "activity_status", default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "commitment"
+    t.integer  "commitment",      default: 0, null: false
   end
 
-  create_table "proxy_cities", force: true do |t|
+  create_table "proxy_cities", force: :cascade do |t|
     t.integer "city_id"
     t.integer "proxy_city_id"
   end
@@ -95,18 +95,18 @@ ActiveRecord::Schema.define(version: 20170203195548) do
   add_index "proxy_cities", ["city_id", "proxy_city_id"], name: "index_proxy_cities_on_city_id_and_proxy_city_id", unique: true, using: :btree
   add_index "proxy_cities", ["proxy_city_id", "city_id"], name: "index_proxy_cities_on_proxy_city_id_and_city_id", unique: true, using: :btree
 
-  create_table "roles", force: true do |t|
+  create_table "roles", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "roles_users", force: true do |t|
+  create_table "roles_users", force: :cascade do |t|
     t.integer "role_id"
     t.integer "user_id"
   end
 
-  create_table "tea_times", force: true do |t|
+  create_table "tea_times", force: :cascade do |t|
     t.datetime "start_time"
     t.float    "duration"
     t.integer  "followup_status",           default: 0
@@ -120,7 +120,7 @@ ActiveRecord::Schema.define(version: 20170203195548) do
     t.text     "notes"
   end
 
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "nickname"
     t.string   "phone"
     t.datetime "created_at"
