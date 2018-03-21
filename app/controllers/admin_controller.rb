@@ -18,7 +18,7 @@ class AdminController < ApplicationController
   end
 
   def cities_overview
-    @cities = City.order(:created_at).reverse_order
+    @cities = City.order(:created_at).includes(:suggested_by_user).reverse_order
   end
 
   def users

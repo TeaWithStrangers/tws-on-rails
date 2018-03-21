@@ -38,7 +38,7 @@
         <td><%= !city.suggested_by_user.nil? ? city.suggested_by_user.name : "No User" %></td>
         <td><%= !city.suggested_by_user.nil? ? city.suggested_by_user.email : "No Email" %></td>
         <td><%= city.brew_status.humanize %></td>
-        <td><%= city.users.count %></td>
+        <td><%= city.users_count %></td>
         <td>
           <%= link_to 'Edit', edit_city_path(city) %>
           <%= link_to 'Destroy', city, :method => :delete, :data => { :confirm => 'Are you sure?' } %>
