@@ -50,7 +50,7 @@ class CitiesController < ApplicationController
   # PATCH/PUT /cities/1.json
   def update
     if params[:approval_action]
-      approver = CityApprover.new(@city)
+      approver = CityApprover.new(@city.id)
       case params[:approval_action]
       when "merge"
         approver.merge!(params[:merge_city_id])
