@@ -233,7 +233,7 @@ describe User do
     end
   end
 
-  context '.send_drip_email' do
+  skip context '.send_drip_email' do
     let!(:host) { create(:user, :host) }
     context 'does not send' do
       it 'with inactive commitment' do
