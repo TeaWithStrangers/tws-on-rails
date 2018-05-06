@@ -1,8 +1,10 @@
+HOSTING_TYPEFORM='https://medium.com/@AnkitShah_21916/tea-with-strangers-be-the-host-c526bfb06fe8'
+
 Rails.application.routes.draw do
   root 'static#index'
-  get '/about'          => 'static#about',          as: :about
-  get '/hosting'        => 'static#hosting',        as: :hosting
-  get '/signup'         => 'static#jfdi_signup',    as: :sign_up
+  get '/about'          => 'static#about',              as: :about
+  get '/hosting'        => redirect(HOSTING_TYPEFORM),  as: :hosting
+  get '/signup'         => 'static#jfdi_signup',        as: :sign_up
 
   # Devise and Registration Routes
   devise_for :users, :controllers => {:registrations => "registrations"}, :skip => [:sessions]
