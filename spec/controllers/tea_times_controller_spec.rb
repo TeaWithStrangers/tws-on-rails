@@ -9,27 +9,39 @@ describe TeaTimesController do
   end
 
   describe '#index' do
+    it 'should be viewable by all viewers' do
+      get :index
+      assert_response :success
+
+      sign_in @user
+      referer '/'
+      get :index
+      assert_response :success
+    end
+  end
+
+  describe '#list' do
     context 'viewed by a host or admin' do
       it 'should show *all* the tea times to hosts' do
         sign_in @host
-        get :index
+        get :list
         expect(assigns(:tea_times)).to eq(TeaTime.all)
       end
 
       it 'should show *all* the tea times to admins' do
         sign_in @admin
-        get :index
+        get :list
         expect(assigns(:tea_times)).to eq(TeaTime.all)
       end
     end
 
     it 'should redirect normal and anonymous users to sign in' do
-      get :index
+      get :list
       assert_response :redirect
 
       sign_in @user
       referer '/'
-      get :index
+      get :list
       assert_response 302
     end
   end
