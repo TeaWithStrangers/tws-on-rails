@@ -70,8 +70,20 @@
             </button>
           <% end %>
         <% end %>
+      <% elsif (no_signin_button ||= false) # No signin button; don't show signin CTA text %>
+        <%= link_to sign_up_path(redirect_to_tt: tea_time.id) do %>
+          <% if tea_time.spots_remaining? %>
+            <button class="spots<%= tea_time.spots_remaining %>">
+              Count Me In
+            </button>
+          <% else %>
+            <button class="yellow button">
+              Join Waitlist
+            </button>
+          <% end %>
+        <% end %>
       <% else %>
-        <%= link_to new_user_session_path do %>
+        <%= link_to new_user_session_path(redirect_to_tt: tea_time.id) do %>
           <button class="yellow button">
             Sign in to schedule
           </button>

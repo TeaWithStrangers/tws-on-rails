@@ -1,0 +1,50 @@
+<% next_month_name = Date.today.next_month.strftime("%B") %>
+
+<div class="cover-photo" style="background-image: linear-gradient(to bottom, rgba(247, 191, 77, 0.87), rgba(247, 191, 77, 0.87)), url('<%= image_path("missing-city-image.jpg") %>'); margin-bottom: 50px;">
+  <%= render partial: 'shared/header' %>
+  <div class="content">
+    <div class="content-box">
+      <h1 class="cover-photo-lede">Tea times this month</h1>
+      <span class='cover-photo-subtext'>
+        We announce tea times at the beginning of each month.
+        If nothing this month fits you, sign up and we'll
+        email you in <%= next_month_name %> about tea times
+        then.
+      </span>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="light-background">
+    <div>
+      <% if @tea_times_by_city.empty? %>
+        <p>
+          No tea times scheduled for this month! Check back later.
+        </p>
+      <% else %>
+        <p>
+          This month, there are tea times happening in <%= @cities.to_sentence %>.
+        </p>
+        <p>
+          If you don't live in any of these places or the tea times below don't
+          work for your schedule, we can try to make something work for you in
+          <%= next_month_name %>.
+        </p>
+      <% end %>
+    </div>
+    <div>
+      <button>Email me in <%= next_month_name %></button>
+    </div>
+    <% @tea_times_by_city.each do |city, tts| %>
+      <div class="tt-set-container">
+        <div class="tt-container tt-city-name" style="border: 5px solid #EF6236; color: #EF6236; font-weight: bold; height: 200px; padding: 20px; font-size: 30px; text-transform: uppercase; text-align: center;">
+          <%= city %>
+        </div>
+        <% tts.each do |tt| %>
+          <%= render partial: 'shared/tea_time_row', locals: {tea_time: tt, no_signin_button: true} %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

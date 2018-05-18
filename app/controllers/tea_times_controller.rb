@@ -1,13 +1,38 @@
 class TeaTimesController < ApplicationController
   helper TeaTimesHelper
-  before_action :set_tea_time, except: [:index, :new, :create]
-  before_action :authenticate_user!
-  before_action :authorized?, only: [:new, :edit, :create, :update, :cancel, :destroy, :index]
+  before_action :set_tea_time, except: [:index, :list, :new, :create]
+  before_action :authenticate_user!, except: [:index]
+  before_action :authorized?, only: [:new, :edit, :create, :update, :cancel, :destroy, :list]
   before_action :use_new_styles, except: [:create, :update, :cancel, :destroy]
 
   # GET /tea_times
   # GET /tea_times.json
   def index
+    @tea_times = TeaTime.this_month.order(start_time: :asc).includes(:city).all
+
+    # Array of cities holding tea times this month
+    # Extract all names of cities from tea times and deduplicate
+    @cities = @tea_times.map { |tt| tt.city.name }.uniq
+
+    # For each available city, create a hash entry and an empty list
+    # of tea times
+    @tea_times_by_city = Hash.new
+    @cities.each { |city| @tea_times_by_city[city] = [] }
+
+    # Iterate through tea times and segment into cities
+    @tea_times.each do |tt|
+      @tea_times_by_city[tt.city.name].push(tt)
+    end
+
+    respond_to do |format|
+      format.html { render layout: !request.xhr? }
+      format.json { render json: @tea_times }
+    end
+  end
+
+  # GET /tea_times/list
+  # GET /tea_times/list.json
+  def list
     @tea_times = TeaTime.all
     respond_to do |format|
       format.html { render layout: !request.xhr? }

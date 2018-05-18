@@ -30,6 +30,9 @@ Rails.application.routes.draw do
   end
 
   resources :tea_times do
+    collection do
+      get 'list' => 'tea_times#list'
+    end
     member do
       post '/attendance'                => 'attendance#create', as: :attendance
       patch '/attendance/all'           => 'attendance#mark',             as: :mark
