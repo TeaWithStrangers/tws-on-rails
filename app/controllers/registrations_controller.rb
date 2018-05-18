@@ -7,7 +7,16 @@ class RegistrationsController < Devise::RegistrationsController
       user_info = GetOrCreateNonWaitlistedUser.call(user_params)
       if user_info[:new_user?] && user_info[:user].valid?
         sign_in user_info[:user]
-        redirect_to cities_path
+
+        # Retrieve redirect location from Devise if exists
+        redirect_url = stored_location_for(User)
+
+        # Fall back to cities path if no redirect location exists
+        unless redirect_url
+          redirect_url = cities_path
+        end
+
+        redirect_to redirect_url
       elsif !user_info[:new_user?] && user_info[:user].valid?
         redirect_to new_user_session_path, alert: 'You\'ve made an account already. Log in using the same email. Click \'Forgot Password\' if you\'re confused.'
       else

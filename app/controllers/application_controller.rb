@@ -16,8 +16,16 @@ class ApplicationController < ActionController::Base
     go_back(exception)
   end
 
+  # Override Devise's after_sign_in_path_for to check whether
+  # the user (here, `resource` would be User) has a stored
+  # redirect location, and use that as the path. Otherwise,
+  # go to a city page.
+  # See https://github.com/plataformatec/devise/wiki/How-To:-Redirect-back-to-current-page-after-sign-in,-sign-out,-sign-up,-update
   def after_sign_in_path_for(resource)
-    if current_user.home_city.nil?
+    redirect_path = stored_location_for(resource)
+    if redirect_path
+      redirect_path
+    elsif current_user.home_city.nil?
       cities_path
     else
       city_path(current_user.home_city)
