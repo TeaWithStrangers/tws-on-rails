@@ -39,6 +39,11 @@ class AttendanceController < ApplicationController
       current_user.update_attributes(phone_number: params[:attendance][:phone_number])
     end
 
+    # Save home city if they don't have one yet
+    if current_user.home_city.nil?
+      current_user.update_attributes(home_city: @tea_time.city)
+    end
+
     if @attendance.save
       # Send various emails (Should all be run async)
       @attendance.send_confirmation_mail  if @attendance.pending?
