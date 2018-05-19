@@ -10,6 +10,16 @@ feature 'Signing In & Up' do
     expect(page).to have_content 'Dashboard'
   end
 
+  scenario 'can sign up with a valid email and password and a redirect_to_tt path' do
+    tt = create(:tea_time)
+    visit sign_up_path(redirect_to_tt: tt.id)
+    fill_in('user_name', with: 'Darth Helmet')
+    fill_in('user_email', with: 'drthhlmt@spaceballone.com')
+    fill_in('user_password', with: SecureRandom.hex)
+    click_button("Let's Get Tea")
+    expect(page.current_path).to eq tea_time_path(tt.id)
+  end
+
   scenario 'with blank name' do
     sign_up_with('', 'drthhlmt@spaceballone.com')
     #User should be redirected to the sign up page
@@ -98,6 +108,30 @@ feature 'Registered User' do
       expect(@user.attendances.reload.first.waiting_list?).to eq true
       @full_tt.attendances.where.not(user_id: @user.id).sample.flake!
       expect(ActionMailer::Base.deliveries.map(&:subject)).to include('A spot just opened up at tea time! Sign up!')
+    end
+  end
+end
+
+feature 'Registered User without home city' do
+  before(:each) do
+    @host = create(:user, :host)
+    @user = create(:user, home_city: nil)
+    @tt = create(:tea_time, host: @host, city: @host.home_city)
+    sign_in @user
+  end
+
+  feature 'Tea Time Attendance' do
+    scenario 'signing up to a tea time sets user home city to tea time city' do
+      visit city_path(@host.home_city)
+      expect(page.status_code).to eq(200)
+      click_link('Count Me In')
+      expect(current_path).to eq tea_time_path(@tt)
+
+      find('input.confirm').click
+
+      # Reload the user model and check the user's home city is set
+      @user.reload
+      expect(@user.home_city).to eq @tt.city
     end
   end
 end
