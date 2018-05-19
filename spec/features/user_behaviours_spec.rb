@@ -33,6 +33,14 @@ feature 'Signing In & Up' do
     expect(page).to have_content user.home_city.name
   end
 
+  scenario 'can sign in with a redirect_to_tt path and be redirected correctly' do
+    tt = create(:tea_time)
+    user = create(:user)
+    visit new_user_session_path(redirect_to_tt: tt.id)
+    sign_in user
+    expect(page.current_path).to eq tea_time_path(tt.id)
+  end
+
   scenario 'with an already created user account from a registration form' do
     user = create(:user)
     sign_up_with(user.nickname, user.email)
