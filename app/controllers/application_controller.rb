@@ -25,10 +25,8 @@ class ApplicationController < ActionController::Base
     redirect_path = stored_location_for(resource)
     if redirect_path
       redirect_path
-    elsif current_user.home_city.nil?
-      cities_path
     else
-      city_path(current_user.home_city)
+      tea_times_path
     end
   end
 
