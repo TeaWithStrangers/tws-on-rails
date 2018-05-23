@@ -312,6 +312,7 @@ GEM
       rspec-mocks (~> 3.7.0)
       rspec-support (~> 3.7.0)
     rspec-support (3.7.1)
+    ruby_http_client (3.3.0)
     ruby_parser (3.11.0)
       sexp_processor (~> 4.9)
     sass (3.5.5)
@@ -329,6 +330,9 @@ GEM
       rdoc (>= 5.0)
     sendgrid (1.2.4)
       json
+    sendgrid-ruby (5.2.0)
+      ruby_http_client (~> 3.2)
+      sinatra (>= 1.4.7, < 3)
     sexp_processor (4.10.1)
     shellany (0.0.1)
     shoulda-matchers (3.1.2)
@@ -441,6 +445,7 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   sdoc
   sendgrid
+  sendgrid-ruby
   shoulda-matchers
   skylight
   spring

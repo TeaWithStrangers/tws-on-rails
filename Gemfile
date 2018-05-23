@@ -30,6 +30,7 @@ gem 'neat', '~> 1'
 gem 'markerb'
 gem 'redcarpet', '~> 3.4'
 gem 'sendgrid'
+gem 'sendgrid-ruby'
 
 gem 'google_drive'
 
