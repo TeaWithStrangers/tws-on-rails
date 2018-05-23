@@ -7,8 +7,6 @@ require 'json'
 # Number of users to update per API call
 ITEMS_PER_BATCH = 1000
 
-sg = SendGrid::API.new(api_key: ENV['SENDGRID_API_KEY'])
-
 def get_users_array
   users = User.all
   users_array = users.map do |user|
@@ -30,6 +28,13 @@ end
 namespace :sendgrid_list do
   desc "System for syncing user database with SendGrid Contacts."
   task sync: :environment do
+    if ENV['SENDGRID_API_KEY']
+      sg = SendGrid::API.new(api_key: ENV['SENDGRID_API_KEY'])
+    else
+      p "No SendGrid credentials available."
+      return
+    end
+
     new_count = 0
     updated_count = 0
 
