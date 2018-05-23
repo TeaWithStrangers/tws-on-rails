@@ -42,3 +42,4 @@ function modalActivation() {
 
 $(document).ready(modalActivation)
 $(document).on('page:load', modalActivation)
+$(document).on('turbolinks:load', modalActivation)
