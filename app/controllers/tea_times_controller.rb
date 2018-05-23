@@ -1,7 +1,7 @@
 class TeaTimesController < ApplicationController
   helper TeaTimesHelper
   before_action :set_tea_time, except: [:index, :list, :new, :create]
-  before_action :authenticate_user!, except: [:index]
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :authorized?, only: [:new, :edit, :create, :update, :cancel, :destroy, :list]
   before_action :use_new_styles, except: [:create, :update, :cancel, :destroy]
 
@@ -43,9 +43,11 @@ class TeaTimesController < ApplicationController
   # GET /tea_times/1
   # GET /tea_times/1.json
   def show
-    @new_attendance = @tea_time.attendances.new(user_id: current_user.id, provide_phone_number: true)
+    if user_signed_in?
+      @new_attendance = @tea_time.attendances.new(user_id: current_user.id, provide_phone_number: true)
+    end
     respond_to do |format|
-      format.html { render layout: !request.xhr? }
+      format.html { render layout: !request.xhr?, locals: { full_form: !request.xhr? } }
       format.json { render json: @tea_time }
     end
   end

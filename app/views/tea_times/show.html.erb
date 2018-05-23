@@ -1,3 +1,19 @@
+<% if full_form %>
+  <%= content_for :title do %>Tea Time | Tea With Strangers<% end %>
+
+  <div class="cover-photo" style="background-image: linear-gradient(to bottom, rgba(247, 191, 77, 0.87), rgba(247, 191, 77, 0.87)), url('<%= image_path("missing-city-image.jpg") %>'); margin-bottom: 50px;">
+    <%= render partial: 'shared/header' %>
+    <div class="content">
+      <div class="content-box">
+        <h1 class="cover-photo-lede">Tea time</h1>
+        <span class='cover-photo-subtext'>
+        </span>
+      </div>
+    </div>
+  </div>
+
+<% end %>
+
 <div class="light-background">
   <div class="container">
     <div class="section tt-solo">
@@ -7,65 +23,79 @@
       <div class="tt-form boxless form">
         <%= render partial: 'shared/tea_time_row', locals: {tea_time: @tea_time, without_button: display_button?(local_assigns)} %>
 
-        <%= form_for @new_attendance, url: attendance_tea_time_path(@tea_time), html: {class: 'schedule-tea new_user'} do |f| %>
-          <div class="form-body">
+        <% if user_signed_in? %>
+          <%= form_for @new_attendance, url: attendance_tea_time_path(@tea_time), html: {class: 'schedule-tea new_user'} do |f| %>
+            <div class="form-body">
 
-            <div class="name-email-container split-container">
-              <div class="field name split2">
-                <div class="form-label">
-                  <%= f.label :nickname, "Name", class: 'capitalize boldweight' %>
+              <div class="name-email-container split-container">
+                <div class="field name split2">
+                  <div class="form-label">
+                    <%= f.label :nickname, "Name", class: 'capitalize boldweight' %>
+                  </div>
+                  <%= f.text_field :nickname,
+                                   value:        @new_attendance.user.name,
+                                   readonly:     true,
+                                   placeholder: 'First name (or nickname)'
+                  %>
                 </div>
-                <%= f.text_field :nickname,
-                    value:        @new_attendance.user.name,
-                    readonly:     true,
-                    placeholder: 'First name (or nickname)'
-                %>
+
+                <div class="field email split2">
+                  <div class="form-label">
+                    <%= f.label :email, "Email", class: 'capitalize boldweight' %>
+                  </div>
+                  <%= f.email_field :email,
+                                    value:        @new_attendance.user.email,
+                                    readonly:     true,
+                                    placeholder: 'Email Address'
+                  %>
+                </div>
               </div>
 
-              <div class="field email split2">
-                <div class="form-label">
-                  <%= f.label :email, "Email", class: 'capitalize boldweight' %>
-                </div>
-                <%= f.email_field :email,
-                    value:        @new_attendance.user.email,
-                    readonly:     true,
-                    placeholder: 'Email Address'
-                %>
+              <div class="field phone split1 last">
+                <% if !current_user.phone_number.blank? %>
+                  <div class="form-label">
+                    <%= f.label :phone_number, "Phone number", class: 'capitalize boldweight inline' %>
+                    <span class="sub-label light">
+                      We have your number down as <%= current_user.phone_number %>
+                    </span>
+                  </div>
+                  <%= f.check_box :provide_phone_number %>
+                  <%= f.label :provide_phone_number, "It's cool to share my number with #{@tea_time.host.nickname} before the tea time, as long as I'm attending" %>
+                <% else %>
+                  <div class="form-label">
+                    <%= f.label :phone_number, "Phone number", class: 'capitalize boldweight inline' %>
+                    <span class="sub-label light">
+                      Optional, but helps <%= @tea_time.host.nickname %> get in touch the day of your tea time
+                    </span>
+                  </div>
+                  <%= f.text_field :phone_number,
+                                   value:        '',
+                                   placeholder:  '(555) 345-6789'
+                  %>
+                <% end %>
               </div>
-            </div>
 
-            <div class="field phone split1 last">
-              <% if !current_user.phone_number.blank? %>
-                <div class="form-label">
-                  <%= f.label :phone_number, "Phone number", class: 'capitalize boldweight inline' %>
-                  <span class="sub-label light">
-                    We have your number down as <%= current_user.phone_number %>
-                  </span>
-                </div>
-                <%= f.check_box :provide_phone_number %>
-                <%= f.label :provide_phone_number, "It's cool to share my number with #{@tea_time.host.nickname} before the tea time, as long as I'm attending" %>
-              <% else %>
-                <div class="form-label">
-                  <%= f.label :phone_number, "Phone number", class: 'capitalize boldweight inline' %>
-                  <span class="sub-label light">
-                    Optional, but helps <%= @tea_time.host.nickname %> get in touch the day of your tea time
-                  </span>
-                </div>
-                <%= f.text_field :phone_number,
-                    value:        '',
-                    placeholder:  '(555) 345-6789'
-                %>
+              <% if !@tea_time.spots_remaining? %>
+                <p class="disclaimer">You'll get an email the moment someone cancels their seat.</p>
               <% end %>
+              <div class="button-container">
+                <%= f.submit @tea_time.spots_remaining? ? 'Confirm' : 'Join Waitlist', class: 'confirm' %>
+                <%= link_to "Nevermind", :back, class: 'cancel' %>
+              </div>
             </div>
-
-            <% if !@tea_time.spots_remaining? %>
-              <p class="disclaimer">You'll get an email the moment someone cancels their seat.</p>
+          <% end %>
+        <% else %>
+          <%= link_to sign_up_path(redirect_to_tt: @tea_time.id, city_id: @tea_time.city.id) do %>
+            <% if @tea_time.spots_remaining? %>
+              <button class="spots<%= @tea_time.spots_remaining %>">
+                Count Me In
+              </button>
+            <% else %>
+              <button class="yellow button">
+                Join Waitlist
+              </button>
             <% end %>
-            <div class="button-container">
-              <%= f.submit @tea_time.spots_remaining? ? 'Confirm' : 'Join Waitlist', class: 'confirm' %>
-              <%= link_to "Nevermind", :back, class: 'cancel' %>
-            </div>
-          </div>
+          <% end %>
         <% end %>
       </div>
     </div>
