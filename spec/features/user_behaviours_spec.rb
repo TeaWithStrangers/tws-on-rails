@@ -20,6 +20,53 @@ feature 'Signing In & Up' do
     expect(page.current_path).to eq tea_time_path(tt.id)
   end
 
+  scenario 'can sign up with a valid email and password and be shown a remind_next_month banner' do
+    visit sign_up_path(remind_next_month: 'yes')
+    fill_in('user_name', with: 'Darth Helmet')
+    fill_in('user_email', with: 'drthhlmt@spaceballone.com')
+    fill_in('user_password', with: SecureRandom.hex)
+    click_button("Let's Get Tea")
+    expect(page.current_path).to eq tea_times_path
+    expect(page).to have_content "next month"
+  end
+
+  scenario 'can sign up with a valid email and password and selected home city' do
+    city = create(:city)
+
+    # Load the signup page and set the city to be selected by default
+    visit sign_up_path(city_id: city.id)
+
+    # Check the city is selected by default
+    expect(page).to have_select('user_home_city', selected: city.name)
+
+    fill_in('user_name', with: 'Darth Helmet')
+    fill_in('user_email', with: 'drthhlmt_city@spaceballone.com')
+    fill_in('user_password', with: SecureRandom.hex)
+    click_button("Let's Get Tea")
+    expect(page.current_path).to eq tea_times_path
+
+    # Check that the city was saved
+    user = User.find_by_email('drthhlmt_city@spaceballone.com')
+    expect(user.home_city).to eq city
+  end
+
+  scenario 'can sign up with a valid email and password and other home city' do
+    visit sign_up_path()
+    fill_in('user_name', with: 'Darth Helmet')
+    fill_in('user_email', with: 'drthhlmt_city@spaceballone.com')
+    fill_in('user_password', with: SecureRandom.hex)
+
+    # Select other city
+    select('Other', from: 'user_home_city')
+
+    click_button("Let's Get Tea")
+    expect(page.current_path).to eq tea_times_path
+
+    # Check that the city is nil
+    user = User.find_by_email('drthhlmt_city@spaceballone.com')
+    expect(user.home_city).to eq nil
+  end
+
   scenario 'with blank name' do
     sign_up_with('', 'drthhlmt@spaceballone.com')
     #User should be redirected to the sign up page
@@ -29,8 +76,7 @@ feature 'Signing In & Up' do
   scenario 'can sign up, log out, log in' do
     user = create(:user)
     sign_in user
-    expect(current_path).to eq city_path(user.home_city)
-    expect(page).to have_content user.home_city.name
+    expect(current_path).to eq tea_times_path
   end
 
   scenario 'can sign in with a redirect_to_tt path and be redirected correctly' do

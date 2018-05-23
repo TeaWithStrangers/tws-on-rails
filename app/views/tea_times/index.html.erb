@@ -1,3 +1,5 @@
+<%= content_for :title do %>Tea Times | Tea With Strangers<% end %>
+
 <% next_month_name = Date.today.next_month.strftime("%B") %>
 
 <div class="cover-photo" style="background-image: linear-gradient(to bottom, rgba(247, 191, 77, 0.87), rgba(247, 191, 77, 0.87)), url('<%= image_path("missing-city-image.jpg") %>'); margin-bottom: 50px;">
@@ -7,9 +9,10 @@
       <h1 class="cover-photo-lede">Tea times this month</h1>
       <span class='cover-photo-subtext'>
         We announce tea times at the beginning of each month.
-        If nothing this month fits you, sign up and we'll
-        email you in <%= next_month_name %> about tea times
-        then.
+        If nothing this month fits you,
+        <% if !user_signed_in? %>sign up and <% end %>
+        we'll email you in <%= next_month_name %> about tea
+        times then.
       </span>
     </div>
   </div>
@@ -34,7 +37,13 @@
       <% end %>
     </div>
     <div>
-      <button>Email me in <%= next_month_name %></button>
+      <% if user_signed_in? %>
+        TODOCOPY None of these times work for you? We'll send out a newsletter in <%= next_month_name %> with the next month's tea times.</div>
+      <% else %>
+        <%= link_to sign_up_path(remind_next_month: 'yes') do %>
+          <button>Email me in <%= next_month_name %></button>
+        <% end %>
+      <% end %>
     </div>
     <% @tea_times_by_city.each do |city, tts| %>
       <div class="tt-set-container">

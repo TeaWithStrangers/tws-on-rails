@@ -11,9 +11,14 @@ class RegistrationsController < Devise::RegistrationsController
         # Retrieve redirect location from Devise if exists
         redirect_url = stored_location_for(User)
 
-        # Fall back to cities path if no redirect location exists
+        # Fall back to tea times path if no redirect location exists
         unless redirect_url
-          redirect_url = cities_path
+          redirect_url = tea_times_path
+        end
+
+        # If the ?remind_next_month GET param exists, show banner
+        if params.has_key?(:remind_next_month)
+          flash[:success] = "We'll let you know about tea times next month!"
         end
 
         redirect_to redirect_url
@@ -61,7 +66,7 @@ class RegistrationsController < Devise::RegistrationsController
     end
 
     def user_params
-      a = params.require(:user).permit(:nickname, :email, :password, :phone_number)
+      a = params.require(:user).permit(:nickname, :email, :password, :phone_number, :home_city_id)
       a[:given_name] = a[:nickname] if !a[:given_name]
       a
     end
