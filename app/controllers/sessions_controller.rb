@@ -4,10 +4,10 @@ class SessionsController < Devise::SessionsController
     return redirect_to profile_path if current_user
 
     # If the redirect_to_tt parameter exists, store the URL
-    # to redirect to after signup
+    # to redirect to after login
     # See https://github.com/plataformatec/devise/wiki/How-To:-Redirect-back-to-current-page-after-sign-in,-sign-out,-sign-up,-update
     if params[:redirect_to_tt] && TeaTime.find(params[:redirect_to_tt])
-      store_location_for(:user, '/tea_times/' + params[:redirect_to_tt].to_i.to_s)
+      store_location_for(:user, '/tea_times/' + params[:redirect_to_tt])
     end
 
     super
