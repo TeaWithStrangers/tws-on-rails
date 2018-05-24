@@ -175,7 +175,15 @@ class User < ActiveRecord::Base
     if last_tea_time
       last_tea_time.start_time.to_date.strftime('%s')
     else
-      0
+      nil
+    end
+  end
+
+  def last_sign_in_date
+    if last_sign_in_at
+      last_sign_in_at.to_date.strftime('%s')
+    else
+      nil
     end
   end
 

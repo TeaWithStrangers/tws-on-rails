@@ -46,7 +46,8 @@ class SendGridList
         home_city: user.home_city ? user.home_city.name : '',
         user_type: user.admin? ? 'admin' : (user.host? ? 'host' : 'user'),
         tea_times_attended: user.tea_times_attended,
-        last_tea_time: user.last_tea_time_date
+        last_tea_time: user.last_tea_time_date,
+        last_sign_in: user.last_sign_in_date
       }
 
       @sg.client.contactdb.recipients.patch(request_body: [user_hash])
