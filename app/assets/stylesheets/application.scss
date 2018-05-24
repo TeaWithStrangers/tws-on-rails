@@ -12,6 +12,7 @@
  *
  *= require normalize
  *= require jquery-ui/dialog
+ *= require chosen
  *= require_self
  */
 
@@ -48,6 +49,7 @@
 @import "components/dashboard-tasks";
 @import "components/notifications";
 @import "components/ckeditor-override";
+@import "components/admin";
 
 // Block Components
 @import "components/cover-photo";

@@ -1,0 +1,86 @@
+<%= render partial: 'shared/admin_header' %>
+<div class="container dashboard">
+  <div class="row">
+    <div class="wide">
+      <h1>Segment Assembler</h1>
+
+        <p class="segment-help">Segment Assembler loads your existing segments in SendGrid, allows you
+        to select a subset of them, combines them (i.e. pools them with an OR rule,
+        where recipients that are in any of the segments are included), optionally
+        allows you to take a random sample of the recipients, and creates a SendGrid
+        list from the resulting group of recipients.</p>
+
+        <%= form_for(:segment, url: {action: 'segment_create'}) do |f| %>
+          <div class="segment-form-field">
+            <div class="segment-form-field-header">
+              <div class="segment-form-field-name">
+                <%= f.label :name, 'Name' %>
+              </div>
+            </div>
+            <div class="segment-form-field-content">
+              <%= f.text_field :name, placeholder: 'List name' %>
+            </div>
+          </div>
+
+          <div class="segment-form-field">
+            <div class="segment-form-field-header">
+              <div class="segment-form-field-header-meta">
+                <a href="#" id="segment-form-refresh-page">Refresh</a>
+                <a href="https://sendgrid.com/marketing_campaigns/ui/contacts">Go to Segments</a>
+              </div>
+              <div class="segment-form-field-name">
+                <%= f.label :segments, 'Segments' %>
+              </div>
+            </div>
+            <div class="segment-form-field-content">
+              <%= f.select :segments,
+                           @segments,
+                           {},
+                           { multiple: true, class: 'chosen-select', :'data-placeholder' => 'Select segments' } %>
+            </div>
+          </div>
+
+          <div class="segment-form-info">
+            <div class="segment-form-info-item">
+              <div class="segment-form-info-item-wrap">
+                <div class="segment-form-info-item-content">
+                  <div class="segment-form-info-total-recipients">
+                    <div id="segment-form-info-total-recipients-count">
+                      25,000
+                    </div>
+                    <a id="segment-form-info-total-recipients-refresh" href="#">&#8635;</a>
+                    <div id="segment-form-info-total-recipients-spinner" class="spinner"></div>
+                  </div>
+                  <div class="segment-form-info-content-subtitle">
+                    recipients
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="segment-form-info-item">
+              <div class="segment-form-info-item-wrap">
+                <div class="segment-form-info-item-content">
+                  <div class="segment-form-info-sample">
+                    <%= f.text_field :sample, placeholder: 'all' %>
+                  </div>
+                  <div class="segment-form-info-content-subtitle">
+                    random sample
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="segment-form-info-item">
+              <div class="segment-form-info-item-wrap">
+                <div class="segment-form-info-item-content segment-form-info-item-content-centered">
+                  <div class="segment-form-info-submit">
+                    <%= f.submit value: 'Assemble' %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

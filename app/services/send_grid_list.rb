@@ -9,6 +9,21 @@ class SendGridList
     @sg = nil
   end
 
+  # Sync a local User object with the SendGrid contacts DB.
+  # 
+  # Called after a User is created or updated, or an Attendance record for that
+  # user is created or updated.
+  # 
+  # If the user email changed, then the old SendGrid contact record will be
+  # deleted, since SendGrid uses emails as the unique identifier and cannot
+  # detect a user email change.
+  # 
+  # If the user exists already on SendGrid, their details will be updated.
+  # If the user does not already exist on SendGrid, a record will be created.
+  # 
+  # @param <User> user The User object to sync.
+  # @param <Boolean> new_record Whether or not this callback is from creating a
+  # new user.
   def self.sync_user(user, new_record = false)
     # Ensure the user is not deleted
     if @sg and !user.deleted_at
@@ -38,11 +53,18 @@ class SendGridList
     end
   end
 
+  # Delete a user from the SendGrid contacts DB.
+  # 
+  # Called after a User is destroyed.
+  # 
+  # @param <User> user The user to delete.
   def self.delete_user(user)
     # When a user deletes their account, remove them from the mailing list.
     self.delete_user_by_email(user.email)
   end
 
+  # Deletes a user by email from the SendGrid contacts DB.
+  # @param <String> email The email for the contact record to delete.
   def self.delete_user_by_email(email)
     if @sg
       user_response = @sg.client.contactdb.recipients.search.get(query_params: {email: email})
@@ -53,6 +75,149 @@ class SendGridList
           @sg.client.contactdb.recipients._(id).delete
         end
       end
+    end
+  end
+
+  # Gets all segments in the database, returning the name and ID.
+  #
+  # @return [Array<Array<String, Integer>>] An array of arrays, the inner
+  # array containing [segment_name, segment_id].
+  def self.get_segments
+    if @sg
+      segments_response = @sg.client.contactdb.segments.get
+      if segments_response.status_code != '200'
+        raise('Error fetching segments')
+      else
+        resp = JSON.parse(segments_response.body)
+        segments = resp['segments'].map do |segment|
+          segment_name = '%s (%d)' % [segment['name'], segment['recipient_count']]
+          [segment_name, segment['id']]
+        end
+        return segments.to_a
+      end
+    else
+      []
+    end
+  end
+
+  # Create a SendGrid list with the union of the specified segments.
+  #
+  # A set is generated which is the union of all of the recipients in
+  # all of the specified segments.
+  #
+  # If `sample` is nil, all recipients are retained. If `sample` is an
+  # integer, then a random sample of size `sample` is taken from the
+  # recipients set.
+  #
+  # A list is created with the resulting recipients with name `name`.
+  #
+  # @param [String] name Name of the list to create.
+  # @param [Array<Integer>] segments List of segments to combine.
+  # @param [Integer] sample Size of the random sample to take, or nil to retain all recipients.
+  #
+  # @return [Union<Integer, Boolean>] Integer list_id if successful, false if error.
+  def self.create_list_from_segments(name, segments, sample)
+    # Creates a SendGrid List corresponding to the union of the segments in
+    # `segments` and with a random sample of `sample` (which can be blank).
+    if @sg
+      all_recipients = get_recipients(segments).to_a
+
+      # If a sample is requested, take a sample
+      unless sample.blank?
+        sample = sample.delete(',').to_i
+        all_recipients = all_recipients.sample(sample)
+      end
+
+      # Create list
+      create_list_response = @sg.client.contactdb.lists.post(request_body: {name: name})
+      if create_list_response.status_code == '201'
+        # Get list ID
+        create_list_body = JSON.parse(create_list_response.body)
+        list_id = create_list_body['id']
+
+        # Batch recipients
+        batches = all_recipients.each_slice(1000).to_a
+
+        # Loop through each batch
+        batches.each_with_index do |batch, index|
+          puts 'Running batch %d of %d.' % [index + 1, batches.count]
+          post_recipients_response = @sg.client.contactdb.lists._(list_id).recipients.post(request_body: batch)
+
+          # Catch error
+          if post_recipients_response.status_code != '201'
+            return false
+          end
+
+          # Rate limit
+          sleep 1.5
+        end
+
+        return list_id
+      else
+        return false
+      end
+    else
+      return false
+    end
+  end
+
+  # Get a list of all recipients for an array of segments.
+  # 
+  # Takes the union of all of the recipients from each segment, i.e. no
+  # recipient is duplicated in the list.
+  # 
+  # Returns a set of recipient_ids, the identifier for recipients in SendGrid.
+  # 
+  # @param [Array<Integer>] Array of segment IDs to get recipients for.
+  # @return [Set<String>] Set of recipient_ids for these segments.
+  def self.get_recipients(segments)
+    if @sg
+      all_recipients = Set[]
+      segments.each do |segment|
+        if segment != ""
+          all_recipients.merge(get_segment_recipients(segment))
+        end
+      end
+
+      return all_recipients
+    end
+  end
+
+  # Get a list of all recipients for a given segment.
+  # 
+  # Fetches recipients 1000 records at a time from the segment until 404 is
+  # reached (denoting end of list).
+  # 
+  # @param [Integer] segment_id Segment ID to fetch recipients for.
+  # @return [Set<Integer>] Set of recipient_ids for this segment.
+  def self.get_segment_recipients(segment_id)
+    if @sg
+      puts 'Fetching segment %s' % [segment_id]
+      query_params = {page: 1, page_size: 1000}
+
+      recipients = Set[]
+
+      while true do
+        puts 'Fetching page %d' % [query_params[:page]]
+        segment_response = @sg.client.contactdb.segments._(segment_id).recipients.get(query_params: query_params)
+
+        if segment_response.status_code == '404'
+          # End of results
+          sleep 1
+          break
+        elsif segment_response.status_code != '200'
+          raise('Error fetching segment')
+        end
+
+        segment_body = JSON.parse(segment_response.body)
+        recipients.merge(segment_body['recipients'].collect {|recipient| recipient['id']})
+
+        # Next page
+        query_params[:page] += 1
+        sleep 1
+      end
+
+      return recipients
     end
   end
 end

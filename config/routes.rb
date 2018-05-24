@@ -64,6 +64,9 @@ Rails.application.routes.draw do
     get '/host'               => 'hosts#new',                 as: :new_host
     post '/host'              => 'hosts#create',              as: :create_host
     get "/jobs"               => DelayedJobWeb, :anchor => false, via: [:get, :post]
+    get '/segment'            => 'admin#segment'
+    post '/segment_create'    => 'admin#segment_create'
+    post '/segment_count'     => 'admin#segment_count'
   end
 
   scope :profile do

@@ -1,0 +1,22 @@
+<%= render partial: 'shared/admin_header' %>
+<div class="container dashboard">
+  <div class="row">
+    <div class="wide">
+      <h1>Segment Assembler</h1>
+
+      <p>
+        <%= link_to segment_path do %>
+          <button>&larr; Back to Segment Assembler</button>
+        <% end %>
+      </p>
+
+      <p>
+        <%= link_to @list_url do %>
+          <button>&rarr; View list on SendGrid</button>
+        <% end %>
+      </p>
+
+    </div>
+  </div>
+</div>
+</div>
