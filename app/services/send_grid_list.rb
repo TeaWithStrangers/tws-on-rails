@@ -9,9 +9,18 @@ class SendGridList
     @sg = nil
   end
 
-  def self.sync_user(user)
+  def self.sync_user(user, new_record = false)
     # Ensure the user is not deleted
     if @sg and !user.deleted_at
+      # When a user email changes, we delete the old recipient record
+      # Then we can insert the new one with the updated email
+      if !new_record and user.changes[:email]
+        # User email changed
+        # Remove the recipient with the previous email
+        previous_email = user.changes[:email][0]
+        self.delete_user_by_email(previous_email)
+      end
+
       user_hash = {
         user_id: user.id,
         name: user.name,
@@ -31,8 +40,12 @@ class SendGridList
 
   def self.delete_user(user)
     # When a user deletes their account, remove them from the mailing list.
+    self.delete_user_by_email(user.email)
+  end
+
+  def self.delete_user_by_email(email)
     if @sg
-      user_response = @sg.client.contactdb.recipients.search.get(query_params: {email: user.email})
+      user_response = @sg.client.contactdb.recipients.search.get(query_params: {email: email})
       if user_response.status_code == "200"
         resp = JSON.parse(user_response.body)
         if resp['recipient_count'] > 0

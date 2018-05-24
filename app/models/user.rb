@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
   delegate :commitment, to: :host_detail
 
   before_destroy :flake_future
-  after_create { SendGridList.sync_user(self) }
+  after_create { SendGridList.sync_user(self, true) }
   after_update { SendGridList.sync_user(self) }
   after_destroy { SendGridList.delete_user(self) }
 
