@@ -1,59 +1,83 @@
 <%= content_for :title do %>Tea Times | Tea With Strangers<% end %>
 
+<% month_name = Date.today.strftime("%B") %>
 <% next_month_name = Date.today.next_month.strftime("%B") %>
 
-<div class="cover-photo" style="background-image: linear-gradient(to bottom, rgba(247, 191, 77, 0.87), rgba(247, 191, 77, 0.87)), url('<%= image_path("missing-city-image.jpg") %>'); margin-bottom: 50px;">
+<div class="city-banner cover-photo" style="background-image: linear-gradient(to bottom, rgba(247, 191, 77, 0.8), rgba(247, 191, 77, 0.7)), url('<%= image_path("landing/tea-time-banner.jpg") %>'); background-position: 50% 45%;">
   <%= render partial: 'shared/header' %>
-  <div class="content">
+  <div class="tt-index content">
     <div class="content-box">
-      <h1 class="cover-photo-lede">Tea times this month</h1>
-      <span class='cover-photo-subtext'>
-        We announce tea times at the beginning of each month.
-        If nothing this month fits you,
-        <% if !user_signed_in? %>sign up and <% end %>
-        we'll email you in <%= next_month_name %> about tea
-        times then.
-      </span>
+      <h1 class="cover-photo-lede city-title">Good conversations</h1>
+      <span class='cover-photo-subtext city-subtext'>
+          They're hard to find.
+        </span>
     </div>
   </div>
 </div>
 
-<div class="container">
+
+<div class="container tt-page">
   <div class="light-background">
-    <div>
+    <div class="city-intro tt-intro">
+      
+      <!--Revisit copy later -->
       <% if @tea_times_by_city.empty? %>
         <p>
           No tea times scheduled for this month! Check back later.
         </p>
+      <!-- /revisit -->
+
       <% else %>
-        <p>
-          This month, there are tea times happening in <%= @cities.to_sentence %>.
-        </p>
-        <p>
-          If you don't live in any of these places or the tea times below don't
-          work for your schedule, we can try to make something work for you in
-          <%= next_month_name %>.
-        </p>
-      <% end %>
-    </div>
-    <div>
-      <% if user_signed_in? %>
-        TODOCOPY None of these times work for you? We'll send out a newsletter in <%= next_month_name %> with the next month's tea times.</div>
-      <% else %>
-        <%= link_to sign_up_path(remind_next_month: 'yes') do %>
-          <button>Email me in <%= next_month_name %></button>
-        <% end %>
-      <% end %>
-    </div>
-    <% @tea_times_by_city.each do |city, tts| %>
-      <div class="tt-set-container">
-        <div class="tt-container tt-city-name" style="border: 5px solid #EF6236; color: #EF6236; font-weight: bold; height: 200px; padding: 20px; font-size: 30px; text-transform: uppercase; text-align: center;">
-          <%= city %>
+        <h2>
+          Tea With Strangers is tea, with strangers.
+        </h2>
+        <p class="city-anchor-list">
+          For two hours, five-ish strangers sit at a cafe (or some other public place) with a host to talk. Not about anything in particular. The circumstances are unusual, but that's the point. 
+        </p> 
+        <div class="city-jump notification alert">
+          <h5 class="strong">
+            Jump to See Tea Times in Your City This Month
+          </h5>
+          <%= @cities.to_sentence %>
+          <!--TODO FIX TO_SENTENCE FORMATTING TO WRAP EACH CITY IN A SPAN WITHOUT ANY COMMAS OR 'ANDS' -->
         </div>
-        <% tts.each do |tt| %>
-          <%= render partial: 'shared/tea_time_row', locals: {tea_time: tt, no_signin_button: true} %>
+        <!--TODO add toggle to see next month's tea times after 15th of month. Click and refresh page to show current and next month tea times. Toggle should show how many tea times are set up for next month maybe-->
+        <% if !user_signed_in? %>
+          <p> 
+            If none of these work for you, you can <%= link_to "sign up", sign_up_path %> and we'll email you when next month's tea times are all up. You can also <%= link_to "apply to be a Host", hosting_path %> and your Tea Time can be here then.
+          </p>
+        <% else %>
+          <p> 
+            If none of these work for you, come back <%= next_month_name %> 1, or you can <%= link_to "apply to be a Host", hosting_path %> and your Tea Time can be here then.
+          </p>
         <% end %>
+      <% end %>
+    </div>
+    <div class="tt-all">
+      <% @tea_times_by_city.each do |city, tts| %>
+        <div class="tt-set-container">
+          <div class="city-title-holder notification alert">
+            <h3>
+              <%= city %>
+              <br>
+              👉
+            </h3>
+          </div>
+          <% tts.each do |tt| %>
+            <%= render partial: 'shared/tea_time_row', locals: {tea_time: tt, no_signin_button: true} %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <!--div class="tt-all the-rest">
+      <div class="city-title-holder notification alert">
+        <h3>
+          Everywhere Else
+          <br>
+          👉
+        </h3>
       </div>
-    <% end %>
+    </div-->
   </div>
 </div>
+<%= render partial: 'shared/new_footer' %>

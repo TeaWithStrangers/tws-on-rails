@@ -53,13 +53,8 @@ tea times across the website.
 	margin-top: 1em;
 	margin-bottom: 2em;
 
-	@include media($tablet-only) {
+	@include media($tablet) {
 
-		@include span-columns(4 of 12);
-		@include omega(3n);
-	}
-
-	@include media($desktop) {
 		@include span-columns(3 of 12);
 		@include omega(4n);
 	}
@@ -181,4 +176,43 @@ tea times across the website.
 			@include inverted-button($tws-yellow);
 		}
 	}
+}
+
+.tt-context {
+	@include media($tablet) {
+
+		@include span-columns(3 of 12);
+	}
+
+	background: white;
+	padding: 1.5em 1em; 
+	border: 1px solid $tws-medium-gray;
+}
+
+.tt-all {
+
+	.city-title-holder {
+		@extend %vertical-center-flex-container;
+	    @include padding(90px 0);
+		@include span-columns(3 of 12);
+		margin-top: 1em;
+		border: 1px solid $tws-yellow;
+	}
+	h3 {
+		font-size: 1.25em;
+		text-align: center;
+	}
+
+}
+
+.tt-intro {
+	margin-bottom: 2em;
+
+}
+
+.city-jump {
+	padding: 2em !important;
+	margin: 1em 0;
+	text-align: center;
+
 }

@@ -5,3 +5,9 @@
 .wrapper-content {
 	height: 100vh;
 }
+
+.container {
+	&.tt-page {
+		margin-bottom: 4em;
+	}
+}
