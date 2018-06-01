@@ -14,6 +14,17 @@ class TeaTimesController < ApplicationController
     # Extract all names of cities from tea times and deduplicate
     @cities = @tea_times.map { |tt| tt.city.name }.uniq
 
+    # Extract a mapping from city name to city code
+    # Fall back on the full city name if there's no city code
+    @city_to_city_code = Hash.new
+    @tea_times.each do |tt|
+      if tt.city.city_code.blank?
+        @city_to_city_code[tt.city.name] = tt.city.name
+      else
+        @city_to_city_code[tt.city.name] = tt.city.city_code
+      end
+    end
+
     # For each available city, create a hash entry and an empty list
     # of tea times
     @tea_times_by_city = Hash.new
