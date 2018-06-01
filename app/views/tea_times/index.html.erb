@@ -1,5 +1,4 @@
-<%= content_for :title do %>Tea Times | Tea With Strangers<% end %>
-
+<%= content_for :title do %>Tea Times this month | Tea With Strangers<% end %>
 <% month_name = Date.today.strftime("%B") %>
 <% next_month_name = Date.today.next_month.strftime("%B") %>
 
@@ -56,7 +55,7 @@
     <div class="tt-all">
       <% @tea_times_by_city.each do |city, tts| %>
         <div class="tt-set-container">
-          <div class="city-title-holder notification alert">
+          <div class="city-title-holder notification alert tt-grid-unit">
             <h3>
               <%= city %>
               <br>
@@ -64,7 +63,9 @@
             </h3>
           </div>
           <% tts.each do |tt| %>
-            <%= render partial: 'shared/tea_time_row', locals: {tea_time: tt, no_signin_button: true} %>
+            <div class="tt-grid-unit">
+              <%= render partial: 'shared/tea_time_row', locals: {tea_time: tt, no_signin_button: true} %>
+            </div>
           <% end %>
         </div>
       <% end %>

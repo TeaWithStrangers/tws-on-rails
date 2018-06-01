@@ -5,6 +5,9 @@ tea times across the website.
 
 */
 
+.tt-page-only {
+	display: none;
+}
 
 .tt-set-container {
 	overflow: auto;
@@ -23,21 +26,8 @@ tea times across the website.
 		overflow: auto;
 	}
 
-	.tt-container {
-
-		@include media($tablet) {
-
-			@include span-columns(4 of 12);
-		}
-	}
-
 	form.schedule-tea {
 		margin-top: 1em;
-
-		@include media($tablet) {
-
-			@include span-columns(8 of 12);
-		}
 
 		.button-container {
 			text-align: center;
@@ -49,15 +39,17 @@ tea times across the website.
 	}
 }
 
-.tt-container {
-	margin-top: 1em;
-	margin-bottom: 2em;
-
+.tt-grid-unit {
 	@include media($tablet) {
 
 		@include span-columns(3 of 12);
 		@include omega(4n);
 	}
+}
+
+.tt-container {
+	margin-top: 1em;
+	margin-bottom: 2em;
 
 	.tt-box {
 		background: $tws-white;
@@ -116,7 +108,7 @@ tea times across the website.
 		float: left;
 		width: 48%;
 		position: absolute;
-		top: 35%;
+		top: 25%;
 
 	}
 
@@ -181,12 +173,9 @@ tea times across the website.
 .tt-context {
 	@include media($tablet) {
 
-		@include span-columns(3 of 12);
+		@include span-columns(8 of 12);
 	}
 
-	background: white;
-	padding: 1.5em 1em; 
-	border: 1px solid $tws-medium-gray;
 }
 
 .tt-all {
@@ -215,4 +204,92 @@ tea times across the website.
 	margin: 1em 0;
 	text-align: center;
 
+}
+
+.tt-event-page {
+	margin-top: 2em;
+
+	.tt-form {
+
+		@include media($tablet) {
+
+			@include span-columns(4 of 12);
+		}
+
+		button {
+			width: 100%;
+		}
+
+		h2.modified-caps {
+			text-transform: uppercase;
+			font-size: 1em;
+			text-align: center;
+			margin: .5em 0;
+
+		}
+	}
+
+	.tt-container {
+		margin-bottom: 1em;
+
+		.tt-page-only {
+			display: block;
+			text-align: left;
+			.info-sec {
+				clear: both;
+				overflow: auto;
+				min-height: 0;
+			}
+			.emoji {
+				float: left;
+				width: 10%;
+				display: block;
+			}
+			h4, h5 {
+				font-size: 1em;
+				float: left;
+				width: 90%;
+				margin-top: .25em;
+				&.bold {
+					font-weight: 600;
+				}
+				&.caps {
+					text-transform: uppercase;
+				}
+				&.light {
+					color: $tws-medium-gray;
+				}
+			}
+			h5 {
+				font-size: 0.8em;
+				margin-top: 0.4em;
+			}
+		}
+
+		.tt-card-top {
+			margin: 0;
+			display: none;
+			.place {
+				text-align: center;
+				min-height: 0;
+			}
+		}
+
+		.host-container {
+			display: none;
+		}
+
+		.date-time {
+			display: none;
+			float: none;
+			width: 100%;
+			position: relative;
+			top: 0;
+
+			.day, .date, .time {
+				margin-bottom: .15em;
+			}
+		}
+
+	}
 }

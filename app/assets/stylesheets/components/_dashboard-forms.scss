@@ -39,10 +39,18 @@ These are styles related to forms within the user or host dashboards
 
 			margin: 0;
 
-			@include media($tablet) {
-				padding: 0 1em;
-			}
 		}
+
+    input:read-only {
+      background-color: lighten($tws-yellow, 25);
+      border: 1px solid $tws-yellow;
+    }
+
+    input:-moz-read-only {
+      background-color: lighten($tws-yellow, 25);
+      border: 1px solid $tws-yellow;
+    }
+
   }
 
   .field {

@@ -1,6 +1,48 @@
 <div class="tt-container">
   <div class="tt-box">
+    
+    <div class="tt-page-only">
+      <h2 class="section-header modified-caps">
+        <%= @tea_time.spots_remaining? ? "Join #{@tea_time.host.name} for tea time" : 'Get on wait list for this tea time' %>
+      </h2>
+      <hr>
+      <div class="full-date info-sec">
+        <div class="emoji">
+          📅 
+        </div>
+        <h4 class="bold">
+          <%= "#{tea_time.day}" %>, <%= "#{tea_time.date_sans_year}" %>
+        </h4>
+      </div>
+      <div class="time info-sec">
+        <div class="emoji">
+          ⏰ 
+        </div>
+        <h4 class="caps bold">
+          <%= "#{tea_time.start_end_hour}" %>
+        </h4>
+      </div>
+      <div class="place info-sec">
+        <div class="emoji">
+          📍
+        </div>
+        <h5 class="light bold">
+          <%= "#{tea_time.location}" %>
+        </h5>
+      </div>
+      <div class="city info-sec">
+        <div class="emoji">
+          🗺 
+        </div>
+        <h5 class="light">
+          <%= "#{tea_time.city.name}" %>
+        </h5>
+      </div>
+
+    </div>
+
     <div class="tt-card-top">
+     
       <%= link_to host_city_path(tea_time.city, tea_time.host) do %>
         <div class="host-container">
           <div class="host-avatar">
@@ -11,6 +53,7 @@
           </h6>
         </div>
       <% end %>
+
       <div class="date-time">
         <div class="day">
           <h6 class="light boldweight capitalize">
@@ -28,11 +71,11 @@
           </h5>
         </div>
       </div>
-    </div>
-    <div class="place">
-      <h5 class="light lightweight">
-        <%= "#{tea_time.location}" %>
-      </h5>
+      <div class="place">
+        <h5 class="light lightweight">
+          <%= "#{tea_time.location}" %>
+        </h5>
+      </div>
     </div>
     <hr>
     <div class="availability">
