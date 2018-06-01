@@ -6,6 +6,8 @@ class CitiesController < ApplicationController
 
   # GET /cities
   def index
+    redirect_to :tea_times, status: :moved_permanently
+
     @active_cities = City.fully_brewed.order(users_count: :desc)
 
     @upcoming_cities = City.where(
@@ -14,12 +16,15 @@ class CitiesController < ApplicationController
   end
 
   def set_home_city
+    redirect_to :tea_times, status: :moved_permanently
+
     current_user.update_attributes(home_city: @city)
     redirect_to city_path(@city)
   end
 
   # GET /:id (city code)
   def show
+    redirect_to :tea_times, status: :moved_permanently
   end
 
   # GET /cities/new
