@@ -221,6 +221,25 @@ tea times across the website.
 		border: $base-border;
 		border-color: lighten($tws-yellow,15);
 		color: darken($tws-yellow,15);
+
+        a {
+            border: 2px solid $tws-yellow;
+            color: darken($tws-yellow,15);
+            padding: .5em 1.5em;
+            display: inline-block;
+            margin: 10px 15px 0 15px;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background-color: transparent;
+
+            &:hover {
+                border: 2px solid darken($tws-yellow, 15);
+                color: darken($tws-yellow,20);
+            }
+        }
 	}
 }
 

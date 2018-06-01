@@ -50,12 +50,15 @@
         <h5 class="strong">
           Jump to Your City's Tea Times
         </h5>
-        <%= @cities.to_sentence %>
+        <% @cities.each do |city| %>
+          <a href="#<%= city.parameterize %>"><%= city %></a>
+        <% end %>
         <!--TODO FIX TO_SENTENCE FORMATTING TO WRAP EACH CITY IN A SPAN WITHOUT ANY COMMAS OR 'ANDS' -->
       </div>
     </div>
     <div class="tt-all">
       <% @tea_times_by_city.each do |city, tts| %>
+        <a name="<%= city.parameterize %>"></a>
         <div class="tt-set-container">
           <div class="city-title-holder notification alert tt-grid-unit">
             <h3>
