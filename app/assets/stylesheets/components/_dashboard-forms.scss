@@ -181,7 +181,7 @@ These are styles related to forms within the user or host dashboards
     margin: 0 auto;
     margin-bottom: -1em;
     font-size: 0.8em;
-    font-weight: bold;
+    font-weight: 600;
     padding: .2em 0;
     text-align: center;
     position: relative;
@@ -335,5 +335,21 @@ These are styles related to forms within the user or host dashboards
 
       @include span-columns(3 of 9);
     }
+  }
+}
+
+.hosting-commitment {
+  display: none;
+}
+
+h3.form-subheader.no-margin {
+  margin: 0;
+}
+
+.edit-profile-link {
+  padding: 20px;
+
+  p {
+    margin: 0 !important;
   }
 }
