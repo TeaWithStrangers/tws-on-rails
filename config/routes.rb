@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   get '/about'          => 'static#about',              as: :about
   get '/hosting'        => redirect(HOSTING_TYPEFORM),  as: :hosting
   get '/signup'         => 'static#jfdi_signup',        as: :sign_up
+  get '/terms'          => 'static#terms',              as: :terms
+  get '/privacy'        => 'static#privacy',            as: :privacy
 
   # Devise and Registration Routes
   devise_for :users, :controllers => {:registrations => "registrations"}, :skip => [:sessions]

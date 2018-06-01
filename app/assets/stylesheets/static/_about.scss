@@ -47,6 +47,10 @@
   h3.static-subheader {
     margin-bottom: $base-font-size;
   }
+
+  &.top-margin {
+    margin-top: $base-font-size*3;
+  }
 }
 
 .interested-in-hosting {
