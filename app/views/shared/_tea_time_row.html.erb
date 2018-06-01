@@ -3,7 +3,7 @@
     
     <div class="tt-page-only">
       <h2 class="section-header modified-caps">
-        <%= @tea_time.spots_remaining? ? "Join #{@tea_time.host.name} for tea time" : 'Get on wait list for this tea time' %>
+        <%= tea_time.spots_remaining? ? "Join #{tea_time.host.name} for tea time" : 'Get on wait list for this tea time' %>
       </h2>
       <hr>
       <div class="full-date info-sec">
