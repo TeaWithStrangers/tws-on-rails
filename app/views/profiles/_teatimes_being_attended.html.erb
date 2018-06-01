@@ -42,12 +42,12 @@
       </li>
     <% end %>
   </ul>
-<% elsif !current_user.home_city.nil? && attendances.count.zero? %>
+<% else %>
   <h2>
     You have no tea times coming up! Let's change that.
   </h2>
   <div class="dash-create-new-tea">
-    <%= link_to city_path(current_user.home_city) do %>
+    <%= link_to tea_times_path do %>
       <div class="new-tea-box">
         <div class="plus-sign-container">
           <h1>
@@ -58,23 +58,6 @@
           <div class="schedule-text">
             <h3 class="capitalize">
               Join a tea time
-            </h3>
-          </div>
-        </div>
-      </div>
-    <% end %>
-  </div>
-<% else %>
-  <h2>
-    Set your home city and get over to a tea time!
-  </h2>
-  <div class="dash-create-new-tea">
-    <%= link_to cities_path do %>
-      <div class="new-tea-box">
-        <div class="homecity-text-container">
-          <div class="schedule-text">
-            <h3 class="capitalize">
-              Set your home city
             </h3>
           </div>
         </div>

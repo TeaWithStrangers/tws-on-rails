@@ -19,70 +19,29 @@
       </div>
     <% else %>
       <% if !@attending.count.zero? %>
-        <% if !current_user.home_city.nil? %>
-          <div class="hello sidebar-section">
-            <h2>
-              Welcome home, <%= "#{current_user.nickname}!" %>
-            </h2>
-            <h3 class="gray">
-              What are you grateful for today?
-            </h3>
-          </div>
-          <div class="join-tea sidebar-section">
-            <%= link_to "Find Another Tea Time!", city_path(current_user.home_city), class: "button signup-tt"  %>
-          </div>
-        <% else %>
-          <div class="hello sidebar-section">
-            <h2>
-              Welcome home, <%= "#{current_user.nickname}!" %>
-            </h2>
-            <div class="notification slim alert">
-              <h3 class="gray">
-                Set your home city!
-              </h3>
-              <p>
-                Don't miss anything good happening around you.
-              </p>
-              <div class="join-tea sidebar-section">
-                <%= link_to 'Find Your City', cities_path, class: "button find-city" %>
-              </div>
-            </div>
-          </div>
-          <div class="join-tea sidebar-section">
-            <%= link_to 'Find Your City', cities_path, class: "button find-city" %>
-          </div>
-        <% end %>
+        <div class="hello sidebar-section">
+          <h2>
+            Welcome home, <%= "#{current_user.nickname}!" %>
+          </h2>
+          <h3 class="gray">
+            What are you grateful for today?
+          </h3>
+        </div>
+        <div class="join-tea sidebar-section">
+          <%= link_to "Find Another Tea Time!", tea_times_path, class: "button signup-tt"  %>
+        </div>
       <% else %>
-        <% if !current_user.home_city.nil? %>
-          <div class="hello sidebar-section">
-            <h2>
-              Welcome home, <%= "#{current_user.nickname}!" %>
-            </h2>
-            <h3 class="gray">
-              What are you grateful for today?
-            </h3>
-          </div>
-          <div class="join-tea sidebar-section">
-            <%= link_to "Sign Up For a Tea Time!", city_path(current_user.home_city), class: "button signup-tt" %>
-          </div>
-        <% else %>
-          <div class="hello sidebar-section">
-            <h2>
-              Welcome home, <%= "#{current_user.nickname}!" %>
-            </h2>
-            <div class="notification slim alert">
-              <h3 class="gray">
-                Set your home city!
-              </h3>
-              <p>
-                Don't miss anything good happening around you.
-              </p>
-              <div class="join-tea sidebar-section">
-                <%= link_to 'Find Your City', cities_path, class: "button find-city" %>
-              </div>
-            </div>
-          </div>
-        <% end %>
+        <div class="hello sidebar-section">
+          <h2>
+            Welcome home, <%= "#{current_user.nickname}!" %>
+          </h2>
+          <h3 class="gray">
+            What are you grateful for today?
+          </h3>
+        </div>
+        <div class="join-tea sidebar-section">
+          <%= link_to "Sign Up For a Tea Time!", tea_times_path, class: "button signup-tt" %>
+        </div>
       <% end %>
     <% end %>
   </div>
