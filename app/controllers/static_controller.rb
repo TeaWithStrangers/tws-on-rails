@@ -26,6 +26,9 @@ class StaticController < ApplicationController
   def about
   end
 
+  def tos
+  end
+
   def jfdi_signup
     # Querystring params (all optional):
     # - redirect_to_tt: integer - Set the tea time to redirect to after signup
