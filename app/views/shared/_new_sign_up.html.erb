@@ -2,6 +2,8 @@
   <%= f.text_field :nickname, placeholder: 'First name (or nickname)', id: 'user_name', class: 'name', autofocus: true %>
   <%= f.email_field :email, placeholder: 'Email address', id: 'user_email', class: 'email' %>
   <%= f.password_field :password, placeholder: 'Password (at least 8 characters you won\'t forget!)', id: 'user_password', class: 'password' %>
-  <%= f.select :home_city_id, @cities_set_with_blank, {disabled: '', selected: @selected_city}, id: 'user_home_city', class: 'home_city' %>
+  <div class="dropdown">
+	  <%= f.select :home_city_id, @cities_set_with_blank, {disabled: '', selected: @selected_city}, id: 'user_home_city', class: 'home_city' %>
+  </div>
   <%= f.submit "Let's Get Tea", id: 'user_signup_submit', class: 'orange' %>
 <% end %>
