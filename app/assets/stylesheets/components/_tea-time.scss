@@ -206,8 +206,11 @@ tea times across the website.
 
 }
 
+// Below styles are for /tea_times/123 pages
+
 .tt-event-page {
 	margin-top: 2em;
+	overflow: auto;
 
 	.tt-form {
 
@@ -291,5 +294,122 @@ tea times across the website.
 			}
 		}
 
+	}
+
+	.tt-context {
+		margin: 1em 0;
+
+		@include media($tablet) {
+
+			@include span-columns(8 of 12);
+			padding-left: 2em;
+		}
+
+		.host-introduction {
+			@include media($tablet) {
+    			@include span-columns(6 of 8);
+    			@include shift(1 of 8)
+    		}
+    		overflow: auto;
+    		margin-bottom: 1em;
+
+    		h5 {
+				margin-top: .5em;
+				color: $tws-medium-gray;
+				line-height: 1.5em;
+			}
+		}
+
+		
+
+		.photo-plus {
+			margin: 1em 0 2em;
+			overflow: auto;
+			clear: both;
+		}
+
+		.photo-container {
+
+    		@include media($tablet) {
+    			@include span-columns(4 of 8);
+    			@include shift(2 of 8)
+    		}
+		}
+
+		.host-photo {
+			background: $tws-white;
+		    border: $base-border;
+		    border-width: 2px;
+		    padding: 0.75em 0.75em 3em;
+		    line-height: 0;
+		    margin-bottom: 0.5em;
+
+		    .host-img {
+		      width: 100%;
+		      height: auto;
+		    }
+		}
+
+		.intro-summary {
+
+		}
+
+		.bio-section {
+			clear: both;
+		}
+
+		.rest-of-profile {
+			padding: 2em;
+			background: $tws-white;;
+			border: $base-border;
+			margin-bottom: 2em;
+
+			@include media($tablet) {
+    			@include span-columns(6 of 8);
+    			@include shift(1 of 8);
+    		}
+
+    		p {
+    			font-size: 0.9em;
+    		}
+
+		}
+	}
+}
+
+.tt-refresh {
+	margin-top: 2em;
+
+	h5 {
+		text-transform: uppercase;
+		font-weight: 600;
+		text-align: center;
+
+		#large {
+			font-size: 2em;
+		}
+	}
+
+	hr {
+		border-color: darken($tws-yellow,15); 
+		width: 30%;
+		margin: 1em auto;
+	}
+
+	p {
+		font-size: 0.8em;
+		position: relative;
+	}
+
+	#emoji-shift:after {
+		
+		content: '👇👇👇';
+		font-size: 2em;
+		text-align: center;
+		display: block; 
+
+		@include media($tablet) {
+			content: '👉';
+		}
 	}
 }

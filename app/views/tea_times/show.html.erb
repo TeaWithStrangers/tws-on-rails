@@ -24,8 +24,9 @@
 
 <% end %>
 
-<div class="light-background">
-  <div class="container tt-event-page">
+
+<div class="container tt-event-page">
+  <div class="light-background">
     <div class="section tt-solo">
       <div class="tt-form boxless form">
         <%= render partial: 'shared/tea_time_row', locals: {tea_time: @tea_time, without_button: display_button?(local_assigns)} %>
@@ -87,7 +88,7 @@
               <% end %>
               <div class="button-container">
                 <%= f.submit @tea_time.spots_remaining? ? 'Confirm' : 'Join Waitlist', class: 'confirm' %>
-                <%= link_to "Nevermind", :back, class: 'cancel' %>
+                <%= link_to "See Other Tea Times", :back, class: 'cancel' %>
               </div>
             </div>
           <% end %>
@@ -104,10 +105,33 @@
             <% end %>
           <% end %>
         <% end %>
+        <div class="tt-refresh notification alert">
+          <h5>
+            What is Tea Time, exactly?
+            <br><br>
+            <span id="large">🍵</span>
+          </h5>
+          <hr> 
+          <p>
+            Tea Time is where five-ish strangers sit at a cafe with a Host to have a two hour conversation. It's not about anything in particular. 
+          </p>
+          <p>
+            You're meant to know pretty much nothing about the people that come, aside from the fact that they all signed up for this — just like you. It's self-selecting in that sense.
+          </p>
+          <p>
+            However, it may bring you comfort to know a little something about your Host. If so, just keep reading 
+          </p>
+          <p id="emoji-shift">
+          </p>
+        </div>
       </div>
-    </div>
-    <div class="tt-context">
+      </div>
 
+    <div class="tt-context">
+      <%= render partial: 'shared/host_profile', locals: {host: @tea_time.host, city: @tea_time.city} %>
     </div>
   </div>
 </div>
+
+<%= render partial: 'shared/new_footer' %>
+
