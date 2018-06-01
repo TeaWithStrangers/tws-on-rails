@@ -17,7 +17,7 @@
 
 <div class="container tt-page">
   <div class="light-background">
-    <div class="city-intro tt-intro">
+    <div class="tt-intro">
       
       <!--Revisit copy later -->
       <% if @tea_times_by_city.empty? %>
@@ -33,13 +33,6 @@
         <p class="city-anchor-list">
           For two hours, five-ish strangers sit at a cafe (or some other public place) with a host to talk. Not about anything in particular. The circumstances are unusual, but that's the point. 
         </p> 
-        <div class="city-jump notification alert">
-          <h5 class="strong">
-            Jump to See Tea Times in Your City This Month
-          </h5>
-          <%= @cities.to_sentence %>
-          <!--TODO FIX TO_SENTENCE FORMATTING TO WRAP EACH CITY IN A SPAN WITHOUT ANY COMMAS OR 'ANDS' -->
-        </div>
         <!--TODO add toggle to see next month's tea times after 15th of month. Click and refresh page to show current and next month tea times. Toggle should show how many tea times are set up for next month maybe-->
         <% if !user_signed_in? %>
           <p> 
@@ -51,6 +44,15 @@
           </p>
         <% end %>
       <% end %>
+    </div>
+    <div class="city-jump">
+      <div class="jump-box">
+        <h5 class="strong">
+          Click to Jump to Your City's Tea Times
+        </h5>
+        <%= @cities.to_sentence %>
+        <!--TODO FIX TO_SENTENCE FORMATTING TO WRAP EACH CITY IN A SPAN WITHOUT ANY COMMAS OR 'ANDS' -->
+      </div>
     </div>
     <div class="tt-all">
       <% @tea_times_by_city.each do |city, tts| %>

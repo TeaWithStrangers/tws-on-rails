@@ -180,6 +180,8 @@ tea times across the website.
 
 .tt-all {
 
+	clear: both;
+
 	.city-title-holder {
 		@extend %vertical-center-flex-container;
 	    @include padding(90px 0);
@@ -195,15 +197,31 @@ tea times across the website.
 }
 
 .tt-intro {
-	margin-bottom: 2em;
 
+	@include media($tablet) {
+
+		@include span-columns(8 of 12);
+		@include shift(2 of 12);
+	}
 }
 
 .city-jump {
-	padding: 2em !important;
 	margin: 1em 0;
 	text-align: center;
+	overflow: auto;
 
+	@include media($tablet) {
+
+		@include span-columns(12 of 12);
+		margin-right: 0;
+	}
+
+	.jump-box {
+		padding: 1em;
+		border: $base-border;
+		border-color: lighten($tws-yellow,15);
+		color: darken($tws-yellow,15);
+	}
 }
 
 // Below styles are for /tea_times/123 pages
