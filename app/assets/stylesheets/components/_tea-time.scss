@@ -211,19 +211,23 @@ tea times across the website.
 		width: 100%;
 
 		&:disabled {
-			@include inverted-button($base-button-color);
+			opacity: 1;
 		}
 		
 		&.green:disabled {
-			@include inverted-button($tws-green);
+			border-color: $tws-green;
+			color: $tws-green;
+			background: lighten($tws-green,25);
 		}
 		
 		&.gray:disabled {
-			@include inverted-button($tws-medium-gray);
+			border-color: $tws-medium-gray;
+			color: $tws-medium-gray;
+			background: lighten($tws-medium-gray,25);
 		}
 
 		&.yellow:disabled {
-			@include inverted-button($tws-yellow);
+			
 		}
 	}
 }
