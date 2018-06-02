@@ -400,8 +400,6 @@ tea times across the website.
 		}
 
 		.rest-of-profile {
-			padding: 2em;
-			background: $tws-white;;
 			border: $base-border;
 			margin-bottom: 2em;
 
@@ -412,6 +410,19 @@ tea times across the website.
 
     		p {
     			font-size: 0.9em;
+    		}
+
+    		.sans-tagline {
+    			padding: 2em;
+				background: $tws-white;
+    		}
+
+    		.tagline {
+    			text-align: center;
+    			padding: 1em;
+    			p {
+    				margin: 0;
+    			}
     		}
 
 		}

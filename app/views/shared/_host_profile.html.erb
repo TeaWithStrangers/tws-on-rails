@@ -1,40 +1,40 @@
-  <div class="host-introduction">
-    
-    <h2> 
-      Meet your Host, <%= host.name %>. 
-    </h2>
-    <h5>
-      (It'll be helpful to know what they look like when you're looking for a group of confused strangers at the cafe.)
-    </h5>
-  </div>
+<div class="host-introduction">
+  
+  <h2> 
+    Meet your Host, <%= host.name %>. 
+  </h2>
+  <h5>
+    (It'll be helpful to know what they look like when you're looking for a group of confused strangers at the cafe.)
+  </h5>
+</div>
 
-  <div class="photo-plus">
-    <div class="photo-container">
-      <div class="host-photo">
-        <img class="host-img" src="<%= host.avatar.url(:landscape) %>"/>
-      </div>
-
-      <% if host.facebook? || host.twitter? %>
-        <div class="social-container">
-          <% if host.facebook? %>
-            <div class="social facebook">
-              <%= link_to "Facebook", host.facebook_url %>
-            </div>
-          <% end %>
-          <% if host.twitter? %>
-            <div class="social twitter">
-              <%= link_to "Twitter", host.twitter_url %>
-            </div>
-          <% end %>
-        </div>
-      <% end %> 
+<div class="photo-plus">
+  <div class="photo-container">
+    <div class="host-photo">
+      <img class="host-img" src="<%= host.avatar.url(:landscape) %>"/>
     </div>
 
+    <% if host.facebook? || host.twitter? %>
+      <div class="social-container">
+        <% if host.facebook? %>
+          <div class="social facebook">
+            <%= link_to "Facebook", host.facebook_url %>
+          </div>
+        <% end %>
+        <% if host.twitter? %>
+          <div class="social twitter">
+            <%= link_to "Twitter", host.twitter_url %>
+          </div>
+        <% end %>
+      </div>
+    <% end %> 
   </div>
 
+</div>
 
-  <div class="rest-of-profile">
 
+<div class="rest-of-profile">
+  <div class="sans-tagline">
     <div class="bio-section">
       <div class="intro-summary">
         <% if host.summary? %>
@@ -78,3 +78,11 @@
       <% end %>
     </div>
   </div>
+  <div class="bio-section tagline notification alert">
+      <% if host.tagline? %>
+          <%= simple_format host.tagline %>
+      <% else %>
+          New friends are just old strangers.
+      <% end %>
+  </div>
+</div>
