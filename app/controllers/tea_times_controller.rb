@@ -10,29 +10,37 @@ class TeaTimesController < ApplicationController
   def index
     @tea_times = TeaTime.this_month.order(start_time: :asc).includes(:city).all
 
+    # For each available city, create a hash entry and an empty list
+    # of tea times
+    @tea_times_by_city = Hash.new
+
+    # Iterate through tea times and segment into cities
+    @tea_times.each do |tt|
+      if @tea_times_by_city[tt.city.name] == nil
+        @tea_times_by_city[tt.city.name] = []
+      end
+      @tea_times_by_city[tt.city.name].push(tt)
+    end
+
+    # Sort by the number of tea times in each city, most to least
+    @tea_times_by_city = Hash[@tea_times_by_city.sort_by {|tt| tt.length}.reverse]
+
     # Array of cities holding tea times this month
     # Extract all names of cities from tea times and deduplicate
-    @cities = @tea_times.map { |tt| tt.city.name }.uniq
+    @cities = @tea_times_by_city.keys.uniq
 
     # Extract a mapping from city name to city code
     # Fall back on the full city name if there's no city code
     @city_to_city_code = Hash.new
-    @tea_times.each do |tt|
-      if tt.city.city_code.blank?
-        @city_to_city_code[tt.city.name] = tt.city.name
-      else
-        @city_to_city_code[tt.city.name] = tt.city.city_code
+    @tea_times_by_city.each do |city_name, tt_list|
+      tt_list.each do |tt|
+        p tt.city
+        if tt.city.city_code.blank?
+          @city_to_city_code[tt.city.name] = tt.city.name
+        else
+          @city_to_city_code[tt.city.name] = tt.city.city_code
+        end
       end
-    end
-
-    # For each available city, create a hash entry and an empty list
-    # of tea times
-    @tea_times_by_city = Hash.new
-    @cities.each { |city| @tea_times_by_city[city] = [] }
-
-    # Iterate through tea times and segment into cities
-    @tea_times.each do |tt|
-      @tea_times_by_city[tt.city.name].push(tt)
     end
 
     respond_to do |format|
