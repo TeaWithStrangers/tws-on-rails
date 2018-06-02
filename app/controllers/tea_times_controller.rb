@@ -23,7 +23,7 @@ class TeaTimesController < ApplicationController
     end
 
     # Sort by the number of tea times in each city, most to least
-    @tea_times_by_city = Hash[@tea_times_by_city.sort_by {|tt| tt.length}.reverse]
+    @tea_times_by_city = Hash[@tea_times_by_city.sort_by {|city, tt_array| tt_array.length}.reverse]
 
     # Array of cities holding tea times this month
     # Extract all names of cities from tea times and deduplicate
@@ -34,7 +34,6 @@ class TeaTimesController < ApplicationController
     @city_to_city_code = Hash.new
     @tea_times_by_city.each do |city_name, tt_list|
       tt_list.each do |tt|
-        p tt.city
         if tt.city.city_code.blank?
           @city_to_city_code[tt.city.name] = tt.city.name
         else
