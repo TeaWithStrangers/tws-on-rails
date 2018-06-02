@@ -60,16 +60,14 @@
 
     <div class="tt-card-top">
      
-      <%= link_to host_city_path(tea_time.city, tea_time.host) do %>
-        <div class="host-container">
-          <div class="host-avatar">
-            <div class="avatar" style="background-image: url('<%= tea_time.host.avatar.url(:medium) %>');"></div>
-          </div>
-          <h6 class="light boldweight capitalize">
-            <%= "#{tea_time.host.name}" %>
-          </h6>
+      <div class="host-container">
+        <div class="host-avatar">
+          <div class="avatar" style="background-image: url('<%= tea_time.host.avatar.url(:medium) %>');"></div>
         </div>
-      <% end %>
+        <h6 class="light boldweight capitalize">
+          <%= "#{tea_time.host.name}" %>
+        </h6>
+      </div>
 
       <div class="date-time">
         <div class="day">

@@ -51,6 +51,29 @@ tea times across the website.
 		margin-bottom: 2.5em;
 	}
 
+	a {
+		.host-container h6 {
+			color: $tws-orange!important;
+		}
+
+		color: $base-font-color;
+
+		&:hover {
+			button:after {
+				content: 'Check it out →';
+				position: absolute; 
+				width: 100%;
+				height: 100%;
+				top: 0;
+				left: 0;
+				background: $tws-yellow;
+				color: $tws-offwhite;
+				padding: 1em 1.5em;
+			}
+		}
+
+	}
+
 	.tt-container {
 		.tt-cta {
 			padding: 0;
@@ -70,15 +93,7 @@ tea times across the website.
 				position: relative;
 				&:hover {
 					&:after {
-						content: 'Check it out →';
-						position: absolute; 
-						width: 100%;
-						height: 100%;
-						top: 0;
-						left: 0;
-						background: $tws-yellow;
-						color: $tws-offwhite;
-						padding: 1em 1.5em;
+
 					}
 				}
 			}

@@ -80,21 +80,14 @@
           </div>
           <% tts.each do |tt| %>
             <div class="tt-grid-unit">
-              <%= render partial: 'shared/tea_time_row', locals: {tea_time: tt, no_signin_button: true} %>
+              <%= link_to tea_time_path(tt) do %>
+                <%= render partial: 'shared/tea_time_row', locals: {tea_time: tt, no_signin_button: true} %>
+              <% end %>
             </div>
           <% end %>
         </div>
       <% end %>
     </div>
-    <!--div class="tt-all the-rest">
-      <div class="city-title-holder notification alert">
-        <h3>
-          Everywhere Else
-          <br>
-          👉
-        </h3>
-      </div>
-    </div-->
   </div>
 </div>
 <%= render partial: 'shared/new_footer' %>
