@@ -87,7 +87,7 @@
                 <p class="disclaimer">You'll get an email the moment someone cancels their seat.</p>
               <% end %>
               <div class="button-container">
-                <%= f.submit @tea_time.spots_remaining? ? 'Confirm' : 'Join Waitlist', class: 'confirm' %>
+                <%= f.submit @tea_time.spots_remaining? ? 'Sign me up' : 'Join Waitlist', class: 'confirm' %>
                 <%= link_to "See Other Tea Times", :back, class: 'cancel' %>
               </div>
             </div>
@@ -96,7 +96,7 @@
           <%= link_to sign_up_path(redirect_to_tt: @tea_time.id, city_id: @tea_time.city.id) do %>
             <% if @tea_time.spots_remaining? %>
               <button class="spots<%= @tea_time.spots_remaining %>">
-                Count Me In
+                Sign me up
               </button>
             <% else %>
               <button class="yellow button">

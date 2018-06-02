@@ -26,7 +26,7 @@
         <div class="emoji">
           📍
         </div>
-        <h5 class="light bold">
+        <h5 class="light ">
           <%= "#{tea_time.location}" %>
         </h5>
       </div>
@@ -34,8 +34,25 @@
         <div class="emoji">
           🗺 
         </div>
-        <h5 class="light">
+        <h5 class="light ">
           <%= "#{tea_time.city.name}" %>
+        </h5>
+      </div>
+      <div class="link info-sec">
+        <div class="emoji">
+          🗣 
+        </div>
+        <h5 class="light">
+          <%= tea_time_url(tea_time).gsub("http://","") %>
+        </h5>
+      </div>
+
+      <div class="link info-sec">
+        <div class="emoji">
+          ☝🏽
+        </div>
+        <h5 class="light">
+          Send to a friend that should be here (especially if you can't come yourself!)
         </h5>
       </div>
 
@@ -101,7 +118,7 @@
             </button>
           <% elsif tea_time.spots_remaining? %>
             <button class="spots<%= tea_time.spots_remaining %>">
-              Count Me In
+              This one →
             </button>
           <% elsif tea_time.waitlisted?(current_user) %>
             <button class="gray button" disabled="<%= true %>">

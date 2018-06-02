@@ -36,11 +36,11 @@
         <!--TODO add toggle to see next month's tea times after 15th of month. Click and refresh page to show current and next month tea times. Toggle should show how many tea times are set up for next month maybe-->
         <% if !user_signed_in? %>
           <p> 
-            If none of these work for you, you can <%= link_to "sign up", sign_up_path %> and we'll email you when next month's tea times are all up. You can also <%= link_to "apply to be a Host", hosting_path %> and your Tea Time can be here then.
+            If none of these work for you, you can <%= link_to "sign up", sign_up_path %> and we'll email you when next month's tea times are all up. You can also <%= link_to "apply to be a Host", hosting_path %>!
           </p>
         <% else %>
           <p> 
-            If none of these work for you, come back <%= next_month_name %> 1, or you can <%= link_to "apply to be a Host", hosting_path %> and your Tea Time can be here then.
+            If none of these work for you, come back <%= next_month_name %> 1, or you can <%= link_to "apply to be a Host", hosting_path %>!
           </p>
         <% end %>
       <% end %>
@@ -61,7 +61,7 @@
       <% @tea_times_by_city.each do |city, tts| %>
         <a name="<%= @city_to_city_code[city].parameterize %>"></a>
         <div class="tt-set-container">
-          <div class="city-title-holder notification alert tt-grid-unit">
+          <div class="city-title-holder tt-grid-unit">
             <h3>
               <%= city %>
               <br>
