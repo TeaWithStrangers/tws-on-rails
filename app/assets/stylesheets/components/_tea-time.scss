@@ -217,27 +217,30 @@ tea times across the website.
 	}
 
 	.jump-box {
-		padding: 1em;
+		padding: 1em 1em 0 1em ;
 		border: $base-border;
 		border-color: lighten($tws-yellow,15);
 		color: darken($tws-yellow,15);
 
+		.jump-city-list {
+			overflow: auto;
+			margin: 1em 0 0;
+		}
+
         a {
-            border: 2px solid $tws-yellow;
+            border: 1px solid darken($tws-yellow,15);
             color: darken($tws-yellow,15);
-            padding: .5em 1.5em;
+            padding: .25em 1em;
             display: inline-block;
-            margin: 10px 15px 0 15px;
+            margin: 0 0.5em 1em;
             border-radius: 10px;
-            font-size: 18px;
+            font-size: 0.8em;
             font-weight: 600;
-            letter-spacing: 2px;
             text-transform: uppercase;
             background-color: transparent;
 
             &:hover {
-                border: 2px solid darken($tws-yellow, 15);
-                color: darken($tws-yellow,20);
+                background-color: lighten($tws-yellow,20);
             }
         }
 	}

@@ -50,10 +50,11 @@
         <h5 class="strong">
           Jump to Your City's Tea Times
         </h5>
-        <% @cities.each do |city| %>
-          <a href="#<%= @city_to_city_code[city].parameterize %>"><%= city %></a>
-        <% end %>
-        <!--TODO FIX TO_SENTENCE FORMATTING TO WRAP EACH CITY IN A SPAN WITHOUT ANY COMMAS OR 'ANDS' -->
+        <div class="jump-city-list">
+          <% @cities.each do |city| %>
+            <a href="#<%= @city_to_city_code[city].parameterize %>"><%= city %></a>
+          <% end %>
+        </div>
       </div>
     </div>
     <div class="tt-all">
