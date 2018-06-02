@@ -39,9 +39,9 @@ class HostsController < ApplicationController
     end
 
     if @host.save
-      UserMailer.delay.host_registration(@host, user_exists ? nil : generated_password)
+#      UserMailer.delay.host_registration(@host, user_exists ? nil : generated_password)
       @host.generate_host_detail
-      redirect_to profile_path, notice: 'New host successfully created and emailed!'
+      redirect_to profile_path, notice: 'New host successfully created!'
     else
       redirect_to new_host_path, alert: 'New host not created :/'
     end
@@ -60,7 +60,7 @@ class HostsController < ApplicationController
 
 private
   def update_params
-    params.require(:user).permit(:summary, :story, :tagline, :twitter, :topics, :avatar)
+    params.require(:user).permit(:summary, :story, :tagline, :twitter, :facebook, :topics, :avatar)
   end
 
   def authorised?

@@ -1,73 +1,128 @@
-<div class="light-background">
-  <div class="container">
+<% if full_form %>
+  <%= content_for :title do %>Join <%= @tea_time.host.name %> for Tea Time | Tea With Strangers<% end %>
+  <%= content_for :description do %>
+    Tea Time is where five-ish strangers sit at a cafe with a Host (in this case, <%= @tea_time.host.name %>) to have a two hour conversation. It's not about anything in particular. The circumstances are unusual, but that's the point.
+  <% end %>
+
+  <%= content_for :head do %>
+    <meta property ="og:type" content="website"/>
+    <meta property ="og:title" content="Join <%= @tea_time.host.name %> for Tea Time | Tea With Strangers"/>
+    <meta property ="og:image" content="<%= @tea_time.host.avatar.url(:medium) %>" />
+    <meta property ="og:description" content ="Tea Time is where five-ish strangers sit at a cafe with a Host (in this case, <%= @tea_time.host.name %>) to have a two hour conversation. It's not about anything in particular. The circumstances are unusual, but that's the point."/>
+  <% end %>
+
+  <%= render partial: 'shared/header' %>
+
+<% end %>
+
+
+<div class="container tt-event-page">
+  <div class="light-background">
     <div class="section tt-solo">
-      <h2 class="section-header">
-        <%= @tea_time.spots_remaining? ? 'Sign up for this tea time' : 'Join the wait list for this tea time' %>
-      </h2>
       <div class="tt-form boxless form">
         <%= render partial: 'shared/tea_time_row', locals: {tea_time: @tea_time, without_button: display_button?(local_assigns)} %>
 
-        <%= form_for @new_attendance, url: attendance_tea_time_path(@tea_time), html: {class: 'schedule-tea new_user'} do |f| %>
-          <div class="form-body">
+        <% if user_signed_in? %>
+          <%= form_for @new_attendance, url: attendance_tea_time_path(@tea_time), html: {class: 'schedule-tea new_user'} do |f| %>
+            <div class="form-body">
 
-            <div class="name-email-container split-container">
-              <div class="field name split2">
-                <div class="form-label">
-                  <%= f.label :nickname, "Name", class: 'capitalize boldweight' %>
+              <div class="name-email-container">
+                <div class="field name">
+                  <div class="form-label">
+                    <%= f.label :nickname, "Name", class: 'capitalize boldweight' %>
+                  </div>
+                  <%= f.text_field :nickname,
+                                   value:        @new_attendance.user.name,
+                                   readonly:     true,
+                                   placeholder: 'First name (or nickname)'
+                  %>
                 </div>
-                <%= f.text_field :nickname,
-                    value:        @new_attendance.user.name,
-                    readonly:     true,
-                    placeholder: 'First name (or nickname)'
-                %>
+
+                <div class="field email">
+                  <div class="form-label">
+                    <%= f.label :email, "Email", class: 'capitalize boldweight' %>
+                  </div>
+                  <%= f.email_field :email,
+                                    value:        @new_attendance.user.email,
+                                    readonly:     true,
+                                    placeholder: 'Email Address'
+                  %>
+                </div>
               </div>
 
-              <div class="field email split2">
-                <div class="form-label">
-                  <%= f.label :email, "Email", class: 'capitalize boldweight' %>
-                </div>
-                <%= f.email_field :email,
-                    value:        @new_attendance.user.email,
-                    readonly:     true,
-                    placeholder: 'Email Address'
-                %>
+              <div class="field phone split1 last">
+                <% if !current_user.phone_number.blank? %>
+                  <div class="form-label">
+                    <%= f.label :phone_number, "Phone number", class: 'capitalize boldweight inline' %>
+                    <span class="sub-label light">
+                      We have your number down as <%= current_user.phone_number %>
+                    </span>
+                  </div>
+                  <%= f.check_box :provide_phone_number %>
+                  <%= f.label :provide_phone_number, "It's cool to share my number with #{@tea_time.host.nickname} before the tea time, as long as I'm attending" %>
+                <% else %>
+                  <div class="form-label">
+                    <%= f.label :phone_number, "Mobile number", class: 'capitalize boldweight inline' %>
+                    <span class="sub-label light">
+                      Optional, but helps <%= @tea_time.host.nickname %> get in touch the day of your tea time
+                    </span>
+                  </div>
+                  <%= f.text_field :phone_number,
+                                   value:        '',
+                                   placeholder:  '(555) 345-6789'
+                  %>
+                <% end %>
               </div>
-            </div>
 
-            <div class="field phone split1 last">
-              <% if !current_user.phone_number.blank? %>
-                <div class="form-label">
-                  <%= f.label :phone_number, "Phone number", class: 'capitalize boldweight inline' %>
-                  <span class="sub-label light">
-                    We have your number down as <%= current_user.phone_number %>
-                  </span>
-                </div>
-                <%= f.check_box :provide_phone_number %>
-                <%= f.label :provide_phone_number, "It's cool to share my number with #{@tea_time.host.nickname} before the tea time, as long as I'm attending" %>
-              <% else %>
-                <div class="form-label">
-                  <%= f.label :phone_number, "Phone number", class: 'capitalize boldweight inline' %>
-                  <span class="sub-label light">
-                    Optional, but helps <%= @tea_time.host.nickname %> get in touch the day of your tea time
-                  </span>
-                </div>
-                <%= f.text_field :phone_number,
-                    value:        '',
-                    placeholder:  '(555) 345-6789'
-                %>
+              <% if !@tea_time.spots_remaining? %>
+                <p class="disclaimer">You'll get an email the moment someone cancels their seat.</p>
               <% end %>
+              <div class="button-container">
+                <%= f.submit @tea_time.spots_remaining? ? 'Sign me up' : 'Join Waitlist', class: 'confirm' %>
+                <%= link_to "See Other Tea Times", :back, class: 'cancel' %>
+              </div>
             </div>
-
-            <% if !@tea_time.spots_remaining? %>
-              <p class="disclaimer">You'll get an email the moment someone cancels their seat.</p>
+          <% end %>
+        <% else %>
+          <%= link_to sign_up_path(redirect_to_tt: @tea_time.id, city_id: @tea_time.city.id) do %>
+            <% if @tea_time.spots_remaining? %>
+              <button class="spots<%= @tea_time.spots_remaining %>">
+                Sign me up
+              </button>
+            <% else %>
+              <button class="yellow button">
+                Join Waitlist
+              </button>
             <% end %>
-            <div class="button-container">
-              <%= f.submit @tea_time.spots_remaining? ? 'Confirm' : 'Join Waitlist', class: 'confirm' %>
-              <%= link_to "Nevermind", :back, class: 'cancel' %>
-            </div>
-          </div>
+          <% end %>
         <% end %>
+        <div class="tt-refresh notification alert">
+          <h5>
+            What is Tea Time, exactly?
+            <br><br>
+            <span id="large">🍵</span>
+          </h5>
+          <hr> 
+          <p>
+            Tea Time is where five-ish strangers sit at a cafe with a Host to have a two hour conversation. It's not about anything in particular. 
+          </p>
+          <p>
+            You're meant to know pretty much nothing about the people that come, aside from the fact that they all signed up for this — just like you. It's self-selecting in that sense.
+          </p>
+          <p>
+            However, it may bring you comfort to know a little something about your Host. If so, just keep reading 
+          </p>
+          <p id="emoji-shift">
+          </p>
+        </div>
       </div>
+      </div>
+
+    <div class="tt-context">
+      <%= render partial: 'shared/host_profile', locals: {host: @tea_time.host, city: @tea_time.city} %>
     </div>
   </div>
 </div>
+
+<%= render partial: 'shared/new_footer' %>
+

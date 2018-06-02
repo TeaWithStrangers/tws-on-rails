@@ -51,6 +51,11 @@ h4 {
 
 h5 {
   font-size: $h5-font-size;
+
+  &.strong {
+    font-weight: 600;
+    text-transform: uppercase;
+  }
 }
 
 h6 {

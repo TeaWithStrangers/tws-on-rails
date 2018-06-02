@@ -7,7 +7,21 @@ class RegistrationsController < Devise::RegistrationsController
       user_info = GetOrCreateNonWaitlistedUser.call(user_params)
       if user_info[:new_user?] && user_info[:user].valid?
         sign_in user_info[:user]
-        redirect_to cities_path
+
+        # Retrieve redirect location from Devise if exists
+        redirect_url = stored_location_for(User)
+
+        # Fall back to tea times path if no redirect location exists
+        unless redirect_url
+          redirect_url = tea_times_path
+        end
+
+        # If the ?remind_next_month GET param exists, show banner
+        if params.has_key?(:remind_next_month)
+          flash[:success] = "We'll let you know about tea times next month!"
+        end
+
+        redirect_to redirect_url
       elsif !user_info[:new_user?] && user_info[:user].valid?
         redirect_to new_user_session_path, alert: 'You\'ve made an account already. Log in using the same email. Click \'Forgot Password\' if you\'re confused.'
       else
@@ -52,7 +66,7 @@ class RegistrationsController < Devise::RegistrationsController
     end
 
     def user_params
-      a = params.require(:user).permit(:nickname, :email, :password, :phone_number)
+      a = params.require(:user).permit(:nickname, :email, :password, :phone_number, :home_city_id)
       a[:given_name] = a[:nickname] if !a[:given_name]
       a
     end

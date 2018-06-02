@@ -29,9 +29,9 @@ function modalActivation() {
     }
   });
 
-  $('.tea-time-scheduling').on('click', function(evt) {
-    modal = loadModal(evt.currentTarget.href)(evt)
-  });
+  // $('.tea-time-scheduling').on('click', function(evt) {
+  //   modal = loadModal(evt.currentTarget.href)(evt)
+  // });
 
   $('.cities.show a.cancel').on('click', function(evt) {
     console.log(evt)
@@ -42,3 +42,4 @@ function modalActivation() {
 
 $(document).ready(modalActivation)
 $(document).on('page:load', modalActivation)
+$(document).on('turbolinks:load', modalActivation)

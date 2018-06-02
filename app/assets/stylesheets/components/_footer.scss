@@ -19,6 +19,10 @@ footer {
   @include shift(1);
 }
 
+.footer-link-top-margin {
+  margin-top: 20px;
+}
+
 .ethos-rant {
   color: $tws-white;
 
