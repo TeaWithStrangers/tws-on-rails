@@ -107,7 +107,7 @@ feature 'Registered User' do
     scenario 'allows a user to sign up' do
       visit city_path(@user.home_city)
       expect(page.status_code).to eq(200)
-      click_link('Count Me In')
+      click_link('Sign me up')
       expect(current_path).to eq tea_time_path(@tt)
 
       find('input.confirm').click
@@ -178,7 +178,7 @@ feature 'Registered User without home city' do
     scenario 'signing up to a tea time sets user home city to tea time city' do
       visit city_path(@host.home_city)
       expect(page.status_code).to eq(200)
-      click_link('Count Me In')
+      click_link('Sign me up')
       expect(current_path).to eq tea_time_path(@tt)
 
       find('input.confirm').click
