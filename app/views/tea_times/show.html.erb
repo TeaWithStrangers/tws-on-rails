@@ -1,24 +1,15 @@
 <% if full_form %>
-  <%= content_for :title do %>Tea Time | Tea With Strangers<% end %>
-  
-  <!-- 
-
-  TODO: 
-    • Site description
-    • FB OG metadata
-
+  <%= content_for :title do %>Join <%= @tea_time.host.name %> for Tea Time | Tea With Strangers<% end %>
   <%= content_for :description do %>
-    <%= "Tea With Strangers is a community of people that bring strangers together for great conversations. We're all about making cities feel more like neighborhoods. Come join in!"%>
+    Tea Time is where five-ish strangers sit at a cafe with a Host (in this case, <%= @tea_time.host.name %>) to have a two hour conversation. It's not about anything in particular. The circumstances are unusual, but that's the point.
   <% end %>
 
   <%= content_for :head do %>
     <meta property ="og:type" content="website"/>
-    <meta property ="og:title" content='<%= "Tea With Strangers"%>'/>
-    <meta property ="og:image" content='<%= ""%>'/>
-    <meta property ="og:description" content ="Tea With Strangers is a community of people that bring strangers together for great conversations. We're all about making cities feel more like neighborhoods."/>
+    <meta property ="og:title" content="Join <%= @tea_time.host.name %> for Tea Time | Tea With Strangers"/>
+    <meta property ="og:image" content="<%= @tea_time.host.avatar.url(:medium) %>" />
+    <meta property ="og:description" content ="Tea Time is where five-ish strangers sit at a cafe with a Host (in this case, <%= @tea_time.host.name %>) to have a two hour conversation. It's not about anything in particular. The circumstances are unusual, but that's the point."/>
   <% end %>
-
-  -->
 
   <%= render partial: 'shared/header' %>
 
