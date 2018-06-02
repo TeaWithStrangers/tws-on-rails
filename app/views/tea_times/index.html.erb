@@ -1,4 +1,14 @@
 <%= content_for :title do %>Tea Times this month | Tea With Strangers<% end %>
+<%= content_for :description do %>
+    Tea Time is where five-ish strangers sit at a cafe with a Host to have a two hour conversation. It's not about anything in particular. The circumstances are unusual, but that's the point.
+<% end %>
+
+<%= content_for :head do %>
+  <meta property ="og:type" content="website"/>
+  <meta property ="og:title" content="Tea With Strangers"/>
+  <meta property ="og:image" content="<%= image_path("landing/tea-time-banner.jpg") %>" />
+  <meta property ="og:description" content ="Good conversations are hard to find. That's where Tea Time come in. Five-ish strangers sit at a cafe with a Host to talk. Not about anything in particular. The circumstances are unusual, but that's the point."/>
+<% end %>
 <% month_name = Date.today.strftime("%B") %>
 <% next_month_name = Date.today.next_month.strftime("%B") %>
 
