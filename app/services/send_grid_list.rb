@@ -221,4 +221,71 @@ class SendGridList
       return recipients
     end
   end
+
+  # Unsubscribe the given email from the newsletter.
+  #
+  # Makes 3 attempts to unsubscribe. If all fail, then return false.
+  #
+  # The request happens in the add_to_unsubscribe_group() method.
+  #
+  # @param [String] email Email to unsubscribe
+  # @return [Boolean] true if successful, false if not successful.
+  def self.newsletter_unsubscribe(email)
+    if @sg
+      # Make 3 attempts to unsubscribe
+      for attempt in 1..3 do
+        if add_to_unsubscribe_group(email)
+          # Success, return early
+          return true
+        else
+          # Failed to unsubscribe, potentially because of API rate limit
+          sleep 1
+        end
+      end
+
+      # Three attempts made, failed
+      return false
+    else
+      # No SendGrid API credentials loaded
+      return false
+    end
+  end
+
+  # Make a call to SendGrid API to unsubscribe an email by adding it to the
+  # unsubscribe group with the ID set in env SENDGRID_NEWSLETTER_UNSUB_GROUP.
+  #
+  # This is not called directly by the controller. This method only handles the
+  # request logic to the SendGrid API.
+  #
+  # newsletter_unsubscribe is called by the controller.
+  # newsletter_unsubscribe may call this multiple times in case of failure.
+  #
+  # Note: if the SENDGRID_NEWSLETTER_UNSUB_GROUP variable is set to an invalid
+  # unsubscribe group, the email will be added to the global unsubscribe list.
+  #
+  # @param [String] email Email to unsubscribe
+  # @return [Boolean] true if successful, false if not successful.
+  def self.add_to_unsubscribe_group(email)
+    if @sg
+      data = {'recipient_emails': [email]}
+      response = @sg.client.asm.groups._(ENV['SENDGRID_NEWSLETTER_UNSUB_GROUP']).suppressions.post(request_body: data)
+      if response.status_code == '201'
+        # Ensure the body contains the exact email unsubscribed
+        resp = JSON.parse(response.body)
+        if !resp['recipient_emails'].nil? and !resp['recipient_emails'][0].nil? and resp['recipient_emails'][0] === email
+          # Successfully added
+          return true
+        end
+
+        # Failed to match returned email, fail
+        return false
+      else
+        # Response code not 201, fail
+        return false
+      end
+    else
+      # No SendGrid credentials, fail
+      return false
+    end
+  end
 end

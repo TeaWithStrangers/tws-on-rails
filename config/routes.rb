@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     post    'signin'   => 'sessions#create',          as: :user_session
     delete  'signout'  => 'sessions#destroy',         as: :destroy_user_session
     get     'logout'   => 'sessions#destroy'
+    post    'users/unsubscribe'   => 'registrations#unsubscribe',          as: :user_unsubscribe
   end
 
   namespace :api do
