@@ -15,7 +15,7 @@ describe RegistrationsController do
       u = User.find_by(email: 'foo@foobar.com')
       expect(u).not_to eq nil
       expect(u.waitlisted?).to eq false
-      expect(response).to redirect_to(cities_path)
+      expect(response).to redirect_to(tea_times_path)
     end
   end
 

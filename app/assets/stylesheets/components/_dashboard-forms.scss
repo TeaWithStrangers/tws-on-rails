@@ -36,13 +36,21 @@ These are styles related to forms within the user or host dashboards
   	.split-container, .name-email, .social, .new-password {
 			@include outer-container;
 			@include span-columns(12);
-
+      padding: 0 20px;
 			margin: 0;
 
-			@include media($tablet) {
-				padding: 0 1em;
-			}
 		}
+
+    input:read-only {
+      background-color: lighten($tws-yellow, 25);
+      border: 1px solid $tws-yellow;
+    }
+
+    input:-moz-read-only {
+      background-color: lighten($tws-yellow, 25);
+      border: 1px solid $tws-yellow;
+    }
+
   }
 
   .field {
@@ -173,7 +181,7 @@ These are styles related to forms within the user or host dashboards
     margin: 0 auto;
     margin-bottom: -1em;
     font-size: 0.8em;
-    font-weight: bold;
+    font-weight: 600;
     padding: .2em 0;
     text-align: center;
     position: relative;
@@ -332,5 +340,21 @@ These are styles related to forms within the user or host dashboards
 
       @include span-columns(3 of 9);
     }
+  }
+}
+
+.hosting-commitment {
+  display: none;
+}
+
+h3.form-subheader.no-margin {
+  margin: 0;
+}
+
+.edit-profile-link {
+  padding: 20px;
+
+  p {
+    margin: 0 !important;
   }
 }

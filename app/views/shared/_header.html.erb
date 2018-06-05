@@ -13,22 +13,9 @@
           </li>
         <% end %>
 
-        <% if !current_user %>
-          <li class="nav-link-item">
-            <%= link_to "Cities", cities_path %>
-          </li>
-        <% elsif current_user && current_user.home_city.nil? %>
-          <li class="nav-link-item">
-            <%= link_to "Set Home City", cities_path, class: 'nav-emphasis' %>
-          </li>
-        <% else %>
-          <li class="nav-link-item">
-            <%= link_to current_user.home_city.name, city_path(current_user.home_city) %>
-          </li>
-          <li class="nav-link-item">
-            <%= link_to "Cities", cities_path %>
-          </li>
-        <% end %>
+        <li class="nav-link-item">
+          <%= link_to "Tea Times", tea_times_path %>
+        </li>
 
         <% if !current_user || (current_user && !current_user.host?) %>
           <li class="nav-link-item">

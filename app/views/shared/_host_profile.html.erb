@@ -1,0 +1,88 @@
+<div class="host-introduction">
+  
+  <h2> 
+    Meet your Host, <%= host.name %>. 
+  </h2>
+  <h5>
+    (It'll be helpful to know what they look like when you're looking for a group of confused strangers at the cafe.)
+  </h5>
+</div>
+
+<div class="photo-plus">
+  <div class="photo-container">
+    <div class="host-photo">
+      <img class="host-img" src="<%= host.avatar.url(:landscape) %>"/>
+    </div>
+
+    <% if host.facebook? || host.twitter? %>
+      <div class="social-container">
+        <% if host.facebook? %>
+          <div class="social facebook">
+            <%= link_to "Facebook", host.facebook_url %>
+          </div>
+        <% end %>
+        <% if host.twitter? %>
+          <div class="social twitter">
+            <%= link_to "Twitter", host.twitter_url %>
+          </div>
+        <% end %>
+      </div>
+    <% end %> 
+  </div>
+
+</div>
+
+
+<div class="rest-of-profile">
+  <div class="sans-tagline">
+    <div class="bio-section">
+      <div class="intro-summary">
+        <% if host.summary? %>
+          <p>
+            <%= simple_format host.summary %>
+          </p>
+        <% else %>
+          <p class="placeholder">
+            I have a dream that one day <%= city.name %> will be filled with people that have sat together for tea time.
+          </p>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="bio-section story">
+      <h3>
+        What's your story?
+      </h3>
+      <% if host.story? %>
+        <p>
+          <%= simple_format host.story %>
+        </p>
+      <% else %>
+        <p class="placeholder">
+          I once had a really good story, and then I started writing about it. I'm still on that part. When I'm done, it'll be here.
+        </p>
+      <% end %>
+    </div>
+    <div class="bio-section topics">
+      <h3>
+        What might we talk about?
+      </h3>
+      <% if host.topics? %>
+        <p>
+          <%= simple_format host.topics %>
+        </p>
+      <% else %>
+        <p class="placeholder">
+          Lots of really interesting and relatable things that I just haven't specified yet.
+        </p>
+      <% end %>
+    </div>
+  </div>
+  <div class="bio-section tagline notification alert">
+      <% if host.tagline? %>
+          <%= simple_format host.tagline %>
+      <% else %>
+          New friends are just old strangers.
+      <% end %>
+  </div>
+</div>

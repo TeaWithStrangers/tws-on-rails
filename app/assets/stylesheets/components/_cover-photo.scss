@@ -45,8 +45,8 @@
 
   &.city-banner {
     margin-bottom: $base-font-size*3;
-
   }
+
   .content {
 
     @extend %vertical-center-flex-container;
@@ -55,6 +55,10 @@
 
     @include media($tablet) {
       @include padding(110px 0);
+    }
+
+    &.tt-index {
+      padding: 75px 0;
     }
   }
 

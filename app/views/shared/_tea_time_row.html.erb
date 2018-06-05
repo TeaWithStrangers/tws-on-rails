@@ -1,16 +1,74 @@
 <div class="tt-container">
   <div class="tt-box">
-    <div class="tt-card-top">
-      <%= link_to host_city_path(tea_time.city, tea_time.host) do %>
-        <div class="host-container">
-          <div class="host-avatar">
-            <div class="avatar" style="background-image: url('<%= tea_time.host.avatar.url(:medium) %>');"></div>
-          </div>
-          <h6 class="light boldweight capitalize">
-            <%= "#{tea_time.host.name}" %>
-          </h6>
+    
+    <div class="tt-page-only">
+      <h2 class="section-header modified-caps">
+        <%= tea_time.spots_remaining? ? "Join #{tea_time.host.name} for tea time" : 'Get on wait list for this tea time' %>
+      </h2>
+      <hr>
+      <div class="full-date info-sec">
+        <div class="emoji">
+          📅 
         </div>
-      <% end %>
+        <h4 class="bold">
+          <%= "#{tea_time.day}" %>, <%= "#{tea_time.date_sans_year}" %>
+        </h4>
+      </div>
+      <div class="time info-sec">
+        <div class="emoji">
+          ⏰ 
+        </div>
+        <h4 class="caps bold">
+          <%= "#{tea_time.start_end_hour}" %>
+        </h4>
+      </div>
+      <div class="place info-sec">
+        <div class="emoji">
+          📍
+        </div>
+        <h5 class="light ">
+          <%= "#{tea_time.location}" %>
+        </h5>
+      </div>
+      <div class="city info-sec">
+        <div class="emoji">
+          🗺 
+        </div>
+        <h5 class="light ">
+          <%= "#{tea_time.city.name}" %>
+        </h5>
+      </div>
+      <div class="link info-sec">
+        <div class="emoji">
+          🗣 
+        </div>
+        <h5 class="light">
+          <%= tea_time_url(tea_time).gsub("http://","") %>
+        </h5>
+      </div>
+
+      <div class="link info-sec">
+        <div class="emoji">
+          ☝🏽
+        </div>
+        <h5 class="light">
+          Send to a friend that should be here (especially if you can't come yourself!)
+        </h5>
+      </div>
+
+    </div>
+
+    <div class="tt-card-top">
+     
+      <div class="host-container">
+        <div class="host-avatar">
+          <div class="avatar" style="background-image: url('<%= tea_time.host.avatar.url(:medium) %>');"></div>
+        </div>
+        <h6 class="light boldweight capitalize">
+          <%= "#{tea_time.host.name}" %>
+        </h6>
+      </div>
+
       <div class="date-time">
         <div class="day">
           <h6 class="light boldweight capitalize">
@@ -28,11 +86,11 @@
           </h5>
         </div>
       </div>
-    </div>
-    <div class="place">
-      <h5 class="light lightweight">
-        <%= "#{tea_time.location}" %>
-      </h5>
+      <div class="place">
+        <h5 class="light lightweight">
+          <%= "#{tea_time.location}" %>
+        </h5>
+      </div>
     </div>
     <hr>
     <div class="availability">
@@ -58,7 +116,7 @@
             </button>
           <% elsif tea_time.spots_remaining? %>
             <button class="spots<%= tea_time.spots_remaining %>">
-              Count Me In
+              This one →
             </button>
           <% elsif tea_time.waitlisted?(current_user) %>
             <button class="gray button" disabled="<%= true %>">
@@ -70,8 +128,20 @@
             </button>
           <% end %>
         <% end %>
+      <% elsif (no_signin_button ||= false) # No signin button; don't show signin CTA text %>
+        <%= link_to sign_up_path(redirect_to_tt: tea_time.id, city_id: tea_time.city.id) do %>
+          <% if tea_time.spots_remaining? %>
+            <button class="spots<%= tea_time.spots_remaining %>">
+              Count Me In
+            </button>
+          <% else %>
+            <button class="yellow button">
+              Join Waitlist
+            </button>
+          <% end %>
+        <% end %>
       <% else %>
-        <%= link_to new_user_session_path do %>
+        <%= link_to new_user_session_path(redirect_to_tt: tea_time.id) do %>
           <button class="yellow button">
             Sign in to schedule
           </button>

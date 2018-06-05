@@ -39,6 +39,11 @@ class AttendanceController < ApplicationController
       current_user.update_attributes(phone_number: params[:attendance][:phone_number])
     end
 
+    # Save home city if they don't have one yet
+    if current_user.home_city.nil?
+      current_user.update_attributes(home_city: @tea_time.city)
+    end
+
     if @attendance.save
       # Send various emails (Should all be run async)
       @attendance.send_confirmation_mail  if @attendance.pending?
@@ -50,7 +55,7 @@ class AttendanceController < ApplicationController
         "You're set for tea time! Check your email and add it to your calendar :)"
       return redirect_to profile_path, notice: message
     else
-      return redirect_to city_path(@tea_time.city), alert: "Couldn't register for that, sorry :("
+      return redirect_to tea_times, alert: "Couldn't register for that, sorry :("
     end
   end
 

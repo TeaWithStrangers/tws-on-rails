@@ -1,0 +1,94 @@
+<% month_name = Date.today.strftime("%B") %>
+<% next_month_name = Date.today.next_month.strftime("%B") %>
+
+<%= content_for :title do %>Tea Times this month | Tea With Strangers<% end %>
+<%= content_for :description do %>
+    Tea Time is a thoughtful conversation between a small group of strangers and a Host. It's not about anything in particular, but there's never a shortage of questions and great stories. The circumstances are unusual, but that's the point.
+<% end %>
+
+<%= content_for :head do %>
+  <meta property ="og:type" content="website"/>
+  <meta property ="og:title" content="Join for a Tea Time this month | Tea With Strangers"/>
+  <meta property ="og:image" content="<%= image_path("landing/tea-time-og.png") %>" />
+  <meta property ="og:description" content ="Tea Time is a thoughtful conversation between a small group of strangers and a Host. It's not about anything in particular, but there's never a shortage of questions and great stories. The circumstances are unusual, but that's the point."/>
+<% end %>
+
+<div class="city-banner cover-photo" style="background-image: linear-gradient(to bottom, rgba(247, 191, 77, 0.8), rgba(247, 191, 77, 0.7)), url('<%= image_path("landing/tea-time-banner.jpg") %>'); background-position: 50% 45%;">
+  <%= render partial: 'shared/header' %>
+  <div class="tt-index content">
+    <div class="content-box">
+      <h1 class="cover-photo-lede city-title">Good conversations</h1>
+      <span class='cover-photo-subtext city-subtext'>
+          They're hard to find.
+        </span>
+    </div>
+  </div>
+</div>
+
+
+<div class="container tt-page">
+  <div class="light-background">
+    <div class="tt-intro">
+      
+      <!--Revisit copy later -->
+      <% if @tea_times_by_city.empty? %>
+        <p>
+          No tea times scheduled for this month! Check back later.
+        </p>
+      <!-- /revisit -->
+
+      <% else %>
+        <h2>
+          Tea With Strangers is tea, with strangers.
+        </h2>
+        <p class="city-anchor-list">
+          For two hours, five-ish strangers sit at a cafe (or some other public place) with a host to talk. Not about anything in particular. The circumstances are unusual, but that's the point. 
+        </p> 
+        <!--TODO add toggle to see next month's tea times after 15th of month. Click and refresh page to show current and next month tea times. Toggle should show how many tea times are set up for next month maybe-->
+        <% if !user_signed_in? %>
+          <p> 
+            If none of these work for you, you can <%= link_to "sign up", sign_up_path %> and we'll email you when next month's tea times are all up. You can also <%= link_to "apply to be a Host", hosting_path %>!
+          </p>
+        <% else %>
+          <p> 
+            If none of these work for you, come back <%= next_month_name %> 1, or you can <%= link_to "apply to be a Host", hosting_path %>!
+          </p>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="city-jump">
+      <div class="jump-box notification alert">
+        <h5 class="strong">
+          Jump to Your City's Tea Times
+        </h5>
+        <div class="jump-city-list">
+          <% @cities.each do |city| %>
+            <a href="#<%= @city_to_city_code[city].parameterize %>"><%= city %></a>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="tt-all">
+      <% @tea_times_by_city.each do |city, tts| %>
+        <a name="<%= @city_to_city_code[city].parameterize %>"></a>
+        <div class="tt-set-container">
+          <div class="city-title-holder tt-grid-unit">
+            <h3>
+              <%= city %>
+              <br>
+              👉
+            </h3>
+          </div>
+          <% tts.each do |tt| %>
+            <div class="tt-grid-unit">
+              <%= link_to tea_time_path(tt) do %>
+                <%= render partial: 'shared/tea_time_row', locals: {tea_time: tt, no_signin_button: true} %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<%= render partial: 'shared/new_footer' %>

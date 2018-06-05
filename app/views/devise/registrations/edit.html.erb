@@ -132,46 +132,57 @@
         <% end %>
 
         <% if resource.host? %>
-          <h3 class="form-subheader">
-            How often do you want to host tea time?
+          <h3 class="form-subheader no-margin">
+            Edit your profile
           </h3>
+          <div class="edit-profile-link">
+            <p>
+              You can do that <%= link_to "over here", host_profile_path %>.
+            </p>
+          </div>
 
-          <div class="field">
-            <div class="form-label">
-              <%= f.label :commitment, 'Committing makes TWS better.', class: 'capitalize boldweight' %>
-              <span class="sub-label light">
-                By telling us how regularly you want to host, we'll be better positioned to support your hosting goals by driving strangers to your tea times and sending you reminders to post a tea time when you need them.
-              </span>
-            </div>
-            <div id='commitment-form' class='radio-buttons'>
-              <% HostDetail::COMMITMENT_OVERVIEW.each do |overview| %>
-                <div>
-                  <label>
-                    <% params = {} %>
-                    <% params.merge!({ id: 'commitment-regular'}) if overview == HostDetail::REGULAR_COMMITMENT %>
-                    <%= f.radio_button :commitment_overview, overview, params %>
-                    <span><%= HostDetail::COMMITMENT_OVERVIEW_TEXT[overview] %></span>
-                    <% if overview == HostDetail::REGULAR_COMMITMENT %>
-                      <div id='nested-radio-buttons'>
-                        <% HostDetail::COMMITMENT_DETAILS.each do |detail| %>
-                          <label>
-                            <% if detail == HostDetail::CUSTOM_COMMITMENT %>
-                              <%= f.radio_button :commitment_detail, detail, { checked: !!resource.custom_commitment } %>
-                              <span>Every</span>
-                                <% params = { id: 'custom-commitment', value: resource.custom_commitment} %>
-                                <%= f.text_field :commitment_detail, params %>
-                              <span>weeks.</span>
-                            <% else %>
-                              <%= f.radio_button :commitment_detail, detail %>
-                              <span> <%= HostDetail::COMMITMENT_DETAILS_TEXT[detail] %> </span>
-                            <% end %>
-                          </label>
-                        <% end %>
-                      </div>
-                    <% end %>
-                  </label>
-                </div>
-              <% end %>
+          <div class="hosting-commitment">
+            <h3 class="form-subheader">
+              How often do you want to host tea time?
+            </h3>
+
+            <div class="field">
+              <div class="form-label">
+                <%= f.label :commitment, 'Committing makes TWS better.', class: 'capitalize boldweight' %>
+                <span class="sub-label light">
+                  By telling us how regularly you want to host, we'll be better positioned to support your hosting goals by driving strangers to your tea times and sending you reminders to post a tea time when you need them.
+                </span>
+              </div>
+              <div id='commitment-form' class='radio-buttons'>
+                <% HostDetail::COMMITMENT_OVERVIEW.each do |overview| %>
+                  <div>
+                    <label>
+                      <% params = {} %>
+                      <% params.merge!({ id: 'commitment-regular'}) if overview == HostDetail::REGULAR_COMMITMENT %>
+                      <%= f.radio_button :commitment_overview, overview, params %>
+                      <span><%= HostDetail::COMMITMENT_OVERVIEW_TEXT[overview] %></span>
+                      <% if overview == HostDetail::REGULAR_COMMITMENT %>
+                        <div id='nested-radio-buttons'>
+                          <% HostDetail::COMMITMENT_DETAILS.each do |detail| %>
+                            <label>
+                              <% if detail == HostDetail::CUSTOM_COMMITMENT %>
+                                <%= f.radio_button :commitment_detail, detail, { checked: !!resource.custom_commitment } %>
+                                <span>Every</span>
+                                  <% params = { id: 'custom-commitment', value: resource.custom_commitment} %>
+                                  <%= f.text_field :commitment_detail, params %>
+                                <span>weeks.</span>
+                              <% else %>
+                                <%= f.radio_button :commitment_detail, detail %>
+                                <span> <%= HostDetail::COMMITMENT_DETAILS_TEXT[detail] %> </span>
+                              <% end %>
+                            </label>
+                          <% end %>
+                        </div>
+                      <% end %>
+                    </label>
+                  </div>
+                <% end %>
+              </div>
             </div>
           </div>
         <% end %>
@@ -216,16 +227,19 @@
     <br>
     <div class="unsubscribe-newsletter">
       <h2>
-        Unsubscribe from newsletter
+        Unsubscribe from mass emails
       </h2>
 
       <p>
-        Tea With Strangers sends you occasional newsletters about things like the next month's tea times. To unsubscribe from this newsletter, use the button below. <strong>This doesn't unsubscribe you from non-newsletter email, like password resets and tea time confirmations. To do that, you'll have to cancel your account below.</strong>
+        We're not big on marketing, and we try hard to only send you relevant emails that are actually valuable to you — mostly to let you know tea times near you are available. However, if you'd rather not get anything from us, click the button below. We'll miss ya, but we understand.
       </p>
-      <%= button_to "Unsubscribe from the newsletter",
+      <%= button_to "Unsubscribe from mass emails",
                     user_unsubscribe_path,
                     :class => 'unsubscribe-newsletter',
                     data: { confirm: "Are you sure you want to unsubscribe from the newsletter?" }, method: :post %>
+      <p>
+        <i class="light">To be clear, you will still receive "transactional emails" that provide you with important information — like when you reset your password or confirmation emails after you sign up for tea times. To opt out of those, you'll have to cancel your account.</i>
+      </p>
     </div>
     <br>
     <div class="cancel-account">
@@ -234,12 +248,15 @@
       </h2>
 
       <p>
-        Right now, if you have an account, you're getting emails from us. If you want to stop getting all emails, including password resets and tea time confirmation emails, you have to cancel your account.
+        Doing this will ensure you don't get transactional emails, it will ensure that you can't register for tea times (unless you make another account later on). When you do this, we'll get rid of your information from our databases immediately. 
       </p>
-      <%= button_to "Don't do it",
+      <%= button_to "Cancel my account",
         registration_path(resource_name),
         :class => 'cancel-account',
-        data: { confirm: "It doesn't have to be this way. We can make this work. I promise. There's still time to hit cancel." }, method: :delete %>
+        data: { confirm: "Just one more check before you delete your account. Are you sure?" }, method: :delete %>
+      <p>
+        <i>To review the personal information we have about you, scroll up to your account details (yes, that's actually all the personal information we have about you.) If you have other questions, comments or concerns, don't hesitate to email us at mydata@teawithstrangers.com.</i>
+      </p>
     </div>
   </div>
 </div>
