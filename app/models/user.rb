@@ -162,11 +162,19 @@ class User < ActiveRecord::Base
     attendances.present_or_pending.count
   end
 
+  # Finds the last tea time attended, ensuring that it's in the past.
+  # present_or_pending can return future tea times, so we have to restrict
+  # this to return only past tea times.
   def last_tea_time
     if attendances.present_or_pending.empty?
       nil
     else
-      attendances.joins(:tea_time).present_or_pending.order('tea_times.start_time DESC').first.tea_time
+      last_attendance = attendances.joins(:tea_time).present_or_pending.order('tea_times.start_time DESC').where('tea_times.start_time < ?', Time.now.utc).first
+      if last_attendance.nil?
+        nil
+      else
+        last_attendance.tea_time
+      end
     end
   end
 
