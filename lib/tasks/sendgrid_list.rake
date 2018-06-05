@@ -230,7 +230,8 @@ namespace :sendgrid_list do
 
     # Final check that recipients in SendGrid == users in DB
     response = JSON.parse(sg.client.contactdb.recipients.get(query_params: {page: 1, page_size: 5}).body)
-    if response['recipient_count'] != User.count
+    users_count = User.count
+    if response['recipient_count'] != users_count
       raise('Error: %d in user database != %d in SendGrid contacts' % [users_count, response['recipient_count']])
     else
       puts '%d users in user database, %d recipients in SendGrid contacts' % [users_count, response['recipient_count']]
