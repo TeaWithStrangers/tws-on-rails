@@ -22,6 +22,9 @@ class User < ActiveRecord::Base
   delegate :commitment, to: :host_detail
 
   before_destroy :flake_future
+  after_create { SendGridList.sync_user(self, true) }
+  after_update { SendGridList.sync_user(self) }
+  after_destroy { SendGridList.delete_user(self) }
 
   bitmask :roles, :as => [:host, :admin], :null => false
   alias_method :role?, :roles?
@@ -153,6 +156,45 @@ class User < ActiveRecord::Base
 
   def tws_interests
     super || {'hosting' => false, 'leading' => false }
+  end
+
+  # Finds the number of tea times attended, ensuring it only counts tea times
+  # that have happened in the past.
+  def tea_times_attended
+    attendances.joins(:tea_time).present_or_pending.where('tea_times.start_time < ?', Time.now.utc).count
+  end
+
+  # Finds the last tea time attended, ensuring that it's in the past.
+  # present_or_pending can return future tea times, so we have to restrict
+  # this to return only past tea times.
+  def last_tea_time
+    if attendances.present_or_pending.empty?
+      nil
+    else
+      last_attendance = attendances.joins(:tea_time).present_or_pending.order('tea_times.start_time DESC').where('tea_times.start_time < ?', Time.now.utc).first
+      if last_attendance.nil?
+        nil
+      else
+        last_attendance.tea_time
+      end
+    end
+  end
+
+  def last_tea_time_date
+    # Returns a UNIX epoch date for the user's last tea time.
+    if last_tea_time
+      last_tea_time.start_time.to_date.strftime('%s')
+    else
+      nil
+    end
+  end
+
+  def last_sign_in_date
+    if last_sign_in_at
+      last_sign_in_at.to_date.strftime('%s')
+    else
+      nil
+    end
   end
 
   def send_drip_email(tea_time)

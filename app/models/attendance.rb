@@ -7,6 +7,7 @@ class Attendance < ActiveRecord::Base
   validate :host_is_not_own_attendee
 
   scope :attended, ->() { where(status: [:cancelled, :pending, :present].map {|x| Attendance.statuses[x]}) }
+  scope :present_or_pending, ->() { where(status: [:pending, :present].map {|x| Attendance.statuses[x]}) }
   scope :waitlisted,    ->() { where(status: [:waiting_list].map {|x| Attendance.statuses[x]}) }
 
   scope :pending,       ->() { where(status: [:pending].map {|x| Attendance.statuses[x]})  }
@@ -15,6 +16,10 @@ class Attendance < ActiveRecord::Base
   scope :no_show,       ->() { where(status: [:no_show].map {|x| Attendance.statuses[x]})  }
 
   delegate :start_time, to: :tea_time, prefix: true
+
+  # After attendance is updated, update the user tea time details in the SendGrid list
+  after_create { SendGridList.sync_user(self.user) }
+  after_update { SendGridList.sync_user(self.user) }
 
   def todo?
     pending?

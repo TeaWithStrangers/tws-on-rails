@@ -208,8 +208,8 @@ These are styles related to forms within the user or host dashboards
   opacity: 0.4;
 }
 
-.cancel-account {
-	input.cancel-account {
+.cancel-account, .unsubscribe-newsletter {
+	input.cancel-account, input.unsubscribe-newsletter {
 		@include inverted-button($tws-orange, $tws-orange);
 		cursor: pointer;
 
@@ -219,6 +219,11 @@ These are styles related to forms within the user or host dashboards
 		}
 	}
 }
+
+.unsubscribe-newsletter {
+    margin-bottom: 20px;
+}
+
 .form.email-reminder {
   textarea {
     font-size: 0.8em;

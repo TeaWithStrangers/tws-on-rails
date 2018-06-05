@@ -60,6 +60,20 @@ class RegistrationsController < Devise::RegistrationsController
       params[:user][:password].present?
   end
 
+  def unsubscribe
+    if user_signed_in?
+      success = SendGridList.newsletter_unsubscribe(current_user.email)
+      if success
+        flash[:notice] = "Unsubscribed! You won't get any more mass emails from us."
+      else
+        flash[:alert] = "Sorry — our system had an unusual hiccup, but we'll make this work. Just email unsubscribe@teawithstrangers.com with Unsubscribe in the subject line."
+      end
+    else
+      flash[:alert] = "We'll need you to sign in before we can unsubscribe you!"
+    end
+    redirect_to :back
+  end
+
   private
     def after_update_path_for(resource)
       profile_path
