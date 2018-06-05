@@ -84,7 +84,7 @@
       </div>
       <div class="controls actions">
         <h6 class="cancel capitalize boldweight">
-          <%= link_to 'Cancel tea time', @tea_time, method: :delete, data: {conform: 'Are you sure? If you can, try to ask another host to sub in for you, then make the tea time theirs by hitting \'Edit Tea Time\' If there\'s no other way, cancel and fire the attendees a note so they understand what happened!' }, class: 'cancel-button' %>
+          <%= link_to 'Cancel tea time', cancel_tea_time_path(@tea_time), :method => :put, :data => { :confirm => 'Are you sure? If you can, try to ask another host to sub in for you, then make the tea time theirs by hitting \'Edit Tea Time\' If there\'s no other way, cancel and fire the attendees a note so they understand what happened!' }, class: 'cancel-button' %>
         </h6>
       </div>
     <% else %>
