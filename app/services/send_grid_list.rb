@@ -126,7 +126,9 @@ class SendGridList
 
       # If a sample is requested, take a sample
       unless sample.blank?
-        sample = sample.delete(',').to_i
+        if sample.is_a?(String)
+          sample = sample.to_s.delete(',').to_i
+        end
         all_recipients = all_recipients.sample(sample)
       end
 
