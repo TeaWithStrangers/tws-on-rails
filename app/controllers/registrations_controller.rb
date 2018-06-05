@@ -64,12 +64,12 @@ class RegistrationsController < Devise::RegistrationsController
     if user_signed_in?
       success = SendGridList.newsletter_unsubscribe(current_user.email)
       if success
-        flash[:notice] = 'You have been unsubscribed from the newsletter.'
+        flash[:notice] = "Unsubscribed! You won't get any more mass emails from us."
       else
-        flash[:alert] = 'An error occurred unsubscribing you from the newsletter. Please email us at ankit@teawithstrangers.com.'
+        flash[:alert] = "Sorry — our system had an unusual hiccup, but we'll make this work. Just email unsubscribe@teawithstrangers.com with Unsubscribe in the subject line."
       end
     else
-      flash[:alert] = "You must be signed in to unsubscribe."
+      flash[:alert] = "We'll need you to sign in before we can unsubscribe you!"
     end
     redirect_to :back
   end
