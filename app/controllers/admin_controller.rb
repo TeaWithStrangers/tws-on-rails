@@ -83,6 +83,41 @@ class AdminController < ApplicationController
     end
   end
 
+  def segment
+    @segments = SendGridList.get_segments
+  end
+
+  def segment_create
+    name = params[:segment][:name]
+    segments = params[:segment][:segments]
+    sample = params[:segment][:sample]
+
+    if sample.blank?
+      sample = nil
+    else
+      sample = sample.delete(',').to_i
+    end
+
+    if name.blank?
+      name = 'List'
+    end
+
+    @list_id = SendGridList.create_list_from_segments(name, segments, sample)
+
+    if @list_id === false
+      flash[:error] = 'Error creating list. Did you already use that list name?'
+      redirect_to segment_path
+    else
+      flash[:success] = 'Successfully created list. Note: the SendGrid UI may not immediately display all contacts in the list.'
+      @list_url = 'https://sendgrid.com/marketing_campaigns/ui/lists/%d' % [@list_id]
+    end
+  end
+
+  def segment_count
+    segments = params[:segments]
+    render text: SendGridList.get_recipients(segments).length
+  end
+
   private
     def authorized?
       unless current_user.admin?

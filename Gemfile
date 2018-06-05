@@ -26,10 +26,12 @@ gem "active_model_serializers", "~> 0.9.3"
 gem 'bitmask_attributes', '~> 1.0'
 gem 'bourbon', '~> 4'
 gem 'neat', '~> 1'
+gem 'chosen-rails'
 
 gem 'markerb'
 gem 'redcarpet', '~> 3.4'
 gem 'sendgrid'
+gem 'sendgrid-ruby'
 
 gem 'google_drive'
 

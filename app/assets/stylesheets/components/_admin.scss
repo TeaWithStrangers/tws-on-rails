@@ -1,0 +1,252 @@
+.segment-help {
+  width: 600px;
+  margin-top: 20px;
+  font-size: 0.8em;
+}
+
+.segment-form-field {
+  margin-top: 30px;
+  border: 1px solid #E6E6E6;
+  border-radius: 3px;
+  background-color: #fff;
+  width: 600px;
+
+  .segment-form-field-header {
+    padding: 10px 20px;
+    border-bottom: 1px solid #E6E6E6;
+
+    .segment-form-field-name {
+    }
+
+    .segment-form-field-header-meta {
+      float: right;
+      a {
+        padding-left: 20px;
+      }
+    }
+  }
+
+  .segment-form-field-content {
+    input {
+      border: 0;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .chosen-container, .chosen-container-multi {
+      .chosen-choices {
+        border: 0;
+        background: none;
+        padding: 10px 20px;
+
+        li.search-field input[type="text"] {
+          height: 35px;
+          font-size: 15px;
+        }
+
+        li.search-choice {
+          background-image: none;
+          background-color: #eee;
+          font-size: 15px;
+          padding: 8px 25px 8px 12px;
+          border: 1px solid #ccc;
+
+          .search-choice-close {
+            top: 9px;
+            transition: none;
+          }
+        }
+      }
+
+      .chosen-drop {
+        border: 0;
+      }
+
+      .chosen-results {
+        font-size: 15px;
+      }
+    }
+
+    .chosen-container-active {
+      border: 0;
+      box-shadow: none;
+
+      .chosen-choices {
+        box-shadow: none;
+      }
+    }
+  }
+}
+
+/*
+Copyright (c) 2018 by Brent Miller (https://codepen.io/BrentWMiller/pen/XKGyBb)
+
+                                    Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+
+.segment-form-info {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0;
+  width: 600px;
+  margin-top: 30px;
+
+  .segment-form-info-item:first-child {
+    margin-left: 0;
+  }
+  .segment-form-info-item:last-child {
+    margin-right: 0;
+  }
+
+  .segment-form-info-item {
+    position: relative;
+    width: 100%;
+    margin: 0 2px;
+    z-index: 2;
+    border-radius: 2px;
+
+    .segment-form-info-item-content {
+      position: relative;
+      margin: 0;
+      z-index: 2;
+      text-align: center;
+
+      &.segment-form-info-item-content-centered {
+        display: flex;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
+
+  .segment-form-info-item-wrap {
+    padding: 10px;
+    position: relative;
+    height: 100%;
+    &:before, &:after {
+      position: absolute;
+      left: 0;
+      content: ' ';
+      width: 100%;
+      height: 50.5%;
+      z-index: 1;
+      background-color: #F8D68F;
+    }
+
+    // Top of arrow
+    &:before {
+      top: 0;
+      transform: skew(20deg);
+      border-radius: .1em .1em 0 0;
+    }
+
+    // Bottom of arrow
+    &:after {
+      bottom: 0;
+      transform: skew(-20deg);
+      border-radius: 0 0 .1em .1em;
+    }
+  }
+
+  .segment-form-info-item:first-child .segment-form-info-item-wrap,
+  .segment-form-info-item:last-child .segment-form-info-item-wrap {
+    width: 100%;
+    border-radius: .2em;
+    &:before, &:after {
+      width: 50%;
+    }
+  }
+
+  .segment-form-info-item:first-child .segment-form-info-item-wrap {
+    background: linear-gradient(to right, #F7C661 95%, transparent 5%);
+    &:before, &:after {
+      background-color: #F7C661;
+      left: 50%;
+    }
+  }
+
+  .segment-form-info-item:last-child .segment-form-info-item-wrap {
+    background: linear-gradient(to left, #F9E6BC 95%, transparent 5%);
+    &:before, &:after {
+      background-color: #F9E6BC;
+      right: 50%;
+    }
+  }
+
+  .segment-form-info-total-recipients {
+    height: 40px;
+    #segment-form-info-total-recipients-count {
+      display: none;
+      font-size: 25px;
+    }
+
+    a#segment-form-info-total-recipients-refresh {
+      font-size: 25px;
+      padding: 10px;
+    }
+
+    #segment-form-info-total-recipients-spinner {
+      display: none;
+    }
+  }
+
+  .segment-form-info-sample {
+    height: 37px;
+    margin-top: 3px;
+
+    input {
+      padding: 2px;
+      font-size: 25px;
+      text-align: center;
+      margin: auto;
+      width: 100px;
+    }
+  }
+
+  .segment-form-info-content-subtitle {
+    color: #7C6331;
+    line-height: 1em;
+    margin-bottom: 8px;
+  }
+
+  .segment-form-info-submit {
+    input {
+      padding: 8px 12px;
+      border-radius: 3px;
+      width: auto;
+      margin: 0;
+    }
+  }
+}
+
+/*
+https://stephanwagner.me/only-css-loading-spinner
+MIT licensed
+ */
+
+@keyframes spinner {
+  to {transform: rotate(360deg);}
+}
+
+.spinner:before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin-top: -20px;
+  margin-left: -10px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-top-color: #EF6236;
+  animation: spinner .6s linear infinite;
+}
