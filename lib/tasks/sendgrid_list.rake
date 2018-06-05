@@ -9,8 +9,6 @@
 # It does so by first loading all of the emails in SendGrid (along with their
 # corresponding recipient IDs, SendGrid's internal locator for the recipient)
 # and putting the set of emails loaded into a set, sg_recipients_emails.
-# Then, we load all of the users in the local master user database and convert
-# them into a hashmap format.
 #
 # Step 2
 # Next, for each user in the master user database, we do an update (PATCH)
@@ -76,8 +74,11 @@ require 'set'
 # Number of users to update per API call
 ITEMS_PER_BATCH = 1000
 
-def get_users_array
-  users = User.all
+# Get a batch of users from the user database
+# page: page number, indexed at 0
+# page size: number of records per page
+def get_users_array(page, page_size)
+  users = User.all.order('id ASC').offset(page * page_size).limit(page_size)
   users_array = users.map do |user|
     {
       user_id: user.id,
@@ -144,7 +145,7 @@ namespace :sendgrid_list do
     end
 
     ##########
-    # STEP 1: Load existing SendGrid recipients and user database
+    # STEP 1: Load existing SendGrid recipients
     ##########
 
     # Load existing SendGrid recipients
@@ -153,39 +154,47 @@ namespace :sendgrid_list do
     new_count = 0
     updated_count = 0
 
-    users_array = get_users_array
-    users_count = users_array.size
-
-    puts '%d users to process' % [users_count]
-
     ##########
     # STEP 2: Write user database to SendGrid contacts
     ##########
 
-    # Split into batches
-    batches = users_array.each_slice(ITEMS_PER_BATCH).to_a
+    # Load user database in batches
+    # user_batch contains the batch number
+    user_page = 0
 
-    batches.each_with_index do |batch, index|
-      puts 'Running batch %d of %d.' % [index + 1, batches.count]
+    while true
+      # Get user batch
+      batch = get_users_array(user_page, ITEMS_PER_BATCH)
 
-      # Update user batch to SendGrid
-      response = sg.client.contactdb.recipients.patch(request_body: batch)
-      puts response.status_code
-      resp = JSON.parse(response.body)
-      puts resp
+      if batch.size === 0
+        # No more users to process
+        break
+      else
+        p batch
+        puts 'Inserting batch %d.' % [user_page]
 
-      # Stop sync if SendGrid reports an error.
-      if resp['error_count'] > 0
-        raise('Error')
+        # Update user batch to SendGrid
+        response = sg.client.contactdb.recipients.patch(request_body: batch)
+        puts response.status_code
+        resp = JSON.parse(response.body)
+        puts resp
+
+        # Stop sync if SendGrid reports an error.
+        if resp['error_count'] > 0
+          raise('Error')
+        end
+
+        new_count += resp['new_count']
+        updated_count += resp['updated_count']
+
+        # Remove all users who appeared in this batch from the recipients set
+        sg_recipients_emails.subtract(batch.collect {|x| x[:email].downcase})
+
+        # Update user page to get next user page
+        user_page += 1
+
+        sleep 2
       end
-
-      new_count += resp['new_count']
-      updated_count += resp['updated_count']
-
-      # Remove all users who appeared in this batch from the recipients set
-      sg_recipients_emails.subtract(batch.collect {|x| x[:email].downcase})
-
-      sleep 2
     end
 
     puts '%d new users, %d updated users' % [new_count, updated_count]
@@ -221,7 +230,7 @@ namespace :sendgrid_list do
 
     # Final check that recipients in SendGrid == users in DB
     response = JSON.parse(sg.client.contactdb.recipients.get(query_params: {page: 1, page_size: 5}).body)
-    if response['recipient_count'] != users_count
+    if response['recipient_count'] != User.count
       raise('Error: %d in user database != %d in SendGrid contacts' % [users_count, response['recipient_count']])
     else
       puts '%d users in user database, %d recipients in SendGrid contacts' % [users_count, response['recipient_count']]
