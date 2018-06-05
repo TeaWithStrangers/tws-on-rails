@@ -158,8 +158,10 @@ class User < ActiveRecord::Base
     super || {'hosting' => false, 'leading' => false }
   end
 
+  # Finds the number of tea times attended, ensuring it only counts tea times
+  # that have happened in the past.
   def tea_times_attended
-    attendances.present_or_pending.count
+    attendances.joins(:tea_time).present_or_pending.where('tea_times.start_time < ?', Time.now.utc).count
   end
 
   # Finds the last tea time attended, ensuring that it's in the past.
