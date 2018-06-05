@@ -1,16 +1,17 @@
+<% month_name = Date.today.strftime("%B") %>
+<% next_month_name = Date.today.next_month.strftime("%B") %>
+
 <%= content_for :title do %>Tea Times this month | Tea With Strangers<% end %>
 <%= content_for :description do %>
-    Tea Time is where five-ish strangers sit at a cafe with a Host to have a two hour conversation. It's not about anything in particular. The circumstances are unusual, but that's the point.
+    Tea Time is a thoughtful conversation between a small group of strangers and a Host. It's not about anything in particular, but there's never a shortage of questions and great stories. The circumstances are unusual, but that's the point.
 <% end %>
 
 <%= content_for :head do %>
   <meta property ="og:type" content="website"/>
-  <meta property ="og:title" content="Tea With Strangers"/>
-  <meta property ="og:image" content="<%= image_path("landing/tea-time-banner.jpg") %>" />
-  <meta property ="og:description" content ="Good conversations are hard to find. That's where Tea Time come in. Five-ish strangers sit at a cafe with a Host to talk. Not about anything in particular. The circumstances are unusual, but that's the point."/>
+  <meta property ="og:title" content="Join for a Tea Time this month | Tea With Strangers"/>
+  <meta property ="og:image" content="<%= image_path("landing/tea-time-og.png") %>" />
+  <meta property ="og:description" content ="Tea Time is a thoughtful conversation between a small group of strangers and a Host. It's not about anything in particular, but there's never a shortage of questions and great stories. The circumstances are unusual, but that's the point."/>
 <% end %>
-<% month_name = Date.today.strftime("%B") %>
-<% next_month_name = Date.today.next_month.strftime("%B") %>
 
 <div class="city-banner cover-photo" style="background-image: linear-gradient(to bottom, rgba(247, 191, 77, 0.8), rgba(247, 191, 77, 0.7)), url('<%= image_path("landing/tea-time-banner.jpg") %>'); background-position: 50% 45%;">
   <%= render partial: 'shared/header' %>
