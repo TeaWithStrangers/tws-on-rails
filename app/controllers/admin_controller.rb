@@ -102,15 +102,16 @@ class AdminController < ApplicationController
       name = 'List'
     end
 
-    @list_id = SendGridList.create_list_from_segments(name, segments, sample)
+    SendGridList.delay.create_list_from_segments(name, segments, sample)
 
-    if @list_id === false
-      flash[:error] = 'Error creating list. Did you already use that list name?'
-      redirect_to segment_path
-    else
-      flash[:success] = 'Successfully created list. Note: the SendGrid UI may not immediately display all contacts in the list.'
-      @list_url = 'https://sendgrid.com/marketing_campaigns/ui/lists/%d' % [@list_id]
-    end
+    # if @list_id === false
+    #   flash[:error] = 'Error creating list. Did you already use that list name?'
+    #   redirect_to segment_path
+    # else
+    #   flash[:success] = 'Successfully created list. Note: the SendGrid UI may not immediately display all contacts in the list.'
+    #   @list_url = 'https://sendgrid.com/marketing_campaigns/ui/lists/%d' % [@list_id]
+    # end
+    flash[:success] = 'Successfully queued list for creation.'
   end
 
   def segment_count

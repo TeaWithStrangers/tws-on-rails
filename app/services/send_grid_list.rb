@@ -154,6 +154,27 @@ class SendGridList
           sleep 1.5
         end
 
+        list_url = 'https://sendgrid.com/marketing_campaigns/ui/lists/%d' % [list_id]
+
+        # Email notification with results
+        r = @sg.client.mail._("send").post(request_body: {
+            "from": {
+               "email": "ankit@teawithstrangers.com"
+            },
+            "personalizations": [
+                {
+                    "to": [ { "email": "ankit@teawithstrangers.com" } ] ,
+                    "subject": "Segment Assembler: list created: %s" % [name]
+                }
+            ],
+            "content": [
+                {
+                    "type": "text/plain",
+                    "value": "Your list %s has been created: %s" % [name, list_url]
+                }
+            ]
+        })
+
         return list_id
       else
         return false
