@@ -5,6 +5,45 @@ tea times across the website.
 
 */
 
+/// THIS CSS IS BROKEN AND NEEDS @MARKBAO'S ATTENTION
+
+.visibility-container {
+	@include span-columns(12 of 12);
+}
+
+.month-display-container {
+	position: relative;
+	overflow: visible;
+	clear: both;
+}
+
+.month-display {
+	width: 100%;
+	float: left;
+	clear: both;
+	position: absolute;
+	top: 0;
+	&.show {
+		&.left {
+			left: 0%;
+		}
+		&.right {
+			left: 0%;
+		}
+	}
+
+	&.hidden {
+		&.left {
+			left: -120%;
+		}
+		&.right {
+			left: 120%;
+		}
+	}
+}
+
+/// </end>
+
 .tt-page-only {
 	display: none;
 }
@@ -253,7 +292,7 @@ tea times across the website.
 		@extend %vertical-center-flex-container;
 	    @include padding(83px 0);
 		margin-top: 1em;
-		border: 1px solid lighten($tws-orange,15);
+		border: 2px solid lighten($tws-orange,15);
 
 		h3 {
 			font-size: 1.25em;
@@ -273,15 +312,41 @@ tea times across the website.
 	}
 }
 
-.city-jump {
-	margin: 1em 0;
+.jump {
+	margin: 1em -1em;
 	text-align: center;
-	overflow: auto;
+	overflow: visible;
 
 	@include media($tablet) {
 
 		@include span-columns(12 of 12);
 		margin-right: 0;
+	}
+
+	.month-selector {
+		overflow: auto;
+		border-bottom: 1px solid $tws-yellow;
+		padding: 0.5em 1em;
+		text-transform: uppercase;
+		font-weight: 600;
+		font-size: 0.8em;
+		a {
+			cursor: pointer;
+			border-bottom: 1px solid;
+		}
+		.month {
+			@include span-columns(6 of 12);
+			@include omega(2n);
+		}
+		.showing {
+			text-align: left;
+		}
+		.previous {
+
+		}
+		.click {
+			text-align: right;
+		}
 	}
 
 	.jump-box {
