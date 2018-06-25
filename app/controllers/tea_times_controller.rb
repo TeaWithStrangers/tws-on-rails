@@ -8,43 +8,21 @@ class TeaTimesController < ApplicationController
   # GET /tea_times
   # GET /tea_times.json
   def index
-    @tea_times = TeaTime.this_month.order(start_time: :asc).includes(:city).all
+    @tea_times_this_month = TeaTime.this_month.order(start_time: :asc).includes(:city).all
+    @this_month = transform_tea_times(@tea_times_this_month)
 
-    # For each available city, create a hash entry and an empty list
-    # of tea times
-    @tea_times_by_city = Hash.new
+    @next_month = nil
+    @days_until_next_month = (Date.today.end_of_month - 10.days - Date.today + 1).to_i
 
-    # Iterate through tea times and segment into cities
-    @tea_times.each do |tt|
-      if @tea_times_by_city[tt.city.name] == nil
-        @tea_times_by_city[tt.city.name] = []
-      end
-      @tea_times_by_city[tt.city.name].push(tt)
-    end
-
-    # Sort by the number of tea times in each city, most to least
-    @tea_times_by_city = Hash[@tea_times_by_city.sort_by {|city, tt_array| tt_array.length}.reverse]
-
-    # Array of cities holding tea times this month
-    # Extract all names of cities from tea times and deduplicate
-    @cities = @tea_times_by_city.keys.uniq
-
-    # Extract a mapping from city name to city code
-    # Fall back on the full city name if there's no city code
-    @city_to_city_code = Hash.new
-    @tea_times_by_city.each do |city_name, tt_list|
-      tt_list.each do |tt|
-        if tt.city.city_code.blank?
-          @city_to_city_code[tt.city.name] = tt.city.name
-        else
-          @city_to_city_code[tt.city.name] = tt.city.city_code
-        end
-      end
+    # Determine if we should show next month's tea times
+    if Date.today > Date.today.end_of_month - 10.days
+      @tea_times_next_month = TeaTime.next_month.order(start_time: :asc).includes(:city).all
+      @next_month = transform_tea_times(@tea_times_next_month)
     end
 
     respond_to do |format|
       format.html { render layout: !request.xhr? }
-      format.json { render json: @tea_times }
+      format.json { render json: @tea_times_this_month }
     end
   end
 
@@ -146,4 +124,49 @@ class TeaTimesController < ApplicationController
         redirect_to :back, error: 'Unauthorised!'
       end
     end
+
+  # Transform a list of tea times into a Hash containing:
+  #
+  # - tea_times_by_city: Hash with key city_name, value TeaTime, sort by count
+  # - cities: Array of Strings of city names
+  # - city_to_city_code: Hash that maps city_name to city_code
+  def transform_tea_times(tea_times)
+    # For each available city, create a hash entry and an empty list
+    # of tea times
+    tea_times_by_city = Hash.new
+
+    # Iterate through tea times and segment into cities
+    tea_times.each do |tt|
+      if tea_times_by_city[tt.city.name] == nil
+        tea_times_by_city[tt.city.name] = []
+      end
+      tea_times_by_city[tt.city.name].push(tt)
+    end
+
+    # Sort by the number of tea times in each city, most to least
+    tea_times_by_city = Hash[tea_times_by_city.sort_by {|city, tt_array| tt_array.length}.reverse]
+
+    # Array of cities holding tea times this month
+    # Extract all names of cities from tea times and deduplicate
+    cities = tea_times_by_city.keys.uniq
+
+    # Extract a mapping from city name to city code
+    # Fall back on the full city name if there's no city code
+    city_to_city_code = Hash.new
+    tea_times_by_city.each do |city_name, tt_list|
+      tt_list.each do |tt|
+        if tt.city.city_code.blank?
+          city_to_city_code[tt.city.name] = tt.city.name
+        else
+          city_to_city_code[tt.city.name] = tt.city.city_code
+        end
+      end
+    end
+
+    {
+      tea_times_by_city: tea_times_by_city,
+      cities: cities,
+      city_to_city_code: city_to_city_code
+    }
+  end
 end

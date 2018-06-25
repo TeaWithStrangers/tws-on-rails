@@ -31,7 +31,7 @@
     <div class="tt-intro">
       
       <!--Revisit copy later -->
-      <% if @tea_times_by_city.empty? %>
+      <% if @this_month[:tea_times_by_city].empty? %>
         <p>
           No tea times scheduled for this month! Check back later.
         </p>
@@ -51,43 +51,106 @@
           </p>
         <% else %>
           <p> 
-            If none of these work for you, come back <%= next_month_name %> 1, or you can <%= link_to "apply to be a Host", hosting_path %>!
+            If none of these work for you, check back in <%= next_month_name %>, or you can <%= link_to "apply to be a Host", hosting_path %>!
           </p>
         <% end %>
       <% end %>
     </div>
-    <div class="city-jump">
-      <div class="jump-box notification alert">
-        <h5 class="strong">
-          Jump to Your City's Tea Times
-        </h5>
-        <div class="jump-city-list">
-          <% @cities.each do |city| %>
-            <a href="#<%= @city_to_city_code[city].parameterize %>"><%= city %></a>
-          <% end %>
-        </div>
-      </div>
-    </div>
-    <div class="tt-all">
-      <% @tea_times_by_city.each do |city, tts| %>
-        <a name="<%= @city_to_city_code[city].parameterize %>"></a>
-        <div class="tt-set-container">
-          <div class="city-title-holder tt-grid-unit">
-            <h3>
-              <%= city %>
-              <br>
-              👉
-            </h3>
+    <div class="visibility-container">
+      <div class="month-display-container show-left">
+        <div class="month-display left">
+          <div class="jump">
+            <div class="month-selector">
+              <div class="month showing now">
+                📅 The rest of <%= month_name %> 
+              </div>
+              <div class="month click next">
+                <% if @next_month.nil? %>
+                  <span class="light">(<%= next_month_name %>'s tea times will be available in <%= @days_until_next_month %> days)</span>
+                <% else %>
+                  🔮  <a name="next" id="tea-time-month-next" href="#">See <%= next_month_name %>'s tea times →</a>
+                <% end %>
+              </div>
+            </div>
+            <div class="jump-box notification alert">
+              <h5 class="strong">
+                Jump to Your City's Tea Times
+              </h5>
+              <div class="jump-city-list">
+                <% @this_month[:cities].each do |city| %>
+                  <a href="#<%= @this_month[:city_to_city_code][city].parameterize %>" data-turbolinks="false"><%= city %></a>
+                <% end %>
+              </div>
+            </div>
           </div>
-          <% tts.each do |tt| %>
-            <div class="tt-grid-unit">
-              <%= link_to tea_time_path(tt) do %>
-                <%= render partial: 'shared/tea_time_row', locals: {tea_time: tt, no_signin_button: true} %>
+          <div class="tt-all current-month">
+            <% @this_month[:tea_times_by_city].each do |city, tts| %>
+              <a name="<%= @this_month[:city_to_city_code][city].parameterize %>"></a>
+              <div class="tt-set-container">
+                <div class="city-title-holder tt-grid-unit">
+                  <h3>
+                    <%= city %>
+                    <br>
+                    👉
+                  </h3>
+                </div>
+                <% tts.each do |tt| %>
+                  <div class="tt-grid-unit">
+                    <%= link_to tea_time_path(tt) do %>
+                      <%= render partial: 'shared/tea_time_row', locals: {tea_time: tt, no_signin_button: true} %>
+                    <% end %>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <% unless @next_month.nil? %>
+          <div class="month-display right">
+            <div class="jump">
+              <div class="month-selector">
+                <div class="month showing next">
+                  📅 Tea times in <%= next_month_name %>
+                </div>
+                <div class="month click now">
+                  🧘🏽‍♀️ <a name="next" id="tea-time-month-prev" href="#">←  See this month's tea times</a>
+                </div>
+              </div>
+              <div class="jump-box notification alert">
+                <h5 class="strong">
+                  Jump to Your City's Tea Times
+                </h5>
+                <div class="jump-city-list">
+                  <% @next_month[:cities].each do |city| %>
+                    <a href="#<%= @next_month[:city_to_city_code][city].parameterize %>-next-month" data-turbolinks="false"><%= city %></a>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+            <div class="tt-all">
+              <% @next_month[:tea_times_by_city].each do |city, tts| %>
+                <a name="<%= @next_month[:city_to_city_code][city].parameterize %>-next-month"></a>
+                <div class="tt-set-container">
+                  <div class="city-title-holder tt-grid-unit">
+                    <h3>
+                      <%= city %>
+                      <br>
+                      👉
+                    </h3>
+                  </div>
+                  <% tts.each do |tt| %>
+                    <div class="tt-grid-unit">
+                      <%= link_to tea_time_path(tt) do %>
+                        <%= render partial: 'shared/tea_time_row', locals: {tea_time: tt, no_signin_button: true} %>
+                      <% end %>
+                    </div>
+                  <% end %>
+                </div>
               <% end %>
             </div>
-          <% end %>
-        </div>
-      <% end %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

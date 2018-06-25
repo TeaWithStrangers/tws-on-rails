@@ -5,6 +5,57 @@ tea times across the website.
 
 */
 
+/*
+Contains the .month-display-container, which is 200% of the width of this
+container. Overflow is hidden. .month-display-container will translate its own
+content.
+ */
+.visibility-container {
+	@include span-columns(12 of 12);
+    width: 100%;
+    overflow: hidden;
+}
+
+/*
+Contains the two month display containers.
+
+The width of this container is 200% of the parent container, allowing it to
+contain the two .month-display containers each as 50% of this container,
+appearing side-by-side (the left and right containers).
+
+Initially has show-left class. When the show-right class is set, it translates
+-50% on the x axis to move the right container into view. The overflow is
+hidden by .visibility-container.
+ */
+.month-display-container {
+    @include clearfix;
+	position: relative;
+	overflow: visible;
+	clear: both;
+    width: 200%;
+    transition: transform 0.5s ease-in-out;
+
+    // Show left month container (default)
+    &.show-left {
+        transform: translate(0%);
+    }
+
+    // Show right month container (shift entire container left 50%)
+    &.show-right {
+        transform: translate(-50%);
+    }
+}
+
+/*
+Contains an individual month container.
+ */
+.month-display {
+	width: 50%;
+    display: inline-block;
+    float: left;
+    vertical-align: top;
+}
+
 .tt-page-only {
 	display: none;
 }
@@ -253,7 +304,7 @@ tea times across the website.
 		@extend %vertical-center-flex-container;
 	    @include padding(83px 0);
 		margin-top: 1em;
-		border: 1px solid lighten($tws-orange,15);
+		border: 2px solid lighten($tws-orange,15);
 
 		h3 {
 			font-size: 1.25em;
@@ -273,15 +324,45 @@ tea times across the website.
 	}
 }
 
-.city-jump {
+.jump {
 	margin: 1em 0;
 	text-align: center;
-	overflow: auto;
+	overflow: visible;
 
 	@include media($tablet) {
 
 		@include span-columns(12 of 12);
 		margin-right: 0;
+	}
+
+	.month-selector {
+		overflow: auto;
+		border-bottom: 1px solid $tws-yellow;
+		padding: 0.5em 1em;
+		text-transform: uppercase;
+		font-weight: 600;
+		font-size: 0.8em;
+		a {
+			cursor: pointer;
+			border-bottom: 1px solid;
+		}
+		.month {
+			@include span-columns(6 of 12);
+			@include omega(2n);
+
+			span.light {
+				color: lighten($tws-orange,15);
+			}
+		}
+		.showing {
+			text-align: left;
+		}
+		.previous {
+
+		}
+		.click {
+			text-align: right;
+		}
 	}
 
 	.jump-box {
