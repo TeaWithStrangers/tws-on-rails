@@ -66,7 +66,7 @@
               </div>
               <div class="month click next">
                 <% if @next_month.nil? %>
-                  View next month&rsquo;s tea times in <%= @days_until_next_month %> days
+                  <span class="light">(<%= next_month_name %>'s tea times will be available in <%= @days_until_next_month %> days)</span>
                 <% else %>
                   🔮  <a name="next" id="tea-time-month-next" href="#">See <%= next_month_name %>'s tea times →</a>
                 <% end %>

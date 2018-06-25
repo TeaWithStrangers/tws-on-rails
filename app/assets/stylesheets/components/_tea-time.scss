@@ -349,6 +349,10 @@ Contains an individual month container.
 		.month {
 			@include span-columns(6 of 12);
 			@include omega(2n);
+
+			span.light {
+				color: lighten($tws-orange,15);
+			}
 		}
 		.showing {
 			text-align: left;
