@@ -34,6 +34,7 @@ class TeaTime < ActiveRecord::Base
   scope :future_until, ->(until_time) { future.before(until_time) }
   scope :not_cancelled, -> { where("followup_status != 3") }
   scope :this_month, -> { after(Date.today).before(Time.now.at_end_of_month).not_cancelled }
+  scope :next_month, -> { after(Date.today.at_beginning_of_month.next_month).before(Time.now.at_beginning_of_month.next_month.at_end_of_month).not_cancelled }
 
   def date
     start_time.strftime("%A, %D")
