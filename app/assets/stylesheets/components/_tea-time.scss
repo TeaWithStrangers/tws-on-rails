@@ -5,44 +5,56 @@ tea times across the website.
 
 */
 
-/// THIS CSS IS BROKEN AND NEEDS @MARKBAO'S ATTENTION
-
+/*
+Contains the .month-display-container, which is 200% of the width of this
+container. Overflow is hidden. .month-display-container will translate its own
+content.
+ */
 .visibility-container {
 	@include span-columns(12 of 12);
+    width: 100%;
+    overflow: hidden;
 }
 
+/*
+Contains the two month display containers.
+
+The width of this container is 200% of the parent container, allowing it to
+contain the two .month-display containers each as 50% of this container,
+appearing side-by-side (the left and right containers).
+
+Initially has show-left class. When the show-right class is set, it translates
+-50% on the x axis to move the right container into view. The overflow is
+hidden by .visibility-container.
+ */
 .month-display-container {
+    @include clearfix;
 	position: relative;
 	overflow: visible;
 	clear: both;
+    width: 200%;
+    transition: transform 0.5s ease-in-out;
+
+    // Show left month container (default)
+    &.show-left {
+        transform: translate(0%);
+    }
+
+    // Show right month container (shift entire container left 50%)
+    &.show-right {
+        transform: translate(-50%);
+    }
 }
 
+/*
+Contains an individual month container.
+ */
 .month-display {
-	width: 100%;
-	float: left;
-	clear: both;
-	position: absolute;
-	top: 0;
-	&.show {
-		&.left {
-			left: 0%;
-		}
-		&.right {
-			left: 0%;
-		}
-	}
-
-	&.hidden {
-		&.left {
-			left: -120%;
-		}
-		&.right {
-			left: 120%;
-		}
-	}
+	width: 50%;
+    display: inline-block;
+    float: left;
+    vertical-align: top;
 }
-
-/// </end>
 
 .tt-page-only {
 	display: none;
@@ -313,7 +325,7 @@ tea times across the website.
 }
 
 .jump {
-	margin: 1em -1em;
+	margin: 1em 0;
 	text-align: center;
 	overflow: visible;
 
