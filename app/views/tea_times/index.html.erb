@@ -62,13 +62,17 @@
           <div class="jump">
             <div class="month-selector">
               <div class="month showing now">
-                📅 The rest of <%= month_name %> 
+                <% if @next_month.nil? %>
+                  📅 Tea times in <%= month_name %>
+                <% else %>
+                  📅 <%= month_name %> is almost over
+                <% end %>
               </div>
               <div class="month click next">
                 <% if @next_month.nil? %>
-                  <span class="light">(<%= next_month_name %>'s tea times will be available in <%= @days_until_next_month %> days)</span>
+                  <a class="not-yet" disabled><%= next_month_name %>'s tea times available in <%= @days_until_next_month %> days</a>
                 <% else %>
-                  🔮  <a name="next" id="tea-time-month-next" href="#">See <%= next_month_name %>'s tea times →</a>
+                  <a name="next" class="next-button" id="tea-time-month-next" href="#">See <%= next_month_name %>'s tea times here →</a>
                 <% end %>
               </div>
             </div>
@@ -113,7 +117,7 @@
                   📅 Tea times in <%= next_month_name %>
                 </div>
                 <div class="month click now">
-                  🧘🏽‍♀️ <a name="next" id="tea-time-month-prev" href="#">←  See this month's tea times</a>
+                  <a name="next" id="tea-time-month-prev" href="#">←  See this month's tea times</a>
                 </div>
               </div>
               <div class="jump-box notification alert">
