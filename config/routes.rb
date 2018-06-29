@@ -1,9 +1,11 @@
 HOSTING_TYPEFORM='https://medium.com/tea-with-strangers/apply-to-be-a-tea-with-strangers-host-9ca06937fbd7'
+WELCOME_TYPEFORM='https://medium.com/tea-with-strangers/youre-almost-a-host-welcome-70f06148f1cc'
 
 Rails.application.routes.draw do
   root 'static#index'
   get '/about'          => 'static#about',              as: :about
   get '/hosting'        => redirect(HOSTING_TYPEFORM),  as: :hosting
+  get '/welcome'        => redirect(WELCOME_TYPEFORM),  as: :welcome
   get '/signup'         => 'static#jfdi_signup',        as: :sign_up
   get '/terms'          => 'static#terms',              as: :terms
   get '/privacy'        => 'static#privacy',            as: :privacy
