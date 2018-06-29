@@ -1,4 +1,4 @@
-HOSTING_TYPEFORM='https://medium.com/@AnkitShah_21916/tea-with-strangers-be-the-host-c526bfb06fe8'
+HOSTING_TYPEFORM='https://medium.com/tea-with-strangers/apply-to-be-a-tea-with-strangers-host-9ca06937fbd7'
 
 Rails.application.routes.draw do
   root 'static#index'
