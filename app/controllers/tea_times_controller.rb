@@ -9,7 +9,7 @@ class TeaTimesController < ApplicationController
   # GET /tea_times.json
   def index
     @tea_times_this_month = TeaTime.this_month.order(start_time: :asc).includes(:city).all
-    @this_month = transform_tea_times(@tea_times_this_month)
+    @this_month = transform_tea_times(filter_tea_times(@tea_times_this_month))
 
     @next_month = nil
     @days_until_next_month = (Date.today.end_of_month - 10.days - Date.today + 1).to_i
@@ -17,7 +17,7 @@ class TeaTimesController < ApplicationController
     # Determine if we should show next month's tea times
     if Date.today > Date.today.end_of_month - 10.days
       @tea_times_next_month = TeaTime.next_month.order(start_time: :asc).includes(:city).all
-      @next_month = transform_tea_times(@tea_times_next_month)
+      @next_month = transform_tea_times(filter_tea_times(@tea_times_next_month, true))
     end
 
     respond_to do |format|
@@ -167,6 +167,65 @@ class TeaTimesController < ApplicationController
       tea_times_by_city: tea_times_by_city,
       cities: cities,
       city_to_city_code: city_to_city_code
+    }
+  end
+
+  # Filter tea times by ensuring that the tea time is within the start/end time
+  # window relative to its own time zone.
+  #
+  # Since tea times are displayed in the time zone local to the city they are
+  # in, but stored in the database as UTC, constraining a query based on UTC
+  # may lead to past tea times being included or extra tea times from the future
+  # being included.
+  #
+  # For example, making a query for tea times after the current day in UTC
+  # also shows tea times that happened the previous day in time zones that are
+  # behind UTC (e.g. it will show tea times that happened during the previous
+  # day in the US, since 00:00 UTC translates to the previous day in US time
+  # zones.)
+  #
+  # To solve this, we:
+  # - Adjust the tea time query scopes to account for all time zones, which
+  #   means accounting for UTC-12 to UTC+14. This will include extra tea times.
+  # - After retrieving from the database, filter each tea time by making sure
+  #   that each tea time happens within the time range (current month or next
+  #   month, depending on what is being displayed) in the local time zone.
+  def filter_tea_times(tea_times, next_month = false)
+    # Return an array of tea times filtered based on this select block.
+    tea_times.select { |tt|
+      if tt.city.nil? or tt.city.timezone.blank?
+        # If no city or city timezone information, include by default
+        true
+      else
+        # 1. Check if tea time start_time is at least:
+        # - Current month: The beginning of the day in the local time zone
+        # - Next month: The first day of the month in the local time zone
+
+        beginning_in_tz = Time.now.in_time_zone(tt.city.timezone)
+                              .at_beginning_of_day
+
+        if next_month
+          beginning_in_tz = Time.now.in_time_zone(tt.city.timezone)
+                                .at_beginning_of_month
+                                .next_month
+        end
+
+        # 2. Check if tea time start_time is at most:
+        # - Current month: The end of the current month in the local time zone
+        # - Next month: The end of the next month in the local time zone
+
+        end_of_month_in_tz = Time.now.in_time_zone(tt.city.timezone)
+                                 .at_end_of_month
+
+        if next_month
+          end_of_month_in_tz = Time.now.in_time_zone(tt.city.timezone)
+                                   .at_beginning_of_month
+                                   .next_month
+                                   .at_end_of_month
+        end
+
+        tt.start_time >= beginning_in_tz and tt.start_time <= end_of_month_in_tz
+      end
     }
   end
 end

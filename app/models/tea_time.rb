@@ -33,8 +33,11 @@ class TeaTime < ActiveRecord::Base
   scope :future, -> { after(Time.now.utc) }
   scope :future_until, ->(until_time) { future.before(until_time) }
   scope :not_cancelled, -> { where("followup_status != 3") }
-  scope :this_month, -> { after(Date.today).before(Time.now.at_end_of_month).not_cancelled }
-  scope :next_month, -> { after(Date.today.at_beginning_of_month.next_month).before(Time.now.at_beginning_of_month.next_month.at_end_of_month).not_cancelled }
+
+  # See comments in TeaTimesController#filter_tea_times for details on why
+  # additional hours are added to the times in these scopes.
+  scope :this_month, -> { after(Time.now.at_beginning_of_day - 14.hours).before(Time.now.at_end_of_month + 12.hours).not_cancelled }
+  scope :next_month, -> { after(Time.now.at_beginning_of_month.next_month - 14.hours).before(Time.now.at_beginning_of_month.next_month.at_end_of_month + 12.hours).not_cancelled }
 
   def date
     start_time.strftime("%A, %D")
