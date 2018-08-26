@@ -70,7 +70,7 @@
               </div>
               <div class="month click next">
                 <% if @next_month.nil? %>
-                  <a class="not-yet" disabled><%= next_month_name %>'s tea times available in <%= @days_until_next_month %> days</a>
+                  <a class="not-yet" disabled><%= next_month_name %>'s tea times available in <%= @days_until_next_month %> <%= @days_until_next_month == 1 ? "day" : "days" %></a>
                 <% else %>
                   <a name="next" class="next-button" id="tea-time-month-next" href="#">See <%= next_month_name %>'s tea times here →</a>
                 <% end %>
