@@ -29,7 +29,7 @@ gem 'neat', '~> 1'
 gem 'chosen-rails'
 
 gem 'markerb'
-gem 'redcarpet', '~> 3.4'
+gem 'redcarpet', '~> 3.5'
 gem 'sendgrid'
 gem 'sendgrid-ruby'
 
